@@ -1,128 +1,366 @@
-// ================================================
-// MOBILE NAVIGATION
-// ================================================
-const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karol Polikarp | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">kp<span class="accent">.</span></a>
+            <ul class="nav-links">
+                <li><a href="#o-mnie">O mnie</a></li>
+                <li><a href="#projekty">Projekty</a></li>
+                <li><a href="#wpisy">Wpisy</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
 
-navToggle?.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    navToggle.classList.toggle('active');
-});
+    <main>
+        <!-- Hero / Bio Section -->
+        <section id="o-mnie" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-greeting">
+                        <span class="greeting-line"></span>
+                        <span class="greeting-text">Cześć, jestem</span>
+                    </div>
+                    <h1 class="hero-title">Karol Polikarp</h1>
+                    <p class="hero-subtitle">
+                        Tworzę <span class="accent">cyfrowe produkty</span> i rozwiązania,
+                        które łączą design z technologią.
+                    </p>
+                    <p class="hero-bio">
+                        Developer i designer z pasją do tworzenia intuicyjnych interfejsów
+                        i funkcjonalnych aplikacji. Specjalizuję się w React, TypeScript
+                        i nowoczesnym web developmencie.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#projekty" class="btn btn-primary">Zobacz projekty</a>
+                        <a href="#kontakt" class="btn btn-secondary">Napisz do mnie</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-shape"></div>
+                    <div class="hero-dots"></div>
+                </div>
+            </div>
+        </section>
 
-// Close mobile menu when clicking a link
-navLinks?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        navToggle.classList.remove('active');
-    });
-});
+        <!-- Projects Section -->
+        <section id="projekty" class="projects">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-label">Portfolio</span>
+                    <h2 class="section-title">Wybrane projekty</h2>
+                    <p class="section-desc">Rzeczy, które zbudowałem i nad którymi pracowałem</p>
+                </header>
 
-// ================================================
-// SCROLL REVEAL ANIMATION
-// ================================================
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
+                <div class="projects-grid">
+                    <article class="project-card project-featured">
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                    <path d="M9 9h6v6H9z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">Node.js</span>
+                            </div>
+                            <h3 class="project-title">Aplikacja SaaS</h3>
+                            <p class="project-desc">
+                                Platforma do zarządzania projektami z real-time collaboration,
+                                dashboardami analitycznymi i integracjami.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <span>Zobacz projekt</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="project-link">
+                                    <span>GitHub</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
 
-const revealOnScroll = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealOnScroll.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
+                    <article class="project-card">
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <path d="M12 7v5l3 3"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Next.js</span>
+                                <span class="tag">Prisma</span>
+                            </div>
+                            <h3 class="project-title">E-commerce Platform</h3>
+                            <p class="project-desc">
+                                Sklep internetowy z headless CMS, płatnościami online i panelem administracyjnym.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <span>Zobacz</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
 
-// Observe all cards and links
-document.querySelectorAll('.project-card, .post-card, .contact-link').forEach(el => {
-    revealOnScroll.observe(el);
-});
+                    <article class="project-card">
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                    <path d="M2 17l10 5 10-5"/>
+                                    <path d="M2 12l10 5 10-5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Vue</span>
+                                <span class="tag">Firebase</span>
+                            </div>
+                            <h3 class="project-title">Dashboard Analytics</h3>
+                            <p class="project-desc">
+                                Interaktywny dashboard z wizualizacjami danych i real-time updates.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <span>Demo</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
 
-// ================================================
-// SMOOTH SCROLL FOR ANCHOR LINKS
-// ================================================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    <article class="project-card">
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                    <path d="M8 21h8M12 17v4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">React Native</span>
+                            </div>
+                            <h3 class="project-title">Aplikacja Mobilna</h3>
+                            <p class="project-desc">
+                                Cross-platform aplikacja do śledzenia nawyków i produktywności.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <span>App Store</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
+        <!-- Blog/Posts Section -->
+        <section id="wpisy" class="posts">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-label">Blog</span>
+                    <h2 class="section-title">Ostatnie wpisy</h2>
+                    <p class="section-desc">Przemyślenia o technologii, designie i rozwoju</p>
+                </header>
 
-// ================================================
-// NAVBAR BACKGROUND ON SCROLL
-// ================================================
-const nav = document.querySelector('.nav');
-let lastScroll = 0;
+                <div class="posts-list">
+                    <article class="post-card">
+                        <div class="post-meta">
+                            <time datetime="2024-01-15">15 Sty 2024</time>
+                            <span class="post-reading">5 min czytania</span>
+                        </div>
+                        <h3 class="post-title">
+                            <a href="#">Jak zbudowałem system design tokens w projekcie</a>
+                        </h3>
+                        <p class="post-excerpt">
+                            Praktyczny przewodnik po implementacji design tokens w zespole produktowym,
+                            od koncepcji po wdrożenie.
+                        </p>
+                        <div class="post-tags">
+                            <span class="tag-sm">Design Systems</span>
+                            <span class="tag-sm">CSS</span>
+                        </div>
+                    </article>
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+                    <article class="post-card">
+                        <div class="post-meta">
+                            <time datetime="2024-01-08">08 Sty 2024</time>
+                            <span class="post-reading">8 min czytania</span>
+                        </div>
+                        <h3 class="post-title">
+                            <a href="#">TypeScript generics - od podstaw do zaawansowanych wzorców</a>
+                        </h3>
+                        <p class="post-excerpt">
+                            Głęboki dive w generics TypeScripta z praktycznymi przykładami
+                            i case studies z rzeczywistych projektów.
+                        </p>
+                        <div class="post-tags">
+                            <span class="tag-sm">TypeScript</span>
+                            <span class="tag-sm">Tutorial</span>
+                        </div>
+                    </article>
 
-    if (currentScroll > 100) {
-        nav.style.boxShadow = '0 1px 10px rgba(0, 0, 0, 0.05)';
-    } else {
-        nav.style.boxShadow = 'none';
-    }
+                    <article class="post-card">
+                        <div class="post-meta">
+                            <time datetime="2023-12-20">20 Gru 2023</time>
+                            <span class="post-reading">4 min czytania</span>
+                        </div>
+                        <h3 class="post-title">
+                            <a href="#">Minimalizm w UI - mniej znaczy więcej</a>
+                        </h3>
+                        <p class="post-excerpt">
+                            Dlaczego prostota w interfejsach użytkownika prowadzi do lepszych
+                            doświadczeń i jak ją osiągnąć.
+                        </p>
+                        <div class="post-tags">
+                            <span class="tag-sm">UI/UX</span>
+                            <span class="tag-sm">Design</span>
+                        </div>
+                    </article>
+                </div>
 
-    lastScroll = currentScroll;
-});
+                <a href="#" class="posts-more">
+                    <span>Wszystkie wpisy</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
 
-// ================================================
-// ACTIVE NAV LINK HIGHLIGHT
-// ================================================
-const sections = document.querySelectorAll('section[id]');
+        <!-- Links / Contact Section -->
+        <section id="kontakt" class="contact">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-label">Kontakt</span>
+                    <h2 class="section-title">Porozmawiajmy</h2>
+                    <p class="section-desc">Zawsze otwarty na nowe projekty i współpracę</p>
+                </header>
 
-const highlightNavLink = () => {
-    const scrollY = window.pageYOffset;
+                <div class="contact-content">
+                    <div class="contact-links">
+                        <a href="mailto:hello@karolpolikarp.io" class="contact-link contact-link-primary">
+                            <div class="contact-link-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                    <path d="M22 6L12 13 2 6"/>
+                                </svg>
+                            </div>
+                            <div class="contact-link-content">
+                                <span class="contact-link-label">Email</span>
+                                <span class="contact-link-value">hello@karolpolikarp.io</span>
+                            </div>
+                            <svg class="contact-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                            </svg>
+                        </a>
 
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-        const navLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+                        <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="contact-link">
+                            <div class="contact-link-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                </svg>
+                            </div>
+                            <div class="contact-link-content">
+                                <span class="contact-link-label">GitHub</span>
+                                <span class="contact-link-value">@karolpolikarp</span>
+                            </div>
+                            <svg class="contact-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                            </svg>
+                        </a>
 
-        if (navLink) {
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                navLink.classList.add('active');
-            } else {
-                navLink.classList.remove('active');
-            }
-        }
-    });
-};
+                        <a href="https://linkedin.com/in/karolpolikarp" target="_blank" rel="noopener" class="contact-link">
+                            <div class="contact-link-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="2" width="20" height="20" rx="2"/>
+                                    <path d="M8 11v5M8 8v.01M12 16v-5a2 2 0 1 1 4 0v5"/>
+                                </svg>
+                            </div>
+                            <div class="contact-link-content">
+                                <span class="contact-link-label">LinkedIn</span>
+                                <span class="contact-link-value">/in/karolpolikarp</span>
+                            </div>
+                            <svg class="contact-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                            </svg>
+                        </a>
 
-window.addEventListener('scroll', highlightNavLink);
+                        <a href="https://twitter.com/karolpolikarp" target="_blank" rel="noopener" class="contact-link">
+                            <div class="contact-link-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M4 4l11.733 16h4.267l-11.733 -16z"/>
+                                    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/>
+                                </svg>
+                            </div>
+                            <div class="contact-link-content">
+                                <span class="contact-link-label">X / Twitter</span>
+                                <span class="contact-link-value">@karolpolikarp</span>
+                            </div>
+                            <svg class="contact-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                            </svg>
+                        </a>
+                    </div>
 
-// ================================================
-// ANIMATE HERO SHAPE ON MOUSE MOVE
-// ================================================
-const heroShape = document.querySelector('.hero-shape');
+                    <div class="contact-cta">
+                        <p>Lub po prostu napisz na</p>
+                        <a href="mailto:hello@karolpolikarp.io" class="email-big">hello@karolpolikarp.io</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-if (heroShape) {
-    document.addEventListener('mousemove', (e) => {
-        const { clientX, clientY } = e;
-        const { innerWidth, innerHeight } = window;
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-copy">&copy; 2024 Karol Polikarp. Zbudowane z <span class="accent">&hearts;</span></p>
+                <p class="footer-tech">HTML, CSS, JavaScript</p>
+            </div>
+        </div>
+    </footer>
 
-        const xPercent = (clientX / innerWidth - 0.5) * 20;
-        const yPercent = (clientY / innerHeight - 0.5) * 20;
-
-        heroShape.style.transform = `translate(calc(-50% + ${xPercent}px), calc(-50% + ${yPercent}px))`;
-    });
-}
-
-// ================================================
-// CONSOLE EASTER EGG
-// ================================================
-console.log('%c👋 Cześć!', 'font-size: 24px; font-weight: bold;');
-console.log('%cSzukasz czegoś w kodzie? Napisz do mnie!', 'font-size: 14px; color: #10b981;');
+    <script src="script.js"></script>
+</body>
+</html>
