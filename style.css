@@ -8,13 +8,15 @@
     --color-primary-dark: #006666;
     --color-primary-subtle: #e0f7f7;
     --color-primary-glow: rgba(0, 128, 128, 0.15);
+    --color-primary-gradient: linear-gradient(135deg, #008080 0%, #20b2aa 100%);
 
-    /* Neutrals */
-    --color-bg: #ffffff;
-    --color-bg-alt: #f8fafa;
+    /* Neutrals - warmer, less flat */
+    --color-bg: #fafbfc;
+    --color-bg-alt: #f0f4f5;
+    --color-bg-accent: #e8f4f4;
     --color-surface: #ffffff;
-    --color-border: #e5e7eb;
-    --color-border-light: #f3f4f6;
+    --color-border: #d1d9de;
+    --color-border-light: #e8eef0;
 
     /* Text */
     --color-text: #111827;
@@ -274,7 +276,32 @@ section {
     padding-top: calc(var(--space-4xl) + 60px);
     position: relative;
     overflow: hidden;
-    background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+    background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 128, 128, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(32, 178, 170, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 128, 128, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary-light), transparent);
+    opacity: 0.3;
 }
 
 .hero .container {
@@ -365,10 +392,65 @@ section {
 
 .hero-visual {
     position: relative;
-    height: 400px;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Hero Photo */
+.hero-photo-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-photo {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 4px solid white;
+    box-shadow:
+        0 20px 60px rgba(0, 128, 128, 0.3),
+        0 0 0 1px rgba(0, 128, 128, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.hero-photo-ring {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    border: 2px dashed var(--color-primary-light);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: spin 30s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-photo-blob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, var(--color-primary-subtle) 0%, rgba(0, 128, 128, 0.1) 100%);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    z-index: 1;
+    animation: blob 8s ease-in-out infinite;
+}
+
+@keyframes blob {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
 }
 
 /* Hero Code Card */
@@ -526,7 +608,21 @@ section {
    PROJECTS SECTION
    ================================================ */
 .projects {
-    background: var(--color-bg-alt);
+    background:
+        radial-gradient(ellipse 40% 30% at 20% 80%, rgba(0, 128, 128, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 80% 20%, rgba(32, 178, 170, 0.06) 0%, transparent 50%),
+        var(--color-bg-alt);
+    position: relative;
+}
+
+.projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
 }
 
 .projects-grid {
@@ -753,7 +849,20 @@ section {
    CONTACT SECTION
    ================================================ */
 .contact {
-    background: var(--color-bg-alt);
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0, 128, 128, 0.1) 0%, transparent 50%),
+        var(--color-bg-alt);
+    position: relative;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
 }
 
 .contact-content {
@@ -905,7 +1014,20 @@ section {
    ABOUT SECTION
    ================================================ */
 .about {
-    background: var(--color-bg-alt);
+    background:
+        radial-gradient(ellipse 50% 30% at 0% 100%, rgba(0, 128, 128, 0.08) 0%, transparent 50%),
+        var(--color-bg-alt);
+    position: relative;
+}
+
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
 }
 
 .about-content {
@@ -990,7 +1112,21 @@ section {
    SKILLS SECTION
    ================================================ */
 .skills {
-    background: var(--color-bg-alt);
+    background:
+        radial-gradient(ellipse 60% 40% at 100% 50%, rgba(0, 128, 128, 0.06) 0%, transparent 50%),
+        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+    position: relative;
+}
+
+.skills::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary-light), transparent);
+    opacity: 0.3;
 }
 
 .skills-grid {
@@ -1064,7 +1200,20 @@ section {
    TECH STACK SECTION
    ================================================ */
 .tech-stack {
-    background: var(--color-bg-alt);
+    background:
+        linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg-accent) 100%);
+    position: relative;
+}
+
+.tech-stack::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary-light), transparent);
+    opacity: 0.3;
 }
 
 .stack-categories {
@@ -1189,8 +1338,20 @@ section {
    ================================================ */
 .footer {
     padding: var(--space-2xl) 0;
-    background: var(--color-bg);
+    background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
     border-top: 1px solid var(--color-border);
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary-light), transparent);
+    opacity: 0.2;
 }
 
 .footer-content {
