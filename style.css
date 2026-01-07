@@ -392,65 +392,25 @@ section {
 
 .hero-visual {
     position: relative;
-    height: 500px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: var(--space-xl);
 }
 
 /* Hero Photo */
-.hero-photo-wrapper {
+.hero-photo-container {
     position: relative;
-    z-index: 2;
 }
 
 .hero-photo {
-    width: 280px;
-    height: 280px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
     object-position: center top;
     border: 4px solid white;
-    box-shadow:
-        0 20px 60px rgba(0, 128, 128, 0.3),
-        0 0 0 1px rgba(0, 128, 128, 0.1);
-    position: relative;
-    z-index: 2;
-}
-
-.hero-photo-ring {
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    right: -15px;
-    bottom: -15px;
-    border: 2px dashed var(--color-primary-light);
-    border-radius: 50%;
-    opacity: 0.5;
-    animation: spin 30s linear infinite;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.hero-photo-blob {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 350px;
-    height: 350px;
-    background: linear-gradient(135deg, var(--color-primary-subtle) 0%, rgba(0, 128, 128, 0.1) 100%);
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    z-index: 1;
-    animation: blob 8s ease-in-out infinite;
-}
-
-@keyframes blob {
-    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-    50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+    box-shadow: var(--shadow-lg);
 }
 
 /* Hero Code Card */
