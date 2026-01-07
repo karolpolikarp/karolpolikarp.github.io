@@ -1,202 +1,128 @@
-$(document).ready(function() {
-  const apiRoot = 'https://desolate-castle-41450.herokuapp.com/v1/';
-  const trelloApiRoot = 'https://desolate-castle-41450.herokuapp.com/v1/trello/';
-  const datatableRowTemplate = $('[data-datatable-row-template]').children()[0];
-  const $tasksContainer = $('[data-tasks-container]');
+// ================================================
+// MOBILE NAVIGATION
+// ================================================
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
 
-  var availableBoards = {};
-  var availableTasks = {};
+navToggle?.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    navToggle.classList.toggle('active');
+});
 
-  // init
-
-  getAllTasks();
-
-  function getAllAvailableBoards(callback, callbackArgs) {
-    var requestUrl = trelloApiRoot + 'boards';
-
-    $.ajax({
-      url: requestUrl,
-      method: 'GET',
-      contentType: 'application/json',
-      success: function(boards) { callback(callbackArgs, boards); }
+// Close mobile menu when clicking a link
+navLinks?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        navToggle.classList.remove('active');
     });
-  }
+});
 
-  function createElement(data) {
-    const element = $(datatableRowTemplate).clone();
+// ================================================
+// SCROLL REVEAL ANIMATION
+// ================================================
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
 
-    element.attr('data-task-id', data.id);
-    element.find('[data-task-name-section] [data-task-name-paragraph]').text(data.title);
-    element.find('[data-task-name-section] [data-task-name-input]').val(data.title);
-
-    element.find('[data-task-content-section] [data-task-content-paragraph]').text(data.content);
-    element.find('[data-task-content-section] [data-task-content-input]').val(data.content);
-
-    return element;
-  }
-
-  function prepareBoardOrListSelectOptions(availableChoices) {
-    return availableChoices.map(function(choice) {
-      return $('<option>')
-                .addClass('crud-select__option')
-                .val(choice.id)
-                .text(choice.name || 'Unknown name');
+const revealOnScroll = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealOnScroll.unobserve(entry.target);
+        }
     });
-  }
+}, observerOptions);
 
-  function handleDatatableRender(taskData, boards) {
-    $tasksContainer.empty();
-    boards.forEach(board => {
-      availableBoards[board.id] = board;
+// Observe all cards and links
+document.querySelectorAll('.project-card, .post-card, .contact-link').forEach(el => {
+    revealOnScroll.observe(el);
+});
+
+// ================================================
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ================================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
     });
+});
 
-    taskData.forEach(function(task) {
-      var $datatableRowEl = createElement(task);
-      var $availableBoardsOptionElements = prepareBoardOrListSelectOptions(boards);
+// ================================================
+// NAVBAR BACKGROUND ON SCROLL
+// ================================================
+const nav = document.querySelector('.nav');
+let lastScroll = 0;
 
-      $datatableRowEl.find('[data-board-name-select]')
-        .append($availableBoardsOptionElements);
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
 
-      $datatableRowEl
-        .appendTo($tasksContainer);
-    });
-  }
-
-  function getAllTasks() {
-    const requestUrl = apiRoot + 'tasks';
-
-    $.ajax({
-      url: requestUrl,
-      method: 'GET',
-      contentType: "application/json",
-      success: function(tasks) {
-        tasks.forEach(task => {
-          availableTasks[task.id] = task;
-        });
-
-        getAllAvailableBoards(handleDatatableRender, tasks);
-      }
-    });
-  }
-
-  function handleTaskUpdateRequest() {
-    var parentEl = $(this).parents('[data-task-id]');
-    var taskId = parentEl.attr('data-task-id');
-    var taskTitle = parentEl.find('[data-task-name-input]').val();
-    var taskContent = parentEl.find('[data-task-content-input]').val();
-    var requestUrl = apiRoot + 'tasks';
-
-    $.ajax({
-      url: requestUrl,
-      method: "PUT",
-      processData: false,
-      contentType: "application/json; charset=utf-8",
-      dataType: 'json',
-      data: JSON.stringify({
-        id: taskId,
-        title: taskTitle,
-        content: taskContent
-      }),
-      success: function(data) {
-        parentEl.attr('data-task-id', data.id).toggleClass('datatable__row--editing');
-        parentEl.find('[data-task-name-paragraph]').text(taskTitle);
-        parentEl.find('[data-task-content-paragraph]').text(taskContent);
-      }
-    });
-  }
-
-  function handleTaskDeleteRequest() {
-    var parentEl = $(this).parents('[data-task-id]');
-    var taskId = parentEl.attr('data-task-id');
-    var requestUrl = apiRoot + 'tasks';
-
-    $.ajax({
-      url: requestUrl + '/' + taskId,
-      method: 'DELETE',
-      success: function() {
-        parentEl.slideUp(400, function() { parentEl.remove(); });
-      }
-    })
-  }
-
-  function handleTaskSubmitRequest(event) {
-    event.preventDefault();
-
-    var taskTitle = $(this).find('[name="title"]').val();
-    var taskContent = $(this).find('[name="content"]').val();
-
-    var requestUrl = apiRoot + 'tasks';
-
-    $.ajax({
-      url: requestUrl,
-      method: 'POST',
-      processData: false,
-      contentType: "application/json; charset=utf-8",
-      dataType: 'json',
-      data: JSON.stringify({
-        title: taskTitle,
-        content: taskContent
-      }),
-      success: getAllTasks
-    });
-  }
-
-  function toggleEditingState() {
-    var parentEl = $(this).parents('[data-task-id]');
-    parentEl.toggleClass('datatable__row--editing');
-
-    var taskTitle = parentEl.find('[data-task-name-paragraph]').text();
-    var taskContent = parentEl.find('[data-task-content-paragraph]').text();
-
-    parentEl.find('[data-task-name-input]').val(taskTitle);
-    parentEl.find('[data-task-content-input]').val(taskContent);
-  }
-
-  function handleBoardNameSelect(event) {
-    var $changedSelectEl = $(event.target);
-    var selectedBoardId = $changedSelectEl.val();
-    var $listNameSelectEl = $changedSelectEl.siblings('[data-list-name-select]');
-    var preparedListOptions = prepareBoardOrListSelectOptions(availableBoards[selectedBoardId].lists);
-
-    $listNameSelectEl.empty().append(preparedListOptions);
-  }
-
-  function handleCardCreationRequest(event) {
-    var requestUrl = trelloApiRoot + 'cards';
-    var $relatedTaskRow = $(event.target).parents('[data-task-id]');
-    var relatedTaskId = $relatedTaskRow.attr('data-task-id');
-    var relatedTask = availableTasks[relatedTaskId];
-    var selectedListId = $relatedTaskRow.find('[data-list-name-select]').val();
-
-    if (!selectedListId) {
-      alert('You have to select a board and a list first!');
-      return;
+    if (currentScroll > 100) {
+        nav.style.boxShadow = '0 1px 10px rgba(0, 0, 0, 0.05)';
+    } else {
+        nav.style.boxShadow = 'none';
     }
 
-    $.ajax({
-      url: requestUrl,
-      method: 'POST',
-      processData: false,
-      contentType: "application/json; charset=utf-8",
-      dataType: 'json',
-      data: JSON.stringify({
-        name: relatedTask.title,
-        description: relatedTask.content,
-        listId: selectedListId
-      }),
-      success: function(data) {
-        console.log('Card created - ' + data.shortUrl);
-        alert('Card created - ' + data.shortUrl);
-      }
-    });
-  }
-
-  $('[data-task-add-form]').on('submit', handleTaskSubmitRequest);
-
-  $tasksContainer.on('change','[data-board-name-select]', handleBoardNameSelect);
-  $tasksContainer.on('click','[data-trello-card-creation-trigger]', handleCardCreationRequest);
-  $tasksContainer.on('click','[data-task-edit-button]', toggleEditingState);
-  $tasksContainer.on('click','[data-task-edit-abort-button]', toggleEditingState);
-  $tasksContainer.on('click','[data-task-submit-update-button]', handleTaskUpdateRequest);
-  $tasksContainer.on('click','[data-task-delete-button]', handleTaskDeleteRequest);
+    lastScroll = currentScroll;
 });
+
+// ================================================
+// ACTIVE NAV LINK HIGHLIGHT
+// ================================================
+const sections = document.querySelectorAll('section[id]');
+
+const highlightNavLink = () => {
+    const scrollY = window.pageYOffset;
+
+    sections.forEach(section => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 100;
+        const sectionId = section.getAttribute('id');
+        const navLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+
+        if (navLink) {
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLink.classList.add('active');
+            } else {
+                navLink.classList.remove('active');
+            }
+        }
+    });
+};
+
+window.addEventListener('scroll', highlightNavLink);
+
+// ================================================
+// ANIMATE HERO SHAPE ON MOUSE MOVE
+// ================================================
+const heroShape = document.querySelector('.hero-shape');
+
+if (heroShape) {
+    document.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+
+        const xPercent = (clientX / innerWidth - 0.5) * 20;
+        const yPercent = (clientY / innerHeight - 0.5) * 20;
+
+        heroShape.style.transform = `translate(calc(-50% + ${xPercent}px), calc(-50% + ${yPercent}px))`;
+    });
+}
+
+// ================================================
+// CONSOLE EASTER EGG
+// ================================================
+console.log('%c👋 Cześć!', 'font-size: 24px; font-weight: bold;');
+console.log('%cSzukasz czegoś w kodzie? Napisz do mnie!', 'font-size: 14px; color: #10b981;');
