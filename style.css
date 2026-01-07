@@ -698,6 +698,138 @@ section {
 }
 
 /* ================================================
+   ABOUT SECTION
+   ================================================ */
+.about {
+    background: var(--color-bg);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+}
+
+.about-text p {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+.about-education h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
+    color: var(--color-text);
+}
+
+.education-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.education-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-sm) var(--space-md);
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-light);
+}
+
+.edu-date {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    background: var(--color-primary-subtle);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    align-self: start;
+    white-space: nowrap;
+}
+
+.edu-title {
+    grid-column: 2;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+    line-height: 1.4;
+}
+
+.edu-school {
+    grid-column: 2;
+    font-size: 0.8rem;
+    color: var(--color-text-tertiary);
+}
+
+/* ================================================
+   SKILLS SECTION
+   ================================================ */
+.skills {
+    background: var(--color-bg-alt);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+}
+
+.skill-card {
+    padding: var(--space-xl);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-light);
+    transition: all var(--transition-base);
+}
+
+.skill-card:hover {
+    border-color: var(--color-primary-light);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.skill-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary-subtle);
+    border-radius: var(--radius-md);
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+}
+
+.skill-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.skill-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+}
+
+.skill-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+/* ================================================
    FOOTER
    ================================================ */
 .footer {
@@ -732,6 +864,15 @@ section {
 
     .hero-visual {
         display: none;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .projects-grid {
@@ -783,6 +924,10 @@ section {
     .hero-cta .btn {
         width: 100%;
         justify-content: center;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
     }
 
     .footer-content {
