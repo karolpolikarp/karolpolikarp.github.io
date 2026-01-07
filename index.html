@@ -47,7 +47,8 @@
                     </p>
                     <p class="hero-bio">
                         Buduję rzeczy, których sam potrzebuję - narzędzia do pracy z polskim prawem,
-                        automatyzacje, eksperymenty z modelami językowymi.
+                        automatyzacje workflow, integracje z modelami językowymi. Wierzę, że najlepsze
+                        rozwiązania rodzą się na styku dyscyplin.
                     </p>
 
                     <div class="hero-keywords">
@@ -56,6 +57,8 @@
                         <span class="keyword">Python</span>
                         <span class="keyword">Claude API</span>
                         <span class="keyword">Web Scraping</span>
+                        <span class="keyword">RAG</span>
+                        <span class="keyword">Supabase</span>
                     </div>
 
                     <div class="hero-cta">
@@ -69,21 +72,10 @@
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <div class="hero-card">
-                        <div class="hero-card-header">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <div class="hero-card-content">
-                            <code>
-                                <span class="code-keyword">from</span> prawo <span class="code-keyword">import</span> ISAP<br>
-                                <span class="code-keyword">from</span> ai <span class="code-keyword">import</span> Claude<br><br>
-                                <span class="code-comment"># szukam podstawy prawnej</span><br>
-                                ustawa = ISAP.find(<span class="code-string">"ochrona danych"</span>)<br>
-                                odpowiedź = Claude.ask(ustawa)
-                            </code>
-                        </div>
+                    <div class="hero-photo-wrapper">
+                        <img src="assets/images/karol-photo.jpg" alt="Karol Polikarp Wilczyński" class="hero-photo">
+                        <div class="hero-photo-ring"></div>
+                        <div class="hero-photo-blob"></div>
                     </div>
                 </div>
             </div>
@@ -134,10 +126,19 @@
                         <p>
                             Nie dlatego, że lubię zbierać dyplomy, ale dlatego, że w pewnym momencie
                             zrozumiałem, że <strong>nie da się sensownie zarządzać czymś, czego się nie rozumie od środka</strong>.
+                            Regulacje technologiczne pisane bez zrozumienia technologii są jak przepisy drogowe
+                            pisane przez ludzi, którzy nigdy nie prowadzili samochodu.
                         </p>
                         <p>
                             Dziś łączę te światy - pracuję nad regulacjami AI na poziomie europejskim,
                             a wieczorami buduję narzędzia, które automatyzują moją codzienną pracę z prawem.
+                            Uczestniczę w pracach grup roboczych dotyczących AI Act, projektuję piaskownice
+                            regulacyjne i testuję, jak modele językowe radzą sobie z polskim prawem.
+                        </p>
+                        <p>
+                            Moje podejście: <strong>najpierw zrozum problem od środka, potem buduj rozwiązanie</strong>.
+                            Większość moich projektów powstaje z realnej potrzeby - JakiePrawo.pl zbudowałem,
+                            bo sam potrzebowałem szybko znajdować podstawy prawne w tysiącach aktów.
                         </p>
                     </div>
                     <div class="about-education">
@@ -195,6 +196,7 @@
                         <p>
                             Wdrożenie AI Act w Polsce, projektowanie piaskownic regulacyjnych,
                             współpraca z organami nadzoru. Uczestnictwo w grupach roboczych na poziomie UE.
+                            Analiza zgodności systemów AI z wymogami regulacyjnymi, ocena ryzyka.
                         </p>
                         <div class="skill-tags">
                             <span>AI Act</span>
@@ -460,14 +462,16 @@
                             </div>
                             <h3 class="project-title">JakiePrawo.pl</h3>
                             <p class="project-desc">
-                                Wyszukiwarka podstaw prawnych dla polskiego prawa. Wpisujesz pytanie -
-                                dostajesz konkretny artykuł, nazwę aktu i link do ISAP.
+                                Wyszukiwarka podstaw prawnych dla polskiego prawa. Wpisujesz pytanie w języku naturalnym -
+                                dostajesz konkretny artykuł, nazwę aktu prawnego i link do ISAP. Zbudowana z myślą
+                                o prawnikach, urzędnikach i każdym, kto szuka odpowiedzi w gąszczu przepisów.
                             </p>
                             <ul class="project-features">
-                                <li>Integracja z Claude API do rozumienia pytań</li>
-                                <li>Własny serwer MCP na Raspberry Pi</li>
-                                <li>Parsowanie PDF-ów z Sejmu</li>
-                                <li>Edge Functions w Supabase</li>
+                                <li>RAG z Claude API do semantycznego rozumienia pytań prawnych</li>
+                                <li>Własny serwer MCP na Raspberry Pi z bazą aktów</li>
+                                <li>Parsowanie i indeksowanie PDF-ów z Sejmu i ISAP</li>
+                                <li>Edge Functions w Supabase do obsługi zapytań</li>
+                                <li>Automatyczne aktualizacje bazy przy zmianach w prawie</li>
                             </ul>
                             <div class="project-links">
                                 <a href="https://jakieprawo.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
@@ -653,7 +657,7 @@
                 <header class="section-header">
                     <span class="section-label">Kontakt</span>
                     <h2 class="section-title">Porozmawiajmy</h2>
-                    <p class="section-desc">Otwarty na współpracę przy projektach z pogranicza prawa i technologii</p>
+                    <p class="section-desc">Otwarty na współpracę przy projektach z pogranicza prawa i technologii. Szczególnie interesują mnie wyzwania związane z automatyzacją procesów prawnych i wdrażaniem AI w sektorze publicznym.</p>
                 </header>
 
                 <div class="contact-content">
@@ -712,7 +716,7 @@
                     <div class="contact-cta">
                         <div class="contact-cta-box">
                             <h3>Współpraca</h3>
-                            <p>Zainteresowany współpracą przy projektach z zakresu LegalTech, automatyzacji prawniczej lub regulacji AI?</p>
+                            <p>Szukasz kogoś, kto rozumie zarówno prawo, jak i technologię? Chętnie porozmawiam o projektach z zakresu LegalTech, automatyzacji procesów prawnych, wdrażania AI Act lub budowania narzędzi dla sektora publicznego.</p>
                             <div class="contact-availability">
                                 <span class="availability-dot"></span>
                                 <span>Dostępny na konsultacje</span>
