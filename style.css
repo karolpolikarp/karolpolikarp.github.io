@@ -2,25 +2,29 @@
    DESIGN TOKENS
    ================================================ */
 :root {
-    /* Colors - Windows 95 Teal Theme */
-    --color-primary: #008080;
-    --color-primary-light: #20b2aa;
-    --color-primary-dark: #006666;
-    --color-primary-subtle: #e0f7f7;
-    --color-primary-glow: rgba(0, 128, 128, 0.2);
+    /* Colors - Frutiger Aero Theme */
+    --color-primary: #00a8e8;
+    --color-primary-light: #4fc3f7;
+    --color-primary-dark: #0077b6;
+    --color-primary-subtle: rgba(0, 168, 232, 0.1);
+    --color-primary-glow: rgba(0, 168, 232, 0.3);
 
-    /* Windows 95 Classic Colors */
-    --win95-silver: #c0c0c0;
-    --win95-dark: #808080;
-    --win95-light: #dfdfdf;
-    --win95-blue: #000080;
+    /* Frutiger Aero Aurora Colors */
+    --aero-sky-start: #87ceeb;
+    --aero-sky-end: #e0f7fa;
+    --aero-green: #4caf50;
+    --aero-leaf: #81c784;
+    --aero-water: #00bcd4;
+    --aero-glass: rgba(255, 255, 255, 0.7);
+    --aero-glass-border: rgba(255, 255, 255, 0.4);
+    --aero-shine: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 50%);
 
     /* Neutrals */
-    --color-bg: #f5f5f5;
-    --color-bg-alt: #ffffff;
-    --color-surface: #ffffff;
-    --color-border: #c0c0c0;
-    --color-border-light: #dfdfdf;
+    --color-bg: linear-gradient(135deg, #e3f2fd 0%, #f1f8e9 50%, #e0f2f1 100%);
+    --color-bg-alt: rgba(255, 255, 255, 0.8);
+    --color-surface: rgba(255, 255, 255, 0.9);
+    --color-border: rgba(255, 255, 255, 0.6);
+    --color-border-light: rgba(255, 255, 255, 0.4);
 
     /* Text */
     --color-text: #111827;
@@ -50,24 +54,23 @@
     --transition-base: 250ms ease;
     --transition-slow: 400ms ease;
 
-    /* Shadows - Windows 95 style + modern */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-    --shadow-glow: 0 0 40px var(--color-primary-glow);
-    --shadow-retro: 4px 4px 0 var(--win95-dark);
-    --shadow-retro-sm: 2px 2px 0 var(--win95-dark);
+    /* Shadows - Frutiger Aero style */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-glow: 0 0 40px var(--color-primary-glow), 0 0 80px rgba(0, 168, 232, 0.15);
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    --shadow-bubble: 0 4px 16px rgba(0, 168, 232, 0.2);
 
-    /* Border Radius - Mix of modern and retro */
-    --radius-sm: 2px;
-    --radius-md: 4px;
-    --radius-lg: 6px;
-    --radius-xl: 8px;
+    /* Border Radius - Frutiger Aero rounded corners */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
     --radius-full: 9999px;
 
-    /* Windows 95 borders */
-    --border-raised: inset -1px -1px var(--win95-dark), inset 1px 1px var(--win95-light);
-    --border-sunken: inset 1px 1px var(--win95-dark), inset -1px -1px var(--win95-light);
+    /* Glass border */
+    --border-glass: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 /* ================================================
@@ -92,7 +95,90 @@ body {
     font-size: 16px;
     line-height: 1.6;
     color: var(--color-text);
-    background-color: var(--color-bg);
+    background: linear-gradient(135deg, #e3f2fd 0%, #f1f8e9 50%, #e0f2f1 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Frutiger Aero Decorative Bubbles */
+.aero-bubbles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.2) 50%, transparent 70%);
+    box-shadow: inset 0 -5px 20px rgba(0,168,232,0.1), 0 5px 20px rgba(0,0,0,0.05);
+    animation: float 20s ease-in-out infinite;
+}
+
+.bubble-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    right: -100px;
+    animation-delay: 0s;
+    opacity: 0.4;
+}
+
+.bubble-2 {
+    width: 200px;
+    height: 200px;
+    top: 40%;
+    left: -50px;
+    animation-delay: -5s;
+    opacity: 0.3;
+}
+
+.bubble-3 {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    right: 10%;
+    animation-delay: -10s;
+    opacity: 0.35;
+}
+
+.bubble-4 {
+    width: 100px;
+    height: 100px;
+    top: 60%;
+    left: 20%;
+    animation-delay: -15s;
+    opacity: 0.25;
+}
+
+.bubble-5 {
+    width: 250px;
+    height: 250px;
+    bottom: -50px;
+    left: 30%;
+    animation-delay: -7s;
+    opacity: 0.3;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg);
+    }
+    75% {
+        transform: translateY(20px) rotate(-5deg);
+    }
 }
 
 img {
@@ -140,10 +226,11 @@ section {
     left: 0;
     right: 0;
     z-index: 100;
-    background: var(--win95-silver);
-    border-bottom: 2px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .nav-container {
@@ -224,45 +311,68 @@ section {
     padding: var(--space-md) var(--space-xl);
     font-size: 0.95rem;
     font-weight: 600;
-    border-radius: var(--radius-sm);
-    transition: all var(--transition-fast);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary {
-    background: var(--color-primary);
+    background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-primary) 50%, var(--color-primary-dark) 100%);
     color: white;
-    box-shadow: var(--shadow-retro-sm);
-    border: 2px solid var(--color-primary-dark);
+    box-shadow: var(--shadow-md), var(--shadow-glow), inset 0 1px 0 rgba(255,255,255,0.4);
+    border: none;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+    border-radius: var(--radius-full) var(--radius-full) 0 0;
 }
 
 .btn-primary:hover {
-    background: var(--color-primary-light);
-    transform: translate(2px, 2px);
-    box-shadow: none;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg), 0 0 60px var(--color-primary-glow), inset 0 1px 0 rgba(255,255,255,0.5);
 }
 
 .btn-primary:active {
-    background: var(--color-primary-dark);
-    box-shadow: var(--border-sunken);
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm), inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .btn-secondary {
-    background: var(--win95-silver);
+    background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 50%, rgba(240,240,240,0.8) 100%);
     color: var(--color-text);
-    border: 2px solid var(--win95-dark);
-    box-shadow: var(--shadow-retro-sm);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: blur(8px);
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 100%);
+    border-radius: var(--radius-full) var(--radius-full) 0 0;
 }
 
 .btn-secondary:hover {
-    background: var(--win95-light);
-    transform: translate(2px, 2px);
-    box-shadow: none;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.8);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9) 50%, rgba(245,245,245,0.95) 100%);
 }
 
 .btn-secondary:active {
-    box-shadow: var(--border-sunken);
+    transform: translateY(0);
 }
 
 /* ================================================
@@ -344,21 +454,22 @@ section {
 .keyword {
     font-size: 0.75rem;
     font-weight: 600;
-    padding: var(--space-xs) var(--space-sm);
-    background: var(--win95-silver);
-    color: var(--color-text);
-    border-radius: 0;
-    border: 2px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
-    transition: all var(--transition-fast);
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
+    padding: var(--space-xs) var(--space-md);
+    background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%);
+    color: var(--color-primary-dark);
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: all var(--transition-base);
+    backdrop-filter: blur(8px);
 }
 
 .keyword:hover {
-    background: var(--color-primary);
+    background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
     color: white;
-    border-color: var(--color-primary-dark);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-bubble), inset 0 1px 0 rgba(255,255,255,0.4);
+    transform: translateY(-2px);
 }
 
 .hero-visual {
@@ -369,71 +480,86 @@ section {
     justify-content: center;
 }
 
-/* Hero Code Card - Windows 95 Style */
+/* Hero Code Card - Frutiger Aero Glass Style */
 .hero-card {
-    background: var(--win95-silver);
-    border-radius: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: var(--shadow-retro);
+    box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.8);
     width: 100%;
     max-width: 420px;
-    border: 2px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
 }
 
 .hero-card-header {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 4px 6px;
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    padding: 12px 16px;
+    background: linear-gradient(180deg, rgba(0,168,232,0.9) 0%, rgba(0,119,182,0.95) 100%);
     color: white;
     font-weight: 600;
     font-size: 0.85rem;
+    position: relative;
 }
 
 .hero-card-header::before {
-    content: '📁 prawo.py';
+    content: 'prawo.py';
     flex: 1;
 }
 
-.dot {
-    width: 16px;
-    height: 14px;
-    background: var(--win95-silver);
-    border: 1px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: bold;
-    color: var(--color-text);
+.hero-card-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
 }
 
-.dot.red::after { content: '×'; }
-.dot.yellow::after { content: '□'; }
-.dot.green::after { content: '_'; }
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.dot::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    width: 6px;
+    height: 4px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+    border-radius: 50%;
+}
+
+.dot.red { background: linear-gradient(180deg, #ff6b6b 0%, #ee5253 100%); }
+.dot.yellow { background: linear-gradient(180deg, #feca57 0%, #ff9f43 100%); }
+.dot.green { background: linear-gradient(180deg, #5fd068 0%, #26de81 100%); }
 
 .hero-card-content {
-    padding: var(--space-md);
-    background: #1e1e1e;
-    border: 2px solid;
-    border-color: var(--win95-dark) var(--win95-light) var(--win95-light) var(--win95-dark);
-    margin: 2px;
+    padding: var(--space-lg);
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    margin: 8px;
+    border-radius: var(--radius-lg);
 }
 
 .hero-card-content code {
     font-family: var(--font-mono);
     font-size: 0.85rem;
     line-height: 1.8;
-    color: #00ff00;
+    color: #a8dadc;
     display: block;
 }
 
-.code-keyword { color: #ffff00; }
-.code-comment { color: #808080; }
-.code-string { color: #00ffff; }
+.code-keyword { color: #e76f51; }
+.code-comment { color: #6c757d; }
+.code-string { color: #2a9d8f; }
 
 .hero-shape {
     position: absolute;
@@ -461,8 +587,20 @@ section {
    STATS SECTION
    ================================================ */
 .stats {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    background: linear-gradient(135deg, #4fc3f7 0%, #00bcd4 25%, #26a69a 50%, #66bb6a 75%, #81c784 100%);
     padding: var(--space-3xl) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
 }
 
 .stats-grid {
@@ -545,18 +683,18 @@ section {
 }
 
 .project-card {
-    background: var(--color-surface);
-    border-radius: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    border: 2px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
-    box-shadow: var(--shadow-retro);
-    transition: all var(--transition-fast);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: all var(--transition-base);
+    backdrop-filter: blur(20px);
 }
 
 .project-card:hover {
-    transform: translate(4px, 4px);
-    box-shadow: none;
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .project-featured {
@@ -605,13 +743,13 @@ section {
 .tag {
     font-size: 0.75rem;
     font-weight: 600;
-    padding: var(--space-xs) var(--space-sm);
-    background: var(--color-primary);
+    padding: var(--space-xs) var(--space-md);
+    background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
     color: white;
-    border-radius: 0;
-    border: 1px solid var(--color-primary-dark);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    border-radius: var(--radius-full);
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 168, 232, 0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
 }
 
 .project-title {
@@ -783,23 +921,35 @@ section {
     align-items: center;
     gap: var(--space-lg);
     padding: var(--space-lg);
-    background: var(--color-surface);
-    border-radius: 0;
-    border: 2px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
-    box-shadow: var(--shadow-retro-sm);
-    transition: all var(--transition-fast);
+    background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-glass);
+    transition: all var(--transition-base);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
 }
 
 .contact-link:hover {
-    transform: translate(2px, 2px);
-    box-shadow: none;
-    background: var(--color-primary-subtle);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .contact-link-primary {
-    background: var(--color-primary-subtle);
-    border-color: var(--color-primary-light) var(--color-primary-dark) var(--color-primary-dark) var(--color-primary-light);
+    background: linear-gradient(180deg, rgba(0,168,232,0.15) 0%, rgba(0,168,232,0.05) 100%);
+    border-color: rgba(0, 168, 232, 0.3);
 }
 
 .contact-link-icon {
@@ -859,11 +1009,25 @@ section {
 }
 
 .contact-cta-box {
-    background: var(--win95-silver);
-    border: 2px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
-    box-shadow: var(--shadow-retro);
+    background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-glass);
     padding: var(--space-xl);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-cta-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
 }
 
 .contact-cta-box h3 {
@@ -966,10 +1130,11 @@ section {
     grid-template-columns: auto 1fr;
     gap: var(--space-sm) var(--space-md);
     padding: var(--space-md);
-    background: var(--color-surface);
-    border-radius: 0;
-    border: 2px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
+    background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
 }
 
 .edu-date {
@@ -1014,18 +1179,31 @@ section {
 
 .skill-card {
     padding: var(--space-xl);
-    background: var(--color-surface);
-    border-radius: 0;
-    border: 2px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
-    box-shadow: var(--shadow-retro-sm);
-    transition: all var(--transition-fast);
+    background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-glass);
+    transition: all var(--transition-base);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    pointer-events: none;
 }
 
 .skill-card:hover {
-    transform: translate(2px, 2px);
-    box-shadow: none;
-    background: var(--color-primary-subtle);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .skill-icon {
@@ -1203,9 +1381,9 @@ section {
    ================================================ */
 .footer {
     padding: var(--space-2xl) 0;
-    background: var(--win95-silver);
-    border-top: 2px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
+    background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(20px);
 }
 
 .footer-content {
@@ -1224,21 +1402,38 @@ section {
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-lg);
-    background: var(--win95-silver);
-    border: 2px solid;
-    border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
+    background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-primary) 50%, var(--color-primary-dark) 100%);
+    border: none;
+    border-radius: var(--radius-full);
     font-weight: 700;
     font-size: 0.95rem;
+    color: white;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md), var(--shadow-bubble), inset 0 1px 0 rgba(255,255,255,0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.start-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+    border-radius: var(--radius-full) var(--radius-full) 0 0;
 }
 
 .start-button:hover {
-    background: var(--win95-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), 0 0 40px var(--color-primary-glow), inset 0 1px 0 rgba(255,255,255,0.5);
 }
 
 .start-button:active {
-    border-color: var(--win95-dark) var(--win95-light) var(--win95-light) var(--win95-dark);
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm), inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .start-icon {
@@ -1270,12 +1465,14 @@ section {
 
 .footer-clock {
     padding: var(--space-sm) var(--space-md);
-    background: var(--color-surface);
-    border: 2px solid;
-    border-color: var(--win95-dark) var(--win95-light) var(--win95-light) var(--win95-dark);
+    background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-md);
     font-family: var(--font-mono);
     font-size: 0.85rem;
     font-weight: 500;
+    box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.8);
+    color: var(--color-primary-dark);
 }
 
 /* ================================================
