@@ -315,7 +315,6 @@ section {
     display: flex;
     align-items: center;
     gap: var(--space-md);
-    margin-bottom: var(--space-lg);
 }
 
 .greeting-line {
@@ -393,24 +392,26 @@ section {
 .hero-visual {
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--space-xl);
+    justify-content: center;
 }
 
-/* Hero Photo */
-.hero-photo-container {
-    position: relative;
+/* Hero Intro with Avatar */
+.hero-intro {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
 }
 
-.hero-photo {
-    width: 180px;
-    height: 180px;
+.hero-avatar {
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     object-fit: cover;
     object-position: center top;
-    border: 4px solid white;
-    box-shadow: var(--shadow-lg);
+    border: 3px solid var(--color-primary);
+    box-shadow: var(--shadow-md);
 }
 
 /* Hero Code Card */
