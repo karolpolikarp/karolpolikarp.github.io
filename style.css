@@ -92,7 +92,11 @@ body {
     font-size: 16px;
     line-height: 1.6;
     color: var(--color-text);
-    background-color: var(--color-bg);
+    background: var(--win95-silver);
+    background-image:
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 4px 4px;
 }
 
 img {
@@ -156,9 +160,23 @@ section {
 }
 
 .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.logo-main {
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.02em;
+}
+
+.logo-sub {
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
 }
 
 .nav-links {
@@ -313,6 +331,11 @@ section {
     margin-bottom: var(--space-lg);
 }
 
+.hero-surname {
+    display: block;
+    color: var(--color-primary);
+}
+
 .hero-subtitle {
     font-size: clamp(1.1rem, 2vw, 1.35rem);
     color: var(--color-text-secondary);
@@ -461,8 +484,11 @@ section {
    STATS SECTION
    ================================================ */
 .stats {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     padding: var(--space-3xl) 0;
+    border-top: 3px solid var(--color-primary-light);
+    border-bottom: 3px solid var(--color-primary-dark);
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), inset 0 -2px 0 rgba(0,0,0,0.2);
 }
 
 .stats-grid {
@@ -545,7 +571,7 @@ section {
 }
 
 .project-card {
-    background: var(--color-surface);
+    background: var(--win95-silver);
     border-radius: 0;
     overflow: hidden;
     border: 2px solid;
@@ -557,6 +583,7 @@ section {
 .project-card:hover {
     transform: translate(4px, 4px);
     box-shadow: none;
+    border-color: var(--color-primary-light) var(--color-primary-dark) var(--color-primary-dark) var(--color-primary-light);
 }
 
 .project-featured {
@@ -783,7 +810,7 @@ section {
     align-items: center;
     gap: var(--space-lg);
     padding: var(--space-lg);
-    background: var(--color-surface);
+    background: var(--win95-silver);
     border-radius: 0;
     border: 2px solid;
     border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
@@ -794,7 +821,7 @@ section {
 .contact-link:hover {
     transform: translate(2px, 2px);
     box-shadow: none;
-    background: var(--color-primary-subtle);
+    border-color: var(--color-primary-light) var(--color-primary-dark) var(--color-primary-dark) var(--color-primary-light);
 }
 
 .contact-link-primary {
@@ -917,7 +944,7 @@ section {
    ABOUT SECTION
    ================================================ */
 .about {
-    background: var(--color-bg);
+    background: var(--color-bg-alt);
 }
 
 .about-content {
@@ -966,10 +993,11 @@ section {
     grid-template-columns: auto 1fr;
     gap: var(--space-sm) var(--space-md);
     padding: var(--space-md);
-    background: var(--color-surface);
+    background: var(--win95-silver);
     border-radius: 0;
     border: 2px solid;
     border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
+    box-shadow: var(--shadow-retro-sm);
 }
 
 .edu-date {
@@ -1014,7 +1042,7 @@ section {
 
 .skill-card {
     padding: var(--space-xl);
-    background: var(--color-surface);
+    background: var(--win95-silver);
     border-radius: 0;
     border: 2px solid;
     border-color: var(--win95-light) var(--win95-dark) var(--win95-dark) var(--win95-light);
@@ -1025,7 +1053,7 @@ section {
 .skill-card:hover {
     transform: translate(2px, 2px);
     box-shadow: none;
-    background: var(--color-primary-subtle);
+    border-color: var(--color-primary-light) var(--color-primary-dark) var(--color-primary-dark) var(--color-primary-light);
 }
 
 .skill-icon {
@@ -1079,7 +1107,7 @@ section {
    TECH STACK SECTION
    ================================================ */
 .tech-stack {
-    background: var(--color-bg);
+    background: var(--color-bg-alt);
 }
 
 .stack-categories {
