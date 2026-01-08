@@ -984,12 +984,23 @@ section {
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.3;
+    filter: blur(2px);
+    user-select: none;
+    transition: filter 0.3s ease;
 }
 
 .position-desc {
     font-size: 0.85rem;
     opacity: 0.8;
     line-height: 1.5;
+    filter: blur(2.5px);
+    user-select: none;
+    transition: filter 0.3s ease;
+}
+
+.position-item:hover .position-title,
+.position-item:hover .position-desc {
+    filter: blur(0);
 }
 
 /* ================================================
