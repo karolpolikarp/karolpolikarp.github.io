@@ -548,7 +548,7 @@ section {
         0 0 80px rgba(0, 128, 128, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
     width: 100%;
-    max-width: 580px;
+    max-width: 650px;
     border: 1px solid rgba(0, 128, 128, 0.3);
     transform: perspective(1000px) rotateY(-2deg) rotateX(2deg);
     transition: all 0.4s ease;
@@ -628,8 +628,8 @@ section {
 
 /* Console Body */
 .console-body {
-    padding: var(--space-lg);
-    min-height: 340px;
+    padding: var(--space-xl);
+    min-height: 380px;
     display: flex;
     flex-direction: column;
     background:
@@ -640,11 +640,11 @@ section {
 .console-output {
     flex: 1;
     overflow-y: auto;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
     font-family: var(--font-mono);
-    font-size: 0.9rem;
-    line-height: 1.7;
-    max-height: 220px;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    max-height: 260px;
     scrollbar-width: thin;
     scrollbar-color: var(--color-primary) transparent;
 }
