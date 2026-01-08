@@ -548,7 +548,7 @@ section {
         0 0 80px rgba(0, 128, 128, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
     width: 100%;
-    max-width: 500px;
+    max-width: 580px;
     border: 1px solid rgba(0, 128, 128, 0.3);
     transform: perspective(1000px) rotateY(-2deg) rotateX(2deg);
     transition: all 0.4s ease;
@@ -597,7 +597,8 @@ section {
 .console-title {
     flex: 1;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 500;
     color: #8b949e;
     text-align: center;
 }
@@ -607,7 +608,8 @@ section {
     align-items: center;
     gap: 6px;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 500;
     color: #3fb950;
 }
 
@@ -626,8 +628,8 @@ section {
 
 /* Console Body */
 .console-body {
-    padding: var(--space-md);
-    min-height: 280px;
+    padding: var(--space-lg);
+    min-height: 340px;
     display: flex;
     flex-direction: column;
     background:
@@ -640,9 +642,9 @@ section {
     overflow-y: auto;
     margin-bottom: var(--space-md);
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    line-height: 1.6;
-    max-height: 180px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    max-height: 220px;
     scrollbar-width: thin;
     scrollbar-color: var(--color-primary) transparent;
 }
@@ -758,7 +760,8 @@ section {
 
 .console-prompt {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 500;
     color: var(--color-primary);
     white-space: nowrap;
     user-select: none;
@@ -770,7 +773,7 @@ section {
     border: none;
     outline: none;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #c9d1d9;
     caret-color: var(--color-primary);
 }
@@ -780,8 +783,8 @@ section {
 }
 
 .console-run {
-    width: 28px;
-    height: 28px;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -794,8 +797,8 @@ section {
 }
 
 .console-run svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
 }
 
 .console-run:hover {
@@ -820,15 +823,15 @@ section {
 
 .commands-label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: #484f58;
     margin-right: var(--space-xs);
 }
 
 .cmd-btn {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    padding: 4px 10px;
+    font-size: 0.8rem;
+    padding: 6px 14px;
     background: rgba(0, 128, 128, 0.15);
     border: 1px solid rgba(0, 128, 128, 0.3);
     border-radius: var(--radius-full);
