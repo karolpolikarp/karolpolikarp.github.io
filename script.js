@@ -1,4 +1,136 @@
 // ================================================
+// THEME TOGGLE (DARK/LIGHT MODE)
+// ================================================
+const ThemeManager = {
+    toggle: document.getElementById('themeToggle'),
+
+    init() {
+        // Check for saved preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        } else if (systemPrefersDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        this.toggle?.addEventListener('click', () => this.toggleTheme());
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
+    },
+
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+
+        // Add transition effect
+        document.body.style.transition = 'background 0.3s ease, color 0.3s ease';
+        setTimeout(() => {
+            document.body.style.transition = '';
+        }, 300);
+    }
+};
+
+ThemeManager.init();
+
+// ================================================
+// CUSTOM CURSOR
+// ================================================
+const CustomCursor = {
+    cursor: null,
+    cursorDot: null,
+
+    init() {
+        // Only on desktop
+        if (window.innerWidth <= 768) return;
+
+        // Create cursor elements
+        this.cursor = document.createElement('div');
+        this.cursor.className = 'custom-cursor';
+        document.body.appendChild(this.cursor);
+
+        this.cursorDot = document.createElement('div');
+        this.cursorDot.className = 'cursor-dot';
+        document.body.appendChild(this.cursorDot);
+
+        // Track mouse movement
+        document.addEventListener('mousemove', (e) => this.moveCursor(e));
+
+        // Hover effects
+        const hoverElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card, .blog-card, .timeline-item, .contact-link');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => this.cursor.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => this.cursor.classList.remove('cursor-hover'));
+        });
+
+        // Click effect
+        document.addEventListener('mousedown', () => this.cursor.classList.add('cursor-click'));
+        document.addEventListener('mouseup', () => this.cursor.classList.remove('cursor-click'));
+    },
+
+    moveCursor(e) {
+        requestAnimationFrame(() => {
+            this.cursor.style.left = e.clientX + 'px';
+            this.cursor.style.top = e.clientY + 'px';
+            this.cursorDot.style.left = e.clientX + 'px';
+            this.cursorDot.style.top = e.clientY + 'px';
+        });
+    }
+};
+
+CustomCursor.init();
+
+// ================================================
+// PARALLAX EFFECT
+// ================================================
+const ParallaxEffect = {
+    shapes: document.querySelectorAll('.floating-shape.parallax'),
+
+    init() {
+        if (window.innerWidth <= 768) return;
+
+        document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+        window.addEventListener('scroll', () => this.handleScroll());
+    },
+
+    handleMouseMove(e) {
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        const mouseX = e.clientX - centerX;
+        const mouseY = e.clientY - centerY;
+
+        this.shapes.forEach(shape => {
+            const speed = parseFloat(shape.dataset.speed) || 0.05;
+            const x = mouseX * speed;
+            const y = mouseY * speed;
+            shape.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    },
+
+    handleScroll() {
+        const scrollY = window.pageYOffset;
+        this.shapes.forEach(shape => {
+            const speed = parseFloat(shape.dataset.speed) || 0.05;
+            const y = scrollY * speed * 0.5;
+            const currentTransform = shape.style.transform || '';
+            const baseTransform = currentTransform.replace(/translateY\([^)]*\)/, '');
+            shape.style.transform = `${baseTransform} translateY(${y}px)`;
+        });
+    }
+};
+
+ParallaxEffect.init();
+
+// ================================================
 // MOBILE NAVIGATION
 // ================================================
 const navToggle = document.querySelector('.nav-toggle');
@@ -77,25 +209,117 @@ if (statsSection) {
 }
 
 // ================================================
-// SCROLL REVEAL ANIMATIONS
+// ENHANCED SCROLL REVEAL ANIMATIONS
 // ================================================
-const revealElements = document.querySelectorAll(
-    '.skill-card, .project-card, .contact-link, .education-list li, .stack-category'
-);
+const ScrollAnimations = {
+    init() {
+        // Original reveal elements
+        const revealElements = document.querySelectorAll(
+            '.skill-card, .project-card, .contact-link, .education-list li, .stack-category, .stack-tech-item'
+        );
 
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-revealElements.forEach(el => {
-    el.classList.add('reveal');
-    revealObserver.observe(el);
-});
+        revealElements.forEach(el => {
+            el.classList.add('reveal');
+            revealObserver.observe(el);
+        });
+
+        // New fade-in animations
+        const fadeElements = document.querySelectorAll(
+            '.fade-in-up, .fade-in-left, .fade-in-right, .scale-in'
+        );
+
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+
+        fadeElements.forEach(el => {
+            fadeObserver.observe(el);
+        });
+
+        // Section headers animation
+        const sectionHeaders = document.querySelectorAll('.section-header');
+        const headerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    headerObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sectionHeaders.forEach(header => {
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(30px)';
+            header.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            headerObserver.observe(header);
+        });
+
+        // Position items staggered animation
+        const positionItems = document.querySelectorAll('.position-item');
+        const positionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                    positionObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        positionItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            positionObserver.observe(item);
+        });
+    }
+};
+
+ScrollAnimations.init();
+
+// ================================================
+// MAGNETIC BUTTON EFFECT
+// ================================================
+const MagneticButtons = {
+    init() {
+        if (window.innerWidth <= 768) return;
+
+        const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+    }
+};
+
+MagneticButtons.init();
 
 // ================================================
 // NAVBAR SCROLL EFFECT
