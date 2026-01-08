@@ -43,53 +43,6 @@ const ThemeManager = {
 ThemeManager.init();
 
 // ================================================
-// CUSTOM CURSOR
-// ================================================
-const CustomCursor = {
-    cursor: null,
-    cursorDot: null,
-
-    init() {
-        // Only on desktop
-        if (window.innerWidth <= 768) return;
-
-        // Create cursor elements
-        this.cursor = document.createElement('div');
-        this.cursor.className = 'custom-cursor';
-        document.body.appendChild(this.cursor);
-
-        this.cursorDot = document.createElement('div');
-        this.cursorDot.className = 'cursor-dot';
-        document.body.appendChild(this.cursorDot);
-
-        // Track mouse movement
-        document.addEventListener('mousemove', (e) => this.moveCursor(e));
-
-        // Hover effects
-        const hoverElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card, .blog-card, .timeline-item, .contact-link');
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => this.cursor.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => this.cursor.classList.remove('cursor-hover'));
-        });
-
-        // Click effect
-        document.addEventListener('mousedown', () => this.cursor.classList.add('cursor-click'));
-        document.addEventListener('mouseup', () => this.cursor.classList.remove('cursor-click'));
-    },
-
-    moveCursor(e) {
-        requestAnimationFrame(() => {
-            this.cursor.style.left = e.clientX + 'px';
-            this.cursor.style.top = e.clientY + 'px';
-            this.cursorDot.style.left = e.clientX + 'px';
-            this.cursorDot.style.top = e.clientY + 'px';
-        });
-    }
-};
-
-CustomCursor.init();
-
-// ================================================
 // PARALLAX EFFECT
 // ================================================
 const ParallaxEffect = {
