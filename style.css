@@ -1314,7 +1314,7 @@ section {
 }
 
 .contact-content {
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -1414,42 +1414,69 @@ section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2xl);
-    align-items: start;
+    align-items: stretch;
 }
 
 .contact-cta {
     padding: 0;
+    display: flex;
 }
 
 .contact-cta-box {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-primary-subtle) 100%);
+    border: 1px solid var(--color-primary-light);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    padding: var(--space-xl);
+    box-shadow: var(--shadow-md), 0 0 30px rgba(0, 128, 128, 0.08);
+    padding: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.contact-cta-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+}
+
+.contact-cta-box:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 128, 128, 0.15);
 }
 
 .contact-cta-box h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     margin-bottom: var(--space-md);
-    color: var(--color-text);
+    color: var(--color-primary-dark);
 }
 
 .contact-cta-box p {
     font-size: 0.95rem;
     color: var(--color-text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: var(--space-lg);
 }
 
 .contact-availability {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-primary-dark);
+    background: rgba(0, 128, 128, 0.1);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-full);
+    margin-top: auto;
 }
 
 .availability-dot {
@@ -1458,6 +1485,7 @@ section {
     background: var(--color-primary);
     border-radius: 50%;
     animation: pulse 2s infinite;
+    box-shadow: 0 0 8px rgba(0, 128, 128, 0.5);
 }
 
 @keyframes pulse {
