@@ -80,20 +80,47 @@
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <div class="hero-card">
-                        <div class="hero-card-header">
-                            <span class="dot green"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot red"></span>
+                    <div class="legal-console">
+                        <div class="console-header">
+                            <div class="console-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <div class="console-title">prawo.py — konsola prawna</div>
+                            <div class="console-status">
+                                <span class="status-dot"></span>
+                                <span>online</span>
+                            </div>
                         </div>
-                        <div class="hero-card-content">
-                            <code>
-                                <span class="code-keyword">from</span> prawo <span class="code-keyword">import</span> ISAP<br>
-                                <span class="code-keyword">from</span> ai <span class="code-keyword">import</span> Claude<br><br>
-                                <span class="code-comment"># szukam podstawy prawnej</span><br>
-                                ustawa = ISAP.find(<span class="code-string">"ochrona danych"</span>)<br>
-                                odpowiedź = Claude.ask(ustawa)
-                            </code>
+                        <div class="console-body">
+                            <div class="console-output" id="consoleOutput">
+                                <div class="console-line system">
+                                    <span class="line-prefix">[system]</span>
+                                    <span>Witaj w konsoli prawnej v2.0</span>
+                                </div>
+                                <div class="console-line system">
+                                    <span class="line-prefix">[system]</span>
+                                    <span>Załadowano: ISAP, Claude API, Baza aktów prawnych</span>
+                                </div>
+                                <div class="console-line blank"></div>
+                            </div>
+                            <div class="console-input-area">
+                                <span class="console-prompt">prawo@isap:~$</span>
+                                <input type="text" class="console-input" id="consoleInput" placeholder="wpisz komendę lub kliknij przykład..." autocomplete="off">
+                                <button class="console-run" id="consoleRun" title="Wykonaj">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="console-commands">
+                            <span class="commands-label">Przykłady:</span>
+                            <button class="cmd-btn" data-cmd="ISAP.find('ochrona danych')">ISAP.find()</button>
+                            <button class="cmd-btn" data-cmd="Claude.ask('Czym jest RODO?')">Claude.ask()</button>
+                            <button class="cmd-btn" data-cmd="prawo.art(6, 'RODO')">prawo.art()</button>
+                            <button class="cmd-btn" data-cmd="help">help</button>
                         </div>
                     </div>
                 </div>
