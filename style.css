@@ -984,12 +984,16 @@ section {
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.3;
+    filter: blur(3px);
+    user-select: none;
 }
 
 .position-desc {
     font-size: 0.85rem;
     opacity: 0.8;
     line-height: 1.5;
+    filter: blur(3px);
+    user-select: none;
 }
 
 /* ================================================
