@@ -645,3 +645,46 @@ const LegalConsole = {
 
 // Initialize console
 LegalConsole.init();
+
+// ================================================
+// EMAIL PROTECTION - Anti-Scraper Obfuscation
+// ================================================
+const EmailProtection = {
+    // Email parts (obfuscated to avoid scraping)
+    parts: ['karolp', 'wilczynski', '@', 'gmail', '.', 'com'],
+
+    init() {
+        const emailLink = document.getElementById('emailLink');
+        const emailDisplay = document.getElementById('emailDisplay');
+        const newsletterLink = document.getElementById('newsletterLink');
+
+        if (emailLink && emailDisplay) {
+            emailLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const email = this.decode();
+                emailDisplay.textContent = email;
+                emailLink.href = 'mailto:' + email;
+                // Open mail client on subsequent clicks
+                if (emailLink.dataset.revealed === 'true') {
+                    window.location.href = 'mailto:' + email;
+                }
+                emailLink.dataset.revealed = 'true';
+            });
+        }
+
+        if (newsletterLink) {
+            newsletterLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const email = this.decode();
+                window.location.href = 'mailto:' + email + '?subject=Newsletter%20-%20Zapisuję%20się';
+            });
+        }
+    },
+
+    decode() {
+        // Reconstruct email from parts
+        return this.parts[0] + this.parts[1] + this.parts[2] + this.parts[3] + this.parts[4] + this.parts[5];
+    }
+};
+
+EmailProtection.init();

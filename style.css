@@ -38,8 +38,8 @@
     --space-4xl: 6rem;
 
     /* Layout */
-    --container-max: 1200px;
-    --container-narrow: 800px;
+    --container-max: 1400px;
+    --container-narrow: 900px;
 
     /* Transitions */
     --transition-fast: 150ms ease;
@@ -615,7 +615,7 @@ section {
         0 0 80px rgba(0, 128, 128, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
     width: 100%;
-    max-width: 650px;
+    max-width: 720px;
     border: 1px solid rgba(0, 128, 128, 0.3);
     transform: perspective(1000px) rotateY(-2deg) rotateX(2deg);
     transition: all 0.4s ease;
@@ -1051,7 +1051,7 @@ section {
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.3;
-    filter: blur(3px);
+    filter: blur(5px);
     user-select: none;
 }
 
@@ -1059,12 +1059,12 @@ section {
     font-size: 0.85rem;
     opacity: 0.8;
     line-height: 1.5;
-    filter: blur(3px);
+    filter: blur(5px);
     user-select: none;
 }
 
 .blurred-text {
-    filter: blur(3px);
+    filter: blur(5px);
     user-select: none;
 }
 
