@@ -222,6 +222,17 @@ const LegalConsole = {
                     `Źródło: isap.sejm.gov.pl`
                 ]
             })
+        },
+        {
+            regex: /cats\.show\(['"]?(Pimpek|Fryderyk|Both)['"]?\)/i,
+            handler: (match) => {
+                const cat = match[1].toLowerCase();
+                return {
+                    type: 'easter-egg',
+                    loading: 'Ładuję koty...',
+                    cat: cat
+                };
+            }
         }
     ],
 
@@ -301,6 +312,12 @@ const LegalConsole = {
                 await this.delay(800 + Math.random() * 700);
                 loadingLine.remove();
 
+                // Handle easter egg (cats)
+                if (result.type === 'easter-egg' && result.cat) {
+                    this.showCatEasterEgg(result.cat);
+                    return;
+                }
+
                 // Show result
                 const lineType = result.type === 'ai' ? 'ai-response' : 'result';
                 result.response.forEach(line => {
@@ -370,6 +387,82 @@ const LegalConsole = {
 
         await this.delay(500);
         this.execute(demoCommand);
+    },
+
+    showCatEasterEgg(cat) {
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'cat-easter-egg-overlay';
+
+        const container = document.createElement('div');
+        container.className = 'cat-easter-egg-container';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'cat-easter-egg-close';
+        closeBtn.innerHTML = '×';
+        closeBtn.onclick = () => overlay.remove();
+
+        const content = document.createElement('div');
+        content.className = 'cat-easter-egg-content';
+
+        const catNames = {
+            'pimpek': 'Pimpek',
+            'fryderyk': 'Fryderyk',
+            'both': 'Pimpek & Fryderyk'
+        };
+
+        const title = document.createElement('h3');
+        title.className = 'cat-easter-egg-title';
+        title.textContent = `🐱 ${catNames[cat]} 🐱`;
+
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'cat-easter-egg-images';
+
+        if (cat === 'both') {
+            ['pimpek', 'fryderyk'].forEach(name => {
+                const img = document.createElement('img');
+                img.src = `assets/images/cats/${name}.jpg`;
+                img.alt = name.charAt(0).toUpperCase() + name.slice(1);
+                img.className = 'cat-easter-egg-img';
+                imageContainer.appendChild(img);
+            });
+        } else {
+            const img = document.createElement('img');
+            img.src = `assets/images/cats/${cat}.jpg`;
+            img.alt = catNames[cat];
+            img.className = 'cat-easter-egg-img cat-easter-egg-img-single';
+            imageContainer.appendChild(img);
+        }
+
+        const subtitle = document.createElement('p');
+        subtitle.className = 'cat-easter-egg-subtitle';
+        subtitle.textContent = 'Sekretni asystenci prawni 🐾';
+
+        content.appendChild(title);
+        content.appendChild(imageContainer);
+        content.appendChild(subtitle);
+        container.appendChild(closeBtn);
+        container.appendChild(content);
+        overlay.appendChild(container);
+        document.body.appendChild(overlay);
+
+        // Add line to console
+        this.addLine('system', `🐱 Easter egg unlocked: ${catNames[cat]}!`);
+        this.addLine('blank');
+
+        // Close on overlay click
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.remove();
+        });
+
+        // Close on Escape
+        const escHandler = (e) => {
+            if (e.key === 'Escape') {
+                overlay.remove();
+                document.removeEventListener('keydown', escHandler);
+            }
+        };
+        document.addEventListener('keydown', escHandler);
     }
 };
 
