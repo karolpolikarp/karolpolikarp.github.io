@@ -1177,6 +1177,8 @@ section {
     align-items: center;
     justify-content: center;
     min-height: 200px;
+    overflow: hidden;
+    position: relative;
 }
 
 .project-placeholder {
@@ -1184,6 +1186,8 @@ section {
     height: 80px;
     color: var(--color-primary);
     opacity: 0.5;
+    position: relative;
+    z-index: 0;
 }
 
 .project-placeholder svg {
@@ -1193,16 +1197,19 @@ section {
 
 /* Project image - for actual images instead of placeholders */
 .project-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     transition: transform var(--transition-slow), opacity var(--transition-base);
+    z-index: 1;
 }
 
 .project-card:hover .project-img {
     transform: scale(1.05);
-    opacity: 0.95;
 }
 
 .project-content {
@@ -1953,7 +1960,7 @@ section {
     background: var(--color-primary);
     color: white;
     border-radius: var(--radius-full);
-    z-index: 1;
+    z-index: 2;
 }
 
 .project-image {
@@ -2611,6 +2618,8 @@ section {
     color: var(--color-primary);
     opacity: 0.5;
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 0;
 }
 
 .blog-card:hover .blog-card-icon {
@@ -2620,18 +2629,19 @@ section {
 
 /* Blog card image - for actual images instead of icon placeholders */
 .blog-card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     transition: transform var(--transition-slow), opacity var(--transition-base);
-    position: relative;
     z-index: 1;
 }
 
 .blog-card:hover .blog-card-img {
     transform: scale(1.05);
-    opacity: 0.95;
 }
 
 .blog-card-content {
