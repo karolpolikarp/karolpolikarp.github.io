@@ -208,7 +208,7 @@ section {
     justify-content: space-between;
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: var(--space-lg) var(--space-xl);
+    padding: var(--space-xl) var(--space-2xl);
 }
 
 .nav-logo {
@@ -218,17 +218,23 @@ section {
 }
 
 .logo-main {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 800;
     letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(0, 128, 128, 0.3);
+    position: relative;
 }
 
 .logo-sub {
-    font-size: 0.65rem;
-    font-weight: 400;
-    color: var(--color-text-tertiary);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-primary);
     letter-spacing: 0.1em;
-    margin-top: 2px;
+    margin-top: 4px;
 }
 
 .nav-links {
@@ -282,6 +288,23 @@ section {
    ================================================ */
 .accent {
     color: var(--color-primary);
+}
+
+.logo-main .accent {
+    font-size: 2rem;
+    color: var(--color-primary-light);
+    animation: logoDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoDotPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+    }
 }
 
 /* ================================================
