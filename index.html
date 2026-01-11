@@ -18,11 +18,9 @@
                 <span class="logo-sub">[ka‿pɛ‿ˈvu]</span>
             </a>
             <ul class="nav-links">
-                <li><a href="#o-mnie">O mnie</a></li>
-                <li><a href="#kompetencje">Kompetencje</a></li>
+                <li><a href="#hero">Home</a></li>
                 <li><a href="#projekty">Projekty</a></li>
                 <li><a href="#blog">Blog</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
             </ul>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                 <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -145,51 +143,165 @@
             </div>
         </section>
 
-        <!-- Positions Section -->
-        <section class="positions">
+        <!-- Projects Section -->
+        <section id="projekty" class="projects">
             <div class="container">
-                <div class="positions-grid">
-                    <div class="position-item">
-                        <span class="position-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                <path d="M2 17l10 5 10-5"/>
-                                <path d="M2 12l10 5 10-5"/>
-                            </svg>
-                        </span>
-                        <span class="position-title">Regulacje AI</span>
-                        <span class="position-desc">Wdrożenie AI Act, piaskownice regulacyjne</span>
-                    </div>
-                    <div class="position-item">
-                        <span class="position-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="2" y="3" width="20" height="14" rx="2"/>
-                                <path d="M8 21h8M12 17v4"/>
-                            </svg>
-                        </span>
-                        <span class="position-title">Sektor publiczny</span>
-                        <span class="position-desc">Projekty IT, zamówienia, fundusze UE</span>
-                    </div>
-                    <div class="position-item">
-                        <span class="position-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                            </svg>
-                        </span>
-                        <span class="position-title">4 podyplomówki</span>
-                        <span class="position-desc">AI, Big Data, Python, bazy danych</span>
-                    </div>
-                    <div class="position-item">
-                        <span class="position-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="11" cy="11" r="8"/>
-                                <path d="M21 21l-4.35-4.35"/>
-                            </svg>
-                        </span>
-                        <span class="position-title">JakiePrawo.pl</span>
-                        <span class="position-desc">Wyszukiwarka podstaw prawnych</span>
-                    </div>
+                <header class="section-header">
+                    <h2 class="section-title">Projekty</h2>
+                </header>
+
+                <div class="projects-grid">
+                    <!-- Featured Project -->
+                    <article class="project-card project-featured">
+                        <div class="project-image">
+                            <div class="project-badge">Flagowy projekt</div>
+                            <img src="assets/images/obraz_2026-01-09_205957107.png" alt="Screenshot JakiePrawo.pl" class="project-img">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">Supabase</span>
+                                <span class="tag">Claude API</span>
+                                <span class="tag">MCP</span>
+                            </div>
+                            <h3 class="project-title">JakiePrawo.pl</h3>
+                            <p class="project-desc">
+                                Narzędzie do wyszukiwania podstaw prawnych. Zadajesz pytanie,
+                                dostajesz konkretny artykuł, nazwę aktu, wyjaśnienie i link do pełnego tekstu w ISAP.
+                            </p>
+                            <ul class="project-features">
+                                <li>React, TypeScript, Supabase Edge Functions</li>
+                                <li>Własny serwer MCP na Raspberry Pi do ekstrakcji treści ustaw</li>
+                                <li>Parsowanie PDF-ów z api.sejm.gov.pl</li>
+                            </ul>
+                            <div class="project-links">
+                                <a href="https://jakieprawo.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
+                                    <span>Zobacz na żywo</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Other Projects -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/majeranek.png" alt="Screenshot Majeranek" class="project-img">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">React</span>
+                                <span class="tag">AI</span>
+                            </div>
+                            <h3 class="project-title">Majeranek</h3>
+                            <p class="project-desc">
+                                Aplikacja do tworzenia tier list i rankingów z rekomendacjami AI.
+                                Wrzucasz swoje ulubione filmy, książki, gry – AI analizuje wzorce
+                                i podpowiada rzeczy, które mogą Ci się spodobać.
+                                Cross-list analysis: może zaproponować film na podstawie Twojego gustu muzycznego.
+                            </p>
+                            <div class="project-links">
+                                <a href="https://github.com/karolpolikarp/majeranek" target="_blank" rel="noopener" class="project-link">
+                                    <span>GitHub</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/margiela.png" alt="Screenshot AutoMargiela" class="project-img">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Selenium</span>
+                                <span class="tag">Automation</span>
+                            </div>
+                            <h3 class="project-title">AutoMargiela</h3>
+                            <p class="project-desc">
+                                Bot do automatycznego monitorowania cen produktów Maison Margiela.
+                                Selenium + obsługa captcha + powiadomienia.
+                            </p>
+                            <div class="project-links">
+                                <a href="https://github.com/karolpolikarp/automargiela" target="_blank" rel="noopener" class="project-link">
+                                    <span>GitHub</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/espi.png" alt="Screenshot Prognozy ESPI" class="project-img">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">GPT-4o</span>
+                                <span class="tag">Pandas</span>
+                            </div>
+                            <h3 class="project-title">Prognozy giełdowe z ESPI</h3>
+                            <p class="project-desc">
+                                Prognozowanie kursów akcji na podstawie komunikatów giełdowych.
+                                Raporty ESPI trzech spółek (JSW, CD Projekt, Allegro) – ponad 1200 dokumentów.
+                                Model GPT-4o mini generował prognozy dla pięciu horyzontów czasowych.
+                            </p>
+                            <div class="project-links">
+                                <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="project-link">
+                                    <span>GitHub</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/notebooks.png" alt="Screenshot Notebooks" class="project-img">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Jupyter</span>
+                                <span class="tag">Pandas</span>
+                                <span class="tag">R</span>
+                            </div>
+                            <h3 class="project-title">Notebooki data science</h3>
+                            <p class="project-desc">
+                                Projekty z okresu studiów podyplomowych:
+                                <strong>videogame</strong> – analiza globalnego rynku gier (segmentacja K-means, różnice regionalne);
+                                <strong>Winnipeg/Washington</strong> – analiza rynków Airbnb (feature engineering, szacunki przychodów).
+                            </p>
+                            <div class="project-links">
+                                <a href="https://github.com/karolpolikarp/videogame" target="_blank" rel="noopener" class="project-link">
+                                    <span>GitHub</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="projects-footer">
+                    <a href="https://github.com/karolpolikarp?tab=repositories" target="_blank" rel="noopener" class="btn btn-secondary">
+                        <span>Wszystkie repozytoria</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </section>
@@ -483,169 +595,6 @@
                             <span class="tech-project-text">Automatyzacja</span>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projekty" class="projects">
-            <div class="container">
-                <header class="section-header">
-                    <h2 class="section-title">Projekty</h2>
-                </header>
-
-                <div class="projects-grid">
-                    <!-- Featured Project -->
-                    <article class="project-card project-featured">
-                        <div class="project-image">
-                            <div class="project-badge">Flagowy projekt</div>
-                            <img src="assets/images/obraz_2026-01-09_205957107.png" alt="Screenshot JakiePrawo.pl" class="project-img">
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">React</span>
-                                <span class="tag">Supabase</span>
-                                <span class="tag">Claude API</span>
-                                <span class="tag">MCP</span>
-                            </div>
-                            <h3 class="project-title">JakiePrawo.pl</h3>
-                            <p class="project-desc">
-                                Narzędzie do wyszukiwania podstaw prawnych. Zadajesz pytanie,
-                                dostajesz konkretny artykuł, nazwę aktu, wyjaśnienie i link do pełnego tekstu w ISAP.
-                            </p>
-                            <ul class="project-features">
-                                <li>React, TypeScript, Supabase Edge Functions</li>
-                                <li>Własny serwer MCP na Raspberry Pi do ekstrakcji treści ustaw</li>
-                                <li>Parsowanie PDF-ów z api.sejm.gov.pl</li>
-                            </ul>
-                            <div class="project-links">
-                                <a href="https://jakieprawo.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
-                                    <span>Zobacz na żywo</span>
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Other Projects -->
-                    <article class="project-card">
-                        <div class="project-image">
-                            <img src="assets/images/majeranek.png" alt="Screenshot Majeranek" class="project-img">
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">TypeScript</span>
-                                <span class="tag">React</span>
-                                <span class="tag">AI</span>
-                            </div>
-                            <h3 class="project-title">Majeranek</h3>
-                            <p class="project-desc">
-                                Aplikacja do tworzenia tier list i rankingów z rekomendacjami AI.
-                                Wrzucasz swoje ulubione filmy, książki, gry – AI analizuje wzorce
-                                i podpowiada rzeczy, które mogą Ci się spodobać.
-                                Cross-list analysis: może zaproponować film na podstawie Twojego gustu muzycznego.
-                            </p>
-                            <div class="project-links">
-                                <a href="https://github.com/karolpolikarp/majeranek" target="_blank" rel="noopener" class="project-link">
-                                    <span>GitHub</span>
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <div class="project-image">
-                            <img src="assets/images/margiela.png" alt="Screenshot AutoMargiela" class="project-img">
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">Selenium</span>
-                                <span class="tag">Automation</span>
-                            </div>
-                            <h3 class="project-title">AutoMargiela</h3>
-                            <p class="project-desc">
-                                Bot do automatycznego monitorowania cen produktów Maison Margiela.
-                                Selenium + obsługa captcha + powiadomienia.
-                            </p>
-                            <div class="project-links">
-                                <a href="https://github.com/karolpolikarp/automargiela" target="_blank" rel="noopener" class="project-link">
-                                    <span>GitHub</span>
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <div class="project-image">
-                            <img src="assets/images/espi.png" alt="Screenshot Prognozy ESPI" class="project-img">
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">GPT-4o</span>
-                                <span class="tag">Pandas</span>
-                            </div>
-                            <h3 class="project-title">Prognozy giełdowe z ESPI</h3>
-                            <p class="project-desc">
-                                Prognozowanie kursów akcji na podstawie komunikatów giełdowych.
-                                Raporty ESPI trzech spółek (JSW, CD Projekt, Allegro) – ponad 1200 dokumentów.
-                                Model GPT-4o mini generował prognozy dla pięciu horyzontów czasowych.
-                            </p>
-                            <div class="project-links">
-                                <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="project-link">
-                                    <span>GitHub</span>
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <div class="project-image">
-                            <img src="assets/images/notebooks.png" alt="Screenshot Notebooks" class="project-img">
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">Jupyter</span>
-                                <span class="tag">Pandas</span>
-                                <span class="tag">R</span>
-                            </div>
-                            <h3 class="project-title">Notebooki data science</h3>
-                            <p class="project-desc">
-                                Projekty z okresu studiów podyplomowych:
-                                <strong>videogame</strong> – analiza globalnego rynku gier (segmentacja K-means, różnice regionalne);
-                                <strong>Winnipeg/Washington</strong> – analiza rynków Airbnb (feature engineering, szacunki przychodów).
-                            </p>
-                            <div class="project-links">
-                                <a href="https://github.com/karolpolikarp/videogame" target="_blank" rel="noopener" class="project-link">
-                                    <span>GitHub</span>
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="projects-footer">
-                    <a href="https://github.com/karolpolikarp?tab=repositories" target="_blank" rel="noopener" class="btn btn-secondary">
-                        <span>Wszystkie repozytoria</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
                 </div>
             </div>
         </section>
