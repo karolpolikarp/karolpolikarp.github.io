@@ -1095,8 +1095,10 @@ section {
 .section-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.1em;
     margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    color: var(--color-primary);
 }
 
 .section-desc {
