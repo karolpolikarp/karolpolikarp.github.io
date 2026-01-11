@@ -186,6 +186,7 @@ button {
 
 section {
     padding: var(--space-4xl) 0;
+    scroll-margin-top: 100px;
 }
 
 /* ================================================
