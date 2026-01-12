@@ -2837,3 +2837,429 @@ section {
         text-shadow: 0 0 20px rgba(0, 128, 128, 0.6), 0 0 40px rgba(0, 128, 128, 0.3);
     }
 }
+
+/* ================================================
+   SCROLL PROGRESS INDICATOR
+   ================================================ */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg,
+        var(--color-primary) 0%,
+        var(--color-primary-light) 50%,
+        var(--color-primary) 100%);
+    background-size: 200% 100%;
+    animation: scrollProgressGradient 2s ease infinite;
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 10px var(--color-primary), 0 0 20px rgba(0, 128, 128, 0.3);
+}
+
+@keyframes scrollProgressGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ================================================
+   NOISE/GRAIN TEXTURE OVERLAY
+   ================================================ */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    mix-blend-mode: overlay;
+}
+
+[data-theme="dark"] .noise-overlay {
+    opacity: 0.04;
+}
+
+/* ================================================
+   GRADIENT BORDER ANIMATIONS
+   ================================================ */
+.gradient-border {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: calc(var(--radius-lg) + 2px);
+    background: linear-gradient(
+        var(--gradient-angle, 0deg),
+        var(--color-primary),
+        var(--color-primary-light),
+        rgba(0, 128, 128, 0.3),
+        var(--color-primary-light),
+        var(--color-primary)
+    );
+    background-size: 300% 300%;
+    animation: gradientBorderRotate 4s linear infinite;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.gradient-border:hover::before {
+    opacity: 1;
+}
+
+@keyframes gradientBorderRotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Apply gradient border to skill cards */
+.skill-card {
+    position: relative;
+    z-index: 1;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: calc(var(--radius-lg) + 2px);
+    background: linear-gradient(
+        45deg,
+        var(--color-primary),
+        var(--color-primary-light),
+        rgba(0, 128, 128, 0.2),
+        var(--color-primary-light),
+        var(--color-primary)
+    );
+    background-size: 300% 300%;
+    animation: gradientBorderRotate 4s linear infinite paused;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.skill-card:hover::before {
+    opacity: 1;
+    animation-play-state: running;
+}
+
+/* Apply gradient border to project cards */
+.project-card {
+    position: relative;
+    z-index: 1;
+}
+
+.project-card::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: calc(var(--radius-lg) + 2px);
+    background: linear-gradient(
+        60deg,
+        var(--color-primary),
+        var(--color-primary-light),
+        rgba(32, 178, 170, 0.3),
+        var(--color-primary-light),
+        var(--color-primary)
+    );
+    background-size: 300% 300%;
+    animation: gradientBorderRotate 3s linear infinite paused;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.project-card:hover::after {
+    opacity: 1;
+    animation-play-state: running;
+}
+
+/* Apply gradient border to blog cards */
+.blog-card {
+    position: relative;
+    z-index: 1;
+}
+
+.blog-card::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: calc(var(--radius-lg) + 2px);
+    background: linear-gradient(
+        90deg,
+        var(--color-primary),
+        var(--color-primary-light),
+        rgba(0, 128, 128, 0.2),
+        var(--color-primary-light),
+        var(--color-primary)
+    );
+    background-size: 300% 300%;
+    animation: gradientBorderRotate 5s linear infinite paused;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.blog-card:hover::after {
+    opacity: 1;
+    animation-play-state: running;
+}
+
+/* ================================================
+   ENHANCED MORPHING BACKGROUND BLOBS
+   ================================================ */
+.floating-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.6;
+    will-change: transform, border-radius;
+}
+
+.shape-1 {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, rgba(0, 128, 128, 0.2) 0%, rgba(32, 178, 170, 0.1) 100%);
+    top: 15%;
+    right: 8%;
+    animation: morphBlob1 20s ease-in-out infinite;
+}
+
+.shape-2 {
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(225deg, rgba(32, 178, 170, 0.15) 0%, rgba(0, 102, 102, 0.1) 100%);
+    bottom: 25%;
+    left: 3%;
+    animation: morphBlob2 25s ease-in-out infinite;
+}
+
+.shape-3 {
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(315deg, rgba(0, 128, 128, 0.12) 0%, rgba(32, 178, 170, 0.08) 100%);
+    top: 55%;
+    right: 25%;
+    animation: morphBlob3 18s ease-in-out infinite;
+}
+
+@keyframes morphBlob1 {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    25% {
+        transform: translate(-40px, 30px) rotate(90deg) scale(1.1);
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+    50% {
+        transform: translate(30px, -40px) rotate(180deg) scale(0.95);
+        border-radius: 50% 60% 30% 60% / 30% 50% 70% 50%;
+    }
+    75% {
+        transform: translate(-20px, -30px) rotate(270deg) scale(1.05);
+        border-radius: 40% 60% 60% 40% / 70% 30% 50% 60%;
+    }
+}
+
+@keyframes morphBlob2 {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+        border-radius: 40% 60% 60% 40% / 70% 30% 70% 30%;
+    }
+    33% {
+        transform: translate(50px, -30px) scale(1.15);
+        border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%;
+    }
+    66% {
+        transform: translate(-40px, 40px) scale(0.9);
+        border-radius: 50% 50% 30% 70% / 50% 50% 70% 30%;
+    }
+}
+
+@keyframes morphBlob3 {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+        border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+    }
+    50% {
+        transform: translate(60px, 40px) rotate(180deg);
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+}
+
+/* ================================================
+   SMOOTH SECTION TRANSITIONS
+   ================================================ */
+section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Section reveal animation */
+.section-reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Smooth gradient transitions between sections */
+.projects::after,
+.about::after,
+.skills::after,
+.tech-stack::after,
+.blog::after,
+.contact::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, transparent, var(--color-bg-alt));
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0.5;
+}
+
+/* ================================================
+   PROJECT IMAGE PARALLAX EFFECT
+   ================================================ */
+.project-image {
+    overflow: hidden;
+    position: relative;
+}
+
+.project-img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.08) translateY(-5px);
+}
+
+/* 3D tilt effect preparation */
+.project-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.project-card .project-image {
+    transform: translateZ(0);
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-image {
+    transform: translateZ(20px);
+}
+
+/* Blog card image parallax */
+.blog-card-image {
+    overflow: hidden;
+    position: relative;
+}
+
+.blog-card-img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.blog-card:hover .blog-card-img {
+    transform: scale(1.1) translateY(-3px);
+}
+
+/* ================================================
+   ENHANCED HOVER STATES
+   ================================================ */
+.position-item {
+    transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.position-item:hover {
+    transform: translateY(-6px) rotateX(2deg);
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.2),
+        0 5px 15px rgba(0, 128, 128, 0.1);
+}
+
+/* Contact link enhanced hover */
+.contact-link {
+    transform-style: preserve-3d;
+}
+
+.contact-link:hover {
+    transform: translateX(6px) perspective(500px) rotateY(-1deg);
+}
+
+/* Keyword tags enhanced */
+.keyword {
+    position: relative;
+    overflow: hidden;
+}
+
+.keyword::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.keyword:hover::before {
+    left: 100%;
+}
+
+/* ================================================
+   SECTION CONTENT STAGGER ANIMATIONS
+   ================================================ */
+.stagger-children > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.stagger-children.animated > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-children.animated > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children.animated > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children.animated > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-children.animated > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-children.animated > *:nth-child(6) { transition-delay: 0.6s; }
+
+.stagger-children.animated > * {
+    opacity: 1;
+    transform: translateY(0);
+}
