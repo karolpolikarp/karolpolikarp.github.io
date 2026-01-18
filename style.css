@@ -2063,11 +2063,11 @@ section {
     min-height: 320px;
 }
 
-/* Secondary projects - 4 columns */
+/* Secondary projects - 3 columns */
 .projects-secondary {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-lg);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
 }
 
 .projects-secondary .project-card {
@@ -2160,15 +2160,13 @@ section {
 }
 
 /* Responsive adjustments */
-@media (max-width: 1200px) {
-    .projects-secondary {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 @media (max-width: 1024px) {
     .projects-featured-stack .project-featured {
         grid-template-columns: 1fr;
+    }
+
+    .projects-secondary {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
