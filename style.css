@@ -136,6 +136,40 @@
 }
 
 /* ================================================
+   ACCESSIBILITY - Skip Link & Focus States
+   ================================================ */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    color: white;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    z-index: 9999;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: var(--space-md);
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Global focus styles */
+*:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ================================================
    RESET & BASE
    ================================================ */
 *,
@@ -255,8 +289,14 @@ section {
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--color-text-secondary);
-    transition: color var(--transition-fast);
+    transition: color var(--transition-fast), transform var(--transition-fast);
     position: relative;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+}
+
+.nav-links a:focus-visible {
+    background: var(--color-primary-subtle);
 }
 
 .nav-links a::after {
@@ -1081,21 +1121,12 @@ section {
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.3;
-    filter: blur(5px);
-    user-select: none;
 }
 
 .position-desc {
     font-size: 0.85rem;
-    opacity: 0.8;
+    opacity: 0.85;
     line-height: 1.5;
-    filter: blur(5px);
-    user-select: none;
-}
-
-.blurred-text {
-    filter: blur(5px);
-    user-select: none;
 }
 
 /* ================================================
@@ -2319,8 +2350,20 @@ section {
         gap: var(--space-2xl);
     }
 
+    /* Show console on tablet with adjusted size */
     .hero-visual {
-        display: none;
+        display: flex;
+        justify-content: center;
+    }
+
+    .legal-console {
+        max-width: 100%;
+        transform: none;
+        animation: none;
+    }
+
+    .legal-console:hover {
+        transform: translateY(-4px);
     }
 
     .about-content {
@@ -2353,6 +2396,42 @@ section {
 @media (max-width: 768px) {
     :root {
         --space-4xl: 4rem;
+    }
+
+    /* Hide console on mobile - too complex for small screens */
+    .hero-visual {
+        display: none;
+    }
+
+    /* Mobile console adjustments if shown */
+    .legal-console {
+        transform: none;
+        animation: none;
+    }
+
+    .console-body {
+        min-height: 280px;
+        padding: var(--space-md);
+    }
+
+    .console-output {
+        max-height: 180px;
+        font-size: 0.85rem;
+    }
+
+    .console-commands {
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+    }
+
+    .cmd-btn {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+    }
+
+    .commands-label {
+        width: 100%;
+        margin-bottom: var(--space-xs);
     }
 
     .positions-grid {
@@ -3001,5 +3080,38 @@ section {
     }
     50% {
         text-shadow: 0 0 20px rgba(0, 128, 128, 0.6), 0 0 40px rgba(0, 128, 128, 0.3);
+    }
+}
+
+/* ================================================
+   REDUCED MOTION ACCESSIBILITY
+   ================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .floating-shape,
+    .legal-console,
+    .hero::before {
+        animation: none;
+    }
+
+    .parallax {
+        transform: none !important;
+    }
+
+    .reveal,
+    .fade-in-up,
+    .fade-in-left,
+    .fade-in-right,
+    .scale-in {
+        opacity: 1;
+        transform: none;
     }
 }
