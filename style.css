@@ -2,13 +2,13 @@
    DESIGN TOKENS - Premium Style
    ================================================ */
 :root {
-    /* Colors - Warm Premium Theme */
-    --color-primary: #1a2744;
-    --color-primary-light: #2d4a7c;
-    --color-primary-dark: #0f1a2e;
-    --color-primary-subtle: #f8f6f3;
-    --color-primary-glow: rgba(26, 39, 68, 0.12);
-    --color-primary-gradient: linear-gradient(135deg, #1a2744 0%, #2d4a7c 100%);
+    /* Colors - British Racing Green Premium Theme */
+    --color-primary: #004d2b;
+    --color-primary-light: #1a6b42;
+    --color-primary-dark: #003d22;
+    --color-primary-subtle: #f5f9f7;
+    --color-primary-glow: rgba(0, 77, 43, 0.12);
+    --color-primary-gradient: linear-gradient(135deg, #004d2b 0%, #1a6b42 100%);
 
     /* Gold Accent */
     --color-accent: #c9a962;
@@ -108,7 +108,7 @@
 [data-theme="dark"] .hero {
     background:
         radial-gradient(ellipse 100% 80% at 20% -20%, rgba(201, 169, 98, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(26, 39, 68, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(0, 77, 43, 0.4) 0%, transparent 50%),
         radial-gradient(ellipse 50% 50% at 50% 80%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
         linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
 }
@@ -374,7 +374,7 @@ section {
 .btn-primary {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: white;
-    box-shadow: 0 4px 20px rgba(26, 39, 68, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 77, 43, 0.25);
     letter-spacing: 0.02em;
 }
 
@@ -421,7 +421,7 @@ section {
     overflow: hidden;
     background:
         radial-gradient(ellipse 100% 80% at 20% -20%, rgba(201, 169, 98, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(26, 39, 68, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(0, 77, 43, 0.15) 0%, transparent 50%),
         radial-gradient(ellipse 50% 50% at 50% 80%, rgba(201, 169, 98, 0.06) 0%, transparent 50%),
         linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
 }
@@ -482,7 +482,7 @@ section {
 .shape-2 {
     width: 200px;
     height: 200px;
-    background: rgba(26, 39, 68, 0.1);
+    background: rgba(0, 77, 43, 0.1);
     bottom: 30%;
     left: 5%;
     animation: floatShape2 12s ease-in-out infinite;
@@ -571,6 +571,7 @@ section {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    padding-bottom: 0.1em;
 }
 
 .hero-subtitle {
@@ -605,13 +606,13 @@ section {
     font-size: 0.75rem;
     font-weight: 600;
     padding: var(--space-xs) var(--space-md);
-    background: linear-gradient(135deg, var(--color-primary-subtle) 0%, rgba(26, 39, 68, 0.08) 100%);
+    background: linear-gradient(135deg, var(--color-primary-subtle) 0%, rgba(0, 77, 43, 0.08) 100%);
     color: var(--color-primary);
     border-radius: var(--radius-full);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    border: 1px solid rgba(26, 39, 68, 0.15);
+    border: 1px solid rgba(0, 77, 43, 0.15);
     cursor: default;
 }
 
@@ -1179,7 +1180,7 @@ section {
 .projects {
     background:
         radial-gradient(ellipse 40% 30% at 20% 80%, rgba(201, 169, 98, 0.06) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 40% at 80% 20%, rgba(26, 39, 68, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 80% 20%, rgba(0, 77, 43, 0.05) 0%, transparent 50%),
         var(--color-bg-alt);
     position: relative;
 }
@@ -1876,7 +1877,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--color-primary-subtle) 0%, rgba(26, 39, 68, 0.08) 100%);
+    background: linear-gradient(135deg, var(--color-primary-subtle) 0%, rgba(0, 77, 43, 0.08) 100%);
     border-radius: var(--radius-md);
     color: var(--color-primary);
     margin-bottom: var(--space-lg);
@@ -2264,7 +2265,7 @@ section {
     font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(26, 39, 68, 0.25);
+    box-shadow: 0 4px 15px rgba(0, 77, 43, 0.25);
 }
 
 .start-button:hover {
