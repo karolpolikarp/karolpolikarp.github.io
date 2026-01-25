@@ -564,8 +564,8 @@ section {
 /* Individual floating icons */
 .bg-icon {
     position: absolute;
-    opacity: 0.12;
-    color: var(--color-primary);
+    opacity: 0.5;
+    color: red;
     animation: floatIcon 20s ease-in-out infinite;
 }
 
