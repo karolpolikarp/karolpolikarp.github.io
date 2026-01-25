@@ -123,7 +123,7 @@
 
 [data-theme="dark"] .bg-icon {
     color: var(--color-accent);
-    opacity: 0.12;
+    opacity: 0.32;
 }
 
 [data-theme="dark"] .neural-network {
