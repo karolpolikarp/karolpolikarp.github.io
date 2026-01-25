@@ -16,6 +16,12 @@
     --color-accent-dark: #b8944d;
     --color-accent-subtle: rgba(201, 169, 98, 0.15);
 
+    /* Gucci-inspired Accent - Burgundy/Red */
+    --color-burgundy: #6b1d1d;
+    --color-burgundy-light: #8b2e2e;
+    --color-burgundy-dark: #4a1515;
+    --color-burgundy-glow: rgba(107, 29, 29, 0.15);
+
     /* Neutrals - warm cream tones */
     --color-bg: #fdfcfa;
     --color-bg-alt: #f8f6f3;
@@ -86,6 +92,11 @@
     --color-primary-glow: rgba(201, 169, 98, 0.2);
     --color-accent-subtle: rgba(201, 169, 98, 0.15);
 
+    /* Burgundy for dark mode - slightly brighter */
+    --color-burgundy: #8b2e2e;
+    --color-burgundy-light: #a54040;
+    --color-burgundy-glow: rgba(139, 46, 46, 0.2);
+
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
@@ -119,6 +130,31 @@
 
 [data-theme="dark"] .floating-shape {
     opacity: 0.3;
+}
+
+[data-theme="dark"] .gradient-blob {
+    opacity: 0.2;
+    mix-blend-mode: screen;
+}
+
+[data-theme="dark"] .blob-1 {
+    background: radial-gradient(circle, rgba(0, 120, 60, 0.3) 0%, rgba(0, 77, 43, 0.1) 50%, transparent 70%);
+}
+
+[data-theme="dark"] .blob-2 {
+    background: radial-gradient(circle, rgba(139, 46, 46, 0.25) 0%, rgba(107, 29, 29, 0.08) 50%, transparent 70%);
+}
+
+[data-theme="dark"] .blob-3 {
+    background: radial-gradient(circle, rgba(201, 169, 98, 0.25) 0%, rgba(201, 169, 98, 0.08) 50%, transparent 70%);
+}
+
+[data-theme="dark"] .blob-4 {
+    background: radial-gradient(circle, rgba(139, 46, 46, 0.2) 0%, rgba(107, 29, 29, 0.05) 50%, transparent 70%);
+}
+
+[data-theme="dark"] .blob-5 {
+    background: radial-gradient(circle, rgba(0, 100, 50, 0.2) 0%, rgba(201, 169, 98, 0.1) 50%, transparent 70%);
 }
 
 [data-theme="dark"] .bg-icon {
@@ -549,6 +585,119 @@ section {
 @keyframes floatShape3 {
     0%, 100% { transform: translate(0, 0); }
     50% { transform: translate(50px, 30px); }
+}
+
+/* ================================================
+   ABSTRACT GRADIENT BLOBS - Background Depth
+   ================================================ */
+
+.gradient-blobs {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .gradient-blob {
+    mix-blend-mode: screen;
+    opacity: 0.25;
+}
+
+/* Primary green blob - top left */
+.blob-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 77, 43, 0.35) 0%, rgba(0, 77, 43, 0.1) 50%, transparent 70%);
+    top: -15%;
+    left: -10%;
+    animation: blobFloat1 25s ease-in-out infinite;
+}
+
+/* Burgundy/red blob - top right */
+.blob-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(107, 29, 29, 0.25) 0%, rgba(107, 29, 29, 0.08) 50%, transparent 70%);
+    top: 10%;
+    right: -5%;
+    animation: blobFloat2 30s ease-in-out infinite;
+}
+
+/* Gold accent blob - center */
+.blob-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201, 169, 98, 0.2) 0%, rgba(201, 169, 98, 0.05) 50%, transparent 70%);
+    top: 40%;
+    left: 30%;
+    animation: blobFloat3 20s ease-in-out infinite;
+}
+
+/* Deep burgundy blob - bottom left */
+.blob-4 {
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(74, 21, 21, 0.2) 0%, rgba(74, 21, 21, 0.05) 50%, transparent 70%);
+    bottom: -10%;
+    left: -8%;
+    animation: blobFloat4 28s ease-in-out infinite;
+}
+
+/* Small accent blob - bottom right */
+.blob-5 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(0, 77, 43, 0.2) 0%, rgba(201, 169, 98, 0.1) 50%, transparent 70%);
+    bottom: 15%;
+    right: 10%;
+    animation: blobFloat5 22s ease-in-out infinite;
+}
+
+@keyframes blobFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(40px, 30px) scale(1.05); }
+    50% { transform: translate(20px, -20px) scale(0.95); }
+    75% { transform: translate(-30px, 20px) scale(1.02); }
+}
+
+@keyframes blobFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-50px, 40px) scale(1.08); }
+    66% { transform: translate(30px, -30px) scale(0.92); }
+}
+
+@keyframes blobFloat3 {
+    0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    50% { transform: translate(60px, -40px) scale(1.1) rotate(10deg); }
+}
+
+@keyframes blobFloat4 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(50px, -20px) scale(0.95); }
+    50% { transform: translate(30px, 40px) scale(1.05); }
+    75% { transform: translate(-40px, 10px) scale(1); }
+}
+
+@keyframes blobFloat5 {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(-30px, -50px); }
+    66% { transform: translate(40px, 30px); }
+}
+
+/* Hide blobs on mobile for performance */
+@media (max-width: 768px) {
+    .gradient-blobs {
+        display: none;
+    }
 }
 
 /* ================================================
