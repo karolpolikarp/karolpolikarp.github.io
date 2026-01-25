@@ -117,11 +117,7 @@
 }
 
 [data-theme="dark"] .hero {
-    background:
-        radial-gradient(ellipse 100% 80% at 20% -20%, rgba(201, 169, 98, 0.18) 0%, transparent 50%),
-        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(0, 77, 43, 0.25) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 50% at 50% 80%, rgba(201, 169, 98, 0.1) 0%, transparent 50%),
-        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+    background: transparent;
 }
 
 [data-theme="dark"] .hero::before {
@@ -491,11 +487,7 @@ section {
     position: relative;
     z-index: 2;
     overflow: hidden;
-    background:
-        radial-gradient(ellipse 100% 80% at 20% -20%, rgba(201, 169, 98, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(0, 77, 43, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 50% at 50% 80%, rgba(201, 169, 98, 0.06) 0%, transparent 50%),
-        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+    background: transparent;
 }
 
 .hero::before {
@@ -595,7 +587,7 @@ section {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 0;
+    z-index: 1;
     overflow: hidden;
 }
 
