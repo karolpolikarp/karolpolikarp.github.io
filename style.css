@@ -71,18 +71,18 @@
    DARK MODE
    ================================================ */
 [data-theme="dark"] {
-    --color-bg: #0a0f1a;
-    --color-bg-alt: #111827;
-    --color-bg-accent: #1a2332;
-    --color-surface: #151d2c;
-    --color-border: #2a3544;
-    --color-border-light: #374151;
+    --color-bg: #12100d;
+    --color-bg-alt: #1a1714;
+    --color-bg-accent: #23201b;
+    --color-surface: #1e1b17;
+    --color-border: #3a342c;
+    --color-border-light: #4a433a;
 
-    --color-text: #f3f4f6;
-    --color-text-secondary: #9ca3af;
-    --color-text-tertiary: #6b7280;
+    --color-text: #f5f3f0;
+    --color-text-secondary: #b5a99a;
+    --color-text-tertiary: #8a7e70;
 
-    --color-primary-subtle: rgba(201, 169, 98, 0.1);
+    --color-primary-subtle: rgba(201, 169, 98, 0.12);
     --color-primary-glow: rgba(201, 169, 98, 0.2);
     --color-accent-subtle: rgba(201, 169, 98, 0.15);
 
@@ -92,12 +92,12 @@
 }
 
 [data-theme="dark"] .nav {
-    background: rgba(15, 20, 25, 0.95);
+    background: rgba(18, 16, 13, 0.95);
     border-bottom-color: var(--color-border);
 }
 
 [data-theme="dark"] .nav-scrolled {
-    background: rgba(15, 20, 25, 0.98);
+    background: rgba(18, 16, 13, 0.98);
 }
 
 [data-theme="dark"] .btn-secondary {
@@ -107,9 +107,9 @@
 
 [data-theme="dark"] .hero {
     background:
-        radial-gradient(ellipse 100% 80% at 20% -20%, rgba(201, 169, 98, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(0, 77, 43, 0.4) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 50% at 50% 80%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 80% at 20% -20%, rgba(201, 169, 98, 0.18) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(0, 77, 43, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 50% 80%, rgba(201, 169, 98, 0.1) 0%, transparent 50%),
         linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
 }
 
