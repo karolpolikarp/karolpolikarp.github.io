@@ -262,6 +262,8 @@ button {
 section {
     padding: var(--space-4xl) 0;
     scroll-margin-top: 100px;
+    position: relative;
+    z-index: 2;
 }
 
 /* ================================================
@@ -451,6 +453,7 @@ section {
     align-items: center;
     padding-top: calc(var(--space-4xl) + 60px);
     position: relative;
+    z-index: 2;
     overflow: hidden;
     background:
         radial-gradient(ellipse 100% 80% at 20% -20%, rgba(201, 169, 98, 0.12) 0%, transparent 50%),
@@ -557,7 +560,7 @@ section {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 10;
+    z-index: 1;
     overflow: hidden;
 }
 
@@ -2449,6 +2452,7 @@ section {
     background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
     border-top: 1px solid var(--color-border);
     position: relative;
+    z-index: 2;
 }
 
 .footer::before {
