@@ -33,9 +33,31 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#004d2b">
 
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Karol Polikarp Wilczyński",
+        "url": "https://karolpolikarp.github.io",
+        "image": "https://karolpolikarp.github.io/assets/images/karol-photo.jpg",
+        "jobTitle": "AI Governance & LegalTech Specialist",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Ministerstwo Cyfryzacji"
+        },
+        "knowsAbout": ["AI Act", "LegalTech", "Python", "AI Governance", "Public Policy", "Regulatory Sandboxes"],
+        "sameAs": [
+            "https://www.linkedin.com/in/karolwilczynski/",
+            "https://github.com/karolpolikarp"
+        ]
+    }
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -134,7 +156,7 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-intro">
-                        <img src="assets/images/karol-photo.jpg" alt="Karol Polikarp Wilczyński" class="hero-avatar">
+                        <img src="assets/images/karol-photo.jpg" alt="Karol Polikarp Wilczyński" class="hero-avatar" width="160" height="160">
                         <div class="hero-greeting">
                             <span class="greeting-line"></span>
                             <span class="greeting-text">Cześć, jestem</span>
@@ -201,20 +223,20 @@
                             </div>
                             <div class="console-input-area">
                                 <span class="console-prompt">prawo@isap:~$</span>
-                                <input type="text" class="console-input" id="consoleInput" placeholder="wpisz komendę lub kliknij przykład..." autocomplete="off">
-                                <button class="console-run" id="consoleRun" title="Wykonaj">
+                                <input type="text" class="console-input" id="consoleInput" placeholder="wpisz komendę lub kliknij przykład..." autocomplete="off" aria-label="Wprowadź komendę">
+                                <button class="console-run" id="consoleRun" title="Wykonaj" aria-label="Wykonaj komendę">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                     </svg>
                                 </button>
                             </div>
                         </div>
-                        <div class="console-commands">
+                        <div class="console-commands" role="group" aria-label="Przykładowe komendy">
                             <span class="commands-label">Przykłady:</span>
-                            <button class="cmd-btn" data-cmd="ISAP.find('ochrona danych')">ISAP.find()</button>
-                            <button class="cmd-btn" data-cmd="Claude.ask('Czym jest RODO?')">Claude.ask()</button>
-                            <button class="cmd-btn" data-cmd="prawo.art(6, 'RODO')">prawo.art()</button>
-                            <button class="cmd-btn" data-cmd="help">help</button>
+                            <button class="cmd-btn" data-cmd="ISAP.find('ochrona danych')" aria-label="Szukaj w bazie ISAP">ISAP.find()</button>
+                            <button class="cmd-btn" data-cmd="Claude.ask('Czym jest RODO?')" aria-label="Zapytaj Claude AI">Claude.ask()</button>
+                            <button class="cmd-btn" data-cmd="prawo.art(6, 'RODO')" aria-label="Pobierz artykuł prawa">prawo.art()</button>
+                            <button class="cmd-btn" data-cmd="help" aria-label="Pokaż pomoc">help</button>
                         </div>
                     </div>
                 </div>
