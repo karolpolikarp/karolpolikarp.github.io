@@ -47,6 +47,9 @@ ThemeManager.init();
 // ================================================
 const ParallaxEffect = {
     shapes: document.querySelectorAll('.floating-shape.parallax'),
+    mouseX: 0,
+    mouseY: 0,
+    scrollY: 0,
 
     init() {
         if (window.innerWidth <= 768) return;
@@ -58,25 +61,23 @@ const ParallaxEffect = {
     handleMouseMove(e) {
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
-        const mouseX = e.clientX - centerX;
-        const mouseY = e.clientY - centerY;
-
-        this.shapes.forEach(shape => {
-            const speed = parseFloat(shape.dataset.speed) || 0.05;
-            const x = mouseX * speed;
-            const y = mouseY * speed;
-            shape.style.transform = `translate(${x}px, ${y}px)`;
-        });
+        this.mouseX = e.clientX - centerX;
+        this.mouseY = e.clientY - centerY;
+        this.updateTransforms();
     },
 
     handleScroll() {
-        const scrollY = window.pageYOffset;
+        this.scrollY = window.pageYOffset;
+        this.updateTransforms();
+    },
+
+    updateTransforms() {
         this.shapes.forEach(shape => {
             const speed = parseFloat(shape.dataset.speed) || 0.05;
-            const y = scrollY * speed * 0.5;
-            const currentTransform = shape.style.transform || '';
-            const baseTransform = currentTransform.replace(/translateY\([^)]*\)/, '');
-            shape.style.transform = `${baseTransform} translateY(${y}px)`;
+            const mouseOffsetX = this.mouseX * speed;
+            const mouseOffsetY = this.mouseY * speed;
+            const scrollOffset = this.scrollY * speed * 0.5;
+            shape.style.transform = `translate(${mouseOffsetX}px, ${mouseOffsetY + scrollOffset}px)`;
         });
     }
 };
@@ -118,48 +119,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ================================================
-// COUNTER ANIMATION
-// ================================================
-const animateCounters = () => {
-    const counters = document.querySelectorAll('.stat-number');
-
-    counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'));
-        const duration = 2000;
-        const increment = target / (duration / 16);
-        let current = 0;
-
-        const updateCounter = () => {
-            current += increment;
-            if (current < target) {
-                counter.textContent = Math.ceil(current);
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = target;
-            }
-        };
-
-        updateCounter();
-    });
-};
-
-// Trigger counters when stats section is visible
-const statsSection = document.querySelector('.stats');
-let countersAnimated = false;
-
-if (statsSection) {
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !countersAnimated) {
-                countersAnimated = true;
-                animateCounters();
-            }
-        });
-    }, { threshold: 0.5 });
-
-    statsObserver.observe(statsSection);
-}
 
 // ================================================
 // ENHANCED SCROLL REVEAL ANIMATIONS
@@ -251,24 +210,56 @@ ScrollAnimations.init();
 // MAGNETIC BUTTON EFFECT
 // ================================================
 const MagneticButtons = {
+    buttons: [],
+    handlers: new Map(),
+    isEnabled: false,
+
     init() {
-        if (window.innerWidth <= 768) return;
+        this.buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+        this.handleResize();
+        window.addEventListener('resize', () => this.handleResize());
+    },
 
-        const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+    handleResize() {
+        const shouldEnable = window.innerWidth > 768;
 
-        buttons.forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
+        if (shouldEnable && !this.isEnabled) {
+            this.enable();
+        } else if (!shouldEnable && this.isEnabled) {
+            this.disable();
+        }
+    },
+
+    enable() {
+        this.isEnabled = true;
+        this.buttons.forEach(btn => {
+            const moveHandler = (e) => {
                 const rect = btn.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
-
                 btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-            });
-
-            btn.addEventListener('mouseleave', () => {
+            };
+            const leaveHandler = () => {
                 btn.style.transform = '';
-            });
+            };
+
+            btn.addEventListener('mousemove', moveHandler);
+            btn.addEventListener('mouseleave', leaveHandler);
+            this.handlers.set(btn, { move: moveHandler, leave: leaveHandler });
         });
+    },
+
+    disable() {
+        this.isEnabled = false;
+        this.buttons.forEach(btn => {
+            const handlers = this.handlers.get(btn);
+            if (handlers) {
+                btn.removeEventListener('mousemove', handlers.move);
+                btn.removeEventListener('mouseleave', handlers.leave);
+                btn.style.transform = '';
+            }
+        });
+        this.handlers.clear();
     }
 };
 
@@ -567,9 +558,15 @@ const LegalConsole = {
     },
 
     showCatEasterEgg(cat) {
+        // Store previously focused element to restore focus on close
+        const previouslyFocused = document.activeElement;
+
         // Create overlay
         const overlay = document.createElement('div');
         overlay.className = 'cat-easter-egg-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'Zdjęcia kotów');
 
         const container = document.createElement('div');
         container.className = 'cat-easter-egg-container';
@@ -577,7 +574,18 @@ const LegalConsole = {
         const closeBtn = document.createElement('button');
         closeBtn.className = 'cat-easter-egg-close';
         closeBtn.innerHTML = '×';
-        closeBtn.onclick = () => overlay.remove();
+        closeBtn.setAttribute('aria-label', 'Zamknij');
+
+        const closeModal = () => {
+            overlay.remove();
+            document.removeEventListener('keydown', keyHandler);
+            // Restore focus to previously focused element
+            if (previouslyFocused && previouslyFocused.focus) {
+                previouslyFocused.focus();
+            }
+        };
+
+        closeBtn.onclick = closeModal;
 
         const content = document.createElement('div');
         content.className = 'cat-easter-egg-content';
@@ -623,23 +631,31 @@ const LegalConsole = {
         overlay.appendChild(container);
         document.body.appendChild(overlay);
 
+        // Focus the close button for keyboard accessibility
+        closeBtn.focus();
+
         // Add line to console
         this.addLine('system', `🐱 Easter egg unlocked: ${catNames[cat]}!`);
         this.addLine('blank');
 
         // Close on overlay click
         overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) overlay.remove();
+            if (e.target === overlay) closeModal();
         });
 
-        // Close on Escape
-        const escHandler = (e) => {
+        // Keyboard handler for Escape and focus trap
+        const keyHandler = (e) => {
             if (e.key === 'Escape') {
-                overlay.remove();
-                document.removeEventListener('keydown', escHandler);
+                closeModal();
+            }
+            // Focus trap - keep focus within modal
+            if (e.key === 'Tab') {
+                // Only one focusable element (close button), so trap focus there
+                e.preventDefault();
+                closeBtn.focus();
             }
         };
-        document.addEventListener('keydown', escHandler);
+        document.addEventListener('keydown', keyHandler);
     }
 };
 
@@ -650,8 +666,9 @@ LegalConsole.init();
 // EMAIL PROTECTION - Anti-Scraper Obfuscation
 // ================================================
 const EmailProtection = {
-    // Email parts (obfuscated to avoid scraping)
-    parts: ['karolp', 'wilczynski', '@', 'gmail', '.', 'com'],
+    // Email encoded as character codes (harder for scrapers to parse)
+    // Encoded: karolpwilczynski@gmail.com
+    encoded: [107,97,114,111,108,112,119,105,108,99,122,121,110,115,107,105,64,103,109,97,105,108,46,99,111,109],
 
     init() {
         const emailLink = document.getElementById('emailLink');
@@ -682,8 +699,8 @@ const EmailProtection = {
     },
 
     decode() {
-        // Reconstruct email from parts
-        return this.parts[0] + this.parts[1] + this.parts[2] + this.parts[3] + this.parts[4] + this.parts[5];
+        // Reconstruct email from character codes
+        return String.fromCharCode.apply(null, this.encoded);
     }
 };
 
