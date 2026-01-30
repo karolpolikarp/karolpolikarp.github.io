@@ -509,7 +509,7 @@ section {
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+    background: linear-gradient(90deg, transparent, var(--color-burgundy), var(--color-accent), var(--color-burgundy), transparent);
     opacity: 0.4;
 }
 
@@ -872,6 +872,12 @@ section {
     border-color: transparent;
 }
 
+/* Alternate keywords use burgundy on hover */
+.keyword:nth-child(3n+2):hover {
+    background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
+    box-shadow: 0 4px 12px var(--color-burgundy-glow);
+}
+
 .hero-visual {
     position: relative;
     display: flex;
@@ -896,7 +902,8 @@ section {
     border: 4px solid var(--color-accent);
     box-shadow:
         0 10px 40px rgba(0, 0, 0, 0.15),
-        0 0 0 8px rgba(201, 169, 98, 0.1),
+        0 0 0 8px var(--color-burgundy-glow),
+        0 0 0 12px rgba(201, 169, 98, 0.08),
         0 0 60px rgba(201, 169, 98, 0.2);
     transition: all 0.4s ease;
 }
@@ -1302,7 +1309,7 @@ section {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+    background: linear-gradient(90deg, transparent, var(--color-burgundy-light), var(--color-accent), var(--color-burgundy-light), transparent);
 }
 
 .positions::before {
@@ -1486,6 +1493,24 @@ section {
     z-index: 1;
 }
 
+/* Burgundy left accent bar on project cards */
+.project-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--color-burgundy) 0%, var(--color-burgundy-light) 100%);
+    transform: scaleY(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+.project-card:hover::after {
+    transform: scaleY(1);
+}
+
 .project-card:hover::before {
     opacity: 1;
 }
@@ -1572,6 +1597,10 @@ section {
     border-radius: var(--radius-sm);
     text-transform: uppercase;
     letter-spacing: 0.03em;
+}
+
+.tag-burgundy {
+    background: var(--color-burgundy);
 }
 
 .project-title {
@@ -1669,7 +1698,7 @@ section {
     top: 0;
     bottom: 0;
     width: 4px;
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+    background: linear-gradient(180deg, var(--color-burgundy) 0%, var(--color-burgundy-light) 100%);
     transform: scaleY(0);
     transition: transform 0.3s ease;
 }
@@ -2053,6 +2082,30 @@ section {
     box-shadow: 0 8px 20px rgba(201, 169, 98, 0.3);
 }
 
+/* Alternate skill cards use burgundy accent */
+.skill-card:nth-child(2):hover .skill-icon,
+.skill-card:nth-child(4):hover .skill-icon,
+.skill-card:nth-child(6):hover .skill-icon {
+    background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
+    color: #fff;
+    box-shadow: 0 8px 20px var(--color-burgundy-glow);
+}
+
+.skill-card:nth-child(2):hover::after,
+.skill-card:nth-child(4):hover::after,
+.skill-card:nth-child(6):hover::after {
+    background: linear-gradient(90deg, var(--color-burgundy), var(--color-burgundy-light));
+}
+
+.skill-card:nth-child(2):hover,
+.skill-card:nth-child(4):hover,
+.skill-card:nth-child(6):hover {
+    border-color: var(--color-burgundy-light);
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.1),
+        0 0 30px var(--color-burgundy-glow);
+}
+
 .skill-icon svg {
     width: 24px;
     height: 24px;
@@ -2224,7 +2277,7 @@ section {
     content: '>';
     position: absolute;
     left: 0;
-    color: var(--color-primary);
+    color: var(--color-burgundy);
     font-weight: 600;
 }
 
@@ -3011,6 +3064,16 @@ section {
     border-color: var(--color-accent);
 }
 
+/* Alternate blog cards use burgundy accent */
+.blog-card:nth-child(2)::before {
+    background: linear-gradient(90deg, var(--color-burgundy), var(--color-burgundy-light));
+}
+
+.blog-card:nth-child(2):hover {
+    border-color: var(--color-burgundy-light);
+    box-shadow: 0 20px 40px var(--color-burgundy-glow);
+}
+
 .blog-card-image {
     height: 180px;
     background: linear-gradient(135deg, var(--color-primary-subtle), var(--color-bg-accent));
@@ -3080,6 +3143,10 @@ section {
     background: var(--color-primary);
     color: white;
     border-radius: var(--radius-full);
+}
+
+.blog-card:nth-child(2) .blog-card-category {
+    background: var(--color-burgundy);
 }
 
 .blog-card-date {
