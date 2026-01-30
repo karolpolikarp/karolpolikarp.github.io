@@ -153,11 +153,6 @@
     background: radial-gradient(circle, rgba(0, 120, 60, 0.2) 0%, rgba(201, 169, 98, 0.1) 35%, transparent 65%);
 }
 
-[data-theme="dark"] .bg-icon {
-    color: var(--color-accent);
-    opacity: 0.32;
-}
-
 [data-theme="dark"] .neural-network {
     opacity: 0.15;
 }
@@ -695,119 +690,6 @@ section {
     }
 }
 
-/* ================================================
-   DECORATIVE BACKGROUND ELEMENTS
-   ================================================ */
-
-/* Floating decorative icons container */
-.bg-decorations {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-}
-
-/* Individual floating icons */
-.bg-icon {
-    position: absolute;
-    opacity: 0.12;
-    color: var(--color-primary);
-    animation: floatIcon 20s ease-in-out infinite;
-}
-
-.bg-icon svg {
-    width: 100%;
-    height: 100%;
-}
-
-.bg-icon-1 {
-    width: 50px;
-    height: 50px;
-    top: 15%;
-    left: 8%;
-    animation-delay: 0s;
-    animation-duration: 25s;
-}
-
-.bg-icon-2 {
-    width: 45px;
-    height: 45px;
-    top: 35%;
-    right: 12%;
-    animation-delay: -5s;
-    animation-duration: 22s;
-}
-
-.bg-icon-3 {
-    width: 50px;
-    height: 50px;
-    bottom: 25%;
-    left: 15%;
-    animation-delay: -10s;
-    animation-duration: 28s;
-}
-
-.bg-icon-4 {
-    width: 40px;
-    height: 40px;
-    top: 55%;
-    right: 6%;
-    animation-delay: -3s;
-    animation-duration: 20s;
-}
-
-.bg-icon-5 {
-    width: 55px;
-    height: 55px;
-    bottom: 15%;
-    right: 20%;
-    animation-delay: -8s;
-    animation-duration: 24s;
-}
-
-.bg-icon-6 {
-    width: 35px;
-    height: 35px;
-    top: 75%;
-    left: 5%;
-    animation-delay: -12s;
-    animation-duration: 26s;
-}
-
-.bg-icon-7 {
-    width: 48px;
-    height: 48px;
-    top: 8%;
-    right: 25%;
-    animation-delay: -7s;
-    animation-duration: 23s;
-}
-
-.bg-icon-8 {
-    width: 42px;
-    height: 42px;
-    bottom: 40%;
-    left: 25%;
-    animation-delay: -15s;
-    animation-duration: 27s;
-}
-
-@keyframes floatIcon {
-    0%, 100% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-    25% {
-        transform: translate(15px, -20px) rotate(5deg);
-    }
-    50% {
-        transform: translate(-10px, 15px) rotate(-3deg);
-    }
-    75% {
-        transform: translate(20px, 10px) rotate(2deg);
-    }
-}
-
 /* Neural network lines SVG */
 .neural-network {
     position: fixed;
@@ -872,7 +754,6 @@ section {
 
 /* Hide decorative elements on mobile for performance */
 @media (max-width: 768px) {
-    .bg-decorations,
     .neural-network {
         display: none;
     }
@@ -3381,7 +3262,6 @@ section {
     .floating-shape,
     .legal-console,
     .hero::before,
-    .bg-icon,
     .neural-line,
     .neural-line-accent,
     .neural-node,
