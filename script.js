@@ -43,19 +43,21 @@ const ThemeManager = {
 ThemeManager.init();
 
 // ================================================
-// PARALLAX EFFECT
+// PARALLAX EFFECT (with requestAnimationFrame throttling)
 // ================================================
 const ParallaxEffect = {
     shapes: document.querySelectorAll('.floating-shape.parallax'),
     mouseX: 0,
     mouseY: 0,
     scrollY: 0,
+    rafId: null,
+    needsUpdate: false,
 
     init() {
         if (window.innerWidth <= 768) return;
 
-        document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
-        window.addEventListener('scroll', () => this.handleScroll());
+        document.addEventListener('mousemove', (e) => this.handleMouseMove(e), { passive: true });
+        window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
     },
 
     handleMouseMove(e) {
@@ -63,12 +65,21 @@ const ParallaxEffect = {
         const centerY = window.innerHeight / 2;
         this.mouseX = e.clientX - centerX;
         this.mouseY = e.clientY - centerY;
-        this.updateTransforms();
+        this.scheduleUpdate();
     },
 
     handleScroll() {
         this.scrollY = window.pageYOffset;
-        this.updateTransforms();
+        this.scheduleUpdate();
+    },
+
+    scheduleUpdate() {
+        if (this.needsUpdate) return;
+        this.needsUpdate = true;
+        this.rafId = requestAnimationFrame(() => {
+            this.updateTransforms();
+            this.needsUpdate = false;
+        });
     },
 
     updateTransforms() {
@@ -108,13 +119,22 @@ navLinks?.querySelectorAll('a').forEach(link => {
 // ================================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        const href = this.getAttribute('href');
+        // Skip if href is just "#" or empty
+        if (!href || href === '#') return;
+
+        try {
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        } catch (err) {
+            // Invalid selector, let browser handle default behavior
+            console.warn('Invalid anchor href:', href);
         }
     });
 });
@@ -700,7 +720,7 @@ const EmailProtection = {
 
     decode() {
         // Reconstruct email from character codes
-        return String.fromCharCode.apply(null, this.encoded);
+        return String.fromCharCode(...this.encoded);
     }
 };
 
