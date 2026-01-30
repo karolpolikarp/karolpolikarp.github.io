@@ -17,10 +17,10 @@
     --color-accent-subtle: rgba(201, 169, 98, 0.15);
 
     /* Gucci-inspired Accent - Burgundy/Red */
-    --color-burgundy: #8b2232;
-    --color-burgundy-light: #a83a4a;
-    --color-burgundy-dark: #6b1525;
-    --color-burgundy-glow: rgba(139, 34, 50, 0.18);
+    --color-burgundy: #6b1d1d;
+    --color-burgundy-light: #8b2e2e;
+    --color-burgundy-dark: #4a1515;
+    --color-burgundy-glow: rgba(107, 29, 29, 0.15);
 
     /* Neutrals - warm cream tones */
     --color-bg: #fdfcfa;
@@ -92,10 +92,10 @@
     --color-primary-glow: rgba(201, 169, 98, 0.2);
     --color-accent-subtle: rgba(201, 169, 98, 0.15);
 
-    /* Burgundy for dark mode - brighter for visibility */
-    --color-burgundy: #a83a4a;
-    --color-burgundy-light: #c45060;
-    --color-burgundy-glow: rgba(168, 58, 74, 0.25);
+    /* Burgundy for dark mode - slightly brighter */
+    --color-burgundy: #8b2e2e;
+    --color-burgundy-light: #a54040;
+    --color-burgundy-glow: rgba(139, 46, 46, 0.2);
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
@@ -335,7 +335,7 @@ section {
 }
 
 .logo-main .accent {
-    color: var(--color-burgundy);
+    color: var(--color-accent);
     animation: none;
 }
 
@@ -403,7 +403,7 @@ section {
    ACCENT
    ================================================ */
 .accent {
-    color: var(--color-burgundy);
+    color: var(--color-accent);
     font-weight: 500;
 }
 
@@ -781,7 +781,7 @@ section {
 .greeting-line {
     width: 40px;
     height: 2px;
-    background: var(--color-burgundy);
+    background: var(--color-accent);
 }
 
 .greeting-text {
@@ -1428,12 +1428,6 @@ section {
     margin-bottom: var(--space-md);
 }
 
-/* Burgundy section labels for visual variety */
-.projects .section-label,
-.blog .section-label {
-    color: var(--color-burgundy);
-}
-
 .section-title {
     font-family: var(--font-serif);
     font-size: clamp(2.5rem, 5vw, 3.5rem);
@@ -1499,7 +1493,7 @@ section {
     z-index: 1;
 }
 
-/* Burgundy left accent bar on project cards - always visible */
+/* Burgundy left accent bar on project cards */
 .project-card::after {
     content: '';
     position: absolute;
@@ -1508,13 +1502,13 @@ section {
     bottom: 0;
     width: 4px;
     background: linear-gradient(180deg, var(--color-burgundy) 0%, var(--color-burgundy-light) 100%);
+    transform: scaleY(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 2;
-    opacity: 0.7;
-    transition: opacity 0.4s ease;
 }
 
 .project-card:hover::after {
-    opacity: 1;
+    transform: scaleY(1);
 }
 
 .project-card:hover::before {
@@ -1669,9 +1663,8 @@ section {
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--color-burgundy-light), var(--color-accent), var(--color-burgundy-light), transparent);
-    opacity: 0.5;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
 }
 
 .contact-content {
@@ -2052,15 +2045,13 @@ section {
     right: 0;
     height: 3px;
     background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
-    transform: scaleX(0.3);
+    transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
-    opacity: 0.6;
 }
 
 .skill-card:hover::after {
     transform: scaleX(1);
-    opacity: 1;
 }
 
 .skill-card:hover {
@@ -2100,9 +2091,9 @@ section {
     box-shadow: 0 8px 20px var(--color-burgundy-glow);
 }
 
-.skill-card:nth-child(2)::after,
-.skill-card:nth-child(4)::after,
-.skill-card:nth-child(6)::after {
+.skill-card:nth-child(2):hover::after,
+.skill-card:nth-child(4):hover::after,
+.skill-card:nth-child(6):hover::after {
     background: linear-gradient(90deg, var(--color-burgundy), var(--color-burgundy-light));
 }
 
@@ -2528,7 +2519,7 @@ section {
 }
 
 .footer-divider {
-    color: var(--color-burgundy);
+    color: var(--color-accent);
     font-weight: 600;
 }
 
@@ -3031,9 +3022,8 @@ section {
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--color-burgundy-light), var(--color-accent), var(--color-burgundy-light), transparent);
-    opacity: 0.5;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
 }
 
 .blog-grid {
@@ -3059,15 +3049,13 @@ section {
     right: 0;
     height: 4px;
     background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
-    transform: scaleX(0.25);
+    transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
-    opacity: 0.6;
 }
 
 .blog-card:hover::before {
     transform: scaleX(1);
-    opacity: 1;
 }
 
 .blog-card:hover {
