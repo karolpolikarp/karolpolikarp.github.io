@@ -338,24 +338,28 @@ section {
 
 .logo-main .accent {
     color: var(--color-accent);
-    text-shadow: 0 0 20px rgba(201, 169, 98, 0.6), 0 0 40px rgba(201, 169, 98, 0.3);
-    animation: accentPulse 3s ease-in-out infinite;
+    position: relative;
+    font-size: 2.2rem;
 }
 
-@keyframes accentPulse {
-    0%, 100% { text-shadow: 0 0 15px rgba(201, 169, 98, 0.4), 0 0 30px rgba(201, 169, 98, 0.15); }
-    50% { text-shadow: 0 0 25px rgba(201, 169, 98, 0.7), 0 0 50px rgba(201, 169, 98, 0.3); }
+.logo-main .accent::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, rgba(201, 169, 98, 0.6) 0%, rgba(201, 169, 98, 0.2) 40%, transparent 70%);
+    border-radius: 50%;
+    animation: dotGlow 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
 }
 
-.nav-logo:hover .logo-main {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.nav-logo:hover .logo-main .accent {
-    -webkit-text-fill-color: var(--color-accent);
+@keyframes dotGlow {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
 }
 
 .logo-sub {
@@ -402,7 +406,7 @@ section {
 }
 
 .nav-links a:hover {
-    color: var(--color-accent-dark);
+    color: var(--color-primary);
 }
 
 [data-theme="dark"] .nav-links a:hover {
@@ -431,12 +435,8 @@ section {
    ACCENT
    ================================================ */
 .accent {
-    color: var(--color-accent-dark);
-    font-weight: 600;
-}
-
-[data-theme="dark"] .accent {
     color: var(--color-accent);
+    font-weight: 600;
 }
 
 /* ================================================
@@ -815,16 +815,19 @@ section {
 .greeting-line {
     width: 40px;
     height: 2px;
-    background: linear-gradient(90deg, var(--color-accent-dark), var(--color-accent));
-    box-shadow: 0 0 8px rgba(201, 169, 98, 0.3);
+    background: var(--color-primary);
 }
 
 .greeting-text {
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--color-accent-dark);
+    color: var(--color-primary);
     text-transform: uppercase;
     letter-spacing: 0.15em;
+}
+
+[data-theme="dark"] .greeting-line {
+    background: var(--color-accent);
 }
 
 [data-theme="dark"] .greeting-text {
@@ -878,18 +881,12 @@ section {
 }
 
 .hero-subtitle .accent {
-    background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-primary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-primary);
     font-weight: 600;
 }
 
 [data-theme="dark"] .hero-subtitle .accent {
-    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-accent);
 }
 
 .hero-bio {
@@ -1479,7 +1476,7 @@ section {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--color-accent-dark);
+    color: var(--color-primary-light);
     margin-bottom: var(--space-md);
 }
 
