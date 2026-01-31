@@ -1392,23 +1392,8 @@ section {
 .blurred-text {
     filter: blur(5px);
     user-select: none;
-    transition: filter var(--transition-base);
-    cursor: pointer;
 }
 
-/* Unblur on hover/focus for accessibility */
-.blurred-text:hover,
-.blurred-text:focus {
-    filter: blur(0);
-    user-select: auto;
-}
-
-/* Respect reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-    .blurred-text {
-        transition: none;
-    }
-}
 
 /* ================================================
    SECTION HEADER
