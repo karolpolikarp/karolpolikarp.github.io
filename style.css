@@ -332,34 +332,99 @@ section {
     font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--color-text);
-    position: relative;
-    transition: all 0.4s ease;
+    text-shadow:
+        0 0 10px rgba(0, 77, 43, 0.3),
+        0 0 30px rgba(0, 77, 43, 0.15),
+        0 0 60px rgba(0, 77, 43, 0.08);
+    animation: neonFlicker 4s ease-in-out infinite;
+}
+
+@keyframes neonFlicker {
+    0%, 100% {
+        text-shadow:
+            0 0 10px rgba(0, 77, 43, 0.3),
+            0 0 30px rgba(0, 77, 43, 0.15),
+            0 0 60px rgba(0, 77, 43, 0.08);
+    }
+    4% {
+        text-shadow:
+            0 0 2px rgba(0, 77, 43, 0.1);
+    }
+    6% {
+        text-shadow:
+            0 0 10px rgba(0, 77, 43, 0.3),
+            0 0 30px rgba(0, 77, 43, 0.15),
+            0 0 60px rgba(0, 77, 43, 0.08);
+    }
+    8% {
+        text-shadow:
+            0 0 2px rgba(0, 77, 43, 0.05);
+    }
+    10% {
+        text-shadow:
+            0 0 14px rgba(0, 77, 43, 0.4),
+            0 0 40px rgba(0, 77, 43, 0.2),
+            0 0 80px rgba(0, 77, 43, 0.1);
+    }
+    50% {
+        text-shadow:
+            0 0 12px rgba(0, 77, 43, 0.35),
+            0 0 35px rgba(0, 77, 43, 0.18),
+            0 0 70px rgba(0, 77, 43, 0.1);
+    }
+}
+
+[data-theme="dark"] .logo-main {
+    text-shadow:
+        0 0 10px rgba(201, 169, 98, 0.4),
+        0 0 30px rgba(201, 169, 98, 0.2),
+        0 0 60px rgba(201, 169, 98, 0.1);
+    animation: neonFlickerDark 4s ease-in-out infinite;
+}
+
+@keyframes neonFlickerDark {
+    0%, 100% {
+        text-shadow:
+            0 0 10px rgba(201, 169, 98, 0.4),
+            0 0 30px rgba(201, 169, 98, 0.2),
+            0 0 60px rgba(201, 169, 98, 0.1);
+    }
+    4% {
+        text-shadow:
+            0 0 2px rgba(201, 169, 98, 0.1);
+    }
+    6% {
+        text-shadow:
+            0 0 10px rgba(201, 169, 98, 0.4),
+            0 0 30px rgba(201, 169, 98, 0.2),
+            0 0 60px rgba(201, 169, 98, 0.1);
+    }
+    8% {
+        text-shadow:
+            0 0 2px rgba(201, 169, 98, 0.05);
+    }
+    10% {
+        text-shadow:
+            0 0 14px rgba(201, 169, 98, 0.5),
+            0 0 40px rgba(201, 169, 98, 0.25),
+            0 0 80px rgba(201, 169, 98, 0.12);
+    }
+    50% {
+        text-shadow:
+            0 0 12px rgba(201, 169, 98, 0.45),
+            0 0 35px rgba(201, 169, 98, 0.22),
+            0 0 70px rgba(201, 169, 98, 0.1);
+    }
 }
 
 .logo-main .accent {
-    color: var(--color-accent);
-    position: relative;
-    font-size: 2.2rem;
+    animation: dotMorph 8s ease-in-out infinite;
 }
 
-.logo-main .accent::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
-    background: radial-gradient(circle, rgba(201, 169, 98, 0.6) 0%, rgba(201, 169, 98, 0.2) 40%, transparent 70%);
-    border-radius: 50%;
-    animation: dotGlow 3s ease-in-out infinite;
-    pointer-events: none;
-    z-index: -1;
-}
-
-@keyframes dotGlow {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
-    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+@keyframes dotMorph {
+    0%, 100% { color: #c9a962; }
+    33% { color: #1a6b42; }
+    66% { color: #8b2e2e; }
 }
 
 .logo-sub {
@@ -368,11 +433,6 @@ section {
     color: var(--color-text-tertiary);
     letter-spacing: 0.1em;
     margin-top: 4px;
-    transition: color 0.3s ease;
-}
-
-.nav-logo:hover .logo-sub {
-    color: var(--color-text-secondary);
 }
 
 .nav-links {
