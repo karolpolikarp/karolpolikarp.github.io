@@ -7,7 +7,7 @@
     --color-primary-light: #1a6b42;
     --color-primary-dark: #003d22;
     --color-primary-subtle: #f5f9f7;
-    --color-primary-glow: rgba(0, 77, 43, 0.12);
+    --color-primary-glow: rgba(0, 77, 43, 0.15);
     --color-primary-gradient: linear-gradient(135deg, #004d2b 0%, #1a6b42 100%);
 
     /* Gold Accent */
@@ -60,9 +60,9 @@
     --transition-slow: 400ms ease;
 
     /* Shadows */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05);
     --shadow-glow: 0 0 40px var(--color-primary-glow);
 
     /* Border Radius */
@@ -495,9 +495,9 @@ section {
     position: absolute;
     top: 10%;
     right: 5%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(201, 169, 98, 0.1) 0%, transparent 70%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(201, 169, 98, 0.15) 0%, rgba(0, 77, 43, 0.05) 50%, transparent 70%);
     pointer-events: none;
     animation: float 8s ease-in-out infinite;
 }
@@ -510,7 +510,7 @@ section {
     right: 0;
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--color-burgundy), var(--color-accent), var(--color-burgundy), transparent);
-    opacity: 0.4;
+    opacity: 0.5;
 }
 
 @keyframes float {
@@ -537,7 +537,7 @@ section {
 .shape-1 {
     width: 300px;
     height: 300px;
-    background: rgba(201, 169, 98, 0.12);
+    background: rgba(201, 169, 98, 0.16);
     top: 20%;
     right: 10%;
     animation: floatShape1 15s ease-in-out infinite;
@@ -546,7 +546,7 @@ section {
 .shape-2 {
     width: 200px;
     height: 200px;
-    background: rgba(0, 77, 43, 0.1);
+    background: rgba(0, 77, 43, 0.14);
     bottom: 30%;
     left: 5%;
     animation: floatShape2 12s ease-in-out infinite;
@@ -555,7 +555,7 @@ section {
 .shape-3 {
     width: 150px;
     height: 150px;
-    background: rgba(201, 169, 98, 0.08);
+    background: rgba(201, 169, 98, 0.12);
     top: 60%;
     right: 30%;
     animation: floatShape3 18s ease-in-out infinite;
@@ -596,17 +596,19 @@ section {
     border-radius: 50%;
     filter: blur(80px);
     opacity: 1;
+    mix-blend-mode: multiply;
 }
 
 [data-theme="dark"] .gradient-blob {
     opacity: 0.85;
+    mix-blend-mode: screen;
 }
 
 /* Primary green blob - top left */
 .blob-1 {
     width: 800px;
     height: 800px;
-    background: radial-gradient(circle, rgba(0, 77, 43, 0.28) 0%, rgba(0, 77, 43, 0.15) 35%, transparent 65%);
+    background: radial-gradient(circle, rgba(0, 77, 43, 0.18) 0%, rgba(0, 77, 43, 0.08) 35%, transparent 65%);
     top: -25%;
     left: -15%;
     animation: blobFloat1 25s ease-in-out infinite;
@@ -616,7 +618,7 @@ section {
 .blob-2 {
     width: 800px;
     height: 800px;
-    background: radial-gradient(circle, rgba(120, 30, 40, 0.18) 0%, rgba(139, 46, 46, 0.1) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(120, 30, 40, 0.12) 0%, rgba(139, 46, 46, 0.06) 40%, transparent 70%);
     top: -5%;
     right: -10%;
     animation: blobFloat2 30s ease-in-out infinite;
@@ -626,7 +628,7 @@ section {
 .blob-3 {
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.08) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(201, 169, 98, 0.14) 0%, rgba(201, 169, 98, 0.06) 40%, transparent 70%);
     top: 35%;
     left: 25%;
     animation: blobFloat3 20s ease-in-out infinite;
@@ -636,7 +638,7 @@ section {
 .blob-4 {
     width: 850px;
     height: 850px;
-    background: radial-gradient(circle, rgba(120, 30, 40, 0.15) 0%, rgba(107, 29, 29, 0.08) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(120, 30, 40, 0.10) 0%, rgba(107, 29, 29, 0.05) 40%, transparent 70%);
     bottom: -15%;
     left: -10%;
     animation: blobFloat4 28s ease-in-out infinite;
@@ -646,7 +648,7 @@ section {
 .blob-5 {
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(0, 77, 43, 0.18) 0%, rgba(201, 169, 98, 0.1) 35%, transparent 65%);
+    background: radial-gradient(circle, rgba(0, 77, 43, 0.12) 0%, rgba(201, 169, 98, 0.08) 35%, transparent 65%);
     bottom: 5%;
     right: 0%;
     animation: blobFloat5 22s ease-in-out infinite;
@@ -696,7 +698,7 @@ section {
     inset: 0;
     pointer-events: none;
     z-index: 99;
-    opacity: 0.06;
+    opacity: 0.1;
 }
 
 .neural-network svg {
@@ -854,14 +856,15 @@ section {
     font-size: 0.75rem;
     font-weight: 600;
     padding: var(--space-xs) var(--space-md);
-    background: linear-gradient(135deg, var(--color-primary-subtle) 0%, rgba(0, 77, 43, 0.08) 100%);
+    background: linear-gradient(135deg, rgba(0, 77, 43, 0.1) 0%, rgba(201, 169, 98, 0.08) 100%);
     color: var(--color-primary);
     border-radius: var(--radius-full);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    border: 1px solid rgba(0, 77, 43, 0.15);
+    border: 1px solid rgba(0, 77, 43, 0.2);
     cursor: default;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .keyword:hover {
@@ -1288,7 +1291,7 @@ section {
     height: 100px;
     background-image: radial-gradient(var(--color-primary) 2px, transparent 2px);
     background-size: 16px 16px;
-    opacity: 0.2;
+    opacity: 0.25;
 }
 
 /* ================================================
@@ -1392,23 +1395,8 @@ section {
 .blurred-text {
     filter: blur(5px);
     user-select: none;
-    transition: filter var(--transition-base);
-    cursor: pointer;
 }
 
-/* Unblur on hover/focus for accessibility */
-.blurred-text:hover,
-.blurred-text:focus {
-    filter: blur(0);
-    user-select: auto;
-}
-
-/* Respect reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-    .blurred-text {
-        transition: none;
-    }
-}
 
 /* ================================================
    SECTION HEADER
@@ -1477,7 +1465,7 @@ section {
     border-radius: var(--radius-lg);
     overflow: hidden;
     border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
 }
@@ -1518,9 +1506,10 @@ section {
 .project-card:hover {
     transform: translateY(-8px);
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 20px 40px rgba(0, 0, 0, 0.12),
+        0 8px 16px rgba(0, 0, 0, 0.06),
         0 0 0 1px rgba(201, 169, 98, 0.25),
-        0 0 40px rgba(201, 169, 98, 0.08);
+        0 0 40px rgba(201, 169, 98, 0.1);
     border-color: var(--color-accent);
 }
 
@@ -1686,6 +1675,7 @@ section {
     background: var(--color-surface);
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -1709,7 +1699,7 @@ section {
 
 .contact-link:hover {
     border-color: var(--color-accent);
-    box-shadow: 0 10px 30px rgba(201, 169, 98, 0.15);
+    box-shadow: 0 10px 30px rgba(201, 169, 98, 0.15), 0 4px 8px rgba(0, 0, 0, 0.06);
     transform: translateX(4px);
 }
 
@@ -1724,11 +1714,12 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-primary-subtle);
+    background: linear-gradient(135deg, rgba(0, 77, 43, 0.08) 0%, rgba(201, 169, 98, 0.06) 100%);
     border-radius: var(--radius-md);
     color: var(--color-primary);
     flex-shrink: 0;
     transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .contact-link:hover .contact-link-icon {
@@ -1971,19 +1962,22 @@ section {
     background: var(--color-surface);
     border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .edu-date {
     grid-column: 1;
     grid-row: 1 / 3;
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-primary);
-    background: var(--color-primary-subtle);
+    background: linear-gradient(135deg, rgba(0, 77, 43, 0.08) 0%, rgba(201, 169, 98, 0.1) 100%);
     padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius-sm);
     align-self: start;
     white-space: nowrap;
+    border: 1px solid rgba(0, 77, 43, 0.12);
 }
 
 .edu-title {
@@ -2032,6 +2026,7 @@ section {
     background: var(--color-surface);
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -2057,8 +2052,9 @@ section {
 .skill-card:hover {
     transform: translateY(-6px);
     box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.1),
-        0 0 30px rgba(201, 169, 98, 0.08);
+        0 15px 35px rgba(0, 0, 0, 0.12),
+        0 5px 15px rgba(0, 0, 0, 0.06),
+        0 0 30px rgba(201, 169, 98, 0.1);
     border-color: var(--color-accent);
 }
 
@@ -2068,11 +2064,12 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--color-primary-subtle) 0%, rgba(0, 77, 43, 0.08) 100%);
+    background: linear-gradient(135deg, rgba(0, 77, 43, 0.1) 0%, rgba(201, 169, 98, 0.08) 100%);
     border-radius: var(--radius-md);
     color: var(--color-primary);
     margin-bottom: var(--space-lg);
     transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 77, 43, 0.06);
 }
 
 .skill-card:hover .skill-icon {
@@ -2137,9 +2134,10 @@ section {
     font-size: 0.7rem;
     font-weight: 500;
     padding: 2px 8px;
-    background: var(--color-border-light);
-    color: var(--color-text-tertiary);
+    background: var(--color-bg-accent);
+    color: var(--color-text-secondary);
     border-radius: var(--radius-full);
+    border: 1px solid var(--color-border-light);
 }
 
 /* ================================================
@@ -2174,11 +2172,12 @@ section {
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
     transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
 }
 
 .stack-tech-item:hover {
     border-color: var(--color-accent);
-    box-shadow: 0 8px 24px rgba(201, 169, 98, 0.1);
+    box-shadow: 0 8px 24px rgba(201, 169, 98, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
     transform: translateY(-2px);
 }
 
@@ -2199,13 +2198,14 @@ section {
 
 .tech-badge {
     font-size: 0.7rem;
-    font-weight: 500;
+    font-weight: 600;
     padding: 2px 8px;
-    background: var(--color-primary-subtle);
+    background: linear-gradient(135deg, rgba(0, 77, 43, 0.1) 0%, rgba(0, 77, 43, 0.06) 100%);
     color: var(--color-primary);
     border-radius: var(--radius-full);
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    border: 1px solid rgba(0, 77, 43, 0.1);
 }
 
 .tech-projects {
@@ -2525,12 +2525,14 @@ section {
 
 .footer-clock {
     padding: var(--space-sm) var(--space-md);
-    background: var(--color-bg-alt);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     font-family: var(--font-mono);
     font-size: 0.85rem;
     font-weight: 500;
+    box-shadow: var(--shadow-sm);
+    color: var(--color-primary);
 }
 
 /* ================================================
@@ -2558,7 +2560,7 @@ section {
 /* Nav scroll effect */
 .nav-scrolled {
     background: rgba(255, 255, 255, 0.98);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-md), 0 1px 0 rgba(201, 169, 98, 0.1);
 }
 
 /* ================================================
@@ -3039,6 +3041,7 @@ section {
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    box-shadow: var(--shadow-sm);
 }
 
 .blog-card::before {
@@ -3060,7 +3063,7 @@ section {
 
 .blog-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(201, 169, 98, 0.12);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(201, 169, 98, 0.1);
     border-color: var(--color-accent);
 }
 
