@@ -1109,7 +1109,7 @@ section {
     font-family: var(--font-mono);
     font-size: 0.95rem;
     line-height: 1.8;
-    max-height: 260px;
+    max-height: 300px;
     scrollbar-width: thin;
     scrollbar-color: var(--color-primary) transparent;
 }
@@ -1182,6 +1182,20 @@ section {
     padding-left: var(--space-md);
     border-left: 2px solid #a371f7;
     margin-left: var(--space-sm);
+}
+
+.console-line.header {
+    color: var(--color-accent, #c9a962);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.console-line.dim {
+    color: #484f58;
+}
+
+.console-line.accent {
+    color: var(--color-accent, #c9a962);
 }
 
 .console-line.loading {
