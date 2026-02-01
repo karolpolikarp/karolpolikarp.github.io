@@ -994,7 +994,7 @@ section {
     border-radius: 50%;
     object-fit: cover;
     object-position: center top;
-    border: 3px solid var(--color-border);
+    border: 3px solid var(--color-accent);
     box-shadow:
         0 10px 40px rgba(0, 0, 0, 0.12),
         0 0 0 6px rgba(0, 77, 43, 0.06);
