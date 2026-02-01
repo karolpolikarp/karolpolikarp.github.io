@@ -440,8 +440,6 @@ const LegalConsole = {
         'help': {
             type: 'system',
             response: [
-                { text: '\u2550\u2550\u2550 Dost\u0119pne komendy \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550', type: 'header' },
-                '',
                 { text: '  O mnie:', type: 'dim' },
                 '    karol.about()        Kim jestem',
                 '    karol.now()          Nad czym pracuj\u0119',
@@ -474,10 +472,7 @@ const LegalConsole = {
             type: 'system',
             response: [
                 { text: 'Karol Polikarp Wilczy\u0144ski', type: 'header' },
-                '  Prawnik \u00b7 Programista \u00b7 AI Governance',
-                '  Ministerstwo Cyfryzacji',
-                '',
-                { text: '  Wpisz karol.about() aby dowiedzie\u0107 si\u0119 wi\u0119cej', type: 'dim' }
+                '  Prawnik \u00b7 Programista \u00b7 AI Governance'
             ]
         }
     },
@@ -491,23 +486,17 @@ const LegalConsole = {
                 type: 'result',
                 loading: '\u0141aduj\u0119 profil',
                 response: [
-                    { text: '\u2550\u2550\u2550 Karol Polikarp Wilczy\u0144ski \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550', type: 'header' },
-                    { text: '    Prawnik \u2192 Programista \u2192 AI Governance', type: 'accent' },
+                    { text: 'Karol Polikarp Wilczy\u0144ski', type: 'header' },
+                    '  Prawnik \u00b7 Programista \u00b7 AI Governance',
                     '',
-                    'Pracuj\u0119 w Ministerstwie Cyfryzacji',
-                    'nad wdro\u017ceniem piaskownic regulacyjnych',
-                    'AI w Polsce (wymóg AI Act).',
+                    { text: '  Stack:', type: 'accent' },
+                    '    Python, TypeScript, React',
+                    '    Claude API, MCP, Supabase',
                     '',
-                    'Nie jestem programist\u0105 w administracji.',
-                    'Jestem prawnikiem, kt\u00f3ry nauczy\u0142 si\u0119',
-                    'kodowa\u0107, \u017ceby lepiej rozumie\u0107 to,',
-                    'co reguluje.',
+                    { text: '  Obszary:', type: 'accent' },
+                    '    AI Act, LegalTech, administracja',
                     '',
-                    { text: '  \u2192 5 lat prawa (UW) + 4 podyplom\u00f3wki w 3 lata', type: 'accent' },
-                    { text: '  \u2192 Python, React, Claude API, Supabase', type: 'accent' },
-                    { text: '  \u2192 6 projekt\u00f3w: legaltech \u2192 data science', type: 'accent' },
-                    '',
-                    { text: '  Wpisz karol.projects() aby zobaczy\u0107 projekty', type: 'dim' }
+                    { text: '  karol.projects()  karol.stack()', type: 'dim' }
                 ]
             })
         },
@@ -517,8 +506,6 @@ const LegalConsole = {
                 type: 'result',
                 loading: '\u0141aduj\u0119 projekty',
                 response: [
-                    { text: '\u2550\u2550\u2550 Projekty \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550', type: 'header' },
-                    '',
                     { text: '  [1] JakiePrawo.pl', type: 'accent' },
                     '      React + Claude API + MCP',
                     '      Wyszukiwarka podstaw prawnych',
@@ -553,23 +540,8 @@ const LegalConsole = {
                 type: 'result',
                 loading: 'Pobieram status',
                 response: [
-                    { text: '\u2550\u2550\u2550 Aktualnie pracuj\u0119 nad... \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550', type: 'header' },
-                    '',
                     { text: '  Piaskownice regulacyjne AI', type: 'accent' },
-                    '  Ministerstwo Cyfryzacji | Art. 57 AI Act',
-                    '',
-                    '  Kontrolowane \u015brodowiska do testowania',
-                    '  system\u00f3w AI przed wej\u015bciem na rynek.',
-                    '',
-                    { text: '  Post\u0119p: \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591 ~50%', type: 'accent' },
-                    '  Termin: sierpie\u0144 2026',
-                    '',
-                    '  Wsp\u00f3\u0142praca:',
-                    { text: '    \u2192 Dania, Litwa, Estonia', type: 'accent' },
-                    { text: '    \u2192 Grupy robocze UE', type: 'accent' },
-                    { text: '    \u2192 UODO, KNF', type: 'accent' },
-                    '',
-                    { text: '  Wpisz sandbox.status() po szczeg\u00f3\u0142y', type: 'dim' }
+                    '  Art. 57 AI Act'
                 ]
             })
         },
@@ -579,8 +551,6 @@ const LegalConsole = {
                 type: 'result',
                 loading: '\u0141aduj\u0119 stack',
                 response: [
-                    { text: '\u2550\u2550\u2550 Tech Stack \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550', type: 'header' },
-                    '',
                     { text: '  Python', type: 'accent' },
                     '    AutoMargiela, ESPI, Data Science',
                     { text: '  React + TypeScript', type: 'accent' },
@@ -604,21 +574,16 @@ const LegalConsole = {
                 type: 'result',
                 loading: '\u0141aduj\u0119 edukacj\u0119',
                 response: [
-                    { text: '\u2550\u2550\u2550 Edukacja \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550', type: 'header' },
-                    '',
                     { text: '  2024-25', type: 'accent' },
                     '    Big Data \u2014 PJAIT',
                     { text: '  2024-25', type: 'accent' },
-                    '    AI in Business & Public Sector \u2014 SGH',
+                    '    AI in Business \u2014 SGH',
                     { text: '  2023-24', type: 'accent' },
                     '    Python AI Programmer \u2014 PJAIT',
                     { text: '  2022-23', type: 'accent' },
-                    '    IT Systems, Apps & DB \u2014 PJAIT',
+                    '    IT Systems & DB \u2014 PJAIT',
                     { text: '  2013-18', type: 'accent' },
-                    '    Prawo \u2014 Uniwersytet Warszawski',
-                    '',
-                    { text: '  \u2192 4 podyplom\u00f3wki w 3 lata', type: 'accent' },
-                    { text: '  \u2192 + magister prawa z 5 lat na UW', type: 'accent' }
+                    '    Prawo \u2014 Uniwersytet Warszawski'
                 ]
             })
         },
@@ -628,20 +593,18 @@ const LegalConsole = {
                 type: 'result',
                 loading: '\u0141aduj\u0119 kompetencje',
                 response: [
-                    { text: '\u2550\u2550\u2550 Kompetencje \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550', type: 'header' },
-                    '',
-                    { text: '  Regulacje AI', type: 'accent' },
-                    '    AI Act, piaskownice, UODO, KNF',
-                    { text: '  Sektor publiczny', type: 'accent' },
-                    '    Projekty IT, fundusze UE, zam\u00f3wienia',
+                    { text: '  Regulacje technologiczne', type: 'accent' },
+                    '    AI Act, Piaskownice, UODO',
+                    { text: '  Projekty publiczne', type: 'accent' },
+                    '    Fundusze UE, Projekty IT, Zam\u00f3wienia publ.',
                     { text: '  Programowanie', type: 'accent' },
-                    '    TypeScript, React, Python, APIs',
+                    '    Python, TypeScript, Claude API',
                     { text: '  Analiza danych', type: 'accent' },
                     '    Pandas, Scikit-learn, Jupyter',
                     { text: '  Prawo', type: 'accent' },
-                    '    RODO, zam\u00f3wienia publ., kontrakty IT',
-                    { text: '  Wsp\u00f3\u0142praca UE', type: 'accent' },
-                    '    Dania, Litwa, Estonia, grupy robocze'
+                    '    Umowy IT, RODO, Zam\u00f3wienia publ.',
+                    { text: '  Wsp\u00f3\u0142praca mi\u0119dzynarodowa', type: 'accent' },
+                    '    UE, Dania, Kraje ba\u0142tyckie'
                 ]
             })
         },
@@ -651,8 +614,6 @@ const LegalConsole = {
                 type: 'result',
                 loading: '\u0141aduj\u0119 dane kontaktowe',
                 response: [
-                    { text: '\u2550\u2550\u2550 Kontakt \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550', type: 'header' },
-                    '',
                     { text: '  Email', type: 'accent' },
                     '    karolpwilczynski@gmail.com',
                     { text: '  GitHub', type: 'accent' },
@@ -660,10 +621,7 @@ const LegalConsole = {
                     { text: '  LinkedIn', type: 'accent' },
                     '    Karol Polikarp Wilczy\u0144ski',
                     { text: '  Web', type: 'accent' },
-                    '    jakieprawo.pl',
-                    '',
-                    '  Otwarty na wsp\u00f3\u0142prac\u0119: LegalTech,',
-                    '  AI governance, automatyzacja'
+                    '    jakieprawo.pl'
                 ]
             })
         },
@@ -699,8 +657,8 @@ const LegalConsole = {
 
                 const p = LegalConsole.projectData[projectKey];
                 const lines = [
-                    { text: `\u2550\u2550\u2550 ${p.name} \u2550\u2550\u2550`, type: 'header' },
-                    { text: `    ${p.badge}`, type: 'dim' },
+                    { text: `  ${p.name}`, type: 'accent' },
+                    { text: `  ${p.badge}`, type: 'dim' },
                     ''
                 ];
                 p.desc.forEach(d => lines.push(d));
@@ -737,23 +695,9 @@ const LegalConsole = {
                 type: 'result',
                 loading: 'Pobieram status piaskownic',
                 response: [
-                    { text: '\u2550\u2550\u2550 AI Regulatory Sandbox \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550', type: 'header' },
-                    { text: '    Art. 57 AI Act | Min. Cyfryzacji', type: 'dim' },
-                    '',
-                    '  Status:  W trakcie wdra\u017cania',
-                    '  Termin:  Sierpie\u0144 2026',
-                    '',
-                    { text: '  Post\u0119p:', type: 'accent' },
-                    { text: '    \u2713 Analiza wymog\u00f3w AI Act', type: 'result' },
-                    { text: '    \u2713 Wsp\u00f3\u0142praca mi\u0119dzynarodowa', type: 'result' },
-                    { text: '    \u25d0 Projektowanie ram prawnych', type: 'accent' },
-                    '    \u25cb Konsultacje publiczne',
-                    '    \u25cb Wdro\u017cenie systemu',
-                    '    \u25cb Uruchomienie piaskownic',
-                    '',
-                    { text: '  Partnerzy: Dania \u00b7 Litwa \u00b7 Estonia', type: 'accent' },
-                    '',
-                    { text: '  Wpisz karol.now() po wi\u0119cej kontekstu', type: 'dim' }
+                    { text: '  AI Regulatory Sandbox', type: 'accent' },
+                    '  Art. 57 AI Act',
+                    '  Status: w trakcie wdra\u017cania'
                 ]
             })
         },
@@ -821,24 +765,21 @@ const LegalConsole = {
                 const q = match[1].toLowerCase();
                 let answer;
                 if (q.includes('rodo') || q.includes('gdpr') || q.includes('dane osobowe')) {
-                    answer = 'RODO (2016/679) to unijne prawo ochrony danych osobowych. Kluczowe zasady: minimalizacja danych, zgoda, prawo do bycia zapomnianym, prawo dost\u0119pu. Administratorzy zg\u0142aszaj\u0105 naruszenia w 72h.';
+                    answer = 'RODO (2016/679) \u2014 unijne prawo ochrony danych osobowych. Zasady: minimalizacja danych, zgoda, prawo do bycia zapomnianym, prawo dost\u0119pu. Zg\u0142aszanie narusze\u0144 w 72h.';
                 } else if (q.includes('ai act') || q.includes('akt o ai')) {
-                    answer = 'AI Act (2024/1689) reguluje systemy AI w UE. 4 poziomy ryzyka: niedopuszczalne (zakaz), wysokie (wymogi zgodno\u015bci), ograniczone (transparentno\u015b\u0107), minimalne. Ka\u017cde pa\u0144stwo musi uruchomi\u0107 piaskownice regulacyjne.';
+                    answer = 'AI Act (2024/1689) reguluje systemy AI w UE. 4 poziomy ryzyka: niedopuszczalne, wysokie, ograniczone, minimalne. Art. 57 wymaga piaskownic regulacyjnych w ka\u017cdym pa\u0144stwie.';
                 } else if (q.includes('piaskown') || q.includes('sandbox')) {
-                    answer = 'Piaskownice regulacyjne AI (Art. 57 AI Act) to kontrolowane \u015brodowiska, w kt\u00f3rych firmy mog\u0105 testowa\u0107 innowacyjne systemy AI pod nadzorem regulatora. Polska wdra\u017ca je przez Ministerstwo Cyfryzacji. Termin: sierpie\u0144 2026.';
-                } else if (q.includes('karol') || q.includes('autor') || q.includes('tw\u00f3rca')) {
-                    answer = 'Karol Polikarp Wilczy\u0144ski \u2014 prawnik, kt\u00f3ry nauczy\u0142 si\u0119 programowa\u0107. Pracuje w Ministerstwie Cyfryzacji nad piaskownicami AI. Buduje narz\u0119dzia legaltech (jakieprawo.pl). 4 podyplom\u00f3wki w 3 lata.';
-                } else if (q.includes('jakieprawo') || q.includes('prawo') && q.includes('szuka')) {
-                    answer = 'JakiePrawo.pl to wyszukiwarka podstaw prawnych zbudowana z React, Claude API i w\u0142asnym serwerem MCP na Raspberry Pi. Parsuje PDF-y z api.sejm.gov.pl i udost\u0119pnia tre\u015b\u0107 akt\u00f3w prawnych.';
+                    answer = 'Piaskownice regulacyjne AI (Art. 57 AI Act) \u2014 kontrolowane \u015brodowiska do testowania system\u00f3w AI pod nadzorem regulatora, przed wej\u015bciem na rynek.';
+                } else if (q.includes('zam\u00f3w') || q.includes('przetarg')) {
+                    answer = 'Prawo zam\u00f3wie\u0144 publicznych (Dz.U. 2022 poz. 1710) \u2014 reguluje udzielanie zam\u00f3wie\u0144 przez podmioty publiczne. Tryby: przetarg nieograniczony, ograniczony, negocjacje, dialog konkurencyjny.';
                 } else {
-                    answer = `Analizuj\u0119: "${match[1]}". W polskim systemie prawnym kluczowe s\u0105: Konstytucja RP, ustawy, rozporz\u0105dzenia i akty prawa UE. Spr\u00f3buj ISAP.find() dla konkretnych akt\u00f3w lub zapytaj o RODO, AI Act, piaskownice.`;
+                    answer = `W polskim systemie prawnym kluczowe \u017ar\u00f3d\u0142a to: Konstytucja RP, ustawy, rozporz\u0105dzenia i akty prawa UE. Spr\u00f3buj ISAP.find() dla konkretnych akt\u00f3w.`;
                 }
                 return {
                     type: 'ai',
                     loading: 'Claude analizuje pytanie',
                     response: [
-                        { text: 'Claude AI odpowiada:', type: 'accent' },
-                        '',
+                        { text: 'Claude AI:', type: 'accent' },
                         answer
                     ]
                 };
@@ -850,7 +791,7 @@ const LegalConsole = {
                 type: 'result',
                 loading: 'Pobieram tre\u015b\u0107 artyku\u0142u',
                 response: [
-                    { text: `Art. ${match[1]} - ${match[2]}`, type: 'header' },
+                    { text: `Art. ${match[1]} - ${match[2]}`, type: 'accent' },
                     '',
                     match[2].toLowerCase().includes('rodo')
                         ? '"Przetwarzanie jest zgodne z prawem wy\u0142\u0105cznie w przypadkach, gdy \u2013 i w takim zakresie, w jakim \u2013 spe\u0142niony jest co najmniej jeden z warunk\u00f3w..."'
