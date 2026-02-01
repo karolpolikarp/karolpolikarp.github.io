@@ -463,7 +463,7 @@ const LegalConsole = {
                 '    karol.contact()      Dane kontaktowe',
                 '    clear                Wyczy\u015b\u0107 konsol\u0119',
                 '',
-                { text: '  \ud83d\udca1 Spr\u00f3buj: cats.show(\'Pimpek\')', type: 'dim' }
+                { text: '  \ud83d\udca1 Nie wszystkie komendy s\u0105 tu wymienione...', type: 'dim' }
             ]
         },
         'clear': {
