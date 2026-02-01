@@ -440,66 +440,31 @@ const LegalConsole = {
         'help': {
             type: 'system',
             response: [
-                { text: '  O mnie:', type: 'dim' },
-                '    karol.about()        Kim jestem',
-                '    karol.now()          Nad czym pracuj\u0119',
-                '    karol.skills()       Kompetencje',
-                '    karol.education()    Edukacja',
+                { text: '  Prawo:', type: 'dim' },
+                '    ISAP.find(query)     Szukaj w bazie ISAP',
+                '    Claude.ask(query)    Zapytaj AI o prawo',
+                '    prawo.art(nr, akt)   Pobierz artyku\u0142',
                 '',
                 { text: '  Projekty:', type: 'dim' },
                 '    karol.projects()     Lista projekt\u00f3w',
                 '    projekty.get(name)   Szczeg\u00f3\u0142y projektu',
                 '    karol.stack()        Tech stack',
                 '',
-                { text: '  Prawo:', type: 'dim' },
-                '    ISAP.find(query)     Szukaj w ISAP',
-                '    Claude.ask(query)    Zapytaj AI',
-                '    prawo.art(nr, akt)   Pobierz artyku\u0142',
-                '',
                 { text: '  System:', type: 'dim' },
-                '    sandbox.status()     Status piaskownic AI',
-                '    karol.contact()      Dane kontaktowe',
                 '    clear                Wyczy\u015b\u0107 konsol\u0119',
                 '',
-                { text: '  \ud83d\udca1 Nie wszystkie komendy s\u0105 tu wymienione...', type: 'dim' }
+                { text: '  Nie wszystkie komendy s\u0105 tu wymienione.', type: 'dim' }
             ]
         },
         'clear': {
             type: 'action',
             action: 'clear'
-        },
-        'whoami': {
-            type: 'system',
-            response: [
-                { text: 'Karol Polikarp Wilczy\u0144ski', type: 'header' },
-                '  Prawnik \u00b7 Programista \u00b7 AI Governance'
-            ]
         }
     },
 
     // Patterns for dynamic commands
     patterns: [
-        // ═══ PORTFOLIO COMMANDS ═══
-        {
-            regex: /^karol\.about\(\)\s*$/i,
-            handler: () => ({
-                type: 'result',
-                loading: '\u0141aduj\u0119 profil',
-                response: [
-                    { text: 'Karol Polikarp Wilczy\u0144ski', type: 'header' },
-                    '  Prawnik \u00b7 Programista \u00b7 AI Governance',
-                    '',
-                    { text: '  Stack:', type: 'accent' },
-                    '    Python, TypeScript, React',
-                    '    Claude API, MCP, Supabase',
-                    '',
-                    { text: '  Obszary:', type: 'accent' },
-                    '    AI Act, LegalTech, administracja',
-                    '',
-                    { text: '  karol.projects()  karol.stack()', type: 'dim' }
-                ]
-            })
-        },
+        // ═══ PROJECT COMMANDS ═══
         {
             regex: /^karol\.projects\(\)\s*$/i,
             handler: () => ({
@@ -535,17 +500,6 @@ const LegalConsole = {
             })
         },
         {
-            regex: /^karol\.now\(\)\s*$/i,
-            handler: () => ({
-                type: 'result',
-                loading: 'Pobieram status',
-                response: [
-                    { text: '  Piaskownice regulacyjne AI', type: 'accent' },
-                    '  Art. 57 AI Act'
-                ]
-            })
-        },
-        {
             regex: /^karol\.stack\(\)\s*$/i,
             handler: () => ({
                 type: 'result',
@@ -568,64 +522,6 @@ const LegalConsole = {
                 ]
             })
         },
-        {
-            regex: /^karol\.education\(\)\s*$/i,
-            handler: () => ({
-                type: 'result',
-                loading: '\u0141aduj\u0119 edukacj\u0119',
-                response: [
-                    { text: '  2024-25', type: 'accent' },
-                    '    Big Data \u2014 PJAIT',
-                    { text: '  2024-25', type: 'accent' },
-                    '    AI in Business \u2014 SGH',
-                    { text: '  2023-24', type: 'accent' },
-                    '    Python AI Programmer \u2014 PJAIT',
-                    { text: '  2022-23', type: 'accent' },
-                    '    IT Systems & DB \u2014 PJAIT',
-                    { text: '  2013-18', type: 'accent' },
-                    '    Prawo \u2014 Uniwersytet Warszawski'
-                ]
-            })
-        },
-        {
-            regex: /^karol\.skills\(\)\s*$/i,
-            handler: () => ({
-                type: 'result',
-                loading: '\u0141aduj\u0119 kompetencje',
-                response: [
-                    { text: '  Regulacje technologiczne', type: 'accent' },
-                    '    AI Act, Piaskownice, UODO',
-                    { text: '  Projekty publiczne', type: 'accent' },
-                    '    Fundusze UE, Projekty IT, Zam\u00f3wienia publ.',
-                    { text: '  Programowanie', type: 'accent' },
-                    '    Python, TypeScript, Claude API',
-                    { text: '  Analiza danych', type: 'accent' },
-                    '    Pandas, Scikit-learn, Jupyter',
-                    { text: '  Prawo', type: 'accent' },
-                    '    Umowy IT, RODO, Zam\u00f3wienia publ.',
-                    { text: '  Wsp\u00f3\u0142praca mi\u0119dzynarodowa', type: 'accent' },
-                    '    UE, Dania, Kraje ba\u0142tyckie'
-                ]
-            })
-        },
-        {
-            regex: /^karol\.contact\(\)\s*$/i,
-            handler: () => ({
-                type: 'result',
-                loading: '\u0141aduj\u0119 dane kontaktowe',
-                response: [
-                    { text: '  Email', type: 'accent' },
-                    '    karolpwilczynski@gmail.com',
-                    { text: '  GitHub', type: 'accent' },
-                    '    @karolpolikarp',
-                    { text: '  LinkedIn', type: 'accent' },
-                    '    Karol Polikarp Wilczy\u0144ski',
-                    { text: '  Web', type: 'accent' },
-                    '    jakieprawo.pl'
-                ]
-            })
-        },
-
         // ═══ PROJECT DETAILS ═══
         {
             regex: /projekty\.get\(['"](.+)['"]\)/i,
@@ -688,21 +584,7 @@ const LegalConsole = {
             }
         },
 
-        // ═══ SANDBOX STATUS ═══
-        {
-            regex: /^sandbox\.status\(\)\s*$/i,
-            handler: () => ({
-                type: 'result',
-                loading: 'Pobieram status piaskownic',
-                response: [
-                    { text: '  AI Regulatory Sandbox', type: 'accent' },
-                    '  Art. 57 AI Act',
-                    '  Status: w trakcie wdra\u017cania'
-                ]
-            })
-        },
-
-        // ═══ LEGAL COMMANDS (preserved) ═══
+        // ═══ LEGAL COMMANDS ═══
         {
             regex: /ISAP\.find\(['"](.+)['"]\)/i,
             handler: (match) => {
@@ -967,7 +849,7 @@ const LegalConsole = {
         // Only run demo if no user interaction yet
         if (this.history.length > 0) return;
 
-        const demoCommand = "karol.about()";
+        const demoCommand = "ISAP.find('AI Act')";
 
         // Type command character by character
         for (let i = 0; i <= demoCommand.length; i++) {
