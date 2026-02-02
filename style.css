@@ -273,6 +273,20 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+[data-theme="dark"] .project-placeholder {
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .blog-card-icon {
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: var(--color-accent-subtle);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
 /* ================================================
    ACCESSIBILITY - Skip Link & Focus States
    ================================================ */
@@ -1177,7 +1191,7 @@ section {
     display: flex;
     flex-direction: column;
     background:
-        radial-gradient(ellipse at top right, rgba(0, 128, 128, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at top right, rgba(0, 77, 43, 0.08) 0%, transparent 50%),
         #0d1117;
 }
 
@@ -1190,7 +1204,7 @@ section {
     line-height: 1.8;
     max-height: 300px;
     scrollbar-width: thin;
-    scrollbar-color: var(--color-primary) transparent;
+    scrollbar-color: #3a342c transparent;
 }
 
 .console-output::-webkit-scrollbar {
@@ -1202,7 +1216,7 @@ section {
 }
 
 .console-output::-webkit-scrollbar-thumb {
-    background: var(--color-primary);
+    background: #3a342c;
     border-radius: 4px;
 }
 
@@ -1826,7 +1840,7 @@ section {
    ================================================ */
 .contact {
     background:
-        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0, 128, 128, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201, 169, 98, 0.07) 0%, transparent 50%),
         var(--color-bg-alt);
     position: relative;
 }
@@ -2083,7 +2097,7 @@ section {
    ================================================ */
 .about {
     background:
-        radial-gradient(ellipse 50% 30% at 0% 100%, rgba(0, 128, 128, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 30% at 0% 100%, rgba(0, 77, 43, 0.06) 0%, transparent 50%),
         var(--color-bg-alt);
     position: relative;
     box-shadow:
@@ -2187,7 +2201,7 @@ section {
    ================================================ */
 .skills {
     background:
-        radial-gradient(ellipse 60% 40% at 100% 50%, rgba(0, 128, 128, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 100% 50%, rgba(107, 29, 29, 0.05) 0%, transparent 50%),
         linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
     position: relative;
 }
@@ -2985,7 +2999,7 @@ section {
     border: 2px solid var(--color-primary);
     box-shadow:
         0 25px 80px rgba(0, 0, 0, 0.5),
-        0 0 60px rgba(0, 128, 128, 0.3),
+        0 0 60px rgba(0, 77, 43, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     max-width: 700px;
     width: 100%;
@@ -3039,7 +3053,7 @@ section {
     font-weight: 700;
     color: white;
     margin-bottom: var(--space-xl);
-    text-shadow: 0 2px 10px rgba(0, 128, 128, 0.5);
+    text-shadow: 0 2px 10px rgba(0, 77, 43, 0.5);
 }
 
 .cat-easter-egg-images {
@@ -3059,7 +3073,7 @@ section {
     border: 3px solid var(--color-primary);
     box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.3),
-        0 0 30px rgba(0, 128, 128, 0.2);
+        0 0 30px rgba(0, 77, 43, 0.2);
     transition: all 0.3s ease;
     animation: catImgIn 0.5s ease backwards;
 }
@@ -3087,7 +3101,7 @@ section {
     transform: scale(1.05) rotate(2deg);
     box-shadow:
         0 15px 40px rgba(0, 0, 0, 0.4),
-        0 0 50px rgba(0, 128, 128, 0.3);
+        0 0 50px rgba(0, 77, 43, 0.3);
 }
 
 .cat-easter-egg-img-single {
@@ -3201,7 +3215,7 @@ section {
    ================================================ */
 .blog {
     background:
-        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(0, 128, 128, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(0, 77, 43, 0.06) 0%, transparent 50%),
         var(--color-bg-alt);
     position: relative;
     box-shadow:
@@ -3500,10 +3514,10 @@ section {
 
 @keyframes textGlow {
     0%, 100% {
-        text-shadow: 0 0 10px rgba(0, 128, 128, 0.3);
+        text-shadow: 0 0 10px rgba(0, 77, 43, 0.3);
     }
     50% {
-        text-shadow: 0 0 20px rgba(0, 128, 128, 0.6), 0 0 40px rgba(0, 128, 128, 0.3);
+        text-shadow: 0 0 20px rgba(0, 77, 43, 0.6), 0 0 40px rgba(0, 77, 43, 0.3);
     }
 }
 
