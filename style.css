@@ -273,6 +273,20 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+[data-theme="dark"] .project-placeholder {
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .blog-card-icon {
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: var(--color-accent-subtle);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
 /* ================================================
    ACCESSIBILITY - Skip Link & Focus States
    ================================================ */
@@ -1190,7 +1204,7 @@ section {
     line-height: 1.8;
     max-height: 300px;
     scrollbar-width: thin;
-    scrollbar-color: var(--color-primary) transparent;
+    scrollbar-color: #3a342c transparent;
 }
 
 .console-output::-webkit-scrollbar {
@@ -1202,7 +1216,7 @@ section {
 }
 
 .console-output::-webkit-scrollbar-thumb {
-    background: var(--color-primary);
+    background: #3a342c;
     border-radius: 4px;
 }
 
