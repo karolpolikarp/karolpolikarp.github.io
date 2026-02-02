@@ -33,7 +33,7 @@
     /* Text */
     --color-text: #1a1a1a;
     --color-text-secondary: #5a5a5a;
-    --color-text-tertiary: #8a8a8a;
+    --color-text-tertiary: #767676;
 
     /* Typography - Elegant */
     --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -86,7 +86,7 @@
 
     --color-text: #f5f3f0;
     --color-text-secondary: #b5a99a;
-    --color-text-tertiary: #8a7e70;
+    --color-text-tertiary: #9e9183;
 
     --color-primary-subtle: rgba(201, 169, 98, 0.12);
     --color-primary-glow: rgba(201, 169, 98, 0.2);
@@ -201,6 +201,76 @@
 [data-theme="dark"] .footer-clock {
     background: var(--color-surface);
     border-color: var(--color-border);
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .tech-badge {
+    background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.08) 100%);
+    color: var(--color-accent);
+    border-color: rgba(201, 169, 98, 0.2);
+}
+
+[data-theme="dark"] .tech-projects a {
+    color: var(--color-accent);
+    background: var(--color-accent-subtle);
+}
+
+[data-theme="dark"] .blog-card-link {
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .blog-card:hover .blog-card-title {
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .blog-cta p strong {
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .contact-link-icon {
+    color: var(--color-accent);
+    background: linear-gradient(135deg, rgba(201, 169, 98, 0.12) 0%, rgba(201, 169, 98, 0.06) 100%);
+}
+
+[data-theme="dark"] .contact-link-primary {
+    background: rgba(201, 169, 98, 0.08);
+    border-color: rgba(201, 169, 98, 0.25);
+}
+
+[data-theme="dark"] .skill-icon {
+    color: var(--color-accent);
+    background: linear-gradient(135deg, rgba(201, 169, 98, 0.12) 0%, rgba(201, 169, 98, 0.06) 100%);
+    box-shadow: 0 2px 6px rgba(201, 169, 98, 0.1);
+}
+
+[data-theme="dark"] .edu-date {
+    background: linear-gradient(135deg, rgba(201, 169, 98, 0.12) 0%, rgba(201, 169, 98, 0.08) 100%);
+    border-color: rgba(201, 169, 98, 0.2);
+}
+
+[data-theme="dark"] .project-features li::before {
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .cat-easter-egg-subtitle {
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .email-big {
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .contact-availability {
+    color: var(--color-bg);
+}
+
+[data-theme="dark"] .legal-console {
+    border-color: rgba(201, 169, 98, 0.35);
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(201, 169, 98, 0.3),
+        0 0 80px rgba(201, 169, 98, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 /* ================================================
