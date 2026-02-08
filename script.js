@@ -335,7 +335,7 @@ const LegalConsole = {
     projectData: {
         'jakieprawo': {
             name: 'JakiePrawo.pl',
-            badge: 'Flagowy projekt',
+            badge: 'Prawo + AI',
             desc: [
                 'Wyszukiwarka podstaw prawnych \u2014 zadaj',
                 'pytanie, otrzymaj artyku\u0142, nazw\u0119 aktu,',
@@ -370,7 +370,7 @@ const LegalConsole = {
         },
         'whoisi': {
             name: 'Whoisi',
-            badge: 'Personalized Intelligence',
+            badge: 'AI + UX',
             desc: [
                 'Personalny asystent AI dopasowany',
                 'do stylu komunikacji, preferencji',

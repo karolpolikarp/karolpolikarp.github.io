@@ -1141,6 +1141,10 @@ section {
         0 0 0 8px rgba(0, 77, 43, 0.1);
 }
 
+[data-theme="dark"] .hero-avatar {
+    filter: saturate(0.8) brightness(1.05) hue-rotate(-10deg);
+}
+
 /* ================================================
    LEGAL CONSOLE - Interactive Terminal
    ================================================ */
