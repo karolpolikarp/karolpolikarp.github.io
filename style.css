@@ -1800,54 +1800,10 @@ section {
     transform: scale(1.05);
 }
 
-/* Project Video on Hover */
-.project-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 2;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-}
-
-.project-has-video:hover .project-video {
-    opacity: 1;
-}
-
-.project-has-video:hover .project-img {
-    opacity: 0;
-}
-
+/* Project Video on Hover — hidden until videos are recorded */
+.project-video,
 .project-video-hint {
-    position: absolute;
-    bottom: var(--space-md);
-    left: var(--space-md);
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 4px 12px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 500;
-    border-radius: var(--radius-full);
-    z-index: 3;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-}
-
-.project-video-hint svg {
-    width: 14px;
-    height: 14px;
-}
-
-.project-has-video:hover .project-video-hint {
-    opacity: 0;
+    display: none;
 }
 
 .project-content {
@@ -1951,6 +1907,11 @@ section {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
+    height: 100%;
+}
+
+.contact-links .contact-link {
+    flex: 1;
 }
 
 .contact-link {
