@@ -43,6 +43,11 @@ const ThemeManager = {
 ThemeManager.init();
 
 // ================================================
+// PERFORMANCE: Reduced motion detection
+// ================================================
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ================================================
 // PARALLAX EFFECT (with requestAnimationFrame throttling)
 // ================================================
 const ParallaxEffect = {
@@ -54,7 +59,7 @@ const ParallaxEffect = {
     needsUpdate: false,
 
     init() {
-        if (window.innerWidth <= 768) return;
+        if (window.innerWidth <= 768 || prefersReducedMotion) return;
 
         document.addEventListener('mousemove', (e) => this.handleMouseMove(e), { passive: true });
         window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
@@ -241,7 +246,7 @@ const MagneticButtons = {
     },
 
     handleResize() {
-        const shouldEnable = window.innerWidth > 768;
+        const shouldEnable = window.innerWidth > 768 && !prefersReducedMotion;
 
         if (shouldEnable && !this.isEnabled) {
             this.enable();
@@ -253,17 +258,23 @@ const MagneticButtons = {
     enable() {
         this.isEnabled = true;
         this.buttons.forEach(btn => {
+            let rafPending = false;
             const moveHandler = (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                if (rafPending) return;
+                rafPending = true;
+                requestAnimationFrame(() => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                    rafPending = false;
+                });
             };
             const leaveHandler = () => {
                 btn.style.transform = '';
             };
 
-            btn.addEventListener('mousemove', moveHandler);
+            btn.addEventListener('mousemove', moveHandler, { passive: true });
             btn.addEventListener('mouseleave', leaveHandler);
             this.handlers.set(btn, { move: moveHandler, leave: leaveHandler });
         });
@@ -286,22 +297,24 @@ const MagneticButtons = {
 MagneticButtons.init();
 
 // ================================================
-// NAVBAR SCROLL EFFECT
+// NAVBAR SCROLL EFFECT (throttled with rAF)
 // ================================================
 const nav = document.querySelector('.nav');
-let lastScroll = 0;
+let navScrollRaf = false;
 
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-
-    if (currentScroll > 100) {
-        nav.classList.add('nav-scrolled');
-    } else {
-        nav.classList.remove('nav-scrolled');
-    }
-
-    lastScroll = currentScroll;
-});
+    if (navScrollRaf) return;
+    navScrollRaf = true;
+    requestAnimationFrame(() => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > 100) {
+            nav.classList.add('nav-scrolled');
+        } else {
+            nav.classList.remove('nav-scrolled');
+        }
+        navScrollRaf = false;
+    });
+}, { passive: true });
 
 // ================================================
 // WINDOWS 95 CLOCK
@@ -317,7 +330,8 @@ const updateClock = () => {
 };
 
 updateClock();
-setInterval(updateClock, 1000);
+// Update every 15s instead of every 1s - clock only shows HH:MM
+setInterval(updateClock, 15000);
 
 // ================================================
 // PROJECT VIDEO ON HOVER
@@ -813,29 +827,35 @@ const LegalConsole = {
         this.addLine('blank');
     },
 
-    // Render mixed-type response arrays
+    // Render mixed-type response arrays (batched DOM update)
     renderResponse(response, defaultType) {
+        const fragment = document.createDocumentFragment();
         response.forEach(item => {
             if (typeof item === 'object' && item !== null) {
-                this.addLine(item.type || defaultType, item.text || ' ');
+                fragment.appendChild(this.createLine(item.type || defaultType, item.text || ' '));
             } else {
-                this.addLine(defaultType, item || ' ');
+                fragment.appendChild(this.createLine(defaultType, item || ' '));
             }
         });
+        this.output.appendChild(fragment);
+        this.output.scrollTop = this.output.scrollHeight;
     },
 
-    addLine(type, content = '') {
+    createLine(type, content = '') {
         const line = document.createElement('div');
         line.className = `console-line ${type}`;
 
         if (type === 'command') {
             line.innerHTML = `<span class="line-prefix">\u276f</span><span>${this.escapeHtml(content.replace(this.prompt + ' ', ''))}</span>`;
-        } else if (type === 'loading') {
-            line.innerHTML = `<span>${this.escapeHtml(content)}</span>`;
         } else if (content) {
             line.innerHTML = `<span>${this.escapeHtml(content)}</span>`;
         }
 
+        return line;
+    },
+
+    addLine(type, content = '') {
+        const line = this.createLine(type, content);
         this.output.appendChild(line);
         this.output.scrollTop = this.output.scrollHeight;
         return line;
@@ -863,8 +883,8 @@ const LegalConsole = {
     },
 
     async runDemo() {
-        // Only run demo if no user interaction yet
-        if (this.history.length > 0) return;
+        // Only run demo if no user interaction yet and motion is allowed
+        if (this.history.length > 0 || prefersReducedMotion) return;
 
         const demoCommand = "ISAP.find('AI Act')";
 
@@ -1020,3 +1040,76 @@ const EmailProtection = {
 };
 
 EmailProtection.init();
+
+// ================================================
+// PERFORMANCE: Pause off-screen animations
+// ================================================
+const AnimationPauser = {
+    init() {
+        if (prefersReducedMotion) return;
+
+        // Pause gradient blob animations when not visible
+        const blobs = document.querySelector('.gradient-blobs');
+        if (blobs) {
+            // Blobs are fixed-position so always "visible" - but we can pause
+            // when user is at the very bottom or in certain sections
+            // For fixed elements, we use a page visibility approach instead
+            document.addEventListener('visibilitychange', () => {
+                const blobEls = blobs.querySelectorAll('.gradient-blob');
+                blobEls.forEach(blob => {
+                    blob.style.animationPlayState = document.hidden ? 'paused' : 'running';
+                });
+            });
+        }
+
+        // Pause neural network animation when tab is hidden
+        const neural = document.querySelector('.neural-network');
+        if (neural) {
+            document.addEventListener('visibilitychange', () => {
+                const lines = neural.querySelectorAll('.neural-line, .neural-line-accent, .neural-node, .neural-node-accent');
+                lines.forEach(el => {
+                    el.style.animationPlayState = document.hidden ? 'paused' : 'running';
+                });
+            });
+        }
+
+        // Pause hero decorations when hero is scrolled past
+        const hero = document.querySelector('.hero');
+        const heroDecorations = document.querySelectorAll('.floating-shape, .hero::before');
+        if (hero) {
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const shapes = hero.querySelectorAll('.floating-shape');
+                    shapes.forEach(shape => {
+                        shape.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+                    });
+                });
+            }, { threshold: 0 });
+            heroObserver.observe(hero);
+        }
+
+        // Pause positions glow when not visible
+        const positions = document.querySelector('.positions');
+        if (positions) {
+            const posObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    positions.style.setProperty('--anim-state', entry.isIntersecting ? 'running' : 'paused');
+                });
+            }, { threshold: 0 });
+            posObserver.observe(positions);
+        }
+
+        // Pause console status dot when not visible
+        const consoleDot = document.querySelector('.status-dot');
+        if (consoleDot) {
+            const dotObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    consoleDot.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+                });
+            }, { threshold: 0 });
+            dotObserver.observe(consoleDot);
+        }
+    }
+};
+
+AnimationPauser.init();
