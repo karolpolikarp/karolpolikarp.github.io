@@ -196,7 +196,7 @@
 [data-theme="dark"] .keyword {
     background: linear-gradient(135deg, rgba(0, 140, 70, 0.2) 0%, rgba(0, 100, 50, 0.12) 100%);
     border-color: rgba(0, 140, 70, 0.35);
-    color: #1a7a45;
+    color: #2e9d62;
 }
 
 [data-theme="dark"] .edu-date {
@@ -247,7 +247,7 @@
 }
 
 [data-theme="dark"] .skill-icon {
-    color: #1a7a45;
+    color: #2e9d62;
     background: linear-gradient(135deg, rgba(0, 140, 70, 0.12) 0%, rgba(0, 100, 50, 0.06) 100%);
     box-shadow: 0 2px 6px rgba(0, 140, 70, 0.1);
 }
@@ -283,7 +283,7 @@
 }
 
 [data-theme="dark"] .project-placeholder {
-    color: #1a7a45;
+    color: #2e9d62;
 }
 
 [data-theme="dark"] .blog-card-icon {
@@ -293,7 +293,7 @@
 [data-theme="dark"] .theme-toggle:hover {
     background: rgba(0, 140, 70, 0.12);
     border-color: var(--color-primary-light);
-    color: #1a7a45;
+    color: #2e9d62;
 }
 
 [data-theme="dark"] .project-link-primary {
@@ -313,7 +313,7 @@
 
 [data-theme="dark"] .tag {
     background: rgba(0, 140, 70, 0.2);
-    color: #1a7a45;
+    color: #2e9d62;
     border: 1px solid rgba(0, 140, 70, 0.3);
 }
 
@@ -584,7 +584,7 @@ section {
 }
 
 [data-theme="dark"] .nav-links a:hover {
-    color: #1a7a45;
+    color: #2e9d62;
 }
 
 .nav-links a:hover::after {
@@ -1037,7 +1037,7 @@ section {
 }
 
 [data-theme="dark"] .hero-surname {
-    color: #1a7a45;
+    color: var(--color-accent);
 }
 
 .hero-subtitle {
@@ -1053,7 +1053,7 @@ section {
 }
 
 [data-theme="dark"] .hero-subtitle .accent {
-    color: #1a7a45;
+    color: var(--color-accent);
 }
 
 .hero-bio {
@@ -1139,6 +1139,10 @@ section {
     box-shadow:
         0 15px 50px rgba(0, 0, 0, 0.15),
         0 0 0 8px rgba(0, 77, 43, 0.1);
+}
+
+[data-theme="dark"] .hero-avatar {
+    filter: saturate(0.8) brightness(1.05) hue-rotate(-10deg);
 }
 
 /* ================================================
@@ -1630,7 +1634,7 @@ section {
 }
 
 [data-theme="dark"] .section-label {
-    color: #1a7a45;
+    color: #2e9d62;
 }
 
 .section-title {
@@ -3544,7 +3548,7 @@ section {
 }
 
 [data-theme="dark"] .blog-upcoming-category {
-    color: #1a7a45;
+    color: #2e9d62;
     background: rgba(0, 140, 70, 0.12);
     border-color: rgba(0, 140, 70, 0.2);
 }
