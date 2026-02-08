@@ -88,9 +88,9 @@
     --color-text-secondary: #b5a99a;
     --color-text-tertiary: #9e9183;
 
-    --color-primary-subtle: rgba(201, 169, 98, 0.12);
-    --color-primary-glow: rgba(201, 169, 98, 0.2);
-    --color-accent-subtle: rgba(201, 169, 98, 0.15);
+    --color-primary-subtle: rgba(0, 140, 70, 0.12);
+    --color-primary-glow: rgba(0, 140, 70, 0.2);
+    --color-accent-subtle: rgba(0, 140, 70, 0.12);
 
     /* Burgundy for dark mode - slightly brighter */
     --color-burgundy: #8b2e2e;
@@ -109,7 +109,7 @@
 
 [data-theme="dark"] .nav-scrolled {
     background: rgba(18, 16, 13, 0.98);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(201, 169, 98, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(0, 140, 70, 0.08);
 }
 
 [data-theme="dark"] .btn-secondary {
@@ -137,7 +137,7 @@
 }
 
 [data-theme="dark"] .hero::before {
-    background: radial-gradient(circle, rgba(201, 169, 98, 0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0, 140, 70, 0.1) 0%, transparent 70%);
 }
 
 [data-theme="dark"] .floating-shape {
@@ -182,11 +182,11 @@
 }
 
 [data-theme="dark"] .neural-line {
-    stroke: var(--color-accent);
+    stroke: var(--color-primary-light);
 }
 
 [data-theme="dark"] .neural-node {
-    fill: var(--color-accent);
+    fill: var(--color-primary-light);
 }
 
 [data-theme="dark"] body::before {
@@ -194,9 +194,9 @@
 }
 
 [data-theme="dark"] .keyword {
-    background: linear-gradient(135deg, rgba(201, 169, 98, 0.25) 0%, rgba(201, 169, 98, 0.15) 100%);
-    border-color: rgba(201, 169, 98, 0.4);
-    color: var(--color-accent);
+    background: linear-gradient(135deg, rgba(0, 140, 70, 0.2) 0%, rgba(0, 100, 50, 0.12) 100%);
+    border-color: rgba(0, 140, 70, 0.35);
+    color: #4ade80;
 }
 
 [data-theme="dark"] .edu-date {
@@ -238,18 +238,18 @@
 
 [data-theme="dark"] .contact-link-icon {
     color: var(--color-accent);
-    background: linear-gradient(135deg, rgba(201, 169, 98, 0.12) 0%, rgba(201, 169, 98, 0.06) 100%);
+    background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.05) 100%);
 }
 
 [data-theme="dark"] .contact-link-primary {
-    background: rgba(201, 169, 98, 0.08);
-    border-color: rgba(201, 169, 98, 0.25);
+    background: rgba(0, 140, 70, 0.06);
+    border-color: rgba(139, 46, 46, 0.25);
 }
 
 [data-theme="dark"] .skill-icon {
-    color: var(--color-accent);
-    background: linear-gradient(135deg, rgba(201, 169, 98, 0.12) 0%, rgba(201, 169, 98, 0.06) 100%);
-    box-shadow: 0 2px 6px rgba(201, 169, 98, 0.1);
+    color: #4ade80;
+    background: linear-gradient(135deg, rgba(0, 140, 70, 0.12) 0%, rgba(0, 100, 50, 0.06) 100%);
+    box-shadow: 0 2px 6px rgba(0, 140, 70, 0.1);
 }
 
 [data-theme="dark"] .edu-date {
@@ -258,7 +258,7 @@
 }
 
 [data-theme="dark"] .project-features li::before {
-    color: var(--color-accent);
+    color: var(--color-burgundy-light);
 }
 
 [data-theme="dark"] .cat-easter-egg-subtitle {
@@ -274,16 +274,16 @@
 }
 
 [data-theme="dark"] .legal-console {
-    border-color: rgba(201, 169, 98, 0.35);
+    border-color: rgba(201, 169, 98, 0.25);
     box-shadow:
         0 25px 50px -12px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(201, 169, 98, 0.3),
-        0 0 80px rgba(201, 169, 98, 0.15),
+        0 0 0 1px rgba(201, 169, 98, 0.2),
+        0 0 40px rgba(0, 140, 70, 0.08),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] .project-placeholder {
-    color: var(--color-accent);
+    color: #4ade80;
 }
 
 [data-theme="dark"] .blog-card-icon {
@@ -291,30 +291,30 @@
 }
 
 [data-theme="dark"] .theme-toggle:hover {
-    background: var(--color-accent-subtle);
-    border-color: var(--color-accent);
-    color: var(--color-accent);
+    background: rgba(0, 140, 70, 0.12);
+    border-color: var(--color-primary-light);
+    color: #4ade80;
 }
 
 [data-theme="dark"] .project-link-primary {
-    background: var(--color-accent);
-    color: var(--color-primary-dark);
+    background: var(--color-primary-light);
+    color: #fff;
 }
 
 [data-theme="dark"] .project-link-primary:hover {
-    background: var(--color-accent-light);
-    color: var(--color-primary-dark);
+    background: #1a8a52;
+    color: #fff;
 }
 
 [data-theme="dark"] .project-badge {
-    background: var(--color-accent);
-    color: var(--color-primary-dark);
+    background: var(--color-primary-light);
+    color: #fff;
 }
 
 [data-theme="dark"] .tag {
-    background: rgba(201, 169, 98, 0.2);
-    color: var(--color-accent);
-    border: 1px solid rgba(201, 169, 98, 0.3);
+    background: rgba(0, 140, 70, 0.2);
+    color: #4ade80;
+    border: 1px solid rgba(0, 140, 70, 0.3);
 }
 
 [data-theme="dark"] .tag-burgundy {
@@ -324,16 +324,16 @@
 }
 
 [data-theme="dark"] .start-button {
-    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-    color: var(--color-primary-dark);
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+    color: #fff;
 }
 
 [data-theme="dark"] .position-item {
-    border-color: rgba(201, 169, 98, 0.15);
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 [data-theme="dark"] .position-item:hover {
-    border-color: rgba(201, 169, 98, 0.3);
+    border-color: rgba(139, 46, 46, 0.35);
 }
 
 @media (max-width: 768px) {
@@ -584,7 +584,7 @@ section {
 }
 
 [data-theme="dark"] .nav-links a:hover {
-    color: var(--color-accent);
+    color: #4ade80;
 }
 
 .nav-links a:hover::after {
@@ -1032,19 +1032,12 @@ section {
 
 .hero-surname {
     display: block;
-    background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 50%, var(--color-accent-dark) 100%);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-primary);
     padding-bottom: 0.1em;
-    animation: surnameShimmer 8s ease-in-out infinite;
-    filter: drop-shadow(0 2px 4px rgba(201, 169, 98, 0.3));
 }
 
-@keyframes surnameShimmer {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+[data-theme="dark"] .hero-surname {
+    color: var(--color-primary-light);
 }
 
 .hero-subtitle {
@@ -1060,7 +1053,7 @@ section {
 }
 
 [data-theme="dark"] .hero-subtitle .accent {
-    color: var(--color-accent);
+    color: #4ade80;
 }
 
 .hero-bio {
@@ -1637,7 +1630,7 @@ section {
 }
 
 [data-theme="dark"] .section-label {
-    color: var(--color-accent);
+    color: #4ade80;
 }
 
 .section-title {
@@ -3491,9 +3484,9 @@ section {
 
 .blog-upcoming-item {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    padding: var(--space-lg) var(--space-xl);
+    flex-direction: row;
+    gap: var(--space-lg);
+    padding: 0;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -3501,6 +3494,20 @@ section {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+}
+
+.blog-upcoming-img {
+    width: 180px;
+    min-height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.blog-upcoming-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-lg) var(--space-lg) var(--space-lg) 0;
 }
 
 .blog-upcoming-item::after {
@@ -3539,9 +3546,9 @@ section {
 }
 
 [data-theme="dark"] .blog-upcoming-category {
-    color: var(--color-accent);
-    background: var(--color-accent-subtle);
-    border-color: rgba(201, 169, 98, 0.2);
+    color: #4ade80;
+    background: rgba(0, 140, 70, 0.12);
+    border-color: rgba(0, 140, 70, 0.2);
 }
 
 .blog-upcoming-item h3 {
@@ -3555,6 +3562,22 @@ section {
     font-size: 0.9rem;
     color: var(--color-text-secondary);
     line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .blog-upcoming-item {
+        flex-direction: column;
+    }
+
+    .blog-upcoming-img {
+        width: 100%;
+        height: 140px;
+        min-height: auto;
+    }
+
+    .blog-upcoming-content {
+        padding: var(--space-md);
+    }
 }
 
 /* ================================================
