@@ -109,7 +109,7 @@
 
 [data-theme="dark"] .nav-scrolled {
     background: rgba(18, 16, 13, 0.98);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(201, 169, 98, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(0, 140, 70, 0.08);
 }
 
 [data-theme="dark"] .btn-secondary {
@@ -200,7 +200,7 @@
 }
 
 [data-theme="dark"] .edu-date {
-    color: #4ade80;
+    color: var(--color-accent);
 }
 
 [data-theme="dark"] .footer {
@@ -210,7 +210,7 @@
 [data-theme="dark"] .footer-clock {
     background: var(--color-surface);
     border-color: var(--color-border);
-    color: #4ade80;
+    color: var(--color-accent);
 }
 
 [data-theme="dark"] .tech-badge {
@@ -237,13 +237,13 @@
 }
 
 [data-theme="dark"] .contact-link-icon {
-    color: #4ade80;
-    background: linear-gradient(135deg, rgba(0, 140, 70, 0.12) 0%, rgba(0, 100, 50, 0.06) 100%);
+    color: var(--color-accent);
+    background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.05) 100%);
 }
 
 [data-theme="dark"] .contact-link-primary {
-    background: rgba(0, 140, 70, 0.08);
-    border-color: rgba(0, 140, 70, 0.25);
+    background: rgba(0, 140, 70, 0.06);
+    border-color: rgba(139, 46, 46, 0.25);
 }
 
 [data-theme="dark"] .skill-icon {
@@ -253,12 +253,12 @@
 }
 
 [data-theme="dark"] .edu-date {
-    background: linear-gradient(135deg, rgba(0, 140, 70, 0.12) 0%, rgba(0, 100, 50, 0.08) 100%);
-    border-color: rgba(0, 140, 70, 0.2);
+    background: linear-gradient(135deg, rgba(201, 169, 98, 0.12) 0%, rgba(201, 169, 98, 0.08) 100%);
+    border-color: rgba(201, 169, 98, 0.2);
 }
 
 [data-theme="dark"] .project-features li::before {
-    color: #4ade80;
+    color: var(--color-burgundy-light);
 }
 
 [data-theme="dark"] .cat-easter-egg-subtitle {
@@ -266,7 +266,7 @@
 }
 
 [data-theme="dark"] .email-big {
-    color: #4ade80;
+    color: var(--color-accent);
 }
 
 [data-theme="dark"] .contact-availability {
@@ -274,11 +274,11 @@
 }
 
 [data-theme="dark"] .legal-console {
-    border-color: rgba(0, 140, 70, 0.35);
+    border-color: rgba(201, 169, 98, 0.25);
     box-shadow:
         0 25px 50px -12px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(0, 140, 70, 0.3),
-        0 0 60px rgba(0, 140, 70, 0.1),
+        0 0 0 1px rgba(201, 169, 98, 0.2),
+        0 0 40px rgba(0, 140, 70, 0.08),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
@@ -329,11 +329,11 @@
 }
 
 [data-theme="dark"] .position-item {
-    border-color: rgba(0, 140, 70, 0.15);
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 [data-theme="dark"] .position-item:hover {
-    border-color: rgba(0, 140, 70, 0.3);
+    border-color: rgba(139, 46, 46, 0.35);
 }
 
 @media (max-width: 768px) {
