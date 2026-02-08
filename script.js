@@ -320,6 +320,23 @@ updateClock();
 setInterval(updateClock, 1000);
 
 // ================================================
+// PROJECT VIDEO ON HOVER
+// ================================================
+document.querySelectorAll('.project-has-video').forEach(container => {
+    const video = container.querySelector('.project-video');
+    if (!video) return;
+
+    container.addEventListener('mouseenter', () => {
+        video.play().catch(() => {});
+    });
+
+    container.addEventListener('mouseleave', () => {
+        video.pause();
+        video.currentTime = 0;
+    });
+});
+
+// ================================================
 // PORTFOLIO CONSOLE - Interactive Terminal
 // ================================================
 const LegalConsole = {
