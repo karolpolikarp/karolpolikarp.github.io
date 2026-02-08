@@ -1032,12 +1032,12 @@ section {
 
 .hero-surname {
     display: block;
-    color: var(--color-accent);
+    color: var(--color-primary);
     padding-bottom: 0.1em;
 }
 
 [data-theme="dark"] .hero-surname {
-    color: var(--color-accent);
+    color: var(--color-primary-light);
 }
 
 .hero-subtitle {
