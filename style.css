@@ -3562,13 +3562,7 @@ section {
     line-height: 1.5;
 }
 
-@media (max-width: 1024px) {
-    .blog-upcoming-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .blog-upcoming-list {
         grid-template-columns: 1fr;
     }
