@@ -1032,19 +1032,12 @@ section {
 
 .hero-surname {
     display: block;
-    background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 50%, var(--color-accent-dark) 100%);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-accent);
     padding-bottom: 0.1em;
-    animation: surnameShimmer 8s ease-in-out infinite;
-    filter: drop-shadow(0 2px 4px rgba(201, 169, 98, 0.3));
 }
 
-@keyframes surnameShimmer {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+[data-theme="dark"] .hero-surname {
+    color: var(--color-accent);
 }
 
 .hero-subtitle {
