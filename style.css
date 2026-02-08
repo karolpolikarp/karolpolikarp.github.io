@@ -196,7 +196,7 @@
 [data-theme="dark"] .keyword {
     background: linear-gradient(135deg, rgba(0, 140, 70, 0.2) 0%, rgba(0, 100, 50, 0.12) 100%);
     border-color: rgba(0, 140, 70, 0.35);
-    color: #3db878;
+    color: #1a7a45;
 }
 
 [data-theme="dark"] .edu-date {
@@ -247,7 +247,7 @@
 }
 
 [data-theme="dark"] .skill-icon {
-    color: #3db878;
+    color: #1a7a45;
     background: linear-gradient(135deg, rgba(0, 140, 70, 0.12) 0%, rgba(0, 100, 50, 0.06) 100%);
     box-shadow: 0 2px 6px rgba(0, 140, 70, 0.1);
 }
@@ -283,7 +283,7 @@
 }
 
 [data-theme="dark"] .project-placeholder {
-    color: #3db878;
+    color: #1a7a45;
 }
 
 [data-theme="dark"] .blog-card-icon {
@@ -293,7 +293,7 @@
 [data-theme="dark"] .theme-toggle:hover {
     background: rgba(0, 140, 70, 0.12);
     border-color: var(--color-primary-light);
-    color: #3db878;
+    color: #1a7a45;
 }
 
 [data-theme="dark"] .project-link-primary {
@@ -313,7 +313,7 @@
 
 [data-theme="dark"] .tag {
     background: rgba(0, 140, 70, 0.2);
-    color: #3db878;
+    color: #1a7a45;
     border: 1px solid rgba(0, 140, 70, 0.3);
 }
 
@@ -584,7 +584,7 @@ section {
 }
 
 [data-theme="dark"] .nav-links a:hover {
-    color: #3db878;
+    color: #1a7a45;
 }
 
 .nav-links a:hover::after {
@@ -1037,7 +1037,7 @@ section {
 }
 
 [data-theme="dark"] .hero-surname {
-    color: #3db878;
+    color: #1a7a45;
 }
 
 .hero-subtitle {
@@ -1053,7 +1053,7 @@ section {
 }
 
 [data-theme="dark"] .hero-subtitle .accent {
-    color: #3db878;
+    color: #1a7a45;
 }
 
 .hero-bio {
@@ -1630,7 +1630,7 @@ section {
 }
 
 [data-theme="dark"] .section-label {
-    color: #3db878;
+    color: #1a7a45;
 }
 
 .section-title {
@@ -3544,7 +3544,7 @@ section {
 }
 
 [data-theme="dark"] .blog-upcoming-category {
-    color: #3db878;
+    color: #1a7a45;
     background: rgba(0, 140, 70, 0.12);
     border-color: rgba(0, 140, 70, 0.2);
 }
