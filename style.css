@@ -449,12 +449,12 @@ section {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: logoShimmer 5s ease-in-out infinite;
+    animation: logoShimmer 12s ease-in-out infinite;
 }
 
 @keyframes logoShimmer {
-    0%, 70%, 100% { background-position: 100% 0; }
-    30% { background-position: -100% 0; }
+    0%, 80%, 100% { background-position: 100% 0; }
+    20% { background-position: -100% 0; }
 }
 
 [data-theme="dark"] .logo-main {
@@ -476,7 +476,7 @@ section {
 
 .logo-main .accent {
     -webkit-text-fill-color: currentColor;
-    animation: dotMorph 8s ease-in-out infinite;
+    animation: dotMorph 16s ease-in-out infinite;
 }
 
 @keyframes dotMorph {
@@ -597,8 +597,8 @@ section {
 
 .btn-primary:hover {
     background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-    box-shadow: 0 8px 30px rgba(201, 169, 98, 0.4), 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(201, 169, 98, 0.3), 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
 }
 
 .btn-primary:active {
@@ -618,8 +618,8 @@ section {
 .btn-secondary:hover {
     border-color: var(--color-accent);
     color: var(--color-accent-dark);
-    box-shadow: 0 8px 25px rgba(201, 169, 98, 0.2);
-    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(201, 169, 98, 0.15);
+    transform: translateY(-2px);
 }
 
 .btn-secondary:active {
@@ -745,7 +745,7 @@ section {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 1;
+    opacity: 0.7;
     mix-blend-mode: multiply;
 }
 
@@ -982,7 +982,7 @@ section {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     padding-bottom: 0.1em;
-    animation: surnameShimmer 4s ease-in-out infinite;
+    animation: surnameShimmer 8s ease-in-out infinite;
     filter: drop-shadow(0 2px 4px rgba(201, 169, 98, 0.3));
 }
 
@@ -1110,20 +1110,14 @@ section {
     border: 1px solid rgba(201, 169, 98, 0.25);
     transform: perspective(1000px) rotateY(-2deg) rotateX(2deg);
     transition: all 0.4s ease;
-    animation: consoleFloat 6s ease-in-out infinite;
 }
 
 .legal-console:hover {
-    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(-8px);
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(-4px);
     box-shadow:
         0 35px 60px -15px rgba(0, 0, 0, 0.5),
         0 0 0 1px rgba(201, 169, 98, 0.35),
-        0 0 120px rgba(201, 169, 98, 0.15);
-}
-
-@keyframes consoleFloat {
-    0%, 100% { transform: perspective(1000px) rotateY(-2deg) rotateX(2deg) translateY(0); }
-    50% { transform: perspective(1000px) rotateY(-2deg) rotateX(2deg) translateY(-10px); }
+        0 0 80px rgba(201, 169, 98, 0.12);
 }
 
 /* Console Header */
@@ -1439,24 +1433,7 @@ section {
     51%, 100% { opacity: 0; }
 }
 
-/* Scanline effect (optional retro feel) */
-.legal-console::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.03) 2px,
-        rgba(0, 0, 0, 0.03) 4px
-    );
-    pointer-events: none;
-    z-index: 10;
-}
+/* Scanline effect removed - too aggressive for modern portfolio */
 
 .hero-shape {
     position: absolute;
@@ -1698,12 +1675,11 @@ section {
 }
 
 .project-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.12),
-        0 8px 16px rgba(0, 0, 0, 0.06),
-        0 0 0 1px rgba(201, 169, 98, 0.25),
-        0 0 40px rgba(201, 169, 98, 0.1);
+        0 12px 30px rgba(0, 0, 0, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.05),
+        0 0 0 1px rgba(201, 169, 98, 0.2);
     border-color: var(--color-accent);
 }
 
@@ -2247,11 +2223,10 @@ section {
 }
 
 .skill-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-3px);
     box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.12),
-        0 5px 15px rgba(0, 0, 0, 0.06),
-        0 0 30px rgba(201, 169, 98, 0.1);
+        0 10px 25px rgba(0, 0, 0, 0.08),
+        0 4px 10px rgba(0, 0, 0, 0.04);
     border-color: var(--color-accent);
 }
 
