@@ -993,13 +993,7 @@ const EmailProtection = {
             });
         }
 
-        if (newsletterLink) {
-            newsletterLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                const email = this.decode();
-                window.location.href = 'mailto:' + email + '?subject=Newsletter%20-%20Zapisuję%20się';
-            });
-        }
+        // Newsletter link removed - blog section simplified
     },
 
     decode() {
