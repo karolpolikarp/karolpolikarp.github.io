@@ -1037,7 +1037,7 @@ section {
 }
 
 [data-theme="dark"] .hero-surname {
-    color: #2e9d62;
+    color: var(--color-accent);
 }
 
 .hero-subtitle {
@@ -1053,7 +1053,7 @@ section {
 }
 
 [data-theme="dark"] .hero-subtitle .accent {
-    color: #2e9d62;
+    color: var(--color-accent);
 }
 
 .hero-bio {
