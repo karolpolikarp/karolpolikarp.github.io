@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://karolpolikarp.github.io/sitemap.xml
