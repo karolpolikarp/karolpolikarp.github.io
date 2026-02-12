@@ -1004,14 +1004,6 @@ const LegalConsole = {
 LegalConsole.init();
 
 // ================================================
-// BLURRED TEXT REVEAL (tap to toggle on mobile)
-// ================================================
-document.querySelectorAll('.blurred-text').forEach(el => {
-    el.addEventListener('click', () => el.classList.toggle('revealed'));
-});
-
-
-// ================================================
 // EMAIL PROTECTION - Anti-Scraper Obfuscation
 // ================================================
 const EmailProtection = {
