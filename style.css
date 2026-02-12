@@ -1656,14 +1656,6 @@ section {
 .blurred-text {
     filter: blur(5px);
     user-select: none;
-    cursor: pointer;
-    transition: filter var(--transition-base);
-}
-
-.blurred-text:hover,
-.blurred-text.revealed {
-    filter: blur(0);
-    user-select: auto;
 }
 
 
