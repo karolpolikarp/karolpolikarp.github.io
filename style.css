@@ -2504,7 +2504,7 @@ section {
     z-index: 2;
 }
 
-/* Amber ALPHA badge - inline with project title */
+/* Amber ALPHA badge - outlined/bordered style */
 .project-badge-alpha {
     display: inline-flex;
     align-items: center;
@@ -2513,9 +2513,10 @@ section {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     padding: 2px 10px;
-    background: linear-gradient(135deg, #d4a017 0%, #c9a962 100%);
-    color: #fff;
-    border-radius: var(--radius-full);
+    background: transparent;
+    color: #c9930a;
+    border: 1.5px solid #c9930a;
+    border-radius: var(--radius-sm);
     vertical-align: middle;
     margin-left: var(--space-xs);
     font-family: var(--font-mono);
@@ -2523,8 +2524,9 @@ section {
 }
 
 [data-theme="dark"] .project-badge-alpha {
-    background: linear-gradient(135deg, rgba(212, 160, 23, 0.85) 0%, rgba(201, 169, 98, 0.85) 100%);
-    color: #fff;
+    background: rgba(201, 147, 10, 0.1);
+    color: #d4a41a;
+    border-color: #d4a41a;
 }
 
 .project-image {
