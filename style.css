@@ -1069,6 +1069,42 @@ section {
     margin-bottom: var(--space-2xl);
 }
 
+/* Hero Positions */
+.hero-positions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md) var(--space-xl);
+    margin-bottom: var(--space-2xl);
+    max-width: 520px;
+}
+
+.hero-position {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.position-title {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.position-desc {
+    font-size: 0.8rem;
+    color: var(--color-text-tertiary);
+    line-height: 1.4;
+}
+
+[data-theme="dark"] .position-title {
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .position-desc {
+    color: var(--color-text-tertiary);
+}
+
 .hero-cta {
     display: flex;
     gap: var(--space-md);
@@ -3010,6 +3046,11 @@ section {
 
     .position-item {
         padding: var(--space-md);
+    }
+
+    .hero-positions {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
     }
 
     .hero-keywords {
