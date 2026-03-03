@@ -25,9 +25,12 @@ npx serve
 
 ```
 /
-├── index.html      # Main HTML (937 lines) - All page content and structure
-├── style.css       # Styles (3127 lines) - Complete design system
-├── script.js       # JavaScript (690 lines) - Interactive functionality
+├── index.html      # Main HTML (~825 lines) - All page content and structure
+├── style.css       # Styles (~3650 lines) - Complete design system
+├── script.js       # JavaScript (~1115 lines) - Interactive functionality
+├── 404.html        # Custom 404 page (Polish)
+├── robots.txt      # Search engine crawl rules
+├── sitemap.xml     # XML sitemap for SEO
 ├── README.md       # Project documentation for humans
 ├── CLAUDE.md       # This file - AI assistant guidance
 └── assets/
@@ -38,7 +41,7 @@ npx serve
 
 ### index.html
 - Complete page structure with semantic HTML5
-- Sections: nav, hero, projects, about, skills, stack, blog, contact, footer
+- Sections: nav, hero, projects, about, skills, blog, contact, footer
 - SEO meta tags (Open Graph, Twitter Cards)
 - Google Fonts imports (Playfair Display, DM Sans, JetBrains Mono)
 - Theme color: `#004d2b` (British Racing Green)
@@ -165,7 +168,6 @@ Before committing changes, verify:
 | Projects | `#projekty` | Portfolio showcase |
 | About | `#o-mnie` | Personal background |
 | Skills | `#kompetencje` | Core competencies |
-| Tech Stack | `#stack` | Tools and technologies |
 | Blog | `#blog` | Publication previews |
 | Contact | `#kontakt` | Email, newsletter |
 | Footer | `footer` | Windows 95 clock |
@@ -183,6 +185,6 @@ Preserve these features when making changes.
 
 - No build process overhead
 - Minimal external dependencies (only Google Fonts)
-- Images should be optimized before adding (current total ~23MB)
+- Images should be optimized before adding (current total ~12MB)
 - Use `loading="lazy"` on images below the fold
 - IntersectionObserver used for efficient scroll animations

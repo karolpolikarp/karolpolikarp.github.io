@@ -213,17 +213,6 @@
     color: var(--color-accent);
 }
 
-[data-theme="dark"] .tech-badge {
-    background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.08) 100%);
-    color: var(--color-accent);
-    border-color: rgba(201, 169, 98, 0.2);
-}
-
-[data-theme="dark"] .tech-projects a {
-    color: var(--color-accent);
-    background: var(--color-accent-subtle);
-}
-
 [data-theme="dark"] .blog-card-link {
     color: var(--color-accent);
 }
@@ -2390,103 +2379,6 @@ section {
 }
 
 /* ================================================
-   TECH STACK SECTION
-   ================================================ */
-.tech-stack {
-    background:
-        linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg-accent) 100%);
-    position: relative;
-}
-
-.tech-stack::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-primary-light), transparent);
-    opacity: 0.3;
-}
-
-.stack-projects {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-lg);
-}
-
-.stack-tech-item {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-sm);
-}
-
-.stack-tech-item:hover {
-    border-color: var(--color-accent);
-    box-shadow: 0 8px 24px rgba(201, 169, 98, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
-    transform: translateY(-2px);
-}
-
-.tech-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-    padding-bottom: var(--space-sm);
-    border-bottom: 1px solid var(--color-border-light);
-}
-
-.tech-name {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-text);
-}
-
-.tech-badge {
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 2px 8px;
-    background: linear-gradient(135deg, rgba(0, 77, 43, 0.1) 0%, rgba(0, 77, 43, 0.06) 100%);
-    color: var(--color-primary);
-    border-radius: var(--radius-full);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    border: 1px solid rgba(0, 77, 43, 0.1);
-}
-
-.tech-projects {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-}
-
-.tech-projects a {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--color-primary);
-    padding: 4px 10px;
-    background: var(--color-primary-subtle);
-    border-radius: var(--radius-sm);
-    transition: all 0.2s ease;
-}
-
-.tech-projects a:hover {
-    background: var(--color-accent);
-    color: var(--color-primary-dark);
-}
-
-.tech-project-text {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    padding: 4px 10px;
-    background: var(--color-bg-alt);
-    border-radius: var(--radius-sm);
-}
-
-/* ================================================
    PROJECT ENHANCEMENTS
    ================================================ */
 .project-badge {
@@ -2875,10 +2767,6 @@ section {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .stack-projects {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .projects-grid {
         grid-template-columns: 1fr;
     }
@@ -2941,10 +2829,6 @@ section {
 
     .position-desc {
         font-size: 0.8rem;
-    }
-
-    .stack-projects {
-        grid-template-columns: 1fr;
     }
 
     .nav-links {
