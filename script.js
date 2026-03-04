@@ -152,7 +152,7 @@ const ScrollAnimations = {
     init() {
         // Original reveal elements
         const revealElements = document.querySelectorAll(
-            '.skill-card, .project-card, .contact-link, .education-list li, .stack-category, .stack-tech-item'
+            '.skill-card, .project-card, .contact-link, .education-list li'
         );
 
         const revealObserver = new IntersectionObserver((entries) => {
@@ -1014,7 +1014,6 @@ const EmailProtection = {
     init() {
         const emailLink = document.getElementById('emailLink');
         const emailDisplay = document.getElementById('emailDisplay');
-        const newsletterLink = document.getElementById('newsletterLink');
 
         if (emailLink && emailDisplay) {
             emailLink.addEventListener('click', (e) => {
@@ -1029,8 +1028,6 @@ const EmailProtection = {
                 emailLink.dataset.revealed = 'true';
             });
         }
-
-        // Newsletter link removed - blog section simplified
     },
 
     decode() {
