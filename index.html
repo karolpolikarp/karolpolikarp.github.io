@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karol Polikarp Wilczyński | AI, Prawo, Technologia</title>
+    <meta name="description" content="Pracuję na styku AI, ICT, prawa i administracji publicznej. Buduję narzędzia do pracy z polskim prawem i automatyzacje.">
+
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Karol Polikarp Wilczyński">
+    <meta name="keywords" content="AI Act, LegalTech, Python, Claude API, prawo, sztuczna inteligencja, piaskownice regulacyjne, administracja publiczna">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://karolpolikarp.github.io/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://karolpolikarp.github.io/">
+    <meta property="og:title" content="Karol Polikarp Wilczyński | AI, Prawo, Technologia">
+    <meta property="og:description" content="Pracuję na styku AI, ICT, prawa i administracji publicznej. Buduję narzędzia do pracy z polskim prawem i automatyzacje.">
+    <meta property="og:image" content="https://karolpolikarp.github.io/assets/images/karol-photo.jpg">
+    <meta property="og:locale" content="pl_PL">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://karolpolikarp.github.io/">
+    <meta name="twitter:title" content="Karol Polikarp Wilczyński | AI, Prawo, Technologia">
+    <meta name="twitter:description" content="Pracuję na styku AI, ICT, prawa i administracji publicznej. Buduję narzędzia do pracy z polskim prawem i automatyzacje.">
+    <meta name="twitter:image" content="https://karolpolikarp.github.io/assets/images/karol-photo.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23004d2b'/%3E%3Ctext x='50' y='68' font-family='system-ui,-apple-system,sans-serif' font-size='48' font-weight='700' fill='%23c9a962' text-anchor='middle'%3Ekpw%3C/text%3E%3C/svg%3E">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#004d2b">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Karol Polikarp Wilczyński",
+        "url": "https://karolpolikarp.github.io",
+        "image": "https://karolpolikarp.github.io/assets/images/karol-photo.jpg",
+        "jobTitle": "AI Governance & LegalTech Specialist",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Ministerstwo Cyfryzacji"
+        },
+        "knowsAbout": ["AI Act", "LegalTech", "Python", "AI Governance", "Public Policy", "Regulatory Sandboxes"],
+        "sameAs": [
+            "https://www.linkedin.com/in/karolwilczynski/",
+            "https://github.com/karolpolikarp"
+        ]
+    }
+    </script>
+
+    <!-- Fonts - async loading for faster first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#hero" class="skip-link">Przejdź do treści</a>
+
+
+    <nav class="nav" role="navigation" aria-label="Główna nawigacja">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-main">kpw<span class="logo-sparkle"><svg viewBox="0 0 24 24" width="15" height="15"><path d="M12 0C12 10 10 12 0 12C10 12 12 14 12 24C12 14 14 12 24 12C14 12 12 10 12 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span></span>
+                <span class="logo-sub">[ka‿pɛ‿ˈvu]</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#projekty">Projekty</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Przełącz motyw jasny/ciemny">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <button class="nav-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-bg-decoration" id="parallaxContainer">
+                <div class="floating-shape shape-1 parallax" data-speed="0.05"></div>
+                <div class="floating-shape shape-2 parallax" data-speed="0.03"></div>
+                <div class="floating-shape shape-3 parallax" data-speed="0.04"></div>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-intro">
+                        <img src="assets/images/karol-photo.jpg" alt="Karol Polikarp Wilczyński" class="hero-avatar" width="160" height="160">
+                        <div class="hero-greeting">
+                            <span class="greeting-line"></span>
+                            <span class="greeting-text">Cześć, jestem</span>
+                        </div>
+                    </div>
+                    <h1 class="hero-title">Karol Polikarp <span class="hero-surname">Wilczyński</span></h1>
+                    <p class="hero-subtitle">
+                        Pracuję na styku <span class="accent">sztucznej inteligencji</span>, <span class="accent">technologii</span>,
+                        <span class="accent">polityk publicznych</span>, <span class="accent">prawa</span> i <span class="accent">administracji publicznej</span>.
+                    </p>
+
+                    <div class="hero-keywords">
+                        <span class="keyword">AI Act</span>
+                        <span class="keyword">AI Sandboxes</span>
+                        <span class="keyword">LegalTech</span>
+                        <span class="keyword">Public Policy</span>
+                        <span class="keyword">Python</span>
+                        <span class="keyword">Claude API</span>
+                        <span class="keyword">AI Governance</span>
+                        <span class="keyword">Web Scraping</span>
+                        <span class="keyword">RAG</span>
+                        <span class="keyword">Supabase</span>
+                    </div>
+
+                    <div class="hero-cta">
+                        <a href="#projekty" class="btn btn-primary">
+                            <span>Zobacz projekty</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <a href="#kontakt" class="btn btn-secondary">Kontakt</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-education">
+                        <h3>Wykształcenie</h3>
+                        <ul class="education-list">
+                            <li>
+                                <div class="edu-timeline-marker"></div>
+                                <div class="edu-content">
+                                    <span class="edu-date">2024–2025</span>
+                                    <span class="edu-title">Big Data — inżynieria dużych zbiorów danych</span>
+                                    <span class="edu-school">Polsko-Japońska Akademia Technik Komputerowych</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="edu-timeline-marker"></div>
+                                <div class="edu-content">
+                                    <span class="edu-date">2024–2025</span>
+                                    <span class="edu-title">Sztuczna Inteligencja w Biznesie i Sektorze Publicznym</span>
+                                    <span class="edu-school">Szkoła Główna Handlowa w Warszawie</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="edu-timeline-marker"></div>
+                                <div class="edu-content">
+                                    <span class="edu-date">2023–2024</span>
+                                    <span class="edu-title">Programista Python sztucznej inteligencji</span>
+                                    <span class="edu-school">Polsko-Japońska Akademia Technik Komputerowych</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="edu-timeline-marker"></div>
+                                <div class="edu-content">
+                                    <span class="edu-date">2022–2023</span>
+                                    <span class="edu-title">Systemy informatyczne, aplikacje i bazy danych</span>
+                                    <span class="edu-school">Polsko-Japońska Akademia Technik Komputerowych</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="edu-timeline-marker"></div>
+                                <div class="edu-content">
+                                    <span class="edu-date">2013–2018</span>
+                                    <span class="edu-title">Prawo</span>
+                                    <span class="edu-school">Uniwersytet Warszawski</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Projects Section -->
+        <section id="projekty" class="projects">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">Projekty</h2>
+                </header>
+
+                <!-- Main Featured Projects -->
+                <div class="projects-featured-stack">
+                    <!-- 1: JakiePrawo.pl -->
+                    <article class="project-card project-featured">
+                        <div class="project-image project-has-video">
+                            <img src="assets/images/obraz_2026-01-09_205957107.png" alt="Screenshot JakiePrawo.pl" class="project-img" loading="lazy">
+                            <video class="project-video" src="assets/videos/jakieprawo.mp4" muted loop playsinline preload="none"></video>
+                            <div class="project-video-hint">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                <span>Najedź, żeby zobaczyć demo</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">Supabase</span>
+                                <span class="tag tag-burgundy">Claude API</span>
+                                <span class="tag">MCP</span>
+                            </div>
+                            <h3 class="project-title">JakiePrawo.pl <span class="project-badge-alpha">ALPHA</span></h3>
+                            <p class="project-subtitle">Wyszukiwarka podstaw prawnych</p>
+                            <p class="project-desc">
+                                Wpisujesz pytanie, dostajesz konkretny artykuł, nazwę ustawy
+                                i link do pełnego tekstu w ISAP.
+                            </p>
+                            <ul class="project-features">
+                                <li>React, TypeScript, Supabase Edge Functions</li>
+                                <li>Serwer MCP na Raspberry Pi do ekstrakcji treści ustaw</li>
+                                <li>Parsowanie PDF-ów z api.sejm.gov.pl</li>
+                            </ul>
+                            <div class="project-links">
+                                <a href="https://jakieprawo.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
+                                    <span>Zobacz na żywo</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 2: AutoMargiela -->
+                    <article class="project-card project-featured">
+                        <div class="project-image">
+                            <img src="assets/images/margiela.png" alt="Screenshot AutoMargiela" class="project-img" loading="lazy">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Selenium</span>
+                                <span class="tag tag-burgundy">Automation</span>
+                            </div>
+                            <h3 class="project-title">AutoMargiela</h3>
+                            <p class="project-subtitle">Monitor cen Maison Margiela</p>
+                            <p class="project-desc">
+                                Śledzi ceny produktów Maison Margiela na różnych stronach.
+                                Jak cena spadnie, dostajesz powiadomienie.
+                            </p>
+                            <ul class="project-features">
+                                <li>Scraping Selenium z obejściem captcha</li>
+                                <li>Alerty cenowe na maila</li>
+                                <li>Śledzenie wielu produktów naraz</li>
+                            </ul>
+                            <div class="project-links">
+                                <a href="https://replica.jakieprawo.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
+                                    <span>Zobacz na żywo</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 3: Majeranek -->
+                    <article class="project-card project-featured">
+                        <div class="project-image project-has-video">
+                            <img src="assets/images/majeranek.png" alt="Screenshot Majeranek" class="project-img" loading="lazy">
+                            <video class="project-video" src="assets/videos/majeranek.mp4" muted loop playsinline preload="none"></video>
+                            <div class="project-video-hint">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                <span>Najedź, żeby zobaczyć demo</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">React</span>
+                                <span class="tag tag-burgundy">AI</span>
+                                <span class="tag">Supabase</span>
+                            </div>
+                            <h3 class="project-title">Majeranek</h3>
+                            <p class="project-subtitle">Rankingi i rekomendacje AI</p>
+                            <p class="project-desc">
+                                Robisz tier listy z filmów, książek, gier. AI patrzy na Twoje rankingi
+                                i podpowiada co jeszcze może Ci się spodobać.
+                            </p>
+                            <ul class="project-features">
+                                <li>Rekomendacje na podstawie Twoich rankingów</li>
+                                <li>Cross-list: film na podstawie gustu muzycznego</li>
+                                <li>Drag & drop do układania tier list</li>
+                            </ul>
+                            <div class="project-links">
+                                <span class="project-link project-link-coming">
+                                    <span>Wkrótce</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 4: AIgets.me -->
+                    <article class="project-card project-featured">
+                        <div class="project-image project-has-video">
+                            <img src="assets/images/whoisi.png" alt="Screenshot AIgets.me" class="project-img" loading="lazy">
+                            <video class="project-video" src="assets/videos/whoisi.mp4" muted loop playsinline preload="none"></video>
+                            <div class="project-video-hint">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                <span>Najedź, żeby zobaczyć demo</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag tag-burgundy">AI</span>
+                                <span class="tag">Personalization</span>
+                                <span class="tag tag-burgundy">LLM</span>
+                                <span class="tag">UX</span>
+                            </div>
+                            <h3 class="project-title">AIgets.me</h3>
+                            <p class="project-subtitle">Personalizacja asystentów AI</p>
+                            <p class="project-desc">
+                                Konfigurujesz jak AI ma się do Ciebie odzywać, co wie o Tobie
+                                i jak pracuje. Zapisujesz to jako profil i używasz z różnymi modelami.
+                            </p>
+                            <ul class="project-features">
+                                <li>Profile z tonem, kontekstem i preferencjami</li>
+                                <li>Działa z Claude, GPT i innymi modelami</li>
+                                <li>Eksport profilu jako system prompt</li>
+                            </ul>
+                            <div class="project-links">
+                                <span class="project-link project-link-coming">
+                                    <span>Wkrótce</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Other Projects - compact -->
+                <div class="projects-duo">
+                    <article class="project-duo-card">
+                        <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener">
+                            <div class="project-duo-image">
+                                <img src="assets/images/espi.png" alt="Prognozy ESPI" loading="lazy">
+                            </div>
+                            <div class="project-duo-content">
+                                <div class="project-tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag tag-burgundy">GPT-4o</span>
+                                    <span class="tag">Pandas</span>
+                                </div>
+                                <h3>Prognozy giełdowe z ESPI</h3>
+                                <p>Prognozowanie kursów akcji na podstawie komunikatów giełdowych. Ponad 1200 raportów ESPI.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="project-duo-card">
+                        <a href="https://github.com/karolpolikarp/videogame" target="_blank" rel="noopener">
+                            <div class="project-duo-image">
+                                <img src="assets/images/notebooks.png" alt="Notebooki" loading="lazy">
+                            </div>
+                            <div class="project-duo-content">
+                                <div class="project-tags">
+                                    <span class="tag">Jupyter</span>
+                                    <span class="tag">Pandas</span>
+                                    <span class="tag">R</span>
+                                </div>
+                                <h3>Notebooki data science</h3>
+                                <p>Projekty ze studiów: analiza rynku gier (K-means), analiza Airbnb (feature engineering).</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+
+                <div class="projects-footer">
+                    <a href="https://github.com/karolpolikarp?tab=repositories" target="_blank" rel="noopener" class="btn btn-secondary">
+                        <span>Wszystkie repozytoria</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="o-mnie" class="about" style="display: none;">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">O mnie</h2>
+                </header>
+
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="lead">
+                            Prawnik, Uniwersytet Warszawski. Pracuję w Ministerstwie Cyfryzacji
+                            przy wdrożeniu regulacji AI w Polsce.
+                        </p>
+                        <p>
+                            Na co dzień zajmuję się piaskownicami regulacyjnymi AI
+                            wynikającymi z unijnego AI Act. Po godzinach piszę kod
+                            i buduję narzędzia do pracy z polskim prawem.
+                        </p>
+                    </div>
+                    <div class="about-education">
+                        <h3>Wykształcenie</h3>
+                        <ul class="education-list">
+                            <li>
+                                <span class="edu-date">2024-2025</span>
+                                <span class="edu-title">Big Data - inżynieria dużych zbiorów danych</span>
+                                <span class="edu-school">Polsko-Japońska Akademia Technik Komputerowych w Warszawie</span>
+                            </li>
+                            <li>
+                                <span class="edu-date">2024-2025</span>
+                                <span class="edu-title">Sztuczna Inteligencja w Biznesie i Sektorze Publicznym</span>
+                                <span class="edu-school">Szkoła Główna Handlowa w Warszawie</span>
+                            </li>
+                            <li>
+                                <span class="edu-date">2023-2024</span>
+                                <span class="edu-title">Programista Python sztucznej inteligencji</span>
+                                <span class="edu-school">Polsko-Japońska Akademia Technik Komputerowych w Warszawie</span>
+                            </li>
+                            <li>
+                                <span class="edu-date">2022-2023</span>
+                                <span class="edu-title">Systemy informatyczne, aplikacje i bazy danych</span>
+                                <span class="edu-school">Polsko-Japońska Akademia Technik Komputerowych w Warszawie</span>
+                            </li>
+                            <li>
+                                <span class="edu-date">2013-2018</span>
+                                <span class="edu-title">Prawo</span>
+                                <span class="edu-school">Uniwersytet Warszawski</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="kompetencje" class="skills" style="display: none;">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">Kompetencje</h2>
+                </header>
+
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3>Regulacje technologiczne</h3>
+                        <p>
+                            Wdrożenie AI Act, piaskownice regulacyjne.
+                            Praca z organami nadzorczymi i partnerami z UE.
+                        </p>
+                        <div class="skill-tags">
+                            <span>AI Act</span>
+                            <span>Piaskownice</span>
+                            <span>UODO</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3>Projekty publiczne</h3>
+                        <p>
+                            Koordynacja projektów IT w sektorze publicznym.
+                            Fundusze europejskie, zamówienia publiczne, współpraca międzyresortowa.
+                        </p>
+                        <div class="skill-tags">
+                            <span>Fundusze UE</span>
+                            <span>Projekty IT</span>
+                            <span>ZamPubl</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                <path d="M8 21h8"/>
+                                <path d="M12 17v4"/>
+                                <path d="M7 8l3 3-3 3"/>
+                                <path d="M13 14h4"/>
+                            </svg>
+                        </div>
+                        <h3>Programowanie</h3>
+                        <p>
+                            TypeScript, React, Python. Supabase, Edge Functions, integracja z Claude API.
+                            Raspberry Pi, Tailscale, własna infrastruktura.
+                        </p>
+                        <div class="skill-tags">
+                            <span>Python</span>
+                            <span>TypeScript</span>
+                            <span>Claude API</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 3v18h18"/>
+                                <path d="M18 17V9"/>
+                                <path d="M13 17V5"/>
+                                <path d="M8 17v-3"/>
+                            </svg>
+                        </div>
+                        <h3>Analiza danych</h3>
+                        <p>
+                            Python, pandas, scikit-learn. Jupyter notebooks.
+                            Segmentacja, analiza sentymentu, praca z danymi.
+                        </p>
+                        <div class="skill-tags">
+                            <span>Pandas</span>
+                            <span>Scikit-learn</span>
+                            <span>Jupyter</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <path d="M14 2v6h6"/>
+                                <path d="M16 13H8"/>
+                                <path d="M16 17H8"/>
+                                <path d="M10 9H8"/>
+                            </svg>
+                        </div>
+                        <h3>Prawo</h3>
+                        <p>
+                            Prawo cywilne, zamówienia publiczne, RODO.
+                            Umowy IT, porozumienia międzyresortowe, analiza zgodności.
+                        </p>
+                        <div class="skill-tags">
+                            <span>Umowy IT</span>
+                            <span>RODO</span>
+                            <span>ZamPubl</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M2 12h20"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <h3>Współpraca międzynarodowa</h3>
+                        <p>
+                            Projekty z partnerami z UE — głównie kraje bałtyckie i Skandynawia.
+                            Grupy robocze, wymiana doświadczeń.
+                        </p>
+                        <div class="skill-tags">
+                            <span>UE</span>
+                            <span>Dania</span>
+                            <span>Kraje bałtyckie</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="blog" style="display: none;">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">Publikacje</h2>
+                </header>
+
+                <div class="blog-upcoming">
+                    <div class="blog-upcoming-list">
+                        <article class="blog-upcoming-item fade-in-up stagger-1">
+                            <img src="assets/images/sandbox.png" alt="AI Act piaskownice" class="blog-upcoming-img" loading="lazy">
+                            <div class="blog-upcoming-content">
+                                <span class="blog-upcoming-category">AI Act</span>
+                                <h3>Czym są piaskownice regulacyjne AI</h3>
+                                <p>Jak mechanizm z AI Act będzie działać w Polsce i kto będzie mógł z niego skorzystać.</p>
+                            </div>
+                        </article>
+                        <article class="blog-upcoming-item fade-in-up stagger-2">
+                            <img src="assets/images/raspberry.png" alt="Budowanie z Claude API" class="blog-upcoming-img" loading="lazy">
+                            <div class="blog-upcoming-content">
+                                <span class="blog-upcoming-category">LegalTech</span>
+                                <h3>Budowanie wyszukiwarki prawa z Claude API</h3>
+                                <p>Od problemu do MVP. Supabase, Raspberry Pi i Claude API w praktyce.</p>
+                            </div>
+                        </article>
+                        <article class="blog-upcoming-item fade-in-up stagger-3">
+                            <img src="assets/images/lawyer.png" alt="Prawnik i kod" class="blog-upcoming-img" loading="lazy">
+                            <div class="blog-upcoming-content">
+                                <span class="blog-upcoming-category">Kariera</span>
+                                <h3>Prawnik, który pisze kod - dlaczego warto?</h3>
+                                <p>Od paragrafów do Pythona. Dlaczego coraz więcej prawników sięga po programowanie - i co z tego wynika.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Contact Section -->
+        <section id="kontakt" class="contact">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">Kontakt</h2>
+                </header>
+
+                <div class="contact-tiles">
+                    <a href="#" class="contact-tile contact-tile-primary" id="emailLink" onclick="return false;">
+                        <div class="contact-tile-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <span class="contact-tile-label">Email</span>
+                        <span class="contact-tile-value" id="emailDisplay">[kliknij]</span>
+                    </a>
+
+                    <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="contact-tile">
+                        <div class="contact-tile-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                        </div>
+                        <span class="contact-tile-label">GitHub</span>
+                        <span class="contact-tile-value">@karolpolikarp</span>
+                    </a>
+
+                    <a href="https://linkedin.com/in/karolpwilczynski" target="_blank" rel="noopener" class="contact-tile">
+                        <div class="contact-tile-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </div>
+                        <span class="contact-tile-label">LinkedIn</span>
+                        <span class="contact-tile-value">Karol P. Wilczyński</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-start">
+                    <button class="start-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        <span class="start-icon">🖥️</span>
+                        <span>Start</span>
+                    </button>
+                </div>
+                <div class="footer-center">
+                    <p class="footer-tech">
+                        <span class="footer-stack">Prawo</span>
+                        <span class="footer-divider">+</span>
+                        <span class="footer-stack">AI</span>
+                        <span class="footer-divider">+</span>
+                        <span class="footer-stack">Kod</span>
+                    </p>
+                </div>
+                <div class="footer-clock">
+                    <span id="clock">00:00</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
