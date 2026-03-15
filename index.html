@@ -123,19 +123,6 @@
                         <span class="accent">polityk publicznych</span>, <span class="accent">prawa</span> i <span class="accent">administracji publicznej</span>.
                     </p>
 
-                    <div class="hero-keywords">
-                        <span class="keyword">AI Act</span>
-                        <span class="keyword">AI Sandboxes</span>
-                        <span class="keyword">LegalTech</span>
-                        <span class="keyword">Public Policy</span>
-                        <span class="keyword">Python</span>
-                        <span class="keyword">Claude API</span>
-                        <span class="keyword">AI Governance</span>
-                        <span class="keyword">Web Scraping</span>
-                        <span class="keyword">RAG</span>
-                        <span class="keyword">Supabase</span>
-                    </div>
-
                     <div class="hero-cta">
                         <a href="#projekty" class="btn btn-primary">
                             <span>Zobacz projekty</span>
@@ -151,6 +138,7 @@
                         <div class="hero-tabs" role="tablist">
                             <button class="hero-tab active" data-tab="employment" role="tab" aria-selected="true" aria-controls="panel-employment">Doświadczenie</button>
                             <button class="hero-tab" data-tab="education" role="tab" aria-selected="false" aria-controls="panel-education">Wykształcenie</button>
+                            <button class="hero-tab" data-tab="skills" role="tab" aria-selected="false" aria-controls="panel-skills">Kompetencje</button>
                         </div>
                         <div class="hero-tab-panels">
                             <div class="hero-tab-panel active" id="panel-employment" role="tabpanel">
@@ -241,6 +229,56 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="hero-tab-panel" id="panel-skills" role="tabpanel">
+                                <div class="skills-bento">
+                                    <div class="skills-bento-card skills-bento-wide" data-accent="primary">
+                                        <span class="skills-bento-label">AI & Data Science</span>
+                                        <div class="skills-bento-chips">
+                                            <span>AI Governance</span>
+                                            <span>RAG</span>
+                                            <span>Agentic AI</span>
+                                            <span>LLM</span>
+                                            <span>NLP</span>
+                                            <span>Deep Learning</span>
+                                            <span>Python</span>
+                                            <span>pandas</span>
+                                            <span>scikit-learn</span>
+                                        </div>
+                                    </div>
+                                    <div class="skills-bento-card" data-accent="accent">
+                                        <span class="skills-bento-label">Development</span>
+                                        <div class="skills-bento-chips">
+                                            <span>React</span>
+                                            <span>TypeScript</span>
+                                            <span>Supabase</span>
+                                            <span>Claude API</span>
+                                            <span>MCP</span>
+                                            <span>Java</span>
+                                            <span>SQL</span>
+                                        </div>
+                                    </div>
+                                    <div class="skills-bento-card" data-accent="burgundy">
+                                        <span class="skills-bento-label">Prawo</span>
+                                        <div class="skills-bento-chips">
+                                            <span>AI Sandboxes</span>
+                                            <span>Zamówienia pub.</span>
+                                            <span>RODO</span>
+                                            <span>Prawo cywilne</span>
+                                            <span>ITIL 4</span>
+                                        </div>
+                                    </div>
+                                    <div class="skills-bento-card skills-bento-wide" data-accent="accent">
+                                        <span class="skills-bento-label">Certyfikaty</span>
+                                        <div class="skills-bento-chips skills-bento-certs">
+                                            <span>NVIDIA — Deep Learning</span>
+                                            <span>AI_devs 3 Agents</span>
+                                            <span>AI Devs 2 — GPT-4</span>
+                                            <span>Java Developer Plus</span>
+                                            <span>ITIL® 4 Foundation</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -276,15 +314,16 @@
                                 <span class="tag">MCP</span>
                             </div>
                             <h3 class="project-title">JakiePrawo.pl <span class="project-badge-alpha">ALPHA</span></h3>
-                            <p class="project-subtitle">Wyszukiwarka podstaw prawnych</p>
+                            <p class="project-subtitle">Wyszukiwarka polskiego prawa z AI</p>
                             <p class="project-desc">
-                                Wpisujesz pytanie, dostajesz konkretny artykuł, nazwę ustawy
-                                i link do pełnego tekstu w ISAP.
+                                Wyszukiwarka, która na podstawie pytania w języku naturalnym
+                                zwraca konkretny artykuł ustawy, jej nazwę i bezpośredni link
+                                do pełnego tekstu w ISAP.
                             </p>
                             <ul class="project-features">
-                                <li>React, TypeScript, Supabase Edge Functions</li>
-                                <li>Serwer MCP na Raspberry Pi do ekstrakcji treści ustaw</li>
-                                <li>Parsowanie PDF-ów z api.sejm.gov.pl</li>
+                                <li>Baza ustaw budowana z API Sejmu RP (parsowanie PDF-ów)</li>
+                                <li>Serwer MCP na Raspberry Pi — ekstrakcja i indeksowanie treści</li>
+                                <li>Cytowanie źródła z bezpośrednim odesłaniem do ISAP</li>
                             </ul>
                             <div class="project-links">
                                 <a href="https://jakieprawo.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
@@ -309,15 +348,16 @@
                                 <span class="tag tag-burgundy">Automation</span>
                             </div>
                             <h3 class="project-title">AutoMargiela</h3>
-                            <p class="project-subtitle">Monitor cen Maison Margiela</p>
+                            <p class="project-subtitle">System monitoringu cen produktów luksusowych</p>
                             <p class="project-desc">
-                                Śledzi ceny produktów Maison Margiela na różnych stronach.
-                                Jak cena spadnie, dostajesz powiadomienie.
+                                Narzędzie do śledzenia cen produktów Maison Margiela w wielu sklepach
+                                internetowych. Automatyczne powiadomienia po spadku ceny poniżej
+                                ustalonego progu.
                             </p>
                             <ul class="project-features">
-                                <li>Scraping Selenium z obejściem captcha</li>
-                                <li>Alerty cenowe na maila</li>
-                                <li>Śledzenie wielu produktów naraz</li>
+                                <li>Scraping cen z wielu źródeł jednocześnie</li>
+                                <li>Powiadomienia e-mail z historią zmian cen</li>
+                                <li>Panel do zarządzania obserwowanymi produktami</li>
                             </ul>
                             <div class="project-links">
                                 <a href="https://replica.jakieprawo.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
@@ -348,15 +388,16 @@
                                 <span class="tag">Supabase</span>
                             </div>
                             <h3 class="project-title">Majeranek</h3>
-                            <p class="project-subtitle">Rankingi i rekomendacje AI</p>
+                            <p class="project-subtitle">Inteligentne rekomendacje na podstawie tier list</p>
                             <p class="project-desc">
-                                Robisz tier listy z filmów, książek, gier. AI patrzy na Twoje rankingi
-                                i podpowiada co jeszcze może Ci się spodobać.
+                                Aplikacja do tworzenia tier list z filmów, gier, książek i muzyki.
+                                Model językowy analizuje wzorce w ocenach użytkownika
+                                i proponuje nowe tytuły do odkrycia.
                             </p>
                             <ul class="project-features">
-                                <li>Rekomendacje na podstawie Twoich rankingów</li>
-                                <li>Cross-list: film na podstawie gustu muzycznego</li>
-                                <li>Drag & drop do układania tier list</li>
+                                <li>Rekomendacje cross-mediowe (np. film na podstawie gustu muzycznego)</li>
+                                <li>Intuicyjny interfejs drag & drop</li>
+                                <li>Analiza preferencji użytkownika przez LLM</li>
                             </ul>
                             <div class="project-links">
                                 <span class="project-link project-link-coming">
@@ -387,15 +428,16 @@
                                 <span class="tag">UX</span>
                             </div>
                             <h3 class="project-title">AIgets.me</h3>
-                            <p class="project-subtitle">Personalizacja asystentów AI</p>
+                            <p class="project-subtitle">Jeden profil osobowości dla wielu modeli AI</p>
                             <p class="project-desc">
-                                Konfigurujesz jak AI ma się do Ciebie odzywać, co wie o Tobie
-                                i jak pracuje. Zapisujesz to jako profil i używasz z różnymi modelami.
+                                Narzędzie do budowania profilu komunikacji z asystentami AI — ton,
+                                kontekst, styl pracy. Profil eksportowany jako system prompt,
+                                kompatybilny z dowolnym modelem.
                             </p>
                             <ul class="project-features">
-                                <li>Profile z tonem, kontekstem i preferencjami</li>
-                                <li>Działa z Claude, GPT i innymi modelami</li>
-                                <li>Eksport profilu jako system prompt</li>
+                                <li>Konfiguracja tonu, kontekstu i stylu komunikacji</li>
+                                <li>Kompatybilność z Claude, GPT i innymi modelami LLM</li>
+                                <li>Eksport jako gotowy system prompt do dowolnego narzędzia</li>
                             </ul>
                             <div class="project-links">
                                 <span class="project-link project-link-coming">
@@ -412,7 +454,7 @@
                 <!-- Other Projects - compact -->
                 <div class="projects-duo">
                     <article class="project-duo-card">
-                        <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener">
+                        <a href="https://github.com/karolpolikarp/SGH-Prognozy-gieldowe-z-ESPI" target="_blank" rel="noopener">
                             <div class="project-duo-image">
                                 <img src="assets/images/espi.png" alt="Prognozy ESPI" loading="lazy">
                             </div>
@@ -423,7 +465,7 @@
                                     <span class="tag">Pandas</span>
                                 </div>
                                 <h3>Prognozy giełdowe z ESPI</h3>
-                                <p>Prognozowanie kursów akcji na podstawie komunikatów giełdowych. Ponad 1200 raportów ESPI.</p>
+                                <p>Czy LLM potrafi przewidzieć reakcję rynku na raport giełdowy? Analiza ~1500 komunikatów ESPI polskich spółek z prognozami na 5 horyzontów czasowych.</p>
                             </div>
                         </a>
                     </article>
@@ -439,7 +481,7 @@
                                     <span class="tag">R</span>
                                 </div>
                                 <h3>Notebooki data science</h3>
-                                <p>Projekty ze studiów: analiza rynku gier (K-means), analiza Airbnb (feature engineering).</p>
+                                <p>Projekty analityczne: segmentacja rynku gier (K-means), modelowanie cen Airbnb (feature engineering).</p>
                             </div>
                         </a>
                     </article>
@@ -756,7 +798,7 @@
                             </svg>
                         </div>
                         <span class="contact-tile-label">LinkedIn</span>
-                        <span class="contact-tile-value">Karol P. Wilczyński</span>
+                        <span class="contact-tile-value">Karol Wilczyński</span>
                     </a>
                 </div>
             </div>
@@ -773,13 +815,7 @@
                     </button>
                 </div>
                 <div class="footer-center">
-                    <p class="footer-tech">
-                        <span class="footer-stack">Prawo</span>
-                        <span class="footer-divider">+</span>
-                        <span class="footer-stack">AI</span>
-                        <span class="footer-divider">+</span>
-                        <span class="footer-stack">Kod</span>
-                    </p>
+                    <p class="footer-tech">© 2025-2026 Karol Wilczyński</p>
                 </div>
                 <div class="footer-clock">
                     <span id="clock">00:00</span>
