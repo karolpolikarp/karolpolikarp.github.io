@@ -56,42 +56,6 @@ This is a modern, responsive portfolio website built with vanilla HTML, CSS, and
 7. **Publications**: Upcoming blog posts on AI Act and LegalTech
 8. **Contact**: Professional contact information and availability
 
-## Local Development
-
-To run this website locally:
-
-1. Clone the repository:
-```bash
-git clone https://github.com/karolpolikarp/karolpolikarp.github.io.git
-cd karolpolikarp.github.io
-```
-
-2. Open `index.html` in your browser:
-```bash
-# Using Python
-python -m http.server 8000
-
-# Or using Node.js
-npx serve
-
-# Or simply open the file
-open index.html  # macOS
-start index.html # Windows
-```
-
-3. Visit `http://localhost:8000` in your browser
-
-## Deployment
-
-This site is deployed automatically via GitHub Pages:
-
-- **Branch**: Main branch
-- **Directory**: Root (`/`)
-- **Custom Domain**: Not configured
-- **URL**: https://karolpolikarp.github.io
-
-Any push to the main branch will automatically trigger a deployment.
-
 ## Projects Highlighted
 
 ### JakiePrawo.pl
@@ -123,7 +87,3 @@ Automated price monitoring bot for Maison Margiela products.
 ## License
 
 © 2025 Karol Polikarp Wilczyński. All rights reserved.
-
----
-
-Built with ❤️ for the intersection of law, AI, and technology.
