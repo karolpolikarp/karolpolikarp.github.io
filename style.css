@@ -393,6 +393,7 @@ body {
     font-size: 16px;
     line-height: 1.6;
     color: var(--color-text);
+    overflow-x: hidden;
     background:
         radial-gradient(circle, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
         var(--color-bg);
@@ -969,6 +970,12 @@ section {
     align-items: stretch;
     position: relative;
     z-index: 1;
+    overflow: hidden;
+}
+
+.hero-content,
+.hero-visual {
+    min-width: 0;
 }
 
 .hero-greeting {
@@ -3179,6 +3186,22 @@ section {
 
     .hero-visual {
         display: block;
+    }
+
+    .hero-tab {
+        padding: var(--space-sm) var(--space-sm);
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .hero-tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .hero-subtitle {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
 
     /* Mobile console adjustments if shown */
