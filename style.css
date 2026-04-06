@@ -970,12 +970,21 @@ section {
     align-items: stretch;
     position: relative;
     z-index: 1;
+    min-width: 0;
+    max-width: 100%;
     overflow: hidden;
 }
 
-.hero-content,
+.hero-content {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
 .hero-visual {
     min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .hero-greeting {
@@ -1043,6 +1052,8 @@ section {
     color: var(--color-text-secondary);
     line-height: 1.6;
     margin-bottom: var(--space-md);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .hero-subtitle .accent {
