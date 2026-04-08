@@ -970,9 +970,6 @@ section {
     align-items: stretch;
     position: relative;
     z-index: 1;
-    min-width: 0;
-    max-width: 100%;
-    overflow: hidden;
 }
 
 .hero-content {
