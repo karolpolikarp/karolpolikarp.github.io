@@ -578,7 +578,7 @@ const LegalConsole = {
                 'Alerty cenowe na maila',
                 '\u015aledzenie wielu produkt\u00f3w naraz'
             ],
-            link: 'replica.jakieprawo.pl'
+            link: 'replica.karolwilczynski.com'
         },
         'majeranek': {
             name: 'Majeranek',

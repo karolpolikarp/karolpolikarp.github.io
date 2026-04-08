@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://karolpolikarp.github.io/sitemap.xml
+Sitemap: https://karolwilczynski.com/sitemap.xml

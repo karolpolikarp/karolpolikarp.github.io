@@ -1,8 +1,8 @@
-# karolpolikarp.github.io
+# karolwilczynski.com
 
 Personal portfolio website of Karol Polikarp Wilczyński - showcasing work at the intersection of AI, law, technology, and public administration.
 
-🌐 **Live Site**: [karolpolikarp.github.io](https://karolpolikarp.github.io)
+🌐 **Live Site**: [karolwilczynski.com](https://karolwilczynski.com)
 
 ## About
 

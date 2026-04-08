@@ -4,7 +4,7 @@ This file provides guidance for AI assistants working on this repository.
 
 ## Project Overview
 
-**karolpolikarp.github.io** is a personal portfolio website for Karol Polikarp Wilczynski, showcasing work at the intersection of AI governance, legal technology, and public administration in Poland.
+**karolwilczynski.com** is a personal portfolio website for Karol Polikarp Wilczynski, showcasing work at the intersection of AI governance, legal technology, and public administration in Poland.
 
 - **Type**: Static portfolio website
 - **Stack**: Vanilla HTML5, CSS3, JavaScript (ES6+)
@@ -149,7 +149,7 @@ Before committing changes, verify:
 ## Deployment
 
 - **Automatic**: Push to `master` branch triggers GitHub Pages deployment
-- **URL**: https://karolpolikarp.github.io
+- **URL**: https://karolwilczynski.com
 - **No build step**: Files are served directly
 
 ## Git Workflow
