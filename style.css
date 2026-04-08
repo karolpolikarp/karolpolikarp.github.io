@@ -469,7 +469,7 @@ section {
 .nav-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: var(--space-sm);
     max-width: var(--container-max);
     margin: 0 auto;
     padding: var(--space-md) var(--space-2xl);
@@ -548,6 +548,8 @@ section {
 .nav-links {
     display: flex;
     gap: var(--space-xl);
+    margin-right: auto;
+    margin-left: var(--space-xl);
 }
 
 .nav-links a {
@@ -3269,10 +3271,15 @@ section {
         gap: var(--space-md);
         border-bottom: 1px solid var(--color-border);
         box-shadow: var(--shadow-md);
+        margin: 0;
     }
 
     .nav-links.active {
         display: flex;
+    }
+
+    .theme-toggle {
+        margin-left: auto;
     }
 
     .nav-toggle {
@@ -3587,6 +3594,66 @@ section {
 
 [data-theme="dark"] .theme-toggle {
     background: var(--color-surface);
+}
+
+/* ================================================
+   LANGUAGE TOGGLE BUTTON
+   ================================================ */
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lang-toggle:hover {
+    border-color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+.lang-label {
+    padding: 4px 8px;
+    border-radius: calc(var(--radius-md) - 2px);
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    color: var(--color-text-secondary);
+    line-height: 1;
+}
+
+.lang-label.lang-pl {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.lang-label.lang-en {
+    background: transparent;
+    color: var(--color-text-secondary);
+}
+
+.lang-toggle.lang-en .lang-label.lang-pl {
+    background: transparent;
+    color: var(--color-text-secondary);
+}
+
+.lang-toggle.lang-en .lang-label.lang-en {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+[data-theme="dark"] .lang-toggle {
+    background: var(--color-surface);
+}
+
+[data-theme="dark"] .lang-toggle:hover {
+    border-color: var(--color-primary);
 }
 
 /* ================================================

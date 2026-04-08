@@ -43,6 +43,187 @@ const ThemeManager = {
 ThemeManager.init();
 
 // ================================================
+// LANGUAGE TOGGLE (PL/EN)
+// ================================================
+const LanguageManager = {
+    toggle: document.getElementById('langToggle'),
+    currentLang: 'pl',
+    originals: new Map(),
+
+    translations: [
+        // [selector, englishText, isHTML]
+        // Nav
+        ['.skip-link', 'Skip to content'],
+        ['.nav-links a[href="#projekty"]', 'Projects'],
+        ['.nav-links a[href="#kontakt"]', 'Contact'],
+
+        // Hero
+        ['.greeting-text', "Hi, I'm"],
+        ['.hero-subtitle', 'I work at the intersection of <span class="accent">artificial intelligence</span>, <span class="accent">technology</span>, <span class="accent">public policy</span>, <span class="accent">law</span> and <span class="accent">public administration</span>.', true],
+        ['.hero-cta .btn-primary span', 'See projects'],
+        ['.hero-cta .btn-secondary', 'Contact'],
+
+        // Hero tabs
+        ['.hero-tab[data-tab="employment"]', 'Experience'],
+        ['.hero-tab[data-tab="education"]', 'Education'],
+        ['.hero-tab[data-tab="skills"]', 'Skills'],
+
+        // Employment
+        ['#panel-employment li:nth-child(1) .emp-date', '2025\u2013present'],
+        ['#panel-employment li:nth-child(1) .emp-title', 'Senior Specialist, Innovative Public Policies Division'],
+        ['#panel-employment li:nth-child(1) .emp-company', 'Ministry of Digital Affairs'],
+        ['#panel-employment li:nth-child(2) .emp-title', 'Head of CEEB Department'],
+        ['#panel-employment li:nth-child(2) .emp-company', 'General Office of Building Supervision'],
+        ['#panel-employment li:nth-child(3) .emp-title', 'Deputy Head of Service Development Team'],
+        ['#panel-employment li:nth-child(3) .emp-company', 'Educational Research Institute'],
+        ['#panel-employment li:nth-child(4) .emp-title', 'Senior Legal Specialist'],
+        ['#panel-employment li:nth-child(4) .emp-company', 'Educational Research Institute'],
+        ['#panel-employment li:nth-child(5) .emp-title', 'Senior Specialist, Portal RP Project'],
+        ['#panel-employment li:nth-child(5) .emp-company', 'Ministry of Digital Affairs'],
+
+        // Education
+        ['#panel-education li:nth-child(1) .edu-title', 'Big Data \u2014 Large-Scale Data Engineering'],
+        ['#panel-education li:nth-child(1) .edu-school', 'Polish-Japanese Academy of Information Technology'],
+        ['#panel-education li:nth-child(2) .edu-title', 'Artificial Intelligence in Business and Public Sector'],
+        ['#panel-education li:nth-child(2) .edu-school', 'SGH Warsaw School of Economics'],
+        ['#panel-education li:nth-child(3) .edu-title', 'Python AI Developer'],
+        ['#panel-education li:nth-child(3) .edu-school', 'Polish-Japanese Academy of Information Technology'],
+        ['#panel-education li:nth-child(4) .edu-title', 'IT Systems, Applications and Databases'],
+        ['#panel-education li:nth-child(4) .edu-school', 'Polish-Japanese Academy of Information Technology'],
+        ['#panel-education li:nth-child(5) .edu-title', 'Law'],
+        ['#panel-education li:nth-child(5) .edu-school', 'University of Warsaw'],
+
+        // Skills bento
+        ['.skills-bento-card[data-accent="burgundy"] .skills-bento-label', 'Law'],
+        ['.skills-bento-card:nth-child(4) .skills-bento-label', 'Certificates'],
+        ['.skills-bento-card[data-accent="burgundy"] .skills-bento-chips span:nth-child(2)', 'Public Proc.'],
+        ['.skills-bento-card[data-accent="burgundy"] .skills-bento-chips span:nth-child(4)', 'Civil Law'],
+
+        // Projects section
+        ['#projekty .section-title', 'Projects'],
+        ['.project-video-hint span', 'Hover to see demo'],
+
+        // Project 1 - JakiePrawo
+        ['.projects-featured-stack .project-featured:nth-child(1) .project-subtitle', 'AI-Powered Polish Law Search Engine'],
+        ['.projects-featured-stack .project-featured:nth-child(1) .project-desc', 'A search engine that takes a natural language question and returns the specific legal article, statute name, and a direct link to the full text in ISAP.'],
+        ['.projects-featured-stack .project-featured:nth-child(1) .project-features li:nth-child(1)', 'Statute database built from the Polish Parliament API (PDF parsing)'],
+        ['.projects-featured-stack .project-featured:nth-child(1) .project-features li:nth-child(2)', 'MCP server on Raspberry Pi \u2014 content extraction and indexing'],
+        ['.projects-featured-stack .project-featured:nth-child(1) .project-features li:nth-child(3)', 'Source citation with direct link to ISAP'],
+
+        // Project 2 - AutoMargiela
+        ['.projects-featured-stack .project-featured:nth-child(2) .project-subtitle', 'Product Price Monitoring System'],
+        ['.projects-featured-stack .project-featured:nth-child(2) .project-desc', 'Tool for tracking Maison Margiela product prices across multiple online stores. Automatic notifications when prices drop below a set threshold.'],
+        ['.projects-featured-stack .project-featured:nth-child(2) .project-features li:nth-child(1)', 'Price scraping from multiple sources simultaneously'],
+        ['.projects-featured-stack .project-featured:nth-child(2) .project-features li:nth-child(2)', 'Email notifications with price change history'],
+        ['.projects-featured-stack .project-featured:nth-child(2) .project-features li:nth-child(3)', 'Dashboard for managing watched products'],
+
+        // Project 3 - Majeranek
+        ['.projects-featured-stack .project-featured:nth-child(3) .project-subtitle', 'Smart Recommendations Based on Tier Lists'],
+        ['.projects-featured-stack .project-featured:nth-child(3) .project-desc', 'App for creating tier lists from movies, games, books, and music. A language model analyzes patterns in user ratings and suggests new titles to discover.'],
+        ['.projects-featured-stack .project-featured:nth-child(3) .project-features li:nth-child(1)', 'Cross-media recommendations (e.g., movie based on music taste)'],
+        ['.projects-featured-stack .project-featured:nth-child(3) .project-features li:nth-child(2)', 'Intuitive drag & drop interface'],
+        ['.projects-featured-stack .project-featured:nth-child(3) .project-features li:nth-child(3)', 'User preference analysis via LLM'],
+
+        // Project 4 - AIgets.me
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-subtitle', 'One Personality Profile for Multiple AI Models'],
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-desc', 'A tool for building a communication profile with AI assistants \u2014 tone, context, work style. Profile exported as a system prompt, compatible with any model.'],
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-features li:nth-child(1)', 'Tone, context, and communication style configuration'],
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-features li:nth-child(2)', 'Compatible with Claude, GPT, and other LLM models'],
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-features li:nth-child(3)', 'Export as a ready-made system prompt for any tool'],
+
+        // Project links
+        ['.project-link-primary span', 'See live'],
+        ['.project-link-coming span', 'Coming soon'],
+
+        // Duo projects
+        ['.projects-duo .project-duo-card:nth-child(1) h3', 'Stock Market Predictions from ESPI'],
+        ['.projects-duo .project-duo-card:nth-child(1) p', 'Can an LLM predict market reactions to stock reports? Analysis of ~1,500 ESPI reports from Polish companies with predictions across 5 time horizons.'],
+        ['.projects-duo .project-duo-card:nth-child(2) h3', 'Data Science Notebooks'],
+        ['.projects-duo .project-duo-card:nth-child(2) p', 'Analytical projects: gaming market segmentation (K-means), Airbnb price modeling (feature engineering).'],
+
+        // All repositories
+        ['.projects-footer .btn-secondary span', 'All repositories'],
+
+        // Contact section
+        ['#kontakt .section-title', 'Contact'],
+    ],
+
+    init() {
+        this.translations.forEach(([selector, , isHTML]) => {
+            document.querySelectorAll(selector).forEach((el, i) => {
+                const key = selector + '__' + i;
+                this.originals.set(key, isHTML ? el.innerHTML : el.textContent);
+            });
+        });
+
+        const savedLang = localStorage.getItem('lang');
+        if (savedLang === 'en') {
+            this.setLanguage('en', false);
+        }
+
+        this.toggle?.addEventListener('click', () => this.toggleLanguage());
+    },
+
+    toggleLanguage() {
+        this.setLanguage(this.currentLang === 'pl' ? 'en' : 'pl', true);
+    },
+
+    setLanguage(lang, save) {
+        this.currentLang = lang;
+        document.documentElement.lang = lang;
+
+        if (lang === 'en') {
+            this.translations.forEach(([selector, enText, isHTML]) => {
+                document.querySelectorAll(selector).forEach(el => {
+                    if (isHTML) el.innerHTML = enText;
+                    else el.textContent = enText;
+                });
+            });
+            document.title = 'Karol Polikarp Wilczy\u0144ski | AI, Law, Technology';
+            document.querySelector('meta[name="description"]')?.setAttribute('content',
+                'I work at the intersection of AI, ICT, law and public administration. Building tools for working with Polish law and automations.');
+        } else {
+            this.translations.forEach(([selector, , isHTML]) => {
+                document.querySelectorAll(selector).forEach((el, i) => {
+                    const key = selector + '__' + i;
+                    const original = this.originals.get(key);
+                    if (original !== undefined) {
+                        if (isHTML) el.innerHTML = original;
+                        else el.textContent = original;
+                    }
+                });
+            });
+            document.title = 'Karol Polikarp Wilczy\u0144ski | AI, Prawo, Technologia';
+            document.querySelector('meta[name="description"]')?.setAttribute('content',
+                'Pracuj\u0119 na styku AI, ICT, prawa i administracji publicznej. Buduj\u0119 narz\u0119dzia do pracy z polskim prawem i automatyzacje.');
+        }
+
+        // Email display
+        const emailDisplay = document.getElementById('emailDisplay');
+        const emailLink = document.getElementById('emailLink');
+        if (emailDisplay && (!emailLink || emailLink.dataset.revealed !== 'true')) {
+            emailDisplay.textContent = lang === 'en' ? '[click]' : '[kliknij]';
+        }
+
+        this.updateToggle();
+        if (save) localStorage.setItem('lang', lang);
+    },
+
+    updateToggle() {
+        if (!this.toggle) return;
+        if (this.currentLang === 'en') {
+            this.toggle.classList.add('lang-en');
+            this.toggle.setAttribute('aria-label', 'Prze\u0142\u0105cz na polski');
+        } else {
+            this.toggle.classList.remove('lang-en');
+            this.toggle.setAttribute('aria-label', 'Switch to English');
+        }
+    }
+};
+
+LanguageManager.init();
+
+// ================================================
 // PERFORMANCE: Reduced motion detection
 // ================================================
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
