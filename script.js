@@ -70,7 +70,7 @@ const LanguageManager = {
 
         // Employment
         ['#panel-employment li:nth-child(1) .emp-date', '2025\u2013present'],
-        ['#panel-employment li:nth-child(1) .emp-title', 'Senior Specialist, Innovative Public Policies Division'],
+        ['#panel-employment li:nth-child(1) .emp-title', 'Chief Specialist, Innovative Public Policies Division'],
         ['#panel-employment li:nth-child(1) .emp-company', 'Ministry of Digital Affairs'],
         ['#panel-employment li:nth-child(2) .emp-title', 'Head of CEEB Department'],
         ['#panel-employment li:nth-child(2) .emp-company', 'General Office of Building Supervision'],
