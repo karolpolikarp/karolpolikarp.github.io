@@ -103,33 +103,42 @@ const LanguageManager = {
         ['#projekty .section-title', 'Projects'],
         ['.project-video-hint span', 'Hover to see demo'],
 
-        // Project 1 - JakiePrawo
-        ['.projects-featured-stack .project-featured:nth-child(1) .project-subtitle', 'AI-Powered Polish Law Search Engine'],
-        ['.projects-featured-stack .project-featured:nth-child(1) .project-desc', 'A search engine that takes a natural language question and returns the specific legal article, statute name, and a direct link to the full text in ISAP.'],
-        ['.projects-featured-stack .project-featured:nth-child(1) .project-features li:nth-child(1)', 'Statute database built from the Polish Parliament API (PDF parsing)'],
-        ['.projects-featured-stack .project-featured:nth-child(1) .project-features li:nth-child(2)', 'MCP server on Raspberry Pi \u2014 content extraction and indexing'],
-        ['.projects-featured-stack .project-featured:nth-child(1) .project-features li:nth-child(3)', 'Source citation with direct link to ISAP'],
+        // Project 1 - upfor
+        ['.projects-featured-stack .project-featured:nth-child(1) .project-subtitle', 'Gaming Availability Calendar with AI'],
+        ['.projects-featured-stack .project-featured:nth-child(1) .project-desc', 'Paint weekly gaming availability slots, share with friends, and let Claude propose a session that fits the shared window. Discord-native, multi-timezone, privacy-first.'],
+        ['.projects-featured-stack .project-featured:nth-child(1) .project-features li:nth-child(1)', '7\u00d748 grid \u2014 paint when you play, heatmap shows overlap with your group'],
+        ['.projects-featured-stack .project-featured:nth-child(1) .project-features li:nth-child(2)', 'Discord bot (13 Polish slash commands) with real-time two-way sync'],
+        ['.projects-featured-stack .project-featured:nth-child(1) .project-features li:nth-child(3)', 'Claude Haiku 4.5 with tool-use proposes the session matching the shared window'],
 
-        // Project 2 - AutoMargiela
-        ['.projects-featured-stack .project-featured:nth-child(2) .project-subtitle', 'Product Price Monitoring System'],
-        ['.projects-featured-stack .project-featured:nth-child(2) .project-desc', 'Tool for tracking Maison Margiela product prices across multiple online stores. Automatic notifications when prices drop below a set threshold.'],
-        ['.projects-featured-stack .project-featured:nth-child(2) .project-features li:nth-child(1)', 'Price scraping from multiple sources simultaneously'],
-        ['.projects-featured-stack .project-featured:nth-child(2) .project-features li:nth-child(2)', 'Email notifications with price change history'],
-        ['.projects-featured-stack .project-featured:nth-child(2) .project-features li:nth-child(3)', 'Dashboard for managing watched products'],
+        // Project 2 - JakiePrawo
+        ['.projects-featured-stack .project-featured:nth-child(2) .project-subtitle', 'AI-Powered Polish Law Search Engine'],
+        ['.projects-featured-stack .project-featured:nth-child(2) .project-desc', 'A search engine that takes a natural language question and returns the specific legal article, statute name, and a direct link to the full text in ISAP.'],
+        ['.projects-featured-stack .project-featured:nth-child(2) .project-features li:nth-child(1)', 'Statute database built from the Polish Parliament API (PDF parsing)'],
+        ['.projects-featured-stack .project-featured:nth-child(2) .project-features li:nth-child(2)', 'MCP server on Raspberry Pi \u2014 content extraction and indexing'],
+        ['.projects-featured-stack .project-featured:nth-child(2) .project-features li:nth-child(3)', 'Source citation with direct link to ISAP'],
 
-        // Project 3 - Majeranek
-        ['.projects-featured-stack .project-featured:nth-child(3) .project-subtitle', 'Smart Recommendations Based on Tier Lists'],
-        ['.projects-featured-stack .project-featured:nth-child(3) .project-desc', 'App for creating tier lists from movies, games, books, and music. A language model analyzes patterns in user ratings and suggests new titles to discover.'],
-        ['.projects-featured-stack .project-featured:nth-child(3) .project-features li:nth-child(1)', 'Cross-media recommendations (e.g., movie based on music taste)'],
-        ['.projects-featured-stack .project-featured:nth-child(3) .project-features li:nth-child(2)', 'Intuitive drag & drop interface'],
-        ['.projects-featured-stack .project-featured:nth-child(3) .project-features li:nth-child(3)', 'User preference analysis via LLM'],
+        // Project 3 - AutoMargiela
+        ['.projects-featured-stack .project-featured:nth-child(3) .project-subtitle', 'Product Price Monitoring System'],
+        ['.projects-featured-stack .project-featured:nth-child(3) .project-desc', 'Tool for tracking Maison Margiela product prices across multiple online stores. Automatic notifications when prices drop below a set threshold.'],
+        ['.projects-featured-stack .project-featured:nth-child(3) .project-features li:nth-child(1)', 'Price scraping from multiple sources simultaneously'],
+        ['.projects-featured-stack .project-featured:nth-child(3) .project-features li:nth-child(2)', 'Email notifications with price change history'],
+        ['.projects-featured-stack .project-featured:nth-child(3) .project-features li:nth-child(3)', 'Dashboard for managing watched products'],
 
-        // Project 4 - AIgets.me
-        ['.projects-featured-stack .project-featured:nth-child(4) .project-subtitle', 'One Personality Profile for Multiple AI Models'],
-        ['.projects-featured-stack .project-featured:nth-child(4) .project-desc', 'A tool for building a communication profile with AI assistants \u2014 tone, context, work style. Profile exported as a system prompt, compatible with any model.'],
-        ['.projects-featured-stack .project-featured:nth-child(4) .project-features li:nth-child(1)', 'Tone, context, and communication style configuration'],
-        ['.projects-featured-stack .project-featured:nth-child(4) .project-features li:nth-child(2)', 'Compatible with Claude, GPT, and other LLM models'],
-        ['.projects-featured-stack .project-featured:nth-child(4) .project-features li:nth-child(3)', 'Export as a ready-made system prompt for any tool'],
+        // Project 4 - Majeranek
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-badge-wip', 'WIP'],
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-subtitle', 'Smart Recommendations Based on Tier Lists'],
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-desc', 'App for creating tier lists from movies, games, books, and music. A language model analyzes patterns in user ratings and suggests new titles to discover.'],
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-features li:nth-child(1)', 'Cross-media recommendations (e.g., movie based on music taste)'],
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-features li:nth-child(2)', 'Intuitive drag & drop interface'],
+        ['.projects-featured-stack .project-featured:nth-child(4) .project-features li:nth-child(3)', 'User preference analysis via LLM'],
+
+        // Project 5 - AIgets.me
+        ['.projects-featured-stack .project-featured:nth-child(5) .project-badge-wip', 'WIP'],
+        ['.projects-featured-stack .project-featured:nth-child(5) .project-subtitle', 'One Personality Profile for Multiple AI Models'],
+        ['.projects-featured-stack .project-featured:nth-child(5) .project-desc', 'A tool for building a communication profile with AI assistants \u2014 tone, context, work style. Profile exported as a system prompt, compatible with any model.'],
+        ['.projects-featured-stack .project-featured:nth-child(5) .project-features li:nth-child(1)', 'Tone, context, and communication style configuration'],
+        ['.projects-featured-stack .project-featured:nth-child(5) .project-features li:nth-child(2)', 'Compatible with Claude, GPT, and other LLM models'],
+        ['.projects-featured-stack .project-featured:nth-child(5) .project-features li:nth-child(3)', 'Export as a ready-made system prompt for any tool'],
 
         // Project links
         ['.project-link-primary span', 'See live'],
