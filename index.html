@@ -60,7 +60,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -115,7 +115,7 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-intro">
-                        <img src="assets/images/karol-photo.jpg" alt="Karol Polikarp Wilczyński" class="hero-avatar" width="160" height="160">
+                        <div class="hero-avatar"><img src="assets/images/karol-photo.jpg" alt="Karol Polikarp Wilczyński" width="160" height="160"></div>
                         <div class="hero-greeting">
                             <span class="greeting-line"></span>
                             <span class="greeting-text">Cześć, jestem</span>
@@ -342,8 +342,8 @@
                                     </div>
                                     <div class="showcase-panels">
                                         <div class="showcase-panel is-active" role="tabpanel" id="panel-upfor-opis" aria-labelledby="tab-upfor-opis">
-                                            <p data-en="Scheduling a group session usually dies in chat: 'free tonight?', 'how about Saturday?', round and round. upfor turns it into a single picture — you paint your hours on a weekly grid and a heatmap instantly shows when the whole crew is free.">Umawianie wspólnego grania zwykle umiera w czacie: „jesteś wieczorem?”, „a w sobotę?”, i tak w kółko. upfor zamienia to w jeden obrazek — malujesz swoje godziny na tygodniowej siatce, a heatmapa od razu pokazuje, kiedy wolna jest cała ekipa.</p>
-                                            <p data-en="AI takes it from there: Claude reads the overlapping windows and proposes a concrete session time itself. It all happens in Discord, where the crew already hangs out — and without collecting needless data.">Resztę bierze na siebie AI: Claude czyta nakładające się okna i sam proponuje konkretny termin sesji. Wszystko dzieje się w Discordzie, tam gdzie ekipa i tak siedzi — i bez zbierania zbędnych danych.</p>
+                                            <p data-en="An app that helps a group settle on a time to play together. Everyone marks their free hours on a weekly grid, and it works out when everyone is available at once and shows it as a heatmap.">Apka, która pomaga ekipie ustalić wspólny termin grania. Każdy zaznacza swoje wolne godziny na tygodniowej siatce, a aplikacja liczy, kiedy wszyscy mają czas naraz, i pokazuje to jako heatmapę.</p>
+                                            <p data-en="Claude suggests a concrete session time. The whole thing runs inside Discord, where the group already hangs out, and it doesn't collect data it doesn't need.">Konkretny termin sesji podpowiada Claude. Całość działa w Discordzie, gdzie grupa i tak siedzi, i nie zbiera niepotrzebnych danych.</p>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-upfor-tech" aria-labelledby="tab-upfor-tech" hidden>
                                             <div class="gh-badges">
@@ -355,16 +355,16 @@
                                             </div>
                                             <ul class="showcase-list">
                                                 <li data-en="Next.js 15 (App Router) + React 19, fully typed in TypeScript">Next.js 15 (App Router) + React 19, w pełni typowane w TypeScript</li>
-                                                <li data-en="7×48 grid — 7 days × 48 half-hour slots, rendered as an interactive overlap heatmap">Siatka 7×48 — 7 dni × 48 półgodzinnych slotów, jako interaktywna heatmapa nakładania się dostępności</li>
+                                                <li data-en="7×48 grid (7 days × 48 half-hour slots), rendered as an interactive overlap heatmap">Siatka 7×48 (7 dni × 48 półgodzinnych slotów) jako interaktywna heatmapa nakładania się dostępności</li>
                                                 <li data-en="Discord bot: 13 Polish slash commands, real-time two-way sync">Bot Discord: 13 polskich slash-komend, dwukierunkowa synchronizacja w czasie rzeczywistym</li>
-                                                <li data-en="Claude Haiku 4.5 with tool-use — the model calls functions that compute the shared window">Claude Haiku 4.5 z tool-use — model wywołuje funkcje liczące wspólne okno dostępności</li>
+                                                <li data-en="Claude Haiku 4.5 with tool-use: the model calls functions that compute the shared window">Claude Haiku 4.5 z tool-use: model wywołuje funkcje liczące wspólne okno dostępności</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-upfor-chall" aria-labelledby="tab-upfor-chall" hidden>
                                             <ul class="showcase-list">
                                                 <li data-en="Keeping state consistent in real time when the same slot is edited by both the app and the Discord bot">Utrzymanie spójnego stanu w czasie rzeczywistym, gdy ten sam slot zmienia i aplikacja, i bot Discord</li>
                                                 <li data-en="Designing tool-use so the model proposes a genuinely shared window, not an 'almost' fit">Zaprojektowanie tool-use tak, by model proponował realne wspólne okno, a nie „prawie” pasujący termin</li>
-                                                <li data-en="Time zones without traps — one slot, different local hours, zero mix-ups">Strefy czasowe bez pułapek — jeden slot, różne lokalne godziny, zero pomyłek</li>
+                                                <li data-en="Time zones, where the same slot is a different local hour for everyone">Strefy czasowe, w których ten sam slot to u każdego inna lokalna godzina</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -417,8 +417,8 @@
                                     </div>
                                     <div class="showcase-panels">
                                         <div class="showcase-panel is-active" role="tabpanel" id="panel-prawo-opis" aria-labelledby="tab-prawo-opis">
-                                            <p data-en="To find the right provision you usually have to already know where to look — which statute, which article. JakiePrawo.pl reverses that: you ask in plain language and get the specific article, the statute name, and a link to the full text.">Żeby znaleźć właściwy przepis, zwykle trzeba już wiedzieć, gdzie go szukać — w której ustawie i którym artykule. JakiePrawo.pl odwraca tę kolejność: pytasz po ludzku, a dostajesz konkretny artykuł, nazwę ustawy i link do pełnego tekstu.</p>
-                                            <p data-en="The point is verifiability — the answer always leads to the original in ISAP, never pretends to be it. Not an oracle, just the shortest path to the legal basis.">Sedno to weryfikowalność — odpowiedź zawsze prowadzi do oryginału w ISAP, nigdy nie udaje źródła. To nie wyrocznia, tylko najkrótsza droga do podstawy prawnej.</p>
+                                            <p data-en="A search engine where you ask in plain language and get back the specific article, the statute name, and a link to the full text in ISAP. You don't need to know which act to look in first.">Wyszukiwarka, w której pytasz o coś zwykłym językiem, a w odpowiedzi dostajesz konkretny artykuł, nazwę ustawy i link do pełnego tekstu w ISAP. Nie trzeba wcześniej wiedzieć, w którym akcie szukać.</p>
+                                            <p data-en="I wanted every answer to be verifiable, so it always points to the original source instead of replacing it with the model's own words.">Zależało mi, żeby każdą odpowiedź dało się zweryfikować, więc zawsze prowadzi do oryginalnego źródła, zamiast zastępować je słowami modelu.</p>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-prawo-tech" aria-labelledby="tab-prawo-tech" hidden>
                                             <div class="gh-badges">
@@ -431,14 +431,14 @@
                                             </div>
                                             <ul class="showcase-list">
                                                 <li data-en="React frontend + Supabase (Postgres, auth, storage)">Frontend React + Supabase (Postgres, auth, storage)</li>
-                                                <li data-en="MCP server on a Raspberry Pi — extraction and indexing of legal content">Serwer MCP na Raspberry Pi — ekstrakcja i indeksowanie treści aktów prawnych</li>
+                                                <li data-en="MCP server on a Raspberry Pi for extracting and indexing legal content">Serwer MCP na Raspberry Pi do ekstrakcji i indeksowania treści aktów prawnych</li>
                                                 <li data-en="Statute database built from the Polish Parliament API, parsing PDFs to text">Baza ustaw budowana z API Sejmu RP, parsowanie PDF-ów do tekstu</li>
                                                 <li data-en="Every answer cites the source with a direct ISAP link">Każda odpowiedź cytuje źródło z bezpośrednim linkiem do ISAP</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-prawo-chall" aria-labelledby="tab-prawo-chall" hidden>
                                             <ul class="showcase-list">
-                                                <li data-en="Taming inconsistent PDFs from the Parliament API — varied layouts, scans, formatting">Okiełznanie niespójnych PDF-ów z API Sejmu — różne układy, skany, formatowanie</li>
+                                                <li data-en="Taming inconsistent PDFs from the Parliament API (varied layouts, scans, formatting)">Okiełznanie niespójnych PDF-ów z API Sejmu (różne układy, skany, formatowanie)</li>
                                                 <li data-en="Keeping the database current against amendments and new legislation">Utrzymywanie bazy w aktualności wobec nowelizacji i nowych aktów</li>
                                                 <li data-en="Enforcing source citation so the model can't 'invent' law that isn't there">Wymuszenie cytowania źródła, żeby model nie „dopowiadał” prawa, którego nie ma</li>
                                             </ul>
@@ -492,8 +492,8 @@
                                     </div>
                                     <div class="showcase-panels">
                                         <div class="showcase-panel is-active" role="tabpanel" id="panel-margiela-opis" aria-labelledby="tab-margiela-opis">
-                                            <p data-en="The same item can carry five different prices across five stores — and each one shifts day to day. AutoMargiela tracks Maison Margiela prices across many sources at once and watches the thresholds you set.">Ten sam produkt potrafi mieć w pięciu sklepach pięć różnych cen — i każda z nich zmienia się z dnia na dzień. AutoMargiela śledzi ceny Maison Margiela w wielu źródłach naraz i pilnuje progów, które sam ustawisz.</p>
-                                            <p data-en="When a price drops below your limit, you get an email with the change history. You buy at a real low, not on a hunch.">Kiedy cena spadnie poniżej Twojej granicy, dostajesz maila z historią zmian. Kupujesz w realnym dołku, a nie na przeczucie.</p>
+                                            <p data-en="A tool that tracks Maison Margiela clothing prices across several stores at once. I wrote it because checking the same pieces across different sites by hand got tedious.">Narzędzie, które śledzi ceny ubrań Maison Margiela w kilku sklepach naraz. Pisałem je, bo ręczne sprawdzanie tych samych modeli po różnych stronach robiło się męczące.</p>
+                                            <p data-en="You set a threshold for a product, and when the price drops below it you get an email with the change history. A dashboard shows what's cheaper right now and where.">Dla obserwowanego produktu ustawiasz próg, a gdy cena spadnie poniżej, dostajesz maila z historią zmian. Panel pokazuje, co i gdzie aktualnie potaniało.</p>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-margiela-tech" aria-labelledby="tab-margiela-tech" hidden>
                                             <div class="gh-badges">
@@ -503,7 +503,7 @@
                                                 <span class="gh-badge"><span class="gh-k">LOC</span><span class="gh-v gh-v-gold">~3k</span></span>
                                             </div>
                                             <ul class="showcase-list">
-                                                <li data-en="Python + Selenium — a scraper querying multiple stores in parallel">Python + Selenium — scraper odpytujący wiele sklepów równolegle</li>
+                                                <li data-en="Python + Selenium; a scraper querying multiple stores in parallel">Python + Selenium; scraper odpytujący wiele sklepów równolegle</li>
                                                 <li data-en="Scheduled runs + email alerts with price-change history">Cykliczny harmonogram + powiadomienia e-mail z historią zmian cen</li>
                                                 <li data-en="Dashboard to manage watched products and price thresholds">Panel do zarządzania obserwowanymi produktami i progami cenowymi</li>
                                             </ul>
@@ -565,8 +565,8 @@
                                     </div>
                                     <div class="showcase-panels">
                                         <div class="showcase-panel is-active" role="tabpanel" id="panel-majeranek-opis" aria-labelledby="tab-majeranek-opis">
-                                            <p data-en="Recommendations usually never leave one box — film suggests film, music suggests music. Majeranek reads your taste from tier lists and deliberately jumps across media: from favorite music to film, from games to books.">Polecajki zwykle nie wychodzą poza jedną szufladkę — film podpowie film, muzyka muzykę. Majeranek czyta Twój gust z tier list i celowo przeskakuje między mediami: z ulubionej muzyki w film, z gier w książki.</p>
-                                            <p data-en="You arrange titles by drag and drop, and a language model looks for patterns in your ratings to surface something you wouldn't have found yourself.">Układasz tytuły metodą przeciągnij-i-upuść, a model językowy szuka wzorców w Twoich ocenach i wyławia coś, czego sam(a) byś nie znalazł(a).</p>
+                                            <p data-en="An app where you arrange your tier lists of films, games, books and music by dragging titles around. From those ratings, a language model tries to guess what else you might like.">Aplikacja, w której układasz swoje tier listy filmów, gier, książek i muzyki, przeciągając tytuły. Na podstawie tych ocen model językowy próbuje zgadnąć, co jeszcze może Ci się spodobać.</p>
+                                            <p data-en="I was curious whether recommendations can carry across categories: a film from your music taste, a book from the games you love. This is an early version where I'm testing that.">Ciekawiło mnie, czy rekomendacje da się przenosić między kategoriami: film na bazie gustu muzycznego, książka na bazie ulubionych gier. To wczesna wersja, na której to testuję.</p>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-majeranek-tech" aria-labelledby="tab-majeranek-tech" hidden>
                                             <div class="gh-badges">
@@ -584,7 +584,7 @@
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-majeranek-chall" aria-labelledby="tab-majeranek-chall" hidden>
                                             <ul class="showcase-list">
-                                                <li data-en="Translating taste from one medium to another — a common language for music, film and games">Przełożenie gustu z jednego medium na drugie — wspólny język dla muzyki, filmu i gier</li>
+                                                <li data-en="Translating taste from one medium to another: a common language for music, film and games">Przełożenie gustu z jednego medium na drugie: wspólny język dla muzyki, filmu i gier</li>
                                                 <li data-en="Drag & drop that stays smooth with dozens of items on the list">Drag & drop, który pozostaje płynny przy dziesiątkach pozycji na liście</li>
                                                 <li data-en="Making sure LLM recommendations are on-point, not merely 'plausible'">Pilnowanie, by rekomendacje z LLM były trafne, a nie tylko „prawdopodobne”</li>
                                             </ul>
@@ -639,8 +639,8 @@
                                     </div>
                                     <div class="showcase-panels">
                                         <div class="showcase-panel is-active" role="tabpanel" id="panel-aigets-opis" aria-labelledby="tab-aigets-opis">
-                                            <p data-en="You teach every AI assistant your style from scratch — who you are, how you work, what tone you use. AIgets.me does it once: you build a single profile and export it as a ready-made system prompt.">Każdego asystenta AI uczysz swojego stylu od zera — kim jesteś, jak pracujesz, jakim tonem mówisz. AIgets.me robi to raz: budujesz jeden profil i eksportujesz go jako gotowy system prompt.</p>
-                                            <p data-en="Paste the same profile into Claude, GPT or any other model — and from the first message it talks your way, without explaining who you are over and over.">Ten sam profil wklejasz do Claude, GPT czy dowolnego innego modelu — i od pierwszej wiadomości rozmawiasz po swojemu, bez tłumaczenia w kółko, kim jesteś.</p>
+                                            <p data-en="Instead of explaining who you are and how you like to work to every AI assistant from scratch, you describe it once. AIgets.me turns that into a single profile and exports it as a ready-made system prompt.">Zamiast za każdym razem tłumaczyć asystentowi AI, kim jesteś i jak lubisz pracować, opisujesz to raz. AIgets.me składa z tego jeden profil i eksportuje go jako gotowy system prompt.</p>
+                                            <p data-en="You paste that profile into Claude, GPT or another model so it answers in your style right away. The project is still in progress; the profile configurator already works.">Taki profil wklejasz do Claude, GPT czy innego modelu, żeby od razu odpowiadał w Twoim stylu. Projekt jest w budowie; działa już sam konfigurator profilu.</p>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-aigets-tech" aria-labelledby="tab-aigets-tech" hidden>
                                             <div class="gh-badges">
@@ -659,7 +659,7 @@
                                             <ul class="showcase-list">
                                                 <li data-en="One profile format that works equally well across different models">Jeden format profilu, który działa tak samo dobrze w różnych modelach</li>
                                                 <li data-en="Turning soft preferences into a system prompt that actually changes the answers">Przełożenie miękkich preferencji na system prompt, który faktycznie zmienia odpowiedzi</li>
-                                                <li data-en="A simple builder despite many parameters — without overwhelming the user">Prosty kreator mimo wielu parametrów — bez przytłaczania użytkownika</li>
+                                                <li data-en="A simple builder that doesn't overwhelm despite many parameters">Prosty kreator, który mimo wielu parametrów nie przytłacza</li>
                                             </ul>
                                         </div>
                                     </div>
