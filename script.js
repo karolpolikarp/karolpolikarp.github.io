@@ -165,6 +165,14 @@ const LanguageManager = {
             });
         });
 
+        // Attribute-based translations: [data-en] (text) / [data-en-html] (markup).
+        // Cleaner than selector lists for large blocks like the project showcase.
+        this.dataEls = Array.from(document.querySelectorAll('[data-en], [data-en-html]'));
+        this.dataEls.forEach(el => {
+            const isHTML = el.hasAttribute('data-en-html');
+            this.originals.set(el, isHTML ? el.innerHTML : el.textContent);
+        });
+
         const savedLang = localStorage.getItem('lang');
         if (savedLang === 'en') {
             this.setLanguage('en', false);
@@ -188,6 +196,10 @@ const LanguageManager = {
                     else el.textContent = enText;
                 });
             });
+            this.dataEls?.forEach(el => {
+                if (el.hasAttribute('data-en-html')) el.innerHTML = el.getAttribute('data-en-html');
+                else el.textContent = el.getAttribute('data-en');
+            });
             document.title = 'Karol Polikarp Wilczy\u0144ski | AI, Law, Technology';
             document.querySelector('meta[name="description"]')?.setAttribute('content',
                 'I work at the intersection of AI, ICT, law and public administration. Building tools for working with Polish law and automations.');
@@ -201,6 +213,12 @@ const LanguageManager = {
                         else el.textContent = original;
                     }
                 });
+            });
+            this.dataEls?.forEach(el => {
+                const original = this.originals.get(el);
+                if (original === undefined) return;
+                if (el.hasAttribute('data-en-html')) el.innerHTML = original;
+                else el.textContent = original;
             });
             document.title = 'Karol Polikarp Wilczy\u0144ski | AI, Prawo, Technologia';
             document.querySelector('meta[name="description"]')?.setAttribute('content',
@@ -1332,3 +1350,272 @@ const HeroTabs = {
 };
 
 HeroTabs.init();
+
+// ================================================
+// PROJECT SHOWCASE CAROUSEL
+// ================================================
+const ProjectShowcase = {
+    init() {
+        const carousel = document.querySelector('.showcase-carousel');
+        if (!carousel) return;
+
+        this.carousel = carousel;
+        this.track = carousel.querySelector('.showcase-track');
+        this.slides = Array.from(carousel.querySelectorAll('.showcase-slide'));
+        this.prevBtn = carousel.querySelector('.showcase-prev');
+        this.nextBtn = carousel.querySelector('.showcase-next');
+        this.dotsWrap = carousel.querySelector('.showcase-dots');
+        this.counterCurrent = carousel.querySelector('.showcase-counter-current');
+        this.counterTotal = carousel.querySelector('.showcase-counter-total');
+        if (!this.track || !this.slides.length) return;
+
+        this.index = 0;
+        this.count = this.slides.length;
+        this.reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        this.buildDots();
+        this.setupTabs();
+        this.setupGalleries();
+        this.handleMissingImages();
+        this.bindControls();
+        this.bindKeyboard();
+        this.bindSwipe();
+        this.bindAutoplay();
+
+        if (this.counterTotal) this.counterTotal.textContent = this.pad(this.count);
+        this.goTo(0, false);
+    },
+
+    pad(n) {
+        return String(n).padStart(2, '0');
+    },
+
+    buildDots() {
+        if (!this.dotsWrap) return;
+        this.dots = this.slides.map((slide, i) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'showcase-dot' + (i === 0 ? ' is-active' : '');
+            dot.setAttribute('aria-label', 'Przejdź do projektu ' + (i + 1));
+            if (i === 0) dot.setAttribute('aria-current', 'true');
+            dot.addEventListener('click', () => { this.goTo(i); this.restartAutoplay(); });
+            this.dotsWrap.appendChild(dot);
+            return dot;
+        });
+    },
+
+    goTo(i, animate = true) {
+        this.index = (i + this.count) % this.count;
+        if (this.track) {
+            if (!animate) {
+                const prev = this.track.style.transition;
+                this.track.style.transition = 'none';
+                this.track.style.transform = `translateX(-${this.index * 100}%)`;
+                void this.track.offsetHeight; // force reflow so the jump isn't animated
+                this.track.style.transition = prev;
+            } else {
+                this.track.style.transform = `translateX(-${this.index * 100}%)`;
+            }
+        }
+        this.updateUI();
+    },
+
+    next() { this.goTo(this.index + 1); },
+    prev() { this.goTo(this.index - 1); },
+
+    updateUI() {
+        if (this.dots) {
+            this.dots.forEach((d, i) => {
+                const active = i === this.index;
+                d.classList.toggle('is-active', active);
+                if (active) d.setAttribute('aria-current', 'true');
+                else d.removeAttribute('aria-current');
+            });
+        }
+        if (this.counterCurrent) this.counterCurrent.textContent = this.pad(this.index + 1);
+
+        // Keep off-screen slides out of the tab order and hidden from assistive tech.
+        const active = this.slides[this.index];
+        this.slides.forEach((slide, i) => {
+            const offscreen = i !== this.index;
+            // Never leave focus inside a slide we're about to aria-hide (covers swipe/dots/autoplay).
+            if (offscreen && slide.contains(document.activeElement)) {
+                const safe = active.querySelector('.showcase-tab.is-active')
+                    || active.querySelector('.showcase-tab, a, button') || active;
+                if (safe === active && !active.hasAttribute('tabindex')) active.setAttribute('tabindex', '-1');
+                safe.focus({ preventScroll: true });
+            }
+            slide.setAttribute('aria-hidden', offscreen ? 'true' : 'false');
+            slide.querySelectorAll('a, button').forEach(el => {
+                if (offscreen) {
+                    el.setAttribute('tabindex', '-1');
+                } else if (el.classList.contains('showcase-tab')) {
+                    // Roving tabindex: only the active tab stays in the tab order.
+                    el.setAttribute('tabindex', el.classList.contains('is-active') ? '0' : '-1');
+                } else {
+                    el.removeAttribute('tabindex');
+                }
+            });
+        });
+    },
+
+    bindControls() {
+        this.nextBtn?.addEventListener('click', () => { this.next(); this.restartAutoplay(); });
+        this.prevBtn?.addEventListener('click', () => { this.prev(); this.restartAutoplay(); });
+    },
+
+    bindKeyboard() {
+        this.carousel.addEventListener('keydown', (e) => {
+            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+            // Don't hijack arrows aimed at controls inside a slide — the tablist owns them.
+            if (e.target.closest && e.target.closest('.showcase-slide')) return;
+            e.preventDefault();
+            if (e.key === 'ArrowRight') this.next(); else this.prev();
+            this.restartAutoplay();
+        });
+    },
+
+    bindSwipe() {
+        const vp = this.carousel.querySelector('.showcase-viewport');
+        if (!vp) return;
+        let startX = 0, startY = 0, tracking = false;
+        vp.addEventListener('pointerdown', (e) => {
+            startX = e.clientX; startY = e.clientY; tracking = true;
+        }, { passive: true });
+        vp.addEventListener('pointerup', (e) => {
+            if (!tracking) return;
+            tracking = false;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+                if (dx < 0) this.next(); else this.prev();
+                this.restartAutoplay();
+            }
+        }, { passive: true });
+        vp.addEventListener('pointercancel', () => { tracking = false; });
+    },
+
+    setupTabs() {
+        this.slides.forEach(slide => {
+            const tabs = Array.from(slide.querySelectorAll('.showcase-tab'));
+            const panels = Array.from(slide.querySelectorAll('.showcase-panel'));
+            if (!tabs.length) return;
+
+            const activate = (tab) => {
+                tabs.forEach(t => {
+                    const on = t === tab;
+                    t.classList.toggle('is-active', on);
+                    t.setAttribute('aria-selected', on ? 'true' : 'false');
+                    t.setAttribute('tabindex', on ? '0' : '-1');
+                });
+                panels.forEach(p => { p.classList.remove('is-active'); p.hidden = true; });
+                const target = slide.querySelector('#' + tab.getAttribute('aria-controls'));
+                if (target) { target.hidden = false; target.classList.add('is-active'); }
+            };
+
+            // Roving tabindex: only the active tab is initially reachable via Tab.
+            tabs.forEach(t => t.setAttribute('tabindex', t.classList.contains('is-active') ? '0' : '-1'));
+
+            tabs.forEach((tab, i) => {
+                tab.addEventListener('click', () => {
+                    if (!tab.classList.contains('is-active')) activate(tab);
+                });
+                // ARIA tabs keyboard pattern: Left/Right move between tabs, Home/End jump to ends.
+                tab.addEventListener('keydown', (e) => {
+                    let next = -1;
+                    if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+                    else if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+                    else if (e.key === 'Home') next = 0;
+                    else if (e.key === 'End') next = tabs.length - 1;
+                    else return;
+                    e.preventDefault();
+                    e.stopPropagation(); // don't let the carousel-level handler also fire
+                    activate(tabs[next]);
+                    tabs[next].focus();
+                });
+            });
+        });
+    },
+
+    setupGalleries() {
+        this.slides.forEach(slide => {
+            const gallery = slide.querySelector('.showcase-gallery');
+            const mainImg = slide.querySelector('.showcase-img');
+            const stage = slide.querySelector('.showcase-stage');
+            if (!gallery || !mainImg) return;
+            const thumbs = Array.from(gallery.querySelectorAll('.showcase-thumb'));
+            // A single-image gallery adds no value — hide it until more screenshots are added.
+            if (thumbs.length <= 1) { gallery.hidden = true; return; }
+            thumbs.forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    const src = thumb.dataset.src;
+                    if (src) {
+                        mainImg.src = src;
+                        stage?.classList.remove('is-missing');
+                    }
+                    thumbs.forEach(t => t.classList.remove('is-active'));
+                    thumb.classList.add('is-active');
+                });
+            });
+        });
+    },
+
+    handleMissingImages() {
+        this.slides.forEach(slide => {
+            const img = slide.querySelector('.showcase-img');
+            const stage = slide.querySelector('.showcase-stage');
+            if (!img || !stage) return;
+            const markMissing = () => stage.classList.add('is-missing');
+            if (img.complete && img.naturalWidth === 0) markMissing();
+            img.addEventListener('error', markMissing);
+            img.addEventListener('load', () => {
+                if (img.naturalWidth > 0) stage.classList.remove('is-missing');
+            });
+        });
+    },
+
+    bindAutoplay() {
+        if (this.reduceMotion || this.count <= 1) return;
+        this.delay = 7000;
+        this.paused = false;
+        this._startAutoplay = () => {
+            this.stopAutoplay();
+            this.timer = setInterval(() => { if (!this.paused) this.next(); }, this.delay);
+        };
+
+        this.carousel.addEventListener('mouseenter', () => { this.paused = true; });
+        this.carousel.addEventListener('mouseleave', () => { this.paused = false; });
+        this.carousel.addEventListener('focusin', () => { this.paused = true; });
+        this.carousel.addEventListener('focusout', () => {
+            if (!this.carousel.contains(document.activeElement)) this.paused = false;
+        });
+        document.addEventListener('visibilitychange', () => { this.paused = document.hidden; });
+
+        // Only run autoplay while the carousel is on screen.
+        if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    this.onScreen = entry.isIntersecting;
+                    if (entry.isIntersecting) { this.paused = false; this._startAutoplay(); }
+                    else { this.stopAutoplay(); }
+                });
+            }, { threshold: 0.3 });
+            io.observe(this.carousel);
+        } else {
+            this._startAutoplay();
+        }
+    },
+
+    stopAutoplay() {
+        if (this.timer) { clearInterval(this.timer); this.timer = null; }
+    },
+
+    restartAutoplay() {
+        // Bail if the carousel is known to be off screen, so user interaction with the
+        // bottom controls can't re-arm autoplay that the IntersectionObserver had stopped.
+        if (this.reduceMotion || !this._startAutoplay || this.onScreen === false) return;
+        this._startAutoplay();
+    }
+};
+
+ProjectShowcase.init();
