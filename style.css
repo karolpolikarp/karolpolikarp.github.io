@@ -3175,6 +3175,35 @@ section {
 @media (max-width: 768px) {
     .ds-section, .tools-section { margin-top: var(--space-3xl); }
     .ds-heading, .tools-heading { font-size: 1.3rem; margin-bottom: var(--space-lg); }
+
+    /* Notebooki DS na mobilce: zwarte wiersze (miniatura + tekst) zamiast
+       wysokich kart ze zdjęciem — sekcja nie zjada tyle wysokości strony. */
+    .ds-grid { gap: var(--space-md); }
+    .ds-card a {
+        flex-direction: row;
+        align-items: stretch;
+    }
+    .ds-card .project-duo-image {
+        width: 104px;
+        height: auto;
+        min-height: 96px;
+        flex-shrink: 0;
+    }
+    .ds-shot-placeholder { display: none; }
+    .ds-card .project-duo-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--space-sm) var(--space-md);
+    }
+    .ds-card .project-duo-content h3 { margin-top: 2px; }
+    .ds-card .project-duo-content p {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 }
 
 /* Project subtitle (for Whoisi) */
