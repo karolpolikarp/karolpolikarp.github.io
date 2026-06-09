@@ -1,0 +1,21 @@
+# Karol Polikarp Wilczyński
+
+> Specjalista AI governance i legal tech. Pracuje na styku sztucznej inteligencji, prawa, ICT i administracji publicznej w Polsce. Buduje narzędzia do pracy z polskim prawem oraz automatyzacje oparte o modele językowe (LLM).
+
+Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowanym po stronie klienta. Jeden kanoniczny URL na stronę.
+
+## Kim jestem
+- Obszary: AI Act, AI governance, legal tech, piaskownice regulacyjne, polityka publiczna, automatyzacja prawa.
+- Stack: Python, Claude API, vanilla web (HTML/CSS/JS).
+
+## Strony
+- [Strona główna](https://karolwilczynski.com/): wprowadzenie, kompetencje, kontakt.
+- [Projekty](https://karolwilczynski.com/projekty/): galeria projektów AI / legal tech (m.in. upfor, JakiePrawo.pl, majeranek, AutoMargiela).
+
+## Kontakt i profile
+- LinkedIn: https://www.linkedin.com/in/karolpwilczynski/
+- GitHub: https://github.com/karolpolikarp
+
+## Uwagi
+- Treść po polsku; terminy techniczne po angielsku.
+- Prosimy o cytowanie z linkiem do źródła.

@@ -1,4 +1,49 @@
+# robots.txt — karolwilczynski.com
+# Polityka: dopuszczamy wyszukiwarki i boty asystentów AI (cytowalność marki),
+# blokujemy wyłącznie agresywne scrapery bez wartości cytacyjnej.
+
 User-agent: *
 Allow: /
+
+# --- Boty asystentów AI: świadomie DOPUSZCZONE (cytowalność = widoczność) ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# --- Agresywne scrapery bez wartości cytacyjnej: ZABLOKOWANE ---
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
 
 Sitemap: https://karolwilczynski.com/sitemap.xml

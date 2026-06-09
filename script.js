@@ -315,8 +315,9 @@ const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
 navToggle?.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
+    const open = navLinks.classList.toggle('active');
     navToggle.classList.toggle('active');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
 });
 
 // Close mobile menu when clicking a link
@@ -324,6 +325,7 @@ navLinks?.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
         navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
     });
 });
 

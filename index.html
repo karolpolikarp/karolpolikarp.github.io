@@ -3,29 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karol Polikarp Wilczyński | AI, Prawo, Technologia</title>
-    <meta name="description" content="Pracuję na styku AI, ICT, prawa i administracji publicznej. Buduję narzędzia do pracy z polskim prawem i automatyzacje.">
+    <title>Karol Polikarp Wilczyński | AI Governance i Legal Tech</title>
+    <meta name="description" content="Na styku AI, prawa i administracji publicznej w Polsce. Buduję narzędzia legal tech do pracy z polskim prawem (JakiePrawo.pl) oraz automatyzacje oparte o LLM.">
 
     <!-- SEO Meta Tags -->
     <meta name="author" content="Karol Polikarp Wilczyński">
     <meta name="keywords" content="AI Act, LegalTech, Python, Claude API, prawo, sztuczna inteligencja, piaskownice regulacyjne, administracja publiczna">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://karolwilczynski.com/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Karol Polikarp Wilczyński">
     <meta property="og:url" content="https://karolwilczynski.com/">
-    <meta property="og:title" content="Karol Polikarp Wilczyński | AI, Prawo, Technologia">
-    <meta property="og:description" content="Pracuję na styku AI, ICT, prawa i administracji publicznej. Buduję narzędzia do pracy z polskim prawem i automatyzacje.">
-    <meta property="og:image" content="https://karolwilczynski.com/assets/images/karol-photo.jpg">
+    <meta property="og:title" content="Karol Polikarp Wilczyński | AI Governance i Legal Tech">
+    <meta property="og:description" content="Na styku AI, prawa i administracji publicznej w Polsce. Buduję narzędzia legal tech do pracy z polskim prawem (JakiePrawo.pl) oraz automatyzacje oparte o LLM.">
+    <meta property="og:image" content="https://karolwilczynski.com/assets/images/og-card.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Karol Polikarp Wilczyński — AI governance, legal tech, administracja publiczna">
     <meta property="og:locale" content="pl_PL">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://karolwilczynski.com/">
-    <meta name="twitter:title" content="Karol Polikarp Wilczyński | AI, Prawo, Technologia">
-    <meta name="twitter:description" content="Pracuję na styku AI, ICT, prawa i administracji publicznej. Buduję narzędzia do pracy z polskim prawem i automatyzacje.">
-    <meta name="twitter:image" content="https://karolwilczynski.com/assets/images/karol-photo.jpg">
+    <meta name="twitter:title" content="Karol Polikarp Wilczyński | AI Governance i Legal Tech">
+    <meta name="twitter:description" content="Na styku AI, prawa i administracji publicznej w Polsce. Buduję narzędzia legal tech do pracy z polskim prawem (JakiePrawo.pl) oraz automatyzacje oparte o LLM.">
+    <meta name="twitter:image" content="https://karolwilczynski.com/assets/images/og-card.jpg">
+    <meta name="twitter:image:alt" content="Karol Polikarp Wilczyński — AI governance, legal tech, administracja publiczna">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg?v=3">
@@ -33,6 +38,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png?v=3">
     <link rel="icon" href="favicon.ico?v=3" sizes="any">
     <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
+    <link rel="manifest" href="/manifest.webmanifest">
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#004d2b">
@@ -41,19 +47,40 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Karol Polikarp Wilczyński",
-        "url": "https://karolwilczynski.com",
-        "image": "https://karolwilczynski.com/assets/images/karol-photo.jpg",
-        "jobTitle": "AI Governance & LegalTech Specialist",
-        "worksFor": {
-            "@type": "Organization",
-            "name": "Ministerstwo Cyfryzacji"
-        },
-        "knowsAbout": ["AI Act", "LegalTech", "Python", "AI Governance", "Public Policy", "Regulatory Sandboxes"],
-        "sameAs": [
-            "https://www.linkedin.com/in/karolwilczynski/",
-            "https://github.com/karolpolikarp"
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": "https://karolwilczynski.com/#person",
+                "name": "Karol Polikarp Wilczyński",
+                "url": "https://karolwilczynski.com",
+                "image": "https://karolwilczynski.com/assets/images/karol-photo.jpg",
+                "jobTitle": "AI Governance & LegalTech Specialist",
+                "worksFor": {
+                    "@type": "Organization",
+                    "name": "Ministerstwo Cyfryzacji",
+                    "url": "https://www.gov.pl/web/cyfryzacja"
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Warszawa",
+                    "addressCountry": "PL"
+                },
+                "nationality": { "@type": "Country", "name": "PL" },
+                "knowsLanguage": ["pl", "en"],
+                "knowsAbout": ["AI Act", "LegalTech", "Python", "AI Governance", "Public Policy", "Regulatory Sandboxes"],
+                "sameAs": [
+                    "https://www.linkedin.com/in/karolpwilczynski/",
+                    "https://github.com/karolpolikarp"
+                ]
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://karolwilczynski.com/#website",
+                "url": "https://karolwilczynski.com/",
+                "name": "Karol Polikarp Wilczyński",
+                "inLanguage": "pl-PL",
+                "publisher": { "@id": "https://karolwilczynski.com/#person" }
+            }
         ]
     }
     </script>
@@ -77,7 +104,7 @@
                 <span class="logo-main">kpw<span class="logo-sparkle" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="kpwSpark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop class="kpw-stop-a" offset="0"/><stop class="kpw-stop-b" offset="1"/></linearGradient></defs><path class="logo-spark logo-spark-lg" d="M10.5 1.4C10.5 8.1 8.1 10.5 1.4 10.5C8.1 10.5 10.5 12.9 10.5 19.6C10.5 12.9 12.9 10.5 19.6 10.5C12.9 10.5 10.5 8.1 10.5 1.4Z"/><path class="logo-spark logo-spark-sm" d="M19 4C19 6.2 18.2 7 16 7C18.2 7 19 7.8 19 10C19 7.8 19.8 7 22 7C19.8 7 19 6.2 19 4Z"/></svg></span></span>
                 <span class="logo-sub">[ka‿pɛ‿ˈvu]</span>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#projekty">Projekty</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
@@ -101,7 +128,7 @@
                 <span class="lang-label lang-pl">PL</span>
                 <span class="lang-label lang-en">EN</span>
             </button>
-            <button class="nav-toggle" aria-label="Menu">
+            <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
                 <span></span>
                 <span></span>
             </button>
@@ -119,7 +146,7 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-intro">
-                        <div class="hero-avatar"><img src="assets/images/karol-photo.jpg" alt="Karol Polikarp Wilczyński" width="160" height="160"></div>
+                        <div class="hero-avatar"><img src="assets/images/karol-photo.jpg" alt="Karol Polikarp Wilczyński" width="160" height="160" fetchpriority="high"></div>
                         <div class="hero-greeting">
                             <span class="greeting-line"></span>
                             <span class="greeting-text">Cześć, jestem</span>
@@ -393,7 +420,7 @@
                                             <span class="showcase-url">jakieprawo.pl</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img" src="assets/images/obraz_2026-01-09_205957107.png" alt="Zrzut ekranu — JakiePrawo.pl" loading="lazy">
+                                            <img class="showcase-img" src="assets/images/obraz_2026-01-09_205957107.webp" alt="Zrzut ekranu — JakiePrawo.pl" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -401,7 +428,7 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/obraz_2026-01-09_205957107.png" aria-label="Zrzut 1"><img src="assets/images/obraz_2026-01-09_205957107.png" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/obraz_2026-01-09_205957107.webp" aria-label="Zrzut 1"><img src="assets/images/obraz_2026-01-09_205957107.webp" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
@@ -469,7 +496,7 @@
                                             <span class="showcase-url">replica.karolwilczynski.com</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img" src="assets/images/margiela.png" alt="Zrzut ekranu — AutoMargiela" loading="lazy">
+                                            <img class="showcase-img" src="assets/images/margiela.webp" alt="Zrzut ekranu — AutoMargiela" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -477,7 +504,7 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/margiela.png" aria-label="Zrzut 1"><img src="assets/images/margiela.png" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/margiela.webp" aria-label="Zrzut 1"><img src="assets/images/margiela.webp" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
@@ -541,7 +568,7 @@
                                             <span class="showcase-url" data-en="majeranek · coming soon">majeranek · wkrótce</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img" src="assets/images/majeranek.png" alt="Zrzut ekranu — Majeranek" loading="lazy">
+                                            <img class="showcase-img" src="assets/images/majeranek.webp" alt="Zrzut ekranu — Majeranek" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -549,7 +576,7 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/majeranek.png" aria-label="Zrzut 1"><img src="assets/images/majeranek.png" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/majeranek.webp" aria-label="Zrzut 1"><img src="assets/images/majeranek.webp" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
@@ -615,7 +642,7 @@
                                             <span class="showcase-url" data-en="aigets.me · coming soon">aigets.me · wkrótce</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img" src="assets/images/whoisi.png" alt="Zrzut ekranu — AIgets.me" loading="lazy">
+                                            <img class="showcase-img" src="assets/images/whoisi.webp" alt="Zrzut ekranu — AIgets.me" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -623,7 +650,7 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/whoisi.png" aria-label="Zrzut 1"><img src="assets/images/whoisi.png" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/whoisi.webp" aria-label="Zrzut 1"><img src="assets/images/whoisi.webp" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
@@ -713,7 +740,7 @@
                     <article class="project-duo-card">
                         <a href="https://github.com/karolpolikarp/ds-VideoGameSales" target="_blank" rel="noopener">
                             <div class="project-duo-image">
-                                <img src="assets/images/notebooks.png" alt="Notebooki" loading="lazy">
+                                <img src="assets/images/notebooks.webp" alt="Notebooki" loading="lazy">
                             </div>
                             <div class="project-duo-content">
                                 <div class="project-tags">
@@ -971,7 +998,7 @@
                 <div class="blog-upcoming">
                     <div class="blog-upcoming-list">
                         <article class="blog-upcoming-item fade-in-up stagger-1">
-                            <img src="assets/images/sandbox.png" alt="AI Act piaskownice" class="blog-upcoming-img" loading="lazy">
+                            <img src="assets/images/sandbox.webp" alt="AI Act piaskownice" class="blog-upcoming-img" loading="lazy">
                             <div class="blog-upcoming-content">
                                 <span class="blog-upcoming-category">AI Act</span>
                                 <h3>Czym są piaskownice regulacyjne AI</h3>
@@ -979,7 +1006,7 @@
                             </div>
                         </article>
                         <article class="blog-upcoming-item fade-in-up stagger-2">
-                            <img src="assets/images/raspberry.png" alt="Budowanie z Claude API" class="blog-upcoming-img" loading="lazy">
+                            <img src="assets/images/raspberry.webp" alt="Budowanie z Claude API" class="blog-upcoming-img" loading="lazy">
                             <div class="blog-upcoming-content">
                                 <span class="blog-upcoming-category">LegalTech</span>
                                 <h3>Budowanie wyszukiwarki prawa z Claude API</h3>
@@ -987,7 +1014,7 @@
                             </div>
                         </article>
                         <article class="blog-upcoming-item fade-in-up stagger-3">
-                            <img src="assets/images/lawyer.png" alt="Prawnik i kod" class="blog-upcoming-img" loading="lazy">
+                            <img src="assets/images/lawyer.webp" alt="Prawnik i kod" class="blog-upcoming-img" loading="lazy">
                             <div class="blog-upcoming-content">
                                 <span class="blog-upcoming-category">Kariera</span>
                                 <h3>Prawnik, który pisze kod - dlaczego warto?</h3>
@@ -1051,7 +1078,7 @@
             <div class="footer-content">
                 <div class="footer-start">
                     <button class="start-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                        <span class="start-icon">🖥️</span>
+                        <span class="start-icon" aria-hidden="true">🖥️</span>
                         <span>Start</span>
                     </button>
                 </div>
@@ -1065,6 +1092,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=3"></script>
+    <script src="script.js?v=4" defer></script>
 </body>
 </html>

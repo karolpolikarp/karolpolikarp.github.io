@@ -1,0 +1,17 @@
+{
+  "name": "Karol Polikarp Wilczyński",
+  "short_name": "kpw",
+  "description": "AI governance i legal tech — narzędzia do pracy z polskim prawem i automatyzacje.",
+  "lang": "pl-PL",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fdfcfa",
+  "theme_color": "#004d2b",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+  ]
+}

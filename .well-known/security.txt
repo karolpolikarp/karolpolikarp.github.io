@@ -1,0 +1,4 @@
+Contact: mailto:karolpolikarp@gmail.com
+Preferred-Languages: pl, en
+Canonical: https://karolwilczynski.com/.well-known/security.txt
+Expires: 2027-06-09T00:00:00.000Z
