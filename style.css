@@ -3044,7 +3044,7 @@ section {
 /* --- Data Science & Tools subsections --- */
 .ds-section,
 .tools-section {
-    margin-top: var(--space-md);
+    margin-top: var(--space-lg);
     margin-bottom: 0;
 }
 .apps-heading,
@@ -3054,7 +3054,7 @@ section {
     font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-md);
 }
 /* Nagłówek "Aplikacje" nad karuzelą — bliżej tytułu sekcji */
 .apps-heading {
@@ -4293,7 +4293,7 @@ section {
     overflow: hidden;
     /* Vertical room so each slide's drop shadow isn't clipped; horizontal stays 0
        so neighbouring slides never peek past the edges during/after a transition. */
-    padding: 4px 0 22px;
+    padding: 4px 0 16px;
 }
 
 .showcase-track {
@@ -4693,7 +4693,7 @@ section {
     align-items: center;
     justify-content: center;
     gap: var(--space-lg);
-    margin-top: var(--space-xl);
+    margin-top: var(--space-md);
 }
 
 .showcase-arrow {
