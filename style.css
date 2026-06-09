@@ -3044,12 +3044,10 @@ section {
 /* --- Data Science & Tools subsections --- */
 .ds-section,
 .tools-section {
-    margin-top: var(--space-4xl);
-    margin-bottom: var(--space-2xl);
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-lg);
 }
-.tools-section {
-    margin-top: var(--space-3xl);
-}
+.apps-heading,
 .ds-heading,
 .tools-heading {
     font-family: var(--font-serif);
@@ -3057,6 +3055,10 @@ section {
     font-weight: 600;
     text-align: center;
     margin-bottom: var(--space-xl);
+}
+/* Nagłówek "Aplikacje" nad karuzelą — bliżej tytułu sekcji */
+.apps-heading {
+    margin-top: var(--space-lg);
 }
 .ds-heading-note {
     font-family: var(--font-sans);
@@ -3107,9 +3109,13 @@ section {
 
 /* Tools — compact icon cards */
 .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--space-lg);
+}
+.tools-card {
+    flex: 0 1 340px;
 }
 .tools-card {
     display: flex;
@@ -3173,8 +3179,8 @@ section {
     vertical-align: middle;
 }
 @media (max-width: 768px) {
-    .ds-section, .tools-section { margin-top: var(--space-3xl); }
-    .ds-heading, .tools-heading { font-size: 1.3rem; margin-bottom: var(--space-lg); }
+    .ds-section, .tools-section { margin-top: var(--space-xl); }
+    .apps-heading, .ds-heading, .tools-heading { font-size: 1.3rem; margin-bottom: var(--space-lg); }
 
     /* Notebooki DS na mobilce: zwarte wiersze (miniatura + tekst) zamiast
        wysokich kart ze zdjęciem — sekcja nie zjada tyle wysokości strony. */
