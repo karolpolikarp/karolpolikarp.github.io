@@ -3042,15 +3042,9 @@ section {
 }
 
 /* --- Data Science & Tools subsections --- */
-.tools-section {
-    margin-top: var(--space-lg);
-    margin-bottom: 0;
-}
-/* Data Science: optyczna korekta — odrobinę mniej niż Narzędzia, bo nad nim jest
-   pusta przestrzeń (a nie "wypełniające" ją strzałki karuzeli), więc ten sam
-   odstęp wygląda na większy. 16px realnie ≈ 24px wizualnie. */
+.tools-section,
 .ds-section {
-    margin-top: var(--space-md);
+    margin-top: var(--space-sm);
     margin-bottom: 0;
 }
 .apps-heading,
@@ -3060,7 +3054,7 @@ section {
     font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
 }
 /* Nagłówek "Aplikacje" nad karuzelą — bliżej tytułu sekcji */
 .apps-heading {
