@@ -1384,6 +1384,12 @@ const ProjectShowcase = {
         this.bindSwipe();
         this.bindAutoplay();
 
+        // Re-align the overlaid mobile controls when the layout changes size.
+        window.addEventListener('resize', () => {
+            if (this._rAF) cancelAnimationFrame(this._rAF);
+            this._rAF = requestAnimationFrame(() => this.positionMobileControls());
+        }, { passive: true });
+
         if (this.counterTotal) this.counterTotal.textContent = this.pad(this.count);
         this.goTo(0, false);
     },
@@ -1459,6 +1465,25 @@ const ProjectShowcase = {
                 }
             });
         });
+
+        this.positionMobileControls();
+    },
+
+    // On mobile the prev/next arrows and the counter are overlaid on the screenshot.
+    // Align them to the active slide's image area (same vertical offset for every slide).
+    positionMobileControls() {
+        if (!this.carousel) return;
+        if (!window.matchMedia('(max-width: 768px)').matches) {
+            this.carousel.style.removeProperty('--sc-arrow-top');
+            this.carousel.style.removeProperty('--sc-badge-top');
+            return;
+        }
+        const stage = this.slides[this.index]?.querySelector('.showcase-stage');
+        if (!stage) return;
+        const rect = stage.getBoundingClientRect();
+        const top = rect.top - this.carousel.getBoundingClientRect().top;
+        this.carousel.style.setProperty('--sc-arrow-top', (top + rect.height / 2) + 'px');
+        this.carousel.style.setProperty('--sc-badge-top', (top + 12) + 'px');
     },
 
     bindControls() {

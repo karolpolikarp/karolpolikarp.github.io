@@ -4675,6 +4675,61 @@ section {
     .showcase-subtitle {
         font-size: 1.05rem;
     }
+
+    /* Karuzela na mobile: nawigacja nałożona na sam screenshot, żeby od razu
+       (bez scrollowania) było widać, że to karuzela i można iść w lewo/prawo.
+       --sc-arrow-top / --sc-badge-top ustawia JS = środek/góra aktywnego zdjęcia. */
+    .showcase-prev,
+    .showcase-next {
+        position: absolute;
+        top: var(--sc-arrow-top, 38%);
+        transform: translateY(-50%);
+        z-index: 5;
+        width: 42px;
+        height: 42px;
+        background: rgba(0, 0, 0, 0.42);
+        border-color: rgba(255, 255, 255, 0.35);
+        color: #fff;
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .showcase-prev { left: 12px; }
+    .showcase-next { right: 12px; }
+    .showcase-prev svg,
+    .showcase-next svg { width: 20px; height: 20px; }
+    .showcase-prev:hover,
+    .showcase-next:hover,
+    .showcase-prev:active,
+    .showcase-next:active {
+        background: rgba(0, 0, 0, 0.62);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-50%);
+    }
+
+    /* Licznik 01/05 jako plakietka w rogu zdjęcia */
+    .showcase-counter {
+        position: absolute;
+        top: var(--sc-badge-top, 14px);
+        right: 12px;
+        z-index: 5;
+        min-width: 0;
+        padding: 4px 11px;
+        border-radius: var(--radius-full);
+        background: rgba(0, 0, 0, 0.42);
+        color: rgba(255, 255, 255, 0.85);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        font-size: 0.72rem;
+    }
+    .showcase-counter .showcase-counter-current { color: #fff; }
+
+    /* Pasek pod slajdem zostaje już tylko z kropkami (wskaźnik pomocniczy) */
+    .showcase-controls {
+        gap: var(--space-md);
+        margin-top: var(--space-md);
+    }
 }
 
 @media (max-width: 480px) {
