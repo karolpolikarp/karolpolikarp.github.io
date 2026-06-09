@@ -96,7 +96,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="style.css?v=16">
+    <link rel="stylesheet" href="style.css?v=17">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -782,109 +782,85 @@
                 <!-- Data Science / Notebooki -->
                 <section class="ds-section" aria-labelledby="ds-heading">
                     <h3 class="ds-heading" id="ds-heading">Data Science</h3>
-                    <div class="ds-grid">
+                    <div class="ds-bento">
 
-                        <article class="project-duo-card ds-card">
-                            <a href="https://github.com/karolpolikarp/ds-Winnipeg" target="_blank" rel="noopener">
-                                <div class="project-duo-image">
-                                    <span class="ds-shot-placeholder" data-en="Screenshot soon">Zrzut wkrótce</span>
-                                    <img src="assets/images/ds-winnipeg.png" alt="Zrzut — Airbnb Winnipeg (R)" loading="lazy" onerror="this.remove()">
+                        <!-- Kafel flagowy -->
+                        <a class="ds-tile ds-tile--feature" href="https://github.com/karolpolikarp/ds-SGH-Prognozy-gieldowe-z-ESPI" target="_blank" rel="noopener">
+                            <img class="ds-tile-shot" src="assets/images/espi.png" alt="" loading="lazy" onerror="this.remove()">
+                            <div class="ds-tile-body">
+                                <span class="ds-flag" data-en="featured">flagowy</span>
+                                <div class="project-tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag tag-burgundy">GPT-4o</span>
+                                    <span class="tag">Pandas</span>
                                 </div>
-                                <div class="project-duo-content">
-                                    <div class="project-tags">
-                                        <span class="tag">R</span>
-                                        <span class="tag">EDA</span>
-                                        <span class="tag">k-means</span>
-                                    </div>
-                                    <h3 data-en="Airbnb Winnipeg">Airbnb Winnipeg</h3>
-                                    <p data-en="Exploratory analysis of the short-term rental market in R: cleaning, MICE imputation, correlations, k-means segmentation and an interactive map.">Eksploracyjna analiza rynku najmu krótkoterminowego w R: czyszczenie, imputacja MICE, korelacje, segmentacja k-means i interaktywna mapa.</p>
-                                </div>
-                            </a>
-                        </article>
+                                <h3 data-en="Stock forecasts from ESPI">Prognozy giełdowe z ESPI</h3>
+                                <p data-en="Can an LLM predict the market's reaction to a filing? ~1500 Allegro ESPI reports, forecasts across 5 horizons.">Czy LLM przewidzi reakcję rynku na raport ESPI? ~1500 komunikatów Allegro i prognozy na 5 horyzontów czasowych.</p>
+                            </div>
+                        </a>
 
-                        <article class="project-duo-card ds-card">
-                            <a href="https://github.com/karolpolikarp/ds-WashingtonDC" target="_blank" rel="noopener">
-                                <div class="project-duo-image">
-                                    <span class="ds-shot-placeholder" data-en="Screenshot soon">Zrzut wkrótce</span>
-                                    <img src="assets/images/ds-washington.png" alt="Zrzut — Airbnb Waszyngton (Python)" loading="lazy" onerror="this.remove()">
-                                </div>
-                                <div class="project-duo-content">
-                                    <div class="project-tags">
-                                        <span class="tag">Python</span>
-                                        <span class="tag">Pandas</span>
-                                        <span class="tag">statsmodels</span>
-                                    </div>
-                                    <h3 data-en="Airbnb Washington">Airbnb Waszyngton</h3>
-                                    <p data-en="Rental-price analysis in Python: EDA, cleaning, distributions and variable-association tests (chi-square, OLS regression).">Analiza cen najmu w Pythonie: EDA, czyszczenie, rozkłady oraz testy związków zmiennych (chi-kwadrat, regresja OLS).</p>
-                                </div>
-                            </a>
-                        </article>
+                        <!-- Kafel CTA (wciągnięty guzik "Wszystkie repozytoria") -->
+                        <a class="ds-tile ds-tile--cta" href="https://github.com/karolpolikarp?tab=repositories" target="_blank" rel="noopener">
+                            <div class="ds-tile-body">
+                                <h3 data-en="All the research on GitHub">Cały research na GitHubie</h3>
+                                <p data-en="5 notebooks · R / Python">5 notebooków · R / Python</p>
+                                <span class="ds-cta-link" data-en="All repositories">Wszystkie repozytoria
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </span>
+                            </div>
+                        </a>
 
-                        <article class="project-duo-card ds-card">
-                            <a href="https://github.com/karolpolikarp/ds-VideoGameSales" target="_blank" rel="noopener">
-                                <div class="project-duo-image">
-                                    <span class="ds-shot-placeholder" data-en="Screenshot soon">Zrzut wkrótce</span>
-                                    <img src="assets/images/ds-videogames.png" alt="Zrzut — Rynek gier wideo" loading="lazy" onerror="this.remove()">
+                        <!-- Kafle -->
+                        <a class="ds-tile ds-tile--cell" href="https://github.com/karolpolikarp/ds-Winnipeg" target="_blank" rel="noopener">
+                            <div class="ds-tile-body">
+                                <div class="project-tags">
+                                    <span class="tag">R</span>
+                                    <span class="tag">EDA</span>
+                                    <span class="tag">k-means</span>
                                 </div>
-                                <div class="project-duo-content">
-                                    <div class="project-tags">
-                                        <span class="tag">Python</span>
-                                        <span class="tag">scikit-learn</span>
-                                        <span class="tag">PCA</span>
-                                    </div>
-                                    <h3 data-en="Video game market">Rynek gier wideo</h3>
-                                    <p data-en="Game-sales big data: EDA, PCA, K-Means clustering and a RandomForest sales-prediction model.">Big data o sprzedaży gier: EDA, PCA, klastrowanie K-Means oraz model RandomForest przewidujący sprzedaż.</p>
-                                </div>
-                            </a>
-                        </article>
+                                <h3 data-en="Airbnb Winnipeg">Airbnb Winnipeg</h3>
+                                <p data-en="Short-term rental EDA in R: cleaning, MICE imputation, correlations, k-means and an interactive map.">Analiza rynku najmu w R: czyszczenie, imputacja MICE, korelacje, k-means i interaktywna mapa.</p>
+                            </div>
+                        </a>
 
-                        <article class="project-duo-card ds-card">
-                            <a href="https://github.com/karolpolikarp/ds-speed-dating" target="_blank" rel="noopener">
-                                <div class="project-duo-image">
-                                    <span class="ds-shot-placeholder" data-en="Screenshot soon">Zrzut wkrótce</span>
-                                    <img src="assets/images/ds-speeddating.png" alt="Zrzut — Segmentacja użytkowników (speed dating)" loading="lazy" onerror="this.remove()">
+                        <a class="ds-tile ds-tile--cell" href="https://github.com/karolpolikarp/ds-WashingtonDC" target="_blank" rel="noopener">
+                            <div class="ds-tile-body">
+                                <div class="project-tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">Pandas</span>
+                                    <span class="tag">statsmodels</span>
                                 </div>
-                                <div class="project-duo-content">
-                                    <div class="project-tags">
-                                        <span class="tag">Python</span>
-                                        <span class="tag">K-Means</span>
-                                        <span class="tag">PCA</span>
-                                    </div>
-                                    <h3 data-en="User segmentation">Segmentacja użytkowników</h3>
-                                    <p data-en="Segmenting users on speed-dating data: PCA + K-Means and three profiles ready for marketing campaigns.">Segmentacja użytkowników na danych speed dating: PCA + K-Means i trzy profile gotowe pod kampanie marketingowe.</p>
-                                </div>
-                            </a>
-                        </article>
+                                <h3 data-en="Airbnb Washington">Airbnb Waszyngton</h3>
+                                <p data-en="Rental-price analysis in Python: EDA, distributions and association tests (chi-square, OLS).">Analiza cen najmu w Pythonie: EDA, rozkłady i testy związków zmiennych (chi-kwadrat, regresja OLS).</p>
+                            </div>
+                        </a>
 
-                        <article class="project-duo-card ds-card">
-                            <a href="https://github.com/karolpolikarp/ds-SGH-Prognozy-gieldowe-z-ESPI" target="_blank" rel="noopener">
-                                <div class="project-duo-image">
-                                    <span class="ds-shot-placeholder" data-en="Screenshot soon">Zrzut wkrótce</span>
-                                    <img src="assets/images/espi.png" alt="Zrzut — Prognozy giełdowe z ESPI" loading="lazy" onerror="this.remove()">
+                        <a class="ds-tile ds-tile--cell" href="https://github.com/karolpolikarp/ds-VideoGameSales" target="_blank" rel="noopener">
+                            <div class="ds-tile-body">
+                                <div class="project-tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">scikit-learn</span>
+                                    <span class="tag">PCA</span>
                                 </div>
-                                <div class="project-duo-content">
-                                    <div class="project-tags">
-                                        <span class="tag">Python</span>
-                                        <span class="tag tag-burgundy">GPT-4o</span>
-                                        <span class="tag">Pandas</span>
-                                    </div>
-                                    <h3 data-en="Stock forecasts from ESPI">Prognozy giełdowe z ESPI</h3>
-                                    <p data-en="Can an LLM predict the market's reaction to a filing? ~1500 Allegro ESPI reports and forecasts across 5 horizons.">Czy LLM przewidzi reakcję rynku na raport ESPI? ~1500 komunikatów Allegro i prognozy na 5 horyzontów czasowych.</p>
+                                <h3 data-en="Video game market">Rynek gier wideo</h3>
+                                <p data-en="Game-sales big data: EDA, PCA, K-Means clustering and a RandomForest sales model.">Big data o sprzedaży gier: EDA, PCA, klastrowanie K-Means i model RandomForest.</p>
+                            </div>
+                        </a>
+
+                        <a class="ds-tile ds-tile--cell" href="https://github.com/karolpolikarp/ds-speed-dating" target="_blank" rel="noopener">
+                            <div class="ds-tile-body">
+                                <div class="project-tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">K-Means</span>
+                                    <span class="tag">PCA</span>
                                 </div>
-                            </a>
-                        </article>
+                                <h3 data-en="User segmentation">Segmentacja użytkowników</h3>
+                                <p data-en="Segmenting users on speed-dating data: PCA + K-Means and three profiles for marketing.">Segmentacja użytkowników (speed dating): PCA + K-Means i trzy profile pod kampanie marketingowe.</p>
+                            </div>
+                        </a>
 
                     </div>
                 </section>
-
-                <div class="projects-footer">
-                    <a href="https://github.com/karolpolikarp?tab=repositories" target="_blank" rel="noopener" class="btn btn-secondary">
-                        <span>Wszystkie repozytoria</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
-                </div>
             </div>
         </section>
 
