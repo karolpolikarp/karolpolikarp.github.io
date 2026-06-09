@@ -3044,8 +3044,8 @@ section {
 /* --- Data Science & Tools subsections --- */
 .ds-section,
 .tools-section {
-    margin-top: var(--space-2xl);
-    margin-bottom: var(--space-lg);
+    margin-top: var(--space-md);
+    margin-bottom: 0;
 }
 .apps-heading,
 .ds-heading,
@@ -3251,8 +3251,8 @@ section {
     vertical-align: middle;
 }
 @media (max-width: 768px) {
-    .ds-section, .tools-section { margin-top: var(--space-xl); }
-    .apps-heading, .ds-heading, .tools-heading { font-size: 1.3rem; margin-bottom: var(--space-lg); }
+    .ds-section, .tools-section { margin-top: var(--space-md); }
+    .apps-heading, .ds-heading, .tools-heading { font-size: 1.3rem; margin-bottom: var(--space-md); }
 }
 
 /* Project subtitle (for Whoisi) */
