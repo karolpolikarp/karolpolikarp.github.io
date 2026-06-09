@@ -3041,6 +3041,115 @@ section {
     line-height: 1.5;
 }
 
+/* --- Data Science & Tools subsections --- */
+.ds-section,
+.tools-section {
+    margin-top: var(--space-4xl);
+    margin-bottom: var(--space-2xl);
+}
+.tools-section {
+    margin-top: var(--space-3xl);
+}
+.ds-heading,
+.tools-heading {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+.ds-heading-note {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--color-text-tertiary);
+}
+
+/* Data Science — screenshot cards */
+.ds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+}
+@media (min-width: 980px) {
+    .ds-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.ds-card .project-duo-image {
+    height: 188px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary-subtle), var(--color-bg-alt));
+}
+.ds-card .project-duo-image img {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+.ds-shot-placeholder {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    color: var(--color-text-tertiary);
+}
+.ds-card .project-duo-content {
+    padding: var(--space-md) var(--space-lg) var(--space-lg);
+}
+
+/* Tools — compact icon cards */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+}
+.tools-card {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+    padding: var(--space-lg);
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+}
+.tools-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+.tools-card-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--color-primary-subtle);
+    color: var(--color-primary);
+}
+.tools-card-icon svg { width: 24px; height: 24px; }
+[data-theme="dark"] .tools-card-icon { color: #2e9d62; }
+.tools-card-body { min-width: 0; }
+.tools-card-body h3 {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: var(--space-xs) 0 6px;
+}
+.tools-card-body p {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+}
+@media (max-width: 768px) {
+    .ds-section, .tools-section { margin-top: var(--space-3xl); }
+    .ds-heading, .tools-heading { font-size: 1.3rem; margin-bottom: var(--space-lg); }
+}
+
 /* Project subtitle (for Whoisi) */
 .project-subtitle {
     font-size: 0.9rem;
