@@ -3042,9 +3042,15 @@ section {
 }
 
 /* --- Data Science & Tools subsections --- */
-.ds-section,
 .tools-section {
     margin-top: var(--space-lg);
+    margin-bottom: 0;
+}
+/* Data Science: optyczna korekta — odrobinę mniej niż Narzędzia, bo nad nim jest
+   pusta przestrzeń (a nie "wypełniające" ją strzałki karuzeli), więc ten sam
+   odstęp wygląda na większy. 16px realnie ≈ 24px wizualnie. */
+.ds-section {
+    margin-top: var(--space-md);
     margin-bottom: 0;
 }
 .apps-heading,
