@@ -4630,12 +4630,23 @@ section {
 @media (max-width: 768px) {
     .showcase-slide {
         grid-template-columns: 1fr;
-        gap: var(--space-lg);
+        gap: var(--space-md);
         padding: var(--space-lg);
         border-radius: var(--radius-lg);
     }
+    /* Box rośnie do AKTYWNej zakładki (nie do najwyższej), więc nie zostaje
+       pusta przestrzeń przed przyciskiem CTA. */
     .showcase-panels {
         min-height: 0;
+        margin-bottom: var(--space-md);
+    }
+    .showcase-panel[hidden] {
+        display: none;
+    }
+    /* Pojedyncza miniatura galerii dubluje główny screenshot — ukryj ją, żeby nie
+       tworzyła pustego paska między zdjęciem a tagami. */
+    .showcase-gallery:has(.showcase-thumb:only-child) {
+        display: none;
     }
     /* Single column: the screenshot can't inherit a height from a sibling, so give it
        back a fixed aspect ratio. */
@@ -4674,6 +4685,7 @@ section {
     }
     .showcase-subtitle {
         font-size: 1.05rem;
+        margin-bottom: var(--space-md);
     }
 
     /* Karuzela na mobile: nawigacja nałożona na sam screenshot, żeby od razu
