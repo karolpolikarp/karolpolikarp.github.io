@@ -3065,14 +3065,22 @@ section {
     color: var(--color-text-tertiary);
 }
 
-/* Data Science — screenshot cards */
+/* Data Science — screenshot cards.
+   Flex (nie grid), żeby niepełny ostatni rząd był WYŚRODKOWANY — przy 5 kartach
+   układ 3+2 nie zostawia pustego pola z prawej. Odporne na dowolną liczbę kart. */
 .ds-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--space-lg);
 }
+.ds-card {
+    flex: 0 1 320px;
+}
 @media (min-width: 980px) {
-    .ds-grid { grid-template-columns: repeat(3, 1fr); }
+    .ds-card {
+        flex-basis: calc((100% - 2 * var(--space-lg)) / 3);
+    }
 }
 .ds-card .project-duo-image {
     height: 188px;
@@ -3144,6 +3152,25 @@ section {
     font-size: 0.88rem;
     color: var(--color-text-secondary);
     line-height: 1.5;
+}
+/* Karta narzędzia bez linku (np. prywatne repo / brak demo) */
+.tools-card-static {
+    cursor: default;
+}
+.tools-card-static:hover {
+    transform: none;
+    border-color: var(--color-border);
+    box-shadow: none;
+}
+.tools-note {
+    font-family: var(--font-sans);
+    font-size: 0.66rem;
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-left: 6px;
+    vertical-align: middle;
 }
 @media (max-width: 768px) {
     .ds-section, .tools-section { margin-top: var(--space-3xl); }
