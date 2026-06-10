@@ -1823,6 +1823,17 @@ section {
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
+/* Chip roku — stonowany, monospace, odróżnia się od tagów technologii */
+.tag-year {
+    background: transparent;
+    color: var(--color-text-tertiary);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+.tools-card-head .tag-year { margin-left: auto; }
 
 .tag-burgundy {
     background: var(--color-burgundy);
