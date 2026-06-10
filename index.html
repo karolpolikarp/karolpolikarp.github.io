@@ -389,12 +389,14 @@
                                                 <span class="gh-badge"><span class="gh-k">framework</span><span class="gh-v gh-v-green">Next.js 15</span></span>
                                                 <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-burgundy">Claude Haiku 4.5</span></span>
                                                 <span class="gh-badge"><span class="gh-k">bot</span><span class="gh-v gh-v-slate">Discord.js</span></span>
-                                                <span class="gh-badge"><span class="gh-k">LOC</span><span class="gh-v gh-v-gold">~8k</span></span>
+                                                <span class="gh-badge"><span class="gh-k">API</span><span class="gh-v gh-v-slate">tRPC v11</span></span>
+                                                <span class="gh-badge"><span class="gh-k">LOC</span><span class="gh-v gh-v-gold">~120k</span></span>
                                             </div>
                                             <ul class="showcase-list">
                                                 <li data-en="Next.js 15 (App Router) + React 19, fully typed in TypeScript">Next.js 15 (App Router) + React 19, w pełni typowane w TypeScript</li>
                                                 <li data-en="7×48 grid (7 days × 48 half-hour slots), rendered as an interactive overlap heatmap">Siatka 7×48 (7 dni × 48 półgodzinnych slotów) jako interaktywna heatmapa nakładania się dostępności</li>
-                                                <li data-en="Discord bot: 13 Polish slash commands, real-time two-way sync">Bot Discord: 13 polskich slash-komend, dwukierunkowa synchronizacja w czasie rzeczywistym</li>
+                                                <li data-en="Discord bot: 18 Polish slash commands, real-time two-way sync">Bot Discord: 18 polskich slash-komend, dwukierunkowa synchronizacja w czasie rzeczywistym</li>
+                                                <li data-en="Monorepo (Turborepo): 27 data models, 20 tRPC routers (~125 procedures), realtime over Postgres LISTEN/NOTIFY → SSE">Monorepo (Turborepo): 27 modeli danych, 20 routerów tRPC (~125 procedur), realtime po Postgres LISTEN/NOTIFY → SSE</li>
                                                 <li data-en="Claude Haiku 4.5 with tool-use: the model calls functions that compute the shared window">Claude Haiku 4.5 z tool-use: model wywołuje funkcje liczące wspólne okno dostępności</li>
                                             </ul>
                                         </div>
@@ -465,13 +467,13 @@
                                                 <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-burgundy">Claude API</span></span>
                                                 <span class="gh-badge"><span class="gh-k">protocol</span><span class="gh-v gh-v-slate">MCP</span></span>
                                                 <span class="gh-badge"><span class="gh-k">host</span><span class="gh-v gh-v-slate">Raspberry Pi</span></span>
-                                                <span class="gh-badge"><span class="gh-k">LOC</span><span class="gh-v gh-v-gold">~6k</span></span>
+                                                <span class="gh-badge"><span class="gh-k">LOC</span><span class="gh-v gh-v-gold">~63k</span></span>
                                             </div>
                                             <ul class="showcase-list">
-                                                <li data-en="React frontend + Supabase (Postgres, auth, storage)">Frontend React + Supabase (Postgres, auth, storage)</li>
-                                                <li data-en="MCP server on a Raspberry Pi for extracting and indexing legal content">Serwer MCP na Raspberry Pi do ekstrakcji i indeksowania treści aktów prawnych</li>
-                                                <li data-en="Statute database built from the Polish Parliament API, parsing PDFs to text">Baza ustaw budowana z API Sejmu RP, parsowanie PDF-ów do tekstu</li>
-                                                <li data-en="Every answer cites the source with a direct ISAP link">Każda odpowiedź cytuje źródło z bezpośrednim linkiem do ISAP</li>
+                                                <li data-en="React + Supabase (Postgres + pgvector) frontend, Edge Functions on Deno">Frontend React + Supabase (Postgres + pgvector), funkcje Edge na Deno</li>
+                                                <li data-en="Index of ~15,000 Polish statutes pulled live from the Sejm API (ISAP), PDFs parsed to text">Indeks ~15 000 polskich aktów pobieranych na żywo z API Sejmu (ISAP), parsowanie PDF-ów do tekstu</li>
+                                                <li data-en="MCP server (Deno) on a Raspberry Pi: 8 tools for searching and citing statutes">Serwer MCP (Deno) na Raspberry Pi: 8 narzędzi do wyszukiwania i cytowania aktów</li>
+                                                <li data-en="A 7-layer anti-hallucination pipeline validates every citation before it reaches the user">7-warstwowy pipeline anty-halucynacyjny waliduje każdy cytat, zanim trafi do użytkownika</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-prawo-chall" aria-labelledby="tab-prawo-chall" hidden>
@@ -517,7 +519,7 @@
                                 <div class="showcase-info">
                                     <div class="project-tags">
                                         <span class="tag">Python</span>
-                                        <span class="tag">Selenium</span>
+                                        <span class="tag">Playwright</span>
                                         <span class="tag tag-burgundy">Automation</span>
                                     </div>
                                     <h3 class="showcase-title">AutoMargiela</h3>
@@ -536,14 +538,14 @@
                                         <div class="showcase-panel" role="tabpanel" id="panel-margiela-tech" aria-labelledby="tab-margiela-tech" hidden>
                                             <div class="gh-badges">
                                                 <span class="gh-badge"><span class="gh-k">lang</span><span class="gh-v gh-v-blue">Python</span></span>
-                                                <span class="gh-badge"><span class="gh-k">scraping</span><span class="gh-v gh-v-green">Selenium</span></span>
-                                                <span class="gh-badge"><span class="gh-k">type</span><span class="gh-v gh-v-slate">automation</span></span>
-                                                <span class="gh-badge"><span class="gh-k">LOC</span><span class="gh-v gh-v-gold">~3k</span></span>
+                                                <span class="gh-badge"><span class="gh-k">scraping</span><span class="gh-v gh-v-green">Playwright</span></span>
+                                                <span class="gh-badge"><span class="gh-k">dashboard</span><span class="gh-v gh-v-slate">Flask + SQLite</span></span>
+                                                <span class="gh-badge"><span class="gh-k">LOC</span><span class="gh-v gh-v-gold">~14k</span></span>
                                             </div>
                                             <ul class="showcase-list">
-                                                <li data-en="Python + Selenium; a scraper querying multiple stores in parallel">Python + Selenium; scraper odpytujący wiele sklepów równolegle</li>
-                                                <li data-en="Scheduled runs + email alerts with price-change history">Cykliczny harmonogram + powiadomienia e-mail z historią zmian cen</li>
-                                                <li data-en="Dashboard to manage watched products and price thresholds">Panel do zarządzania obserwowanymi produktami i progami cenowymi</li>
+                                                <li data-en="Python + Playwright scraping 3 stores (Notino, Sephora, Flaconi), running every 6 h via a systemd timer">Python + Playwright śledzący 3 sklepy (Notino, Sephora, Flaconi), uruchamiany co 6 h timerem systemd</li>
+                                                <li data-en="Alerts (Discord/Telegram) on a price drop over 5%, with full change history">Alerty (Discord/Telegram) przy spadku ceny powyżej 5%, z pełną historią zmian</li>
+                                                <li data-en="Flask + SQLite dashboard with an /analytics panel: 12 charts, z-score and percentile buy signals">Panel Flask + SQLite z zakładką /analytics: 12 wykresów, sygnały kupna z z-score i percentyli</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-margiela-chall" aria-labelledby="tab-margiela-chall" hidden>
@@ -608,16 +610,16 @@
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-majeranek-tech" aria-labelledby="tab-majeranek-tech" hidden>
                                             <div class="gh-badges">
+                                                <span class="gh-badge"><span class="gh-k">framework</span><span class="gh-v gh-v-green">Next.js 14</span></span>
                                                 <span class="gh-badge"><span class="gh-k">lang</span><span class="gh-v gh-v-blue">TypeScript</span></span>
-                                                <span class="gh-badge"><span class="gh-k">frontend</span><span class="gh-v gh-v-slate">React</span></span>
-                                                <span class="gh-badge"><span class="gh-k">backend</span><span class="gh-v gh-v-green">Supabase</span></span>
-                                                <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-burgundy">LLM</span></span>
-                                                <span class="gh-badge"><span class="gh-k">status</span><span class="gh-v gh-v-gold">WIP</span></span>
+                                                <span class="gh-badge"><span class="gh-k">backend</span><span class="gh-v gh-v-slate">Supabase</span></span>
+                                                <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-burgundy">Claude</span></span>
+                                                <span class="gh-badge"><span class="gh-k">LOC</span><span class="gh-v gh-v-gold">~115k</span></span>
                                             </div>
                                             <ul class="showcase-list">
-                                                <li data-en="TypeScript + React + Supabase, with a drag & drop tier-list interface">TypeScript + React + Supabase, interfejs drag & drop do tier list</li>
-                                                <li data-en="A language model analyzes patterns in the user's ratings">Model językowy analizuje wzorce w ocenach użytkownika</li>
-                                                <li data-en="Cross-media recommendation engine (a film from your music taste, etc.)">Silnik rekomendacji cross-mediowych (film z gustu muzycznego itp.)</li>
+                                                <li data-en="Next.js 14 + Supabase (53 data models, RLS), with a drag & drop tier-list interface">Next.js 14 + Supabase (53 modele danych, RLS); interfejs drag & drop do tier list</li>
+                                                <li data-en="Ordering items through head-to-head duels: ELO / Glicko-2 rankings">Porządkowanie pozycji przez pojedynki parami: rankingi ELO / Glicko-2</li>
+                                                <li data-en="Cross-media recommendations (Claude) plus full PL/EN bilingualism (2,256 i18n keys)">Rekomendacje cross-mediowe na Claude + pełna dwujęzyczność PL/EN (2256 kluczy i18n)</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-majeranek-chall" aria-labelledby="tab-majeranek-chall" hidden>
@@ -682,15 +684,16 @@
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-aigets-tech" aria-labelledby="tab-aigets-tech" hidden>
                                             <div class="gh-badges">
-                                                <span class="gh-badge"><span class="gh-k">concept</span><span class="gh-v gh-v-slate">system prompt</span></span>
-                                                <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-burgundy">LLM</span></span>
-                                                <span class="gh-badge"><span class="gh-k">models</span><span class="gh-v gh-v-green">Claude · GPT</span></span>
+                                                <span class="gh-badge"><span class="gh-k">framework</span><span class="gh-v gh-v-green">React 19 + Vite</span></span>
+                                                <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-burgundy">Claude Haiku</span></span>
+                                                <span class="gh-badge"><span class="gh-k">models</span><span class="gh-v gh-v-slate">Claude · GPT · Gemini</span></span>
+                                                <span class="gh-badge"><span class="gh-k">LOC</span><span class="gh-v gh-v-gold">~34k</span></span>
                                                 <span class="gh-badge"><span class="gh-k">status</span><span class="gh-v gh-v-gold">WIP</span></span>
                                             </div>
                                             <ul class="showcase-list">
-                                                <li data-en="Profile configurator: tone, context, and work style">Konfigurator profilu: ton, kontekst i styl pracy</li>
-                                                <li data-en="Profile exported as a ready-made system prompt">Eksport profilu jako gotowy system prompt</li>
-                                                <li data-en="Compatible with Claude, GPT, and other LLM models">Kompatybilność z Claude, GPT i innymi modelami LLM</li>
+                                                <li data-en="A 13-step profile builder: tone, context, work style + 10 behaviour toggles">13-krokowy kreator profilu: ton, kontekst, styl pracy + 10 przełączników zachowania</li>
+                                                <li data-en="The profile is exported as a ready-made system prompt (generated by Claude Haiku)">Profil eksportowany jako gotowy system prompt (generowany przez Claude Haiku)</li>
+                                                <li data-en="4 target models: Claude, ChatGPT, Gemini and a universal variant">4 docelowe modele: Claude, ChatGPT, Gemini i wariant uniwersalny</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-aigets-chall" aria-labelledby="tab-aigets-chall" hidden>
@@ -743,7 +746,7 @@
                                 <span class="tag">PLLuM-12B</span>
                                 <span class="tag">on-device</span>
                             </div>
-                            <p data-en="Local, fully offline audio transcription and structuring of service notes on Poland's PLLuM-12B model — no cloud, no external APIs.">Lokalna, w 100% offline transkrypcja audio i strukturyzacja notatek służbowych na polskim modelu PLLuM-12B — zero chmury i zewnętrznych API.</p>
+                            <p data-en="You drop in a meeting recording and get back a ready service note — fully offline, on Poland's government PLLuM-12B model (~13 GB) and Whisper. I wanted the data to never leave the laptop.">Wrzucasz nagranie ze spotkania, a dostajesz gotową notatkę służbową — w całości offline, na rządowym modelu PLLuM-12B (~13 GB) i Whisperze. Zależało mi, żeby dane nie opuszczały laptopa.</p>
                             <a class="tools-card-link" href="https://github.com/karolpolikarp/Stefka-PPLuM-macOS.Silicon" target="_blank" rel="noopener" data-en="Repository">Repozytorium
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                             </a>
@@ -761,7 +764,7 @@
                                 <span class="tag">CLI</span>
                                 <span class="tag">ISAP</span>
                             </div>
-                            <p data-en="Scraper and monitor of Polish legal acts (Journal of Laws / Monitor Polski) from the Sejm's ISAP — CSV/JSON export and change alerts.">Scraper i monitor aktów prawnych (Dz.U./M.P.) z systemu ISAP Sejmu RP — eksport CSV/JSON i alerty o zmianach.</p>
+                            <p data-en="Pulls and watches changes in Polish law (Journal of Laws / Monitor Polski) straight from the Sejm API: 6 CLI modes, CSV/JSON export and a daily check for new acts.">Pobiera i pilnuje zmian w polskim prawie (Dz.U./M.P.) prosto z API Sejmu RP: 6 trybów CLI, eksport CSV/JSON i sprawdzanie nowości co 24 h.</p>
                             <a class="tools-card-link" href="https://github.com/karolpolikarp/isapscrap" target="_blank" rel="noopener" data-en="Repository">Repozytorium
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                             </a>
@@ -779,7 +782,7 @@
                                 <span class="tag">Swing</span>
                                 <span class="tag">Robot</span>
                             </div>
-                            <p data-en="An auto-clicker with humanised mouse movement, named click sequences and configurable execution patterns.">Autoklikacz z humanizowanym ruchem myszy, sekwencjami klikania i konfigurowalnymi wzorcami wykonywania.</p>
+                            <p data-en="An auto-clicker that clicks like a human — a Bézier-curve path and random delays so the movement doesn't look robotic. 1,082 lines of Java, zero dependencies (standard library only).">Autoklikacz, który klika jak człowiek — tor po krzywej Béziera i losowe opóźnienia, żeby ruch nie wyglądał maszynowo. 1082 linie Javy, zero zależności (tylko standardowa biblioteka).</p>
                             <a class="tools-card-link" href="https://github.com/karolpolikarp/Multi-Sequence-Clicker" target="_blank" rel="noopener" data-en="Repository">Repozytorium
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                             </a>
@@ -804,7 +807,7 @@
                                     <span class="tag">Pandas</span>
                                 </div>
                                 <h3 data-en="Stock forecasts from ESPI">Prognozy giełdowe z ESPI</h3>
-                                <p data-en="Can an LLM predict the market's reaction to a filing? ~1500 Allegro ESPI reports, forecasts across 5 horizons.">Czy LLM przewidzi reakcję rynku na raport ESPI? ~1500 komunikatów Allegro i prognozy na 5 horyzontów czasowych.</p>
+                                <p data-en="Can a language model read ESPI filings and predict Allegro's stock move? I took 134 reports and 1,050 trading sessions and matched GPT-4o-mini forecasts across 5 horizons (D0–D30) against what actually happened.">Czy model językowy potrafi czytać komunikaty ESPI i przewidzieć ruch kursu Allegro? Wziąłem 134 raporty i 1050 sesji notowań, i zestawiłem prognozy GPT-4o-mini na 5 horyzontów (D0–D30) z tym, co stało się naprawdę.</p>
                             </div>
                         </a>
 
@@ -828,7 +831,7 @@
                                     <span class="tag">k-means</span>
                                 </div>
                                 <h3 data-en="Airbnb Winnipeg">Airbnb Winnipeg</h3>
-                                <p data-en="Short-term rental EDA in R: cleaning, MICE imputation, correlations, k-means and an interactive map.">Analiza rynku najmu w R: czyszczenie, imputacja MICE, korelacje, k-means i interaktywna mapa.</p>
+                                <p data-en="I took 1,626 Airbnb listings (79 variables) and ran the full R pipeline: cleaning, MICE imputation, correlations and k-means that surfaced 4 host segments — with an interactive map at the end.">Wziąłem 1626 ofert Airbnb (79 zmiennych) i w R przeszedłem całą drogę: czyszczenie, imputacja MICE, korelacje i k-means, który wyłonił 4 segmenty gospodarzy — z interaktywną mapą na końcu.</p>
                             </div>
                         </a>
 
@@ -840,7 +843,7 @@
                                     <span class="tag">statsmodels</span>
                                 </div>
                                 <h3 data-en="Airbnb Washington">Airbnb Waszyngton</h3>
-                                <p data-en="Rental-price analysis in Python: EDA, distributions and association tests (chi-square, OLS).">Analiza cen najmu w Pythonie: EDA, rozkłady i testy związków zmiennych (chi-kwadrat, regresja OLS).</p>
+                                <p data-en="5,454 Washington Airbnb listings, the same toolkit on the Python side: what actually drives the rental price? Distributions, correlations and association tests (chi-square, OLS).">5454 oferty Airbnb w Waszyngtonie, ten sam warsztat po stronie Pythona: co realnie napędza cenę najmu? Rozkłady, korelacje i testy związków zmiennych (chi-kwadrat, regresja OLS).</p>
                             </div>
                         </a>
 
@@ -852,7 +855,7 @@
                                     <span class="tag">PCA</span>
                                 </div>
                                 <h3 data-en="Video game market">Rynek gier wideo</h3>
-                                <p data-en="Game-sales big data: EDA, PCA, K-Means clustering and a RandomForest sales model.">Big data o sprzedaży gier: EDA, PCA, klastrowanie K-Means i model RandomForest.</p>
+                                <p data-en="~16.5k game titles: from EDA and PCA, through K-Means (5 segments), to a RandomForest sales model and Isolation Forest anomaly detection.">~16,5 tys. tytułów gier: od EDA i PCA, przez K-Means (5 segmentów), po model RandomForest przewidujący sprzedaż i wykrywanie anomalii Isolation Forest.</p>
                             </div>
                         </a>
 
@@ -864,7 +867,7 @@
                                     <span class="tag">PCA</span>
                                 </div>
                                 <h3 data-en="User segmentation">Segmentacja użytkowników</h3>
-                                <p data-en="Segmenting users on speed-dating data: PCA + K-Means and three profiles for marketing.">Segmentacja użytkowników (speed dating): PCA + K-Means i trzy profile pod kampanie marketingowe.</p>
+                                <p data-en="From 8,378 speed-dating records I kept 541 and reduced ~200 variables to 10 features. PCA + K-Means gave 3 segments (38/33/29%) ready for marketing campaigns.">Z 8378 obserwacji speed datingu zostawiłem 541 i sprowadziłem ~200 zmiennych do 10 cech. PCA + K-Means dały 3 segmenty (38/33/29%) gotowe pod kampanie marketingowe.</p>
                             </div>
                         </a>
 
