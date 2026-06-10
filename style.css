@@ -3157,10 +3157,10 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.32;
-    filter: blur(5px);
+    opacity: 0.3;
+    filter: blur(2px);
     /* lekkie powiększenie, żeby rozmyte krawędzie nie odsłaniały tła kafla */
-    transform: scale(1.1);
+    transform: scale(1.04);
     z-index: 1;
 }
 /* Zasłona przyciemniająca — najmocniejsza u dołu, gdzie leży tekst → napisy czytelne. */
