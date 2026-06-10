@@ -4537,6 +4537,14 @@ section {
     transition: transform var(--transition-slow);
 }
 
+/* Wariant dla bardzo szerokich zrzutów (np. AutoMargiela): pokazuje CAŁY obraz
+   na dopasowanym ciemnym tle, zamiast przycinać boki. */
+.showcase-img--contain {
+    object-fit: contain;
+    object-position: center;
+    background: #0a0b09;
+}
+
 .showcase-media-frame:hover .showcase-img {
     transform: scale(1.03);
 }
