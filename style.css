@@ -3126,8 +3126,8 @@ section {
     position: relative;
     z-index: 2;
     padding: var(--space-lg);
-    /* Cień chroni czytelność tekstu nad zdjęciem (zieleń jest teraz lekka). */
-    text-shadow: 0 1px 4px rgba(0, 18, 9, 0.6);
+    /* Cień + delikatna poświata chronią czytelność tekstu nad zdjęciem. */
+    text-shadow: 0 1px 3px rgba(0, 10, 5, 0.9), 0 0 8px rgba(0, 10, 5, 0.45);
 }
 .ds-tile-body h3 {
     font-family: var(--font-serif);
@@ -3138,7 +3138,7 @@ section {
 }
 .ds-tile-body p {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.95);
     line-height: 1.55;
     margin: 0;
 }
