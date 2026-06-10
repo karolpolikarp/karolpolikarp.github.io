@@ -3222,8 +3222,8 @@ section {
    rząd 1 — ESPI (8) + gry wideo (4), dwa mocne kafle;
    rząd 2 — para Airbnb: Winnipeg (6) + Waszyngton (6), równe i obok siebie;
    rząd 3 — speed dating jako niski, szeroki pasek (najmniej eksponowany). */
-.ds-tile--feature   { grid-column: span 8; min-height: 260px; }
-.ds-tile--highlight { grid-column: span 4; min-height: 260px; }
+.ds-tile--feature   { grid-column: span 8; min-height: 210px; }
+.ds-tile--highlight { grid-column: span 4; min-height: 210px; }
 .ds-tile--pair      { grid-column: span 6; min-height: 200px; }
 .ds-tile--wide      { grid-column: span 12; min-height: 130px; }
 
