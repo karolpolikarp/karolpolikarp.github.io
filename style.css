@@ -3230,6 +3230,8 @@ section {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
 }
+/* Badge techniczne (klucz–wartość) w karcie narzędzia */
+.tools-card .gh-badges { margin: var(--space-xs) 0 0; }
 /* Nagłówek: ikona + nazwa w jednej linii */
 .tools-card-head {
     display: flex;
