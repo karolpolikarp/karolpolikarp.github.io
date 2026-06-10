@@ -3126,6 +3126,8 @@ section {
     position: relative;
     z-index: 2;
     padding: var(--space-lg);
+    /* Cień chroni czytelność tekstu nad zdjęciem (zieleń jest teraz lekka). */
+    text-shadow: 0 1px 4px rgba(0, 18, 9, 0.6);
 }
 .ds-tile-body h3 {
     font-family: var(--font-serif);
@@ -3159,10 +3161,10 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.4;
-    filter: blur(1.3px);
+    opacity: 0.52;
+    filter: blur(0.5px);
     /* lekkie powiększenie, żeby rozmyte krawędzie nie odsłaniały tła kafla */
-    transform: scale(1.04);
+    transform: scale(1.03);
     z-index: 1;
 }
 /* Zasłona przyciemniająca — najmocniejsza u dołu, gdzie leży tekst → napisy czytelne.
@@ -3173,9 +3175,9 @@ section {
     inset: 0;
     z-index: 1;
     background: linear-gradient(to top,
-        rgba(0, 28, 16, 0.82) 0%,
-        rgba(0, 38, 22, 0.4) 52%,
-        rgba(0, 46, 27, 0.12) 100%);
+        rgba(0, 28, 16, 0.68) 0%,
+        rgba(0, 38, 22, 0.24) 52%,
+        rgba(0, 46, 27, 0.04) 100%);
     pointer-events: none;
 }
 
