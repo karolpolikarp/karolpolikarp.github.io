@@ -3077,7 +3077,8 @@ section {
 .ds-heading,
 .tools-heading {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
+    /* Ta sama wielkość co tytuły projektów (.showcase-title, np. „upfor"). */
+    font-size: 2.1rem;
     font-weight: 600;
     text-align: center;
     margin-bottom: var(--space-lg);
@@ -3294,7 +3295,7 @@ section {
 }
 @media (max-width: 768px) {
     .ds-section, .tools-section { margin-top: var(--space-md); }
-    .apps-heading, .ds-heading, .tools-heading { font-size: 1.3rem; margin-bottom: var(--space-md); }
+    .apps-heading, .ds-heading, .tools-heading { font-size: 1.65rem; margin-bottom: var(--space-md); }
 }
 
 /* Project subtitle (for Whoisi) */
@@ -4873,6 +4874,7 @@ section {
     .showcase-slide { padding: var(--space-md); gap: var(--space-md); }
     .showcase-panels { min-height: 120px; }
     .showcase-title { font-size: 1.4rem; }
+    .apps-heading, .ds-heading, .tools-heading { font-size: 1.4rem; }
     .showcase-subtitle { font-size: 0.95rem; margin-bottom: var(--space-sm); }
     .showcase-tab { font-size: 0.92rem; padding: var(--space-sm); }
     .showcase-panel p { font-size: 0.9rem; line-height: 1.5; }
