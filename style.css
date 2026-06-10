@@ -1077,6 +1077,8 @@ section {
     gap: var(--space-md);
     flex-wrap: wrap;
 }
+/* Na desktopie social żyje w pasku nav — w hero pokazujemy je tylko na mobilce. */
+.hero-social-link { display: none; }
 
 /* Hero Keywords */
 .hero-keywords {
@@ -3705,13 +3707,36 @@ section {
         padding-bottom: var(--space-3xl);
     }
 
+    /* Główne CTA pełną szerokością; "Kontakt" + ikony social naturalnej szerokości pod spodem. */
     .hero-cta {
-        flex-direction: column;
-    }
-
-    .hero-cta .btn {
-        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
         justify-content: center;
+        align-items: center;
+        gap: var(--space-sm);
+    }
+    .hero-cta .btn-primary {
+        flex: 1 1 100%;
+        justify-content: center;
+    }
+    .hero-cta .btn-secondary {
+        width: auto;
+    }
+    .hero-social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        align-self: stretch;
+        width: 52px;
+        background: var(--color-surface);
+        border: 2px solid var(--color-border);
+        border-radius: var(--radius-md);
+        color: var(--color-text);
+        transition: all 0.3s ease;
+    }
+    .hero-social-link:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent-dark);
     }
 
     .skills-grid {
