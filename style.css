@@ -3093,8 +3093,8 @@ section {
     color: var(--color-text-tertiary);
 }
 
-/* Data Science — siatka BENTO 12-kolumn: kafel flagowy + CTA (wciągnięty guzik
-   "Wszystkie repo") + równe kafle 2×2. Każdy rząd sumuje się do 12 → ZERO pustek. */
+/* Data Science — bento 12-kolumn, mieszane rozmiary, każdy kafel ze zrzutem
+   notebooka w tle (jak ESPI). Przycisk "Wszystkie repozytoria" pod siatką. */
 .ds-bento {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -3104,17 +3104,19 @@ section {
 }
 .ds-tile {
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 190px;
     text-decoration: none;
-    color: inherit;
-    border: 1px solid var(--color-border);
+    color: #fff;
+    border: 1px solid transparent;
     border-radius: var(--radius-lg);
-    background: var(--color-surface);
+    background: var(--color-primary-gradient);
     overflow: hidden;
-    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 .ds-tile:hover {
-    border-color: var(--color-primary);
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
 }
@@ -3128,76 +3130,71 @@ section {
     font-size: 1.15rem;
     font-weight: 600;
     margin: var(--space-xs) 0 var(--space-sm);
+    color: #fff;
 }
 .ds-tile-body p {
     font-size: 0.9rem;
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.55;
     margin: 0;
 }
 .ds-tile .project-tags { margin-bottom: var(--space-sm); }
-
-/* Kafel flagowy — gradient marki, biały tekst, zrzut jako subtelne tło */
-.ds-tile--feature {
-    grid-column: span 8;
-    min-height: 210px;
-    display: flex;
-    align-items: flex-end;
-    background: var(--color-primary-gradient);
-    border-color: transparent;
+/* Tagi czytelne na zielonym kaflu (rok zostaje ciemnym pillem w rogu). */
+.ds-tile .project-tags .tag {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
-.ds-tile--feature .ds-tile-body h3 { color: #fff; }
-.ds-tile--feature .ds-tile-body p { color: rgba(255, 255, 255, 0.85); }
+.ds-tile .project-tags .tag-burgundy {
+    background: rgba(176, 64, 64, 0.62);
+    border-color: rgba(255, 150, 150, 0.45);
+}
+
+/* Każdy kafel: zrzut notebooka jako subtelne tło (jak ESPI). */
 .ds-tile-shot {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.18;
+    opacity: 0.22;
     z-index: 1;
 }
-.ds-flag {
-    display: inline-block;
-    font-family: var(--font-sans);
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #1a3b29;
-    background: var(--color-accent);
-    padding: 3px 9px;
-    border-radius: var(--radius-full);
-    margin-bottom: var(--space-sm);
-}
 
-/* Kafel CTA */
-.ds-tile--cta {
-    grid-column: span 4;
+/* Mieszane rozmiary bento: ESPI duży + Winnipeg wysoki (rząd 1), 3 kafle (rząd 2). */
+.ds-tile--feature { grid-column: span 8; min-height: 240px; }
+.ds-tile--tall    { grid-column: span 4; min-height: 240px; }
+.ds-tile--cell    { grid-column: span 4; min-height: 190px; }
+
+/* Przycisk pod siatką — "Wszystkie repozytoria" */
+.ds-allrepos {
     display: flex;
     align-items: center;
-    background: var(--color-accent-subtle);
-}
-.ds-tile--cta h3 { font-size: 1.05rem; margin-top: 0; }
-.ds-cta-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: var(--space-sm);
-    font-weight: 600;
+    justify-content: center;
+    gap: var(--space-sm);
+    max-width: 1340px;
+    margin: var(--space-md) auto 0;
+    padding: var(--space-md) var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
     color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform var(--transition-base), border-color var(--transition-base), background var(--transition-base);
 }
-[data-theme="dark"] .ds-cta-link { color: #2e9d62; }
-
-/* Kafle zwykłe — 2 na rząd */
-.ds-tile--cell { grid-column: span 6; }
+.ds-allrepos:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-subtle);
+    transform: translateY(-2px);
+}
+[data-theme="dark"] .ds-allrepos { color: #2e9d62; }
 
 @media (max-width: 768px) {
     .ds-bento { grid-template-columns: 1fr; gap: var(--space-sm); }
     .ds-tile--feature,
-    .ds-tile--cta,
-    .ds-tile--cell { grid-column: 1 / -1; }
-    .ds-tile--feature { min-height: 160px; }
+    .ds-tile--tall,
+    .ds-tile--cell { grid-column: 1 / -1; min-height: 150px; }
     .ds-tile-body { padding: var(--space-md); }
 }
 
@@ -4532,7 +4529,7 @@ section {
 .showcase-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     min-width: 0;
 }
 
@@ -4614,8 +4611,9 @@ section {
     margin-bottom: var(--space-md);
 }
 
-/* Box dopasowuje się do AKTYWNEJ zakładki (krótszy slajd, bez rezerwy na
-   najwyższą zakładkę). Ukryte panele wypadają z układu. */
+/* Wszystkie panele dzielą tę samą komórkę gridu → box ma STAŁĄ wysokość
+   (= najwyższa zakładka), więc przełączanie zakładek nie zmienia wysokości.
+   Track rozciąga wszystkie slajdy do najwyższego → brak skakania między projektami. */
 .showcase-panel {
     grid-area: 1 / 1;
     min-width: 0;
@@ -4625,7 +4623,7 @@ section {
 }
 
 .showcase-panel[hidden] {
-    display: none;
+    display: block;
 }
 
 .showcase-panel.is-active {
@@ -4725,7 +4723,9 @@ section {
 }
 
 .showcase-cta {
-    margin-top: 0;
+    /* przypięty do dołu boxa — przy stałej wysokości CTA jest zawsze na spodzie */
+    margin-top: auto;
+    padding-top: var(--space-md);
     display: flex;
     gap: var(--space-md);
 }
