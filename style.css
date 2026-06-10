@@ -1846,6 +1846,30 @@ section {
     border-color: rgba(255, 255, 255, 0.14);
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
+
+/* Chip ilości kodu — pod chipem daty w rogu karty narzędzia. Złoty akcent (jak "kod" w aplikacjach). */
+.tag-loc {
+    position: absolute;
+    top: calc(var(--space-md) + 1.7rem);
+    right: var(--space-md);
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--color-surface);
+    color: var(--color-accent-dark);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+}
+.tag-loc svg { width: 11px; height: 11px; }
+[data-theme="dark"] .tag-loc {
+    background: rgba(10, 14, 12, 0.85);
+    color: var(--color-accent);
+    border-color: rgba(255, 255, 255, 0.14);
+}
 /* W karuzeli chip roku ląduje w jednym wierszu z tagami technologii
    (tagi siedzą na górnym paddingu slajdu = space-xl). */
 .showcase-info .tag-year { top: var(--space-xl); }
@@ -3230,8 +3254,6 @@ section {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
 }
-/* Badge techniczne (klucz–wartość) w karcie narzędzia */
-.tools-card .gh-badges { margin: var(--space-xs) 0 0; }
 /* Nagłówek: ikona + nazwa w jednej linii */
 .tools-card-head {
     display: flex;
