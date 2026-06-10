@@ -3159,22 +3159,23 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.3;
-    filter: blur(2px);
+    opacity: 0.4;
+    filter: blur(1.3px);
     /* lekkie powiększenie, żeby rozmyte krawędzie nie odsłaniały tła kafla */
     transform: scale(1.04);
     z-index: 1;
 }
-/* Zasłona przyciemniająca — najmocniejsza u dołu, gdzie leży tekst → napisy czytelne. */
+/* Zasłona przyciemniająca — najmocniejsza u dołu, gdzie leży tekst → napisy czytelne.
+   Lżejsza zieleń, żeby zdjęcia bardziej przebijały. */
 .ds-tile::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: 1;
     background: linear-gradient(to top,
-        rgba(0, 28, 16, 0.92) 0%,
-        rgba(0, 38, 22, 0.55) 52%,
-        rgba(0, 46, 27, 0.22) 100%);
+        rgba(0, 28, 16, 0.82) 0%,
+        rgba(0, 38, 22, 0.4) 52%,
+        rgba(0, 46, 27, 0.12) 100%);
     pointer-events: none;
 }
 
