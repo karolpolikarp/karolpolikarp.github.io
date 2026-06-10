@@ -3194,64 +3194,86 @@ section {
 }
 .tools-card {
     display: flex;
-    gap: var(--space-md);
-    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-sm);
     padding: var(--space-lg);
-    text-decoration: none;
-    color: inherit;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
 }
 .tools-card:hover {
     border-color: var(--color-primary);
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
 }
+/* Nagłówek: ikona + nazwa w jednej linii */
+.tools-card-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
 .tools-card-icon {
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 9px;
     background: var(--color-primary-subtle);
     color: var(--color-primary);
 }
-.tools-card-icon svg { width: 24px; height: 24px; }
+.tools-card-icon svg { width: 20px; height: 20px; }
 [data-theme="dark"] .tools-card-icon { color: #2e9d62; }
-.tools-card-body { min-width: 0; }
-.tools-card-body h3 {
+.tools-card-head h3 {
     font-family: var(--font-serif);
     font-size: 1.1rem;
     font-weight: 600;
-    margin: var(--space-xs) 0 6px;
+    margin: 0;
 }
-.tools-card-body p {
-    font-size: 0.88rem;
+/* Tagi w jednej linii */
+.tools-card .project-tags {
+    flex-wrap: nowrap;
+    gap: 6px;
+    overflow: hidden;
+}
+/* Opis na całą szerokość karty; rośnie, by przyciski wyrównały się na dole */
+.tools-card p {
+    font-size: 0.9rem;
     color: var(--color-text-secondary);
-    line-height: 1.5;
+    line-height: 1.55;
+    margin: 0;
+    flex: 1;
 }
-/* Karta narzędzia bez linku (np. prywatne repo / brak demo) */
-.tools-card-static {
-    cursor: default;
-}
-.tools-card-static:hover {
-    transform: none;
-    border-color: var(--color-border);
-    box-shadow: none;
-}
-.tools-note {
+/* Przycisk do repozytorium */
+.tools-card-link {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--space-xs);
+    padding: 7px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
     font-family: var(--font-sans);
-    font-size: 0.66rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: var(--color-text-tertiary);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-left: 6px;
-    vertical-align: middle;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+}
+.tools-card-link svg { width: 14px; height: 14px; }
+.tools-card-link:hover {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+}
+[data-theme="dark"] .tools-card-link { color: #2e9d62; }
+[data-theme="dark"] .tools-card-link:hover {
+    background: var(--color-primary-light);
+    color: #fff;
+    border-color: var(--color-primary-light);
 }
 @media (max-width: 768px) {
     .ds-section, .tools-section { margin-top: var(--space-md); }
