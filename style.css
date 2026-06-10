@@ -3047,7 +3047,7 @@ section {
     /* To są PODsekcje — wyzeruj odziedziczony padding 6rem z globalnego `section {}`,
        inaczej nad każdym nagłówkiem siedzi ~96px i odstępy są ogromne. */
     padding: 0;
-    margin-top: var(--space-lg);
+    margin-top: var(--space-xl);
     margin-bottom: 0;
 }
 .apps-heading,
@@ -3057,7 +3057,7 @@ section {
     font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
 }
 /* Nagłówek "Aplikacje" nad karuzelą — bliżej tytułu sekcji */
 .apps-heading {
