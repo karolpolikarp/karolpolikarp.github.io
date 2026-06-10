@@ -1825,15 +1825,27 @@ section {
 }
 /* Chip roku — stonowany, monospace, odróżnia się od tagów technologii */
 .tag-year {
-    background: transparent;
+    /* Rok zawsze w prawym górnym rogu karty/slajdu (kontener ma position: relative). */
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: 4;
+    background: var(--color-surface);
     color: var(--color-text-tertiary);
     border: 1px solid var(--color-border);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
     font-family: var(--font-mono);
     font-weight: 600;
     text-transform: none;
     letter-spacing: 0.02em;
 }
-.tools-card-head .tag-year { margin-left: auto; }
+/* Wyższa specyficzność niż [data-theme="dark"] .tag — żeby chip roku nie zlał się z tagami. */
+[data-theme="dark"] .tag-year {
+    background: rgba(10, 14, 12, 0.85);
+    color: rgba(255, 255, 255, 0.72);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
 
 .tag-burgundy {
     background: var(--color-burgundy);
@@ -3084,7 +3096,7 @@ section {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--space-md);
-    max-width: 1040px;
+    max-width: 1340px;
     margin: 0 auto;
 }
 .ds-tile {
@@ -3191,7 +3203,7 @@ section {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--space-lg);
-    max-width: 1040px;
+    max-width: 1340px;
     margin: 0 auto;
 }
 .tools-card {
@@ -3201,6 +3213,7 @@ section {
     .tools-card { grid-column: 1 / -1; }
 }
 .tools-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
@@ -4336,6 +4349,7 @@ section {
 }
 
 .showcase-slide {
+    position: relative;
     flex: 0 0 100%;
     min-width: 100%;
     display: grid;
@@ -4359,12 +4373,14 @@ section {
     flex-direction: column;
     gap: var(--space-md);
     min-width: 0;
+    /* Gdy kolumna z opisem jest wyższa, ramka zdjęcia zostaje wyśrodkowana w pionie. */
+    justify-content: center;
 }
 
 .showcase-media-frame {
-    /* Fill the full height of the slide so the screenshot is the dominant element
-       with no dead space above/below it. */
-    flex: 1;
+    /* Ramka dopasowuje się do treści (pasek + zrzut 16:10 + galeria),
+       a nie do wysokości slajdu — dzięki temu proporcje zrzutu są stałe. */
+    flex: none;
     display: flex;
     flex-direction: column;
     min-height: 0;
@@ -4408,8 +4424,9 @@ section {
 
 .showcase-stage {
     position: relative;
-    flex: 1;
-    min-height: 0;
+    /* Stałe proporcje zrzutu (niezależne od ilości tekstu w slajdzie). */
+    flex: none;
+    aspect-ratio: 16 / 10;
     background: linear-gradient(135deg, var(--color-primary-subtle), var(--color-bg-alt));
     overflow: hidden;
 }
