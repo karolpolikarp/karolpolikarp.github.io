@@ -4376,14 +4376,11 @@ section {
     flex-direction: column;
     gap: var(--space-md);
     min-width: 0;
-    /* Gdy kolumna z opisem jest wyższa, ramka zdjęcia zostaje wyśrodkowana w pionie. */
-    justify-content: center;
 }
 
 .showcase-media-frame {
-    /* Ramka dopasowuje się do treści (pasek + zrzut 16:10 + galeria),
-       a nie do wysokości slajdu — dzięki temu proporcje zrzutu są stałe. */
-    flex: none;
+    /* Ramka wypełnia wysokość kolumny mediów, więc zrzut zajmuje cały box bez luk. */
+    flex: 1;
     display: flex;
     flex-direction: column;
     min-height: 0;
@@ -4427,9 +4424,9 @@ section {
 
 .showcase-stage {
     position: relative;
-    /* Stałe proporcje zrzutu (niezależne od ilości tekstu w slajdzie). */
-    flex: none;
-    aspect-ratio: 16 / 10;
+    /* Zrzut wypełnia ramkę na całą wysokość boxa — bez pustego pasa nad/pod. */
+    flex: 1;
+    min-height: 0;
     background: linear-gradient(135deg, var(--color-primary-subtle), var(--color-bg-alt));
     overflow: hidden;
 }
@@ -4551,7 +4548,7 @@ section {
 .showcase-subtitle {
     font-size: 1.15rem;
     color: var(--color-text-secondary);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-md);
 }
 
 /* Tabs — mirror the hero-tabs language */
@@ -4559,7 +4556,7 @@ section {
     display: flex;
     gap: 0;
     border-bottom: 2px solid var(--color-border);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
 }
 
 .showcase-tab {
@@ -4613,12 +4610,12 @@ section {
 .showcase-panels {
     position: relative;
     display: grid;
-    min-height: 224px;
-    margin-bottom: var(--space-lg);
+    min-height: 150px;
+    margin-bottom: var(--space-md);
 }
 
-/* All panels share one grid cell, so the box always sizes to the TALLEST tab.
-   Switching tabs no longer changes the height. */
+/* Box dopasowuje się do AKTYWNEJ zakładki (krótszy slajd, bez rezerwy na
+   najwyższą zakładkę). Ukryte panele wypadają z układu. */
 .showcase-panel {
     grid-area: 1 / 1;
     min-width: 0;
@@ -4627,10 +4624,8 @@ section {
     transition: opacity 0.3s ease;
 }
 
-/* The [hidden] attribute (set by the JS for semantics) must NOT collapse the panel
-   to display:none, otherwise the box would shrink back to the active tab. */
 .showcase-panel[hidden] {
-    display: block;
+    display: none;
 }
 
 .showcase-panel.is-active {
@@ -4639,10 +4634,10 @@ section {
 }
 
 .showcase-panel p {
-    font-size: 1.05rem;
-    line-height: 1.75;
+    font-size: 1rem;
+    line-height: 1.6;
     color: var(--color-text-secondary);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
 }
 
 .showcase-panel p:last-child {
@@ -4656,12 +4651,12 @@ section {
 }
 
 .showcase-list li {
-    font-size: 1rem;
-    line-height: 1.65;
+    font-size: 0.97rem;
+    line-height: 1.5;
     color: var(--color-text-secondary);
     padding-left: var(--space-lg);
     position: relative;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-xs);
 }
 
 .showcase-list li:last-child {
