@@ -3070,7 +3070,8 @@ section {
     /* To są PODsekcje — wyzeruj odziedziczony padding 6rem z globalnego `section {}`,
        inaczej nad każdym nagłówkiem siedzi ~96px i odstępy są ogromne. */
     padding: 0;
-    margin-top: var(--space-xl);
+    /* Oddech przed nagłówkiem ~ jak między „Projekty" a „Aplikacje". */
+    margin-top: var(--space-3xl);
     margin-bottom: 0;
 }
 .apps-heading,
@@ -3294,7 +3295,7 @@ section {
     border-color: var(--color-primary-light);
 }
 @media (max-width: 768px) {
-    .ds-section, .tools-section { margin-top: var(--space-md); }
+    .ds-section, .tools-section { margin-top: var(--space-xl); }
     .apps-heading, .ds-heading, .tools-heading { font-size: 1.65rem; margin-bottom: var(--space-md); }
 }
 
