@@ -1078,6 +1078,7 @@ section {
     flex-wrap: wrap;
 }
 /* Na desktopie social żyje w pasku nav — w hero pokazujemy je tylko na mobilce. */
+.hero-cta-actions { display: flex; align-items: center; gap: var(--space-md); }
 .hero-social-link { display: none; }
 
 /* Hero Keywords */
@@ -3341,6 +3342,8 @@ section {
 @media (max-width: 768px) {
     .ds-section, .tools-section { margin-top: var(--space-xl); }
     .apps-heading, .ds-heading, .tools-heading { font-size: var(--text-3xl); margin-bottom: var(--space-md); }
+    /* Odstęp Projekty→Aplikacje na mobile = jak przed Narzędzia/Data Science (bazowo był 2× większy). */
+    #projekty .section-header { margin-bottom: var(--space-xl); }
 }
 
 /* Project subtitle (for Whoisi) */
@@ -3564,7 +3567,7 @@ section {
    ================================================ */
 @media (max-width: 1024px) {
     .hero .container {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: var(--space-2xl);
     }
 
@@ -3707,27 +3710,36 @@ section {
         padding-bottom: var(--space-3xl);
     }
 
-    /* Główne CTA pełną szerokością; "Kontakt" + ikony social naturalnej szerokości pod spodem. */
+    /* Mobile hero CTA: pasek "Kontakt + GitHub + LinkedIn" pełną szerokością na górze,
+       przycisk "Zobacz projekty" pełną szerokością pod spodem. */
     .hero-cta {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
+        display: flex;
+        flex-direction: column;
         gap: var(--space-sm);
+        min-width: 0;
     }
     .hero-cta .btn-primary {
-        flex: 1 1 100%;
+        order: 2;
+        width: 100%;
         justify-content: center;
     }
-    .hero-cta .btn-secondary {
+    .hero-cta-actions {
+        order: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 52px 52px;
+        gap: var(--space-sm);
+        min-width: 0;
+    }
+    .hero-cta-actions .btn-secondary {
+        min-width: 0;
         width: auto;
+        justify-content: center;
     }
     .hero-social-link {
+        width: auto;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        align-self: stretch;
-        width: 52px;
         background: var(--color-surface);
         border: 2px solid var(--color-border);
         border-radius: var(--radius-md);

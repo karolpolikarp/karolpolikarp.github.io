@@ -1478,12 +1478,18 @@ const ProjectShowcase = {
             this.carousel.style.removeProperty('--sc-badge-top');
             return;
         }
-        const stage = this.slides[this.index]?.querySelector('.showcase-stage');
-        if (!stage) return;
-        const rect = stage.getBoundingClientRect();
-        const top = rect.top - this.carousel.getBoundingClientRect().top;
-        this.carousel.style.setProperty('--sc-arrow-top', (top + rect.height / 2) + 'px');
-        this.carousel.style.setProperty('--sc-badge-top', (top + 12) + 'px');
+        const slide = this.slides[this.index];
+        if (!slide) return;
+        const carTop = this.carousel.getBoundingClientRect().top;
+        // Strzałki: środek całego boxa slajdu (nie samego zdjęcia).
+        const slideRect = slide.getBoundingClientRect();
+        this.carousel.style.setProperty('--sc-arrow-top', (slideRect.top - carTop + slideRect.height / 2) + 'px');
+        // Licznik 01/05: nadal w rogu zdjęcia.
+        const stage = slide.querySelector('.showcase-stage');
+        if (stage) {
+            const sr = stage.getBoundingClientRect();
+            this.carousel.style.setProperty('--sc-badge-top', (sr.top - carTop + 12) + 'px');
+        }
     },
 
     bindControls() {
