@@ -3186,14 +3186,21 @@ section {
     .hero-cta-actions {
         order: 1;
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 52px 52px;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: stretch;
         gap: var(--space-sm);
         min-width: 0;
     }
+    /* Mobile row order: LinkedIn, GitHub, Kontakt */
+    .hero-cta-actions .hero-social-link[aria-label="LinkedIn"] { order: 1; }
+    .hero-cta-actions .hero-social-link[aria-label="GitHub"] { order: 2; }
     .hero-cta-actions .btn-secondary {
+        order: 3;
         min-width: 0;
         width: auto;
         justify-content: center;
+        padding-left: var(--space-sm);
+        padding-right: var(--space-sm);
     }
     .hero-social-link {
         width: auto;
@@ -3206,6 +3213,7 @@ section {
         color: var(--color-text);
         transition: all 0.3s ease;
     }
+    .hero-social-link svg { width: 24px; height: 24px; }
     .hero-social-link:hover {
         border-color: var(--color-accent);
         color: var(--color-accent-dark);

@@ -61,7 +61,7 @@ const LanguageManager = {
 
         // Hero
         ['.greeting-text', "Hi, I'm"],
-        ['.hero-subtitle', 'I work at the intersection of <span class="accent">artificial intelligence</span>, <span class="accent">technology</span>, <span class="accent">public policy</span>, <span class="accent">law</span> and <span class="accent">public administration</span>.', true],
+        ['.hero-subtitle', 'I work at the intersection of <span class="accent">artificial intelligence</span>, <span class="accent">data analysis</span>, <span class="accent">ICT</span>, <span class="accent">public policy</span>, <span class="accent">law</span> and <span class="accent">public administration</span>.', true],
         ['.hero-cta .btn-primary span', 'See projects'],
         ['.hero-cta .btn-secondary', 'Contact'],
 
@@ -95,9 +95,7 @@ const LanguageManager = {
         ['#panel-education li:nth-child(5) .edu-title', 'Law'],
         ['#panel-education li:nth-child(5) .edu-school', 'University of Warsaw'],
 
-        // Skills bento
-        ['.skills-bento-card[data-accent="burgundy"] .skills-bento-chips span:nth-child(2)', 'Public Proc.'],
-        ['.skills-bento-card[data-accent="burgundy"] .skills-bento-chips span:nth-child(4)', 'Civil Law'],
+        // Skills bento Law/Certificates labels + Prawo chips translate via data-en attributes
 
         // Projects section
         ['#projekty .section-title', 'Projects'],
