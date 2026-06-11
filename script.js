@@ -851,6 +851,8 @@ const ProjectShowcase = {
 
         // Keep off-screen slides out of the tab order and hidden from assistive tech.
         const active = this.slides[this.index];
+        // Navigating to a slide always starts on its first tab (Opis).
+        if (active && active._resetTab) active._resetTab();
         this.slides.forEach((slide, i) => {
             const offscreen = i !== this.index;
             // Never leave focus inside a slide we're about to aria-hide (covers swipe/dots/autoplay).
@@ -1002,6 +1004,9 @@ const ProjectShowcase = {
                 const target = slide.querySelector('#' + tab.getAttribute('aria-controls'));
                 if (target) { target.hidden = false; target.classList.add('is-active'); }
             };
+
+            // Let the carousel snap this slide back to its first tab (Opis) on navigation.
+            slide._resetTab = () => activate(tabs[0]);
 
             // Roving tabindex: only the active tab is initially reachable via Tab.
             tabs.forEach(t => t.setAttribute('tabindex', t.classList.contains('is-active') ? '0' : '-1'));
