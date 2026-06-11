@@ -1126,7 +1126,7 @@ const TechHighlighter = {
     terms: ['Apple Silicon', 'Raspberry Pi', 'PLLuM-12B', 'Next.js', 'TypeScript', 'Playwright',
         'Selenium', 'Supabase', 'Postgres', 'Cloudflare', 'Discordzie', 'Discord', 'Whisperze',
         'Whisper', 'Béziera', 'Bézier', 'OpenAI', 'Claude', 'macOS', 'PLLuM', 'Python', 'SQLite',
-        'Flask', 'React', 'tRPC', 'Swing', 'Java', 'ISAP', 'Sejmu', 'Sejm', 'GPT', 'MCP', 'CSV',
+        'Flask', 'React', 'tRPC', 'Swing', 'Java', 'ISAP', 'CLI', 'GPT', 'MCP', 'CSV',
         'JSON', 'RLS'],
     selector: '.showcase-panel p, .tools-card p, .showcase-subtitle',
 

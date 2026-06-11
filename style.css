@@ -1619,6 +1619,28 @@ section {
     color: #1f1a10;
 }
 .tag-loc .loc-k svg { width: 11px; height: 11px; }
+
+/* Licencja MIT — pigułka pod chipem LOC (akcent „otwarte/open source"). */
+.tag-mit {
+    position: absolute;
+    top: calc(var(--space-md) + 3.9rem);
+    right: var(--space-md);
+    z-index: 4;
+    padding: 4px 9px;
+    border-radius: 5px;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    background: var(--color-primary-subtle);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+[data-theme="dark"] .tag-mit {
+    color: var(--color-primary-on-dark);
+    border-color: var(--color-primary-on-dark);
+}
 /* W karuzeli chip roku ląduje w jednym wierszu z tagami technologii
    (tagi siedzą na górnym paddingu slajdu = space-xl). */
 .showcase-info .tag-year { top: var(--space-xl); }
