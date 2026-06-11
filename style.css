@@ -1577,29 +1577,39 @@ section {
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* Chip ilości kodu — pod chipem daty w rogu karty narzędzia. Złoty akcent (jak "kod" w aplikacjach). */
+/* Licznik kodu jako badge "LOC <>" w stylu shieldów (jak gh-badge w karuzeli). */
 .tag-loc {
     position: absolute;
-    top: calc(var(--space-md) + 1.7rem);
+    top: calc(var(--space-md) + 2.1rem);
     right: var(--space-md);
     z-index: 4;
     display: inline-flex;
+    align-items: stretch;
+    border-radius: 5px;
+    overflow: hidden;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    box-shadow: var(--shadow-sm);
+}
+.tag-loc .loc-k,
+.tag-loc .loc-v {
+    display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: var(--color-surface);
-    color: var(--color-accent-dark);
-    border: 1px solid var(--color-border);
-    font-family: var(--font-mono);
-    font-weight: 600;
-    text-transform: none;
-    letter-spacing: 0;
+    padding: 5px 7px;
 }
-.tag-loc svg { width: 11px; height: 11px; }
-[data-theme="dark"] .tag-loc {
-    background: rgba(10, 14, 12, 0.85);
-    color: var(--color-accent);
-    border-color: rgba(255, 255, 255, 0.14);
+.tag-loc .loc-k {
+    background: #2b3138;
+    color: #e6edf3;
 }
+.tag-loc .loc-v {
+    background: var(--color-accent);
+    color: #1f1a10;
+}
+.tag-loc .loc-k svg { width: 11px; height: 11px; }
 /* W karuzeli chip roku ląduje w jednym wierszu z tagami technologii
    (tagi siedzą na górnym paddingu slajdu = space-xl). */
 .showcase-info .tag-year { top: var(--space-xl); }
@@ -2633,7 +2643,15 @@ section {
     font-size: var(--text-4xl);
     font-weight: 600;
     text-align: center;
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-sm);
+}
+
+.tools-subtitle {
+    text-align: center;
+    max-width: 48ch;
+    margin: 0 auto var(--space-xl);
+    color: var(--color-text-secondary);
+    font-size: var(--text-base);
 }
 /* Nagłówek "Aplikacje" nad karuzelą — bliżej tytułu sekcji */
 .apps-heading {
@@ -2786,7 +2804,7 @@ section {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    padding-right: 5rem;
+    padding-right: 6rem;
 }
 .tools-card-icon {
     flex-shrink: 0;
@@ -2803,9 +2821,10 @@ section {
 [data-theme="dark"] .tools-card-icon { color: var(--color-primary-on-dark); }
 .tools-card-head h3 {
     font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    font-weight: 600;
+    font-size: var(--text-xl);
+    font-weight: 700;
     margin: 0;
+    letter-spacing: -0.01em;
 }
 /* Tagi w jednej linii */
 .tools-card .project-tags {
