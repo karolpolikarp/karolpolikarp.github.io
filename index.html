@@ -377,8 +377,86 @@
                     <div class="showcase-viewport">
                         <div class="showcase-track">
 
-                            <!-- Slide 1: upfor -->
-                            <article class="showcase-slide" role="group" aria-roledescription="slajd" aria-label="1 z 5: upfor">
+                            <!-- Slide 1: JakiePrawo.pl -->
+                            <article class="showcase-slide" role="group" aria-roledescription="slajd" aria-label="1 z 5: JakiePrawo.pl">
+                                <div class="showcase-media">
+                                    <div class="showcase-media-frame">
+                                        <div class="showcase-media-bar">
+                                            <span class="showcase-dot-red"></span>
+                                            <span class="showcase-dot-amber"></span>
+                                            <span class="showcase-dot-green"></span>
+                                            <span class="showcase-url">jakieprawo.pl</span>
+                                        </div>
+                                        <div class="showcase-stage">
+                                            <img class="showcase-img" src="assets/images/obraz_2026-01-09_205957107.webp" alt="Zrzut ekranu:JakiePrawo.pl" loading="lazy">
+                                            <div class="showcase-media-placeholder" aria-hidden="true">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                                                <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="showcase-gallery">
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/obraz_2026-01-09_205957107.webp" aria-label="Zrzut 1"><img src="assets/images/obraz_2026-01-09_205957107.webp" alt="" loading="lazy"></button>
+                                    </div>
+                                </div>
+                                <div class="showcase-info">
+                                    <div class="project-tags">
+                                        <span class="tag">React</span>
+                                        <span class="tag">Supabase</span>
+                                        <span class="tag">Claude API</span>
+                                        <span class="tag">MCP</span>
+                                        <span class="tag tag-year">2025</span>
+                                    </div>
+                                    <h3 class="showcase-title">JakiePrawo.pl <span class="project-badge-alpha">BETA</span></h3>
+                                    <p class="showcase-subtitle" data-en="AI-powered Polish law search engine">Wyszukiwarka polskiego prawa z AI</p>
+
+                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: JakiePrawo.pl">
+                                        <button class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-prawo-opis" aria-controls="panel-prawo-opis" data-en="Overview">Opis</button>
+                                        <button class="showcase-tab" role="tab" aria-selected="false" id="tab-prawo-tech" aria-controls="panel-prawo-tech" data-en="Technical">Techniczne</button>
+                                        <button class="showcase-tab" role="tab" aria-selected="false" id="tab-prawo-chall" aria-controls="panel-prawo-chall" data-en="Challenges">Wyzwania</button>
+                                    </div>
+                                    <div class="showcase-panels">
+                                        <div class="showcase-panel is-active" role="tabpanel" id="panel-prawo-opis" aria-labelledby="tab-prawo-opis">
+                                            <p data-en="A search engine where you ask in plain language and get back the specific article, the statute name, and a link to the full text in ISAP. You don't need to know which act to look in first.">Wyszukiwarka, w której pytasz o coś zwykłym językiem, a w odpowiedzi dostajesz konkretny artykuł, nazwę ustawy i link do pełnego tekstu w ISAP. Nie trzeba wcześniej wiedzieć, w którym akcie szukać.</p>
+                                            <p data-en="Every answer stays verifiable: it always points to the original source instead of replacing it with the model's own words.">Każdą odpowiedź da się zweryfikować: zawsze prowadzi do oryginalnego źródła, zamiast zastępować je słowami modelu.</p>
+                                        </div>
+                                        <div class="showcase-panel" role="tabpanel" id="panel-prawo-tech" aria-labelledby="tab-prawo-tech" hidden>
+                                            <div class="gh-badges">
+                                                <span class="gh-badge"><span class="gh-k">frontend</span><span class="gh-v gh-v-blue">React</span></span>
+                                                <span class="gh-badge"><span class="gh-k">backend</span><span class="gh-v gh-v-green">Supabase</span></span>
+                                                <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-green">Claude API</span></span>
+                                                <span class="gh-badge"><span class="gh-k">protocol</span><span class="gh-v gh-v-slate">MCP</span></span>
+                                                <span class="gh-badge"><span class="gh-k">host</span><span class="gh-v gh-v-slate">Raspberry Pi</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~55k</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-slate">~8k</span></span>
+                                            </div>
+                                            <ul class="showcase-list">
+                                                <li data-en="React + Supabase (Postgres + pgvector) frontend, Edge Functions on Deno">Frontend React + Supabase (Postgres + pgvector), funkcje Edge na Deno</li>
+                                                <li data-en="Index of ~15,000 Polish statutes pulled live from the Sejm API (ISAP), PDFs parsed to text">Indeks ~15 000 polskich aktów pobieranych na żywo z API Sejmu (ISAP), parsowanie PDF-ów do tekstu</li>
+                                                <li data-en="MCP server (Deno) on a Raspberry Pi: 8 tools for searching and citing statutes">Serwer MCP (Deno) na Raspberry Pi: 8 narzędzi do wyszukiwania i cytowania aktów</li>
+                                                <li data-en="A 7-layer anti-hallucination pipeline validates every citation before it reaches the user">7-warstwowy pipeline anty-halucynacyjny waliduje każdy cytat, zanim trafi do użytkownika</li>
+                                            </ul>
+                                        </div>
+                                        <div class="showcase-panel" role="tabpanel" id="panel-prawo-chall" aria-labelledby="tab-prawo-chall" hidden>
+                                            <ul class="showcase-list">
+                                                <li data-en="Taming inconsistent PDFs from the Parliament API (varied layouts, scans, formatting)">Okiełznanie niespójnych PDF-ów z API Sejmu (różne układy, skany, formatowanie)</li>
+                                                <li data-en="Keeping the database current against amendments and new legislation">Utrzymywanie bazy w aktualności wobec nowelizacji i nowych aktów</li>
+                                                <li data-en="Enforcing source citation so the model can't 'invent' law that isn't there">Wymuszenie cytowania źródła, żeby model nie „dopowiadał” prawa, którego nie ma</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="showcase-cta">
+                                        <a href="https://jakieprawo.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
+                                            <span data-en="See live">Zobacz na żywo</span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Slide 2: UpFor.pl -->
+                            <article class="showcase-slide" role="group" aria-roledescription="slajd" aria-label="2 z 5: UpFor.pl">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -451,84 +529,6 @@
 
                                     <div class="showcase-cta">
                                         <a href="https://upfor.karolwilczynski.com" target="_blank" rel="noopener" class="project-link project-link-primary">
-                                            <span data-en="See live">Zobacz na żywo</span>
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <!-- Slide 2: JakiePrawo.pl -->
-                            <article class="showcase-slide" role="group" aria-roledescription="slajd" aria-label="2 z 5: JakiePrawo.pl">
-                                <div class="showcase-media">
-                                    <div class="showcase-media-frame">
-                                        <div class="showcase-media-bar">
-                                            <span class="showcase-dot-red"></span>
-                                            <span class="showcase-dot-amber"></span>
-                                            <span class="showcase-dot-green"></span>
-                                            <span class="showcase-url">jakieprawo.pl</span>
-                                        </div>
-                                        <div class="showcase-stage">
-                                            <img class="showcase-img" src="assets/images/obraz_2026-01-09_205957107.webp" alt="Zrzut ekranu:JakiePrawo.pl" loading="lazy">
-                                            <div class="showcase-media-placeholder" aria-hidden="true">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                                                <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/obraz_2026-01-09_205957107.webp" aria-label="Zrzut 1"><img src="assets/images/obraz_2026-01-09_205957107.webp" alt="" loading="lazy"></button>
-                                    </div>
-                                </div>
-                                <div class="showcase-info">
-                                    <div class="project-tags">
-                                        <span class="tag">React</span>
-                                        <span class="tag">Supabase</span>
-                                        <span class="tag">Claude API</span>
-                                        <span class="tag">MCP</span>
-                                        <span class="tag tag-year">2025</span>
-                                    </div>
-                                    <h3 class="showcase-title">JakiePrawo.pl <span class="project-badge-alpha">BETA</span></h3>
-                                    <p class="showcase-subtitle" data-en="AI-powered Polish law search engine">Wyszukiwarka polskiego prawa z AI</p>
-
-                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: JakiePrawo.pl">
-                                        <button class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-prawo-opis" aria-controls="panel-prawo-opis" data-en="Overview">Opis</button>
-                                        <button class="showcase-tab" role="tab" aria-selected="false" id="tab-prawo-tech" aria-controls="panel-prawo-tech" data-en="Technical">Techniczne</button>
-                                        <button class="showcase-tab" role="tab" aria-selected="false" id="tab-prawo-chall" aria-controls="panel-prawo-chall" data-en="Challenges">Wyzwania</button>
-                                    </div>
-                                    <div class="showcase-panels">
-                                        <div class="showcase-panel is-active" role="tabpanel" id="panel-prawo-opis" aria-labelledby="tab-prawo-opis">
-                                            <p data-en="A search engine where you ask in plain language and get back the specific article, the statute name, and a link to the full text in ISAP. You don't need to know which act to look in first.">Wyszukiwarka, w której pytasz o coś zwykłym językiem, a w odpowiedzi dostajesz konkretny artykuł, nazwę ustawy i link do pełnego tekstu w ISAP. Nie trzeba wcześniej wiedzieć, w którym akcie szukać.</p>
-                                            <p data-en="Every answer stays verifiable: it always points to the original source instead of replacing it with the model's own words.">Każdą odpowiedź da się zweryfikować: zawsze prowadzi do oryginalnego źródła, zamiast zastępować je słowami modelu.</p>
-                                        </div>
-                                        <div class="showcase-panel" role="tabpanel" id="panel-prawo-tech" aria-labelledby="tab-prawo-tech" hidden>
-                                            <div class="gh-badges">
-                                                <span class="gh-badge"><span class="gh-k">frontend</span><span class="gh-v gh-v-blue">React</span></span>
-                                                <span class="gh-badge"><span class="gh-k">backend</span><span class="gh-v gh-v-green">Supabase</span></span>
-                                                <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-green">Claude API</span></span>
-                                                <span class="gh-badge"><span class="gh-k">protocol</span><span class="gh-v gh-v-slate">MCP</span></span>
-                                                <span class="gh-badge"><span class="gh-k">host</span><span class="gh-v gh-v-slate">Raspberry Pi</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~55k</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-slate">~8k</span></span>
-                                            </div>
-                                            <ul class="showcase-list">
-                                                <li data-en="React + Supabase (Postgres + pgvector) frontend, Edge Functions on Deno">Frontend React + Supabase (Postgres + pgvector), funkcje Edge na Deno</li>
-                                                <li data-en="Index of ~15,000 Polish statutes pulled live from the Sejm API (ISAP), PDFs parsed to text">Indeks ~15 000 polskich aktów pobieranych na żywo z API Sejmu (ISAP), parsowanie PDF-ów do tekstu</li>
-                                                <li data-en="MCP server (Deno) on a Raspberry Pi: 8 tools for searching and citing statutes">Serwer MCP (Deno) na Raspberry Pi: 8 narzędzi do wyszukiwania i cytowania aktów</li>
-                                                <li data-en="A 7-layer anti-hallucination pipeline validates every citation before it reaches the user">7-warstwowy pipeline anty-halucynacyjny waliduje każdy cytat, zanim trafi do użytkownika</li>
-                                            </ul>
-                                        </div>
-                                        <div class="showcase-panel" role="tabpanel" id="panel-prawo-chall" aria-labelledby="tab-prawo-chall" hidden>
-                                            <ul class="showcase-list">
-                                                <li data-en="Taming inconsistent PDFs from the Parliament API (varied layouts, scans, formatting)">Okiełznanie niespójnych PDF-ów z API Sejmu (różne układy, skany, formatowanie)</li>
-                                                <li data-en="Keeping the database current against amendments and new legislation">Utrzymywanie bazy w aktualności wobec nowelizacji i nowych aktów</li>
-                                                <li data-en="Enforcing source citation so the model can't 'invent' law that isn't there">Wymuszenie cytowania źródła, żeby model nie „dopowiadał” prawa, którego nie ma</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="showcase-cta">
-                                        <a href="https://jakieprawo.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
                                             <span data-en="See live">Zobacz na żywo</span>
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                                         </a>
