@@ -790,6 +790,12 @@ const ProjectShowcase = {
             if (this._rAF) cancelAnimationFrame(this._rAF);
             this._rAF = requestAnimationFrame(() => this.positionMobileControls());
         }, { passive: true });
+        // The slide height (which the arrow offset is derived from) keeps growing
+        // as fonts and images load, so recompute once everything has settled.
+        window.addEventListener('load', () => this.positionMobileControls());
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(() => this.positionMobileControls());
+        }
 
         if (this.counterTotal) this.counterTotal.textContent = this.pad(this.count);
         this.goTo(0, false);
