@@ -883,9 +883,10 @@ const ProjectShowcase = {
         const slide = this.slides[this.index];
         if (!slide) return;
         const carTop = this.carousel.getBoundingClientRect().top;
-        // Strzałki: pionowy środek CAŁEGO boxa slajdu (zdjęcie + opis), nie samego zrzutu.
+        // Strzałki: w dolnej części boxa slajdu (~2/3 wysokości), żeby nie nachodziły
+        // na tagi i zakładki tuż pod zrzutem.
         const slideRect = slide.getBoundingClientRect();
-        this.carousel.style.setProperty('--sc-arrow-top', (slideRect.top - carTop + slideRect.height / 2) + 'px');
+        this.carousel.style.setProperty('--sc-arrow-top', (slideRect.top - carTop + slideRect.height * 0.66) + 'px');
         // Licznik 01/05 zostaje w rogu zrzutu.
         const stage = slide.querySelector('.showcase-stage');
         if (stage) {
