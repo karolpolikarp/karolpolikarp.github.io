@@ -84,7 +84,7 @@ const LanguageManager = {
         ['#panel-employment li:nth-child(5) .emp-company', 'Ministry of Digital Affairs'],
 
         // Education
-        ['#panel-education li:nth-child(1) .edu-title', 'Big Data \u2014 Large-Scale Data Engineering'],
+        ['#panel-education li:nth-child(1) .edu-title', 'Big Data: Large-Scale Data Engineering'],
         ['#panel-education li:nth-child(1) .edu-school', 'Polish-Japanese Academy of Information Technology'],
         ['#panel-education li:nth-child(2) .edu-title', 'Artificial Intelligence in Business and Public Sector'],
         ['#panel-education li:nth-child(2) .edu-school', 'SGH Warsaw School of Economics'],
