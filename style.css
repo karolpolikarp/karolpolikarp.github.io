@@ -2799,6 +2799,17 @@ section {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
 }
+/* Akcentowy pasek u góry — spójny z kafelkami kompetencji, dodaje charakteru. */
+.tools-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
 /* Nagłówek: ikona + nazwa w jednej linii */
 .tools-card-head {
     display: flex;

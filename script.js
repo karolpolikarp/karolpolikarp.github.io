@@ -898,12 +898,13 @@ const ProjectShowcase = {
         const slide = this.slides[this.index];
         if (!slide) return;
         const carTop = this.carousel.getBoundingClientRect().top;
-        // Strzałki i licznik nakładamy na sam zrzut (stage), żeby od razu było
-        // widać, że screenshot jest przewijalny — środek zdjęcia, nie całego slajdu.
+        // Strzałki: pionowy środek CAŁEGO boxa slajdu (zdjęcie + opis), nie samego zrzutu.
+        const slideRect = slide.getBoundingClientRect();
+        this.carousel.style.setProperty('--sc-arrow-top', (slideRect.top - carTop + slideRect.height / 2) + 'px');
+        // Licznik 01/05 zostaje w rogu zrzutu.
         const stage = slide.querySelector('.showcase-stage');
         if (stage) {
             const sr = stage.getBoundingClientRect();
-            this.carousel.style.setProperty('--sc-arrow-top', (sr.top - carTop + sr.height / 2) + 'px');
             this.carousel.style.setProperty('--sc-badge-top', (sr.top - carTop + 12) + 'px');
         }
     },
