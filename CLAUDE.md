@@ -67,15 +67,18 @@ Contains modular components (in order):
 7. **MagneticButtons** - Interactive hover effects (desktop only)
 8. **Navbar Scroll Effect** - Adds `.nav-scrolled` class at 100px scroll
 9. **Windows 95 Clock** - Footer time display
-10. **LegalConsole** - Interactive terminal simulator with command parsing
-11. **EmailProtection** - Anti-scraper email obfuscation
+10. **LanguageManager** - Live PL/EN toggle via `data-en` / `data-en-html` attributes
+11. **HeroTabs** - Experience / Education / Skills tab panels (keyboard-navigable)
+12. **ProjectShowcase** - Projects carousel (tabs, dots, autoplay w/ pause, swipe)
+13. **EmailProtection** - Anti-scraper email obfuscation
+14. **cats easter egg** - `window.cats.show()` + Konami code
 
 ## Coding Conventions
 
 ### HTML
 - Use semantic elements (`<section>`, `<article>`, `<nav>`, etc.)
 - Include ARIA labels on interactive elements
-- Keep Polish language content; English for code/technical terms
+- Polish-primary content; give every new user-facing string a `data-en` (or `data-en-html`) counterpart for the live PL/EN toggle
 - Classes use kebab-case (e.g., `hero-content`, `project-card`)
 
 ### CSS
@@ -111,10 +114,10 @@ Contains modular components (in order):
 2. Add dark mode overrides under `[data-theme="dark"]` selector
 3. Test by toggling theme button in navigation
 
-### Adding Console Commands
-1. Edit `LegalConsole` object in `script.js`
-2. Add command pattern to `commands` array with regex and response
-3. Follow existing pattern: `{ pattern: /regex/i, response: 'output text' }`
+### Working with the PL/EN toggle
+1. Add `data-en="English text"` to any new user-facing element (or `data-en-html` if it contains markup)
+2. For attributes (e.g. `aria-label`), add an entry to `LanguageManager.attrTranslations`
+3. The choice persists in `localStorage` and fires a `languagechange` event for JS-built UI
 
 ## Critical Guidelines
 
@@ -123,16 +126,16 @@ Contains modular components (in order):
 - Maintain responsive design (test at mobile and desktop widths)
 - Keep dark mode parity with all changes
 - Use existing CSS custom properties
-- Test interactive elements (console, theme toggle, navigation)
+- Test interactive elements (carousel, theme & language toggles, navigation)
 - Preserve the Windows 95 aesthetic elements
 
 ### DO NOT
 - Add npm dependencies or build tools (keep vanilla stack)
-- Remove or break the LegalConsole easter eggs (cats.show command)
+- Remove or break the cats easter egg (`window.cats.show` / Konami code)
 - Hardcode colors - use CSS variables
 - Break the email obfuscation security feature
 - Remove ARIA labels or accessibility features
-- Add English translations (site is intentionally in Polish)
+- Add user-facing text without a `data-en` counterpart (it silently won't translate)
 
 ## Testing Checklist
 
@@ -141,7 +144,7 @@ Before committing changes, verify:
 - [ ] Theme toggle works and persists on reload
 - [ ] Mobile navigation opens/closes correctly
 - [ ] All sections scroll smoothly
-- [ ] Legal console responds to commands
+- [ ] PL/EN toggle translates every section
 - [ ] Animations trigger on scroll
 - [ ] Layout works at 375px, 768px, and 1440px widths
 - [ ] Dark mode displays correctly
@@ -164,7 +167,6 @@ Before committing changes, verify:
 |---------|-----|---------|
 | Navigation | `.nav` | Logo, links, theme toggle |
 | Hero | `#hero` | Introduction, keywords, CTA |
-| Legal Console | `.console-window` | Interactive terminal |
 | Projects | `#projekty` | Portfolio showcase |
 | About | `#o-mnie` | Personal background |
 | Skills | `#kompetencje` | Core competencies |
@@ -175,9 +177,8 @@ Before committing changes, verify:
 ## Easter Eggs
 
 The site includes hidden features:
-1. **Cat photos**: `cats.show('Pimpek')`, `cats.show('Fryderyk')`, `cats.show('Both')` in console
+1. **Cat photos**: `window.cats.show('Pimpek' | 'Fryderyk' | 'Both')` in the devtools console, or the Konami code (Up Up Down Down Left Right Left Right B A) on the page
 2. **Windows 95 clock**: Real-time clock in footer
-3. **Auto-demo**: Console types commands automatically on page load
 
 Preserve these features when making changes.
 
