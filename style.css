@@ -1588,10 +1588,6 @@ section {
 
 /* Licznik kodu jako badge "LOC <>" w stylu shieldów (jak gh-badge w karuzeli). */
 .tag-loc {
-    position: absolute;
-    top: calc(var(--space-md) + 2.1rem);
-    right: var(--space-md);
-    z-index: 4;
     display: inline-flex;
     align-items: stretch;
     border-radius: 5px;
@@ -1622,10 +1618,8 @@ section {
 
 /* Licencja MIT — pigułka pod chipem LOC (akcent „otwarte/open source"). */
 .tag-mit {
-    position: absolute;
-    top: calc(var(--space-md) + 3.9rem);
-    right: var(--space-md);
-    z-index: 4;
+    display: inline-flex;
+    align-items: center;
     padding: 4px 9px;
     border-radius: 5px;
     font-family: var(--font-mono);
@@ -2838,7 +2832,7 @@ section {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    padding-right: 6rem;
+    padding-right: 4rem;
 }
 .tools-card-icon {
     flex-shrink: 0;
@@ -2873,14 +2867,20 @@ section {
     margin: 0;
     flex: 1;
 }
+/* Stopka karty: repozytorium + badge'e LOC/MIT w jednym wierszu, przypięta do dołu. */
+.tools-card-foot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
 /* Przycisk do repozytorium */
 .tools-card-link {
-    align-self: flex-start;
+    order: -1;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    /* przypięty do dołu, żeby wyższe karty wypełniały się równo */
-    margin-top: auto;
     padding: 7px 14px;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-full);

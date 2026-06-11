@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
     <title>Karol Polikarp Wilczyński | AI Governance i Legal Tech</title>
     <meta name="description" content="Na styku AI, prawa i administracji publicznej w Polsce. Buduję narzędzia legal tech do pracy z polskim prawem (JakiePrawo.pl) oraz automatyzacje oparte o LLM.">
 
@@ -107,7 +108,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="style.css?v=63">
+    <link rel="stylesheet" href="style.css?v=64">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -335,6 +336,7 @@
                                     <div class="skills-bento-card" data-accent="burgundy">
                                         <span class="skills-bento-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M8 21h8M5 7h14M5 7l-2.5 5h5zM19 7l-2.5 5h5z"/></svg><span data-en="Law">Prawo</span></span>
                                         <div class="skills-bento-chips">
+                                            <span data-en="Public policy">Polityki publiczne</span>
                                             <span data-en="AI Act">AI Act</span>
                                             <span data-en="AI Sandboxes">AI Sandboxes</span>
                                             <span data-en="Public Proc.">Zamówienia pub.</span>
@@ -785,18 +787,20 @@
                                 </span>
                                 <h3>Stefka</h3>
                                 <span class="tag tag-year">2026</span>
-                                <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~3k</span></span>
-                                <span class="tag-mit">MIT</span>
                             </div>
                             <div class="project-tags">
                                 <span class="tag">Python</span>
                                 <span class="tag">PLLuM-12B</span>
                                 <span class="tag">on-device</span>
                             </div>
-                            <p data-en="Drop in a meeting recording and Stefka returns a transcription of what was said, plus a short summary. Everything runs offline on macOS (Apple Silicon): Whisper handles the audio, the PLLuM-12B model (~13 GB) summarises it locally. Built for sensitive data that shouldn't leave the laptop. No cloud, no APIs.">Wrzucasz nagranie ze spotkania, a Stefka oddaje transkrypcję treści i krótkie podsumowanie. Wszystko offline na macOS (Apple Silicon): Whisper przetwarza dźwięk, a model PLLuM-12B (~13 GB) streszcza go lokalnie. Powstała z myślą o danych wrażliwych, które nie powinny opuszczać laptopa. Zero chmury, zero API.</p>
-                            <a class="tools-card-link" href="https://github.com/karolpolikarp/Stefka-PPLuM-macOS.Silicon" target="_blank" rel="noopener" data-en="Repository">Repozytorium
+                            <p data-en="Drop in a meeting recording and Stefka returns a transcription of what was said, plus a short summary. Everything runs offline on macOS (Apple Silicon): Whisper handles the audio, the PLLuM-12B model (~13 GB) summarises it locally. Built around running PLLuM locally, for sensitive data that shouldn't leave the laptop.">Wrzucasz nagranie ze spotkania, a Stefka zwraca transkrypcję treści i krótkie podsumowanie. Wszystko offline na macOS (Apple Silicon): Whisper przetwarza dźwięk, a model PLLuM-12B (~13 GB) streszcza go lokalnie. Powstała z myślą o lokalnym wykorzystaniu PLLuM i o danych wrażliwych, które nie powinny opuszczać laptopa.</p>
+                            <div class="tools-card-foot">
+                                <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~3k</span></span>
+                                <span class="tag-mit">MIT</span>
+                                <a class="tools-card-link" href="https://github.com/karolpolikarp/Stefka-PPLuM-macOS.Silicon" target="_blank" rel="noopener" data-en="Repository">Repozytorium
                                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
                             </a>
+                            </div>
                         </article>
 
                         <article class="tools-card">
@@ -806,8 +810,6 @@
                                 </span>
                                 <h3>ISAP-scrap</h3>
                                 <span class="tag tag-year">2025</span>
-                                <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~1.5k</span></span>
-                                <span class="tag-mit">MIT</span>
                             </div>
                             <div class="project-tags">
                                 <span class="tag">Python</span>
@@ -815,9 +817,13 @@
                                 <span class="tag">ISAP</span>
                             </div>
                             <p data-en="Tracks changes in Polish law (Journal of Laws and Monitor Polski) straight from the Polish Parliament API, without clicking through ISAP by hand. Six CLI modes: search, full act metadata, CSV/JSON export and a daily check for new acts.">Śledzi zmiany w polskim prawie (Dziennik Ustaw i Monitor Polski) prosto z API Sejmu RP, bez ręcznego przeklikiwania ISAP. Sześć trybów CLI: wyszukiwanie, pełne metadane aktów, eksport do CSV/JSON i codzienne sprawdzanie nowych aktów.</p>
-                            <a class="tools-card-link" href="https://github.com/karolpolikarp/isapscrap" target="_blank" rel="noopener" data-en="Repository">Repozytorium
+                            <div class="tools-card-foot">
+                                <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~1.5k</span></span>
+                                <span class="tag-mit">MIT</span>
+                                <a class="tools-card-link" href="https://github.com/karolpolikarp/isapscrap" target="_blank" rel="noopener" data-en="Repository">Repozytorium
                                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
                             </a>
+                            </div>
                         </article>
 
                         <article class="tools-card">
@@ -827,8 +833,6 @@
                                 </span>
                                 <h3>Multi-Sequence Clicker</h3>
                                 <span class="tag tag-year">2025</span>
-                                <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~1.1k</span></span>
-                                <span class="tag-mit">MIT</span>
                             </div>
                             <div class="project-tags">
                                 <span class="tag">Java</span>
@@ -836,9 +840,13 @@
                                 <span class="tag">Robot</span>
                             </div>
                             <p data-en="An auto-clicker that clicks like a human. Bézier-curve cursor motion and randomised delays keep sequences from looking robotic. Record several click sequences and replay them on a loop. Java (Swing), zero dependencies beyond the standard library.">Autoklikacz, który klika jak człowiek. Ruch kursora po krzywej Béziera i losowe opóźnienia sprawiają, że sekwencje nie wyglądają maszynowo. Nagrywasz wiele sekwencji kliknięć i odtwarzasz je w pętli. Java (Swing), zero zależności poza standardową biblioteką.</p>
-                            <a class="tools-card-link" href="https://github.com/karolpolikarp/Multi-Sequence-Clicker" target="_blank" rel="noopener" data-en="Repository">Repozytorium
+                            <div class="tools-card-foot">
+                                <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~1.1k</span></span>
+                                <span class="tag-mit">MIT</span>
+                                <a class="tools-card-link" href="https://github.com/karolpolikarp/Multi-Sequence-Clicker" target="_blank" rel="noopener" data-en="Repository">Repozytorium
                                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
                             </a>
+                            </div>
                         </article>
 
                     </div>
@@ -1261,6 +1269,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=9" defer></script>
+    <script src="script.js?v=10" defer></script>
 </body>
 </html>

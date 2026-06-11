@@ -5,25 +5,10 @@ const ThemeManager = {
     toggle: document.getElementById('themeToggle'),
 
     init() {
-        // Check for saved preference or system preference
-        const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        } else if (systemPrefersDark) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-
+        // Theme is set pre-paint by an inline <head> script (defaults to dark,
+        // honours a saved choice). Here we just sync the toggle.
         this.toggle?.setAttribute('aria-pressed', String(document.documentElement.getAttribute('data-theme') === 'dark'));
         this.toggle?.addEventListener('click', () => this.toggleTheme());
-
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem('theme')) {
-                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-            }
-        });
     },
 
     toggleTheme() {
