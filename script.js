@@ -1116,3 +1116,57 @@ const ProjectShowcase = {
 };
 
 ProjectShowcase.init();
+
+// ================================================
+// TECH KEYWORD HIGHLIGHTER (carousel + tool copy)
+// Wraps known stack/brand names in <span class="kw"> so they pop in the prose.
+// Re-runs on languagechange because setLanguage rewrites the text nodes.
+// ================================================
+const TechHighlighter = {
+    terms: ['Apple Silicon', 'Raspberry Pi', 'PLLuM-12B', 'Next.js', 'TypeScript', 'Playwright',
+        'Selenium', 'Supabase', 'Postgres', 'Cloudflare', 'Discordzie', 'Discord', 'Whisperze',
+        'Whisper', 'Béziera', 'Bézier', 'OpenAI', 'Claude', 'macOS', 'PLLuM', 'Python', 'SQLite',
+        'Flask', 'React', 'tRPC', 'Swing', 'Java', 'ISAP', 'Sejmu', 'Sejm', 'GPT', 'MCP', 'CSV',
+        'JSON', 'RLS'],
+    selector: '.showcase-panel p, .tools-card p, .showcase-subtitle',
+
+    init() {
+        const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        this.re = new RegExp('\\b(' + this.terms.map(esc).join('|') + ')\\b', 'g');
+        this.run();
+        document.addEventListener('languagechange', () => this.run());
+    },
+
+    run() {
+        document.querySelectorAll(this.selector).forEach(el => this.mark(el));
+    },
+
+    mark(el) {
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+        const targets = [];
+        let node;
+        while (node = walker.nextNode()) {
+            if (node.parentElement.classList.contains('kw')) continue;
+            this.re.lastIndex = 0;
+            if (this.re.test(node.nodeValue)) targets.push(node);
+        }
+        targets.forEach(textNode => {
+            const text = textNode.nodeValue;
+            const frag = document.createDocumentFragment();
+            let last = 0, m;
+            this.re.lastIndex = 0;
+            while (m = this.re.exec(text)) {
+                if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+                const span = document.createElement('span');
+                span.className = 'kw';
+                span.textContent = m[0];
+                frag.appendChild(span);
+                last = m.index + m[0].length;
+            }
+            if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+            textNode.parentNode.replaceChild(frag, textNode);
+        });
+    }
+};
+
+TechHighlighter.init();

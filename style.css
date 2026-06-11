@@ -619,6 +619,15 @@ section {
     border: 0;
 }
 
+/* Inline tech/brand keyword highlight inside descriptions (set by TechHighlighter). */
+.kw {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+[data-theme="dark"] .kw {
+    color: var(--color-primary-on-dark);
+}
+
 /* ================================================
    ACCENT
    ================================================ */
