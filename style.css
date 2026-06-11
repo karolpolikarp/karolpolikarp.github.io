@@ -2868,22 +2868,44 @@ section {
 }
 
 /* Coming soon link style */
+/* "Wkrótce" reads as a status pill, not a clickable button */
 .project-link-coming {
     display: inline-flex;
     align-items: center;
     gap: var(--space-xs);
-    font-size: var(--text-base);
-    font-weight: 500;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.03em;
     color: var(--color-text-tertiary);
     background: var(--color-bg-alt);
-    padding: var(--space-sm) var(--space-md);
-    border-radius: var(--radius-md);
-    border: 1px dashed var(--color-border);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    cursor: default;
 }
 
 .project-link-coming svg {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
+    opacity: 0.8;
+}
+
+/* Keep the pill compact inside .showcase-cta (which otherwise enlarges real links) */
+.showcase-cta .project-link-coming {
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--text-sm);
+}
+
+/* Closing CTA centered under the Projects section */
+.projects-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-2xl);
+}
+
+.projects-footer .btn svg {
+    width: 18px;
+    height: 18px;
 }
 
 /* Responsive adjustments */
