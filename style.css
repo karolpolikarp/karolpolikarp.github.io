@@ -4530,6 +4530,9 @@ section {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        /* Wyśrodkowane między strzałkami karuzeli (które siedzą na tej linii). */
+        justify-content: center;
+        padding: 0 2.5rem;
     }
     .showcase-tabs::-webkit-scrollbar {
         display: none;
