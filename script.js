@@ -96,6 +96,7 @@ const LanguageManager = {
         ['.showcase-next', 'aria-label', 'Nast\u0119pny projekt', 'Next project'],
         ['.showcase-dots', 'aria-label', 'Wyb\u00f3r projektu', 'Choose project'],
         ['.showcase-carousel', 'aria-label', 'Projekty', 'Projects'],
+        ['#emailLink', 'aria-label', 'Poka\u017c adres e-mail', 'Reveal email address'],
     ],
 
     init() {
@@ -260,20 +261,22 @@ ParallaxEffect.init();
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
-navToggle?.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('active');
-    navToggle.classList.toggle('active');
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-});
-
-// Close mobile menu when clicking a link
-navLinks?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        navToggle.classList.remove('active');
-        navToggle.setAttribute('aria-expanded', 'false');
+if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('active');
+        navToggle.classList.toggle('active');
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-});
+
+    // Close mobile menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+}
 
 // ================================================
 // SMOOTH SCROLL

@@ -11,6 +11,13 @@ This file provides guidance for AI assistants working on this repository.
 - **Hosting**: GitHub Pages (auto-deploys from master branch)
 - **Language**: Polish (pl_PL) with English project descriptions
 
+> ⚠️ **`projekty/` sub-page is a deferred, separate effort — see `BACKLOG.md`.**
+> The `projekty/` directory (a newer projects gallery) is **untracked in git, so it is NOT
+> deployed and NOT crawled.** Do not casually edit it, link to it, or commit it as a side effect
+> of unrelated work — it needs its own dedicated pass (commit + sitemap + cross-page data
+> consistency + perf/a11y/i18n parity). All its open items live in `BACKLOG.md`. Improvements
+> elsewhere should target the main page files (`index.html`, `style.css`, `script.js`, `404.html`).
+
 ## Quick Start
 
 ```bash

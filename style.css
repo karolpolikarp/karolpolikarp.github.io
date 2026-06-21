@@ -39,6 +39,8 @@
     --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
     --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    /* UI labels (hero/lang tabs) — kept as a token so the family is intentional, not undefined */
+    --font-heading: var(--font-sans);
 
     /* Skala typografii — spójny system rozmiarów (duże nagłówki płynne: clamp) */
     --text-2xs: 0.68rem;
@@ -282,15 +284,6 @@
 
 [data-theme="dark"] .contact-availability {
     color: var(--color-primary-dark);
-}
-
-[data-theme="dark"] .legal-console {
-    border-color: rgba(201, 169, 98, 0.25);
-    box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(201, 169, 98, 0.2),
-        0 0 40px rgba(0, 140, 70, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] .project-placeholder {
@@ -732,11 +725,6 @@ section {
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--color-burgundy), var(--color-accent), var(--color-burgundy), transparent);
     opacity: 0.5;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-20px) scale(1.05); }
 }
 
 /* Floating background decoration */
@@ -1196,74 +1184,6 @@ section {
 }
 
 /* ================================================
-   LEGAL CONSOLE - Interactive Terminal
-   ================================================ */
-.legal-console {
-    position: relative;
-    background: #0d1117;
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(201, 169, 98, 0.2),
-        0 0 80px rgba(201, 169, 98, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    width: 100%;
-    max-width: 720px;
-    border: 1px solid rgba(201, 169, 98, 0.25);
-    transform: perspective(1000px) rotateY(-2deg) rotateX(2deg);
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    transition: all 0.2s ease;
-}
-
-.dot.red { background: #ff5f56; box-shadow: 0 0 8px rgba(255, 95, 86, 0.5); }
-.dot.yellow { background: #ffbd2e; box-shadow: 0 0 8px rgba(255, 189, 46, 0.5); }
-.dot.green { background: #27ca40; box-shadow: 0 0 8px rgba(39, 202, 64, 0.5); }
-
-@keyframes statusPulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 4px #3fb950; }
-    50% { opacity: 0.5; box-shadow: 0 0 8px #3fb950; }
-}
-
-@keyframes lineAppear {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes loadingDots {
-    0% { content: '.'; }
-    33% { content: '..'; }
-    66% { content: '...'; }
-}
-
-.commands-label {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: #484f58;
-    margin-right: var(--space-xs);
-}
-
-/* Typing cursor for console */
-.typing-cursor {
-    display: inline-block;
-    width: 8px;
-    height: 14px;
-    background: var(--color-accent);
-    margin-left: 2px;
-    animation: cursorBlink 1s infinite;
-}
-
-@keyframes cursorBlink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-}
-
-/* ================================================
    POSITIONS SECTION
    ================================================ */
 .section-divider {
@@ -1298,12 +1218,6 @@ section {
     right: 0;
     height: 3px;
     background: linear-gradient(90deg, transparent, var(--color-burgundy-light), var(--color-accent), var(--color-burgundy-light), transparent);
-}
-
-@keyframes positionsGlow {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(30%, 30%); }
-    100% { transform: translate(0, 0); }
 }
 
 .positions-grid {
@@ -1882,11 +1796,6 @@ section {
 .contact-cta {
     padding: 0;
     display: flex;
-}
-
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
 }
 
 .contact-availability {
@@ -2603,10 +2512,6 @@ section {
     filter: saturate(1);
 }
 
-.project-image {
-    position: relative;
-}
-
 .project-link-primary {
     background: var(--color-primary);
     color: white;
@@ -2892,6 +2797,13 @@ section {
     transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
 }
 .tools-card-link svg { width: 14px; height: 14px; }
+/* Cała karta klikalna → repozytorium (karta ma position:relative); tagi/badge'e są nieinteraktywne. */
+.tools-card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+}
 .tools-card-link:hover {
     background: var(--color-primary);
     color: #fff;
@@ -2908,16 +2820,6 @@ section {
     .apps-heading, .ds-heading, .tools-heading { font-size: var(--text-3xl); margin-bottom: var(--space-md); }
     /* Odstęp Projekty→Aplikacje na mobile = jak przed Narzędzia/Data Science (bazowo był 2× większy). */
     #projekty .section-header { margin-bottom: var(--space-xl); }
-}
-
-@keyframes whoisiGlow {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-}
-
-@keyframes whoisiPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
 }
 
 /* Coming soon link style */
@@ -2959,14 +2861,6 @@ section {
 .projects-footer .btn svg {
     width: 18px;
     height: 18px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-
-}
-
-@media (max-width: 768px) {
 }
 
 /* ================================================
@@ -3105,16 +2999,9 @@ section {
         gap: var(--space-2xl);
     }
 
-    /* Show console on tablet with adjusted size */
     .hero-visual {
         display: flex;
         justify-content: center;
-    }
-
-    .legal-console {
-        max-width: 100%;
-        transform: none;
-        animation: none;
     }
 
     .about-content {
@@ -3158,17 +3045,6 @@ section {
     .hero-subtitle {
         overflow-wrap: break-word;
         word-wrap: break-word;
-    }
-
-    /* Mobile console adjustments if shown */
-    .legal-console {
-        transform: none;
-        animation: none;
-    }
-
-    .commands-label {
-        width: 100%;
-        margin-bottom: var(--space-xs);
     }
 
     .positions-grid {
@@ -3837,15 +3713,6 @@ section {
 .stagger-5 { transition-delay: 0.5s; }
 .stagger-6 { transition-delay: 0.6s; }
 
-@keyframes textGlow {
-    0%, 100% {
-        text-shadow: 0 0 10px rgba(0, 77, 43, 0.3);
-    }
-    50% {
-        text-shadow: 0 0 20px rgba(0, 77, 43, 0.6), 0 0 40px rgba(0, 77, 43, 0.3);
-    }
-}
-
 /* ================================================
    REDUCED MOTION ACCESSIBILITY
    ================================================ */
@@ -3861,7 +3728,6 @@ section {
 
     .floating-shape,
     .gradient-blob,
-    .legal-console,
     .hero::before,
     .positions::before,
     .neural-line,
@@ -3872,7 +3738,6 @@ section {
     .logo-sparkle,
     .status-dot,
     .availability-dot,
-    .typing-cursor,
     .contact-cta-box::before,
     .cat-easter-egg-subtitle,
     .project-placeholder-whoisi::before,
@@ -4530,9 +4395,11 @@ section {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        /* Wyśrodkowane między strzałkami karuzeli (które siedzą na tej linii). */
+        /* Wyśrodkowane między strzałkami karuzeli (które siedzą na tej linii).
+           Strefa strzałki = 12px (inset) + 44px (szerokość) = 56px; padding 3.75rem
+           (60px) trzyma wyśrodkowane zakładki poza strzałkami z ~4px prześwitu. */
         justify-content: center;
-        padding: 0 2.5rem;
+        padding: 0 3.75rem;
     }
     .showcase-tabs::-webkit-scrollbar {
         display: none;
@@ -4548,6 +4415,19 @@ section {
     .showcase-arrow {
         width: 46px;
         height: 46px;
+    }
+    /* WCAG 2.5.8: powiększ pole dotyku 10px kropki do 24px bez zmiany jej wyglądu.
+       Większy gap chroni przed nakładaniem się sąsiednich obszarów dotyku. */
+    .showcase-dots {
+        gap: var(--space-md);
+    }
+    .showcase-dot {
+        position: relative;
+    }
+    .showcase-dot::after {
+        content: '';
+        position: absolute;
+        inset: -7px;
     }
     .showcase-title {
         font-size: var(--text-2xl);
@@ -4566,8 +4446,8 @@ section {
         top: var(--sc-arrow-top, 38%);
         transform: translateY(-50%);
         z-index: 5;
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
         background: rgba(0, 0, 0, 0.42);
         border-color: rgba(255, 255, 255, 0.35);
         color: #fff;
