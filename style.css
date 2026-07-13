@@ -2698,8 +2698,9 @@ section {
     max-width: 1340px;
     margin: 0 auto;
 }
+/* 4 narzędzia → zrównoważona siatka 2×2 (zamiast 3+1 z osieroconą kartą). */
 .tools-card {
-    grid-column: span 4;
+    grid-column: span 6;
 }
 @media (max-width: 768px) {
     .tools-card { grid-column: 1 / -1; }
