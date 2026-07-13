@@ -381,8 +381,84 @@
                     <div class="showcase-viewport">
                         <div class="showcase-track">
 
-                            <!-- Slide 1: JakiePrawo.pl -->
-                            <article class="showcase-slide" role="group" aria-label="1 z 6: JakiePrawo.pl">
+                            <!-- Slide 1: Parawan -->
+                            <article class="showcase-slide" role="group" aria-label="1 z 6: Parawan">
+                                <div class="showcase-media">
+                                    <div class="showcase-media-frame">
+                                        <div class="showcase-media-bar">
+                                            <span class="showcase-dot-red"></span>
+                                            <span class="showcase-dot-amber"></span>
+                                            <span class="showcase-dot-green"></span>
+                                            <span class="showcase-url" data-en="Parawan · local HTML file">Parawan · lokalny plik HTML</span>
+                                        </div>
+                                        <div class="showcase-stage">
+                                            <img class="showcase-img" src="assets/images/parawan.webp" alt="Zrzut ekranu: Parawan" loading="lazy">
+                                            <div class="showcase-media-placeholder" aria-hidden="true">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                                                <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="showcase-gallery">
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/parawan.webp" aria-label="Zrzut 1"><img src="assets/images/parawan.webp" alt="" loading="lazy"></button>
+                                    </div>
+                                </div>
+                                <div class="showcase-info">
+                                    <div class="project-tags">
+                                        <span class="tag">TypeScript</span>
+                                        <span class="tag">Offline</span>
+                                        <span class="tag">Regex + sumy kontrolne</span>
+                                        <span class="tag">Zero-deps</span>
+                                        <span class="tag tag-year">2026</span>
+                                    </div>
+                                    <h3 class="showcase-title">Parawan</h3>
+                                    <p class="showcase-subtitle" data-en="Local anonymizer for Polish personal data">Lokalny anonimizator polskich danych osobowych</p>
+
+                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: Parawan">
+                                        <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-parawan-opis" aria-controls="panel-parawan-opis" data-en="Overview">Opis</button>
+                                        <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-parawan-tech" aria-controls="panel-parawan-tech" data-en="Technical">Techniczne</button>
+                                        <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-parawan-chall" aria-controls="panel-parawan-chall" data-en="Challenges">Wyzwania</button>
+                                    </div>
+                                    <div class="showcase-panels">
+                                        <div class="showcase-panel is-active" role="tabpanel" id="panel-parawan-opis" aria-labelledby="tab-parawan-opis">
+                                            <p data-en="A tool that strips personal data — PESEL, tax IDs, emails, addresses, bank account numbers — out of text before you paste it into an AI chat. Everything happens locally; the text never leaves your browser.">Narzędzie, które usuwa dane osobowe — PESEL, NIP, e-maile, adresy, numery kont — z tekstu, zanim wkleisz go do czatu AI. Wszystko dzieje się lokalnie, tekst nigdy nie opuszcza przeglądarki.</p>
+                                            <p data-en="It's a single HTML file: you open it from disk, with no install and no internet. Detection relies purely on rules, dictionaries and checksums — no AI at all.">To jeden plik HTML: otwierasz go z dysku, bez instalacji i bez internetu. Detekcja opiera się wyłącznie na regułach, słownikach i sumach kontrolnych — żadnego AI.</p>
+                                        </div>
+                                        <div class="showcase-panel" role="tabpanel" id="panel-parawan-tech" aria-labelledby="tab-parawan-tech" hidden>
+                                            <div class="gh-badges">
+                                                <span class="gh-badge"><span class="gh-k">core</span><span class="gh-v gh-v-blue">TypeScript</span></span>
+                                                <span class="gh-badge"><span class="gh-k">build</span><span class="gh-v gh-v-green">Vite single-file</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="detection">detekcja</span><span class="gh-v gh-v-slate">reguły + sumy kontrolne</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="deps">zależności</span><span class="gh-v gh-v-gold">zero</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="distribution">dystrybucja</span><span class="gh-v gh-v-slate">1 plik HTML</span></span>
+                                            </div>
+                                            <ul class="showcase-list">
+                                                <li data-en="Core redactPII() in TypeScript with zero dependencies — runs in Node/Deno/Bun and the browser">Rdzeń redactPII() w TypeScript, zero zależności — działa w Node/Deno/Bun i w przeglądarce</li>
+                                                <li data-en="UI bundled by Vite into one self-contained HTML file, fonts embedded as data: URIs">UI budowane Vite do jednego samowystarczalnego HTML z fontami wbudowanymi jako data: URI</li>
+                                                <li data-en="Checksums (PESEL/NIP/REGON/IBAN) plus contextual anchors cut false positives">Sumy kontrolne (PESEL/NIP/REGON/IBAN) i kotwice kontekstowe tną fałszywe trafienia</li>
+                                                <li data-en="A precision/recall/F1 benchmark acts as a regression gate in CI">Benchmark precision/recall/F1 jako bramka regresji w CI</li>
+                                            </ul>
+                                        </div>
+                                        <div class="showcase-panel" role="tabpanel" id="panel-parawan-chall" aria-labelledby="tab-parawan-chall" hidden>
+                                            <ul class="showcase-list">
+                                                <li data-en="Precision over over-masking — over-masking is worse than a small leak">Precyzja ponad nadmaskowanie — nadmaskowanie bywa gorsze niż drobny wyciek</li>
+                                                <li data-en="Getting the masking pass order right (URLs → email → identifiers → longest digit strings)">Poprawna kolejność przebiegów maskowania (URL → e-mail → identyfikatory → najdłuższe ciągi cyfr)</li>
+                                                <li data-en="Getting past corporate/government blocks: a document, not a program">Przejście przez blokady firmowe/urzędowe: dokument, nie program</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="showcase-cta">
+                                        <a href="https://github.com/karolpolikarp/parawan" target="_blank" rel="noopener" class="project-link project-link-primary">
+                                            <span data-en="View on GitHub">Zobacz na GitHubie</span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Slide 2: JakiePrawo.pl -->
+                            <article class="showcase-slide" role="group" aria-label="2 z 6: JakiePrawo.pl">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -459,8 +535,8 @@
                                 </div>
                             </article>
 
-                            <!-- Slide 2: UpFor.pl -->
-                            <article class="showcase-slide" role="group" aria-label="2 z 6: UpFor.pl">
+                            <!-- Slide 3: UpFor.pl -->
+                            <article class="showcase-slide" role="group" aria-label="3 z 6: UpFor.pl">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -540,8 +616,8 @@
                                 </div>
                             </article>
 
-                            <!-- Slide 3: AutoMargiela -->
-                            <article class="showcase-slide" role="group" aria-label="3 z 6: AutoMargiela">
+                            <!-- Slide 4: AutoMargiela -->
+                            <article class="showcase-slide" role="group" aria-label="4 z 6: AutoMargiela">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -613,8 +689,8 @@
                                 </div>
                             </article>
 
-                            <!-- Slide 4: Majeranek -->
-                            <article class="showcase-slide" role="group" aria-label="4 z 6: Majeranek">
+                            <!-- Slide 5: Majeranek -->
+                            <article class="showcase-slide" role="group" aria-label="5 z 6: Majeranek">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -689,8 +765,8 @@
                                 </div>
                             </article>
 
-                            <!-- Slide 5: AIgets.me -->
-                            <article class="showcase-slide" role="group" aria-label="5 z 6: AIgets.me">
+                            <!-- Slide 6: AIgets.me -->
+                            <article class="showcase-slide" role="group" aria-label="6 z 6: AIgets.me">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -764,82 +840,6 @@
                                 </div>
                             </article>
 
-                            <!-- Slide 6: Parawan -->
-                            <article class="showcase-slide" role="group" aria-label="6 z 6: Parawan">
-                                <div class="showcase-media">
-                                    <div class="showcase-media-frame">
-                                        <div class="showcase-media-bar">
-                                            <span class="showcase-dot-red"></span>
-                                            <span class="showcase-dot-amber"></span>
-                                            <span class="showcase-dot-green"></span>
-                                            <span class="showcase-url" data-en="Parawan · local HTML file">Parawan · lokalny plik HTML</span>
-                                        </div>
-                                        <div class="showcase-stage">
-                                            <img class="showcase-img" src="assets/images/parawan.webp" alt="Zrzut ekranu: Parawan" loading="lazy">
-                                            <div class="showcase-media-placeholder" aria-hidden="true">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                                                <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/parawan.webp" aria-label="Zrzut 1"><img src="assets/images/parawan.webp" alt="" loading="lazy"></button>
-                                    </div>
-                                </div>
-                                <div class="showcase-info">
-                                    <div class="project-tags">
-                                        <span class="tag">TypeScript</span>
-                                        <span class="tag">Offline</span>
-                                        <span class="tag">Regex + sumy kontrolne</span>
-                                        <span class="tag">Zero-deps</span>
-                                        <span class="tag tag-year">2026</span>
-                                    </div>
-                                    <h3 class="showcase-title">Parawan</h3>
-                                    <p class="showcase-subtitle" data-en="Local anonymizer for Polish personal data">Lokalny anonimizator polskich danych osobowych</p>
-
-                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: Parawan">
-                                        <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-parawan-opis" aria-controls="panel-parawan-opis" data-en="Overview">Opis</button>
-                                        <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-parawan-tech" aria-controls="panel-parawan-tech" data-en="Technical">Techniczne</button>
-                                        <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-parawan-chall" aria-controls="panel-parawan-chall" data-en="Challenges">Wyzwania</button>
-                                    </div>
-                                    <div class="showcase-panels">
-                                        <div class="showcase-panel is-active" role="tabpanel" id="panel-parawan-opis" aria-labelledby="tab-parawan-opis">
-                                            <p data-en="A tool that strips personal data — PESEL, tax IDs, emails, addresses, bank account numbers — out of text before you paste it into an AI chat. Everything happens locally; the text never leaves your browser.">Narzędzie, które usuwa dane osobowe — PESEL, NIP, e-maile, adresy, numery kont — z tekstu, zanim wkleisz go do czatu AI. Wszystko dzieje się lokalnie, tekst nigdy nie opuszcza przeglądarki.</p>
-                                            <p data-en="It's a single HTML file: you open it from disk, with no install and no internet. Detection relies purely on rules, dictionaries and checksums — no AI at all.">To jeden plik HTML: otwierasz go z dysku, bez instalacji i bez internetu. Detekcja opiera się wyłącznie na regułach, słownikach i sumach kontrolnych — żadnego AI.</p>
-                                        </div>
-                                        <div class="showcase-panel" role="tabpanel" id="panel-parawan-tech" aria-labelledby="tab-parawan-tech" hidden>
-                                            <div class="gh-badges">
-                                                <span class="gh-badge"><span class="gh-k">core</span><span class="gh-v gh-v-blue">TypeScript</span></span>
-                                                <span class="gh-badge"><span class="gh-k">build</span><span class="gh-v gh-v-green">Vite single-file</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="detection">detekcja</span><span class="gh-v gh-v-slate">reguły + sumy kontrolne</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="deps">zależności</span><span class="gh-v gh-v-gold">zero</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="distribution">dystrybucja</span><span class="gh-v gh-v-slate">1 plik HTML</span></span>
-                                            </div>
-                                            <ul class="showcase-list">
-                                                <li data-en="Core redactPII() in TypeScript with zero dependencies — runs in Node/Deno/Bun and the browser">Rdzeń redactPII() w TypeScript, zero zależności — działa w Node/Deno/Bun i w przeglądarce</li>
-                                                <li data-en="UI bundled by Vite into one self-contained HTML file, fonts embedded as data: URIs">UI budowane Vite do jednego samowystarczalnego HTML z fontami wbudowanymi jako data: URI</li>
-                                                <li data-en="Checksums (PESEL/NIP/REGON/IBAN) plus contextual anchors cut false positives">Sumy kontrolne (PESEL/NIP/REGON/IBAN) i kotwice kontekstowe tną fałszywe trafienia</li>
-                                                <li data-en="A precision/recall/F1 benchmark acts as a regression gate in CI">Benchmark precision/recall/F1 jako bramka regresji w CI</li>
-                                            </ul>
-                                        </div>
-                                        <div class="showcase-panel" role="tabpanel" id="panel-parawan-chall" aria-labelledby="tab-parawan-chall" hidden>
-                                            <ul class="showcase-list">
-                                                <li data-en="Precision over over-masking — over-masking is worse than a small leak">Precyzja ponad nadmaskowanie — nadmaskowanie bywa gorsze niż drobny wyciek</li>
-                                                <li data-en="Getting the masking pass order right (URLs → email → identifiers → longest digit strings)">Poprawna kolejność przebiegów maskowania (URL → e-mail → identyfikatory → najdłuższe ciągi cyfr)</li>
-                                                <li data-en="Getting past corporate/government blocks: a document, not a program">Przejście przez blokady firmowe/urzędowe: dokument, nie program</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="showcase-cta">
-                                        <a href="https://github.com/karolpolikarp/parawan" target="_blank" rel="noopener" class="project-link project-link-primary">
-                                            <span data-en="View on GitHub">Zobacz na GitHubie</span>
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-
                         </div>
                     </div>
 
@@ -859,6 +859,29 @@
                 <section class="tools-section" aria-labelledby="tools-heading">
                     <h3 class="tools-heading" id="tools-heading" data-en="Open-source tools">Otwarte narzędzia</h3>
                     <div class="tools-grid">
+
+                        <article class="tools-card">
+                            <div class="tools-card-head">
+                                <span class="tools-card-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+                                </span>
+                                <h3>Parawan</h3>
+                                <span class="tag tag-year">2026</span>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">offline</span>
+                                <span class="tag">zero-deps</span>
+                            </div>
+                            <p data-en="A single HTML file that strips Polish personal data (PESEL, tax IDs, emails, addresses, bank accounts) out of text before you paste it into an AI chat. It runs 100% offline, straight from disk, with no install. Detection is purely rules, dictionaries and checksums — no AI at all.">Jeden plik HTML, który usuwa polskie dane osobowe (PESEL, NIP, e-maile, adresy, numery kont) z tekstu, zanim wkleisz go do czatu AI. Działa w 100% offline, prosto z dysku, bez instalacji. Detekcja to wyłącznie reguły, słowniki i sumy kontrolne — bez żadnego AI.</p>
+                            <div class="tools-card-foot">
+                                <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~4k</span></span>
+                                <span class="tag-mit">Apache 2.0</span>
+                                <a class="tools-card-link" href="https://github.com/karolpolikarp/parawan" target="_blank" rel="noopener" data-en="Repository">Repozytorium
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                            </a>
+                            </div>
+                        </article>
 
                         <article class="tools-card">
                             <div class="tools-card-head">
