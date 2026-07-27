@@ -2698,12 +2698,20 @@ section {
     max-width: 1340px;
     margin: 0 auto;
 }
-/* 4 narzędzia → zrównoważona siatka 2×2 (zamiast 3+1 z osieroconą kartą). */
+/* Siatka 2 w rzędzie (zamiast 3+1 z osieroconą kartą). */
 .tools-card {
     grid-column: span 6;
 }
 @media (max-width: 768px) {
     .tools-card { grid-column: 1 / -1; }
+}
+/* Nieparzysta liczba kart (5, 7…): ostatnia zostaje sama w rzędzie — wyśrodkuj ją
+   zamiast zostawiać osieroconą przy lewej krawędzi. Przy 4 i 6 kartach nie działa.
+   Zakres min-width jest konieczny: (0,4,0) wygrałoby z mobilnym `grid-column: 1 / -1`. */
+@media (min-width: 769px) {
+    .tools-grid > .tools-card:last-child:nth-child(odd) {
+        grid-column: 4 / span 6;
+    }
 }
 .tools-card {
     position: relative;
@@ -2815,6 +2823,16 @@ section {
     background: var(--color-primary-light);
     color: #fff;
     border-color: var(--color-primary-light);
+}
+/* Drugi link w karcie (repozytorium obok strony projektu). Bazowy .tools-card-link
+   rozciąga niewidoczny ::after na całą kartę; drugi taki overlay przykryłby pierwszy,
+   więc tu go kasujemy i podnosimy link nad overlay, żeby został osobno klikalny. */
+.tools-card-link--secondary {
+    position: relative;
+    z-index: 1;
+}
+.tools-card-link--secondary::after {
+    content: none;
 }
 @media (max-width: 768px) {
     .ds-section, .tools-section { margin-top: var(--space-xl); }
@@ -4196,6 +4214,7 @@ section {
     margin-top: auto;
     padding-top: var(--space-md);
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-md);
 }
 

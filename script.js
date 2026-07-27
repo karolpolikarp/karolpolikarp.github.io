@@ -1126,11 +1126,12 @@ ProjectShowcase.init();
 // Re-runs on languagechange because setLanguage rewrites the text nodes.
 // ================================================
 const TechHighlighter = {
-    terms: ['Apple Silicon', 'Raspberry Pi', 'PLLuM-12B', 'Next.js', 'TypeScript', 'Playwright',
+    terms: ['Apple Silicon', 'Raspberry Pi', 'Stream Decka', 'Stream Deck', 'PLLuM-12B',
+        'Claude Code', 'Next.js', 'Node.js', 'TypeScript', 'Playwright',
         'Selenium', 'Supabase', 'Postgres', 'Cloudflare', 'Discordzie', 'Discord', 'Whisperze',
         'Whisper', 'Béziera', 'Bézier', 'OpenAI', 'Claude', 'macOS', 'PLLuM', 'Python', 'SQLite',
         'Flask', 'React', 'tRPC', 'Swing', 'Java', 'ISAP', 'CLI', 'GPT', 'MCP', 'CSV',
-        'JSON', 'RLS'],
+        'JSON', 'ONNX', 'NER', 'RLS'],
     selector: '.showcase-panel p, .tools-card p, .showcase-subtitle',
 
     init() {

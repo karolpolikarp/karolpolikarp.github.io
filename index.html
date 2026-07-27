@@ -112,7 +112,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="style.css?v=67">
+    <link rel="stylesheet" href="style.css?v=68">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -449,7 +449,11 @@
                                     </div>
 
                                     <div class="showcase-cta">
-                                        <a href="https://github.com/karolpolikarp/parawan" target="_blank" rel="noopener" class="project-link project-link-primary">
+                                        <a href="https://parawan.karolwilczynski.com/" target="_blank" rel="noopener" class="project-link project-link-primary">
+                                            <span data-en="See live">Zobacz na żywo</span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                                        </a>
+                                        <a href="https://github.com/karolpolikarp/parawan" target="_blank" rel="noopener" class="project-link">
                                             <span data-en="View on GitHub">Zobacz na GitHubie</span>
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                                         </a>
@@ -863,6 +867,32 @@
                         <article class="tools-card">
                             <div class="tools-card-head">
                                 <span class="tools-card-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="7" height="7" rx="1.6"/><rect x="14" y="4" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>
+                                </span>
+                                <h3>Claude Usage</h3>
+                                <span class="tag tag-year">2026</span>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Stream Deck</span>
+                                <span class="tag">offline</span>
+                            </div>
+                            <p data-en="A Stream Deck plugin that keeps your Claude limits on physical keys: the 5-hour session, the week, the Fable limit, usage credits and today's token cost. Limits come once a minute from the same endpoint Claude Code's /usage uses; the cost is computed offline from local transcripts. Node.js 20, one dependency, no telemetry — it talks to two hosts and that's it.">Wtyczka do Stream Decka, która trzyma limity Claude'a na fizycznych klawiszach: sesję 5-godzinną, tydzień, limit Fable, pulę kredytów i dzisiejszy koszt tokenów. Limity pobiera raz na minutę z tego samego endpointu, z którego korzysta /usage w Claude Code, a koszt liczy offline z lokalnych transkryptów. Node.js 20, jedna zależność, zero telemetrii — łączy się z dwoma hostami i tyle.</p>
+                            <div class="tools-card-foot">
+                                <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~1.4k</span></span>
+                                <span class="tag-mit">MIT</span>
+                                <a class="tools-card-link" href="https://karolwilczynski.com/claude-usage-streamdeck/" target="_blank" rel="noopener" data-en="Project page">Strona projektu
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                            </a>
+                                <a class="tools-card-link tools-card-link--secondary" href="https://github.com/karolpolikarp/claude-usage-streamdeck" target="_blank" rel="noopener" data-en="Repository">Repozytorium
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                            </a>
+                            </div>
+                        </article>
+
+                        <article class="tools-card">
+                            <div class="tools-card-head">
+                                <span class="tools-card-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
                                 </span>
                                 <h3>Parawan</h3>
@@ -877,7 +907,33 @@
                             <div class="tools-card-foot">
                                 <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~4k</span></span>
                                 <span class="tag-mit">Apache 2.0</span>
-                                <a class="tools-card-link" href="https://github.com/karolpolikarp/parawan" target="_blank" rel="noopener" data-en="Repository">Repozytorium
+                                <a class="tools-card-link" href="https://parawan.karolwilczynski.com/" target="_blank" rel="noopener" data-en="Project page">Strona projektu
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                            </a>
+                                <a class="tools-card-link tools-card-link--secondary" href="https://github.com/karolpolikarp/parawan" target="_blank" rel="noopener" data-en="Repository">Repozytorium
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                            </a>
+                            </div>
+                        </article>
+
+                        <article class="tools-card">
+                            <div class="tools-card-head">
+                                <span class="tools-card-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="6" y="6" width="12" height="12" rx="2.2"/><path d="M9.5 2.5v3.5M14.5 2.5v3.5M9.5 18v3.5M14.5 18v3.5M2.5 9.5h3.5M2.5 14.5h3.5M18 9.5h3.5M18 14.5h3.5"/></svg>
+                                </span>
+                                <h3>Anonimizator AI <span class="project-badge-wip" data-en="WIP">W BUDOWIE</span></h3>
+                                <span class="tag tag-year">2026</span>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">ONNX</span>
+                                <span class="tag">NER</span>
+                            </div>
+                            <p data-en="A DLC for Parawan — an optional AI layer (NER) that catches the rare and foreign surnames the rules miss: “Achtelik”, “Nguyen”, “Müller”. The ONNX model runs entirely on your machine, so recall on rare surnames climbs from 21% to 79–90% while precision holds at 99.6%. Still in progress: it needs the core published to npm and a ~125 MB model pack built separately.">DLC do Parawana — opcjonalna warstwa AI (NER), która wyłapuje rzadkie i obce nazwiska, których nie widzą reguły: „Achtelik”, „Nguyen”, „Müller”. Model ONNX chodzi w całości na Twoim komputerze, więc recall na rzadkich nazwiskach rośnie z 21% do 79–90%, a precyzja zostaje na 99,6%. Wciąż w budowie: wymaga rdzenia opublikowanego w npm i paczki modelu (~125 MB) budowanej osobno.</p>
+                            <div class="tools-card-foot">
+                                <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~3.2k</span></span>
+                                <span class="tag-mit">Apache 2.0</span>
+                                <a class="tools-card-link" href="https://github.com/karolpolikarp/anonimizator-ai" target="_blank" rel="noopener" data-en="Repository">Repozytorium
                                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
                             </a>
                             </div>
@@ -911,7 +967,7 @@
                                 <span class="tools-card-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8M8 9h2"/></svg>
                                 </span>
-                                <h3>ISAP-scrap</h3>
+                                <h3>ISAP-scraper</h3>
                                 <span class="tag tag-year">2025</span>
                             </div>
                             <div class="project-tags">
@@ -923,7 +979,7 @@
                             <div class="tools-card-foot">
                                 <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~1.5k</span></span>
                                 <span class="tag-mit">MIT</span>
-                                <a class="tools-card-link" href="https://github.com/karolpolikarp/isapscrap" target="_blank" rel="noopener" data-en="Repository">Repozytorium
+                                <a class="tools-card-link" href="https://github.com/karolpolikarp/ISAP-scraper" target="_blank" rel="noopener" data-en="Repository">Repozytorium
                                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
                             </a>
                             </div>
@@ -1372,7 +1428,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=15" defer></script>
+    <script src="script.js?v=17" defer></script>
     <script src="analytics.js?v=1" defer></script>
 </body>
 </html>
