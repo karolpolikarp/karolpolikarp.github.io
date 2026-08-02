@@ -597,8 +597,8 @@ window.cats = cats;
 // ================================================
 const EmailProtection = {
     // Email encoded as character codes (harder for scrapers to parse)
-    // Encoded: karolpwilczynski@gmail.com
-    encoded: [107,97,114,111,108,112,119,105,108,99,122,121,110,115,107,105,64,103,109,97,105,108,46,99,111,109],
+    // Encoded: czesc@karolwilczynski.com
+    encoded: [99,122,101,115,99,64,107,97,114,111,108,119,105,108,99,122,121,110,115,107,105,46,99,111,109],
 
     init() {
         const emailLink = document.getElementById('emailLink');
