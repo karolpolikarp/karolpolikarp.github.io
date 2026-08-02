@@ -1129,9 +1129,9 @@ const TechHighlighter = {
     terms: ['Apple Silicon', 'Raspberry Pi', 'Stream Decka', 'Stream Deck', 'PLLuM-12B',
         'Claude Code', 'Next.js', 'Node.js', 'TypeScript', 'Playwright',
         'Selenium', 'Supabase', 'Postgres', 'Cloudflare', 'Discordzie', 'Discord', 'Whisperze',
-        'Whisper', 'Béziera', 'Bézier', 'OpenAI', 'Claude', 'macOS', 'PLLuM', 'Python', 'SQLite',
+        'Whisper', 'Béziera', 'Bézier', 'Telegrama', 'Telegram', 'OpenAI', 'Claude', 'macOS', 'PLLuM', 'Python', 'SQLite',
         'Flask', 'React', 'tRPC', 'Swing', 'Java', 'ISAP', 'CLI', 'GPT', 'MCP', 'CSV',
-        'JSON', 'ONNX', 'NER', 'RLS'],
+        'JSON', 'ONNX', 'NER', 'RLS', 'RSS'],
     selector: '.showcase-panel p, .tools-card p, .showcase-subtitle',
 
     init() {

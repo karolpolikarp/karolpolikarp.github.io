@@ -382,8 +382,90 @@
                     <div class="showcase-viewport">
                         <div class="showcase-track">
 
-                            <!-- Slide 1: Parawan -->
-                            <article class="showcase-slide" role="group" aria-label="1 z 6: Parawan">
+                            <!-- Slide 1: Zorza -->
+                            <article class="showcase-slide" role="group" aria-label="1 z 7: Zorza">
+                                <div class="showcase-media">
+                                    <div class="showcase-media-frame">
+                                        <div class="showcase-media-bar">
+                                            <span class="showcase-dot-red"></span>
+                                            <span class="showcase-dot-amber"></span>
+                                            <span class="showcase-dot-green"></span>
+                                            <span class="showcase-url" data-en="zorza.karolwilczynski.com · dashboard">zorza.karolwilczynski.com · pulpit</span>
+                                        </div>
+                                        <div class="showcase-stage">
+                                            <img class="showcase-img showcase-img--contain" src="assets/images/zorza.webp" alt="Zrzut ekranu: Zorza" loading="lazy">
+                                            <div class="showcase-media-placeholder" aria-hidden="true">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                                                <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="showcase-gallery">
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/zorza.webp" aria-label="Zrzut 1"><img src="assets/images/zorza.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/zorza-karta.webp" aria-label="Zrzut 2"><img src="assets/images/zorza-karta.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/zorza-mapa.webp" aria-label="Zrzut 3"><img src="assets/images/zorza-mapa.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/zorza-wykres.webp" aria-label="Zrzut 4"><img src="assets/images/zorza-wykres.webp" alt="" loading="lazy"></button>
+                                    </div>
+                                </div>
+                                <div class="showcase-info">
+                                    <div class="project-tags">
+                                        <span class="tag">TypeScript</span>
+                                        <span class="tag">Fastify</span>
+                                        <span class="tag">SQLite + FTS5</span>
+                                        <span class="tag">Raspberry Pi</span>
+                                        <span class="tag tag-year">2026</span>
+                                    </div>
+                                    <h3 class="showcase-title">Zorza</h3>
+                                    <p class="showcase-subtitle" data-en="Real-time information listening post">Nasłuch informacyjny w czasie rzeczywistym</p>
+
+                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: Zorza">
+                                        <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-zorza-opis" aria-controls="panel-zorza-opis" data-en="Overview">Opis</button>
+                                        <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-zorza-tech" aria-controls="panel-zorza-tech" data-en="Technical">Techniczne</button>
+                                        <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-zorza-chall" aria-controls="panel-zorza-chall" data-en="Challenges">Wyzwania</button>
+                                    </div>
+                                    <div class="showcase-panels">
+                                        <div class="showcase-panel is-active" role="tabpanel" id="panel-zorza-opis" aria-labelledby="tab-zorza-opis">
+                                            <p data-en="An aggregator that pulls Telegram channels, RSS, X and satellite or market sensors into a single dashboard. Instead of a dozen open tabs — columns sorted by how much an event actually matters.">Agregator, który zbiera w jeden pulpit to, co dzieje się na kanałach Telegrama, w RSS, na X i w sensorach satelitarno-rynkowych. Zamiast kilkunastu otwartych kart — kolumny posortowane po wadze zdarzenia.</p>
+                                            <p data-en="Every item carries a credibility score along with the rules that produced it, and a repost collapses into a counter next to the original. An alert reaches your phone about a second after publication.">Każdy wpis dostaje ocenę wiarygodności razem z listą reguł, które ją ustaliły, a przedruk zwija się w licznik przy oryginale. Alert trafia na telefon w około sekundę od publikacji.</p>
+                                        </div>
+                                        <div class="showcase-panel" role="tabpanel" id="panel-zorza-tech" aria-labelledby="tab-zorza-tech" hidden>
+                                            <div class="gh-badges">
+                                                <span class="gh-badge"><span class="gh-k">core</span><span class="gh-v gh-v-blue">TypeScript</span></span>
+                                                <span class="gh-badge"><span class="gh-k">backend</span><span class="gh-v gh-v-green">Fastify 5 + SQLite</span></span>
+                                                <span class="gh-badge"><span class="gh-k">frontend</span><span class="gh-v gh-v-slate">React 18 + Vite</span></span>
+                                                <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-slate">Claude Haiku 4.5</span></span>
+                                                <span class="gh-badge"><span class="gh-k">host</span><span class="gh-v gh-v-slate">Raspberry Pi 5</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~25k</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold">242</span></span>
+                                            </div>
+                                            <ul class="showcase-list">
+                                                <li data-en="Collectors: Telegram over MTProto (41 channels), 59 RSS feeds and ~15 sensor APIs — NASA FIRMS, AIS, ADS-B, GDELT, COT, Polymarket">Kolektory: Telegram przez MTProto (41 kanałów), 59 kanałów RSS i ~15 API sensorycznych — NASA FIRMS, AIS, ADS-B, GDELT, COT, Polymarket</li>
+                                                <li data-en="SQLite with FTS5 (7 tables), 58k entries in the archive at 30-day retention, one SSE stream to the browser">SQLite z FTS5 (7 tabel), 58 tys. wpisów w archiwum przy retencji 30 dni, jeden strumień SSE do przeglądarki</li>
+                                                <li data-en="Rules decide first — Claude Haiku 4.5 only runs where the rules abstained; embeddings computed locally (all-MiniLM-L6-v2, 22 MB, offline)">Najpierw decydują reguły — Claude Haiku 4.5 wchodzi tylko tam, gdzie reguły nie rozstrzygnęły; embeddingi liczone lokalnie (all-MiniLM-L6-v2, 22 MB, offline)</li>
+                                                <li data-en="Self-hosted on a Raspberry Pi 5 behind a Cloudflare tunnel, hardened systemd sandbox, CI running typecheck and 242 tests">Self-hosted na Raspberry Pi 5 za tunelem Cloudflare, utwardzona piaskownica systemd, CI z typecheckiem i 242 testami</li>
+                                                <li data-en="Running cost of 2.06 USD a day — a Bloomberg terminal costs 31,980 USD a year">Koszt utrzymania 2,06 USD na dobę — terminal Bloomberga kosztuje 31 980 USD rocznie</li>
+                                            </ul>
+                                        </div>
+                                        <div class="showcase-panel" role="tabpanel" id="panel-zorza-chall" aria-labelledby="tab-zorza-chall" hidden>
+                                            <ul class="showcase-list">
+                                                <li data-en="A dedup threshold derived from measurement, not from feel: a literal repost scores 0.83 Jaccard, a paraphrase 0.39 — the cut sits at 0.70">Próg deduplikacji wyprowadzony z pomiaru, nie z wyczucia: dosłowny przedruk to 0,83 Jaccarda, parafraza 0,39 — cięcie na 0,70</li>
+                                                <li data-en="An 8-hour Telegram FLOOD_WAIT after a run of restarts: cache the (channel_id, access_hash) pair instead of resolving usernames — zero resolve calls on startup">FLOOD_WAIT Telegrama na 8 godzin po serii restartów: cache pary (channel_id, access_hash) zamiast rozwiązywania nazw — zero wywołań resolve przy starcie</li>
+                                                <li data-en="An LLM batching gate: 51 → 4 calls an hour and 2.00 → 0.78 USD a day at the same throughput">Bramka batchowania LLM: 51 → 4 wywołania na godzinę i 2,00 → 0,78 USD dziennie przy tej samej przepustowości</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="showcase-cta">
+                                        <a href="https://zorza.karolwilczynski.com" target="_blank" rel="noopener" class="project-link project-link-primary">
+                                            <span data-en="See live">Zobacz na żywo</span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Slide 2: Parawan -->
+                            <article class="showcase-slide" role="group" aria-label="2 z 7: Parawan">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -462,8 +544,8 @@
                                 </div>
                             </article>
 
-                            <!-- Slide 2: JakiePrawo.pl -->
-                            <article class="showcase-slide" role="group" aria-label="2 z 6: JakiePrawo.pl">
+                            <!-- Slide 3: JakiePrawo.pl -->
+                            <article class="showcase-slide" role="group" aria-label="3 z 7: JakiePrawo.pl">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -540,8 +622,8 @@
                                 </div>
                             </article>
 
-                            <!-- Slide 3: UpFor.pl -->
-                            <article class="showcase-slide" role="group" aria-label="3 z 6: UpFor.pl">
+                            <!-- Slide 4: UpFor.pl -->
+                            <article class="showcase-slide" role="group" aria-label="4 z 7: UpFor.pl">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -621,8 +703,8 @@
                                 </div>
                             </article>
 
-                            <!-- Slide 4: AutoMargiela -->
-                            <article class="showcase-slide" role="group" aria-label="4 z 6: AutoMargiela">
+                            <!-- Slide 5: AutoMargiela -->
+                            <article class="showcase-slide" role="group" aria-label="5 z 7: AutoMargiela">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -694,8 +776,8 @@
                                 </div>
                             </article>
 
-                            <!-- Slide 5: Majeranek -->
-                            <article class="showcase-slide" role="group" aria-label="5 z 6: Majeranek">
+                            <!-- Slide 6: Majeranek -->
+                            <article class="showcase-slide" role="group" aria-label="6 z 7: Majeranek">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -770,8 +852,8 @@
                                 </div>
                             </article>
 
-                            <!-- Slide 6: AIgets.me -->
-                            <article class="showcase-slide" role="group" aria-label="6 z 6: AIgets.me">
+                            <!-- Slide 7: AIgets.me -->
+                            <article class="showcase-slide" role="group" aria-label="7 z 7: AIgets.me">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -853,7 +935,7 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
                         </button>
                         <div class="showcase-dots" role="group" aria-label="Wybór projektu"></div>
-                        <span class="showcase-counter"><span class="showcase-counter-current">01</span> / <span class="showcase-counter-total">05</span></span>
+                        <span class="showcase-counter"><span class="showcase-counter-current">01</span> / <span class="showcase-counter-total">07</span></span>
                         <button type="button" class="showcase-arrow showcase-next" aria-label="Następny projekt">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
                         </button>
@@ -1429,7 +1511,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=17" defer></script>
+    <script src="script.js?v=18" defer></script>
     <script src="analytics.js?v=1" defer></script>
 </body>
 </html>
