@@ -433,7 +433,7 @@
                                                 <span class="gh-badge"><span class="gh-k">core</span><span class="gh-v gh-v-blue">TypeScript</span></span>
                                                 <span class="gh-badge"><span class="gh-k">backend</span><span class="gh-v gh-v-green">Fastify 5 + SQLite</span></span>
                                                 <span class="gh-badge"><span class="gh-k">frontend</span><span class="gh-v gh-v-slate">React 18 + Vite</span></span>
-                                                <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-slate">Claude Haiku 4.5</span></span>
+                                                <span class="gh-badge"><span class="gh-k">AI</span><span class="gh-v gh-v-slate">Haiku 4.5 + Sonnet 5</span></span>
                                                 <span class="gh-badge"><span class="gh-k">host</span><span class="gh-v gh-v-slate">Raspberry Pi 5</span></span>
                                                 <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~25k</span></span>
                                                 <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold">242</span></span>
@@ -675,14 +675,15 @@
                                                 <span class="gh-badge"><span class="gh-k">bot</span><span class="gh-v gh-v-slate">Discord.js</span></span>
                                                 <span class="gh-badge"><span class="gh-k">API</span><span class="gh-v gh-v-slate">tRPC v11</span></span>
                                                 <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~113k</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-slate">~17k</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-slate">~32k</span></span>
                                             </div>
                                             <ul class="showcase-list">
                                                 <li data-en="Next.js 15 (App Router) + React 19, fully typed in TypeScript">Next.js 15 (App Router) + React 19, w pełni typowane w TypeScript</li>
                                                 <li data-en="7×48 grid (7 days × 48 half-hour slots), rendered as an interactive overlap heatmap">Siatka 7×48 (7 dni × 48 półgodzinnych slotów) jako interaktywna heatmapa nakładania się dostępności</li>
                                                 <li data-en="Discord bot: 18 Polish slash commands, real-time two-way sync">Bot Discord: 18 polskich slash-komend, dwukierunkowa synchronizacja w czasie rzeczywistym</li>
-                                                <li data-en="Monorepo (Turborepo): 27 data models, 20 tRPC routers (~125 procedures), realtime over Postgres LISTEN/NOTIFY → SSE">Monorepo (Turborepo): 27 modeli danych, 20 routerów tRPC (~125 procedur), realtime po Postgres LISTEN/NOTIFY → SSE</li>
+                                                <li data-en="Monorepo (Turborepo): 28 data models, 20 tRPC routers (~129 procedures), realtime over Postgres LISTEN/NOTIFY → SSE">Monorepo (Turborepo): 28 modeli danych, 20 routerów tRPC (~129 procedur), realtime po Postgres LISTEN/NOTIFY → SSE</li>
                                                 <li data-en="Claude Haiku 4.5 with tool-use: the model calls functions that compute the shared window">Claude Haiku 4.5 z tool-use: model wywołuje funkcje liczące wspólne okno dostępności</li>
+                                                <li data-en="Growth loop: a Discord channel per group, a public /bot page and group invite landings with UTM attribution">Pętla wzrostu: kanał Discord dla każdej grupy, publiczna strona /bot i landing zaproszeń do grupy z atrybucją UTM</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-upfor-chall" aria-labelledby="tab-upfor-chall" hidden>
@@ -690,6 +691,7 @@
                                                 <li data-en="Keeping state consistent in real time when the same slot is edited by both the app and the Discord bot">Utrzymanie spójnego stanu w czasie rzeczywistym, gdy ten sam slot zmienia i aplikacja, i bot Discord</li>
                                                 <li data-en="Designing tool-use so the model proposes a genuinely shared window, not an 'almost' fit">Zaprojektowanie tool-use tak, by model proponował realne wspólne okno, a nie „prawie” pasujący termin</li>
                                                 <li data-en="Time zones, where the same slot is a different local hour for everyone">Strefy czasowe, w których ten sam slot to u każdego inna lokalna godzina</li>
+                                                <li data-en="The bot as a single point of failure: a dead-man's switch plus a fallback cron scheduler on GitHub Actions">Bot jako pojedynczy punkt awarii: dead-man's switch i zapasowy harmonogram cronów w GitHub Actions</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -946,6 +948,29 @@
                 <section class="tools-section" aria-labelledby="tools-heading">
                     <h3 class="tools-heading" id="tools-heading" data-en="Open-source tools">Otwarte narzędzia</h3>
                     <div class="tools-grid">
+
+                        <article class="tools-card">
+                            <div class="tools-card-head">
+                                <span class="tools-card-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="2.6"/><circle cx="4.5" cy="5.5" r="1.8"/><circle cx="19.5" cy="5.5" r="1.8"/><circle cx="4.5" cy="18.5" r="1.8"/><circle cx="19.5" cy="18.5" r="1.8"/><path d="M6 6.8l4 3.6M18 6.8l-4 3.6M6 17.2l4-3.6M18 17.2l-4-3.6"/></svg>
+                                </span>
+                                <h3 data-en="Civil Servant &amp; AI">Urzędnik i AI</h3>
+                                <span class="tag tag-year">2026</span>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">React 19</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">offline</span>
+                            </div>
+                            <p data-en="A clickable map of ways to use language models in government and local administration: 527 ready-to-copy prompts in 10 areas and 56 topics, browsed as a map, step-by-step paths, a matrix, a network of related prompts or a plain list. Every prompt says what data it needs — public, internal or sensitive — because that decides which tool you may run it in. No server, no calls to any model, nothing stored in the browser: the whole state lives in the link.">Klikalna mapa zastosowań modeli językowych w administracji rządowej i samorządowej: 527 gotowych promptów w 10 działach i 56 obszarach, do przeglądania jako mapa, ścieżki krok po kroku, macierz, sieć pokrewnych promptów albo zwykła lista. Przy każdym prompcie jest informacja, z jakimi danymi pracuje — publicznymi, wewnętrznymi czy wrażliwymi — bo to decyduje, w jakim narzędziu wolno go użyć. Bez serwera, bez połączeń z modelem, bez zapisu w przeglądarce: cały stan niesie link.</p>
+                            <div class="tools-card-foot">
+                                <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~15k</span></span>
+                                <span class="tag-mit" data-en="Apache 2.0 · content CC BY-NC-SA">Apache 2.0 · treść CC BY-NC-SA</span>
+                                <a class="tools-card-link" href="https://promptyurzednika.karolwilczynski.com/" target="_blank" rel="noopener" data-en="See live">Zobacz na żywo
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                            </a>
+                            </div>
+                        </article>
 
                         <article class="tools-card">
                             <div class="tools-card-head">
