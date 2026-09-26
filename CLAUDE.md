@@ -89,8 +89,10 @@ Contains modular components (in order):
 
 Decorative layer added on top of the existing design (nothing else in the layout changes):
 - **Hero particles** (`#heroParticles` inside `.hero-bg-decoration`): dust gathers into `§`, then `{ § }`,
-  then settles as `§` on the left and `θ` on the right (serif = law, mono = code), then recedes into a quiet
-  watermark; the pointer repels particles.
+  then settles as `§` on the left and `θ` on the right (serif = law, mono = code) — on wide screens in the empty
+  side margins next to the content, otherwise in the gap between the name and the timeline (`heroLayout()` in
+  `particles.js` measures the real layout and the scene rebuilds, already settled, after a resize). Then it
+  recedes into a quiet watermark; the pointer repels particles.
 - **Contact finale** (`.contact-finale` + `#finaleParticles`): `§` splits into `§ … θ` when scrolled into view,
   above the motto „Od paragrafu do parametru.” (`data-en`). A static HTML/SVG formula is the no-JS fallback.
 - **Number scramble**, **cursor light**, **scroll progress bar**, **hero-tab timeline drawing** (CSS on

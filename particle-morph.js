@@ -52,6 +52,7 @@ const INK_RGB = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0]];
  * @property {Element} [pointerTarget]      element whose pointer moves repel particles (canvas has pointer-events:none)
  * @property {{ shape: number, at: number }[]} [sequence]  shape changes over time (seconds); default: [{shape:0, at:0}]
  * @property {boolean} [startOnVisible]     wait until the canvas is first on screen before starting the sequence
+ * @property {boolean} [startSettled]       skip the sequence: start on the last shape, already settled (used to rebuild after a resize)
  */
 
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)');
@@ -284,6 +285,19 @@ class Morph {
         if (REDUCE.matches) {
             this.enter(seq[seq.length - 1].shape, false);
             this.drawStill();
+        } else if (o.startSettled) {
+            const lastShape = seq[seq.length - 1];
+            this.enter(lastShape.shape, false);
+            this.seqIndex = seq.length;
+            // jump the clock past the entrance, fade-in and settle so the sign is already quiet
+            this.t = Math.max(lastShape.at, o.fadeIn ?? 0) + (o.settle ? o.settle.after + o.settle.duration : 0);
+            this.enterT = this.t - 10;
+            const tg = this.targets[this.cur];
+            for (let p = 0; p < this.N; p++) {
+                const k = this.TI[p];
+                this.px[p] = tg.x[k] + this.JX[p];
+                this.py[p] = tg.y[k] + this.JY[p];
+            }
         } else {
             this.enter(seq[0].shape, false);
             this.seqIndex = 1;
