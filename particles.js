@@ -135,7 +135,7 @@ function heroScene(hero, settled) {
         colorVars: COLOR_VARS,
         dustVar: '--pm-dust',
         maxDpr: 1.5,
-        trail: 0.66,
+        trail: 0.5,       // short trails: the streaks vanish quickly
         // a grand entrance, then the sign recedes into a quiet watermark
         fadeIn: 1.6,
         settle: { after: 1.6, factor: 0.7, duration: 2.2 },
@@ -169,6 +169,7 @@ function finaleScene(finale) {
         colorVars: COLOR_VARS,
         dustVar: '--pm-dust',
         maxDpr: 2,
+        trail: 0.6,
         pointerTarget: finale.parentElement ?? finale,
         startOnVisible: true,
         sequence: [{ shape: 0, at: 0 }, { shape: 1, at: 1.8 }]

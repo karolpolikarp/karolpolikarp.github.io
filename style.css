@@ -4584,16 +4584,20 @@ section {
 
 /* hero: a watermark behind the text and tabs, quieter than the contact finale */
 #heroParticles {
-    --pm-alpha: 0.38;
+    --pm-alpha: 0.56;
 }
 
 [data-theme="dark"] #heroParticles {
-    --pm-alpha: 0.42;
+    --pm-alpha: 0.62;
 }
 
 /* the finale glows, but stays gold instead of burning out to white */
 [data-theme="dark"] #finaleParticles {
-    --pm-alpha: 0.45;
+    --pm-alpha: 0.72;
+}
+
+#finaleParticles {
+    --pm-alpha: 0.8;
 }
 
 /* contact finale: particles split into "§ … θ" above the tiles */
