@@ -6,8 +6,8 @@
 
 /*
  * particles.js — the two particle scenes of the site (decoration only, aria-hidden canvases):
- *   hero:    dust gathers into "§", then "{ § }", and settles as "§" on the left, "θ" on the right
- *   contact: the finale — "§" splits into "§ … θ" when the section comes into view
+ *   hero:    dust gathers into "§", then "{ § }", and settles as "§" on the left, "{ }" on the right
+ *   contact: the finale — "§" splits into "§ … { }" when the section comes into view
  * Serif (Playfair Display) = law, mono (JetBrains Mono) = code.
  * Colours come from --pm-* custom properties (style.css), so both themes are covered.
  */
@@ -19,10 +19,11 @@ const MONO = "'JetBrains Mono', 'Fira Code', Consolas, monospace";
 const COLOR_VARS = ['--pm-0', '--pm-1'];
 
 /**
- * The final sign: "§" (law) on the left and "θ" (parameter) on the right — no arrow between them.
- * @param {CanvasRenderingContext2D} c @param {number} xPara @param {number} xTheta @param {number} cy @param {number} size
+ * The final sign: "§" (law) on the left and "{ }" (code) on the right — no arrow between them.
+ * The braces are drawn one by one around xCode, so their spacing does not depend on the font.
+ * @param {CanvasRenderingContext2D} c @param {number} xPara @param {number} xCode @param {number} cy @param {number} size
  */
-function pair(c, xPara, xTheta, cy, size) {
+function pair(c, xPara, xCode, cy, size) {
     c.textAlign = 'center';
     c.textBaseline = 'middle';
     c.fillStyle = INK[0];
@@ -30,7 +31,9 @@ function pair(c, xPara, xTheta, cy, size) {
     c.fillText('§', xPara, cy + size * 0.04);
     c.fillStyle = INK[1];
     c.font = `600 ${size}px ${MONO}`;
-    c.fillText('θ', xTheta, cy);
+    const d = size * 0.24;
+    c.fillText('{', xCode - d, cy);
+    c.fillText('}', xCode + d, cy);
 }
 
 /** @param {CanvasRenderingContext2D} c @param {number} cx @param {number} cy @param {number} size */
@@ -61,7 +64,7 @@ async function fontsReady() {
     const load = Promise.all([
         document.fonts.load(`700 100px ${SERIF}`, '§'),
         document.fonts.load(`500 100px ${MONO}`, '{}'),
-        document.fonts.load(`600 100px ${MONO}`, 'θ')
+        document.fonts.load(`600 100px ${MONO}`, '{}')
     ]).catch(() => []);
     await Promise.race([load, new Promise(r => setTimeout(r, 2500))]);
 }
@@ -74,7 +77,7 @@ function idle(fn) {
 
 /**
  * Hero geometry in canvas pixels, measured from the real layout.
- * Final sign: on wide screens "§" sits in the empty margin left of the content and "θ" in the margin
+ * Final sign: on wide screens "§" sits in the empty margin left of the content and "{ }" in the margin
  * on the right; where there are no margins, both sit in the gap between the name and the timeline
  * (on phones: behind the name).
  * @param {HTMLCanvasElement} hero
@@ -92,7 +95,7 @@ function heroLayout(hero) {
     const intro = { cx: ox + (DW / 2) * s, cy: oy + DH * 0.51 * s, big: 620 * s, braced: (narrow ? 330 : 400) * s };
     let fin = narrow
         ? { xp: ox + 240 * s, xt: ox + 560 * s, y: oy + DH * 0.51 * s, size: 300 * s }
-        : { xp: ox + 610 * s, xt: ox + 905 * s, y: oy + DH * 0.5 * s, size: 300 * s };
+        : { xp: ox + 610 * s, xt: ox + 875 * s, y: oy + DH * 0.5 * s, size: 280 * s };
     const content = document.querySelector('#hero .hero-content');
     const visual = document.querySelector('#hero .hero-visual');
     const box = document.querySelector('#hero .container');
@@ -107,7 +110,7 @@ function heroLayout(hero) {
                 xp: left / 2,
                 xt: cw - right / 2,
                 y: b.top + b.height / 2 - base.top,
-                size: Math.min(margin * 1.45, ch * 0.55)
+                size: Math.min(margin * 0.9, ch * 0.55)   // "{ }" is ~0.85 em wide: keep it well inside the margin
             };
         }
     }
@@ -115,7 +118,7 @@ function heroLayout(hero) {
 }
 
 /**
- * Hero scene: dust -> "§" -> "{ § }" -> "§ … θ", then a quiet watermark.
+ * Hero scene: dust -> "§" -> "{ § }" -> "§ … { }", then a quiet watermark.
  * @param {HTMLCanvasElement} hero @param {boolean} settled  start on the final sign (after a resize)
  */
 function heroScene(hero, settled) {

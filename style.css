@@ -4551,7 +4551,7 @@ section {
    ================================================ */
 
 /* Particle palette (read by particle-morph.js from the canvas): index 0 = § (law),
-   1 = θ and { } (code); light theme draws opaque, dark theme glows. */
+   1 = { } (code); light theme draws opaque, dark theme glows. */
 :root {
     --pm-0: var(--color-primary);
     --pm-1: var(--color-accent-dark);
@@ -4600,7 +4600,7 @@ section {
     --pm-alpha: 0.8;
 }
 
-/* contact finale: particles split into "§ … θ" above the tiles */
+/* contact finale: particles split into "§ … { }" above the tiles */
 .contact-finale {
     position: relative;
     max-width: 880px;
@@ -4629,7 +4629,7 @@ section {
     color: var(--pm-0);
 }
 
-.formula-theta {
+.formula-code {
     font-family: var(--font-mono);
     font-weight: 600;
     color: var(--pm-1);
