@@ -4551,11 +4551,10 @@ section {
    ================================================ */
 
 /* Particle palette (read by particle-morph.js from the canvas): index 0 = § (law),
-   1 = θ and { } (code), 2 = the arrow; light theme draws opaque, dark theme glows. */
+   1 = θ and { } (code); light theme draws opaque, dark theme glows. */
 :root {
     --pm-0: var(--color-primary);
     --pm-1: var(--color-accent-dark);
-    --pm-2: var(--color-burgundy);
     --pm-dust: var(--color-accent-dark);
     --pm-blend: source-over;
     --pm-alpha: 0.5;
@@ -4567,7 +4566,6 @@ section {
 [data-theme="dark"] {
     --pm-0: var(--color-accent);
     --pm-1: var(--color-primary-on-dark);
-    --pm-2: var(--color-burgundy-light);
     --pm-dust: var(--color-accent);
     --pm-blend: lighter;
     --pm-alpha: 0.62;
@@ -4598,7 +4596,7 @@ section {
     --pm-alpha: 0.45;
 }
 
-/* contact finale: particles gather into "§ → θ" above the tiles */
+/* contact finale: particles split into "§ … θ" above the tiles */
 .contact-finale {
     position: relative;
     max-width: 880px;
@@ -4612,7 +4610,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.1em;
+    gap: 1.1em;
     font-size: clamp(3rem, 1.5rem + 9vw, 8.5rem);
     line-height: 1;
 }
@@ -4631,17 +4629,6 @@ section {
     font-family: var(--font-mono);
     font-weight: 600;
     color: var(--pm-1);
-}
-
-.formula-arrow {
-    width: 0.62em;
-    height: 0.22em;
-    margin: 0 0.08em;
-    fill: none;
-    stroke: var(--pm-2);
-    stroke-width: 5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
 }
 
 .contact-motto {

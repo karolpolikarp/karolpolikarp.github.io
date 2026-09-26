@@ -6,10 +6,9 @@
 
 /*
  * particles.js — the two particle scenes of the site (decoration only, aria-hidden canvases):
- *   hero:    dust gathers into "§", then "{ § }", then "§ → θ" and keeps breathing
- *   contact: the finale — "§" turns into "§ → θ" when the section comes into view
- * Serif (Playfair Display) = law, mono (JetBrains Mono) = code. The arrow is drawn as a path,
- * so the scene never depends on a font having "→".
+ *   hero:    dust gathers into "§", then "{ § }", and settles as "§" on the left, "θ" on the right
+ *   contact: the finale — "§" splits into "§ … θ" when the section comes into view
+ * Serif (Playfair Display) = law, mono (JetBrains Mono) = code.
  * Colours come from --pm-* custom properties (style.css), so both themes are covered.
  */
 
@@ -17,45 +16,21 @@ import { createMorph, INK } from './particle-morph.js?v=4';
 
 const SERIF = "'Playfair Display', Georgia, 'Times New Roman', serif";
 const MONO = "'JetBrains Mono', 'Fira Code', Consolas, monospace";
-const COLOR_VARS = ['--pm-0', '--pm-1', '--pm-2'];
+const COLOR_VARS = ['--pm-0', '--pm-1'];
 
 /**
- * "§ → θ" centred on (cx, cy); glyph size in design px.
- * @param {CanvasRenderingContext2D} c @param {number} cx @param {number} cy @param {number} size
+ * The final sign: "§" (law) on the left and "θ" (parameter) on the right — no arrow between them.
+ * @param {CanvasRenderingContext2D} c @param {number} xPara @param {number} xTheta @param {number} cy @param {number} size
  */
-function formula(c, cx, cy, size) {
+function pair(c, xPara, xTheta, cy, size) {
+    c.textAlign = 'center';
     c.textBaseline = 'middle';
-    c.textAlign = 'left';
-    c.font = `700 ${size}px ${SERIF}`;
-    const wPara = c.measureText('§').width;
-    c.font = `600 ${size}px ${MONO}`;
-    const wTheta = c.measureText('θ').width;
-    const arrow = size * 0.55;
-    const gap = size * 0.2;
-    let x = cx - (wPara + gap + arrow + gap + wTheta) / 2;
-
     c.fillStyle = INK[0];
     c.font = `700 ${size}px ${SERIF}`;
-    c.fillText('§', x, cy + size * 0.04);
-    x += wPara + gap;
-
-    c.strokeStyle = INK[2];
-    c.lineWidth = size * 0.055;
-    c.lineCap = 'round';
-    c.lineJoin = 'round';
-    const head = size * 0.17;
-    c.beginPath();
-    c.moveTo(x, cy);
-    c.lineTo(x + arrow, cy);
-    c.moveTo(x + arrow - head, cy - head * 0.8);
-    c.lineTo(x + arrow, cy);
-    c.lineTo(x + arrow - head, cy + head * 0.8);
-    c.stroke();
-    x += arrow + gap;
-
+    c.fillText('§', xPara, cy + size * 0.04);
     c.fillStyle = INK[1];
     c.font = `600 ${size}px ${MONO}`;
-    c.fillText('θ', x, cy);
+    c.fillText('θ', xTheta, cy);
 }
 
 /** @param {CanvasRenderingContext2D} c @param {number} cx @param {number} cy @param {number} size */
@@ -112,9 +87,9 @@ function heroScene(hero, narrow) {
         shapes: [
             c => section(c, W / 2, H * 0.51, 620),
             c => braced(c, W / 2, H * 0.51, narrow ? 330 : 400),
-            // desktop: smaller and nudged left, so the final sign sits in the gap between
-            // the name and the timeline instead of under the text
-            c => (narrow ? formula(c, W / 2, H * 0.51, 330) : formula(c, W / 2 - 56, H * 0.5, 250))
+            // final: "§" on the left, "θ" on the right — on desktop both sit in the free space
+            // between the name and the timeline
+            c => (narrow ? pair(c, 240, 560, H * 0.51, 300) : pair(c, 610, 905, H * 0.5, 300))
         ],
         count: 1500,
         mobileCount: 700,
@@ -147,7 +122,7 @@ function finaleScene(finale) {
         height: 560,
         shapes: [
             c => section(c, 800, 280, 400),
-            c => formula(c, 800, 280, 300)
+            c => pair(c, 520, 1080, 280, 320)
         ],
         count: 1200,
         mobileCount: 600,

@@ -89,12 +89,13 @@ Contains modular components (in order):
 
 Decorative layer added on top of the existing design (nothing else in the layout changes):
 - **Hero particles** (`#heroParticles` inside `.hero-bg-decoration`): dust gathers into `§`, then `{ § }`,
-  then `§ → θ` (serif = law, mono = code), then recedes into a quiet watermark; the pointer repels particles.
-- **Contact finale** (`.contact-finale` + `#finaleParticles`): `§` turns into `§ → θ` when scrolled into view,
+  then settles as `§` on the left and `θ` on the right (serif = law, mono = code), then recedes into a quiet
+  watermark; the pointer repels particles.
+- **Contact finale** (`.contact-finale` + `#finaleParticles`): `§` splits into `§ … θ` when scrolled into view,
   above the motto „Od paragrafu do parametru.” (`data-en`). A static HTML/SVG formula is the no-JS fallback.
 - **Number scramble**, **cursor light**, **scroll progress bar**, **hero-tab timeline drawing** (CSS on
   `.hero-tab-panel.active`), **scroll-driven reveal** (`animation-timeline: view()` inside `@supports`).
-- Particle colours come from `--pm-0/1/2`, `--pm-dust`, `--pm-blend`, `--pm-alpha` (both themes, `style.css`).
+- Particle colours come from `--pm-0/1`, `--pm-dust`, `--pm-blend`, `--pm-alpha` (both themes, `style.css`).
 - Engine: one shared `requestAnimationFrame` loop for all canvases, pauses off-screen and in hidden tabs,
   `devicePixelRatio` capped, shapes sampled once after fonts load and rescaled on resize.
 - **Every effect honours `prefers-reduced-motion`**: particles draw the settled shape once, scramble and
