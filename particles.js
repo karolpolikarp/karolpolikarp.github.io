@@ -31,7 +31,7 @@ function pair(c, xPara, xCode, cy, size) {
     c.fillText('§', xPara, cy + size * 0.04);
     c.fillStyle = INK[1];
     c.font = `600 ${size}px ${MONO}`;
-    const d = size * 0.24;
+    const d = size * 0.4;
     c.fillText('{', xCode - d, cy);
     c.fillText('}', xCode + d, cy);
 }
@@ -94,8 +94,8 @@ function heroLayout(hero) {
     const oy = (ch - DH * s) * (narrow ? 0.14 : 0.5);
     const intro = { cx: ox + (DW / 2) * s, cy: oy + DH * 0.51 * s, big: 620 * s, braced: (narrow ? 330 : 400) * s };
     let fin = narrow
-        ? { xp: ox + 240 * s, xt: ox + 560 * s, y: oy + DH * 0.51 * s, size: 300 * s }
-        : { xp: ox + 610 * s, xt: ox + 875 * s, y: oy + DH * 0.5 * s, size: 280 * s };
+        ? { xp: ox + 240 * s, xt: ox + 560 * s, y: oy + DH * 0.51 * s, size: 280 * s }
+        : { xp: ox + 610 * s, xt: ox + 860 * s, y: oy + DH * 0.5 * s, size: 250 * s };
     const content = document.querySelector('#hero .hero-content');
     const visual = document.querySelector('#hero .hero-visual');
     const box = document.querySelector('#hero .container');
@@ -110,7 +110,7 @@ function heroLayout(hero) {
                 xp: left / 2,
                 xt: cw - right / 2,
                 y: b.top + b.height / 2 - base.top,
-                size: Math.min(margin * 0.9, ch * 0.55)   // "{ }" is ~0.85 em wide: keep it well inside the margin
+                size: Math.min(margin * 0.76, ch * 0.55)   // "{ }" is ~1.15 em wide: keep it well inside the margin
             };
         }
     }
