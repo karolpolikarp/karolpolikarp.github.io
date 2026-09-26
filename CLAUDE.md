@@ -32,9 +32,11 @@ npx serve
 
 ```
 /
-├── index.html      # Main HTML (~825 lines) - All page content and structure
-├── style.css       # Styles (~3650 lines) - Complete design system
-├── script.js       # JavaScript (~1115 lines) - Interactive functionality
+├── index.html      # Main HTML (~1550 lines) - All page content and structure
+├── style.css       # Styles (~4800 lines) - Complete design system
+├── script.js       # JavaScript (~1280 lines) - Interactive functionality
+├── particle-morph.js # Particle morphing engine (ES module, // @ts-check) - see "Animations"
+├── particles.js    # The hero + contact particle scenes (ES module, loaded after page load)
 ├── 404.html        # Custom 404 page (Polish)
 ├── robots.txt      # Search engine crawl rules
 ├── sitemap.xml     # XML sitemap for SEO
@@ -66,7 +68,6 @@ npx serve
 ### script.js
 Contains modular components (in order):
 1. **ThemeManager** - Dark/light mode with localStorage persistence
-2. **ParallaxEffect** - Floating background shapes (desktop only)
 3. **Mobile Navigation** - Hamburger menu toggle
 4. **Smooth Scroll** - Anchor link behavior
 5. **Counter Animation** - Animated statistics with requestAnimationFrame
@@ -79,6 +80,28 @@ Contains modular components (in order):
 12. **ProjectShowcase** - Projects carousel (tabs, dots, autoplay w/ pause, swipe)
 13. **EmailProtection** - Anti-scraper email obfuscation
 14. **cats easter egg** - `window.cats.show()` + Konami code
+15. **NumberScramble** - Key project numbers roll through `§¶{}<>/01#` when scrolled into view
+16. **CursorLight** - Soft light following the pointer on tool cards and data-science tiles
+17. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
+18. **Particles loader** - `import('./particles.js')` after the `load` event
+
+## Animations („Od paragrafu do parametru”)
+
+Decorative layer added on top of the existing design (nothing else in the layout changes):
+- **Hero particles** (`#heroParticles` inside `.hero-bg-decoration`): dust gathers into `§`, then `{ § }`,
+  then `§ → θ` (serif = law, mono = code), then recedes into a quiet watermark; the pointer repels particles.
+- **Contact finale** (`.contact-finale` + `#finaleParticles`): `§` turns into `§ → θ` when scrolled into view,
+  above the motto „Od paragrafu do parametru.” (`data-en`). A static HTML/SVG formula is the no-JS fallback.
+- **Number scramble**, **cursor light**, **scroll progress bar**, **hero-tab timeline drawing** (CSS on
+  `.hero-tab-panel.active`), **scroll-driven reveal** (`animation-timeline: view()` inside `@supports`).
+- Particle colours come from `--pm-0/1/2`, `--pm-dust`, `--pm-blend`, `--pm-alpha` (both themes, `style.css`).
+- Engine: one shared `requestAnimationFrame` loop for all canvases, pauses off-screen and in hidden tabs,
+  `devicePixelRatio` capped, shapes sampled once after fonts load and rescaled on resize.
+- **Every effect honours `prefers-reduced-motion`**: particles draw the settled shape once, scramble and
+  cursor light are off, CSS animations are wrapped in `prefers-reduced-motion: no-preference`.
+- Typecheck/lint the modules with `deno check particle-morph.js particles.js` and `deno lint` (no config needed).
+- When changing `particle-morph.js`, bump the `?v=` in its import inside `particles.js`; when changing
+  `particles.js`, bump the `?v=` in the loader at the end of `script.js`.
 
 ## Coding Conventions
 
@@ -196,3 +219,4 @@ Preserve these features when making changes.
 - Images should be optimized before adding (current total ~12MB)
 - Use `loading="lazy"` on images below the fold
 - IntersectionObserver used for efficient scroll animations
+- Particle modules are fetched only after the `load` event, so they never compete with the first paint

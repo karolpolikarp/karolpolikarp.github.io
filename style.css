@@ -2665,7 +2665,9 @@ section {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(to top,
+    background:
+        radial-gradient(360px circle at var(--mx, -999px) var(--my, -999px), var(--cursor-light-strong), transparent 45%),
+        linear-gradient(to top,
         rgba(0, 39, 21, 0.93) 0%,
         rgba(0, 50, 28, 0.7) 50%,
         rgba(0, 61, 35, 0.46) 100%);
@@ -2715,6 +2717,7 @@ section {
 }
 .tools-card {
     position: relative;
+    isolation: isolate;
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
@@ -4541,3 +4544,246 @@ section {
     }
 }
 
+/* ================================================
+   ANIMATIONS — particles, number scramble, cursor light, scroll progress,
+   timeline drawing, scroll-driven reveal. All decorative; every effect has a
+   prefers-reduced-motion fallback (particles then draw the settled shape once).
+   ================================================ */
+
+/* Particle palette (read by particle-morph.js from the canvas): index 0 = § (law),
+   1 = θ and { } (code), 2 = the arrow; light theme draws opaque, dark theme glows. */
+:root {
+    --pm-0: var(--color-primary);
+    --pm-1: var(--color-accent-dark);
+    --pm-2: var(--color-burgundy);
+    --pm-dust: var(--color-accent-dark);
+    --pm-blend: source-over;
+    --pm-alpha: 0.5;
+    --pm-dust-alpha: 0.35;
+    --cursor-light: rgba(0, 77, 43, 0.07);
+    --cursor-light-strong: rgba(201, 169, 98, 0.22);
+}
+
+[data-theme="dark"] {
+    --pm-0: var(--color-accent);
+    --pm-1: var(--color-primary-on-dark);
+    --pm-2: var(--color-burgundy-light);
+    --pm-dust: var(--color-accent);
+    --pm-blend: lighter;
+    --pm-alpha: 0.62;
+    --pm-dust-alpha: 0.22;
+    --cursor-light: rgba(201, 169, 98, 0.1);
+}
+
+.particles-canvas {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* hero: a watermark behind the text and tabs, quieter than the contact finale */
+#heroParticles {
+    --pm-alpha: 0.38;
+}
+
+[data-theme="dark"] #heroParticles {
+    --pm-alpha: 0.42;
+}
+
+/* the finale glows, but stays gold instead of burning out to white */
+[data-theme="dark"] #finaleParticles {
+    --pm-alpha: 0.45;
+}
+
+/* contact finale: particles gather into "§ → θ" above the tiles */
+.contact-finale {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+    aspect-ratio: 1600 / 560;
+}
+
+.contact-finale-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1em;
+    font-size: clamp(3rem, 1.5rem + 9vw, 8.5rem);
+    line-height: 1;
+}
+
+.contact-finale.is-live .contact-finale-fallback {
+    visibility: hidden;
+}
+
+.formula-para {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--pm-0);
+}
+
+.formula-theta {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--pm-1);
+}
+
+.formula-arrow {
+    width: 0.62em;
+    height: 0.22em;
+    margin: 0 0.08em;
+    fill: none;
+    stroke: var(--pm-2);
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.contact-motto {
+    margin: var(--space-sm) auto var(--space-2xl);
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 1.1rem + 1.4vw, 2.2rem);
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+[data-theme="dark"] .contact-motto {
+    color: var(--color-accent);
+}
+
+/* number scramble: the visually hidden copy is what screen readers read */
+.scramble-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.scramble-vis {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+/* cursor light on tool cards (between the card background and its content) */
+.tools-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(380px circle at var(--mx, -999px) var(--my, -999px), var(--cursor-light), transparent 45%);
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+    pointer-events: none;
+}
+
+.tools-card:hover::after {
+    opacity: 1;
+}
+
+/* scroll progress under the nav (the JS fallback in script.js sets the transform) */
+.scroll-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    pointer-events: none;
+}
+
+.scroll-progress-bar {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+@supports (animation-timeline: scroll()) {
+    .scroll-progress-bar {
+        animation: scrollProgress linear both;
+        animation-timeline: scroll(root block);
+    }
+}
+
+@keyframes scrollProgress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* hero tabs: the timeline line draws itself and the entries follow when a tab opens */
+.employment-list li:nth-child(1), .education-list li:nth-child(1) { --tl-i: 0; }
+.employment-list li:nth-child(2), .education-list li:nth-child(2) { --tl-i: 1; }
+.employment-list li:nth-child(3), .education-list li:nth-child(3) { --tl-i: 2; }
+.employment-list li:nth-child(4), .education-list li:nth-child(4) { --tl-i: 3; }
+.employment-list li:nth-child(5), .education-list li:nth-child(5) { --tl-i: 4; }
+.employment-list li:nth-child(6), .education-list li:nth-child(6) { --tl-i: 5; }
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero-tab-panel.active .employment-list::before,
+    .hero-tab-panel.active .education-list::before {
+        transform-origin: top center;
+        animation: timelineDraw 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    .hero-tab-panel.active .emp-timeline-marker,
+    .hero-tab-panel.active .edu-timeline-marker {
+        animation: timelineMarker 0.4s ease-out both;
+        animation-delay: calc(var(--tl-i, 0) * 120ms + 180ms);
+    }
+
+    .hero-tab-panel.active .employment-list .emp-content {
+        animation: timelineItem 0.45s ease-out both;
+        animation-delay: calc(var(--tl-i, 0) * 120ms + 120ms);
+    }
+}
+
+@keyframes timelineDraw {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+@keyframes timelineMarker {
+    0% { transform: scale(0); }
+    70% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+@keyframes timelineItem {
+    from { opacity: 0; translate: -10px 0; }
+    to { opacity: 1; translate: 0 0; }
+}
+
+/* SCROLL-DRIVEN REVEAL: sections slide in with the scroll position itself
+   (browsers without animation-timeline keep the IntersectionObserver fade in script.js) */
+@supports (animation-timeline: view()) {
+    @media screen and (prefers-reduced-motion: no-preference) {
+        .section-header,
+        .apps-heading,
+        .tools-heading,
+        .ds-heading,
+        .tools-card,
+        .ds-tile,
+        .contact-finale,
+        .contact-motto,
+        .contact-tile {
+            animation: scrollReveal linear both;
+            animation-timeline: view();
+            /* ends once 60% of the element has entered, so even the last tiles at the page bottom finish */
+            animation-range: entry 0% entry 60%;
+        }
+    }
+}
+
+@keyframes scrollReveal {
+    from { opacity: 0; translate: 0 36px; }
+    to { opacity: 1; translate: 0 0; }
+}

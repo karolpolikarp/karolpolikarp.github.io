@@ -112,7 +112,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="style.css?v=68">
+    <link rel="stylesheet" href="style.css?v=71">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -162,15 +162,14 @@
                 <span></span>
             </button>
         </div>
+        <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div>
     </nav>
 
     <main>
         <!-- Hero Section -->
         <section id="hero" class="hero">
-            <div class="hero-bg-decoration" id="parallaxContainer">
-                <div class="floating-shape shape-1 parallax" data-speed="0.05"></div>
-                <div class="floating-shape shape-2 parallax" data-speed="0.03"></div>
-                <div class="floating-shape shape-3 parallax" data-speed="0.04"></div>
+            <div class="hero-bg-decoration">
+                <canvas id="heroParticles" class="particles-canvas" aria-hidden="true"></canvas>
             </div>
             <div class="container">
                 <div class="hero-content">
@@ -1479,6 +1478,12 @@
                     <h2 class="section-title">Kontakt</h2>
                 </header>
 
+                <div class="contact-finale" aria-hidden="true">
+                    <canvas id="finaleParticles" class="particles-canvas"></canvas>
+                    <div class="contact-finale-fallback"><span class="formula-para">§</span><svg class="formula-arrow" viewBox="0 0 120 40" focusable="false"><path d="M4 20H110M90 5l20 15-20 15"/></svg><span class="formula-theta">θ</span></div>
+                </div>
+                <p class="contact-motto" data-en="From paragraph to parameter.">Od paragrafu do parametru.</p>
+
                 <div class="contact-tiles">
                     <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="contact-tile contact-tile-primary">
                         <div class="contact-tile-icon">
@@ -1536,7 +1541,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=20" defer></script>
+    <script src="script.js?v=23" defer></script>
     <script src="analytics.js?v=1" defer></script>
 </body>
 </html>

@@ -203,59 +203,6 @@ LanguageManager.init();
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ================================================
-// PARALLAX EFFECT (with requestAnimationFrame throttling)
-// ================================================
-const ParallaxEffect = {
-    shapes: document.querySelectorAll('.floating-shape.parallax'),
-    mouseX: 0,
-    mouseY: 0,
-    scrollY: 0,
-    rafId: null,
-    needsUpdate: false,
-
-    init() {
-        if (window.innerWidth <= 768 || prefersReducedMotion) return;
-
-        document.addEventListener('mousemove', (e) => this.handleMouseMove(e), { passive: true });
-        window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
-    },
-
-    handleMouseMove(e) {
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-        this.mouseX = e.clientX - centerX;
-        this.mouseY = e.clientY - centerY;
-        this.scheduleUpdate();
-    },
-
-    handleScroll() {
-        this.scrollY = window.pageYOffset;
-        this.scheduleUpdate();
-    },
-
-    scheduleUpdate() {
-        if (this.needsUpdate) return;
-        this.needsUpdate = true;
-        this.rafId = requestAnimationFrame(() => {
-            this.updateTransforms();
-            this.needsUpdate = false;
-        });
-    },
-
-    updateTransforms() {
-        this.shapes.forEach(shape => {
-            const speed = parseFloat(shape.dataset.speed) || 0.05;
-            const mouseOffsetX = this.mouseX * speed;
-            const mouseOffsetY = this.mouseY * speed;
-            const scrollOffset = this.scrollY * speed * 0.5;
-            shape.style.transform = `translate(${mouseOffsetX}px, ${mouseOffsetY + scrollOffset}px)`;
-        });
-    }
-};
-
-ParallaxEffect.init();
-
-// ================================================
 // MOBILE NAVIGATION
 // ================================================
 const navToggle = document.querySelector('.nav-toggle');
@@ -346,8 +293,10 @@ const ScrollAnimations = {
             fadeObserver.observe(el);
         });
 
-        // Section headers animation
-        const sectionHeaders = document.querySelectorAll('.section-header');
+        // Section headers animation — skipped where CSS scroll-driven animations
+        // (animation-timeline: view()) take over, see "SCROLL-DRIVEN REVEAL" in style.css
+        const cssScrollReveal = !prefersReducedMotion && CSS.supports('animation-timeline: view()');
+        const sectionHeaders = cssScrollReveal ? [] : document.querySelectorAll('.section-header');
         const headerObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1174,3 +1123,168 @@ const TechHighlighter = {
 };
 
 TechHighlighter.init();
+
+// ================================================
+// NUMBER SCRAMBLE — key project numbers roll through §¶{}<>/01# before settling.
+// Screen readers read the real value from a visually hidden copy; once the animation
+// ends the wrapper is replaced by plain text again.
+// ================================================
+const NumberScramble = {
+    // number + the words right after it, in PL and EN — only these facts animate
+    patterns: [
+        /\b41(?= (?:kanałów|channels))/g,
+        /\b59(?= (?:kanałów RSS|RSS feeds))/g,
+        /\b2[,.]06(?= USD)/g,
+        /~15[  ,]000(?= (?:polskich aktów|Polish statutes))/g,
+        /~129(?= (?:procedur|procedures))/g,
+        /\b99[,.]6%/g
+    ],
+    selector: '.showcase-list li, .tools-card p',
+    chars: '§¶{}<>/01#',
+
+    init() {
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
+        this.io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                this.io.unobserve(entry.target);
+                this.play(entry.target);
+            });
+        }, { threshold: 0.6 });
+        this.wrap();
+        // setLanguage rewrites the text nodes, so wrap the new language again
+        document.addEventListener('languagechange', () => this.wrap());
+    },
+
+    wrap() {
+        document.querySelectorAll(this.selector).forEach(el => {
+            const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+            const nodes = [];
+            for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
+            nodes.forEach(node => this.wrapNode(node));
+        });
+    },
+
+    wrapNode(node) {
+        if (node.parentElement.closest('.scramble')) return;
+        const text = node.nodeValue;
+        const hits = [];
+        this.patterns.forEach(re => {
+            re.lastIndex = 0;
+            for (let m = re.exec(text); m; m = re.exec(text)) hits.push([m.index, m[0]]);
+        });
+        if (!hits.length) return;
+        hits.sort((a, b) => a[0] - b[0]);
+        const frag = document.createDocumentFragment();
+        let last = 0;
+        hits.forEach(([i, str]) => {
+            if (i < last) return;
+            frag.append(text.slice(last, i));
+            const wrapEl = document.createElement('span');
+            wrapEl.className = 'scramble';
+            const sr = document.createElement('span');
+            sr.className = 'scramble-sr';
+            sr.textContent = str;
+            const vis = document.createElement('span');
+            vis.className = 'scramble-vis';
+            vis.setAttribute('aria-hidden', 'true');
+            vis.textContent = str;
+            wrapEl.append(sr, vis);
+            frag.append(wrapEl);
+            this.io.observe(vis);
+            last = i + str.length;
+        });
+        frag.append(text.slice(last));
+        node.replaceWith(frag);
+    },
+
+    play(vis) {
+        const final = vis.textContent;
+        // lock the box while the glyphs roll, so the line never reflows
+        vis.style.width = vis.getBoundingClientRect().width + 'px';
+        vis.style.whiteSpace = 'nowrap';
+        vis.style.overflow = 'clip';
+        const start = performance.now();
+        const duration = 900;
+        const tick = (now) => {
+            const p = Math.min(1, (now - start) / duration);
+            const fixed = Math.floor(p * final.length);
+            vis.textContent = Array.from(final).map((ch, i) =>
+                (i < fixed || /[\s,.~% ]/.test(ch)) ? ch : this.chars[(Math.random() * this.chars.length) | 0]
+            ).join('');
+            if (p < 1) {
+                requestAnimationFrame(tick);
+            } else {
+                const wrapEl = vis.parentElement;
+                if (wrapEl && wrapEl.isConnected) wrapEl.replaceWith(document.createTextNode(final));
+            }
+        };
+        requestAnimationFrame(tick);
+    }
+};
+
+NumberScramble.init();
+
+// ================================================
+// CURSOR LIGHT — a soft light follows the pointer across tool cards and data-science tiles
+// (the gradient itself lives in CSS, driven by --mx / --my)
+// ================================================
+const CursorLight = {
+    init() {
+        if (prefersReducedMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        document.querySelectorAll('.tools-card, .ds-tile').forEach(card => {
+            card.addEventListener('pointermove', (e) => {
+                const r = card.getBoundingClientRect();
+                card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+                card.style.setProperty('--my', `${e.clientY - r.top}px`);
+            }, { passive: true });
+        });
+        // tiles draw the light in their always-visible veil, so park it off-card on leave
+        // (tool cards fade theirs out on :hover, and keep the last position for that fade)
+        document.querySelectorAll('.ds-tile').forEach(tile => {
+            tile.addEventListener('pointerleave', () => {
+                tile.style.removeProperty('--mx');
+                tile.style.removeProperty('--my');
+            });
+        });
+    }
+};
+
+CursorLight.init();
+
+// ================================================
+// SCROLL PROGRESS — thin gold bar under the nav. CSS drives it with
+// animation-timeline: scroll() where supported; this is the fallback.
+// ================================================
+const ScrollProgress = {
+    init() {
+        const bar = document.querySelector('.scroll-progress-bar');
+        if (!bar || CSS.supports('animation-timeline: scroll()')) return;
+        let ticking = false;
+        const update = () => {
+            ticking = false;
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
+        };
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        }, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+    }
+};
+
+ScrollProgress.init();
+
+// ================================================
+// PARTICLES — hero and contact scenes (particles.js + particle-morph.js).
+// Fetched only after the page has loaded, so they never compete with the first paint.
+// ================================================
+window.addEventListener('load', () => {
+    import('./particles.js?v=5').catch(() => {
+        // decoration only — the page is complete without it
+    });
+}, { once: true });
