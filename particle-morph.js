@@ -58,6 +58,8 @@ const INK_RGB = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0]];
  *     (default: 6 on touch screens, never with a mouse)
  * @property {number} [maxDpr]              devicePixelRatio cap
  * @property {Element} [pointerTarget]      element whose pointer moves repel particles (canvas has pointer-events:none)
+ * @property {{ radius?: number, force?: number }} [repel]  how far (design units, default 110) and how hard (default 6)
+ *     the pointer pushes particles away
  * @property {{ shape: number, at: number }[]} [sequence]  shape changes over time (seconds); default: [{shape:0, at:0}]
  * @property {boolean} [startOnVisible]     wait until the canvas is first on screen before starting the sequence
  * @property {boolean} [startSettled]       skip the sequence: start on the last shape, already settled (used to rebuild after a resize)
@@ -591,7 +593,8 @@ class Morph {
             mx = (this.pcx - this.rx - this.ox) / this.scale;
             my = (this.pcy - this.ry - this.oy) / this.scale;
         }
-        const R = 110;
+        const R = this.o.repel?.radius ?? 110;
+        const F = this.o.repel?.force ?? 6;
         for (let p = 0; p < this.N; p++) {
             const k = TI[p];
             const tx = tg.x[k] + JX[p] + Math.sin(t * 1.7 + PH[p]) * 1.3;          // breathing
@@ -605,7 +608,7 @@ class Morph {
                 const d2 = dx * dx + dy * dy;
                 if (d2 < R * R && d2 > 0.01) {
                     const d = Math.sqrt(d2);
-                    const force = (1 - d / R) * 6;
+                    const force = (1 - d / R) * F;
                     vx[p] += (dx / d) * force * f;
                     vy[p] += (dy / d) * force * f;
                 }

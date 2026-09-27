@@ -12,7 +12,7 @@
  * Colours come from --pm-* custom properties (style.css), so both themes are covered.
  */
 
-import { createMorph, INK } from './particle-morph.js?v=12';
+import { createMorph, INK } from './particle-morph.js?v=13';
 
 const SERIF = "'Playfair Display', Georgia, 'Times New Roman', serif";
 const MONO = "'JetBrains Mono', 'Fira Code', Consolas, monospace";
@@ -307,6 +307,7 @@ function heroScene(hero, L, settled) {
             pad: 6
         },
         pointerTarget: hero.closest('section') ?? hero,
+        repel: { radius: 60 },   // a small dent under the pointer, not a blast (design space = canvas px here)
         sequence: [{ shape: 0, at: 0 }, { shape: 1, at: 2.2 }, { shape: 2, at: 4.4 }],
         startSettled: settled
     });
