@@ -81,9 +81,8 @@ Contains modular components (in order):
 12. **EmailProtection** - Anti-scraper email obfuscation
 13. **cats easter egg** - `window.cats.show()` + Konami code
 14. **NumberScramble** - Key project numbers roll through `§¶{}<>/01#` when scrolled into view
-15. **CursorLight** - Soft light following the pointer on tool cards and data-science tiles
-16. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
-17. **Particles loader** - `import('./particles.js')` after the `load` event
+15. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
+16. **Particles loader** - `import('./particles.js')` after the `load` event
 
 ## Animations („Od paragrafu do parametru”)
 
@@ -98,15 +97,15 @@ Decorative layer added on top of the existing design (nothing else in the layout
   the pointer repels particles.
 - **Contact finale** (`.contact-finale` + `#finaleParticles`): `§` splits into `§ … { }` when scrolled into view,
   above the motto „Od paragrafu do parametru.” (`data-en`). A static HTML/SVG formula is the no-JS fallback.
-- **Number scramble**, **cursor light**, **scroll progress bar**, **hero-tab timeline drawing** (CSS on
+- **Number scramble**, **scroll progress bar**, **hero-tab timeline drawing** (CSS on
   `.hero-tab-panel.active`), **scroll-driven reveal** (`animation-timeline: view()` inside `@supports`).
 - Particle colours come from `--pm-0/1`, `--pm-dust`, `--pm-blend`, `--pm-alpha`, `--pm-size` (both themes, `style.css`).
   Light theme: deep inks (`--color-primary`, `--pm-gold-deep`), opaque `source-over`, 1.3x dots; dark theme: additive glow.
   The light hero also gets the warm glow the dark hero has (`[data-theme="light"] .hero`).
 - Engine: one shared `requestAnimationFrame` loop for all canvases, pauses off-screen and in hidden tabs,
   `devicePixelRatio` capped, shapes sampled once after fonts load and rescaled on resize.
-- **Every effect honours `prefers-reduced-motion`**: particles draw the settled shape once, scramble, cursor
-  light and the scroll progress bar are off, CSS animations are wrapped in `prefers-reduced-motion: no-preference`.
+- **Every effect honours `prefers-reduced-motion`**: particles draw the settled shape once, scramble and
+  the scroll progress bar are off, CSS animations are wrapped in `prefers-reduced-motion: no-preference`.
 - Typecheck/lint the modules with `deno check particle-morph.js particles.js` and `deno lint` (no config needed).
 - When changing `particle-morph.js`, bump the `?v=` in its import inside `particles.js`; when changing
   `particles.js`, bump the `?v=` in the loader at the end of `script.js`.

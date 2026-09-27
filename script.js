@@ -1220,47 +1220,6 @@ const NumberScramble = {
 NumberScramble.init();
 
 // ================================================
-// CURSOR LIGHT — a soft light follows the pointer across tool cards and data-science tiles
-// (the gradient itself lives in CSS, driven by --mx / --my)
-// ================================================
-const CursorLight = {
-    init() {
-        if (prefersReducedMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-        document.querySelectorAll('.tools-card, .ds-tile').forEach(card => {
-            let x = 0;
-            let y = 0;
-            let rafId = null;
-            // one layout read + style write per frame, however often the pointer fires
-            const update = () => {
-                rafId = null;
-                const r = card.getBoundingClientRect();
-                card.style.setProperty('--mx', `${x - r.left}px`);
-                card.style.setProperty('--my', `${y - r.top}px`);
-            };
-            card.addEventListener('pointermove', (e) => {
-                x = e.clientX;
-                y = e.clientY;
-                if (!rafId) rafId = requestAnimationFrame(update);
-            }, { passive: true });
-            card.addEventListener('pointerleave', () => {
-                if (rafId) cancelAnimationFrame(rafId);
-                rafId = null;
-            });
-        });
-        // tiles draw the light in their always-visible veil, so park it off-card on leave
-        // (tool cards fade theirs out on :hover, and keep the last position for that fade)
-        document.querySelectorAll('.ds-tile').forEach(tile => {
-            tile.addEventListener('pointerleave', () => {
-                tile.style.removeProperty('--mx');
-                tile.style.removeProperty('--my');
-            });
-        });
-    }
-};
-
-CursorLight.init();
-
-// ================================================
 // SCROLL PROGRESS — thin gold bar under the nav. CSS drives it with
 // animation-timeline: scroll() where supported; this is the fallback.
 // Hidden with prefers-reduced-motion (style.css), so nothing to do then.
