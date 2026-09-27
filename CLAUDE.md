@@ -81,8 +81,9 @@ Contains modular components (in order):
 12. **EmailProtection** - Anti-scraper email obfuscation
 13. **cats easter egg** - `window.cats.show()` + Konami code
 14. **NumberScramble** - Key project numbers roll through `§¶{}<>/01#` when scrolled into view
-15. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
-16. **Particles loader** - `import('./particles.js')` after the `load` event
+15. **MottoReveal** - Contact motto: „paragrafu” underlines itself, „parametru” types itself in
+16. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
+17. **Particles loader** - `import('./particles.js')` after the `load` event
 
 ## Animations („Od paragrafu do parametru”)
 
@@ -96,7 +97,8 @@ Decorative layer added on top of the existing design (nothing else in the layout
   language, tab). Then it recedes into a quiet watermark (full frame rate with a mouse, frozen on touch screens when idle);
   the pointer repels particles.
 - **Contact finale** (`.contact-finale` + `#finaleParticles`): `§` splits into `§ … { }` when scrolled into view,
-  above the motto „Od paragrafu do parametru.” (`data-en`). A static HTML/SVG formula is the no-JS fallback.
+  above the motto „Od paragrafu do parametru.” (`data-en-html`: „paragrafu” in the serif and colour of `§`, underlined;
+  „parametru” in the mono and colour of `{ }`, typed in once on screen). A static HTML formula is the no-JS fallback.
 - **Number scramble**, **scroll progress bar**, **hero-tab timeline drawing** (CSS on
   `.hero-tab-panel.active`), **scroll-driven reveal** (`animation-timeline: view()` inside `@supports`).
 - Particle colours come from `--pm-0/1`, `--pm-dust`, `--pm-blend`, `--pm-alpha`, `--pm-size` (both themes, `style.css`).

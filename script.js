@@ -1220,6 +1220,27 @@ const NumberScramble = {
 NumberScramble.init();
 
 // ================================================
+// MOTTO — once „Od paragrafu do parametru.” is on screen, "paragrafu" gets underlined and
+// "parametru" types itself in (CSS does the motion). Without JS / with reduced motion it is simply complete.
+// ================================================
+const MottoReveal = {
+    init() {
+        const motto = document.querySelector('.contact-motto');
+        if (!motto || prefersReducedMotion || !('IntersectionObserver' in window)) return;
+        motto.classList.add('is-waiting');
+        const io = new IntersectionObserver((entries) => {
+            if (!entries.some(entry => entry.isIntersecting)) return;
+            io.disconnect();
+            motto.classList.remove('is-waiting');
+            motto.classList.add('is-in');
+        }, { threshold: 0.9 });
+        io.observe(motto);
+    }
+};
+
+MottoReveal.init();
+
+// ================================================
 // SCROLL PROGRESS — thin gold bar under the nav. CSS drives it with
 // animation-timeline: scroll() where supported; this is the fallback.
 // Hidden with prefers-reduced-motion (style.css), so nothing to do then.
