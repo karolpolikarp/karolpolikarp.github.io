@@ -14,8 +14,9 @@
  *
  * - Many instances share ONE requestAnimationFrame loop; an instance only runs while its canvas
  *   is on screen and the tab is visible.
- * - Once the sequence has settled the scene drops to a lower frame rate; on touch screens it then
- *   freezes on its last frame (no CPU/GPU work) until the next touch, resize or theme change.
+ * - Once the sequence has settled, touch screens freeze the scene on its last frame (no CPU/GPU work)
+ *   until the next touch, resize or theme change; with a mouse it keeps breathing at the full frame rate
+ *   (a capped rate lands on uneven frame intervals and reads as stutter).
  * - devicePixelRatio aware (capped), resizes by rescaling — shapes are never resampled.
  * - prefers-reduced-motion: the final shape is drawn once, with no motion at all.
  * - The canvas is decoration: keep it aria-hidden, all content stays in the HTML.
@@ -52,7 +53,8 @@ const INK_RGB = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0]];
  *     text-safe zones: particles over elements matching `selector` are drawn at `factor` × alpha (default 0.12),
  *     so the scene never competes with the text on top of it; zones are re-measured continuously
  * @property {{ fps?: number, freezeAfter?: number }} [idle]
- *     once settled: run at `fps` (default 30) and freeze after `freezeAfter` seconds without pointer activity
+ *     once settled: optionally cap the frame rate at `fps` (default: none) and freeze after `freezeAfter`
+ *     seconds without pointer activity
  *     (default: 6 on touch screens, never with a mouse)
  * @property {number} [maxDpr]              devicePixelRatio cap
  * @property {Element} [pointerTarget]      element whose pointer moves repel particles (canvas has pointer-events:none)
@@ -248,6 +250,7 @@ class Morph {
         this.paused = false;
         this.frozen = false;     // idle: the last frame stays on the canvas, nothing runs
         this.acc = 0;            // time accumulated towards the next throttled frame
+        this.eraseAcc = 0;       // time accumulated towards the next trail erase
         this.activeT = 0;        // animation time of the last pointer activity
 
         // pointer, kept in client coordinates and mapped through the (scroll-aware) canvas rect
@@ -534,7 +537,7 @@ class Morph {
         this.pointerTarget.removeEventListener('pointerleave', this.onLeave);
     }
 
-    /** Called by the shared loop every animation frame; throttles and freezes once settled. @param {number} dt */
+    /** Called by the shared loop every animation frame; freezes (and optionally throttles) once settled. @param {number} dt */
     advance(dt) {
         if (this.settled()) {
             const idle = this.o.idle ?? {};
@@ -542,10 +545,12 @@ class Morph {
                 this.frozen = true;           // the last frame stays on screen; nothing runs
                 return;
             }
-            this.acc += dt;
-            if (this.acc < 1 / (idle.fps ?? 30)) return;
-            dt = Math.min(0.05, this.acc);
-            this.acc = 0;
+            if (idle.fps) {
+                this.acc += dt;
+                if (this.acc < 1 / idle.fps) return;
+                dt = Math.min(0.05, this.acc);
+                this.acc = 0;
+            }
         }
         this.tick(dt);
     }
@@ -637,18 +642,25 @@ class Morph {
         const trail = this.o.trail ?? 0.76;
         if (still) {
             ctx.clearRect(0, 0, cw, ch);
+            this.eraseAcc = 0;
         } else {
-            // never fully cleared: partial erase leaves trails, and keeps the canvas transparent
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.fillStyle = `rgba(0,0,0,${1 - Math.pow(trail, Math.min(3, dt * 60))})`;
-            ctx.fillRect(0, 0, cw, ch);
+            // never fully cleared: partial erase leaves trails, and keeps the canvas transparent.
+            // At most ~60 erases a second: on faster screens a tiny erase per frame gets rounded away
+            // by the 8-bit alpha, and faint trails would stay on the canvas for good.
+            this.eraseAcc += dt;
+            if (this.eraseAcc >= 0.9 / 60) {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.fillStyle = `rgba(0,0,0,${1 - Math.pow(trail, Math.min(3, this.eraseAcc * 60))})`;
+                ctx.fillRect(0, 0, cw, ch);
+                this.eraseAcc = 0;
+            }
         }
         // a still frame (reduced motion, resize) has no trail build-up to glow with: plain
         // painting keeps the true colours instead of summing dense particles into white
         ctx.globalCompositeOperation = still ? 'source-over' : this.blend;
-        // Trails accumulate once per frame, so at 120/144 Hz the same alpha would glow 2-3x brighter
-        // than at 60 Hz. Scale each frame's contribution by its share of a 60 Hz frame's erase.
-        const rate = still ? 1 : Math.min(1, (1 - Math.pow(trail, Math.min(3, dt * 60))) / (1 - trail));
+        // Paint builds up between erases, so at 120/144 Hz the same alpha would glow 2-3x brighter
+        // than at 60 Hz. Scale each frame's contribution by its share of a 60 Hz frame.
+        const rate = still ? 1 : Math.min(1, dt * 60);
         const a = Math.min(1, this.alpha * this.settleFactor() * rate);
         const qf = this.o.quiet?.factor ?? 0.12;
         const qn = this.quiet.length;

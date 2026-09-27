@@ -12,7 +12,7 @@
  * Colours come from --pm-* custom properties (style.css), so both themes are covered.
  */
 
-import { createMorph, INK } from './particle-morph.js?v=10';
+import { createMorph, INK } from './particle-morph.js?v=12';
 
 const SERIF = "'Playfair Display', Georgia, 'Times New Roman', serif";
 const MONO = "'JetBrains Mono', 'Fira Code', Consolas, monospace";
@@ -20,40 +20,44 @@ const COLOR_VARS = ['--pm-0', '--pm-1'];
 const BRACE = 0.4;   // braces sit ±0.4 em around the centre of "{ }"
 
 /**
+ * Draws one glyph with its ink centred on (x, y). Centring the advance box instead (textAlign
+ * center + textBaseline middle) leaves "§" visibly lower than the braces, whose ink sits high.
+ * @param {CanvasRenderingContext2D} c @param {string} ch @param {number} x @param {number} y
+ */
+function glyph(c, ch, x, y) {
+    c.textAlign = 'left';
+    c.textBaseline = 'alphabetic';
+    const m = c.measureText(ch);
+    c.fillText(ch, x - (m.actualBoundingBoxRight - m.actualBoundingBoxLeft) / 2, y + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2);
+}
+
+/**
  * The final sign: "§" (law) on the left and "{ }" (code) on the right — no arrow between them.
  * The braces are drawn one by one around xCode, so their spacing does not depend on the font.
  * @param {CanvasRenderingContext2D} c @param {number} xPara @param {number} xCode @param {number} cy @param {number} size
  */
 function pair(c, xPara, xCode, cy, size) {
-    c.textAlign = 'center';
-    c.textBaseline = 'middle';
-    c.fillStyle = INK[0];
-    c.font = `700 ${size}px ${SERIF}`;
-    c.fillText('§', xPara, cy + size * 0.04);
+    section(c, xPara, cy, size);
     c.fillStyle = INK[1];
     c.font = `600 ${size}px ${MONO}`;
     const d = size * BRACE;
-    c.fillText('{', xCode - d, cy);
-    c.fillText('}', xCode + d, cy);
+    glyph(c, '{', xCode - d, cy);
+    glyph(c, '}', xCode + d, cy);
 }
 
 /** @param {CanvasRenderingContext2D} c @param {number} cx @param {number} cy @param {number} size */
 function section(c, cx, cy, size) {
-    c.textAlign = 'center';
-    c.textBaseline = 'middle';
     c.fillStyle = INK[0];
     c.font = `700 ${size}px ${SERIF}`;
-    c.fillText('§', cx, cy + size * 0.04);
+    glyph(c, '§', cx, cy);
 }
 
-/** @param {CanvasRenderingContext2D} c @param {number} cx @param {number} cy @param {number} size */
+/** "{ § }" — the paragraph centred between the braces. @param {CanvasRenderingContext2D} c @param {number} cx @param {number} cy @param {number} size */
 function braced(c, cx, cy, size) {
-    c.textAlign = 'center';
-    c.textBaseline = 'middle';
     c.fillStyle = INK[1];
     c.font = `500 ${size * 1.05}px ${MONO}`;
-    c.fillText('{', cx - size * 0.72, cy);
-    c.fillText('}', cx + size * 0.72, cy);
+    glyph(c, '{', cx - size * 0.72, cy);
+    glyph(c, '}', cx + size * 0.72, cy);
     section(c, cx, cy, size);
 }
 
@@ -78,29 +82,27 @@ function idle(fn) {
 
 /**
  * Ink extents of the final sign per 1 px of font size, measured with the real fonts
- * (left/right of the glyph centre, top/bottom of the line centre).
+ * (left/right of the glyph centre, top/bottom of the line centre — glyphs are drawn ink-centred).
  * @typedef {{ l: number, r: number, t: number, b: number }} Ext
  * @returns {{ para: Ext, code: Ext }}
  */
 function signExtents() {
     /** @type {{ para: Ext, code: Ext }} */
-    const fallback = { para: { l: 0.28, r: 0.28, t: 0.42, b: 0.5 }, code: { l: 0.62, r: 0.62, t: 0.5, b: 0.5 } };
+    const fallback = { para: { l: 0.27, r: 0.27, t: 0.5, b: 0.5 }, code: { l: 0.64, r: 0.64, t: 0.48, b: 0.48 } };
     const c = document.createElement('canvas').getContext('2d');
     if (!c) return fallback;
-    c.textAlign = 'center';
-    c.textBaseline = 'middle';
-    c.font = `700 100px ${SERIF}`;
-    const p = c.measureText('§');
-    c.font = `600 100px ${MONO}`;
-    const o = c.measureText('{');
-    const e = c.measureText('}');
-    const para = { l: p.actualBoundingBoxLeft / 100, r: p.actualBoundingBoxRight / 100, t: p.actualBoundingBoxAscent / 100 - 0.04, b: p.actualBoundingBoxDescent / 100 + 0.04 };
-    const code = {
-        l: BRACE + o.actualBoundingBoxLeft / 100,
-        r: BRACE + e.actualBoundingBoxRight / 100,
-        t: Math.max(o.actualBoundingBoxAscent, e.actualBoundingBoxAscent) / 100,
-        b: Math.max(o.actualBoundingBoxDescent, e.actualBoundingBoxDescent) / 100
+    /** half ink width and height, per 1 px of font size @param {string} ch */
+    const half = ch => {
+        const m = c.measureText(ch);
+        return [(m.actualBoundingBoxLeft + m.actualBoundingBoxRight) / 200, (m.actualBoundingBoxAscent + m.actualBoundingBoxDescent) / 200];
     };
+    c.font = `700 100px ${SERIF}`;
+    const [pw, ph] = half('§');
+    c.font = `600 100px ${MONO}`;
+    const [ow, oh] = half('{');
+    const [ew, eh] = half('}');
+    const para = { l: pw, r: pw, t: ph, b: ph };
+    const code = { l: BRACE + ow, r: BRACE + ew, t: Math.max(oh, eh), b: Math.max(oh, eh) };
     const sane = (/** @type {Ext} */ x) => [x.l, x.r, x.t, x.b].every(v => Number.isFinite(v) && v > 0 && v < 2);
     return sane(para) && sane(code) ? { para, code } : fallback;
 }
@@ -135,8 +137,8 @@ function heroObstacles(hero) {
 
 /**
  * Finds a free spot for the final sign. Prefers the two side margins of wide screens — "§" and "{ }"
- * mirrored: the same distance from the left and the right edge, "{ }" centred in its margin with room
- * to breathe — as long as the sign is big enough there; otherwise both side by side in one shared
+ * mirrored: the same distance from the left and the right edge, "{ }" centred in its margin with a
+ * little room on both sides — as long as the sign is big enough there; otherwise both side by side in one shared
  * empty area (under the buttons, next to the greeting). Returns null when nothing reasonably big fits.
  * @param {number} cw @param {number} ch @param {number} top  first usable y (below the fixed nav)
  * @param {number[][]} obstacles
@@ -146,46 +148,71 @@ function freeSpot(cw, ch, top, obstacles) {
     const E = signExtents();
     const pad = 22;      // clearance around text and controls
     const edge = 14;     // clearance from the canvas edges
-    const breathe = 0.15; // "{ }" keeps at least this share of its margin free on each side
+    const breathe = (/** @type {number} */ m) => Math.max(24, 0.06 * m);   // "{ }" clearance on each side of its margin
     const sMax = Math.min(ch * 0.55, 480);
     const sMin = 96;
     const sMargins = 120;  // smallest sign worth splitting into the margins (depends only on the columns,
                            // so PL and EN always agree)
 
+    /** @typedef {(free: number[][], s: number) => { xp: number, xt: number } | null} Place */
     /**
-     * Largest size (then closest to the middle of the hero) at which `place` finds room.
-     * @param {(free: number[][], s: number) => { xp: number, xt: number } | null} place
+     * Where `place` finds room at size s — the spot closest to the middle of the hero — or null.
+     * @param {Place} place @param {number} s
+     */
+    const fitAt = (place, s) => {
+        const up = Math.max(E.para.t, E.code.t) * s;
+        const down = Math.max(E.para.b, E.code.b) * s;
+        /** @type {{ xp: number, xt: number, y: number, size: number } | null} */
+        let best = null;
+        let bestScore = Infinity;
+        for (let y = top + pad + up; y + down + edge <= ch; y += 6) {
+            const y0 = y - up - pad;
+            const y1 = y + down + pad;
+            const spans = obstacles.filter(o => o[1] < y1 && o[3] > y0).map(o => [o[0] - pad, o[2] + pad]).sort((a, b) => a[0] - b[0]);
+            /** @type {number[][]} */
+            const free = [];
+            let x = edge;
+            for (const [a, b] of spans) {
+                if (a > x) free.push([x, a]);
+                x = Math.max(x, b);
+            }
+            if (cw - edge > x) free.push([x, cw - edge]);
+            const spot = place(free, s);
+            const score = Math.abs(y - (top + ch) / 2);
+            if (spot && score < bestScore) {
+                bestScore = score;
+                best = { ...spot, y, size: s };
+            }
+        }
+        return best;
+    };
+
+    /**
+     * The largest size at which `place` finds room: a coarse ladder of sizes, then a few halving steps
+     * between the first size that fits and the one above it (the result is practically continuous,
+     * so a slightly taller or shorter hero — another language — cannot tip it over a threshold).
+     * @param {Place} place
      */
     const search = place => {
-        // a fixed ladder of sizes (not one starting at sMax), so a slightly taller or shorter hero
-        // (another language) cannot tip a size over the threshold
-        for (let s = 480; s >= sMin; s *= 0.94) {
-            if (s > sMax) continue;
-            const up = Math.max(E.para.t, E.code.t) * s;
-            const down = Math.max(E.para.b, E.code.b) * s;
-            /** @type {{ xp: number, xt: number, y: number, size: number } | null} */
-            let best = null;
-            let bestScore = Infinity;
-            for (let y = top + pad + up; y + down + edge <= ch; y += 6) {
-                const y0 = y - up - pad;
-                const y1 = y + down + pad;
-                const spans = obstacles.filter(o => o[1] < y1 && o[3] > y0).map(o => [o[0] - pad, o[2] + pad]).sort((a, b) => a[0] - b[0]);
-                /** @type {number[][]} */
-                const free = [];
-                let x = edge;
-                for (const [a, b] of spans) {
-                    if (a > x) free.push([x, a]);
-                    x = Math.max(x, b);
-                }
-                if (cw - edge > x) free.push([x, cw - edge]);
-                const spot = place(free, s);
-                const score = Math.abs(y - (top + ch) / 2);
-                if (spot && score < bestScore) {
-                    bestScore = score;
-                    best = { ...spot, y, size: s };
+        let above = sMax;
+        for (let s = sMax; s >= sMin; s *= 0.94) {
+            let hit = fitAt(place, s);
+            if (!hit) {
+                above = s;
+                continue;
+            }
+            let lo = s;
+            for (let i = 0; i < 6 && above > lo; i++) {
+                const mid = (lo + above) / 2;
+                const h = fitAt(place, mid);
+                if (h) {
+                    hit = h;
+                    lo = mid;
+                } else {
+                    above = mid;
                 }
             }
-            if (best) return best;
+            return hit;
         }
         return null;
     };
@@ -200,7 +227,7 @@ function freeSpot(cw, ch, top, obstacles) {
         const wp = (E.para.l + E.para.r) * s;
         const wc = (E.code.l + E.code.r) * s;
         const g = (mR - wc) / 2;             // "{ }" centred in its margin: g on both sides
-        if (g < breathe * mR || g + wp + pad > mL) return null;
+        if (g < breathe(mR) || g + wp + pad > mL) return null;
         // mirrored: the ink of "§" starts g from the left edge, the ink of "{ }" ends g from the right one
         return { xp: g + E.para.l * s, xt: cw - g - E.code.r * s };
     });

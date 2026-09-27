@@ -92,9 +92,9 @@ Decorative layer added on top of the existing design (nothing else in the layout
   then settles as `§` on the left and `{ }` on the right (serif = law, mono = code). `freeSpot()` in `particles.js`
   searches the measured layout (text lines, photo, buttons, the whole timeline column) for the biggest empty spot:
   the two side margins on wide screens (mirrored: `§` as far from the left edge as `{ }` from the right one, `{ }`
-  centred in its margin), otherwise one empty area (under the buttons, next to the greeting); on
+  centred in its margin; every glyph is drawn centred on its ink, so `§` and the braces line up), otherwise one empty area (under the buttons, next to the greeting); on
   phones the sign sits behind the name. The scene rebuilds, already settled, whenever that spot moves (resize,
-  language, tab). Then it recedes into a quiet watermark (30 fps once settled, frozen on touch screens when idle);
+  language, tab). Then it recedes into a quiet watermark (full frame rate with a mouse, frozen on touch screens when idle);
   the pointer repels particles.
 - **Contact finale** (`.contact-finale` + `#finaleParticles`): `§` splits into `§ … { }` when scrolled into view,
   above the motto „Od paragrafu do parametru.” (`data-en`). A static HTML/SVG formula is the no-JS fallback.
