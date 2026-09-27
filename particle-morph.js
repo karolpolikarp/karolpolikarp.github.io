@@ -14,6 +14,8 @@
  *
  * - Many instances share ONE requestAnimationFrame loop; an instance only runs while its canvas
  *   is on screen and the tab is visible.
+ * - Once the sequence has settled the scene drops to a lower frame rate; on touch screens it then
+ *   freezes on its last frame (no CPU/GPU work) until the next touch, resize or theme change.
  * - devicePixelRatio aware (capped), resizes by rescaling — shapes are never resampled.
  * - prefers-reduced-motion: the final shape is drawn once, with no motion at all.
  * - The canvas is decoration: keep it aria-hidden, all content stays in the HTML.
@@ -27,6 +29,7 @@ export const INK = /** @type {const} */ (['#ff0000', '#00ff00', '#0000ff', '#fff
 const INK_RGB = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0]];
 
 /** @typedef {(ctx: CanvasRenderingContext2D) => void} DrawFn  draws one shape in design coordinates */
+/** @typedef {{ x: Float32Array, y: Float32Array, c: Uint8Array }} Targets */
 
 /**
  * @typedef {object} MorphOptions
@@ -48,6 +51,9 @@ const INK_RGB = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0]];
  * @property {{ selector: string, factor?: number, pad?: number }} [quiet]
  *     text-safe zones: particles over elements matching `selector` are drawn at `factor` × alpha (default 0.12),
  *     so the scene never competes with the text on top of it; zones are re-measured continuously
+ * @property {{ fps?: number, freezeAfter?: number }} [idle]
+ *     once settled: run at `fps` (default 30) and freeze after `freezeAfter` seconds without pointer activity
+ *     (default: 6 on touch screens, never with a mouse)
  * @property {number} [maxDpr]              devicePixelRatio cap
  * @property {Element} [pointerTarget]      element whose pointer moves repel particles (canvas has pointer-events:none)
  * @property {{ shape: number, at: number }[]} [sequence]  shape changes over time (seconds); default: [{shape:0, at:0}]
@@ -56,7 +62,11 @@ const INK_RGB = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0]];
  */
 
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)');
+// Chrome refreshes a MediaQueryList's state whenever .matches is read, so reading it every frame would
+// swallow the 'change' event (and leave a mid-animation frame on screen): read it once, then follow events.
+let reduced = REDUCE.matches;
 const MOBILE = matchMedia('(max-width: 600px)');
+const FINE = matchMedia('(hover: hover) and (pointer: fine)');
 
 // ------------------------------------------------------------------ shared loop
 /** @type {Set<Morph>} */
@@ -70,7 +80,7 @@ function frame(/** @type {number} */ now) {
     let active = false;
     for (const m of instances) {
         if (m.running()) {
-            m.tick(dt);
+            m.advance(dt);
             active = true;
         }
     }
@@ -88,6 +98,11 @@ function wake() {
     }
 }
 
+REDUCE.addEventListener('change', e => {
+    reduced = e.matches;
+    for (const m of instances) m.onReduce();
+});
+
 document.addEventListener('visibilitychange', () => {
     if (document.hidden && rafId) {
         cancelAnimationFrame(rafId);
@@ -96,6 +111,11 @@ document.addEventListener('visibilitychange', () => {
         wake();
     }
 });
+
+// the pointer is mapped through the canvas rect, which moves when the page scrolls
+addEventListener('scroll', () => {
+    for (const m of instances) m.rectDirty = true;
+}, { passive: true, capture: true });
 
 // ------------------------------------------------------------------ helpers
 /** @param {number[]} rgb */
@@ -113,10 +133,16 @@ function nearestInk(rgb) {
     return best;
 }
 
+/** A CSS number that may legitimately be 0. @param {string} v @param {number} fallback */
+function num(v, fallback) {
+    const n = parseFloat(v);
+    return Number.isNaN(n) ? fallback : n;
+}
+
 /**
  * Draws a shape at half resolution and returns `count` target points (design coordinates).
  * @param {DrawFn} draw @param {number} W @param {number} H @param {number} count
- * @returns {{ x: Float32Array, y: Float32Array, c: Uint8Array }}
+ * @returns {Targets}
  */
 function sample(draw, W, H, count) {
     const OW = Math.ceil(W / 2);
@@ -151,11 +177,6 @@ function sample(draw, W, H, count) {
     }
     const out = { x: new Float32Array(count), y: new Float32Array(count), c: new Uint8Array(count) };
     for (let k = 0; k < count; k++) {
-        if (!n) {
-            out.x[k] = Math.random() * W;
-            out.y[k] = Math.random() * H;
-            continue;
-        }
         const s = order[k % n] * 3;
         out.x[k] = pts[s];
         out.y[k] = pts[s + 1];
@@ -163,6 +184,11 @@ function sample(draw, W, H, count) {
     }
     return out;
 }
+
+const ease = (/** @type {number} */ u) => {
+    const v = Math.min(1, Math.max(0, u));
+    return v * v * (3 - 2 * v);
+};
 
 // ------------------------------------------------------------------ instance
 class Morph {
@@ -176,7 +202,16 @@ class Morph {
         const n = this.N = MOBILE.matches ? (o.mobileCount ?? Math.round(o.count / 2)) : o.count;
         const nd = this.ND = MOBILE.matches ? (o.mobileDust ?? Math.round((o.dust ?? 0) / 2)) : (o.dust ?? 0);
 
-        this.targets = o.shapes.map(draw => sample(draw, this.W, this.H, n));
+        const seq = o.sequence ?? [{ shape: 0, at: 0 }];
+        this.seq = seq;
+        this.lastShape = seq[seq.length - 1].shape;
+        const settled = !!o.startSettled || reduced;
+        /** @type {(Targets | null)[]} */
+        this.targets = o.shapes.map(() => null);
+        // a settled start only ever shows the last shape; otherwise sample everything now,
+        // so no sampling happens in the middle of the entrance
+        if (settled) this.target(this.lastShape);
+        else o.shapes.forEach((_, i) => this.target(i));
 
         this.px = new Float32Array(n); this.py = new Float32Array(n);
         this.vx = new Float32Array(n); this.vy = new Float32Array(n);
@@ -185,7 +220,7 @@ class Morph {
         this.TI = new Uint32Array(n); this.COL = new Uint8Array(n);
         this.QF = new Uint8Array(n);                        // 1 = particle sits over text this frame
         /** @type {number[]} */ this.quiet = [];            // [x0, y0, x1, y1, ...] in canvas CSS px
-        this.quietT = -1;
+        this.quietT = -Infinity;
         for (let p = 0; p < n; p++) {
             this.px[p] = Math.random() * this.W;
             this.py[p] = Math.random() * this.H;
@@ -197,6 +232,7 @@ class Morph {
         }
         // dust lives in normalised canvas space, so it always fills the whole canvas
         this.dx = new Float32Array(nd); this.dy = new Float32Array(nd); this.dph = new Float32Array(nd);
+        this.DF = new Uint8Array(nd);
         for (let p = 0; p < nd; p++) {
             this.dx[p] = Math.random();
             this.dy[p] = Math.random();
@@ -210,8 +246,17 @@ class Morph {
         this.started = !o.startOnVisible;
         this.visible = false;
         this.paused = false;
-        /** @type {number | null} */ this.mx = null;
-        /** @type {number | null} */ this.my = null;
+        this.frozen = false;     // idle: the last frame stays on the canvas, nothing runs
+        this.acc = 0;            // time accumulated towards the next throttled frame
+        this.activeT = 0;        // animation time of the last pointer activity
+
+        // pointer, kept in client coordinates and mapped through the (scroll-aware) canvas rect
+        this.pin = false;
+        this.pcx = 0;
+        this.pcy = 0;
+        this.rectDirty = true;
+        this.rx = 0;
+        this.ry = 0;
 
         // filled in by layout() and readTheme()
         this.cw = 0;
@@ -233,8 +278,11 @@ class Morph {
 
         this.relayout = () => {
             if (!this.layout()) return;
-            if (REDUCE.matches) this.drawStill();
-            else if (this.running()) this.render(1 / 60, true);
+            if (reduced) this.drawStill();
+            else {
+                this.render(1 / 60, true);   // the backing store was cleared: repaint before the next paint
+                this.unfreeze();
+            }
         };
         this.ro = new ResizeObserver(this.relayout);
         this.ro.observe(canvas);
@@ -257,48 +305,34 @@ class Morph {
             this.readTheme();
             this.ctx.setTransform(1, 0, 0, 1, 0, 0);
             this.ctx.clearRect(0, 0, canvas.width, canvas.height); // drop trails in the old colours
-            if (REDUCE.matches) this.drawStill();
+            if (reduced) this.drawStill();
+            else {
+                this.render(1 / 60, true);
+                this.unfreeze();
+            }
         };
         this.mo = new MutationObserver(this.onTheme);
         this.mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-        this.onReduce = () => {
-            if (REDUCE.matches) this.drawStill();
-            else wake();
-        };
-        REDUCE.addEventListener('change', this.onReduce);
 
         const target = o.pointerTarget ?? canvas;
         /** @param {Event} e */
         this.onMove = e => {
             const ev = /** @type {PointerEvent} */ (e);
-            const r = canvas.getBoundingClientRect();
-            this.mx = (ev.clientX - r.left - this.ox) / this.scale;
-            this.my = (ev.clientY - r.top - this.oy) / this.scale;
+            this.pin = true;
+            this.pcx = ev.clientX;
+            this.pcy = ev.clientY;
+            this.activeT = this.t;
+            if (this.frozen) this.unfreeze();
         };
-        this.onLeave = () => { this.mx = this.my = null; };
+        this.onLeave = () => { this.pin = false; };
         target.addEventListener('pointermove', this.onMove, { passive: true });
         target.addEventListener('pointerleave', this.onLeave);
         this.pointerTarget = target;
 
-        const seq = o.sequence ?? [{ shape: 0, at: 0 }];
-        this.seq = seq;
-        if (REDUCE.matches) {
-            this.enter(seq[seq.length - 1].shape, false);
-            this.drawStill();
-        } else if (o.startSettled) {
-            const lastShape = seq[seq.length - 1];
-            this.enter(lastShape.shape, false);
-            this.seqIndex = seq.length;
-            // jump the clock past the entrance, fade-in and settle so the sign is already quiet
-            this.t = Math.max(lastShape.at, o.fadeIn ?? 0) + (o.settle ? o.settle.after + o.settle.duration : 0);
-            this.enterT = this.t - 10;
-            const tg = this.targets[this.cur];
-            for (let p = 0; p < this.N; p++) {
-                const k = this.TI[p];
-                this.px[p] = tg.x[k] + this.JX[p];
-                this.py[p] = tg.y[k] + this.JY[p];
-            }
+        if (settled) {
+            this.settleNow();
+            if (reduced) this.drawStill();
+            else this.render(1 / 60, true);   // no blank frame while the loop spins up
         } else {
             this.enter(seq[0].shape, false);
             this.seqIndex = 1;
@@ -306,6 +340,44 @@ class Morph {
 
         instances.add(this);
         wake();
+    }
+
+    /** prefers-reduced-motion changed (called for every instance by the shared listener). */
+    onReduce() {
+        if (reduced) {
+            this.settleNow();         // switching mid-entrance must still show the final sign
+            this.drawStill();
+        } else {
+            this.unfreeze();          // already settled: breathing resumes, no replay
+        }
+    }
+
+    /** Lazily sampled targets for shape i. @param {number} i @returns {Targets} */
+    target(i) {
+        let t = this.targets[i];
+        if (!t) {
+            t = sample(this.o.shapes[i], this.W, this.H, this.N);
+            this.targets[i] = t;
+        }
+        return t;
+    }
+
+    /** Jumps past the whole sequence: last shape, particles on their targets, alpha already settled. */
+    settleNow() {
+        const o = this.o;
+        const lastStep = this.seq[this.seq.length - 1];
+        this.enter(this.lastShape, false);
+        this.seqIndex = this.seq.length;
+        this.t = Math.max(this.t, Math.max(lastStep.at, o.fadeIn ?? 0) + (o.settle ? o.settle.after + o.settle.duration : 0));
+        this.enterT = this.t - 10;
+        this.activeT = this.t;
+        const tg = this.target(this.cur);
+        for (let p = 0; p < this.N; p++) {
+            const k = this.TI[p];
+            this.px[p] = tg.x[k] + this.JX[p];
+            this.py[p] = tg.y[k] + this.JY[p];
+            this.vx[p] = this.vy[p] = 0;
+        }
     }
 
     readTheme() {
@@ -316,11 +388,10 @@ class Morph {
         const read = (/** @type {string} */ prop) => cs.getPropertyValue(prop).trim();
         this.colors = this.o.colorVars.map(v => read(v) || 'currentColor');
         this.dustColor = (this.o.dustVar && read(this.o.dustVar)) || this.colors[0];
-        const blend = cs.getPropertyValue('--pm-blend').trim();
-        this.blend = /** @type {GlobalCompositeOperation} */ (blend === 'source-over' ? 'source-over' : 'lighter');
-        this.alpha = parseFloat(cs.getPropertyValue('--pm-alpha')) || 0.62;
-        this.dustAlpha = parseFloat(cs.getPropertyValue('--pm-dust-alpha')) || 0.2;
-        this.sizeMul = parseFloat(cs.getPropertyValue('--pm-size')) || 1;   // bigger dots read better on light backgrounds
+        this.blend = /** @type {GlobalCompositeOperation} */ (read('--pm-blend') === 'source-over' ? 'source-over' : 'lighter');
+        this.alpha = num(read('--pm-alpha'), 0.62);
+        this.dustAlpha = num(read('--pm-dust-alpha'), 0.2);
+        this.sizeMul = num(read('--pm-size'), 1);   // bigger dots read better on light backgrounds
     }
 
     /** Re-arms a one-shot listener for the current devicePixelRatio. */
@@ -351,6 +422,7 @@ class Morph {
         this.ox = (cw - this.W * s) * (this.o.originX ?? 0.5);
         this.oy = (ch - this.H * s) * (this.o.originY ?? 0.5);
         this.size = Math.max(1.3, Math.min(2.6, 2.5 * s * (this.W / 1600)));
+        this.rectDirty = true;
         this.measureQuiet();
         return changed;
     }
@@ -388,8 +460,22 @@ class Morph {
         this.quiet = out;
     }
 
+    /** Whether the sequence is over and the alpha has settled. */
+    settled() {
+        const o = this.o;
+        if (this.seqIndex < this.seq.length) return false;
+        const lastStep = this.seq[this.seq.length - 1];
+        return this.t >= Math.max(lastStep.at, o.fadeIn ?? 0) + (o.settle ? o.settle.after + o.settle.duration : 0);
+    }
+
     running() {
-        return this.visible && this.started && !this.paused && !REDUCE.matches;
+        return this.visible && this.started && !this.paused && !this.frozen && !reduced;
+    }
+
+    unfreeze() {
+        this.frozen = false;
+        this.activeT = this.t;
+        wake();
     }
 
     /** @param {number} i @param {boolean} burst */
@@ -398,7 +484,7 @@ class Morph {
         this.enterT = this.t;
         const n = this.N;
         const rot = (Math.random() * n) | 0; // every change sends each particle somewhere new
-        const tg = this.targets[i];
+        const tg = this.target(i);
         for (let p = 0; p < n; p++) {
             const k = (p + rot) % n;
             this.TI[p] = k;
@@ -414,14 +500,23 @@ class Morph {
 
     /** Public: jump to a shape now (with a burst). @param {number} i */
     goTo(i) {
-        if (i === this.cur || !this.targets[i]) return;
-        if (REDUCE.matches) {
+        if (i === this.cur || i < 0 || i >= this.targets.length) return;
+        if (reduced) {
             this.enter(i, false);
             this.drawStill();
         } else {
             this.enter(i, true);
+            this.unfreeze();
             wake();
         }
+    }
+
+    /** Public: re-measure the text zones (tab switch, language change) and repaint if needed. */
+    refresh() {
+        this.rectDirty = true;
+        this.measureQuiet();
+        if (reduced) this.drawStill();
+        else this.unfreeze();
     }
 
     pause() { this.paused = true; }
@@ -432,12 +527,27 @@ class Morph {
         this.ro.disconnect();
         this.io.disconnect();
         this.mo.disconnect();
-        REDUCE.removeEventListener('change', this.onReduce);
         this.dprQuery?.removeEventListener('change', this.onDpr);
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.pointerTarget.removeEventListener('pointermove', this.onMove);
         this.pointerTarget.removeEventListener('pointerleave', this.onLeave);
+    }
+
+    /** Called by the shared loop every animation frame; throttles and freezes once settled. @param {number} dt */
+    advance(dt) {
+        if (this.settled()) {
+            const idle = this.o.idle ?? {};
+            if (this.t - this.activeT > (idle.freezeAfter ?? (FINE.matches ? Infinity : 6)) && !this.pin) {
+                this.frozen = true;           // the last frame stays on screen; nothing runs
+                return;
+            }
+            this.acc += dt;
+            if (this.acc < 1 / (idle.fps ?? 30)) return;
+            dt = Math.min(0.05, this.acc);
+            this.acc = 0;
+        }
+        this.tick(dt);
     }
 
     /** @param {number} dt */
@@ -447,8 +557,9 @@ class Morph {
             this.enter(this.seq[this.seqIndex].shape, true);
             this.seqIndex++;
         }
-        if (this.o.quiet && this.t - this.quietT > 0.4) {
+        if (this.o.quiet && this.t - this.quietT > (this.settled() ? 1 : 0.4)) {
             this.quietT = this.t;
+            this.rectDirty = true;   // cheap insurance against layout shifts that don't scroll
             this.measureQuiet();
         }
         this.step(dt);
@@ -461,10 +572,20 @@ class Morph {
         const dm = Math.pow(0.87, f);         // frame-rate independent damping
         const t = this.t;
         const lt = t - this.enterT;
-        const tg = this.targets[this.cur];
+        const tg = this.target(this.cur);
         const { px, py, vx, vy, K, JX, JY, PH, DL, TI } = this;
-        const mx = this.mx;
-        const my = this.my;
+        /** @type {number | null} */ let mx = null;
+        /** @type {number | null} */ let my = null;
+        if (this.pin) {
+            if (this.rectDirty) {
+                const r = this.canvas.getBoundingClientRect();
+                this.rx = r.left;
+                this.ry = r.top;
+                this.rectDirty = false;
+            }
+            mx = (this.pcx - this.rx - this.ox) / this.scale;
+            my = (this.pcy - this.ry - this.oy) / this.scale;
+        }
         const R = 110;
         for (let p = 0; p < this.N; p++) {
             const k = TI[p];
@@ -498,17 +619,28 @@ class Morph {
         }
     }
 
+    /** @param {number} x @param {number} y */
+    inQuiet(x, y) {
+        const Q = this.quiet;
+        for (let i = 0; i < Q.length; i += 4) {
+            if (x > Q[i] && x < Q[i + 2] && y > Q[i + 1] && y < Q[i + 3]) return 1;
+        }
+        return 0;
+    }
+
     /** @param {number} dt @param {boolean} [still] */
     render(dt, still = false) {
         const { ctx, cw, ch, dpr, scale: s, ox, oy } = this;
+        if (this.cur < 0) return;
         const size = this.size * this.sizeMul;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const trail = this.o.trail ?? 0.76;
         if (still) {
             ctx.clearRect(0, 0, cw, ch);
         } else {
             // never fully cleared: partial erase leaves trails, and keeps the canvas transparent
             ctx.globalCompositeOperation = 'destination-out';
-            ctx.fillStyle = `rgba(0,0,0,${1 - Math.pow(this.o.trail ?? 0.76, Math.min(3, dt * 60))})`;
+            ctx.fillStyle = `rgba(0,0,0,${1 - Math.pow(trail, Math.min(3, dt * 60))})`;
             ctx.fillRect(0, 0, cw, ch);
         }
         // a still frame (reduced motion, resize) has no trail build-up to glow with: plain
@@ -516,30 +648,20 @@ class Morph {
         ctx.globalCompositeOperation = still ? 'source-over' : this.blend;
         // Trails accumulate once per frame, so at 120/144 Hz the same alpha would glow 2-3x brighter
         // than at 60 Hz. Scale each frame's contribution by its share of a 60 Hz frame's erase.
-        const trail = this.o.trail ?? 0.76;
         const rate = still ? 1 : Math.min(1, (1 - Math.pow(trail, Math.min(3, dt * 60))) / (1 - trail));
         const a = Math.min(1, this.alpha * this.settleFactor() * rate);
-        const aq = a * (this.o.quiet?.factor ?? 0.12);
-        const Q = this.quiet;
-        const qn = Q.length;
+        const qf = this.o.quiet?.factor ?? 0.12;
+        const qn = this.quiet.length;
         const QF = this.QF;
+        const DF = this.DF;
         const h = size / 2;
-        for (let p = 0; p < this.N; p++) {                                         // which particles sit over text
-            let inside = 0;
-            if (qn) {
-                const x = ox + this.px[p] * s;
-                const y = oy + this.py[p] * s;
-                for (let i = 0; i < qn; i += 4) {
-                    if (x > Q[i] && x < Q[i + 2] && y > Q[i + 1] && y < Q[i + 3]) { inside = 1; break; }
-                }
-            }
-            QF[p] = inside;
-        }
+        for (let p = 0; p < this.N; p++) QF[p] = qn ? this.inQuiet(ox + this.px[p] * s, oy + this.py[p] * s) : 0;
+        for (let p = 0; p < this.ND; p++) DF[p] = qn ? this.inQuiet(this.dx[p] * cw, this.dy[p] * ch) : 0;
         const colors = this.colors;
         for (let c = 0; c < colors.length; c++) {                                  // batch by colour
             ctx.fillStyle = colors[c];
             for (let pass = 0; pass < (qn ? 2 : 1); pass++) {
-                ctx.globalAlpha = pass ? aq : a;
+                ctx.globalAlpha = pass ? a * qf : a;
                 for (let p = 0; p < this.N; p++) {
                     if (this.COL[p] === c && QF[p] === pass) ctx.fillRect(ox + this.px[p] * s - h, oy + this.py[p] * s - h, size, size);
                 }
@@ -547,15 +669,9 @@ class Morph {
         }
         ctx.fillStyle = this.dustColor;
         for (let pass = 0; pass < (qn ? 2 : 1); pass++) {
-            ctx.globalAlpha = this.dustAlpha * rate * (pass ? (this.o.quiet?.factor ?? 0.12) : 1);
+            ctx.globalAlpha = this.dustAlpha * rate * (pass ? qf : 1);
             for (let p = 0; p < this.ND; p++) {
-                const x = this.dx[p] * cw;
-                const y = this.dy[p] * ch;
-                let inside = 0;
-                for (let i = 0; i < qn; i += 4) {
-                    if (x > Q[i] && x < Q[i + 2] && y > Q[i + 1] && y < Q[i + 3]) { inside = 1; break; }
-                }
-                if (inside === pass) ctx.fillRect(x - 0.8, y - 0.8, 1.6, 1.6);
+                if (DF[p] === pass) ctx.fillRect(this.dx[p] * cw - 0.8, this.dy[p] * ch - 0.8, 1.6, 1.6);
             }
         }
         ctx.globalAlpha = 1;
@@ -564,11 +680,7 @@ class Morph {
 
     /** Alpha multiplier: fades in at the start, then eases to settle.factor once the sequence is over. */
     settleFactor() {
-        if (REDUCE.matches) return 1; // a still frame has no trail build-up, it is already quiet
-        const ease = (/** @type {number} */ u) => {
-            const v = Math.min(1, Math.max(0, u));
-            return v * v * (3 - 2 * v);
-        };
+        if (reduced) return 1; // a still frame has no trail build-up, it is already quiet
         let k = 1;
         const fi = this.o.fadeIn;
         if (fi) k *= 0.3 + 0.7 * ease(this.t / fi);
@@ -580,10 +692,10 @@ class Morph {
         return k;
     }
 
-    /** Reduced motion: the settled shape, drawn once. */
+    /** Reduced motion: the current shape, settled, drawn once. */
     drawStill() {
-        const tg = this.targets[this.cur];
-        if (!tg) return;
+        if (this.cur < 0) return;
+        const tg = this.target(this.cur);
         this.measureQuiet();
         for (let p = 0; p < this.N; p++) {
             const k = this.TI[p];
@@ -605,6 +717,7 @@ export function createMorph(canvas, options) {
     const m = new Morph(canvas, options);
     return {
         goTo: (/** @type {number} */ i) => m.goTo(i),
+        refresh: () => m.refresh(),
         pause: () => m.pause(),
         resume: () => m.resume(),
         destroy: () => m.destroy()

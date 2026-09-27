@@ -608,21 +608,6 @@ const AnimationPauser = {
             });
         }
 
-        // Pause hero decorations when hero is scrolled past
-        const hero = document.querySelector('.hero');
-        const heroDecorations = document.querySelectorAll('.floating-shape, .hero::before');
-        if (hero) {
-            const heroObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    const shapes = hero.querySelectorAll('.floating-shape');
-                    shapes.forEach(shape => {
-                        shape.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
-                    });
-                });
-            }, { threshold: 0 });
-            heroObserver.observe(hero);
-        }
-
         // Pause positions glow when not visible
         const positions = document.querySelector('.positions');
         if (positions) {
@@ -1126,8 +1111,9 @@ TechHighlighter.init();
 
 // ================================================
 // NUMBER SCRAMBLE — key project numbers roll through §¶{}<>/01# before settling.
-// Screen readers read the real value from a visually hidden copy; once the animation
-// ends the wrapper is replaced by plain text again.
+// A number is wrapped only while it rolls (~1 s): screen readers read the real value from a
+// visually hidden copy, and once the animation ends the wrapper is replaced by plain text again,
+// so find-in-page and copying never see the value twice.
 // ================================================
 const NumberScramble = {
     // number + the words right after it, in PL and EN — only these facts animate
@@ -1148,24 +1134,32 @@ const NumberScramble = {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
                 this.io.unobserve(entry.target);
-                this.play(entry.target);
+                this.wrap(entry.target).forEach(vis => this.play(vis));
             });
         }, { threshold: 0.6 });
-        this.wrap();
-        // setLanguage rewrites the text nodes, so wrap the new language again
-        document.addEventListener('languagechange', () => this.wrap());
+        this.observe();
+        // setLanguage rewrites the text nodes, so the new language rolls in again
+        document.addEventListener('languagechange', () => this.observe());
     },
 
-    wrap() {
+    // watch every element that holds one of the numbers
+    observe() {
         document.querySelectorAll(this.selector).forEach(el => {
-            const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
-            const nodes = [];
-            for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
-            nodes.forEach(node => this.wrapNode(node));
+            const text = el.textContent;
+            if (this.patterns.some(re => { re.lastIndex = 0; return re.test(text); })) this.io.observe(el);
         });
     },
 
-    wrapNode(node) {
+    wrap(el) {
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+        const nodes = [];
+        for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
+        const out = [];
+        nodes.forEach(node => this.wrapNode(node, out));
+        return out;
+    },
+
+    wrapNode(node, out) {
         if (node.parentElement.closest('.scramble')) return;
         const text = node.nodeValue;
         const hits = [];
@@ -1183,7 +1177,7 @@ const NumberScramble = {
             const wrapEl = document.createElement('span');
             wrapEl.className = 'scramble';
             const sr = document.createElement('span');
-            sr.className = 'scramble-sr';
+            sr.className = 'sr-only';
             sr.textContent = str;
             const vis = document.createElement('span');
             vis.className = 'scramble-vis';
@@ -1191,7 +1185,7 @@ const NumberScramble = {
             vis.textContent = str;
             wrapEl.append(sr, vis);
             frag.append(wrapEl);
-            this.io.observe(vis);
+            out.push(vis);
             last = i + str.length;
         });
         frag.append(text.slice(last));
@@ -1233,11 +1227,25 @@ const CursorLight = {
     init() {
         if (prefersReducedMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
         document.querySelectorAll('.tools-card, .ds-tile').forEach(card => {
-            card.addEventListener('pointermove', (e) => {
+            let x = 0;
+            let y = 0;
+            let rafId = null;
+            // one layout read + style write per frame, however often the pointer fires
+            const update = () => {
+                rafId = null;
                 const r = card.getBoundingClientRect();
-                card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-                card.style.setProperty('--my', `${e.clientY - r.top}px`);
+                card.style.setProperty('--mx', `${x - r.left}px`);
+                card.style.setProperty('--my', `${y - r.top}px`);
+            };
+            card.addEventListener('pointermove', (e) => {
+                x = e.clientX;
+                y = e.clientY;
+                if (!rafId) rafId = requestAnimationFrame(update);
             }, { passive: true });
+            card.addEventListener('pointerleave', () => {
+                if (rafId) cancelAnimationFrame(rafId);
+                rafId = null;
+            });
         });
         // tiles draw the light in their always-visible veil, so park it off-card on leave
         // (tool cards fade theirs out on :hover, and keep the last position for that fade)
@@ -1255,11 +1263,12 @@ CursorLight.init();
 // ================================================
 // SCROLL PROGRESS — thin gold bar under the nav. CSS drives it with
 // animation-timeline: scroll() where supported; this is the fallback.
+// Hidden with prefers-reduced-motion (style.css), so nothing to do then.
 // ================================================
 const ScrollProgress = {
     init() {
         const bar = document.querySelector('.scroll-progress-bar');
-        if (!bar || CSS.supports('animation-timeline: scroll()')) return;
+        if (!bar || prefersReducedMotion || CSS.supports('animation-timeline: scroll()')) return;
         let ticking = false;
         const update = () => {
             ticking = false;
@@ -1284,7 +1293,7 @@ ScrollProgress.init();
 // Fetched only after the page has loaded, so they never compete with the first paint.
 // ================================================
 window.addEventListener('load', () => {
-    import('./particles.js?v=14').catch(() => {
+    import('./particles.js?v=16').catch(() => {
         // decoration only — the page is complete without it
     });
 }, { once: true });

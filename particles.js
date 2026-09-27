@@ -12,11 +12,12 @@
  * Colours come from --pm-* custom properties (style.css), so both themes are covered.
  */
 
-import { createMorph, INK } from './particle-morph.js?v=8';
+import { createMorph, INK } from './particle-morph.js?v=10';
 
 const SERIF = "'Playfair Display', Georgia, 'Times New Roman', serif";
 const MONO = "'JetBrains Mono', 'Fira Code', Consolas, monospace";
 const COLOR_VARS = ['--pm-0', '--pm-1'];
+const BRACE = 0.4;   // braces sit ±0.4 em around the centre of "{ }"
 
 /**
  * The final sign: "§" (law) on the left and "{ }" (code) on the right — no arrow between them.
@@ -31,7 +32,7 @@ function pair(c, xPara, xCode, cy, size) {
     c.fillText('§', xPara, cy + size * 0.04);
     c.fillStyle = INK[1];
     c.font = `600 ${size}px ${MONO}`;
-    const d = size * 0.4;
+    const d = size * BRACE;
     c.fillText('{', xCode - d, cy);
     c.fillText('}', xCode + d, cy);
 }
@@ -76,53 +77,161 @@ function idle(fn) {
 }
 
 /**
+ * Ink extents of the final sign per 1 px of font size, measured with the real fonts
+ * (left/right of the glyph centre, top/bottom of the line centre).
+ * @typedef {{ l: number, r: number, t: number, b: number }} Ext
+ * @returns {{ para: Ext, code: Ext }}
+ */
+function signExtents() {
+    /** @type {{ para: Ext, code: Ext }} */
+    const fallback = { para: { l: 0.28, r: 0.28, t: 0.42, b: 0.5 }, code: { l: 0.62, r: 0.62, t: 0.5, b: 0.5 } };
+    const c = document.createElement('canvas').getContext('2d');
+    if (!c) return fallback;
+    c.textAlign = 'center';
+    c.textBaseline = 'middle';
+    c.font = `700 100px ${SERIF}`;
+    const p = c.measureText('§');
+    c.font = `600 100px ${MONO}`;
+    const o = c.measureText('{');
+    const e = c.measureText('}');
+    const para = { l: p.actualBoundingBoxLeft / 100, r: p.actualBoundingBoxRight / 100, t: p.actualBoundingBoxAscent / 100 - 0.04, b: p.actualBoundingBoxDescent / 100 + 0.04 };
+    const code = {
+        l: BRACE + o.actualBoundingBoxLeft / 100,
+        r: BRACE + e.actualBoundingBoxRight / 100,
+        t: Math.max(o.actualBoundingBoxAscent, e.actualBoundingBoxAscent) / 100,
+        b: Math.max(o.actualBoundingBoxDescent, e.actualBoundingBoxDescent) / 100
+    };
+    const sane = (/** @type {Ext} */ x) => [x.l, x.r, x.t, x.b].every(v => Number.isFinite(v) && v > 0 && v < 2);
+    return sane(para) && sane(code) ? { para, code } : fallback;
+}
+
+/**
+ * Everything the final sign must keep clear of, in canvas pixels: the lines of text, the photo,
+ * the buttons and the whole timeline column (its height covers every tab).
+ * @param {HTMLCanvasElement} hero
+ * @returns {number[][]} [x0, y0, x1, y1] boxes
+ */
+function heroObstacles(hero) {
+    const base = hero.getBoundingClientRect();
+    /** @type {number[][]} */
+    const out = [];
+    /** @param {DOMRect} r */
+    const add = r => {
+        if (r.width && r.height) out.push([r.left - base.left, r.top - base.top, r.right - base.left, r.bottom - base.top]);
+    };
+    const range = document.createRange();
+    document.querySelectorAll('#hero .hero-greeting, #hero .hero-title, #hero .hero-subtitle').forEach(el => {
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+            if (!(n.nodeValue ?? '').trim()) continue;
+            range.selectNodeContents(n);
+            for (const r of range.getClientRects()) add(r);
+        }
+    });
+    document.querySelectorAll('#hero .hero-avatar, #hero .greeting-line, #hero .hero-cta a, #hero .hero-visual')
+        .forEach(el => add(el.getBoundingClientRect()));
+    return out;
+}
+
+/**
+ * Finds the biggest free spot for the final sign. Prefers "§" and "{ }" in two separate empty areas
+ * (the side margins of wide screens); otherwise both side by side in one empty area (e.g. under the
+ * buttons, or next to the greeting). Returns null when nothing reasonably big fits.
+ * @param {number} cw @param {number} ch @param {number} top  first usable y (below the fixed nav)
+ * @param {number[][]} obstacles
+ * @returns {{ xp: number, xt: number, y: number, size: number } | null}
+ */
+function freeSpot(cw, ch, top, obstacles) {
+    const E = signExtents();
+    const pad = 22;     // clearance around text and controls
+    const edge = 14;    // clearance from the canvas edges
+    const sMax = Math.min(ch * 0.55, 480);
+    const sMin = 96;
+    for (let s = sMax; s >= sMin; s *= 0.94) {
+        const up = Math.max(E.para.t, E.code.t) * s;
+        const down = Math.max(E.para.b, E.code.b) * s;
+        const wp = (E.para.l + E.para.r) * s;
+        const wc = (E.code.l + E.code.r) * s;
+        const gap = 0.5 * s;
+        /** @type {{ xp: number, xt: number, y: number, size: number, split: boolean } | null} */
+        let best = null;
+        let bestScore = Infinity;
+        for (let y = top + pad + up; y + down + edge <= ch; y += 6) {
+            const y0 = y - up - pad;
+            const y1 = y + down + pad;
+            const spans = obstacles.filter(o => o[1] < y1 && o[3] > y0).map(o => [o[0] - pad, o[2] + pad]).sort((a, b) => a[0] - b[0]);
+            /** @type {number[][]} */
+            const free = [];
+            let x = edge;
+            for (const [a, b] of spans) {
+                if (a > x) free.push([x, a]);
+                x = Math.max(x, b);
+            }
+            if (cw - edge > x) free.push([x, cw - edge]);
+            // centre of a box with ink extents (l, r) inside [a, b]
+            const mid = (/** @type {number[]} */ iv, /** @type {Ext} */ ex) => (iv[0] + iv[1]) / 2 + ((ex.l - ex.r) * s) / 2;
+            /** @type {{ xp: number, xt: number, split: boolean } | null} */
+            let spot = null;
+            // the two side margins: empty areas touching the left and right edge, each snug around its
+            // glyph (a margin, not half of a wide empty band)
+            const fits = (/** @type {number[] | undefined} */ iv, /** @type {number} */ w) => !!iv && iv[1] - iv[0] >= w && iv[1] - iv[0] <= w * 3.2;
+            const left = free[0]?.[0] === edge ? free[0] : undefined;
+            const right = free.at(-1)?.[1] === cw - edge ? free.at(-1) : undefined;
+            if (left && right && left !== right && fits(left, wp) && fits(right, wc)) {
+                spot = { xp: mid(left, E.para), xt: mid(right, E.code), split: true };
+            } else {
+                const one = free.find(iv => iv[1] - iv[0] >= wp + gap + wc);
+                if (one) {
+                    const x0 = (one[0] + one[1] - (wp + gap + wc)) / 2;   // the pair, centred in the area
+                    spot = { xp: x0 + E.para.l * s, xt: x0 + wp + gap + E.code.l * s, split: false };
+                }
+            }
+            if (!spot) continue;
+            // separate margins beat a shared area; then stay close to the middle of the hero
+            const score = (spot.split ? 0 : 1e6) + Math.abs(y - (top + ch) / 2);
+            if (score < bestScore) {
+                bestScore = score;
+                best = { ...spot, y, size: s };
+            }
+        }
+        if (best) return best;
+    }
+    return null;
+}
+
+/**
  * Hero geometry in canvas pixels, measured from the real layout.
- * Final sign: on wide screens "§" sits in the empty margin left of the content and "{ }" in the margin
- * on the right; where there are no margins, both sit in the gap between the name and the timeline
- * (on phones: behind the name).
  * @param {HTMLCanvasElement} hero
  */
 function heroLayout(hero) {
     const cw = Math.max(1, Math.round(hero.clientWidth));
     const ch = Math.max(1, Math.round(hero.clientHeight));
     const narrow = matchMedia('(max-width: 768px)').matches;
-    // fallback: the fixed design box of the previous layout, fitted into the canvas
+    // the intro (and the phone layout) use a fixed design box fitted into the canvas
     const DW = narrow ? 800 : 1600;
     const DH = 900;
     const s = Math.min(cw / DW, ch / DH);
     const ox = (cw - DW * s) / 2;
     const oy = (ch - DH * s) * (narrow ? 0.14 : 0.5);
     const intro = { cx: ox + (DW / 2) * s, cy: oy + DH * 0.51 * s, big: 620 * s, braced: (narrow ? 330 : 400) * s };
-    let fin = narrow
-        ? { xp: ox + 240 * s, xt: ox + 560 * s, y: oy + DH * 0.51 * s, size: 280 * s }
-        : { xp: ox + 610 * s, xt: ox + 860 * s, y: oy + DH * 0.5 * s, size: 250 * s };
-    const content = document.querySelector('#hero .hero-content');
-    const visual = document.querySelector('#hero .hero-visual');
-    const box = document.querySelector('#hero .container');
-    if (!narrow && content && visual && box) {
-        const base = hero.getBoundingClientRect();
-        const left = content.getBoundingClientRect().left - base.left;
-        const right = base.right - visual.getBoundingClientRect().right;
-        const margin = Math.min(left, right);
-        if (margin >= 190) {
-            const b = box.getBoundingClientRect();
-            fin = {
-                xp: left / 2,
-                xt: cw - right / 2,
-                y: b.top + b.height / 2 - base.top,
-                size: Math.min(margin * 0.76, ch * 0.55)   // "{ }" is ~1.15 em wide: keep it well inside the margin
-            };
-        }
+    // phones: the sign sits behind the name (particles over text are dimmed)
+    /** @type {{ xp: number, xt: number, y: number, size: number } | null} */
+    let fin = null;
+    if (!narrow) {
+        const nav = document.querySelector('.nav');
+        fin = freeSpot(cw, ch, nav ? nav.getBoundingClientRect().height : 0, heroObstacles(hero));
     }
-    return { cw, ch, intro, fin };
+    fin ??= { xp: ox + 240 * s, xt: ox + 560 * s, y: oy + DH * 0.51 * s, size: 280 * s };
+    const key = [cw, ch, fin.xp, fin.xt, fin.y, fin.size].map(Math.round).join(',');
+    return { cw, ch, intro, fin, key };
 }
 
 /**
  * Hero scene: dust -> "§" -> "{ § }" -> "§ … { }", then a quiet watermark.
- * @param {HTMLCanvasElement} hero @param {boolean} settled  start on the final sign (after a resize)
+ * @param {HTMLCanvasElement} hero @param {ReturnType<typeof heroLayout>} L
+ * @param {boolean} settled  start on the final sign (rebuild after a layout change)
  */
-function heroScene(hero, settled) {
-    const L = heroLayout(hero);
+function heroScene(hero, L, settled) {
     return createMorph(hero, {
         width: L.cw,          // design space = canvas pixels, so shapes can follow the layout
         height: L.ch,
@@ -179,6 +288,51 @@ function finaleScene(finale) {
     });
 }
 
+/** @param {HTMLCanvasElement} hero */
+function initHero(hero) {
+    let L = heroLayout(hero);
+    let scene = heroScene(hero, L, false);
+    hero.classList.add('is-live');
+    /** @type {ReturnType<typeof setTimeout> | undefined} */
+    let timer;
+    const ro = new ResizeObserver(() => check(300));
+    const panels = document.querySelector('#hero .hero-tab-panels');
+    const mo = new MutationObserver(() => check(400));   // after the panel slide-in
+    const onLang = () => check(50);
+    const stop = () => {
+        clearTimeout(timer);
+        ro.disconnect();
+        mo.disconnect();
+        document.removeEventListener('languagechange', onLang);
+    };
+    // the sign follows the layout: rebuild (already settled) whenever its spot moves — resize,
+    // rotation, a longer translation or another tab; otherwise only re-read the text zones
+    /** @param {number} delay */
+    function check(delay) {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            try {
+                const next = heroLayout(hero);
+                if (next.key === L.key) {
+                    scene.refresh();
+                    return;
+                }
+                scene.destroy();
+                L = next;
+                scene = heroScene(hero, L, true);
+            } catch {
+                // the canvas can no longer be read back: drop the effect, keep the page as it is
+                stop();
+                scene.destroy();
+                hero.classList.remove('is-live');
+            }
+        }, delay);
+    }
+    ro.observe(hero);
+    if (panels) mo.observe(panels, { subtree: true, attributes: true, attributeFilter: ['class'] });
+    document.addEventListener('languagechange', onLang);
+}
+
 async function init() {
     const hero = /** @type {HTMLCanvasElement | null} */ (document.getElementById('heroParticles'));
     const finale = /** @type {HTMLCanvasElement | null} */ (document.getElementById('finaleParticles'));
@@ -189,25 +343,7 @@ async function init() {
         // createMorph throws when the canvas can't be read back (anti-fingerprinting); the page
         // then simply keeps its static look — the contact formula fallback stays visible
         try {
-            if (hero) {
-                let scene = heroScene(hero, false);
-                hero.classList.add('is-live');
-                // the sign follows the layout: rebuild (already settled) after a real resize or rotation
-                let w = hero.clientWidth;
-                let h = hero.clientHeight;
-                /** @type {ReturnType<typeof setTimeout> | undefined} */
-                let timer;
-                new ResizeObserver(() => {
-                    clearTimeout(timer);
-                    timer = setTimeout(() => {
-                        if (Math.abs(hero.clientWidth - w) < 24 && Math.abs(hero.clientHeight - h) < 24) return;
-                        w = hero.clientWidth;
-                        h = hero.clientHeight;
-                        scene.destroy();
-                        scene = heroScene(hero, true);
-                    }, 300);
-                }).observe(hero);
-            }
+            if (hero) initHero(hero);
         } catch {
             hero?.classList.remove('is-live');
         }

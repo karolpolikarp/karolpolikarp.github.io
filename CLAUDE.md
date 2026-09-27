@@ -68,31 +68,33 @@ npx serve
 ### script.js
 Contains modular components (in order):
 1. **ThemeManager** - Dark/light mode with localStorage persistence
-3. **Mobile Navigation** - Hamburger menu toggle
-4. **Smooth Scroll** - Anchor link behavior
-5. **Counter Animation** - Animated statistics with requestAnimationFrame
-6. **ScrollAnimations** - IntersectionObserver-based reveals
-7. **MagneticButtons** - Interactive hover effects (desktop only)
-8. **Navbar Scroll Effect** - Adds `.nav-scrolled` class at 100px scroll
-9. **Windows 95 Clock** - Footer time display
-10. **LanguageManager** - Live PL/EN toggle via `data-en` / `data-en-html` attributes
-11. **HeroTabs** - Experience / Education / Skills tab panels (keyboard-navigable)
-12. **ProjectShowcase** - Projects carousel (tabs, dots, autoplay w/ pause, swipe)
-13. **EmailProtection** - Anti-scraper email obfuscation
-14. **cats easter egg** - `window.cats.show()` + Konami code
-15. **NumberScramble** - Key project numbers roll through `§¶{}<>/01#` when scrolled into view
-16. **CursorLight** - Soft light following the pointer on tool cards and data-science tiles
-17. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
-18. **Particles loader** - `import('./particles.js')` after the `load` event
+2. **Mobile Navigation** - Hamburger menu toggle
+3. **Smooth Scroll** - Anchor link behavior
+4. **Counter Animation** - Animated statistics with requestAnimationFrame
+5. **ScrollAnimations** - IntersectionObserver-based reveals
+6. **MagneticButtons** - Interactive hover effects (desktop only)
+7. **Navbar Scroll Effect** - Adds `.nav-scrolled` class at 100px scroll
+8. **Windows 95 Clock** - Footer time display
+9. **LanguageManager** - Live PL/EN toggle via `data-en` / `data-en-html` attributes
+10. **HeroTabs** - Experience / Education / Skills tab panels (keyboard-navigable)
+11. **ProjectShowcase** - Projects carousel (tabs, dots, autoplay w/ pause, swipe)
+12. **EmailProtection** - Anti-scraper email obfuscation
+13. **cats easter egg** - `window.cats.show()` + Konami code
+14. **NumberScramble** - Key project numbers roll through `§¶{}<>/01#` when scrolled into view
+15. **CursorLight** - Soft light following the pointer on tool cards and data-science tiles
+16. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
+17. **Particles loader** - `import('./particles.js')` after the `load` event
 
 ## Animations („Od paragrafu do parametru”)
 
 Decorative layer added on top of the existing design (nothing else in the layout changes):
 - **Hero particles** (`#heroParticles` inside `.hero-bg-decoration`): dust gathers into `§`, then `{ § }`,
-  then settles as `§` on the left and `{ }` on the right (serif = law, mono = code) — on wide screens in the empty
-  side margins next to the content, otherwise in the gap between the name and the timeline (`heroLayout()` in
-  `particles.js` measures the real layout and the scene rebuilds, already settled, after a resize). Then it
-  recedes into a quiet watermark; the pointer repels particles.
+  then settles as `§` on the left and `{ }` on the right (serif = law, mono = code). `freeSpot()` in `particles.js`
+  searches the measured layout (text lines, photo, buttons, the whole timeline column) for the biggest empty spot:
+  the two side margins on wide screens, otherwise one empty area (under the buttons, next to the greeting); on
+  phones the sign sits behind the name. The scene rebuilds, already settled, whenever that spot moves (resize,
+  language, tab). Then it recedes into a quiet watermark (30 fps once settled, frozen on touch screens when idle);
+  the pointer repels particles.
 - **Contact finale** (`.contact-finale` + `#finaleParticles`): `§` splits into `§ … { }` when scrolled into view,
   above the motto „Od paragrafu do parametru.” (`data-en`). A static HTML/SVG formula is the no-JS fallback.
 - **Number scramble**, **cursor light**, **scroll progress bar**, **hero-tab timeline drawing** (CSS on
@@ -102,8 +104,8 @@ Decorative layer added on top of the existing design (nothing else in the layout
   The light hero also gets the warm glow the dark hero has (`[data-theme="light"] .hero`).
 - Engine: one shared `requestAnimationFrame` loop for all canvases, pauses off-screen and in hidden tabs,
   `devicePixelRatio` capped, shapes sampled once after fonts load and rescaled on resize.
-- **Every effect honours `prefers-reduced-motion`**: particles draw the settled shape once, scramble and
-  cursor light are off, CSS animations are wrapped in `prefers-reduced-motion: no-preference`.
+- **Every effect honours `prefers-reduced-motion`**: particles draw the settled shape once, scramble, cursor
+  light and the scroll progress bar are off, CSS animations are wrapped in `prefers-reduced-motion: no-preference`.
 - Typecheck/lint the modules with `deno check particle-morph.js particles.js` and `deno lint` (no config needed).
 - When changing `particle-morph.js`, bump the `?v=` in its import inside `particles.js`; when changing
   `particles.js`, bump the `?v=` in the loader at the end of `script.js`.

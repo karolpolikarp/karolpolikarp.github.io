@@ -159,10 +159,6 @@
     background: radial-gradient(circle, rgba(0, 140, 70, 0.1) 0%, transparent 70%);
 }
 
-[data-theme="dark"] .floating-shape {
-    opacity: 0.3;
-}
-
 [data-theme="dark"] .gradient-blob {
     opacity: 0.2;
     mix-blend-mode: screen;
@@ -734,59 +730,6 @@ section {
     overflow: hidden;
     pointer-events: none;
     z-index: 0;
-}
-
-.floating-shape {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.6;
-    will-change: transform;
-}
-
-.shape-1 {
-    width: 300px;
-    height: 300px;
-    background: rgba(201, 169, 98, 0.16);
-    top: 20%;
-    right: 10%;
-    animation: floatShape1 15s ease-in-out infinite;
-}
-
-.shape-2 {
-    width: 200px;
-    height: 200px;
-    background: rgba(0, 77, 43, 0.14);
-    bottom: 30%;
-    left: 5%;
-    animation: floatShape2 12s ease-in-out infinite;
-}
-
-.shape-3 {
-    width: 150px;
-    height: 150px;
-    background: rgba(201, 169, 98, 0.12);
-    top: 60%;
-    right: 30%;
-    animation: floatShape3 18s ease-in-out infinite;
-}
-
-@keyframes floatShape1 {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(-30px, 20px) rotate(5deg); }
-    50% { transform: translate(20px, -30px) rotate(-5deg); }
-    75% { transform: translate(-20px, -20px) rotate(3deg); }
-}
-
-@keyframes floatShape2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(40px, -20px) scale(1.1); }
-    66% { transform: translate(-30px, 30px) scale(0.9); }
-}
-
-@keyframes floatShape3 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(50px, 30px); }
 }
 
 /* ================================================
@@ -3554,10 +3497,6 @@ section {
     border-color: var(--color-primary);
 }
 
-.floating-shape.parallax {
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
 /* ================================================
    BLOG SECTION
    ================================================ */
@@ -3748,7 +3687,6 @@ section {
         scroll-behavior: auto !important;
     }
 
-    .floating-shape,
     .gradient-blob,
     .hero::before,
     .positions::before,
@@ -3767,12 +3705,7 @@ section {
         animation: none !important;
     }
 
-    .parallax {
-        transform: none !important;
-    }
-
     .gradient-blob,
-    .floating-shape,
     .neural-line,
     .positions::before,
     .logo-main {
@@ -3794,8 +3727,7 @@ section {
    ================================================ */
 @media (prefers-reduced-motion: no-preference) {
     /* GPU-promote only when animations are allowed */
-    .gradient-blob,
-    .floating-shape {
+    .gradient-blob {
         transform: translateZ(0);
     }
 }
@@ -4661,16 +4593,7 @@ section {
     color: var(--color-accent);
 }
 
-/* number scramble: the visually hidden copy is what screen readers read */
-.scramble-sr {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-}
-
+/* number scramble: the rolling copy (screen readers read the .sr-only one) */
 .scramble-vis {
     display: inline-block;
     vertical-align: bottom;
@@ -4693,7 +4616,7 @@ section {
     opacity: 1;
 }
 
-/* scroll progress under the nav (the JS fallback in script.js sets the transform) */
+/* scroll progress under the nav (the JS fallback in script.js sets the transform; off with reduced motion) */
 .scroll-progress {
     position: absolute;
     left: 0;
@@ -4711,10 +4634,22 @@ section {
     transform-origin: left center;
 }
 
+[data-theme="dark"] .scroll-progress-bar {
+    background: linear-gradient(90deg, var(--color-primary-on-dark), var(--color-accent));
+}
+
 @supports (animation-timeline: scroll()) {
-    .scroll-progress-bar {
-        animation: scrollProgress linear both;
-        animation-timeline: scroll(root block);
+    @media (prefers-reduced-motion: no-preference) {
+        .scroll-progress-bar {
+            animation: scrollProgress linear both;
+            animation-timeline: scroll(root block);
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-progress {
+        display: none;
     }
 }
 
