@@ -97,7 +97,9 @@ Decorative layer added on top of the existing design (nothing else in the layout
   above the motto „Od paragrafu do parametru.” (`data-en`). A static HTML/SVG formula is the no-JS fallback.
 - **Number scramble**, **cursor light**, **scroll progress bar**, **hero-tab timeline drawing** (CSS on
   `.hero-tab-panel.active`), **scroll-driven reveal** (`animation-timeline: view()` inside `@supports`).
-- Particle colours come from `--pm-0/1`, `--pm-dust`, `--pm-blend`, `--pm-alpha` (both themes, `style.css`).
+- Particle colours come from `--pm-0/1`, `--pm-dust`, `--pm-blend`, `--pm-alpha`, `--pm-size` (both themes, `style.css`).
+  Light theme: deep inks (`--color-primary`, `--pm-gold-deep`), opaque `source-over`, 1.3x dots; dark theme: additive glow.
+  The light hero also gets the warm glow the dark hero has (`[data-theme="light"] .hero`).
 - Engine: one shared `requestAnimationFrame` loop for all canvases, pauses off-screen and in hidden tabs,
   `devicePixelRatio` capped, shapes sampled once after fonts load and rescaled on resize.
 - **Every effect honours `prefers-reduced-motion`**: particles draw the settled shape once, scramble and

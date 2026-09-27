@@ -12,7 +12,7 @@
  * Colours come from --pm-* custom properties (style.css), so both themes are covered.
  */
 
-import { createMorph, INK } from './particle-morph.js?v=5';
+import { createMorph, INK } from './particle-morph.js?v=8';
 
 const SERIF = "'Playfair Display', Georgia, 'Times New Roman', serif";
 const MONO = "'JetBrains Mono', 'Fira Code', Consolas, monospace";

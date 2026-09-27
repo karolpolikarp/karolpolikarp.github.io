@@ -226,6 +226,7 @@ class Morph {
         /** @type {GlobalCompositeOperation} */ this.blend = 'lighter';
         this.alpha = 0.62;
         this.dustAlpha = 0.2;
+        this.sizeMul = 1;
 
         this.readTheme();
         this.layout();
@@ -309,12 +310,17 @@ class Morph {
 
     readTheme() {
         const cs = getComputedStyle(this.canvas);
-        this.colors = this.o.colorVars.map(v => cs.getPropertyValue(v).trim() || 'currentColor');
-        this.dustColor = this.o.dustVar ? (cs.getPropertyValue(this.o.dustVar).trim() || this.colors[0]) : this.colors[0];
+        // computed custom properties already have their var() chains substituted, so the value is a
+        // plain colour the canvas understands (don't round-trip through `color`: the site's
+        // reduced-motion rule gives every element a tiny transition, which would return the old colour)
+        const read = (/** @type {string} */ prop) => cs.getPropertyValue(prop).trim();
+        this.colors = this.o.colorVars.map(v => read(v) || 'currentColor');
+        this.dustColor = (this.o.dustVar && read(this.o.dustVar)) || this.colors[0];
         const blend = cs.getPropertyValue('--pm-blend').trim();
         this.blend = /** @type {GlobalCompositeOperation} */ (blend === 'source-over' ? 'source-over' : 'lighter');
         this.alpha = parseFloat(cs.getPropertyValue('--pm-alpha')) || 0.62;
         this.dustAlpha = parseFloat(cs.getPropertyValue('--pm-dust-alpha')) || 0.2;
+        this.sizeMul = parseFloat(cs.getPropertyValue('--pm-size')) || 1;   // bigger dots read better on light backgrounds
     }
 
     /** Re-arms a one-shot listener for the current devicePixelRatio. */
@@ -494,7 +500,8 @@ class Morph {
 
     /** @param {number} dt @param {boolean} [still] */
     render(dt, still = false) {
-        const { ctx, cw, ch, dpr, scale: s, ox, oy, size } = this;
+        const { ctx, cw, ch, dpr, scale: s, ox, oy } = this;
+        const size = this.size * this.sizeMul;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         if (still) {
             ctx.clearRect(0, 0, cw, ch);
@@ -504,7 +511,9 @@ class Morph {
             ctx.fillStyle = `rgba(0,0,0,${1 - Math.pow(this.o.trail ?? 0.76, Math.min(3, dt * 60))})`;
             ctx.fillRect(0, 0, cw, ch);
         }
-        ctx.globalCompositeOperation = this.blend;
+        // a still frame (reduced motion, resize) has no trail build-up to glow with: plain
+        // painting keeps the true colours instead of summing dense particles into white
+        ctx.globalCompositeOperation = still ? 'source-over' : this.blend;
         // Trails accumulate once per frame, so at 120/144 Hz the same alpha would glow 2-3x brighter
         // than at 60 Hz. Scale each frame's contribution by its share of a 60 Hz frame's erase.
         const trail = this.o.trail ?? 0.76;
