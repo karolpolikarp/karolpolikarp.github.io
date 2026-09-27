@@ -134,69 +134,89 @@ function heroObstacles(hero) {
 }
 
 /**
- * Finds the biggest free spot for the final sign. Prefers "§" and "{ }" in two separate empty areas
- * (the side margins of wide screens); otherwise both side by side in one empty area (e.g. under the
- * buttons, or next to the greeting). Returns null when nothing reasonably big fits.
+ * Finds a free spot for the final sign. Prefers the two side margins of wide screens — "§" and "{ }"
+ * mirrored: the same distance from the left and the right edge, "{ }" centred in its margin with room
+ * to breathe — as long as the sign is big enough there; otherwise both side by side in one shared
+ * empty area (under the buttons, next to the greeting). Returns null when nothing reasonably big fits.
  * @param {number} cw @param {number} ch @param {number} top  first usable y (below the fixed nav)
  * @param {number[][]} obstacles
  * @returns {{ xp: number, xt: number, y: number, size: number } | null}
  */
 function freeSpot(cw, ch, top, obstacles) {
     const E = signExtents();
-    const pad = 22;     // clearance around text and controls
-    const edge = 14;    // clearance from the canvas edges
+    const pad = 22;      // clearance around text and controls
+    const edge = 14;     // clearance from the canvas edges
+    const breathe = 0.15; // "{ }" keeps at least this share of its margin free on each side
     const sMax = Math.min(ch * 0.55, 480);
     const sMin = 96;
-    for (let s = sMax; s >= sMin; s *= 0.94) {
-        const up = Math.max(E.para.t, E.code.t) * s;
-        const down = Math.max(E.para.b, E.code.b) * s;
+    const sMargins = 120;  // smallest sign worth splitting into the margins (depends only on the columns,
+                           // so PL and EN always agree)
+
+    /**
+     * Largest size (then closest to the middle of the hero) at which `place` finds room.
+     * @param {(free: number[][], s: number) => { xp: number, xt: number } | null} place
+     */
+    const search = place => {
+        // a fixed ladder of sizes (not one starting at sMax), so a slightly taller or shorter hero
+        // (another language) cannot tip a size over the threshold
+        for (let s = 480; s >= sMin; s *= 0.94) {
+            if (s > sMax) continue;
+            const up = Math.max(E.para.t, E.code.t) * s;
+            const down = Math.max(E.para.b, E.code.b) * s;
+            /** @type {{ xp: number, xt: number, y: number, size: number } | null} */
+            let best = null;
+            let bestScore = Infinity;
+            for (let y = top + pad + up; y + down + edge <= ch; y += 6) {
+                const y0 = y - up - pad;
+                const y1 = y + down + pad;
+                const spans = obstacles.filter(o => o[1] < y1 && o[3] > y0).map(o => [o[0] - pad, o[2] + pad]).sort((a, b) => a[0] - b[0]);
+                /** @type {number[][]} */
+                const free = [];
+                let x = edge;
+                for (const [a, b] of spans) {
+                    if (a > x) free.push([x, a]);
+                    x = Math.max(x, b);
+                }
+                if (cw - edge > x) free.push([x, cw - edge]);
+                const spot = place(free, s);
+                const score = Math.abs(y - (top + ch) / 2);
+                if (spot && score < bestScore) {
+                    bestScore = score;
+                    best = { ...spot, y, size: s };
+                }
+            }
+            if (best) return best;
+        }
+        return null;
+    };
+
+    // the side margins: empty areas touching the left and the right edge
+    const margins = search((free, s) => {
+        const left = free[0];
+        const right = free[free.length - 1];
+        if (!left || left === right || left[0] !== edge || right[1] !== cw - edge) return null;
+        const mL = left[1] + pad;            // left edge -> content
+        const mR = cw - (right[0] - pad);    // timeline -> right edge
+        const wp = (E.para.l + E.para.r) * s;
+        const wc = (E.code.l + E.code.r) * s;
+        const g = (mR - wc) / 2;             // "{ }" centred in its margin: g on both sides
+        if (g < breathe * mR || g + wp + pad > mL) return null;
+        // mirrored: the ink of "§" starts g from the left edge, the ink of "{ }" ends g from the right one
+        return { xp: g + E.para.l * s, xt: cw - g - E.code.r * s };
+    });
+
+    // one shared area, the pair centred in it
+    const shared = search((free, s) => {
         const wp = (E.para.l + E.para.r) * s;
         const wc = (E.code.l + E.code.r) * s;
         const gap = 0.5 * s;
-        /** @type {{ xp: number, xt: number, y: number, size: number, split: boolean } | null} */
-        let best = null;
-        let bestScore = Infinity;
-        for (let y = top + pad + up; y + down + edge <= ch; y += 6) {
-            const y0 = y - up - pad;
-            const y1 = y + down + pad;
-            const spans = obstacles.filter(o => o[1] < y1 && o[3] > y0).map(o => [o[0] - pad, o[2] + pad]).sort((a, b) => a[0] - b[0]);
-            /** @type {number[][]} */
-            const free = [];
-            let x = edge;
-            for (const [a, b] of spans) {
-                if (a > x) free.push([x, a]);
-                x = Math.max(x, b);
-            }
-            if (cw - edge > x) free.push([x, cw - edge]);
-            // centre of a box with ink extents (l, r) inside [a, b]
-            const mid = (/** @type {number[]} */ iv, /** @type {Ext} */ ex) => (iv[0] + iv[1]) / 2 + ((ex.l - ex.r) * s) / 2;
-            /** @type {{ xp: number, xt: number, split: boolean } | null} */
-            let spot = null;
-            // the two side margins: empty areas touching the left and right edge, each snug around its
-            // glyph (a margin, not half of a wide empty band)
-            const fits = (/** @type {number[] | undefined} */ iv, /** @type {number} */ w) => !!iv && iv[1] - iv[0] >= w && iv[1] - iv[0] <= w * 3.2;
-            const left = free[0]?.[0] === edge ? free[0] : undefined;
-            const right = free.at(-1)?.[1] === cw - edge ? free.at(-1) : undefined;
-            if (left && right && left !== right && fits(left, wp) && fits(right, wc)) {
-                spot = { xp: mid(left, E.para), xt: mid(right, E.code), split: true };
-            } else {
-                const one = free.find(iv => iv[1] - iv[0] >= wp + gap + wc);
-                if (one) {
-                    const x0 = (one[0] + one[1] - (wp + gap + wc)) / 2;   // the pair, centred in the area
-                    spot = { xp: x0 + E.para.l * s, xt: x0 + wp + gap + E.code.l * s, split: false };
-                }
-            }
-            if (!spot) continue;
-            // separate margins beat a shared area; then stay close to the middle of the hero
-            const score = (spot.split ? 0 : 1e6) + Math.abs(y - (top + ch) / 2);
-            if (score < bestScore) {
-                bestScore = score;
-                best = { ...spot, y, size: s };
-            }
-        }
-        if (best) return best;
-    }
-    return null;
+        const one = free.find(iv => iv[1] - iv[0] >= wp + gap + wc);
+        if (!one) return null;
+        const x0 = (one[0] + one[1] - (wp + gap + wc)) / 2;
+        return { xp: x0 + E.para.l * s, xt: x0 + wp + gap + E.code.l * s };
+    });
+
+    return margins && (margins.size >= sMargins || !shared) ? margins : shared;
 }
 
 /**

@@ -1293,7 +1293,7 @@ ScrollProgress.init();
 // Fetched only after the page has loaded, so they never compete with the first paint.
 // ================================================
 window.addEventListener('load', () => {
-    import('./particles.js?v=16').catch(() => {
+    import('./particles.js?v=19').catch(() => {
         // decoration only — the page is complete without it
     });
 }, { once: true });
