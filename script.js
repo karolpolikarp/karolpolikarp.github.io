@@ -1110,22 +1110,12 @@ const TechHighlighter = {
 TechHighlighter.init();
 
 // ================================================
-// NUMBER SCRAMBLE — key project numbers roll through §¶{}<>/01# before settling.
-// A number is wrapped only while it rolls (~1 s): screen readers read the real value from a
-// visually hidden copy, and once the animation ends the wrapper is replaced by plain text again,
-// so find-in-page and copying never see the value twice.
+// NUMBER SCRAMBLE — key project numbers (marked <span class="scramble-num"> in the HTML, both
+// languages) roll through §¶{}<>/01# before settling. The real number never moves or changes:
+// it only turns transparent while the rolling glyphs are painted over it from a CSS ::after
+// (attr(data-roll)), so layout, screen readers, find-in-page and copying all keep the real value.
 // ================================================
 const NumberScramble = {
-    // number + the words right after it, in PL and EN — only these facts animate
-    patterns: [
-        /\b41(?= (?:kanałów|channels))/g,
-        /\b59(?= (?:kanałów RSS|RSS feeds))/g,
-        /\b2[,.]06(?= USD)/g,
-        /~15[  ,]000(?= (?:polskich aktów|Polish statutes))/g,
-        /~129(?= (?:procedur|procedures))/g,
-        /\b99[,.]6%/g
-    ],
-    selector: '.showcase-list li, .tools-card p',
     chars: '§¶{}<>/01#',
 
     init() {
@@ -1134,83 +1124,35 @@ const NumberScramble = {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
                 this.io.unobserve(entry.target);
-                this.wrap(entry.target).forEach(vis => this.play(vis));
+                this.play(entry.target);
             });
         }, { threshold: 0.6 });
         this.observe();
-        // setLanguage rewrites the text nodes, so the new language rolls in again
+        // setLanguage rebuilds the markup, so the new language rolls in again
         document.addEventListener('languagechange', () => this.observe());
     },
 
-    // watch every element that holds one of the numbers
     observe() {
-        document.querySelectorAll(this.selector).forEach(el => {
-            const text = el.textContent;
-            if (this.patterns.some(re => { re.lastIndex = 0; return re.test(text); })) this.io.observe(el);
-        });
+        this.io.disconnect();
+        document.querySelectorAll('.scramble-num').forEach(el => this.io.observe(el));
     },
 
-    wrap(el) {
-        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
-        const nodes = [];
-        for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
-        const out = [];
-        nodes.forEach(node => this.wrapNode(node, out));
-        return out;
-    },
-
-    wrapNode(node, out) {
-        if (node.parentElement.closest('.scramble')) return;
-        const text = node.nodeValue;
-        const hits = [];
-        this.patterns.forEach(re => {
-            re.lastIndex = 0;
-            for (let m = re.exec(text); m; m = re.exec(text)) hits.push([m.index, m[0]]);
-        });
-        if (!hits.length) return;
-        hits.sort((a, b) => a[0] - b[0]);
-        const frag = document.createDocumentFragment();
-        let last = 0;
-        hits.forEach(([i, str]) => {
-            if (i < last) return;
-            frag.append(text.slice(last, i));
-            const wrapEl = document.createElement('span');
-            wrapEl.className = 'scramble';
-            const sr = document.createElement('span');
-            sr.className = 'sr-only';
-            sr.textContent = str;
-            const vis = document.createElement('span');
-            vis.className = 'scramble-vis';
-            vis.setAttribute('aria-hidden', 'true');
-            vis.textContent = str;
-            wrapEl.append(sr, vis);
-            frag.append(wrapEl);
-            out.push(vis);
-            last = i + str.length;
-        });
-        frag.append(text.slice(last));
-        node.replaceWith(frag);
-    },
-
-    play(vis) {
-        const final = vis.textContent;
-        // lock the box while the glyphs roll, so the line never reflows
-        vis.style.width = vis.getBoundingClientRect().width + 'px';
-        vis.style.whiteSpace = 'nowrap';
-        vis.style.overflow = 'clip';
+    play(el) {
+        const final = el.textContent;
         const start = performance.now();
         const duration = 900;
+        el.classList.add('is-rolling');
         const tick = (now) => {
             const p = Math.min(1, (now - start) / duration);
-            const fixed = Math.floor(p * final.length);
-            vis.textContent = Array.from(final).map((ch, i) =>
-                (i < fixed || /[\s,.~% ]/.test(ch)) ? ch : this.chars[(Math.random() * this.chars.length) | 0]
-            ).join('');
-            if (p < 1) {
+            if (p < 1 && el.isConnected) {
+                const fixed = Math.floor(p * final.length);
+                el.dataset.roll = Array.from(final).map((ch, i) =>
+                    (i < fixed || /[\s,.~%]/.test(ch)) ? ch : this.chars[(Math.random() * this.chars.length) | 0]
+                ).join('');
                 requestAnimationFrame(tick);
             } else {
-                const wrapEl = vis.parentElement;
-                if (wrapEl && wrapEl.isConnected) wrapEl.replaceWith(document.createTextNode(final));
+                el.classList.remove('is-rolling');
+                delete el.dataset.roll;
             }
         };
         requestAnimationFrame(tick);
@@ -1252,7 +1194,7 @@ ScrollProgress.init();
 // Fetched only after the page has loaded, so they never compete with the first paint.
 // ================================================
 window.addEventListener('load', () => {
-    import('./particles.js?v=23').catch(() => {
+    import('./particles.js?v=25').catch(() => {
         // decoration only — the page is complete without it
     });
 }, { once: true });

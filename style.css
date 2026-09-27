@@ -4504,6 +4504,28 @@ section {
     --pm-size: 1;
 }
 
+/* hero without particles (no JS, module or canvas blocked): the soft static glow the floating shapes
+   used to give; it fades out as soon as the particle canvas goes live */
+.hero-bg-decoration::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle 240px at 85% 30%, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent),
+        radial-gradient(circle 170px at 7% 64%, color-mix(in srgb, var(--color-primary) 13%, transparent), transparent),
+        radial-gradient(circle 130px at 68% 70%, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent);
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+}
+
+[data-theme="dark"] .hero-bg-decoration::before {
+    opacity: 0.5;
+}
+
+.hero-bg-decoration:has(> .particles-canvas.is-live)::before {
+    opacity: 0;
+}
+
 .particles-canvas {
     position: absolute;
     inset: 0;
@@ -4596,10 +4618,29 @@ section {
     color: var(--pm-1);
 }
 
-/* number scramble: the rolling copy (screen readers read the .sr-only one) */
-.scramble-vis {
-    display: inline-block;
-    vertical-align: bottom;
+/* number scramble: the real number turns transparent and the rolling glyphs are painted over it,
+   so the line never reflows (script.js sets data-roll; pseudo-content is never copied or found) */
+.scramble-num {
+    white-space: nowrap;
+}
+
+.scramble-num.is-rolling {
+    position: relative;
+    -webkit-text-fill-color: transparent;
+}
+
+/* centred on the glyphs (the pseudo-element's own line box adds half-leading above them) */
+.scramble-num.is-rolling::after {
+    content: attr(data-roll);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-text-fill-color: currentColor;
+    pointer-events: none;
 }
 
 /* scroll progress under the nav (the JS fallback in script.js sets the transform; off with reduced motion) */

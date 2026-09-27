@@ -12,7 +12,7 @@
  * Colours come from --pm-* custom properties (style.css), so both themes are covered.
  */
 
-import { createMorph, INK } from './particle-morph.js?v=13';
+import { createMorph, INK, lineRects } from './particle-morph.js?v=15';
 
 const SERIF = "'Playfair Display', Georgia, 'Times New Roman', serif";
 const MONO = "'JetBrains Mono', 'Fira Code', Consolas, monospace";
@@ -59,6 +59,13 @@ function braced(c, cx, cy, size) {
     glyph(c, '{', cx - size * 0.72, cy);
     glyph(c, '}', cx + size * 0.72, cy);
     section(c, cx, cy, size);
+}
+
+/** Whether the three faces the shapes draw with are loaded (true when there is nothing to load). */
+function fontsLoaded() {
+    return document.fonts.check(`700 100px ${SERIF}`, '§') &&
+        document.fonts.check(`500 100px ${MONO}`, '{}') &&
+        document.fonts.check(`600 100px ${MONO}`, '{}');
 }
 
 /** Resolves once the page (incl. the async font stylesheet) and the glyphs are ready, or after 2.5 s. */
@@ -121,15 +128,8 @@ function heroObstacles(hero) {
     const add = r => {
         if (r.width && r.height) out.push([r.left - base.left, r.top - base.top, r.right - base.left, r.bottom - base.top]);
     };
-    const range = document.createRange();
-    document.querySelectorAll('#hero .hero-greeting, #hero .hero-title, #hero .hero-subtitle').forEach(el => {
-        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-        for (let n = walker.nextNode(); n; n = walker.nextNode()) {
-            if (!(n.nodeValue ?? '').trim()) continue;
-            range.selectNodeContents(n);
-            for (const r of range.getClientRects()) add(r);
-        }
-    });
+    document.querySelectorAll('#hero .hero-greeting, #hero .hero-title, #hero .hero-subtitle')
+        .forEach(el => lineRects(el).forEach(add));
     document.querySelectorAll('#hero .hero-avatar, #hero .greeting-line, #hero .hero-cta a, #hero .hero-visual')
         .forEach(el => add(el.getBoundingClientRect()));
     return out;
@@ -273,20 +273,24 @@ function heroLayout(hero) {
     return { cw, ch, intro, fin, key };
 }
 
+/** The three hero shapes for a layout. @param {ReturnType<typeof heroLayout>} L */
+function heroShapes(L) {
+    return [
+        (/** @type {CanvasRenderingContext2D} */ c) => section(c, L.intro.cx, L.intro.cy, L.intro.big),
+        (/** @type {CanvasRenderingContext2D} */ c) => braced(c, L.intro.cx, L.intro.cy, L.intro.braced),
+        (/** @type {CanvasRenderingContext2D} */ c) => pair(c, L.fin.xp, L.fin.xt, L.fin.y, L.fin.size)
+    ];
+}
+
 /**
  * Hero scene: dust -> "§" -> "{ § }" -> "§ … { }", then a quiet watermark.
  * @param {HTMLCanvasElement} hero @param {ReturnType<typeof heroLayout>} L
- * @param {boolean} settled  start on the final sign (rebuild after a layout change)
  */
-function heroScene(hero, L, settled) {
+function heroScene(hero, L) {
     return createMorph(hero, {
         width: L.cw,          // design space = canvas pixels, so shapes can follow the layout
         height: L.ch,
-        shapes: [
-            c => section(c, L.intro.cx, L.intro.cy, L.intro.big),
-            c => braced(c, L.intro.cx, L.intro.cy, L.intro.braced),
-            c => pair(c, L.fin.xp, L.fin.xt, L.fin.y, L.fin.size)
-        ],
+        shapes: heroShapes(L),
         count: 1500,
         mobileCount: 700,
         dust: 260,
@@ -308,8 +312,7 @@ function heroScene(hero, L, settled) {
         },
         pointerTarget: hero.closest('section') ?? hero,
         repel: { radius: 60 },   // a small dent under the pointer, not a blast (design space = canvas px here)
-        sequence: [{ shape: 0, at: 0 }, { shape: 1, at: 2.2 }, { shape: 2, at: 4.4 }],
-        startSettled: settled
+        sequence: [{ shape: 0, at: 0 }, { shape: 1, at: 2.2 }, { shape: 2, at: 4.4 }]
     });
 }
 
@@ -336,14 +339,25 @@ function finaleScene(finale) {
     });
 }
 
-/** @param {HTMLCanvasElement} hero */
+/**
+ * Runs the hero scene and keeps the sign on its spot: when the layout moves it (resize, rotation,
+ * a longer translation, another tab) the particles flow to the new spot; otherwise only the text
+ * zones are re-read. Returns a function that re-samples everything (web fonts arrived late).
+ * @param {HTMLCanvasElement} hero
+ */
 function initHero(hero) {
     let L = heroLayout(hero);
-    let scene = heroScene(hero, L, false);
-    hero.classList.add('is-live');
+    const scene = heroScene(hero, L);
+    hero.classList.add('is-live');   // style.css: the static fallback decoration fades out
     /** @type {ReturnType<typeof setTimeout> | undefined} */
     let timer;
-    const ro = new ResizeObserver(() => check(300));
+    // a ResizeObserver reports once right after observe(): that is not a change, and re-measuring
+    // then (with the entrance animations of the title and buttons still running) could move the sign
+    let first = true;
+    const ro = new ResizeObserver(() => {
+        if (first) first = false;
+        else check(300);
+    });
     const panels = document.querySelector('#hero .hero-tab-panels');
     const mo = new MutationObserver(() => check(400));   // after the panel slide-in
     const onLang = () => check(50);
@@ -352,33 +366,30 @@ function initHero(hero) {
         ro.disconnect();
         mo.disconnect();
         document.removeEventListener('languagechange', onLang);
+        scene.destroy();
+        hero.classList.remove('is-live');
     };
-    // the sign follows the layout: rebuild (already settled) whenever its spot moves — resize,
-    // rotation, a longer translation or another tab; otherwise only re-read the text zones
-    /** @param {number} delay */
-    function check(delay) {
+    /** @param {number} delay @param {boolean} [force]  re-sample even if the spot did not move */
+    function check(delay, force = false) {
         clearTimeout(timer);
         timer = setTimeout(() => {
             try {
                 const next = heroLayout(hero);
-                if (next.key === L.key) {
+                if (next.key === L.key && !force) {
                     scene.refresh();
                     return;
                 }
-                scene.destroy();
                 L = next;
-                scene = heroScene(hero, L, true);
+                scene.reshape({ width: L.cw, height: L.ch, shapes: heroShapes(L) });
             } catch {
-                // the canvas can no longer be read back: drop the effect, keep the page as it is
-                stop();
-                scene.destroy();
-                hero.classList.remove('is-live');
+                stop();   // the canvas can no longer be read back: drop the effect, keep the page as it is
             }
         }, delay);
     }
     ro.observe(hero);
     if (panels) mo.observe(panels, { subtree: true, attributes: true, attributeFilter: ['class'] });
     document.addEventListener('languagechange', onLang);
+    return () => check(0, true);
 }
 
 async function init() {
@@ -388,20 +399,39 @@ async function init() {
     await fontsReady();
 
     idle(() => {
+        /** @type {(() => void)[]} */
+        const onFonts = [];
         // createMorph throws when the canvas can't be read back (anti-fingerprinting); the page
-        // then simply keeps its static look — the contact formula fallback stays visible
+        // then simply keeps its static look — the hero decoration and the contact formula stay
         try {
-            if (hero) initHero(hero);
+            if (hero) onFonts.push(initHero(hero));
         } catch {
             hero?.classList.remove('is-live');
         }
         try {
             if (finale) {
-                finaleScene(finale);
+                const scene = finaleScene(finale);
                 finale.parentElement?.classList.add('is-live');
+                onFonts.push(() => {
+                    try {
+                        scene.reshape({});
+                    } catch {
+                        scene.destroy();
+                        finale.parentElement?.classList.remove('is-live');
+                    }
+                });
             }
         } catch {
             finale?.parentElement?.classList.remove('is-live');
+        }
+        // the fonts gave up waiting: once they do arrive, re-sample the glyphs and re-place the sign
+        if (!fontsLoaded() && onFonts.length) {
+            const done = () => {
+                if (!fontsLoaded()) return;
+                document.fonts.removeEventListener('loadingdone', done);
+                onFonts.forEach(fn => fn());
+            };
+            document.fonts.addEventListener('loadingdone', done);
         }
     });
 }
