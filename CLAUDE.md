@@ -32,9 +32,11 @@ npx serve
 
 ```
 /
-├── index.html      # Main HTML (~825 lines) - All page content and structure
-├── style.css       # Styles (~3650 lines) - Complete design system
-├── script.js       # JavaScript (~1115 lines) - Interactive functionality
+├── index.html      # Main HTML (~1550 lines) - All page content and structure
+├── style.css       # Styles (~4800 lines) - Complete design system
+├── script.js       # JavaScript (~1280 lines) - Interactive functionality
+├── particle-morph.js # Particle morphing engine (ES module, // @ts-check) - see "Animations"
+├── particles.js    # The hero + contact particle scenes (ES module, loaded after page load)
 ├── 404.html        # Custom 404 page (Polish)
 ├── robots.txt      # Search engine crawl rules
 ├── sitemap.xml     # XML sitemap for SEO
@@ -66,19 +68,51 @@ npx serve
 ### script.js
 Contains modular components (in order):
 1. **ThemeManager** - Dark/light mode with localStorage persistence
-2. **ParallaxEffect** - Floating background shapes (desktop only)
-3. **Mobile Navigation** - Hamburger menu toggle
-4. **Smooth Scroll** - Anchor link behavior
-5. **Counter Animation** - Animated statistics with requestAnimationFrame
-6. **ScrollAnimations** - IntersectionObserver-based reveals
-7. **MagneticButtons** - Interactive hover effects (desktop only)
-8. **Navbar Scroll Effect** - Adds `.nav-scrolled` class at 100px scroll
-9. **Windows 95 Clock** - Footer time display
-10. **LanguageManager** - Live PL/EN toggle via `data-en` / `data-en-html` attributes
-11. **HeroTabs** - Experience / Education / Skills tab panels (keyboard-navigable)
-12. **ProjectShowcase** - Projects carousel (tabs, dots, autoplay w/ pause, swipe)
-13. **EmailProtection** - Anti-scraper email obfuscation
-14. **cats easter egg** - `window.cats.show()` + Konami code
+2. **Mobile Navigation** - Hamburger menu toggle
+3. **Smooth Scroll** - Anchor link behavior
+4. **ScrollAnimations** - IntersectionObserver-based reveals
+5. **MagneticButtons** - Interactive hover effects (desktop only)
+6. **Navbar Scroll Effect** - Adds `.nav-scrolled` class at 100px scroll
+7. **Windows 95 Clock** - Footer time display
+8. **LanguageManager** - Live PL/EN toggle via `data-en` / `data-en-html` attributes
+9. **HeroTabs** - Experience / Education / Skills tab panels (keyboard-navigable)
+10. **ProjectShowcase** - Projects carousel (tabs, dots, autoplay w/ pause, swipe)
+11. **EmailProtection** - Anti-scraper email obfuscation
+12. **cats easter egg** - `window.cats.show()` + Konami code
+13. **NumberScramble** - Numbers marked `<span class="scramble-num">` in the HTML (PL and `data-en-html`) roll
+    through `§¶{}<>/01#` when scrolled into view (painted over the real number from a CSS `::after`)
+14. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
+15. **Particles loader** - `import('./particles.js')` after the `load` event
+
+## Animations („Od paragrafu do parametru”)
+
+Decorative layer added on top of the existing design (nothing else in the layout changes):
+- **Hero particles** (`#heroParticles` inside `.hero-bg-decoration`): dust gathers into `§`, then `{ § }`,
+  then settles as `§` on the left and `{ }` on the right (serif = law, mono = code). `freeSpot()` in `particles.js`
+  searches the measured layout (text lines, photo, buttons, the whole timeline column) for the biggest empty spot:
+  the two side margins on wide screens (`§` centred between the left edge and the text, `{ }` centred between the
+  timeline and the right edge; every glyph is drawn centred on its ink, so `§` and the braces line up), otherwise one empty area (under the buttons, next to the greeting); on
+  phones the sign sits behind the name. When the layout moves that spot (resize, language, tab), `reshape()`
+  lets the particles flow there. Then it recedes into a quiet watermark and freezes once idle (12 s with a
+  mouse, 6 s on touch; the pointer wakes it); the pointer repels particles.
+- **Contact finale** (`.contact-finale` + `#finaleParticles`): `§` splits into `§ … { }` when scrolled into view,
+  above the motto „Od paragrafu do parametru.” (`data-en-html`: one serif, „paragrafu” in the colour of `§`,
+  „parametru” in the colour of `{ }`). A static HTML formula is the no-JS fallback.
+- **Number scramble**, **scroll progress bar**, **hero-tab timeline drawing** (CSS on
+  `.hero-tab-panel.active`), **scroll-driven reveal** (`animation-timeline: view()` inside `@supports`).
+- Particle colours come from `--pm-0/1`, `--pm-dust`, `--pm-blend`, `--pm-alpha`, `--pm-size` (both themes, `style.css`).
+  Light theme: deep inks (`--color-primary`, `--pm-gold-deep`), opaque `source-over`, 1.3x dots; dark theme: additive glow.
+  The light hero also gets the warm glow the dark hero has (`[data-theme="light"] .hero`).
+- Engine: one shared `requestAnimationFrame` loop for all canvases, pauses off-screen and in hidden tabs,
+  freezes once settled and idle (12 s with a mouse, 6 s on touch; the pointer wakes it), `devicePixelRatio`
+  capped, mobile particle counts at the site breakpoint (768px). Shapes are sampled after the fonts load;
+  `reshape()` re-samples them when the hero layout moves the sign (or late fonts arrive) and the particles
+  flow to the new spot. Without particles the hero keeps a soft static glow (`.hero-bg-decoration::before`).
+- **Every effect honours `prefers-reduced-motion`**: particles draw the settled shape once, scramble and
+  the scroll progress bar are off, CSS animations are wrapped in `prefers-reduced-motion: no-preference`.
+- Typecheck/lint the modules with `deno check particle-morph.js particles.js` and `deno lint` (no config needed).
+- When changing `particle-morph.js`, bump the `?v=` in its import inside `particles.js`; when changing
+  `particles.js`, bump the `?v=` in the loader at the end of `script.js`.
 
 ## Coding Conventions
 
@@ -97,9 +131,11 @@ Contains modular components (in order):
 
 ### JavaScript
 - Vanilla ES6+ only - no frameworks or libraries
-- Module pattern with object literals (e.g., `const ThemeManager = { ... }`)
+- Module pattern with object literals (e.g., `const ThemeManager = { ... }`); exception: the particle engine
+  (`particle-morph.js`) is an ES module with a class, because one page runs several instances
 - Use `addEventListener` for event binding
-- Desktop-only features check for touch: `'ontouchstart' in window`
+- Desktop-only (mouse) features: new code checks `matchMedia('(hover: hover) and (pointer: fine)')` (a touch
+  laptop with a mouse counts as desktop); older modules still use `'ontouchstart' in window` / width checks
 - Use `requestAnimationFrame` for animations
 - Use `IntersectionObserver` for scroll-triggered effects
 
@@ -196,3 +232,4 @@ Preserve these features when making changes.
 - Images should be optimized before adding (current total ~12MB)
 - Use `loading="lazy"` on images below the fold
 - IntersectionObserver used for efficient scroll animations
+- Particle modules are fetched only after the `load` event, so they never compete with the first paint

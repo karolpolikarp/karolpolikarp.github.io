@@ -159,10 +159,6 @@
     background: radial-gradient(circle, rgba(0, 140, 70, 0.1) 0%, transparent 70%);
 }
 
-[data-theme="dark"] .floating-shape {
-    opacity: 0.3;
-}
-
 [data-theme="dark"] .gradient-blob {
     opacity: 0.2;
     mix-blend-mode: screen;
@@ -734,59 +730,6 @@ section {
     overflow: hidden;
     pointer-events: none;
     z-index: 0;
-}
-
-.floating-shape {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.6;
-    will-change: transform;
-}
-
-.shape-1 {
-    width: 300px;
-    height: 300px;
-    background: rgba(201, 169, 98, 0.16);
-    top: 20%;
-    right: 10%;
-    animation: floatShape1 15s ease-in-out infinite;
-}
-
-.shape-2 {
-    width: 200px;
-    height: 200px;
-    background: rgba(0, 77, 43, 0.14);
-    bottom: 30%;
-    left: 5%;
-    animation: floatShape2 12s ease-in-out infinite;
-}
-
-.shape-3 {
-    width: 150px;
-    height: 150px;
-    background: rgba(201, 169, 98, 0.12);
-    top: 60%;
-    right: 30%;
-    animation: floatShape3 18s ease-in-out infinite;
-}
-
-@keyframes floatShape1 {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(-30px, 20px) rotate(5deg); }
-    50% { transform: translate(20px, -30px) rotate(-5deg); }
-    75% { transform: translate(-20px, -20px) rotate(3deg); }
-}
-
-@keyframes floatShape2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(40px, -20px) scale(1.1); }
-    66% { transform: translate(-30px, 30px) scale(0.9); }
-}
-
-@keyframes floatShape3 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(50px, 30px); }
 }
 
 /* ================================================
@@ -3551,10 +3494,6 @@ section {
     border-color: var(--color-primary);
 }
 
-.floating-shape.parallax {
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
 /* ================================================
    BLOG SECTION
    ================================================ */
@@ -3745,7 +3684,6 @@ section {
         scroll-behavior: auto !important;
     }
 
-    .floating-shape,
     .gradient-blob,
     .hero::before,
     .positions::before,
@@ -3764,12 +3702,7 @@ section {
         animation: none !important;
     }
 
-    .parallax {
-        transform: none !important;
-    }
-
     .gradient-blob,
-    .floating-shape,
     .neural-line,
     .positions::before,
     .logo-main {
@@ -3791,8 +3724,7 @@ section {
    ================================================ */
 @media (prefers-reduced-motion: no-preference) {
     /* GPU-promote only when animations are allowed */
-    .gradient-blob,
-    .floating-shape {
+    .gradient-blob {
         transform: translateZ(0);
     }
 }
@@ -4541,3 +4473,283 @@ section {
     }
 }
 
+/* ================================================
+   ANIMATIONS — particles, number scramble, scroll progress,
+   timeline drawing, scroll-driven reveal. All decorative; every effect has a
+   prefers-reduced-motion fallback (particles then draw the settled shape once).
+   ================================================ */
+
+/* Particle palette (read by particle-morph.js from the canvas): index 0 = § (law),
+   1 = { } (code); light theme draws opaque, dark theme glows. */
+:root {
+    /* light theme: deep, fully saturated inks (pale greens/golds vanish on cream),
+       drawn opaque and a little bigger */
+    --pm-gold-deep: #94702c;
+    --pm-0: var(--color-primary);
+    --pm-1: var(--pm-gold-deep);
+    --pm-dust: var(--color-accent-dark);
+    --pm-blend: source-over;
+    --pm-alpha: 0.85;
+    --pm-dust-alpha: 0.45;
+    --pm-size: 1.3;
+}
+
+[data-theme="dark"] {
+    --pm-0: var(--color-accent);
+    --pm-1: var(--color-primary-on-dark);
+    --pm-dust: var(--color-accent);
+    --pm-blend: lighter;
+    --pm-alpha: 0.62;
+    --pm-dust-alpha: 0.22;
+    --pm-size: 1;
+}
+
+/* hero without particles (no JS, module or canvas blocked): the soft static glow the floating shapes
+   used to give; it fades out as soon as the particle canvas goes live */
+.hero-bg-decoration::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle 240px at 85% 30%, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent),
+        radial-gradient(circle 170px at 7% 64%, color-mix(in srgb, var(--color-primary) 13%, transparent), transparent),
+        radial-gradient(circle 130px at 68% 70%, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent);
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+}
+
+[data-theme="dark"] .hero-bg-decoration::before {
+    opacity: 0.5;
+}
+
+.hero-bg-decoration:has(> .particles-canvas.is-live)::before {
+    opacity: 0;
+}
+
+.particles-canvas {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* hero: a watermark behind the text and tabs, quieter than the contact finale */
+#heroParticles {
+    --pm-alpha: 0.8;
+}
+
+[data-theme="dark"] #heroParticles {
+    --pm-alpha: 0.62;
+}
+
+/* the finale glows, but stays gold instead of burning out to white */
+[data-theme="dark"] #finaleParticles {
+    --pm-alpha: 0.72;
+}
+
+#finaleParticles {
+    --pm-alpha: 0.95;
+}
+
+/* light theme hero: the warm glow the dark theme already has, so the scene sits on some depth */
+[data-theme="light"] .hero {
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 18%, var(--color-accent-subtle), transparent 60%),
+        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+}
+
+/* contact finale: particles split into "§ … { }" above the tiles */
+.contact-finale {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+    aspect-ratio: 1600 / 560;
+}
+
+.contact-finale-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.1em;
+    font-size: clamp(3rem, 1.5rem + 9vw, 8.5rem);
+    line-height: 1;
+}
+
+.contact-finale.is-live .contact-finale-fallback {
+    visibility: hidden;
+}
+
+.formula-para {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--pm-0);
+}
+
+.formula-code {
+    word-spacing: 0.35em;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--pm-1);
+}
+
+/* the motto: the key words in the colours of "§" and "{ }" above */
+.contact-motto {
+    margin: var(--space-sm) auto var(--space-2xl);
+    padding: 0 var(--space-md);
+    text-align: center;
+    text-wrap: balance;
+    font-family: var(--font-serif);
+    font-size: clamp(1.7rem, 1.1rem + 2.4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    color: var(--color-text);
+}
+
+.motto-law {
+    color: var(--pm-0);
+}
+
+.motto-code {
+    color: var(--pm-1);
+}
+
+/* number scramble: the real number turns transparent and the rolling glyphs are painted over it,
+   so the line never reflows (script.js sets data-roll; pseudo-content is never copied or found) */
+.scramble-num {
+    white-space: nowrap;
+}
+
+.scramble-num.is-rolling {
+    position: relative;
+    -webkit-text-fill-color: transparent;
+}
+
+/* centred on the glyphs (the pseudo-element's own line box adds half-leading above them) */
+.scramble-num.is-rolling::after {
+    content: attr(data-roll);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-text-fill-color: currentColor;
+    pointer-events: none;
+}
+
+/* scroll progress under the nav (the JS fallback in script.js sets the transform; off with reduced motion) */
+.scroll-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    pointer-events: none;
+}
+
+.scroll-progress-bar {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+[data-theme="dark"] .scroll-progress-bar {
+    background: linear-gradient(90deg, var(--color-primary-on-dark), var(--color-accent));
+}
+
+@supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .scroll-progress-bar {
+            animation: scrollProgress linear both;
+            animation-timeline: scroll(root block);
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-progress {
+        display: none;
+    }
+}
+
+@keyframes scrollProgress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* hero tabs: the timeline line draws itself and the entries follow when a tab opens */
+.employment-list li:nth-child(1), .education-list li:nth-child(1) { --tl-i: 0; }
+.employment-list li:nth-child(2), .education-list li:nth-child(2) { --tl-i: 1; }
+.employment-list li:nth-child(3), .education-list li:nth-child(3) { --tl-i: 2; }
+.employment-list li:nth-child(4), .education-list li:nth-child(4) { --tl-i: 3; }
+.employment-list li:nth-child(5), .education-list li:nth-child(5) { --tl-i: 4; }
+.employment-list li:nth-child(6), .education-list li:nth-child(6) { --tl-i: 5; }
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero-tab-panel.active .employment-list::before,
+    .hero-tab-panel.active .education-list::before {
+        transform-origin: top center;
+        animation: timelineDraw 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    .hero-tab-panel.active .emp-timeline-marker,
+    .hero-tab-panel.active .edu-timeline-marker {
+        animation: timelineMarker 0.4s ease-out both;
+        animation-delay: calc(var(--tl-i, 0) * 120ms + 180ms);
+    }
+
+    .hero-tab-panel.active .employment-list .emp-content {
+        animation: timelineItem 0.45s ease-out both;
+        animation-delay: calc(var(--tl-i, 0) * 120ms + 120ms);
+    }
+}
+
+@keyframes timelineDraw {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+@keyframes timelineMarker {
+    0% { transform: scale(0); }
+    70% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+@keyframes timelineItem {
+    from { opacity: 0; translate: -10px 0; }
+    to { opacity: 1; translate: 0 0; }
+}
+
+/* SCROLL-DRIVEN REVEAL: sections slide in with the scroll position itself
+   (browsers without animation-timeline keep the IntersectionObserver fade in script.js) */
+@supports (animation-timeline: view()) {
+    @media screen and (prefers-reduced-motion: no-preference) {
+        .section-header,
+        .apps-heading,
+        .tools-heading,
+        .ds-heading,
+        .tools-card,
+        .ds-tile,
+        .contact-finale,
+        .contact-motto,
+        .contact-tile {
+            animation: scrollReveal linear both;
+            animation-timeline: view();
+            /* ends once 60% of the element has entered, so even the last tiles at the page bottom finish */
+            animation-range: entry 0% entry 60%;
+        }
+    }
+}
+
+@keyframes scrollReveal {
+    from { opacity: 0; translate: 0 36px; }
+    to { opacity: 1; translate: 0 0; }
+}

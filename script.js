@@ -203,59 +203,6 @@ LanguageManager.init();
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ================================================
-// PARALLAX EFFECT (with requestAnimationFrame throttling)
-// ================================================
-const ParallaxEffect = {
-    shapes: document.querySelectorAll('.floating-shape.parallax'),
-    mouseX: 0,
-    mouseY: 0,
-    scrollY: 0,
-    rafId: null,
-    needsUpdate: false,
-
-    init() {
-        if (window.innerWidth <= 768 || prefersReducedMotion) return;
-
-        document.addEventListener('mousemove', (e) => this.handleMouseMove(e), { passive: true });
-        window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
-    },
-
-    handleMouseMove(e) {
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-        this.mouseX = e.clientX - centerX;
-        this.mouseY = e.clientY - centerY;
-        this.scheduleUpdate();
-    },
-
-    handleScroll() {
-        this.scrollY = window.pageYOffset;
-        this.scheduleUpdate();
-    },
-
-    scheduleUpdate() {
-        if (this.needsUpdate) return;
-        this.needsUpdate = true;
-        this.rafId = requestAnimationFrame(() => {
-            this.updateTransforms();
-            this.needsUpdate = false;
-        });
-    },
-
-    updateTransforms() {
-        this.shapes.forEach(shape => {
-            const speed = parseFloat(shape.dataset.speed) || 0.05;
-            const mouseOffsetX = this.mouseX * speed;
-            const mouseOffsetY = this.mouseY * speed;
-            const scrollOffset = this.scrollY * speed * 0.5;
-            shape.style.transform = `translate(${mouseOffsetX}px, ${mouseOffsetY + scrollOffset}px)`;
-        });
-    }
-};
-
-ParallaxEffect.init();
-
-// ================================================
 // MOBILE NAVIGATION
 // ================================================
 const navToggle = document.querySelector('.nav-toggle');
@@ -346,8 +293,10 @@ const ScrollAnimations = {
             fadeObserver.observe(el);
         });
 
-        // Section headers animation
-        const sectionHeaders = document.querySelectorAll('.section-header');
+        // Section headers animation — skipped where CSS scroll-driven animations
+        // (animation-timeline: view()) take over, see "SCROLL-DRIVEN REVEAL" in style.css
+        const cssScrollReveal = !prefersReducedMotion && CSS.supports('animation-timeline: view()');
+        const sectionHeaders = cssScrollReveal ? [] : document.querySelectorAll('.section-header');
         const headerObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -657,21 +606,6 @@ const AnimationPauser = {
                     el.style.animationPlayState = document.hidden ? 'paused' : 'running';
                 });
             });
-        }
-
-        // Pause hero decorations when hero is scrolled past
-        const hero = document.querySelector('.hero');
-        const heroDecorations = document.querySelectorAll('.floating-shape, .hero::before');
-        if (hero) {
-            const heroObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    const shapes = hero.querySelectorAll('.floating-shape');
-                    shapes.forEach(shape => {
-                        shape.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
-                    });
-                });
-            }, { threshold: 0 });
-            heroObserver.observe(hero);
         }
 
         // Pause positions glow when not visible
@@ -1174,3 +1108,93 @@ const TechHighlighter = {
 };
 
 TechHighlighter.init();
+
+// ================================================
+// NUMBER SCRAMBLE — key project numbers (marked <span class="scramble-num"> in the HTML, both
+// languages) roll through §¶{}<>/01# before settling. The real number never moves or changes:
+// it only turns transparent while the rolling glyphs are painted over it from a CSS ::after
+// (attr(data-roll)), so layout, screen readers, find-in-page and copying all keep the real value.
+// ================================================
+const NumberScramble = {
+    chars: '§¶{}<>/01#',
+
+    init() {
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
+        this.io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                this.io.unobserve(entry.target);
+                this.play(entry.target);
+            });
+        }, { threshold: 0.6 });
+        this.observe();
+        // setLanguage rebuilds the markup, so the new language rolls in again
+        document.addEventListener('languagechange', () => this.observe());
+    },
+
+    observe() {
+        this.io.disconnect();
+        document.querySelectorAll('.scramble-num').forEach(el => this.io.observe(el));
+    },
+
+    play(el) {
+        const final = el.textContent;
+        const start = performance.now();
+        const duration = 900;
+        el.classList.add('is-rolling');
+        const tick = (now) => {
+            const p = Math.min(1, (now - start) / duration);
+            if (p < 1 && el.isConnected) {
+                const fixed = Math.floor(p * final.length);
+                el.dataset.roll = Array.from(final).map((ch, i) =>
+                    (i < fixed || /[\s,.~%]/.test(ch)) ? ch : this.chars[(Math.random() * this.chars.length) | 0]
+                ).join('');
+                requestAnimationFrame(tick);
+            } else {
+                el.classList.remove('is-rolling');
+                delete el.dataset.roll;
+            }
+        };
+        requestAnimationFrame(tick);
+    }
+};
+
+NumberScramble.init();
+
+// ================================================
+// SCROLL PROGRESS — thin gold bar under the nav. CSS drives it with
+// animation-timeline: scroll() where supported; this is the fallback.
+// Hidden with prefers-reduced-motion (style.css), so nothing to do then.
+// ================================================
+const ScrollProgress = {
+    init() {
+        const bar = document.querySelector('.scroll-progress-bar');
+        if (!bar || prefersReducedMotion || CSS.supports('animation-timeline: scroll()')) return;
+        let ticking = false;
+        const update = () => {
+            ticking = false;
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
+        };
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        }, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+    }
+};
+
+ScrollProgress.init();
+
+// ================================================
+// PARTICLES — hero and contact scenes (particles.js + particle-morph.js).
+// Fetched only after the page has loaded, so they never compete with the first paint.
+// ================================================
+window.addEventListener('load', () => {
+    import('./particles.js?v=25').catch(() => {
+        // decoration only — the page is complete without it
+    });
+}, { once: true });
