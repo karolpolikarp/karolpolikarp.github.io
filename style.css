@@ -4574,103 +4574,26 @@ section {
     color: var(--pm-1);
 }
 
-/* the motto: law in the serif of "§", code in the mono of "{ }", in the particles' colours */
+/* the motto: the key words in the colours of "§" and "{ }" above */
 .contact-motto {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(0.75rem, 2vw, 1.5rem);
     margin: var(--space-sm) auto var(--space-2xl);
     padding: 0 var(--space-md);
-    font-family: var(--font-serif);
-    font-size: clamp(1.6rem, 1.05rem + 2.3vw, 2.9rem);
-    font-weight: 400;
-    line-height: 1.3;
     text-align: center;
-    color: var(--color-text-secondary);
-}
-
-/* thin gold rules on both sides, like the line before the hero greeting */
-.contact-motto::before,
-.contact-motto::after {
-    content: '';
-    flex: 0 1 80px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-accent));
-}
-
-.contact-motto::after {
-    background: linear-gradient(270deg, transparent, var(--color-accent));
-}
-
-.motto-text {
-    min-width: 0;
+    text-wrap: balance;
+    font-family: var(--font-serif);
+    font-size: clamp(1.7rem, 1.1rem + 2.4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    color: var(--color-text);
 }
 
 .motto-law {
-    font-weight: 700;
     color: var(--pm-0);
-    background: linear-gradient(currentColor, currentColor) no-repeat 0 96% / 100% 0.06em;
 }
 
 .motto-code {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.84em;
-    font-weight: 600;
-    letter-spacing: -0.02em;
     color: var(--pm-1);
-}
-
-[data-theme="dark"] .motto-code {
-    text-shadow: 0 0 22px color-mix(in srgb, var(--pm-1) 45%, transparent);
-}
-
-@media (max-width: 600px) {
-    .contact-motto::before,
-    .contact-motto::after {
-        display: none;
-    }
-}
-
-/* once on screen (script.js adds the classes): the statute gets underlined, the parameter types itself in;
-   without JS or with reduced motion the motto is simply complete */
-@media (prefers-reduced-motion: no-preference) {
-    .contact-motto.is-waiting .motto-law {
-        background-size: 0 0.06em;
-    }
-
-    .contact-motto.is-waiting .motto-code {
-        clip-path: inset(0 100% 0 0);
-    }
-
-    .contact-motto.is-in .motto-law {
-        animation: mottoUnderline 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s backwards;
-    }
-
-    /* "parametru" / "parameter": 9 letters either way; typed while "§" splits into "§ { }" above */
-    .contact-motto.is-in .motto-code {
-        animation: mottoType 0.9s steps(9, end) 1.4s backwards;
-    }
-
-    /* the glow would be clipped into a box while typing, so it lights up afterwards */
-    [data-theme="dark"] .contact-motto.is-in .motto-code {
-        animation: mottoType 0.9s steps(9, end) 1.4s backwards, mottoGlow 0.7s ease-out 2.3s backwards;
-    }
-}
-
-@keyframes mottoUnderline {
-    from { background-size: 0 0.06em; }
-    to { background-size: 100% 0.06em; }
-}
-
-@keyframes mottoType {
-    from { clip-path: inset(0 100% 0 0); }
-    to { clip-path: inset(0 0 0 0); }
-}
-
-@keyframes mottoGlow {
-    from { text-shadow: 0 0 22px transparent; }
 }
 
 /* number scramble: the rolling copy (screen readers read the .sr-only one) */
