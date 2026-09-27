@@ -91,8 +91,8 @@ Decorative layer added on top of the existing design (nothing else in the layout
 - **Hero particles** (`#heroParticles` inside `.hero-bg-decoration`): dust gathers into `§`, then `{ § }`,
   then settles as `§` on the left and `{ }` on the right (serif = law, mono = code). `freeSpot()` in `particles.js`
   searches the measured layout (text lines, photo, buttons, the whole timeline column) for the biggest empty spot:
-  the two side margins on wide screens (mirrored: `§` as far from the left edge as `{ }` from the right one, `{ }`
-  centred in its margin; every glyph is drawn centred on its ink, so `§` and the braces line up), otherwise one empty area (under the buttons, next to the greeting); on
+  the two side margins on wide screens (`§` centred between the left edge and the text, `{ }` centred between the
+  timeline and the right edge; every glyph is drawn centred on its ink, so `§` and the braces line up), otherwise one empty area (under the buttons, next to the greeting); on
   phones the sign sits behind the name. The scene rebuilds, already settled, whenever that spot moves (resize,
   language, tab). Then it recedes into a quiet watermark (full frame rate with a mouse, frozen on touch screens when idle);
   the pointer repels particles.

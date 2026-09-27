@@ -136,9 +136,9 @@ function heroObstacles(hero) {
 }
 
 /**
- * Finds a free spot for the final sign. Prefers the two side margins of wide screens — "§" and "{ }"
- * mirrored: the same distance from the left and the right edge, "{ }" centred in its margin with a
- * little room on both sides — as long as the sign is big enough there; otherwise both side by side in one shared
+ * Finds a free spot for the final sign. Prefers the two side margins of wide screens — "§" centred
+ * between the left edge and the text, "{ }" centred between the timeline and the right edge with a little
+ * room on both sides — as long as the sign is big enough there; otherwise both side by side in one shared
  * empty area (under the buttons, next to the greeting). Returns null when nothing reasonably big fits.
  * @param {number} cw @param {number} ch @param {number} top  first usable y (below the fixed nav)
  * @param {number[][]} obstacles
@@ -227,9 +227,9 @@ function freeSpot(cw, ch, top, obstacles) {
         const wp = (E.para.l + E.para.r) * s;
         const wc = (E.code.l + E.code.r) * s;
         const g = (mR - wc) / 2;             // "{ }" centred in its margin: g on both sides
-        if (g < breathe(mR) || g + wp + pad > mL) return null;
-        // mirrored: the ink of "§" starts g from the left edge, the ink of "{ }" ends g from the right one
-        return { xp: g + E.para.l * s, xt: cw - g - E.code.r * s };
+        const gp = (mL - wp) / 2;            // "§" centred in its margin: gp on both sides
+        if (g < breathe(mR) || gp < pad) return null;
+        return { xp: gp + E.para.l * s, xt: cw - g - E.code.r * s };
     });
 
     // one shared area, the pair centred in it
