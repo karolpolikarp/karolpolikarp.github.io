@@ -46,7 +46,6 @@ const LanguageManager = {
 
         // Hero
         ['.greeting-text', "Hi, I'm"],
-        ['.hero-subtitle', 'I work at the intersection of <span class="accent">artificial intelligence</span>, <span class="accent">data analysis</span>, <span class="accent">ICT</span>, <span class="accent">public policy</span>, <span class="accent">law</span> and <span class="accent">public administration</span>.', true],
         ['.hero-cta .btn-primary span', 'See projects'],
         ['.hero-cta .btn-secondary', 'Contact'],
 
@@ -115,6 +114,13 @@ const LanguageManager = {
             this.originals.set(el, isHTML ? el.innerHTML : el.textContent);
         });
 
+        // Attributes: data-en-content (meta description) and data-en-aria (aria-label).
+        // <title data-en> needs nothing extra: [data-en] above already covers it.
+        this.attrEls = [
+            ...Array.from(document.querySelectorAll('[data-en-content]'), el => [el, 'content', 'data-en-content']),
+            ...Array.from(document.querySelectorAll('[data-en-aria]'), el => [el, 'aria-label', 'data-en-aria']),
+        ].map(([el, attr, enAttr]) => ({ el, attr, pl: el.getAttribute(attr), en: el.getAttribute(enAttr) }));
+
         const savedLang = localStorage.getItem('lang');
         if (savedLang === 'en') {
             this.setLanguage('en', false);
@@ -146,9 +152,6 @@ const LanguageManager = {
                 if (el.hasAttribute('data-en-html')) el.innerHTML = el.getAttribute('data-en-html');
                 else el.textContent = el.getAttribute('data-en');
             });
-            document.title = 'Karol Polikarp Wilczy\u0144ski | AI, Law, Technology';
-            document.querySelector('meta[name="description"]')?.setAttribute('content',
-                'I work at the intersection of AI, ICT, law and public administration. Building tools for working with Polish law and automations.');
         } else {
             this.translations.forEach(([selector, , isHTML]) => {
                 document.querySelectorAll(selector).forEach((el, i) => {
@@ -166,10 +169,12 @@ const LanguageManager = {
                 if (el.hasAttribute('data-en-html')) el.innerHTML = original;
                 else el.textContent = original;
             });
-            document.title = 'Karol Polikarp Wilczy\u0144ski | AI, Prawo, Technologia';
-            document.querySelector('meta[name="description"]')?.setAttribute('content',
-                'Pracuj\u0119 na styku AI, ICT, prawa i administracji publicznej. Buduj\u0119 narz\u0119dzia do pracy z polskim prawem i automatyzacje.');
         }
+
+        this.attrEls?.forEach(({ el, attr, pl, en }) => {
+            const value = lang === 'en' ? en : pl;
+            if (value !== null) el.setAttribute(attr, value);
+        });
 
         // Email display
         const emailDisplay = document.getElementById('emailDisplay');
@@ -416,9 +421,9 @@ window.addEventListener('scroll', () => {
     requestAnimationFrame(() => {
         const currentScroll = window.pageYOffset;
         if (currentScroll > 100) {
-            nav.classList.add('nav-scrolled');
+            nav?.classList.add('nav-scrolled');
         } else {
-            nav.classList.remove('nav-scrolled');
+            nav?.classList.remove('nav-scrolled');
         }
         navScrollRaf = false;
     });
@@ -501,14 +506,14 @@ const cats = {
         if (cat === 'both') {
             ['pimpek', 'fryderyk'].forEach(name => {
                 const img = document.createElement('img');
-                img.src = 'assets/images/cats/' + name + '.jpg';
+                img.src = '/assets/images/cats/' + name + '.jpg';
                 img.alt = name.charAt(0).toUpperCase() + name.slice(1);
                 img.className = 'cat-easter-egg-img';
                 imageContainer.appendChild(img);
             });
         } else {
             const img = document.createElement('img');
-            img.src = 'assets/images/cats/' + cat + '.jpg';
+            img.src = '/assets/images/cats/' + cat + '.jpg';
             img.alt = catNames[cat];
             img.className = 'cat-easter-egg-img cat-easter-egg-img-single';
             imageContainer.appendChild(img);
@@ -1194,7 +1199,9 @@ ScrollProgress.init();
 // Fetched only after the page has loaded, so they never compete with the first paint.
 // ================================================
 window.addEventListener('load', () => {
-    import('./particles.js?v=25').catch(() => {
+    // Only the home page has particle scenes; case-study pages skip the fetch.
+    if (!document.getElementById('heroParticles') && !document.getElementById('finaleParticles')) return;
+    import('/particles.js?v=25').catch(() => {
         // decoration only — the page is complete without it
     });
 }, { once: true });
