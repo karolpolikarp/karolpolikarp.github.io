@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
+    <title data-en="Zorza: case study | Karol Polikarp Wilczyński">Zorza: studium przypadku | Karol Polikarp Wilczyński</title>
+    <meta name="description" content="Jak połączyłem 100 kanałów i 15 API sensorów w jeden pulpit: deduplikacja przed modelem, ocena wiarygodności z jawnych reguł i progi wyprowadzone z pomiarów." data-en-content="How I merged 100 channels and 15 sensor APIs into one dashboard: dedup before the model, credibility from explicit rules, thresholds from measurements.">
+    <meta name="author" content="Karol Polikarp Wilczyński">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://karolwilczynski.com/case/zorza/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Karol Polikarp Wilczyński">
+    <meta property="og:url" content="https://karolwilczynski.com/case/zorza/">
+    <meta property="og:title" content="Zorza: studium przypadku | Karol Polikarp Wilczyński">
+    <meta property="og:description" content="Jak połączyłem 100 kanałów i 15 API sensorów w jeden pulpit: deduplikacja przed modelem, ocena wiarygodności z jawnych reguł i progi wyprowadzone z pomiarów.">
+    <meta property="og:image" content="https://karolwilczynski.com/assets/images/og-card.jpg?v=3">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://karolwilczynski.com/case/zorza/">
+    <meta name="twitter:title" content="Zorza: studium przypadku | Karol Polikarp Wilczyński">
+    <meta name="twitter:description" content="Jak połączyłem 100 kanałów i 15 API sensorów w jeden pulpit: deduplikacja przed modelem, ocena wiarygodności z jawnych reguł i progi wyprowadzone z pomiarów.">
+    <meta name="twitter:image" content="https://karolwilczynski.com/assets/images/og-card.jpg?v=3">
+    <meta name="twitter:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <meta name="theme-color" content="#004d2b">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Zorza: studium przypadku",
+        "description": "Jak połączyłem 100 kanałów i 15 API sensorów w jeden pulpit: deduplikacja przed modelem, ocena wiarygodności z jawnych reguł i progi wyprowadzone z pomiarów.",
+        "url": "https://karolwilczynski.com/case/zorza/",
+        "inLanguage": "pl-PL",
+        "author": {
+            "@type": "Person",
+            "@id": "https://karolwilczynski.com/#person",
+            "name": "Karol Polikarp Wilczyński",
+            "url": "https://karolwilczynski.com"
+        },
+        "isPartOf": {
+            "@id": "https://karolwilczynski.com/#website"
+        },
+        "about": {
+            "@type": "SoftwareApplication",
+            "name": "Zorza",
+            "url": "https://zorza.karolwilczynski.com"
+        }
+    }
+    </script>
+
+    <!-- Fonts - async loading for faster first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="/style.css?v=85">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#tresc" class="skip-link">Przejdź do treści</a>
+
+    <nav class="nav" aria-label="Główna nawigacja" data-en-aria="Main navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Strona główna" data-en-aria="Home page">
+                <span class="logo-main">kpw<span class="logo-sparkle" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="kpwSpark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop class="kpw-stop-a" offset="0"/><stop class="kpw-stop-b" offset="1"/></linearGradient></defs><path class="logo-spark logo-spark-lg" d="M10.5 1.4C10.5 8.1 8.1 10.5 1.4 10.5C8.1 10.5 10.5 12.9 10.5 19.6C10.5 12.9 12.9 10.5 19.6 10.5C12.9 10.5 10.5 8.1 10.5 1.4Z"/><path class="logo-spark logo-spark-sm" d="M19 4C19 6.2 18.2 7 16 7C18.2 7 19 7.8 19 10C19 7.8 19.8 7 22 7C19.8 7 19 6.2 19 4Z"/></svg></span></span>
+                <span class="logo-sub">[ka‿pɛ‿ˈvu]</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/#studia"><span data-en="Case studies">Studia przypadków</span></a></li>
+                <li><a href="/#projekty"><span data-en="Projects">Projekty</span></a></li>
+                <li><a href="/#kontakt"><span data-en="Contact">Kontakt</span></a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="nav-social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/karolpwilczynski" target="_blank" rel="noopener" class="nav-social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.78M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.69 1.69 1.69 0 0 0-1.69 1.69 1.68 1.68 0 0 0 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                </a>
+            </div>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Przełącz motyw jasny/ciemny">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <button type="button" class="lang-toggle" id="langToggle" aria-label="Switch to English">
+                <span class="lang-label lang-pl">PL</span>
+                <span class="lang-label lang-en">EN</span>
+            </button>
+            <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div>
+    </nav>
+
+    <main id="tresc" class="case">
+        <header class="case-hero">
+            <div class="container case-container">
+                <nav class="case-breadcrumb" aria-label="Okruszki" data-en-aria="Breadcrumb">
+                    <a href="/"><span data-en="Home">Strona główna</span></a>
+                    <span aria-hidden="true">/</span>
+                    <a href="/#studia"><span data-en="Case studies">Studia przypadków</span></a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">Zorza</span>
+                </nav>
+                <div class="project-tags">
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">Fastify</span>
+                    <span class="tag">SQLite + FTS5</span>
+                    <span class="tag">Claude Haiku</span>
+                    <span class="tag">Raspberry Pi</span>
+                </div>
+                <h1 class="case-title">Zorza</h1>
+                <p class="case-subtitle" data-en="Real-time information listening post">Nasłuch informacyjny w czasie rzeczywistym</p>
+                <p class="case-lead" data-en="OSINT channels beat news services by quarters of an hour, but a dozen open tabs still do not make a listening post. I built a dashboard that merges 100 content channels with data from sensor APIs, collapses reposts and shows a credibility score next to every item with the rules behind it — the key dedup thresholds come from measurements, and CI runs 264 automated tests together with type checking.">Kanały OSINT wyprzedzają serwisy o&nbsp;kwadranse, ale kilkanaście otwartych kart to jeszcze nie system nasłuchu. Zbudowałem pulpit, który łączy 100&nbsp;kanałów treści z&nbsp;danymi z&nbsp;API sensorów, zwija przedruki i&nbsp;przy każdym wpisie pokazuje ocenę wiarygodności z&nbsp;regułami, które ją ustaliły — kluczowe progi deduplikacji pochodzą z&nbsp;pomiarów, a&nbsp;CI uruchamia 264&nbsp;testy automatyczne razem z&nbsp;kontrolą typów.</p>
+                <dl class="case-facts">
+                    <div><dt data-en="Role">Rola</dt><dd data-en="Design, code (with an AI assistant) and deployment">Projekt, kod (z&nbsp;asystentem AI) i&nbsp;wdrożenie</dd></div>
+                    <div><dt data-en="Period">Okres</dt><dd data-en="July–August 2026">lipiec–sierpień 2026</dd></div>
+                    <div><dt data-en="Status">Status</dt><dd data-en="Deployed on a Raspberry Pi 5 (as of 1 August 2026)">Wdrożony na Raspberry Pi 5 (stan na 1&nbsp;sierpnia 2026)</dd></div>
+                    <div><dt data-en="Code">Kod</dt><dd data-en="Private repository">Repozytorium prywatne</dd></div>
+                </dl>
+                <div class="showcase-cta">
+                    <a href="https://zorza.karolwilczynski.com" target="_blank" rel="noopener" class="project-link project-link-primary">
+                        <span data-en="Project page">Strona projektu</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+                <nav class="case-toc" aria-label="Spis treści" data-en-aria="Contents">
+                    <a href="#problem"><span data-en="Problem">Problem</span></a>
+                    <a href="#ograniczenia"><span data-en="Constraints">Ograniczenia</span></a>
+                    <a href="#architektura"><span data-en="Architecture">Architektura</span></a>
+                    <a href="#decyzje"><span data-en="Decisions">Decyzje</span></a>
+                    <a href="#dowody"><span data-en="Evidence">Dowody</span></a>
+                    <a href="#wnioski"><span data-en="Lessons">Wnioski</span></a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container case-container">
+            <section id="problem" class="case-section" aria-labelledby="h-problem">
+                <h2 class="case-h2" id="h-problem"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span data-en="Problem and context">Problem i kontekst</span></h2>
+                <p data-en="I built Zorza for my own use. I wanted to follow geopolitics and markets in one place, and the sources that often report first — OSINT channels on Telegram — pay for that speed with noise. The same message arrives from several channels, a rumour looks like confirmed news, and a move in the oil price has to be matched by hand with posts from the same minute.">Zorza powstała na własny użytek. Chciałem śledzić wydarzenia geopolityczne i&nbsp;rynki w&nbsp;jednym miejscu, a&nbsp;źródła, które często podają informację najwcześniej — kanały OSINT na Telegramie — płacą za tę szybkość szumem. Ten sam komunikat przychodzi z&nbsp;kilku kanałów, plotka wygląda jak potwierdzona wiadomość, a&nbsp;ruch ceny ropy trzeba samemu zestawić z&nbsp;wpisami z&nbsp;tej samej minuty.</p>
+                <p data-en="The project’s problem statement puts it this way: OSINT channels beat news services by quarters of an hour, but a dozen open tabs is not a listening post. Tabs, each refreshing at its own pace, cannot tell an event confirmed by independent sources from an echo inside one bubble; the same alarm gets read several times, and gut feeling decides whether it is credible.">Problem projektu ująłem tak: kanały OSINT wyprzedzają serwisy o&nbsp;kwadranse, ale kilkanaście otwartych kart to jednak nie jest system nasłuchu. Karty, każda z&nbsp;własnym rytmem odświeżania, nie odróżniają zdarzenia potwierdzonego przez niezależne źródła od echa jednej bańki; ten sam alarm czyta się kilka razy, a&nbsp;o&nbsp;tym, czy jest wiarygodny, decyduje wyczucie.</p>
+                <p data-en="The goal was one dashboard for one analyst: columns by section (geopolitics, markets, world and politics) in publication order, each event’s weight visible on its card, urgent (CRIT) items in a separate bar, a repost collapsed into a counter next to the original, a credibility score with a visible justification, and a phone alert only for an event that is confirmed or comes from a trusted source. It is a personal tool, so the evidence below is technical only.">Celem był jeden pulpit dla jednego analityka: kolumny według działu (geopolityka, rynki, świat i&nbsp;polityka) w&nbsp;kolejności publikacji, waga zdarzenia widoczna na karcie, pilne zdarzenia (CRIT) w&nbsp;osobnym pasku, przedruk zwinięty w&nbsp;licznik przy oryginale, ocena wiarygodności z&nbsp;jawnym uzasadnieniem i&nbsp;powiadomienie na telefon tylko przy zdarzeniu potwierdzonym albo podanym przez wiarygodne źródło. To narzędzie osobiste, dlatego dowody poniżej są wyłącznie techniczne.</p>
+            </section>
+
+            <section id="ograniczenia" class="case-section" aria-labelledby="h-ograniczenia">
+                <h2 class="case-h2" id="h-ograniczenia"><span class="case-h2-num" aria-hidden="true" translate="no">§ 2</span><span data-en="Constraints">Ograniczenia</span></h2>
+                <p data-en="A few conditions shaped every later choice:">Kilka warunków wyznaczyło wszystkie późniejsze wybory:</p>
+                <ul class="showcase-list">
+                    <li data-en="One machine: a Raspberry Pi 5 with 8 GB of memory, no cloud and no separate database server.">Jeden komputer: Raspberry Pi 5 z&nbsp;8&nbsp;GB pamięci, bez chmury i&nbsp;bez osobnego serwera bazy danych.</li>
+                    <li data-en="Cost counted in dollars per day. I pay only for the language model and X access, so every model call has to justify itself.">Koszt liczony w&nbsp;dolarach na dobę. Płacę tylko za model językowy i&nbsp;dostęp do X, więc każde wywołanie modelu musi się obronić.</li>
+                    <li data-en="Sources with no contract and no guarantee: Telegram rate-limits requests, a channel with a familiar name can be an impostor, and the ACLED API refused access.">Źródła bez umowy i&nbsp;bez gwarancji: Telegram ogranicza tempo zapytań, kanał o&nbsp;znanej nazwie bywa podróbką, a&nbsp;API ACLED odmówiło dostępu.</li>
+                    <li data-en="A score must be checkable. In a tool for watching disinformation, a score without a justification is worse than none.">Ocena musi dać się sprawdzić. W&nbsp;narzędziu do obserwacji dezinformacji ocena bez uzasadnienia jest gorsza niż jej brak.</li>
+                    <li data-en="Only the description page is public; the dashboard, the API and the images require a login.">Publicznie widać tylko stronę opisową; pulpit, API i&nbsp;zdjęcia wymagają zalogowania.</li>
+                </ul>
+            </section>
+
+            <section id="architektura" class="case-section" aria-labelledby="h-architektura">
+                <h2 class="case-h2" id="h-architektura"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span data-en="Architecture">Architektura</span></h2>
+                <p data-en="Every content channel has its own adapter: Telegram (push plus polling), RSS with conditional GET (when nothing has changed, the server returns 304), X and Truth Social. They all feed one function, ingest(): it filters out noise, strips ad footers, tags the item by rules (country, topic, weight) and stores it in SQLite with an FTS5 full-text index. The item appears on the dashboard at once, and the archive keeps 30 days of items. Sensors and outside data — NASA FIRMS fires, ship (AIS) and aircraft (ADS-B) traffic, media coverage from GDELT — have separate modules and do not enter the item archive; GDELT feeds the credibility score.">Każdy kanał treści ma własny adapter: Telegram (push i&nbsp;odpytywanie), RSS z&nbsp;warunkowym GET (gdy nic się nie zmieniło, serwer zwraca 304), X i&nbsp;Truth Social. Wszystkie trafiają do jednej funkcji ingest(): ta odsiewa szum, wycina stopki reklamowe, nadaje tagi na podstawie reguł (kraj, temat, waga) i&nbsp;zapisuje wpis w&nbsp;SQLite z&nbsp;indeksem pełnotekstowym FTS5. Wpis od razu pojawia się na pulpicie, a&nbsp;archiwum przechowuje wpisy przez 30&nbsp;dni. Sensory i&nbsp;dane zewnętrzne — pożary z&nbsp;NASA FIRMS, ruch statków (AIS) i&nbsp;samolotów (ADS-B), pokrycie w&nbsp;mediach z&nbsp;GDELT — mają osobne moduły i&nbsp;nie trafiają do archiwum wpisów; GDELT zasila ocenę wiarygodności.</p>
+                <p data-en="Only then does the paid part run. An item the rules could not settle goes through a dedup cascade and reaches Claude Haiku only if no cheaper rung recognised it as a repost; the model’s tags arrive later as an update. The credibility score is computed on read for the whole cluster, because every new confirmation changes it. The dashboard gets one SSE stream, and alerts go to the phone through ntfy.">Dopiero potem działa część płatna. Wpis, którego reguły nie rozstrzygnęły, przechodzi przez kaskadę deduplikacji i&nbsp;trafia do Claude Haiku tylko wtedy, gdy żaden tańszy szczebel nie rozpoznał go jako przedruku; tagi z&nbsp;modelu dochodzą później jako aktualizacja. Ocena wiarygodności jest liczona przy odczycie dla całego klastra, bo każde nowe potwierdzenie ją zmienia. Pulpit dostaje jeden strumień SSE, a&nbsp;alerty idą na telefon przez ntfy.</p>
+                <figure class="case-diagram">
+                    <svg viewBox="0 0 360 502" role="img" aria-labelledby="arch-title arch-desc">
+                        <title id="arch-title" data-en="Data flow in Zorza">Przepływ danych w Zorzy</title>
+                        <desc id="arch-desc" data-en="Content channels feed one entry point that stores items in a SQLite archive. A dedup cascade filters reposts before the paid model, the credibility score comes from explicit rules and GDELT confirmation, and the result reaches the dashboard and the phone as a notification. The other sensors run in separate modules, outside this flow.">Kanały treści trafiają do jednego wejścia, które zapisuje wpisy w archiwum SQLite. Kaskada deduplikacji odsiewa przedruki przed płatnym modelem, ocena wiarygodności powstaje z jawnych reguł i potwierdzeń z GDELT, a wynik trafia na pulpit i jako powiadomienie na telefon. Pozostałe sensory działają w osobnych modułach, poza tym przepływem.</desc>
+                        <defs>
+                            <marker id="cd-arrow-zorza" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path class="cd-arrow" d="M0 0L10 5L0 10z"/>
+                            </marker>
+                        </defs>
+                        <rect class="cd-box cd-box--ext" x="20" y="10" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="97.5" y="31" text-anchor="middle">Telegram, RSS, X</text>
+                        <text class="cd-note" x="97.5" y="49" text-anchor="middle" data-en="and Truth Social">i Truth Social</text>
+                        <rect class="cd-box cd-box--ext" x="185" y="10" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="262.5" y="31" text-anchor="middle">GDELT</text>
+                        <text class="cd-note" x="262.5" y="49" text-anchor="middle" data-en="outside news domains">domeny spoza kanałów</text>
+                        <path class="cd-edge" d="M97.5 62V92" marker-end="url(#cd-arrow-zorza)"/>
+                        <path class="cd-edge" d="M322 62V380H304" marker-end="url(#cd-arrow-zorza)"/>
+                        <rect class="cd-box" x="20" y="96" width="280" height="52" rx="8"/>
+                        <text class="cd-label" x="160" y="117" text-anchor="middle" data-en="Single entry point: ingest()">Jedno wejście: ingest()</text>
+                        <text class="cd-note" x="160" y="135" text-anchor="middle" data-en="noise filter, ad stripping, rule tags">filtr szumu, bez reklam, tagi z reguł</text>
+                        <path class="cd-edge" d="M160 148V178" marker-end="url(#cd-arrow-zorza)"/>
+                        <rect class="cd-box" x="20" y="182" width="280" height="52" rx="8"/>
+                        <text class="cd-label" x="160" y="203" text-anchor="middle" data-en="SQLite + FTS5 archive">Archiwum SQLite + FTS5</text>
+                        <text class="cd-note" x="160" y="221" text-anchor="middle" data-en="full text, 30-day retention">pełny tekst, retencja 30 dni</text>
+                        <path class="cd-edge" d="M160 234V264" marker-end="url(#cd-arrow-zorza)"/>
+                        <rect class="cd-box cd-box--key" x="20" y="268" width="280" height="52" rx="8"/>
+                        <text class="cd-label" x="160" y="289" text-anchor="middle" data-en="Dedup, then Claude Haiku">Deduplikacja → Claude Haiku</text>
+                        <text class="cd-note" x="160" y="307" text-anchor="middle" data-en="Jaccard 0.70 · n-grams · embeddings 0.65">Jaccard 0,70 · n-gramy · embeddingi 0,65</text>
+                        <path class="cd-edge" d="M160 320V350" marker-end="url(#cd-arrow-zorza)"/>
+                        <rect class="cd-box cd-box--key" x="20" y="354" width="280" height="52" rx="8"/>
+                        <text class="cd-label" x="160" y="375" text-anchor="middle" data-en="Credibility score 0–100">Ocena wiarygodności 0–100</text>
+                        <text class="cd-note" x="160" y="393" text-anchor="middle" data-en="explicit rules + GDELT confirmation">jawne reguły + potwierdzenie z GDELT</text>
+                        <path class="cd-edge" d="M160 406V420H97.5V436" marker-end="url(#cd-arrow-zorza)"/>
+                        <path class="cd-edge" d="M160 406V420H262.5V436" marker-end="url(#cd-arrow-zorza)"/>
+                        <rect class="cd-box" x="20" y="440" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="97.5" y="461" text-anchor="middle" data-en="Live dashboard">Pulpit na żywo</text>
+                        <text class="cd-note" x="97.5" y="479" text-anchor="middle" data-en="SSE stream">strumień SSE</text>
+                        <rect class="cd-box" x="185" y="440" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="262.5" y="461" text-anchor="middle" data-en="Phone push">Push na telefon</text>
+                        <text class="cd-note" x="262.5" y="479" text-anchor="middle" data-en="ntfy, quiet hours">ntfy, cisza nocna</text>
+                    </svg>
+                    <figcaption data-en="The gold frames mark the two key decisions: dedup before the paid model and a credibility score from explicit rules. Dashed frames mark external sources. An item reaches the dashboard right after it is stored; model tags follow later, and the score changes with every confirmation.">Złotą ramką zaznaczyłem dwa miejsca kluczowych decyzji: deduplikację przed płatnym modelem i&nbsp;ocenę wiarygodności z&nbsp;jawnych reguł. Przerywane ramki oznaczają źródła zewnętrzne. Wpis trafia na pulpit już po zapisie; tagi z&nbsp;modelu dochodzą później, a&nbsp;ocena zmienia się z&nbsp;każdym potwierdzeniem.</figcaption>
+                </figure>
+            </section>
+
+            <section id="decyzje" class="case-section" aria-labelledby="h-decyzje">
+                <h2 class="case-h2" id="h-decyzje"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span data-en="Key decisions">Kluczowe decyzje</span></h2>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="Free sources at the core, X as an add-on">Darmowe źródła jako rdzeń, X jako dodatek</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The core is Telegram and RSS. I poll X through a third-party API (twitterapi.io) only for individual accounts with no Telegram counterpart, and only during set hours.">Rdzeń to Telegram i&nbsp;RSS. X odpytuję przez zewnętrzne API (twitterapi.io) tylko dla pojedynczych kont bez odpowiednika na Telegramie i&nbsp;tylko w&nbsp;wybranych godzinach.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="The official X API as the main source: about 0.005 USD per read (as of July 2026), with no useful free tier.">Oficjalne API X jako główne źródło: ok.&nbsp;0,005&nbsp;USD za odczyt (stan z&nbsp;lipca 2026), bez sensownego darmowego progu.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="Telegram and RSS cost nothing, and conditional GET lets me skip parsing unchanged feeds. X usage observed on 30 July: 6,020 twitterapi.io credits a day, i.e. 0.06 USD.">Telegram i&nbsp;RSS nic nie kosztują, a&nbsp;warunkowy GET pozwala pominąć parsowanie niezmienionych kanałów RSS. Zużycie X zaobserwowane 30&nbsp;lipca: 6&nbsp;020 kredytów twitterapi.io na dobę, czyli 0,06&nbsp;USD.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="Telegram gives no guarantees: after a run of restarts it blocked channel resolution for eight hours (FLOOD_WAIT), and names need manual checks — a review on 30 July found that 17 of 52 channels contributed nothing; I corrected some names, removed dead and duplicate channels, added one verified channel and was left with 41. Not every channel delivers in real time, so I also poll all of them in a cycle with a 60-second pause.">Telegram nie daje gwarancji: po serii restartów zablokował rozpoznawanie kanałów na osiem godzin (FLOOD_WAIT), a&nbsp;nazwy trzeba weryfikować ręcznie — przegląd z&nbsp;30&nbsp;lipca wykazał, że 17 z&nbsp;52 kanałów nic nie wnosiło; część nazw poprawiłem, martwe i&nbsp;zdublowane kanały usunąłem, dodałem jeden zweryfikowany i&nbsp;zostało 41. Nie każdy kanał dostarcza wpisy w&nbsp;czasie rzeczywistym, dlatego wszystkie dodatkowo odpytuję w&nbsp;cyklu z&nbsp;60-sekundową przerwą.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="Credibility from explicit rules, not from the model">Wiarygodność z&nbsp;jawnych reguł, nie z&nbsp;modelu</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="Pure functions compute the 0–100 score from the number of distinct channels, the highest source class (A–D) and confirmation from different sides of a conflict and from domains outside my channels (GDELT). An echo from one camp and no confirmation after 45 minutes lower the score; the item card lists the rules that fired.">Ocenę 0–100 liczą czyste funkcje na podstawie liczby różnych kanałów, najwyższej klasy źródła (A–D) oraz potwierdzenia z&nbsp;różnych stron sporu i&nbsp;z&nbsp;domen spoza moich kanałów (GDELT). Echo jednego obozu i&nbsp;brak potwierdzenia po 45&nbsp;minutach obniżają wynik, a&nbsp;karta wpisu pokazuje reguły, które zadziałały.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="A credibility score returned by the language model along with the tags.">Ocena wiarygodności zwracana przez model językowy razem z&nbsp;tagami.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="The model returns only tags (weight, category, countries, topics, entities), never a credibility score. The rules can be traced, tested and tuned without touching prompts, whereas a black box could not be challenged.">Model zwraca tylko tagi (waga, kategoria, kraje, tematy, encje), nigdy ocenę wiarygodności. Reguły da się prześledzić, przetestować i&nbsp;dostroić bez zmieniania promptów, a&nbsp;czarnej skrzynki nie dałoby się zakwestionować.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The score is only as good as the source classes, and I assigned some of them by hand. “Three sources” means three of the channels I picked myself, and GDELT lags by a dozen or so minutes, so the freshest news earns no GDELT points yet. The rules compute the score, but which items share a cluster — and so how many channels and camps count — is partly decided by Haiku in semantic clustering.">Wynik jest tak dobry jak klasy źródeł, a&nbsp;część z&nbsp;nich nadałem ręcznie. „Trzy źródła” to trzy spośród kanałów, które sam wybrałem, a&nbsp;GDELT ma kilkanaście minut opóźnienia, więc najświeższa wiadomość nie dostaje jeszcze punktów za potwierdzenie z&nbsp;GDELT. Sam wynik liczą reguły, ale to, które wpisy trafiają do jednego klastra (a&nbsp;więc ile kanałów i&nbsp;obozów się liczy), częściowo rozstrzyga Haiku w&nbsp;klastrowaniu semantycznym.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="Dedup thresholds from measurement, not from feel">Progi deduplikacji z&nbsp;pomiaru, nie z&nbsp;wyczucia</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="A cascade sits in front of the paid model: word Jaccard with a 0.70 cut, character n-grams and optional local all-MiniLM-L6-v2 embeddings (22 MB, offline) with a 0.65 cut. A repost inherits the tags of its classified twin and costs nothing.">Przed płatnym modelem stoi kaskada: Jaccard na słowach z&nbsp;progiem 0,70, n-gramy znakowe i&nbsp;opcjonalnie lokalne embeddingi all-MiniLM-L6-v2 (22&nbsp;MB, offline) z&nbsp;progiem 0,65. Przedruk dziedziczy tagi po sklasyfikowanym bliźniaku i&nbsp;nie zużywa budżetu.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Sending every item to the model, or thresholds taken by analogy — the first embedding version used 0.86 and caught nothing.">Wysyłanie każdego wpisu do modelu albo progi przyjęte przez analogię — pierwsza wersja embeddingów miała próg 0,86 i&nbsp;nie łapała niczego.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="In the hour I measured, the hourly cap let 150 items through and turned 153 away, because I paid separately for every copy of a headline reposted by many channels. On example pairs from a test, shaped like typical items, a verbatim repost with a channel tagline scores 0.83 Jaccard, a paraphrase 0.39, unrelated news 0.00 — the 0.70 cut sits in that gap.">W&nbsp;zmierzonej godzinie limit godzinowy przepuścił 150 wpisów, a&nbsp;153 odrzucił, bo za ten sam nagłówek przepisany przez wiele kanałów płaciłem przy każdej kopii osobno. Na przykładowych parach z&nbsp;testu, ułożonych tak jak typowe wpisy, dosłowny przedruk z&nbsp;doklejoną formułką kanału ma współczynnik Jaccarda 0,83, parafraza 0,39, niezwiązana wiadomość 0,00 — próg 0,70 leży w&nbsp;tej luce.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="For embeddings no perfect cut exists: paraphrases (0.39–0.69) overlap the range of different events on the same topic (0.46–0.60). The 0.65 cut deliberately lets some paraphrases through to the model, because a wrong merge would give an item someone else’s country and weight.">Dla embeddingów idealny próg nie istnieje: parafrazy (0,39–0,69) nakładają się na zakres różnych zdarzeń na ten sam temat (0,46–0,60). Próg 0,65 świadomie przepuszcza część parafraz do modelu, bo błędne sklejenie nadałoby wpisowi cudzy kraj i&nbsp;wagę.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="A batch gate instead of draining the queue">Bramka paczek zamiast opróżniania kolejki</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="A batch of items goes to the model when it is full or when the oldest item has waited longer than 5 minutes (30 at weekends).">Paczka wpisów wychodzi do modelu, gdy jest pełna albo gdy najstarszy wpis czeka dłużej niż 5&nbsp;minut (w&nbsp;weekend 30).</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="The previous mechanism: draining the queue to zero every 30 seconds.">Poprzedni mechanizm: opróżnianie kolejki do zera co 30&nbsp;sekund.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="An hourly cost log on the Pi (7.8 h of running) showed 51–53 calls an hour in the active window (07:00–09:25), at an average of 2 items each, with the batch size set to 25: batches never reached that size, and every call carried the full prompt overhead.">Cogodzinny zapis kosztu z&nbsp;Pi (7,8&nbsp;h pracy) pokazał w&nbsp;oknie aktywnym (07:00–09:25) 51–53 wywołania na godzinę po średnio 2&nbsp;wpisy, przy paczce ustawionej na 25: paczka nigdy nie osiągała tej wielkości, a&nbsp;za każde wywołanie płaciłem pełny narzut promptu.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="When traffic is light, an item waits for its model tags up to 5 minutes on weekdays and up to 30 at weekends. The expected effect — about 12 calls an hour and 0.78 USD a day — is a forecast from the same arithmetic that had underestimated the cost fourfold before; the repository (as of 1 August 2026) holds no measurement after the change.">W&nbsp;godzinach małego ruchu wpis czeka na tagi z&nbsp;modelu do 5&nbsp;minut w&nbsp;dni robocze i&nbsp;do 30 w&nbsp;weekend. Spodziewany efekt — ok.&nbsp;12 wywołań na godzinę i&nbsp;0,78&nbsp;USD na dobę — to prognoza z&nbsp;tej samej arytmetyki, która wcześniej zaniżyła koszt czterokrotnie; w&nbsp;repozytorium (stan na 1&nbsp;sierpnia 2026) nie ma pomiaru po zmianie.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="Haiku instead of Sonnet for summaries">Haiku zamiast Sonneta do streszczeń</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="Claude Haiku writes the periodic situation summaries for the charted assets.">Cykliczne streszczenia sytuacji dla aktywów z&nbsp;wykresów pisze Claude Haiku.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Claude Sonnet, which I had used for this before.">Claude Sonnet, którego używałem do tego wcześniej.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="The same prompt through both models: Haiku 5.4 s and 0.0043 USD, Sonnet 11.3 s and 0.0182 USD. Sonnet attached a spurious political link to the dollar index (DXY); Haiku alone noticed that the Bank of Japan’s intervention precedes its monetary policy review.">Ten sam prompt w&nbsp;obu modelach: Haiku 5,4&nbsp;s i&nbsp;0,0043&nbsp;USD, Sonnet 11,3&nbsp;s i&nbsp;0,0182&nbsp;USD. Sonnet dopisał do indeksu dolara (DXY) pozorne powiązanie polityczne; Haiku jako jedyny zauważył, że interwencja Banku Japonii poprzedza jego przegląd polityki pieniężnej.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="It is one comparison on one prompt, not a benchmark, and Haiku slipped too: an inflection error and a phrase the prompt forbade. The weekly Sunday review is written by Sonnet.">To jedno porównanie na jednym prompcie, nie benchmark, a&nbsp;Haiku też miał wpadki: błąd fleksji i&nbsp;sformułowanie, którego prompt zabraniał. Cotygodniowy przegląd weekendu (w&nbsp;niedzielę) pisze Sonnet.</dd>
+                        </dl>
+                    </article>
+                </div>
+            </section>
+
+            <section id="dowody" class="case-section" aria-labelledby="h-dowody">
+                <h2 class="case-h2" id="h-dowody"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span data-en="Evidence">Dowody</span></h2>
+                <p data-en="The numbers come from the repository: the test run, the configuration, and measurements on the feed’s data and on the production Raspberry Pi.">Liczby pochodzą z&nbsp;repozytorium: z&nbsp;przebiegu testów, konfiguracji oraz pomiarów na danych ze strumienia wpisów i&nbsp;na produkcyjnym Raspberry Pi.</p>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="264">264</span>
+                        <span class="case-stat-label" data-en="automated tests, run in CI together with type checking">testy automatyczne, uruchamiane w&nbsp;CI razem z&nbsp;kontrolą typów</span>
+                        <span class="case-stat-source" data-en="test run · 2026-08-01">przebieg testów · 2026-08-01</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="100">100</span>
+                        <span class="case-stat-label" data-en="content channels: 41 on Telegram and 59 RSS, not counting X, Truth Social and the sensors">kanałów treści: 41&nbsp;na Telegramie i&nbsp;59&nbsp;RSS, bez X, Truth Social i&nbsp;sensorów</span>
+                        <span class="case-stat-source" data-en="source configuration · 2026-07-30">konfiguracja źródeł · 2026-07-30</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="58,134">58&nbsp;134</span>
+                        <span class="case-stat-label" data-en="items in the production archive, running since July 2026 (30-day retention)">wpisy w&nbsp;archiwum produkcyjnym, prowadzonym od lipca 2026 (retencja 30&nbsp;dni)</span>
+                        <span class="case-stat-source" data-en="production measurement · 2026-08-01">pomiar na produkcji · 2026-08-01</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="669&nbsp;MB">669&nbsp;MB</span>
+                        <span class="case-stat-label" data-en="of memory after start on the Raspberry Pi 5, out of 7.9 GB available">pamięci po starcie na Raspberry Pi 5, z&nbsp;7,9&nbsp;GB dostępnych</span>
+                        <span class="case-stat-source" data-en="measured on the Pi · 2026-07-31">pomiar na Pi · 2026-07-31</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="0.65">0,65</span>
+                        <span class="case-stat-label" data-en="embedding similarity cut, above different events on the same topic (0.46–0.60); paraphrases 0.39–0.69, unrelated news 0.02–0.11">próg podobieństwa embeddingów, powyżej różnych zdarzeń na ten sam temat (0,46–0,60); parafrazy 0,39–0,69, niezwiązane wiadomości 0,02–0,11</span>
+                        <span class="case-stat-source" data-en="measured on feed pairs · 2026-07-28">pomiar na parach ze strumienia · 2026-07-28</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="2.00&nbsp;USD">2,00&nbsp;USD</span>
+                        <span class="case-stat-label" data-en="daily classification cost before the batch gate, extrapolated from hourly readings; the estimate assumed 0.51 USD">dobowy koszt klasyfikacji przed bramką paczek, ekstrapolowany z&nbsp;cogodzinnych odczytów; szacunek zakładał 0,51&nbsp;USD</span>
+                        <span class="case-stat-source" data-en="7.8 h measurement on the Pi · 2026-07-31">pomiar 7,8&nbsp;h na Pi · 2026-07-31</span>
+                    </div>
+                </div>
+                <p class="case-source-note" data-en="Repository state as of 1 August 2026: 174 commits since 20 July. The repository is private. No user data — this is a personal tool.">Stan repozytorium na 1&nbsp;sierpnia 2026: 174&nbsp;commity od 20&nbsp;lipca. Repozytorium jest prywatne. Bez danych o&nbsp;użytkownikach — to narzędzie osobiste.</p>
+            </section>
+
+            <section id="wnioski" class="case-section" aria-labelledby="h-wnioski">
+                <h2 class="case-h2" id="h-wnioski"><span class="case-h2-num" aria-hidden="true" translate="no">§ 6</span><span data-en="What I learned">Czego się nauczyłem</span></h2>
+                <ul class="showcase-list">
+                    <li data-en="A number without a date goes stale silently. I record the measurement behind a threshold next to it — in a code comment or the commit message — and the numbers in the project page’s stats bar carry their date; it is a habit worth carrying over to any data-based report.">Liczba bez daty starzeje się po cichu. Pomiar, który uzasadnia próg, zapisuję obok niego — w&nbsp;komentarzu w&nbsp;kodzie albo w&nbsp;opisie commita — a&nbsp;liczby na pasku strony projektu mają datę; ten nawyk warto przenieść do każdego raportu opartego na danych.</li>
+                    <li data-en="An estimate built on a single call does not deserve trust. The classification cost was four times the estimate, and only an hourly log showed that the batch-size setting did nothing.">Szacunek zbudowany na jednym wywołaniu nie zasługuje na zaufanie. Koszt klasyfikacji był czterokrotnie wyższy, niż zakładał szacunek, a&nbsp;dopiero cogodzinny zapis pokazał, że ustawienie wielkości paczki nie działało.</li>
+                    <li data-en="Deployment instructions nobody has run are unverified. The risks I listed from reading the code proved only partly right; the real failure — a systemd sandbox blocking netlink, so the server never came up — surfaced only on the first run on the Pi.">Instrukcja wdrożenia, której nikt nie wykonał, nie jest sprawdzona. Ryzyka wypisane z&nbsp;analizy kodu potwierdziły się tylko częściowo; realną awarię — piaskownicę systemd blokującą netlink, przez co serwer ani razu nie wystartował — ujawniło dopiero pierwsze uruchomienie na Pi.</li>
+                    <li data-en="A score that lists its rules can be challenged and corrected. In tools for public administration, where a decision has to be justified, that is a requirement.">Ocenę z&nbsp;listą reguł można zakwestionować i&nbsp;poprawić. W&nbsp;narzędziach dla administracji, gdzie rozstrzygnięcie trzeba uzasadnić, to warunek konieczny.</li>
+                </ul>
+            </section>
+
+            <nav class="case-pager" aria-label="Inne studia przypadków" data-en-aria="Other case studies">
+                <a class="case-pager-link" href="/case/urzednik-i-ai/">
+                    <span class="case-pager-dir" data-en="← Previous">← Poprzednie</span>
+                    <span class="case-pager-title" data-en="Civil Servant &amp; AI">Urzędnik i AI</span>
+                </a>
+                <a class="case-pager-link case-pager-link--next" href="/case/jakieprawo/">
+                    <span class="case-pager-dir" data-en="Next →">Następne →</span>
+                    <span class="case-pager-title">JakiePrawo.pl</span>
+                </a>
+            </nav>
+            <p class="case-back"><a class="btn btn-secondary" href="/#projekty"><span data-en="All projects">Wszystkie projekty</span></a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-start">
+                    <button type="button" class="start-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        <span class="start-icon" aria-hidden="true">🖥️</span>
+                        <span>Start</span>
+                    </button>
+                </div>
+                <div class="footer-center">
+                    <p class="footer-tech">© 2025-2026 Karol Wilczyński</p>
+                </div>
+                <div class="footer-clock">
+                    <span id="clock">00:00</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js?v=45" defer></script>
+</body>
+</html>
