@@ -38,6 +38,7 @@ npx serve
 ├── particle-morph.js # Particle morphing engine (ES module, // @ts-check) - see "Animations"
 ├── particles.js    # The hero + contact particle scenes (ES module, loaded after page load)
 ├── 404.html        # Custom 404 page (Polish)
+├── case/<slug>/index.html # Case-study subpages (zorza, jakieprawo, parawan, urzednik-i-ai) - see "Case studies"
 ├── robots.txt      # Search engine crawl rules
 ├── sitemap.xml     # XML sitemap for SEO
 ├── README.md       # Project documentation for humans
@@ -74,7 +75,8 @@ Contains modular components (in order):
 5. **MagneticButtons** - Interactive hover effects (desktop only)
 6. **Navbar Scroll Effect** - Adds `.nav-scrolled` class at 100px scroll
 7. **Windows 95 Clock** - Footer time display
-8. **LanguageManager** - Live PL/EN toggle via `data-en` / `data-en-html` attributes
+8. **LanguageManager** - Live PL/EN toggle via `data-en` / `data-en-html` attributes (also `<title data-en>`,
+   `data-en-content` on the meta description, `data-en-aria` for `aria-label`)
 9. **HeroTabs** - Experience / Education / Skills tab panels (keyboard-navigable)
 10. **ProjectShowcase** - Projects carousel (tabs, dots, autoplay w/ pause, swipe)
 11. **EmailProtection** - Anti-scraper email obfuscation
@@ -82,7 +84,7 @@ Contains modular components (in order):
 13. **NumberScramble** - Numbers marked `<span class="scramble-num">` in the HTML (PL and `data-en-html`) roll
     through `§¶{}<>/01#` when scrolled into view (painted over the real number from a CSS `::after`)
 14. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
-15. **Particles loader** - `import('./particles.js')` after the `load` event
+15. **Particles loader** - `import('/particles.js')` after the `load` event, only on pages with a particle canvas
 
 ## Animations („Od paragrafu do parametru”)
 
@@ -159,7 +161,8 @@ Decorative layer added on top of the existing design (nothing else in the layout
 
 ### Working with the PL/EN toggle
 1. Add `data-en="English text"` to any new user-facing element (or `data-en-html` if it contains markup)
-2. For attributes (e.g. `aria-label`), add an entry to `LanguageManager.attrTranslations`
+2. For attributes: `data-en-aria="…"` (aria-label) or `data-en-content="…"` (meta description); the page title is `<title data-en="…">`.
+   Never put `data-en` on an element that has child elements (an icon inside a link would be wiped) - wrap the text in `<span data-en>`
 3. The choice persists in `localStorage` and fires a `languagechange` event for JS-built UI
 
 ## Critical Guidelines
@@ -211,6 +214,7 @@ Before committing changes, verify:
 | Navigation | `.nav` | Logo, links, theme toggle |
 | Hero | `#hero` | Introduction, keywords, CTA |
 | Projects | `#projekty` | Portfolio showcase |
+| Case studies | `#studia` | Cards linking to `/case/<slug>/` |
 | About | `#o-mnie` | Personal background |
 | Skills | `#kompetencje` | Core competencies |
 | Blog | `#blog` | Publication previews |
@@ -233,3 +237,13 @@ Preserve these features when making changes.
 - Use `loading="lazy"` on images below the fold
 - IntersectionObserver used for efficient scroll animations
 - Particle modules are fetched only after the `load` event, so they never compete with the first paint
+
+## Case studies
+
+- `case/<slug>/index.html`: long-form pages (problem → constraints → architecture SVG → decisions with their cost →
+  evidence with source and date → lessons). Same `style.css` / `script.js` (absolute paths), styles in the
+  "CASE STUDIES" block at the end of `style.css` (`.case-*`, diagram classes `.cd-*`).
+- Every number on these pages must be verifiable in the project's repository and carry a date. Private repos
+  (Zorza, JakiePrawo, Urzędnik i AI) are never linked or named; only Parawan's code is public.
+- When adding a page: link it from the `#studia` cards, the project's carousel CTA, the pager on the other case
+  pages, `sitemap.xml` and `llms.txt`.

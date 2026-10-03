@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
+    <title data-en="Civil Servant &amp; AI: case study | Karol Polikarp Wilczyński">Urzędnik i AI: studium przypadku | Karol Polikarp Wilczyński</title>
+    <meta name="description" content="Studium przypadku: katalog 527 promptów dla administracji bez serwera i bez zapisu w przeglądarce. Ograniczenia, architektura, decyzje i dowody z testów." data-en-content="Case study: a catalogue of 527 prompts for public administration with no server and no browser storage. Constraints, architecture, decisions, test evidence.">
+    <meta name="author" content="Karol Polikarp Wilczyński">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://karolwilczynski.com/case/urzednik-i-ai/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Karol Polikarp Wilczyński">
+    <meta property="og:url" content="https://karolwilczynski.com/case/urzednik-i-ai/">
+    <meta property="og:title" content="Urzędnik i AI: studium przypadku | Karol Polikarp Wilczyński">
+    <meta property="og:description" content="Studium przypadku: katalog 527 promptów dla administracji bez serwera i bez zapisu w przeglądarce. Ograniczenia, architektura, decyzje i dowody z testów.">
+    <meta property="og:image" content="https://karolwilczynski.com/assets/images/og-card.jpg?v=3">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://karolwilczynski.com/case/urzednik-i-ai/">
+    <meta name="twitter:title" content="Urzędnik i AI: studium przypadku | Karol Polikarp Wilczyński">
+    <meta name="twitter:description" content="Studium przypadku: katalog 527 promptów dla administracji bez serwera i bez zapisu w przeglądarce. Ograniczenia, architektura, decyzje i dowody z testów.">
+    <meta name="twitter:image" content="https://karolwilczynski.com/assets/images/og-card.jpg?v=3">
+    <meta name="twitter:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <meta name="theme-color" content="#004d2b">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Urzędnik i AI: studium przypadku",
+        "description": "Studium przypadku: katalog 527 promptów dla administracji bez serwera i bez zapisu w przeglądarce. Ograniczenia, architektura, decyzje i dowody z testów.",
+        "url": "https://karolwilczynski.com/case/urzednik-i-ai/",
+        "inLanguage": "pl-PL",
+        "author": {
+            "@type": "Person",
+            "@id": "https://karolwilczynski.com/#person",
+            "name": "Karol Polikarp Wilczyński",
+            "url": "https://karolwilczynski.com"
+        },
+        "isPartOf": {
+            "@id": "https://karolwilczynski.com/#website"
+        },
+        "about": {
+            "@type": "SoftwareApplication",
+            "name": "Urzędnik i AI",
+            "url": "https://promptyurzednika.karolwilczynski.com/"
+        }
+    }
+    </script>
+
+    <!-- Fonts - async loading for faster first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="/style.css?v=86">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#tresc" class="skip-link">Przejdź do treści</a>
+
+    <nav class="nav" aria-label="Główna nawigacja" data-en-aria="Main navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Strona główna" data-en-aria="Home page">
+                <span class="logo-main">kpw<span class="logo-sparkle" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="kpwSpark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop class="kpw-stop-a" offset="0"/><stop class="kpw-stop-b" offset="1"/></linearGradient></defs><path class="logo-spark logo-spark-lg" d="M10.5 1.4C10.5 8.1 8.1 10.5 1.4 10.5C8.1 10.5 10.5 12.9 10.5 19.6C10.5 12.9 12.9 10.5 19.6 10.5C12.9 10.5 10.5 8.1 10.5 1.4Z"/><path class="logo-spark logo-spark-sm" d="M19 4C19 6.2 18.2 7 16 7C18.2 7 19 7.8 19 10C19 7.8 19.8 7 22 7C19.8 7 19 6.2 19 4Z"/></svg></span></span>
+                <span class="logo-sub">[ka‿pɛ‿ˈvu]</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/#studia"><span data-en="Case studies">Studia przypadków</span></a></li>
+                <li><a href="/#projekty"><span data-en="Projects">Projekty</span></a></li>
+                <li><a href="/#kontakt"><span data-en="Contact">Kontakt</span></a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="nav-social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/karolpwilczynski" target="_blank" rel="noopener" class="nav-social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.78M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.69 1.69 1.69 0 0 0-1.69 1.69 1.68 1.68 0 0 0 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                </a>
+            </div>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Przełącz motyw jasny/ciemny">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <button type="button" class="lang-toggle" id="langToggle" aria-label="Switch to English">
+                <span class="lang-label lang-pl">PL</span>
+                <span class="lang-label lang-en">EN</span>
+            </button>
+            <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div>
+    </nav>
+
+    <main id="tresc" class="case">
+        <header class="case-hero">
+            <div class="container case-container">
+                <nav class="case-breadcrumb" aria-label="Okruszki" data-en-aria="Breadcrumb">
+                    <a href="/"><span data-en="Home">Strona główna</span></a>
+                    <span aria-hidden="true">/</span>
+                    <a href="/#studia"><span data-en="Case studies">Studia przypadków</span></a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page" data-en="Civil Servant &amp; AI">Urzędnik i&nbsp;AI</span>
+                </nav>
+                <div class="project-tags">
+                    <span class="tag">React 19</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">D3</span>
+                    <span class="tag">Playwright</span>
+                </div>
+                <h1 class="case-title" data-en="Civil Servant &amp; AI">Urzędnik i&nbsp;AI</h1>
+                <p class="case-subtitle" data-en="A clickable map of ways to use language models in government and local administration">Klikalna mapa zastosowań modeli językowych w&nbsp;administracji rządowej i&nbsp;samorządowej</p>
+                <p class="case-lead" data-en="Anyone in public administration who wants to use a language model faces an empty window and the question of which data may be pasted where. Working with an AI assistant, I built a static catalogue of 527 prompts, each labelled with its data level; the catalogue itself sends and stores nothing — a rule enforced by the content security policy and by a test that runs in CI on every change.">Kto w&nbsp;urzędzie chce użyć modelu językowego, staje przed pustym oknem i&nbsp;pytaniem, które dane wolno gdzie wkleić. Z&nbsp;asystentem AI zbudowałem statyczny katalog 527 promptów z&nbsp;oznaczonym poziomem danych; sam katalog niczego nie wysyła ani nie zapisuje — pilnują tego polityka bezpieczeństwa treści i&nbsp;test uruchamiany w&nbsp;CI przy każdej zmianie.</p>
+                <dl class="case-facts">
+                    <div><dt data-en="Role">Rola</dt><dd data-en="Author: requirements, the starting material with the first 112 prompts, review and final design calls; code, content expansion and decision log with an AI assistant">Autor: założenia, materiał wyjściowy z&nbsp;pierwszymi 112 promptami, przegląd i&nbsp;ostateczne decyzje projektowe; kod, rozbudowa treści i&nbsp;dziennik decyzji z&nbsp;asystentem AI</dd></div>
+                    <div><dt data-en="Period">Okres</dt><dd data-en="August–September 2026">sierpień–wrzesień 2026</dd></div>
+                    <div><dt data-en="Status">Status</dt><dd data-en="Live, release 1.4.0">Działa publicznie, wydanie 1.4.0</dd></div>
+                    <div><dt data-en="Code">Kod</dt><dd data-en="Private repository">Repozytorium prywatne</dd></div>
+                </dl>
+                <div class="showcase-cta">
+                    <a href="https://promptyurzednika.karolwilczynski.com/" target="_blank" rel="noopener" class="project-link project-link-primary">
+                        <span data-en="See live">Zobacz na żywo</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+                <nav class="case-toc" aria-label="Spis treści" data-en-aria="Contents">
+                    <a href="#problem"><span data-en="Problem">Problem</span></a>
+                    <a href="#ograniczenia"><span data-en="Constraints">Ograniczenia</span></a>
+                    <a href="#architektura"><span data-en="Architecture">Architektura</span></a>
+                    <a href="#decyzje"><span data-en="Decisions">Decyzje</span></a>
+                    <a href="#dowody"><span data-en="Evidence">Dowody</span></a>
+                    <a href="#wnioski"><span data-en="Lessons">Wnioski</span></a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container case-container">
+            <section id="problem" class="case-section" aria-labelledby="h-problem">
+                <h2 class="case-h2" id="h-problem"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span data-en="Problem and context">Problem i&nbsp;kontekst</span></h2>
+                <p data-en="In a public office a language model can speed up many routine tasks: a letter, the minutes of a meeting, a table of comments on a draft. That takes two things: a prompt template that fits administrative work, and knowing which data a given prompt works with. In this catalogue 429 of the 527 prompts involve internal or sensitive data, and the data level decides which tool a prompt may be used in.">Model językowy może w&nbsp;urzędzie przyspieszyć wiele zwykłych czynności: pismo, notatkę ze spotkania, zestawienie uwag do projektu. Potrzebne są do tego dwie rzeczy: wzorzec polecenia dopasowany do pracy administracji i&nbsp;wiedza, z&nbsp;jakimi danymi dany prompt pracuje. W&nbsp;tym katalogu 429 z&nbsp;527 promptów dotyczy danych wewnętrznych albo wrażliwych, a&nbsp;poziom danych decyduje o&nbsp;tym, w&nbsp;jakim narzędziu wolno użyć promptu.</p>
+                <p data-en="I wanted a catalogue you can browse the way a civil servant thinks about the job: by task, domain, position, type of office or department. The result is a map of 527 ready-to-copy prompts in 10 areas and 56 topics, with 15 step-by-step work paths and 100 use cases that show the outcome. Every prompt has a “Check before use” section, because responsibility for the result stays with the person using the prompt.">Chciałem katalogu, który da się przeglądać tak, jak urzędnik myśli o&nbsp;swojej pracy: według zadania, dziedziny, stanowiska, rodzaju urzędu albo wydziału. Powstała mapa 527 gotowych promptów w&nbsp;10 działach i&nbsp;56 obszarach, z&nbsp;15 ścieżkami pracy krok po kroku i&nbsp;100 zastosowaniami pokazującymi wynik. Każdy prompt ma sekcję „Sprawdź przed użyciem”, bo odpowiedzialność za wynik zostaje po stronie osoby, która korzysta z&nbsp;promptu.</p>
+                <p data-en="One condition was not negotiable: a tool that shows how AI can be used in administration must not itself become an example of a data leak.">Jeden warunek nie podlegał negocjacji: narzędzie, które pokazuje zastosowania AI w&nbsp;administracji, samo nie może być przykładem wycieku danych.</p>
+            </section>
+
+            <section id="ograniczenia" class="case-section" aria-labelledby="h-ograniczenia">
+                <h2 class="case-h2" id="h-ograniczenia"><span class="case-h2-num" aria-hidden="true" translate="no">§ 2</span><span data-en="Constraints">Ograniczenia</span></h2>
+                <p data-en="Five hard conditions shaped most of the later decisions.">Pięć twardych warunków wyznaczyło większość dalszych decyzji.</p>
+                <ul class="showcase-list">
+                    <li data-en="No network and no storage in the browser: no backend, accounts, analytics or cookies. The app connects to no model — the prompt goes to the clipboard and the user decides where to paste it.">Zero sieci i&nbsp;zero zapisu w&nbsp;przeglądarce: bez backendu, kont, analityki i&nbsp;ciasteczek. Aplikacja nie łączy się z&nbsp;żadnym modelem — prompt trafia do schowka, a&nbsp;gdzie go wkleić, decyduje użytkownik.</li>
+                    <li data-en="Runs from disk and from an intranet: the bundle must open with a double click or from any subfolder of a file server, with nothing to install.">Praca z&nbsp;dysku i&nbsp;z&nbsp;intranetu: paczka ma się otworzyć dwukrotnym kliknięciem albo z&nbsp;dowolnego podkatalogu serwera plików, bez instalacji.</li>
+                    <li data-en="Stable addresses: a link to a prompt travels by e-mail and ends up in printouts, so it must lead to the same place after the catalogue grows.">Trwałe adresy: link do promptu krąży mailem i&nbsp;trafia na wydruki, więc musi prowadzić w&nbsp;to samo miejsce także po rozbudowie katalogu.</li>
+                    <li data-en="Generic content: no names of institutions, programmes, systems or people, so that a prompt fits any office.">Treść generyczna: bez nazw instytucji, programów, systemów i&nbsp;osób, żeby prompt pasował do każdego urzędu.</li>
+                    <li data-en="Editing without programming: a new prompt is added to a text file, and an error must be explained in plain words, with the file name and line number.">Edycja bez programowania: nowy prompt dopisuje się do pliku tekstowego, a&nbsp;błąd ma być opisany słowami, z&nbsp;nazwą pliku i&nbsp;numerem wiersza.</li>
+                </ul>
+            </section>
+
+            <section id="architektura" class="case-section" aria-labelledby="h-architektura">
+                <h2 class="case-h2" id="h-architektura"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span data-en="Architecture">Architektura</span></h2>
+                <p data-en="The prompts live in Markdown files, one for each of the ten areas; a separate file describes the whole map, and the work paths and use cases sit in two JSON files. Each prompt has fields with a fixed meaning, among them: when to use it, data level, types of office, positions, domains, department, the prompt itself and a mandatory check. Values come from closed lists kept in one place, from which the types in the code are also derived. The parser rejects anything outside the lists and stops the build, naming the file and line. The CI gate also runs two editorial checks: a test that every prompt tells the model to say what it doesn’t know instead of guessing, and a genericity guard that catches proper names.">Prompty leżą w&nbsp;plikach Markdown, po jednym na każdy z&nbsp;dziesięciu działów; osobny plik opisuje całą mapę, a&nbsp;ścieżki pracy i&nbsp;zastosowania są w&nbsp;dwóch plikach JSON. Prompt ma pola o&nbsp;stałym znaczeniu, m.in.: kiedy użyć, poziom danych, rodzaje urzędów, stanowiska, dziedziny, wydział, treść i&nbsp;obowiązkową weryfikację. Wartości pochodzą z&nbsp;zamkniętych list zapisanych w&nbsp;jednym miejscu, z&nbsp;którego wynikają też typy w&nbsp;kodzie. Parser odrzuca wszystko spoza list i&nbsp;przerywa budowanie, podając plik i&nbsp;wiersz. W&nbsp;bramce CI działają dodatkowo dwie kontrole redakcyjne: test, czy każdy prompt każe modelowi napisać, czego nie wie, zamiast zgadywać, oraz strażnik generyczności wyłapujący nazwy własne.</p>
+                <p data-en="These files become a single data model built into a static bundle. Nothing is fetched while the app runs, so a single-file version that opens from disk works too. In the browser, seven views, from a map with five lenses to a plain list, read the same model, while the chosen persona and the folder of set-aside prompts live only in the address. The bundle reaches production only through the CI gate, into two copies with identical security headers.">Z&nbsp;tych plików powstaje jeden model danych wbudowany w&nbsp;statyczną paczkę. Nic nie jest pobierane w&nbsp;trakcie pracy, więc działa też wariant jednoplikowy otwierany z&nbsp;dysku. W&nbsp;przeglądarce siedem widoków, od mapy z&nbsp;pięcioma soczewkami po zwykłą listę, czyta ten sam model, a&nbsp;wybór persony i&nbsp;teczka odłożonych promptów żyją wyłącznie w&nbsp;adresie. Na produkcję paczka trafia tylko przez bramkę CI, do dwóch kopii z&nbsp;identycznymi nagłówkami bezpieczeństwa.</p>
+                <figure class="case-diagram">
+                    <svg viewBox="0 0 360 502" role="img" aria-labelledby="arch-title arch-desc">
+                        <title id="arch-title" data-en="From content file to browser">Od pliku z&nbsp;treścią do przeglądarki</title>
+                        <desc id="arch-desc" data-en="Content in Markdown and JSON files passes through the parser and the address registry into a static bundle with the data built in. After a green CI gate, which also runs the editorial checks, the bundle goes to two production copies; the browser keeps the shareable state in the address and stores nothing.">Treść w&nbsp;plikach Markdown i&nbsp;JSON przechodzi przez parser i&nbsp;rejestr adresów do statycznej paczki z&nbsp;wbudowanymi danymi. Po zielonej bramce CI, w&nbsp;której działają też kontrole redakcyjne, paczka trafia do dwóch kopii produkcyjnych, a&nbsp;przeglądarka trzyma stan do udostępnienia w&nbsp;adresie i&nbsp;niczego nie zapisuje.</desc>
+                        <defs>
+                            <marker id="cd-arrow-urzednik-i-ai" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path class="cd-arrow" d="M0 0L10 5L0 10z"/>
+                            </marker>
+                        </defs>
+                        <rect class="cd-box" x="20" y="10" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="31" text-anchor="middle" data-en="Content: Markdown and JSON">Treść: Markdown i JSON</text>
+                        <text class="cd-note" x="180" y="49" text-anchor="middle" data-en="527 prompts, 15 paths, 100 use cases">527 promptów, 15 ścieżek, 100 zastosowań</text>
+                        <path class="cd-edge" d="M180 62V92" marker-end="url(#cd-arrow-urzednik-i-ai)"/>
+
+                        <rect class="cd-box cd-box--key" x="20" y="96" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="117" text-anchor="middle" data-en="Parser and address registry">Parser i rejestr adresów</text>
+                        <text class="cd-note" x="180" y="135" text-anchor="middle" data-en="faulty content or address stops the build">błędna treść lub adres zatrzymuje budowanie</text>
+                        <path class="cd-edge" d="M180 148V178" marker-end="url(#cd-arrow-urzednik-i-ai)"/>
+
+                        <rect class="cd-box" x="20" y="182" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="203" text-anchor="middle" data-en="Static bundle with the data">Statyczna paczka z danymi</text>
+                        <text class="cd-note" x="180" y="221" text-anchor="middle" data-en="fetches nothing; one file runs from disk">nic nie pobiera; jeden plik działa z dysku</text>
+                        <path class="cd-edge" d="M180 234V264" marker-end="url(#cd-arrow-urzednik-i-ai)"/>
+
+                        <rect class="cd-box" x="20" y="268" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="289" text-anchor="middle" data-en="CI gate: checks and tests">Bramka CI: kontrole i testy</text>
+                        <text class="cd-note" x="180" y="307" text-anchor="middle" data-en="publishes only after a green run">publikacja tylko po zielonym przebiegu</text>
+                        <path class="cd-edge" d="M97.5 320V350" marker-end="url(#cd-arrow-urzednik-i-ai)"/>
+                        <path class="cd-edge" d="M262.5 320V350" marker-end="url(#cd-arrow-urzednik-i-ai)"/>
+
+                        <rect class="cd-box cd-box--ext" x="20" y="354" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="97.5" y="375" text-anchor="middle" data-en="External hosting">Hosting zewnętrzny</text>
+                        <text class="cd-note" x="97.5" y="393" text-anchor="middle" data-en="main address">adres główny</text>
+                        <rect class="cd-box cd-box--ext" x="185" y="354" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="262.5" y="375" text-anchor="middle" data-en="Raspberry Pi">Raspberry Pi</text>
+                        <text class="cd-note" x="262.5" y="393" text-anchor="middle" data-en="same commit">ten sam commit</text>
+                        <path class="cd-edge" d="M97.5 406V436" marker-end="url(#cd-arrow-urzednik-i-ai)"/>
+                        <path class="cd-edge" d="M262.5 406V436" marker-end="url(#cd-arrow-urzednik-i-ai)"/>
+
+                        <rect class="cd-box cd-box--key" x="20" y="440" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="461" text-anchor="middle" data-en="Browser: seven views">Przeglądarka: siedem widoków</text>
+                        <text class="cd-note" x="180" y="479" text-anchor="middle" data-en="shareable state in the address; no storage">stan do udostępnienia w adresie, bez zapisu</text>
+                    </svg>
+                    <figcaption data-en="The gold frames mark where the key decisions sit: the parser with its address registry, which stops the build when content or an address is wrong, and the browser, where the state worth keeping fits in the address. The dashed boxes are the two production copies, built from the same commit.">Złotą ramką zaznaczyłem miejsca kluczowych decyzji: parser z&nbsp;rejestrem adresów, który przerywa budowanie, gdy treść albo adres są błędne, i&nbsp;przeglądarkę, w&nbsp;której stan do zachowania mieści się w&nbsp;adresie. Linią przerywaną — dwie kopie produkcyjne budowane z&nbsp;tego samego commita.</figcaption>
+                </figure>
+            </section>
+
+            <section id="decyzje" class="case-section" aria-labelledby="h-decyzje">
+                <h2 class="case-h2" id="h-decyzje"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span data-en="Key decisions">Kluczowe decyzje</span></h2>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="State in the address, not in the browser">Stan w&nbsp;adresie, nie w&nbsp;przeglądarce</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="After loading, the app makes no requests and stores nothing. The persona and the prompt folder are part of the address; the folder is a link the user copies and keeps.">Po załadowaniu aplikacja nie wykonuje żadnych żądań i&nbsp;niczego nie zapisuje. Persona i&nbsp;teczka promptów są częścią adresu; teczka to link, który użytkownik sam kopiuje i&nbsp;przechowuje.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Favourites in browser storage, or user accounts with data stored on a server.">Ulubione w&nbsp;pamięci przeglądarki albo konta z&nbsp;zapisem na serwerze.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="The browser enforces the network rule, not my discipline: the content security policy sets “connect-src 'none'”. End-to-end tests walk through the views and check that no request leaves the page and that localStorage, sessionStorage and cookies stay empty.">Sieci pilnuje przeglądarka, a&nbsp;nie moja dyscyplina: polityka bezpieczeństwa treści ma „connect-src 'none'”. Testy end-to-end (E2E) przechodzą przez widoki i&nbsp;sprawdzają, że nie wyszło żadne żądanie, a&nbsp;localStorage, sessionStorage i&nbsp;ciasteczka są puste.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="Closing the tab without copying the link erases the folder, and anything typed into a prompt’s fields disappears with the tab — the view says so plainly. I also have no way of knowing which prompts and views are used: the hosting sees only technical logs of page visits.">Zamknięcie karty bez skopiowania linku kasuje teczkę, a&nbsp;treść wpisana w&nbsp;pola promptu ginie razem z&nbsp;kartą — widok mówi to wprost. Nie wiem też, które prompty i&nbsp;widoki są używane: hosting widzi tylko techniczne logi wejść na stronę.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="The slug as a public address">Slug jako publiczny adres</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="A prompt’s address is built from the full slug of its title. A registry holds the 531 addresses (527 prompts and 4 information nodes) that have gone public; changing a title requires an entry in the redirect file, otherwise the build stops.">Prompt ma adres zbudowany z&nbsp;pełnego slugu tytułu. Rejestr trzyma 531 adresów (527 promptów i&nbsp;4 węzły informacyjne), które wyszły na zewnątrz; zmiana tytułu wymaga wpisu w&nbsp;pliku przekierowań, inaczej budowanie się przerywa.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Position numbers in the tree — a folder’s address would be many times shorter.">Numery pozycji w&nbsp;drzewie — adres teczki byłby wielokrotnie krótszy.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="A number is a position in the file, so adding a prompt in the middle shifts links that were already shared — silently: a link printed on Friday shows different prompts on Monday and still looks fine. One stage of work added 156 prompts. That is why addresses are part of the versioning rules: a slug change without a redirect is a major release.">Numer to pozycja w&nbsp;pliku, więc dopisanie promptu w&nbsp;środku przestawia wydane wcześniej linki, i&nbsp;to po cichu: link wydrukowany w&nbsp;piątek w&nbsp;poniedziałek pokazuje inne prompty i&nbsp;wygląda na działający. W&nbsp;jednym etapie prac przybyło 156 promptów. Dlatego adresy są częścią zasad wersjonowania: zmiana slugu bez przekierowania to wydanie główne.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="Long links: measured with 526 prompts, a folder of twenty items makes a URL parameter of about 900 characters, and one with the twenty longest titles about 1,300. Every title edit means an extra entry, and the registry can only grow. Addresses of map branches (areas and topics) stay outside the registry, so renaming one still breaks a shared link.">Długie linki: w&nbsp;pomiarze przy 526 promptach dwadzieścia pozycji w&nbsp;teczce to około 900 znaków parametru, a&nbsp;dwadzieścia najdłuższych tytułów — około 1300. Każda redakcja tytułu to dodatkowy wpis, a&nbsp;rejestr może tylko rosnąć. Adresy gałęzi mapy (działów i&nbsp;obszarów) zostały poza rejestrem, więc zmiana ich nazwy nadal psuje cudzy link.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="A search index, with the old version as the reference">Indeks wyszukiwania ze starą wersją jako wzorcem</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="Search uses an inverted index built once, when the browser is first idle. The previous implementation stays in the tests as a reference the new one must match result for result.">Wyszukiwarka korzysta z&nbsp;indeksu odwróconego liczonego raz, w&nbsp;pierwszej wolnej chwili przeglądarki. Dawna implementacja została w&nbsp;testach jako wzorzec, z&nbsp;którym nowa musi się zgadzać co do wyniku.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="A pass over the whole catalogue on every keystroke, with a 150&nbsp;ms delay.">Przejście po całym katalogu przy każdym wciśniętym klawiszu, z&nbsp;opóźnieniem 150&nbsp;ms.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="Each keystroke meant 2,630 tokenisations (with 526 prompts, measured on 31 Aug 2026), and the phrase “notatka ze spotkania” (meeting notes) took 13.6&nbsp;ms; with the index, 0.34&nbsp;ms. The equivalence test caught a bug in the new version straight away: for a query spread across several fields the result differed by 9 prompts out of 68.">Każde wciśnięcie klawisza oznaczało 2630 tokenizacji (przy 526 promptach, pomiar z&nbsp;31.08.2026), a&nbsp;fraza „notatka ze spotkania” kosztowała 13,6&nbsp;ms; na indeksie 0,34&nbsp;ms. Test równoważności od razu złapał błąd nowej wersji: przy zapytaniu rozłożonym na kilka pól wynik różnił się o&nbsp;9 promptów z&nbsp;68.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="Building the index takes time that has to be paid somewhere. Built at start-up, it delayed the first render, even of views that never search (178&nbsp;ms instead of 144); deferred to the first query, it delayed the first keystroke (49&nbsp;ms instead of 30). Only the browser’s first idle moment gave both: 144&nbsp;ms to first render and 18–22&nbsp;ms for the first keystroke (measured on 3 Sep 2026). The reference has to be maintained alongside the code.">Budowa indeksu kosztuje czas, który trzeba gdzieś zapłacić. Liczony przy starcie indeks opóźniał pierwsze wyrenderowanie, także widoków bez wyszukiwania (178&nbsp;ms zamiast 144), a&nbsp;odłożony do pierwszego zapytania — pierwszy wpisany znak (49&nbsp;ms zamiast 30). Dopiero pierwsza wolna chwila przeglądarki dała jedno i&nbsp;drugie: 144&nbsp;ms do pierwszego wyrenderowania i&nbsp;18–22&nbsp;ms na pierwszy znak (pomiar z&nbsp;3.09.2026). Wzorzec trzeba utrzymywać razem z&nbsp;kodem.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="Publishing only after a green gate">Publikacja tylko po zielonej bramce</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="Both production copies are published from a separate branch that only a green CI run can move: unit and end-to-end tests, accessibility checks, size and performance budgets. The copy on a Raspberry Pi builds from the same commit and sends the same headers, guarded by a test that compares both configurations.">Obie kopie produkcyjne są publikowane z&nbsp;osobnej gałęzi, którą przesuwa wyłącznie zielony przebieg CI: testy jednostkowe i&nbsp;E2E, kontrola dostępności, budżety wielkości i&nbsp;wydajności. Kopia na Raspberry Pi buduje się z&nbsp;tego samego commita i&nbsp;wysyła te same nagłówki; pilnuje tego test porównujący obie konfiguracje.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Publishing every commit to the main branch — as before, when code reached the public address in 20 seconds without tests — or hosting that does not allow custom HTTP headers.">Publikacja każdego commita na gałęzi głównej — tak było wcześniej, kod trafiał na publiczny adres w&nbsp;20 sekund, bez testów — albo hosting, na którym nie da się ustawić własnych nagłówków HTTP.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="Two addresses of the same app with different security levels mean the weaker one ends up in office e-mails anyway. The gate works: it stopped the first push of release 1.4.0, because in CI on Linux the Matrix printout (the departments sheet with a persona) ran 0.4&nbsp;px past the printable area, while on Windows it had 44&nbsp;px to spare.">Dwa adresy tej samej aplikacji o&nbsp;różnym poziomie zabezpieczeń oznaczają, że słabszy i&nbsp;tak trafi do maili w&nbsp;urzędach. Bramka działa: zatrzymała pierwszy push wydania 1.4.0, bo w&nbsp;CI na Linuksie wydruk Macierzy (kartka wydziałów z&nbsp;personą) wychodził 0,4&nbsp;px za pole strony, a&nbsp;na Windowsie miał 44&nbsp;px zapasu.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="Time from commit to publication grew from seconds to a dozen or so minutes, and the second copy means a separate update script and a separate test to maintain.">Czas od commita do publikacji wzrósł z&nbsp;sekund do kilkunastu minut, a&nbsp;druga kopia to osobny skrypt aktualizacji i&nbsp;osobny test do utrzymania.</dd>
+                        </dl>
+                    </article>
+                </div>
+            </section>
+
+            <section id="dowody" class="case-section" aria-labelledby="h-dowody">
+                <h2 class="case-h2" id="h-dowody"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span data-en="Evidence">Dowody</span></h2>
+                <p data-en="The figures come from the repository: tests in the gate, measurements recorded with each change, and the release history.">Liczby pochodzą z&nbsp;repozytorium: z&nbsp;testów w&nbsp;bramce, z&nbsp;pomiarów zapisanych przy zmianach i&nbsp;z&nbsp;historii wydań.</p>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="527/527">527/527</span>
+                        <span class="case-stat-label" data-en="prompts tell the model to say what it doesn’t know instead of guessing">promptów każe modelowi napisać, czego nie wie, zamiast zgadywać</span>
+                        <span class="case-stat-source" data-en="editorial test in the gate · 2026-09-27">test redakcyjny w&nbsp;bramce · 2026-09-27</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="0">0</span>
+                        <span class="case-stat-label" data-en="network requests after loading — checked by a test that walks through the views">żądań sieciowych po załadowaniu — sprawdza to test przechodzący przez widoki</span>
+                        <span class="case-stat-source" data-en="end-to-end test · 2026-09-27">test E2E · 2026-09-27</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="0.34&nbsp;ms">0,34&nbsp;ms</span>
+                        <span class="case-stat-label" data-en="phrase search on the index; previously 13.6&nbsp;ms per keystroke">wyszukanie frazy na indeksie; wcześniej 13,6&nbsp;ms na każdy znak</span>
+                        <span class="case-stat-source" data-en="measurement with the change · 2026-08-31">pomiar przy zmianie · 2026-08-31</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="136.0&nbsp;kB">136,0&nbsp;kB</span>
+                        <span class="case-stat-label" data-en="of code after gzip compression, measured on the day I removed the animation library; previously 176.7&nbsp;kB">kodu po kompresji gzip w&nbsp;dniu usunięcia biblioteki animacji; wcześniej 176,7&nbsp;kB</span>
+                        <span class="case-stat-source" data-en="budget measurement with the change · 2026-09-23">pomiar budżetów przy zmianie · 2026-09-23</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="682">682</span>
+                        <span class="case-stat-label" data-en="unit tests and 485 end-to-end tests on Chromium in the gate; WebKit runs the same end-to-end tests as a non-blocking check">testy jednostkowe i&nbsp;485 testów E2E na Chromium w&nbsp;bramce; na WebKicie te same testy E2E działają jako sprawdzenie nieblokujące</span>
+                        <span class="case-stat-source" data-en="project documentation · 2026-09-27">dokumentacja projektu · 2026-09-27</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="356">356</span>
+                        <span class="case-stat-label" data-en="entries in the decision log; most technical decisions were made and justified by the AI assistant, as the brief instructed, and my feedback and calls are recorded there explicitly">wpisów w&nbsp;dzienniku decyzji; większość decyzji technicznych podejmował i&nbsp;uzasadniał asystent AI zgodnie z&nbsp;briefem, a&nbsp;moje uwagi i&nbsp;rozstrzygnięcia są w&nbsp;dzienniku zapisane wprost jako takie</span>
+                        <span class="case-stat-source" data-en="decision log · 2026-09-27">dziennik decyzji · 2026-09-27</span>
+                    </div>
+                </div>
+                <p class="case-source-note" data-en="Figures from the project’s private repository as of 27 Sep 2026 (release 1.4.0); performance measurements are dated to the change they belong to. No user data — the app collects none.">Liczby z&nbsp;prywatnego repozytorium projektu, stan na 27.09.2026 (wydanie 1.4.0); pomiary wydajności mają datę zmiany, której dotyczą. Bez danych o&nbsp;użytkownikach — aplikacja ich nie zbiera.</p>
+            </section>
+
+            <section id="wnioski" class="case-section" aria-labelledby="h-wnioski">
+                <h2 class="case-h2" id="h-wnioski"><span class="case-h2-num" aria-hidden="true" translate="no">§ 6</span><span data-en="What I learned">Czego się nauczyłem</span></h2>
+                <ul class="showcase-list">
+                    <li data-en="A rule enforced by the browser or a test survives later changes; a rule written only in the documentation may not.">Zasada, której pilnuje przeglądarka albo test, przetrwa kolejne zmiany; zasada zapisana tylko w&nbsp;dokumentacji — niekoniecznie.</li>
+                    <li data-en="In administration a link is a document: it travels by e-mail and ends up in notes and printouts. An address has to be designed like a public interface — with a registry and redirects, not a promise in the documentation.">W&nbsp;administracji link jest dokumentem: krąży mailem, trafia do notatek i&nbsp;wydruków. Adres trzeba projektować jak interfejs publiczny — z&nbsp;rejestrem i&nbsp;przekierowaniami, a&nbsp;nie z&nbsp;obietnicą w&nbsp;dokumentacji.</li>
+                    <li data-en="A check that reports “clean” can be blind. Proper names sat in the data for five stages of work, because neither of the guard’s first two patterns caught a name written with an ordinary initial capital. An automated check has to be tried on an example it should catch.">Kontrola, która melduje „czysto”, może być ślepa. Nazwy własne tkwiły w&nbsp;danych przez pięć etapów prac, bo żaden z&nbsp;dwóch pierwszych wzorców strażnika nie łapał nazwy pisanej zwykłą wielką literą. Automatyczną kontrolę trzeba sprawdzić na przykładzie, który powinna złapać.</li>
+                    <li data-en="Numbers in descriptions and tests should be derived from the data. A number typed by hand goes stale with the first new prompt, so the page description and the test assertions take it from the model.">Liczby w&nbsp;opisie i&nbsp;w&nbsp;testach powinny wynikać z&nbsp;danych. Liczba wpisana ręcznie dezaktualizuje się po pierwszym dopisanym prompcie, dlatego opis strony i&nbsp;asercje testów biorą ją z&nbsp;modelu.</li>
+                </ul>
+            </section>
+
+            <nav class="case-pager" aria-label="Inne studia przypadków" data-en-aria="Other case studies">
+                <a class="case-pager-link" href="/case/parawan/">
+                    <span class="case-pager-dir" data-en="← Previous">← Poprzednie</span>
+                    <span class="case-pager-title">Parawan</span>
+                </a>
+                <a class="case-pager-link case-pager-link--next" href="/case/zorza/">
+                    <span class="case-pager-dir" data-en="Next →">Następne →</span>
+                    <span class="case-pager-title">Zorza</span>
+                </a>
+            </nav>
+            <p class="case-back"><a class="btn btn-secondary" href="/#projekty"><span data-en="All projects">Wszystkie projekty</span></a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-start">
+                    <button type="button" class="start-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        <span class="start-icon" aria-hidden="true">🖥️</span>
+                        <span>Start</span>
+                    </button>
+                </div>
+                <div class="footer-center">
+                    <p class="footer-tech">© 2025-2026 Karol Wilczyński</p>
+                </div>
+                <div class="footer-clock">
+                    <span id="clock">00:00</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js?v=45" defer></script>
+</body>
+</html>
