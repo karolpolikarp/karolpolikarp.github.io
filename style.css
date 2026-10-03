@@ -4155,6 +4155,18 @@ section {
     font-size: var(--text-md);
 }
 
+/* Phones: the secondary links (case study, GitHub) wrap under the primary button; keep their rows text-height
+   so the extra link doesn't make every slide in the carousel taller. */
+@media (max-width: 767px) {
+    .showcase-cta {
+        row-gap: 0;
+    }
+
+    .showcase-cta .project-link:not(.project-link-primary) {
+        padding: var(--space-sm) 0;
+    }
+}
+
 /* --- Controls (arrows, dots, counter) --- */
 .showcase-controls {
     display: flex;
