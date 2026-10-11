@@ -112,14 +112,14 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="style.css?v=86">
+    <link rel="stylesheet" href="style.css?v=87">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
     <a href="#hero" class="skip-link">Przejdź do treści</a>
 
 
-    <nav class="nav" role="navigation" aria-label="Główna nawigacja">
+    <nav class="nav" role="navigation" aria-label="Główna nawigacja" data-en-aria="Main navigation">
         <div class="nav-container">
             <a href="#" class="nav-logo">
                 <span class="logo-main">kpw<span class="logo-sparkle" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="kpwSpark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop class="kpw-stop-a" offset="0"/><stop class="kpw-stop-b" offset="1"/></linearGradient></defs><path class="logo-spark logo-spark-lg" d="M10.5 1.4C10.5 8.1 8.1 10.5 1.4 10.5C8.1 10.5 10.5 12.9 10.5 19.6C10.5 12.9 12.9 10.5 19.6 10.5C12.9 10.5 10.5 8.1 10.5 1.4Z"/><path class="logo-spark logo-spark-sm" d="M19 4C19 6.2 18.2 7 16 7C18.2 7 19 7.8 19 10C19 7.8 19.8 7 22 7C19.8 7 19 6.2 19 4Z"/></svg></span></span>
@@ -138,7 +138,7 @@
                     <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.78M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.69 1.69 1.69 0 0 0-1.69 1.69 1.68 1.68 0 0 0 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                 </a>
             </div>
-            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Przełącz motyw jasny/ciemny">
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Przełącz motyw jasny/ciemny" data-en-aria="Toggle light/dark theme">
                 <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="5"/>
                     <line x1="12" y1="1" x2="12" y2="3"/>
@@ -385,7 +385,7 @@
                         <div class="showcase-track">
 
                             <!-- Slide 1: Zorza -->
-                            <article class="showcase-slide" role="group" aria-label="1 z 7: Zorza">
+                            <article class="showcase-slide" role="group" aria-label="1 z 7: Zorza" data-en-aria="1 of 7: Zorza">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -395,7 +395,7 @@
                                             <span class="showcase-url" data-en="zorza.karolwilczynski.com · dashboard">zorza.karolwilczynski.com · pulpit</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img showcase-img--contain" src="assets/images/zorza.webp" alt="Zrzut ekranu: Zorza" loading="lazy">
+                                            <img class="showcase-img showcase-img--contain" src="assets/images/zorza.webp" alt="Zrzut ekranu: Zorza" data-en-alt="Screenshot: Zorza" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -403,10 +403,10 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/zorza.webp" aria-label="Zrzut 1"><img src="assets/images/zorza.webp" alt="" loading="lazy"></button>
-                                        <button type="button" class="showcase-thumb" data-src="assets/images/zorza-karta.webp" aria-label="Zrzut 2"><img src="assets/images/zorza-karta.webp" alt="" loading="lazy"></button>
-                                        <button type="button" class="showcase-thumb" data-src="assets/images/zorza-mapa.webp?v=2" aria-label="Zrzut 3"><img src="assets/images/zorza-mapa.webp?v=2" alt="" loading="lazy"></button>
-                                        <button type="button" class="showcase-thumb" data-src="assets/images/zorza-wykres.webp?v=2" aria-label="Zrzut 4"><img src="assets/images/zorza-wykres.webp?v=2" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/zorza.webp" aria-label="Zrzut 1" data-en-aria="Screenshot 1"><img src="assets/images/zorza.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/zorza-karta.webp" aria-label="Zrzut 2" data-en-aria="Screenshot 2"><img src="assets/images/zorza-karta.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/zorza-mapa.webp?v=2" aria-label="Zrzut 3" data-en-aria="Screenshot 3"><img src="assets/images/zorza-mapa.webp?v=2" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/zorza-wykres.webp?v=2" aria-label="Zrzut 4" data-en-aria="Screenshot 4"><img src="assets/images/zorza-wykres.webp?v=2" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
@@ -420,7 +420,7 @@
                                     <h3 class="showcase-title">Zorza</h3>
                                     <p class="showcase-subtitle" data-en="Real-time information listening post">Nasłuch informacyjny w czasie rzeczywistym</p>
 
-                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: Zorza">
+                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: Zorza" data-en-aria="Details: Zorza">
                                         <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-zorza-opis" aria-controls="panel-zorza-opis" data-en="Overview">Opis</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-zorza-tech" aria-controls="panel-zorza-tech" data-en="Technical">Techniczne</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-zorza-chall" aria-controls="panel-zorza-chall" data-en="Challenges">Wyzwania</button>
@@ -468,7 +468,7 @@
                             </article>
 
                             <!-- Slide 2: Parawan -->
-                            <article class="showcase-slide" role="group" aria-label="2 z 7: Parawan">
+                            <article class="showcase-slide" role="group" aria-label="2 z 7: Parawan" data-en-aria="2 of 7: Parawan">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -478,7 +478,7 @@
                                             <span class="showcase-url" data-en="Parawan · local HTML file">Parawan · lokalny plik HTML</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img" src="assets/images/parawan.webp" alt="Zrzut ekranu: Parawan" loading="lazy">
+                                            <img class="showcase-img" src="assets/images/parawan.webp" alt="Zrzut ekranu: Parawan" data-en-alt="Screenshot: Parawan" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -486,21 +486,21 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/parawan.webp" aria-label="Zrzut 1"><img src="assets/images/parawan.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/parawan.webp" aria-label="Zrzut 1" data-en-aria="Screenshot 1"><img src="assets/images/parawan.webp" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
                                     <div class="project-tags">
                                         <span class="tag">TypeScript</span>
                                         <span class="tag">Offline</span>
-                                        <span class="tag">Regex + sumy kontrolne</span>
+                                        <span class="tag" data-en="Regex + checksums">Regex + sumy kontrolne</span>
                                         <span class="tag">Zero-deps</span>
                                         <span class="tag tag-year">2026</span>
                                     </div>
                                     <h3 class="showcase-title">Parawan</h3>
                                     <p class="showcase-subtitle" data-en="Local anonymizer for Polish personal data">Lokalny anonimizator polskich danych osobowych</p>
 
-                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: Parawan">
+                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: Parawan" data-en-aria="Details: Parawan">
                                         <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-parawan-opis" aria-controls="panel-parawan-opis" data-en="Overview">Opis</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-parawan-tech" aria-controls="panel-parawan-tech" data-en="Technical">Techniczne</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-parawan-chall" aria-controls="panel-parawan-chall" data-en="Challenges">Wyzwania</button>
@@ -552,7 +552,7 @@
                             </article>
 
                             <!-- Slide 3: JakiePrawo.pl -->
-                            <article class="showcase-slide" role="group" aria-label="3 z 7: JakiePrawo.pl">
+                            <article class="showcase-slide" role="group" aria-label="3 z 7: JakiePrawo.pl" data-en-aria="3 of 7: JakiePrawo.pl">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -562,7 +562,7 @@
                                             <span class="showcase-url">jakieprawo.pl</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img" src="assets/images/obraz_2026-01-09_205957107.webp" alt="Zrzut ekranu:JakiePrawo.pl" loading="lazy">
+                                            <img class="showcase-img" src="assets/images/obraz_2026-01-09_205957107.webp" alt="Zrzut ekranu: JakiePrawo.pl" data-en-alt="Screenshot: JakiePrawo.pl" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -570,7 +570,7 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/obraz_2026-01-09_205957107.webp" aria-label="Zrzut 1"><img src="assets/images/obraz_2026-01-09_205957107.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/obraz_2026-01-09_205957107.webp" aria-label="Zrzut 1" data-en-aria="Screenshot 1"><img src="assets/images/obraz_2026-01-09_205957107.webp" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
@@ -584,7 +584,7 @@
                                     <h3 class="showcase-title">JakiePrawo.pl <span class="project-badge-alpha">BETA</span></h3>
                                     <p class="showcase-subtitle" data-en="AI-powered Polish law search engine">Wyszukiwarka polskiego prawa z AI</p>
 
-                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: JakiePrawo.pl">
+                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: JakiePrawo.pl" data-en-aria="Details: JakiePrawo.pl">
                                         <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-prawo-opis" aria-controls="panel-prawo-opis" data-en="Overview">Opis</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-prawo-tech" aria-controls="panel-prawo-tech" data-en="Technical">Techniczne</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-prawo-chall" aria-controls="panel-prawo-chall" data-en="Challenges">Wyzwania</button>
@@ -631,7 +631,7 @@
                             </article>
 
                             <!-- Slide 4: UpFor.pl -->
-                            <article class="showcase-slide" role="group" aria-label="4 z 7: UpFor.pl">
+                            <article class="showcase-slide" role="group" aria-label="4 z 7: UpFor.pl" data-en-aria="4 of 7: UpFor.pl">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -641,7 +641,7 @@
                                             <span class="showcase-url" data-en="upfor.pl · home">upfor.pl · strona główna</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img showcase-img--contain" src="assets/images/upfor.webp?v=4" alt="Zrzut ekranu: upfor" loading="lazy">
+                                            <img class="showcase-img showcase-img--contain" src="assets/images/upfor.webp?v=4" alt="Zrzut ekranu: UpFor.pl" data-en-alt="Screenshot: UpFor.pl" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -649,10 +649,10 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/upfor.webp?v=4" aria-label="Zrzut 1"><img src="assets/images/upfor.webp?v=4" alt="" loading="lazy"></button>
-                                        <button type="button" class="showcase-thumb" data-src="assets/images/upfor-kalendarz.webp?v=2" aria-label="Zrzut 2"><img src="assets/images/upfor-kalendarz.webp?v=2" alt="" loading="lazy"></button>
-                                        <button type="button" class="showcase-thumb" data-src="assets/images/upfor-grupa.webp?v=2" aria-label="Zrzut 3"><img src="assets/images/upfor-grupa.webp?v=2" alt="" loading="lazy"></button>
-                                        <button type="button" class="showcase-thumb" data-src="assets/images/upfor-ai.webp?v=2" aria-label="Zrzut 4"><img src="assets/images/upfor-ai.webp?v=2" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/upfor.webp?v=4" aria-label="Zrzut 1" data-en-aria="Screenshot 1"><img src="assets/images/upfor.webp?v=4" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/upfor-kalendarz.webp?v=2" aria-label="Zrzut 2" data-en-aria="Screenshot 2"><img src="assets/images/upfor-kalendarz.webp?v=2" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/upfor-grupa.webp?v=2" aria-label="Zrzut 3" data-en-aria="Screenshot 3"><img src="assets/images/upfor-grupa.webp?v=2" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/upfor-ai.webp?v=2" aria-label="Zrzut 4" data-en-aria="Screenshot 4"><img src="assets/images/upfor-ai.webp?v=2" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
@@ -666,7 +666,7 @@
                                     <h3 class="showcase-title">UpFor.pl <span class="project-badge-alpha">BETA</span></h3>
                                     <p class="showcase-subtitle" data-en="Gaming availability calendar with AI">Kalendarz dostępności gamingowej z AI</p>
 
-                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: upfor">
+                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: UpFor.pl" data-en-aria="Details: UpFor.pl">
                                         <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-upfor-opis" aria-controls="panel-upfor-opis" data-en="Overview">Opis</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-upfor-tech" aria-controls="panel-upfor-tech" data-en="Technical">Techniczne</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-upfor-chall" aria-controls="panel-upfor-chall" data-en="Challenges">Wyzwania</button>
@@ -710,7 +710,7 @@
                             </article>
 
                             <!-- Slide 5: AutoMargiela -->
-                            <article class="showcase-slide" role="group" aria-label="5 z 7: AutoMargiela">
+                            <article class="showcase-slide" role="group" aria-label="5 z 7: AutoMargiela" data-en-aria="5 of 7: AutoMargiela">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -720,7 +720,7 @@
                                             <span class="showcase-url">replica.karolwilczynski.com</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img showcase-img--contain" src="assets/images/margiela.webp?v=3" alt="Zrzut ekranu:AutoMargiela" loading="lazy">
+                                            <img class="showcase-img showcase-img--contain" src="assets/images/margiela.webp?v=3" alt="Zrzut ekranu: AutoMargiela" data-en-alt="Screenshot: AutoMargiela" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -728,7 +728,7 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/margiela.webp?v=3" aria-label="Zrzut 1"><img src="assets/images/margiela.webp?v=3" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/margiela.webp?v=3" aria-label="Zrzut 1" data-en-aria="Screenshot 1"><img src="assets/images/margiela.webp?v=3" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
@@ -741,7 +741,7 @@
                                     <h3 class="showcase-title">AutoMargiela</h3>
                                     <p class="showcase-subtitle" data-en="Price monitoring with drop alerts">Monitoring cen z alertami o spadkach</p>
 
-                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: AutoMargiela">
+                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: AutoMargiela" data-en-aria="Details: AutoMargiela">
                                         <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-margiela-opis" aria-controls="panel-margiela-opis" data-en="Overview">Opis</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-margiela-tech" aria-controls="panel-margiela-tech" data-en="Technical">Techniczne</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-margiela-chall" aria-controls="panel-margiela-chall" data-en="Challenges">Wyzwania</button>
@@ -783,7 +783,7 @@
                             </article>
 
                             <!-- Slide 6: Majeranek -->
-                            <article class="showcase-slide" role="group" aria-label="6 z 7: Majeranek">
+                            <article class="showcase-slide" role="group" aria-label="6 z 7: Majeranek" data-en-aria="6 of 7: Majeranek">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
@@ -793,7 +793,7 @@
                                             <span class="showcase-url" data-en="majeranek.vercel.app · home">majeranek.vercel.app · strona główna</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img" src="assets/images/majeranek.webp?v=3" alt="Zrzut ekranu: Majeranek" loading="lazy">
+                                            <img class="showcase-img" src="assets/images/majeranek.webp?v=3" alt="Zrzut ekranu: Majeranek" data-en-alt="Screenshot: Majeranek" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -801,10 +801,10 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/majeranek.webp?v=3" aria-label="Zrzut 1"><img src="assets/images/majeranek.webp?v=3" alt="" loading="lazy"></button>
-                                        <button type="button" class="showcase-thumb" data-src="assets/images/majeranek-kroki.webp" aria-label="Zrzut 2"><img src="assets/images/majeranek-kroki.webp" alt="" loading="lazy"></button>
-                                        <button type="button" class="showcase-thumb" data-src="assets/images/majeranek-ai.webp" aria-label="Zrzut 3"><img src="assets/images/majeranek-ai.webp" alt="" loading="lazy"></button>
-                                        <button type="button" class="showcase-thumb" data-src="assets/images/majeranek-kolekcje.webp" aria-label="Zrzut 4"><img src="assets/images/majeranek-kolekcje.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/majeranek.webp?v=3" aria-label="Zrzut 1" data-en-aria="Screenshot 1"><img src="assets/images/majeranek.webp?v=3" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/majeranek-kroki.webp" aria-label="Zrzut 2" data-en-aria="Screenshot 2"><img src="assets/images/majeranek-kroki.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/majeranek-ai.webp" aria-label="Zrzut 3" data-en-aria="Screenshot 3"><img src="assets/images/majeranek-ai.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb" data-src="assets/images/majeranek-kolekcje.webp" aria-label="Zrzut 4" data-en-aria="Screenshot 4"><img src="assets/images/majeranek-kolekcje.webp" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
@@ -818,7 +818,7 @@
                                     <h3 class="showcase-title">Majeranek <span class="project-badge-alpha">ALPHA</span></h3>
                                     <p class="showcase-subtitle" data-en="Smart recommendations based on lists">Inteligentne rekomendacje na podstawie list</p>
 
-                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: Majeranek">
+                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: Majeranek" data-en-aria="Details: Majeranek">
                                         <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-majeranek-opis" aria-controls="panel-majeranek-opis" data-en="Overview">Opis</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-majeranek-tech" aria-controls="panel-majeranek-tech" data-en="Technical">Techniczne</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-majeranek-chall" aria-controls="panel-majeranek-chall" data-en="Challenges">Wyzwania</button>
@@ -860,17 +860,17 @@
                             </article>
 
                             <!-- Slide 7: AIgets.me -->
-                            <article class="showcase-slide" role="group" aria-label="7 z 7: AIgets.me">
+                            <article class="showcase-slide" role="group" aria-label="7 z 7: AIgets.me" data-en-aria="7 of 7: AIgets.me">
                                 <div class="showcase-media">
                                     <div class="showcase-media-frame">
                                         <div class="showcase-media-bar">
                                             <span class="showcase-dot-red"></span>
                                             <span class="showcase-dot-amber"></span>
                                             <span class="showcase-dot-green"></span>
-                                            <span class="showcase-url" data-en="aigets.me · coming soon">aigets.me · wkrótce</span>
+                                            <span class="showcase-url">whoisi.vercel.app</span>
                                         </div>
                                         <div class="showcase-stage">
-                                            <img class="showcase-img" src="assets/images/whoisi.webp" alt="Zrzut ekranu:AIgets.me" loading="lazy">
+                                            <img class="showcase-img" src="assets/images/whoisi.webp" alt="Zrzut ekranu: AIgets.me" data-en-alt="Screenshot: AIgets.me" loading="lazy">
                                             <div class="showcase-media-placeholder" aria-hidden="true">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                                                 <span class="showcase-media-placeholder-note" data-en="Preview coming soon">Podgląd wkrótce</span>
@@ -878,7 +878,7 @@
                                         </div>
                                     </div>
                                     <div class="showcase-gallery">
-                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/whoisi.webp" aria-label="Zrzut 1"><img src="assets/images/whoisi.webp" alt="" loading="lazy"></button>
+                                        <button type="button" class="showcase-thumb is-active" data-src="assets/images/whoisi.webp" aria-label="Zrzut 1" data-en-aria="Screenshot 1"><img src="assets/images/whoisi.webp" alt="" loading="lazy"></button>
                                     </div>
                                 </div>
                                 <div class="showcase-info">
@@ -892,7 +892,7 @@
                                     <h3 class="showcase-title">AIgets.me <span class="project-badge-wip" data-en="WIP">W BUDOWIE</span></h3>
                                     <p class="showcase-subtitle" data-en="One personality profile for many AI models">Jeden profil osobowości dla wielu modeli AI</p>
 
-                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: AIgets.me">
+                                    <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: AIgets.me" data-en-aria="Details: AIgets.me">
                                         <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-aigets-opis" aria-controls="panel-aigets-opis" data-en="Overview">Opis</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-aigets-tech" aria-controls="panel-aigets-tech" data-en="Technical">Techniczne</button>
                                         <button type="button" class="showcase-tab" role="tab" aria-selected="false" id="tab-aigets-chall" aria-controls="panel-aigets-chall" data-en="Challenges">Wyzwania</button>
@@ -925,10 +925,10 @@
                                     </div>
 
                                     <div class="showcase-cta">
-                                        <span class="project-link project-link-coming">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 1.8"/></svg>
-                                            <span data-en="Coming soon">Wkrótce</span>
-                                        </span>
+                                        <a href="https://whoisi.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link project-link-primary">
+                                            <span data-en="See live">Zobacz na żywo</span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                                        </a>
                                     </div>
                                 </div>
                             </article>
@@ -1043,6 +1043,9 @@
                                 <span class="tag-mit" data-en="Content: CC BY-NC-SA">Treść: CC BY-NC-SA</span>
                                 <a class="tools-card-link" href="https://promptyurzednika.karolwilczynski.com/" target="_blank" rel="noopener"><span data-en="See live">Zobacz na żywo</span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                            </a>
+                                <a class="tools-card-link tools-card-link--secondary" href="/case/urzednik-i-ai/"><span data-en="Case study">Studium przypadku</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                             </a>
                             </div>
                         </article>
@@ -1592,7 +1595,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=45" defer></script>
+    <script src="script.js?v=46" defer></script>
     <script src="analytics.js?v=1" defer></script>
 </body>
 </html>
