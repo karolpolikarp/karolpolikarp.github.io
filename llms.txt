@@ -1,16 +1,32 @@
 # Karol Polikarp Wilczyński
 
-> Specjalista AI governance i legal tech. Pracuje na styku sztucznej inteligencji, prawa, ICT i administracji publicznej w Polsce. Buduje narzędzia do pracy z polskim prawem oraz automatyzacje oparte o modele językowe (LLM).
+> Pracuję na styku AI, prawa i administracji publicznej — i sam buduję narzędzia, które to łączą.
 
 Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowanym po stronie klienta. Jeden kanoniczny URL na stronę.
 
 ## Kim jestem
-- Obszary: AI Act, AI governance, legal tech, piaskownice regulacyjne, polityka publiczna, automatyzacja prawa.
-- Stack: Python, Claude API, vanilla web (HTML/CSS/JS).
+- Prawnik (Uniwersytet Warszawski); dalsze kształcenie w AI, big data i programowaniu (SGH, PJATK).
+- Doświadczenie: Ministerstwo Cyfryzacji (główny specjalista, Wydział Innowacyjnych Polityk Publicznych), wcześniej Główny Urząd Nadzoru Budowlanego i Instytut Badań Edukacyjnych.
+- Obszary: AI w administracji publicznej, narzędzia do pracy z prawem, ochrona danych osobowych w pracy z modelami językowymi, analiza danych.
 
 ## Strony
-- [Strona główna](https://karolwilczynski.com/): wprowadzenie, kompetencje, kontakt.
-- [Projekty](https://karolwilczynski.com/projekty/): galeria projektów AI / legal tech (m.in. upfor, JakiePrawo.pl, majeranek, AutoMargiela).
+- [Strona główna](https://karolwilczynski.com/): wprowadzenie, doświadczenie, projekty, studia przypadków, kontakt.
+
+## Studia przypadków (problem, ograniczenia, architektura, decyzje i ich koszt, dowody)
+- [Zorza](https://karolwilczynski.com/case/zorza/): nasłuch informacyjny w czasie rzeczywistym z wyjaśnialną oceną wiarygodności, self-hosted na Raspberry Pi.
+- [JakiePrawo.pl](https://karolwilczynski.com/case/jakieprawo/): odpowiedzi o polskim prawie oparte na tekście przepisów z ISAP, z maskowaniem danych osobowych przed modelem.
+- [Parawan](https://karolwilczynski.com/case/parawan/): lokalne usuwanie danych osobowych z tekstu przed wklejeniem do czatu AI; jeden plik HTML, reguły i sumy kontrolne.
+- [Urzędnik i AI](https://karolwilczynski.com/case/urzednik-i-ai/): mapa gotowych promptów dla administracji publicznej; statyczna strona bez serwera i logowania.
+
+## Projekty
+- Zorza: https://zorza.karolwilczynski.com
+- JakiePrawo.pl: https://jakieprawo.pl
+- Parawan: https://parawan.karolwilczynski.com/ (kod: https://github.com/karolpolikarp/parawan)
+- Urzędnik i AI: https://promptyurzednika.karolwilczynski.com/
+- UpFor.pl (kalendarz dostępności dla grup graczy): https://upfor.pl
+- Majeranek (rankingi ulubionych rzeczy): https://majeranek.vercel.app
+- AutoMargiela (śledzenie cen perfum): https://replica.karolwilczynski.com
+- Narzędzia i analizy danych: https://github.com/karolpolikarp
 
 ## Kontakt i profile
 - LinkedIn: https://www.linkedin.com/in/karolpwilczynski/

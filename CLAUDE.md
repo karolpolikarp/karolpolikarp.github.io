@@ -4,12 +4,12 @@ This file provides guidance for AI assistants working on this repository.
 
 ## Project Overview
 
-**karolwilczynski.com** is a personal portfolio website for Karol Polikarp Wilczynski, showcasing work at the intersection of AI governance, legal technology, and public administration in Poland.
+**karolwilczynski.com** is a personal portfolio website for Karol Polikarp Wilczynski, showcasing work at the intersection of AI, law, and public administration in Poland.
 
-- **Type**: Static portfolio website
+- **Type**: Static portfolio website (home page + case-study subpages under `/case/<slug>/`)
 - **Stack**: Vanilla HTML5, CSS3, JavaScript (ES6+)
 - **Hosting**: GitHub Pages (auto-deploys from master branch)
-- **Language**: Polish (pl_PL) with English project descriptions
+- **Language**: Polish (pl_PL) primary, with a live client-side PL/EN toggle
 
 > ⚠️ **`projekty/` sub-page is a deferred, separate effort — see `BACKLOG.md`.**
 > The `projekty/` directory (a newer projects gallery) is **untracked in git, so it is NOT
@@ -25,33 +25,51 @@ This file provides guidance for AI assistants working on this repository.
 python -m http.server 8000
 # or
 npx serve
-# or simply open index.html directly
+# then open http://localhost:8000/ (and /case/zorza/ etc.)
 ```
+
+Use a local server, not `file://`. The `/case/<slug>/` pages load `/style.css`, `/script.js`, icons and
+images by absolute paths (and `script.js` imports `/particles.js`), so opened as files they render unstyled.
+Opening `index.html` directly mostly works, but the particle scenes (ES module import) do not.
 
 ## File Structure
 
 ```
 /
-├── index.html      # Main HTML (~1550 lines) - All page content and structure
-├── style.css       # Styles (~4800 lines) - Complete design system
-├── script.js       # JavaScript (~1280 lines) - Interactive functionality
-├── particle-morph.js # Particle morphing engine (ES module, // @ts-check) - see "Animations"
-├── particles.js    # The hero + contact particle scenes (ES module, loaded after page load)
-├── 404.html        # Custom 404 page (Polish)
+├── index.html      # Main HTML (~1600 lines) - All page content and structure
+├── style.css       # Styles (~4350 lines) - Complete design system (home + case studies)
+├── script.js       # JavaScript (~1160 lines) - Interactive functionality
+├── particle-morph.js # Particle morphing engine (ES module, // @ts-check, ~780 lines) - see "Animations"
+├── particles.js    # The hero + contact particle scenes (ES module, ~440 lines, loaded after page load)
+├── 404.html        # Custom 404 page (Polish, self-contained styles)
+├── case/<slug>/index.html # Case-study subpages (zorza, jakieprawo, parawan, urzednik-i-ai; ~390-400 lines each) - see "Case studies"
 ├── robots.txt      # Search engine crawl rules
 ├── sitemap.xml     # XML sitemap for SEO
+├── llms.txt        # Plain-text site summary for LLM crawlers (pages, case studies, projects)
+├── manifest.webmanifest # Web app manifest (name, description, icons, theme colour)
+├── .well-known/
+│   └── security.txt # Security contact
+├── deno.json       # `deno lint` config only (excludes untracked dirs, allows `window`) - no build
 ├── README.md       # Project documentation for humans
 ├── CLAUDE.md       # This file - AI assistant guidance
+├── BACKLOG.md      # Deferred tasks (incl. everything for the untracked `projekty/` sub-page)
 └── assets/
-    └── images/     # Project screenshots, profile photos, easter egg images
+    └── images/     # Project screenshots (WebP), profile photo, OG card, easter egg images
 ```
+
+Favicons and app icons (`favicon.*`, `apple-touch-icon.png`, `icon-192/512.png`), `CNAME` and `.nojekyll` also
+live in the root. Untracked local files (`projekty/`, `analytics/`, `analytics.js`, `stats.*`, notes such as
+`STATUS.md` / `handoff-wrzesien.md`) are not part of the deployed site - do not commit them as a side effect.
 
 ## Key Files & Their Purposes
 
 ### index.html
 - Complete page structure with semantic HTML5
-- Sections: nav, hero, projects, about, skills, blog, contact, footer
-- SEO meta tags (Open Graph, Twitter Cards)
+- Sections: nav, hero (Experience / Education / Skills tabs), projects (`#projekty`: apps carousel,
+  case-study cards `#studia`, tools, Data Science bento), contact (`#kontakt`, particle finale), footer
+- Hidden for now: `#o-mnie`, `#kompetencje`, `#blog` carry inline `style="display: none;"`. Their markup, CSS and
+  JS are kept on purpose so they can be switched back on later - do not delete them as "dead code"
+- SEO meta tags (Open Graph, Twitter Cards, JSON-LD)
 - Google Fonts imports (Playfair Display, DM Sans, JetBrains Mono)
 - Theme color: `#004d2b` (British Racing Green)
 
@@ -67,22 +85,28 @@ npx serve
 
 ### script.js
 Contains modular components (in order):
-1. **ThemeManager** - Dark/light mode with localStorage persistence
-2. **Mobile Navigation** - Hamburger menu toggle
-3. **Smooth Scroll** - Anchor link behavior
-4. **ScrollAnimations** - IntersectionObserver-based reveals
-5. **MagneticButtons** - Interactive hover effects (desktop only)
-6. **Navbar Scroll Effect** - Adds `.nav-scrolled` class at 100px scroll
-7. **Windows 95 Clock** - Footer time display
-8. **LanguageManager** - Live PL/EN toggle via `data-en` / `data-en-html` attributes
-9. **HeroTabs** - Experience / Education / Skills tab panels (keyboard-navigable)
-10. **ProjectShowcase** - Projects carousel (tabs, dots, autoplay w/ pause, swipe)
+1. **SafeStorage** - `get`/`set` wrappers around `localStorage` (try/catch; private mode or blocked storage must
+   not stop the script). Use it instead of calling `localStorage` directly
+2. **ThemeManager** - Dark/light mode, persisted via SafeStorage, `aria-pressed` on the toggle
+3. **LanguageManager** - Live PL/EN toggle via `data-en` / `data-en-html` attributes (also `<title data-en>`,
+   `data-en-content` on the meta description, `data-en-aria` for `aria-label`, `data-en-alt` for `alt`)
+4. **Mobile Navigation** - Hamburger menu toggle
+5. **Smooth Scroll** - In-page `#` links: smooth scroll (instant under reduced motion), URL hash via
+   `history.pushState`, focus moved to the target (temporary `tabindex="-1"` without a focus ring)
+6. **ScrollAnimations** - IntersectionObserver-based reveals (`.fade-in-up`, `.skill-card`, `.education-list li`)
+7. **MagneticButtons** - Interactive hover effects (desktop only)
+8. **Navbar Scroll Effect** - Adds `.nav-scrolled` class at 100px scroll
+9. **Windows 95 Clock** - Footer time display
+10. **cats easter egg** - `window.cats.show()` + Konami code (one overlay at a time, labels follow the language)
 11. **EmailProtection** - Anti-scraper email obfuscation
-12. **cats easter egg** - `window.cats.show()` + Konami code
-13. **NumberScramble** - Numbers marked `<span class="scramble-num">` in the HTML (PL and `data-en-html`) roll
+12. **HeroTabs** - Experience / Education / Skills tab panels (keyboard-navigable)
+13. **ProjectShowcase** - Projects carousel (tabs, JS-built dots and counter, screenshot galleries, swipe,
+    autoplay with independent pause reasons: hover, focus, hidden tab, off-screen, user pause button)
+14. **TechHighlighter** - Wraps known stack/brand names in `<span class="kw">`; re-runs on `languagechange`
+15. **NumberScramble** - Numbers marked `<span class="scramble-num">` in the HTML (PL and `data-en-html`) roll
     through `§¶{}<>/01#` when scrolled into view (painted over the real number from a CSS `::after`)
-14. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
-15. **Particles loader** - `import('./particles.js')` after the `load` event
+16. **ScrollProgress** - JS fallback for the gold scroll-progress bar under the nav
+17. **Particles loader** - `import('/particles.js')` after the `load` event, only on pages with a particle canvas
 
 ## Animations („Od paragrafu do parametru”)
 
@@ -110,9 +134,23 @@ Decorative layer added on top of the existing design (nothing else in the layout
   flow to the new spot. Without particles the hero keeps a soft static glow (`.hero-bg-decoration::before`).
 - **Every effect honours `prefers-reduced-motion`**: particles draw the settled shape once, scramble and
   the scroll progress bar are off, CSS animations are wrapped in `prefers-reduced-motion: no-preference`.
-- Typecheck/lint the modules with `deno check particle-morph.js particles.js` and `deno lint` (no config needed).
+- Typecheck/lint with `deno check particle-morph.js particles.js` and `deno lint`. `deno.json` holds the lint
+  config: it excludes the untracked/deferred code (`projekty/`, `analytics/`, `analytics.js`, `stats.js`,
+  `.claude/`) and turns off `no-window` / `no-window-prefix` (browser code); every other recommended rule stays on.
 - When changing `particle-morph.js`, bump the `?v=` in its import inside `particles.js`; when changing
-  `particles.js`, bump the `?v=` in the loader at the end of `script.js`.
+  `particles.js`, bump the `?v=` in the loader at the end of `script.js` (see also "Cache busting").
+
+## Cache busting (`?v=`)
+
+- **Changing `style.css` or `script.js` requires bumping its `?v=` in `index.html` AND in every
+  `case/*/index.html`, all to one shared value** (the case pages load the same files by absolute path, so a
+  page left on the old value serves a stale stylesheet/script from cache). Check before committing - each file
+  must show exactly one value across all five pages:
+  ```bash
+  grep -n 'style.css?v=\|script.js?v=' index.html case/*/index.html
+  ```
+- `404.html` has its own inline styles and does not load `style.css` / `script.js`.
+- Images use their own `?v=` on the `src` when a file is replaced under the same name.
 
 ## Coding Conventions
 
@@ -141,16 +179,22 @@ Decorative layer added on top of the existing design (nothing else in the layout
 
 ## Common Tasks
 
-### Adding a New Project Card
-1. Add HTML in `index.html` within `#projekty` section
-2. Copy existing `.project-card` structure
-3. Add image to `assets/images/`
-4. Ensure card has proper animation class (`fade-in-up`)
+### Adding a New Project to the Carousel
+1. In `index.html` (`#projekty` → `.showcase-track`), copy an existing `<article class="showcase-slide">`
+2. Give its tab/panel ids a new slug (`tab-<slug>-opis` / `panel-<slug>-opis`, `-tech`, `-chall`)
+3. Update the "N z M" `aria-label` + `data-en-aria="N of M: …"` on **every** slide (and the tablist's
+   `Szczegóły: …` / `Details: …`); dots and the counter are built by `ProjectShowcase` from the slides
+4. Add WebP screenshots to `assets/images/`; one `.showcase-thumb` per screenshot (a gallery with a single
+   thumbnail is hidden automatically); main `<img>` gets `alt` + `data-en-alt`
+5. Smaller tools go into `.tools-card` in the "Narzędzia" block instead
 
 ### Modifying Colors
 1. Edit CSS custom properties in `:root` selector in `style.css`
-2. Update both light and dark mode values
-3. Key variables: `--primary`, `--primary-light`, `--primary-dark`, `--accent`, `--gold`
+2. Update both light and dark mode values (dark values live in the `[data-theme="dark"]` block right after `:root`)
+3. Key variables: `--color-primary` (+ `-light`, `-dark`, `-subtle`, `-glow`, `-gradient`; dark mode adds
+   `--color-primary-on-dark`), `--color-accent` (+ `-light`, `-dark`, `-subtle`), `--color-burgundy*`,
+   neutrals `--color-bg`, `--color-bg-alt`, `--color-bg-accent`, `--color-surface`, `--color-border*`,
+   `--color-text`, `--color-text-secondary`, `--color-text-tertiary`; particle colours `--pm-*`
 
 ### Adding Dark Mode Support for New Elements
 1. Add base styles in light mode
@@ -159,7 +203,8 @@ Decorative layer added on top of the existing design (nothing else in the layout
 
 ### Working with the PL/EN toggle
 1. Add `data-en="English text"` to any new user-facing element (or `data-en-html` if it contains markup)
-2. For attributes (e.g. `aria-label`), add an entry to `LanguageManager.attrTranslations`
+2. For attributes: `data-en-aria="…"` (aria-label), `data-en-alt="…"` (image alt) or `data-en-content="…"` (meta description); the page title is `<title data-en="…">`.
+   Never put `data-en` on an element that has child elements (an icon inside a link would be wiped) - wrap the text in `<span data-en>`
 3. The choice persists in `localStorage` and fires a `languagechange` event for JS-built UI
 
 ## Critical Guidelines
@@ -209,12 +254,13 @@ Before committing changes, verify:
 | Section | ID | Purpose |
 |---------|-----|---------|
 | Navigation | `.nav` | Logo, links, theme toggle |
-| Hero | `#hero` | Introduction, keywords, CTA |
-| Projects | `#projekty` | Portfolio showcase |
-| About | `#o-mnie` | Personal background |
-| Skills | `#kompetencje` | Core competencies |
-| Blog | `#blog` | Publication previews |
-| Contact | `#kontakt` | Email, newsletter |
+| Hero | `#hero` | Introduction, Experience / Education / Skills tabs, CTA, `§ { }` particles |
+| Projects | `#projekty` | Apps carousel, tools, Data Science bento |
+| Case studies | `#studia` | Cards linking to `/case/<slug>/` (nested inside `#projekty`) |
+| About | `#o-mnie` | Personal background (**hidden**, `display: none`, kept for later) |
+| Skills | `#kompetencje` | Core competencies (**hidden**, kept for later) |
+| Blog | `#blog` | Publication previews (**hidden**, kept for later) |
+| Contact | `#kontakt` | Email (obfuscated), GitHub, LinkedIn, particle finale + motto |
 | Footer | `footer` | Windows 95 clock |
 
 ## Easter Eggs
@@ -229,7 +275,19 @@ Preserve these features when making changes.
 
 - No build process overhead
 - Minimal external dependencies (only Google Fonts)
-- Images should be optimized before adding (current total ~12MB)
+- Images should be optimized before adding (WebP preferred; `assets/images/` is ~3.7 MB in total)
 - Use `loading="lazy"` on images below the fold
 - IntersectionObserver used for efficient scroll animations
 - Particle modules are fetched only after the `load` event, so they never compete with the first paint
+
+## Case studies
+
+- `case/<slug>/index.html`: long-form pages (problem → constraints → architecture SVG → decisions with their cost →
+  evidence with source and date → lessons). Same `style.css` / `script.js` (absolute paths), styles in the
+  "CASE STUDIES" block at the end of `style.css` (`.case-*`, diagram classes `.cd-*`).
+- Every number on these pages must be verifiable in the project's repository and carry a date. Private repos
+  (Zorza, JakiePrawo, Urzędnik i AI) are never linked or named; only Parawan's code is public.
+- When adding a page: link it from the `#studia` cards, the project's carousel CTA, the pager on the other case
+  pages, `sitemap.xml` and `llms.txt`; keep the nav order Projekty, Studia przypadków, Kontakt (as on the home page).
+- Each page has `TechArticle` JSON-LD with `datePublished` / `dateModified`; update `dateModified` (and the
+  sitemap `lastmod`) when the text changes.

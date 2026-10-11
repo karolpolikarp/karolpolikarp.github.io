@@ -1,89 +1,94 @@
 # karolwilczynski.com
 
-Personal portfolio website of Karol Polikarp Wilczyński - showcasing work at the intersection of AI, law, technology, and public administration.
+Personal website of Karol Polikarp Wilczyński: work where AI meets law and public administration, and the
+tools built along the way.
 
-🌐 **Live Site**: [karolwilczynski.com](https://karolwilczynski.com)
+**Live site**: [karolwilczynski.com](https://karolwilczynski.com)
 
-## About
+## What is on the site
 
-This is a modern, responsive portfolio website built with vanilla HTML, CSS, and JavaScript. The site features:
-
-- **Professional Background**: Working on AI Act implementation and regulatory sandboxes in Poland
-- **Technical Projects**: Including JakiePrawo.pl (legal search engine), automation tools, and data science notebooks
-- **Skills & Education**: Four postgraduate degrees in AI, Big Data, Python, and Database Systems
-- **Publications**: Upcoming blog posts on AI regulation, LegalTech, and legal technology
+- **Hero**: introduction with Experience / Education / Skills tabs (keyboard-navigable) and calls to action.
+- **Projects** (`#projekty`):
+  - an apps carousel (Zorza, Parawan, JakiePrawo.pl, UpFor.pl, AutoMargiela, Majeranek, AIgets.me) with
+    screenshot galleries, Overview / Technical / Challenges tabs, swipe and a pausable autoplay;
+  - **case studies** (`#studia`): cards linking to long-form pages;
+  - **tools**: smaller open tools and scripts;
+  - **Data Science**: notebook projects in a bento grid.
+- **Case studies** at `/case/<slug>/` (`zorza`, `jakieprawo`, `parawan`, `urzednik-i-ai`): problem, constraints,
+  architecture diagram, decisions and what they cost, dated evidence, lessons.
+- **Contact** (`#kontakt`): email (obfuscated against scrapers), GitHub, LinkedIn.
+- About / Skills / Blog sections exist in the markup but are hidden for now.
 
 ## Features
 
-- 🎨 **Modern UI/UX**: Clean, professional design with smooth animations
-- 🌓 **Dark/Light Mode**: Theme toggle with persistent user preference
-- 📱 **Responsive Design**: Mobile-first approach, works on all devices
-- 🎯 **Interactive Console**: Legal console simulation with command examples
-- ⚡ **Performance Optimized**: Fast loading, minimal dependencies
-- 🔍 **SEO Friendly**: Semantic HTML, meta tags, proper structure
+- **Animations „Od paragrafu do parametru”** ("from paragraph to parameter"): particles gather into `§` (law)
+  and `{ }` (code) in the hero and again in the contact finale, plus number scramble, a scroll progress bar and
+  scroll-driven reveals. All of it honours `prefers-reduced-motion` and pauses when off-screen.
+- **PL/EN toggle**: the page is Polish-first. English is swapped in live on the client from `data-en*`
+  attributes, and the choice is remembered.
+- **Dark / light mode**: theme toggle with a remembered preference.
+- **Responsive**: mobile and desktop layouts around a 768px breakpoint.
+- **Accessibility**: semantic HTML, skip links, ARIA labels (translated too), keyboard-operable tabs and carousel.
+- **SEO**: Open Graph / Twitter cards, JSON-LD, `sitemap.xml`, `robots.txt`, `llms.txt`.
+- **Easter eggs**: a Windows 95-style footer clock, and something behind the Konami code.
 
-## Tech Stack
+## Tech stack
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Fonts**: Inter, JetBrains Mono (Google Fonts)
-- **Hosting**: GitHub Pages
-- **Version Control**: Git
+- Vanilla HTML5, CSS3 (custom properties) and JavaScript (ES6+). No framework, no npm, no build step.
+- Fonts: Playfair Display, DM Sans and JetBrains Mono (Google Fonts, loaded asynchronously).
+- Particle engine: a small ES module (`particle-morph.js`) on canvas, fetched only after the page has loaded.
+- Hosting: GitHub Pages with a custom domain.
 
-## Project Structure
+## Running locally
+
+```bash
+python -m http.server 8000
+# or
+npx serve
+```
+
+Then open <http://localhost:8000/>. Use a local server rather than opening files directly: the case-study pages
+load styles, scripts and images by absolute paths (`/style.css`, `/script.js`), so they will not render from
+`file://`.
+
+Optional checks (needs [Deno](https://deno.com); config in `deno.json`):
+
+```bash
+deno lint
+deno check particle-morph.js particles.js
+```
+
+## Deployment
+
+Pushing to `master` deploys the site through GitHub Pages. Files are served as they are; there is nothing to
+build. After changing `style.css` or `script.js`, bump the `?v=` cache-busting query in `index.html` and in
+every `case/*/index.html`.
+
+## Project structure
 
 ```
 .
-├── index.html          # Main HTML file
-├── style.css           # Stylesheet
-├── script.js           # JavaScript functionality
-├── assets/
-│   └── images/         # Project screenshots and images
-└── README.md           # This file
+├── index.html             # Home page
+├── style.css              # All styles (home + case studies)
+├── script.js              # Theme, language, navigation, carousel, tabs, effects
+├── particle-morph.js      # Particle morphing engine (ES module)
+├── particles.js           # Hero and contact particle scenes
+├── case/<slug>/index.html # Case-study pages
+├── 404.html               # Custom 404 page
+├── assets/images/         # Screenshots (WebP), photo, social card
+├── sitemap.xml, robots.txt, llms.txt, manifest.webmanifest
+├── .well-known/security.txt
+├── deno.json              # Lint config (no build)
+├── BACKLOG.md             # Deferred tasks
+└── CLAUDE.md              # Notes for AI coding assistants
 ```
-
-## Key Sections
-
-1. **Hero Section**: Introduction with animated console
-2. **Positions**: Quick overview of current roles and focus areas
-3. **About**: Detailed background and career journey
-4. **Skills**: Core competencies in AI regulation, programming, law, and data analysis
-5. **Tech Stack**: Tools and technologies used in projects
-6. **Projects**: Showcase of featured work including:
-   - JakiePrawo.pl (Legal search engine)
-   - Majeranek (AI-powered ranking app)
-   - AutoMargiela (Price monitoring bot)
-   - Data science notebooks and analysis projects
-7. **Publications**: Upcoming blog posts on AI Act and LegalTech
-8. **Contact**: Professional contact information and availability
-
-## Projects Highlighted
-
-### JakiePrawo.pl
-A legal search engine that allows users to ask questions and receive specific legal articles, act names, explanations, and links to full text in ISAP.
-
-- **Tech**: React, TypeScript, Supabase Edge Functions
-- **Infrastructure**: Custom MCP server on Raspberry Pi
-- **Features**: PDF parsing from api.sejm.gov.pl
-
-### Majeranek
-AI-powered tier list and ranking application that analyzes user preferences and provides cross-list recommendations.
-
-- **Tech**: TypeScript, React, AI
-- **Features**: Pattern analysis, cross-list recommendations
-
-### AutoMargiela
-Automated price monitoring bot for Maison Margiela products.
-
-- **Tech**: Python, Selenium
-- **Features**: CAPTCHA handling, notifications
 
 ## Contact
 
-- **Email**: Available on website
+- **Email**: on the website
 - **GitHub**: [@karolpolikarp](https://github.com/karolpolikarp)
 - **LinkedIn**: [Karol Polikarp Wilczyński](https://linkedin.com/in/karolpwilczynski)
-- **Project**: [JakiePrawo.pl](https://jakieprawo.pl)
 
 ## License
 
-© 2025 Karol Polikarp Wilczyński. All rights reserved.
+© 2025–2026 Karol Polikarp Wilczyński. All rights reserved.
