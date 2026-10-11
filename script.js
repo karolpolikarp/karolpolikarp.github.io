@@ -1,4 +1,17 @@
 // ================================================
+// SAFE STORAGE — localStorage can throw (private mode, blocked site data,
+// sandboxed frames); a SecurityError must never stop the rest of the script.
+// ================================================
+const SafeStorage = {
+    get(key) {
+        try { return localStorage.getItem(key); } catch { return null; }
+    },
+    set(key, value) {
+        try { localStorage.setItem(key, value); } catch { /* storage unavailable */ }
+    }
+};
+
+// ================================================
 // THEME TOGGLE (DARK/LIGHT MODE)
 // ================================================
 const ThemeManager = {
@@ -16,7 +29,7 @@ const ThemeManager = {
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
         document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
+        SafeStorage.set('theme', newTheme);
         this.toggle?.setAttribute('aria-pressed', String(newTheme === 'dark'));
 
         // Add transition effect
@@ -114,14 +127,15 @@ const LanguageManager = {
             this.originals.set(el, isHTML ? el.innerHTML : el.textContent);
         });
 
-        // Attributes: data-en-content (meta description) and data-en-aria (aria-label).
+        // Attributes: data-en-content (meta description), data-en-aria (aria-label), data-en-alt (img alt).
         // <title data-en> needs nothing extra: [data-en] above already covers it.
         this.attrEls = [
             ...Array.from(document.querySelectorAll('[data-en-content]'), el => [el, 'content', 'data-en-content']),
             ...Array.from(document.querySelectorAll('[data-en-aria]'), el => [el, 'aria-label', 'data-en-aria']),
+            ...Array.from(document.querySelectorAll('[data-en-alt]'), el => [el, 'alt', 'data-en-alt']),
         ].map(([el, attr, enAttr]) => ({ el, attr, pl: el.getAttribute(attr), en: el.getAttribute(enAttr) }));
 
-        const savedLang = localStorage.getItem('lang');
+        const savedLang = SafeStorage.get('lang');
         if (savedLang === 'en') {
             this.setLanguage('en', false);
         }
@@ -185,7 +199,7 @@ const LanguageManager = {
 
         this.updateToggle();
         document.dispatchEvent(new CustomEvent('languagechange', { detail: { lang: lang } }));
-        if (save) localStorage.setItem('lang', lang);
+        if (save) SafeStorage.set('lang', lang);
     },
 
     updateToggle() {
@@ -239,19 +253,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         // Skip if href is just "#" or empty
         if (!href || href === '#') return;
 
+        let target;
         try {
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        } catch (err) {
+            target = document.querySelector(href);
+        } catch {
             // Invalid selector, let browser handle default behavior
             console.warn('Invalid anchor href:', href);
+            return;
         }
+        if (!target) return;
+
+        e.preventDefault();
+        target.scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'start'
+        });
+        // Keep the URL in sync, as the default link behaviour would.
+        if (location.hash !== href) {
+            // Resolved against this document's own URL (not a <base href>), so it never leaves the page.
+            try { history.pushState(null, '', location.pathname + location.search + href); } catch { /* e.g. sandboxed frame */ }
+        }
+        // Move focus to the target too (skip link, TOC), so keyboard and screen-reader
+        // users continue from there. Non-focusable targets get a temporary tabindex="-1"
+        // (no focus ring on the whole section), removed again once focus leaves.
+        if (!target.matches('a[href], button, input, select, textarea, [tabindex]')) {
+            target.setAttribute('tabindex', '-1');
+            target.style.outline = 'none';
+            target.addEventListener('blur', () => {
+                target.removeAttribute('tabindex');
+                target.style.removeProperty('outline');
+            }, { once: true });
+        }
+        target.focus({ preventScroll: true });
     });
 });
 
@@ -263,7 +296,7 @@ const ScrollAnimations = {
     init() {
         // Original reveal elements
         const revealElements = document.querySelectorAll(
-            '.skill-card, .project-card, .contact-link, .education-list li'
+            '.skill-card, .education-list li'
         );
 
         const revealObserver = new IntersectionObserver((entries) => {
@@ -281,9 +314,7 @@ const ScrollAnimations = {
         });
 
         // New fade-in animations
-        const fadeElements = document.querySelectorAll(
-            '.fade-in-up, .fade-in-left, .fade-in-right, .scale-in'
-        );
+        const fadeElements = document.querySelectorAll('.fade-in-up');
 
         const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -317,27 +348,6 @@ const ScrollAnimations = {
             header.style.transform = 'translateY(30px)';
             header.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             headerObserver.observe(header);
-        });
-
-        // Position items staggered animation
-        const positionItems = document.querySelectorAll('.position-item');
-        const positionObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 100);
-                    positionObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        positionItems.forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
-            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            positionObserver.observe(item);
         });
     }
 };
@@ -447,23 +457,6 @@ updateClock();
 setInterval(updateClock, 15000);
 
 // ================================================
-// PROJECT VIDEO ON HOVER
-// ================================================
-document.querySelectorAll('.project-has-video').forEach(container => {
-    const video = container.querySelector('.project-video');
-    if (!video) return;
-
-    container.addEventListener('mouseenter', () => {
-        video.play().catch(() => {});
-    });
-
-    container.addEventListener('mouseleave', () => {
-        video.pause();
-        video.currentTime = 0;
-    });
-});
-
-// ================================================
 // CATS EASTER EGG  (devtools: cats.show('Pimpek'|'Fryderyk'|'Both'))
 // ================================================
 const cats = {
@@ -473,18 +466,21 @@ const cats = {
             console.log("cats.show('Pimpek' | 'Fryderyk' | 'Both')");
             return;
         }
+        // Already open (e.g. Konami code typed twice) — don't stack a second dialog.
+        if (document.querySelector('.cat-easter-egg-overlay')) return;
+        const en = LanguageManager.currentLang === 'en';
         const previouslyFocused = document.activeElement;
         const overlay = document.createElement('div');
         overlay.className = 'cat-easter-egg-overlay';
         overlay.setAttribute('role', 'dialog');
         overlay.setAttribute('aria-modal', 'true');
-        overlay.setAttribute('aria-label', 'Zdjęcia kotów');
+        overlay.setAttribute('aria-label', en ? 'Cat photos' : 'Zdjęcia kotów');
         const container = document.createElement('div');
         container.className = 'cat-easter-egg-container';
         const closeBtn = document.createElement('button');
         closeBtn.className = 'cat-easter-egg-close';
         closeBtn.innerHTML = '×';
-        closeBtn.setAttribute('aria-label', 'Zamknij');
+        closeBtn.setAttribute('aria-label', en ? 'Close' : 'Zamknij');
         const keyHandler = (e) => {
             if (e.key === 'Escape') closeModal();
             if (e.key === 'Tab') { e.preventDefault(); closeBtn.focus(); }
@@ -520,7 +516,7 @@ const cats = {
         }
         const subtitle = document.createElement('p');
         subtitle.className = 'cat-easter-egg-subtitle';
-        subtitle.textContent = 'Sekretni asystenci prawni 🐾';
+        subtitle.textContent = (en ? 'Secret legal assistants' : 'Sekretni asystenci prawni') + ' 🐾';
         content.appendChild(title);
         content.appendChild(imageContainer);
         content.appendChild(subtitle);
@@ -580,64 +576,6 @@ const EmailProtection = {
 };
 
 EmailProtection.init();
-
-// ================================================
-// PERFORMANCE: Pause off-screen animations
-// ================================================
-const AnimationPauser = {
-    init() {
-        if (prefersReducedMotion) return;
-
-        // Pause gradient blob animations when not visible
-        const blobs = document.querySelector('.gradient-blobs');
-        if (blobs) {
-            // Blobs are fixed-position so always "visible" - but we can pause
-            // when user is at the very bottom or in certain sections
-            // For fixed elements, we use a page visibility approach instead
-            document.addEventListener('visibilitychange', () => {
-                const blobEls = blobs.querySelectorAll('.gradient-blob');
-                blobEls.forEach(blob => {
-                    blob.style.animationPlayState = document.hidden ? 'paused' : 'running';
-                });
-            });
-        }
-
-        // Pause neural network animation when tab is hidden
-        const neural = document.querySelector('.neural-network');
-        if (neural) {
-            document.addEventListener('visibilitychange', () => {
-                const lines = neural.querySelectorAll('.neural-line, .neural-line-accent, .neural-node, .neural-node-accent');
-                lines.forEach(el => {
-                    el.style.animationPlayState = document.hidden ? 'paused' : 'running';
-                });
-            });
-        }
-
-        // Pause positions glow when not visible
-        const positions = document.querySelector('.positions');
-        if (positions) {
-            const posObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    positions.style.setProperty('--anim-state', entry.isIntersecting ? 'running' : 'paused');
-                });
-            }, { threshold: 0 });
-            posObserver.observe(positions);
-        }
-
-        // Pause console status dot when not visible
-        const consoleDot = document.querySelector('.status-dot');
-        if (consoleDot) {
-            const dotObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    consoleDot.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
-                });
-            }, { threshold: 0 });
-            dotObserver.observe(consoleDot);
-        }
-    }
-};
-
-AnimationPauser.init();
 
 // Hero Tabs
 const HeroTabs = {
@@ -749,7 +687,7 @@ const ProjectShowcase = {
 
     buildDots() {
         if (!this.dotsWrap) return;
-        this.dots = this.slides.map((slide, i) => {
+        this.dots = this.slides.map((_slide, i) => {
             const dot = document.createElement('button');
             dot.type = 'button';
             dot.className = 'showcase-dot' + (i === 0 ? ' is-active' : '');
@@ -1014,35 +952,52 @@ const ProjectShowcase = {
     bindAutoplay() {
         if (this.reduceMotion || this.count <= 1) return;
         this.delay = 7000;
-        this.paused = false;
         this.userPaused = false;
+        // Independent pause reasons: one event must never clear another's pause
+        // (e.g. coming back on screen must not resume while the pointer or focus is inside).
+        this.pauseFlags = { hovered: false, focused: false, hidden: document.hidden, offscreen: false };
         this.addPauseButton();
         this._startAutoplay = () => {
             this.stopAutoplay();
-            this.timer = setInterval(() => { if (!this.paused && !this.userPaused) this.next(); }, this.delay);
+            this.timer = setInterval(() => { if (!this.isAutoplayPaused()) this.next(); }, this.delay);
         };
 
-        this.carousel.addEventListener('mouseenter', () => { this.paused = true; });
-        this.carousel.addEventListener('mouseleave', () => { this.paused = false; });
-        this.carousel.addEventListener('focusin', () => { this.paused = true; });
-        this.carousel.addEventListener('focusout', () => {
-            if (!this.carousel.contains(document.activeElement)) this.paused = false;
+        // Pointer inside (mouse hover; a touch only while the finger is down).
+        this.carousel.addEventListener('pointerenter', () => { this.pauseFlags.hovered = true; });
+        this.carousel.addEventListener('pointerleave', () => { this.pauseFlags.hovered = false; });
+        // Keyboard focus inside. A mouse click also focuses the arrow it hit, which used to be
+        // ignored once the pointer left; keep that by pausing only for visible (keyboard) focus.
+        this.carousel.addEventListener('focusin', (e) => {
+            let visible = true;
+            try { visible = e.target.matches(':focus-visible'); } catch { /* no :focus-visible support */ }
+            this.pauseFlags.focused = visible;
         });
-        document.addEventListener('visibilitychange', () => { this.paused = document.hidden; });
+        this.carousel.addEventListener('focusout', (e) => {
+            // Moving within the carousel fires focusin next, which sets the flag again.
+            if (!this.carousel.contains(e.relatedTarget)) this.pauseFlags.focused = false;
+        });
+        document.addEventListener('visibilitychange', () => { this.pauseFlags.hidden = document.hidden; });
 
         // Only run autoplay while the carousel is on screen.
         if ('IntersectionObserver' in window) {
             const io = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     this.onScreen = entry.isIntersecting;
-                    if (entry.isIntersecting) { this.paused = false; this._startAutoplay(); }
-                    else { this.stopAutoplay(); }
+                    this.pauseFlags.offscreen = !entry.isIntersecting;
+                    if (entry.isIntersecting) this._startAutoplay();
+                    else this.stopAutoplay();
                 });
             }, { threshold: 0.3 });
             io.observe(this.carousel);
         } else {
             this._startAutoplay();
         }
+    },
+
+    isAutoplayPaused() {
+        if (this.userPaused) return true;
+        const f = this.pauseFlags;
+        return !!f && (f.hovered || f.focused || f.hidden || f.offscreen);
     },
 
     stopAutoplay() {
@@ -1087,8 +1042,7 @@ const TechHighlighter = {
     mark(el) {
         const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
         const targets = [];
-        let node;
-        while (node = walker.nextNode()) {
+        for (let node = walker.nextNode(); node; node = walker.nextNode()) {
             if (node.parentElement.classList.contains('kw')) continue;
             this.re.lastIndex = 0;
             if (this.re.test(node.nodeValue)) targets.push(node);
@@ -1096,9 +1050,9 @@ const TechHighlighter = {
         targets.forEach(textNode => {
             const text = textNode.nodeValue;
             const frag = document.createDocumentFragment();
-            let last = 0, m;
+            let last = 0;
             this.re.lastIndex = 0;
-            while (m = this.re.exec(text)) {
+            for (let m = this.re.exec(text); m; m = this.re.exec(text)) {
                 if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
                 const span = document.createElement('span');
                 span.className = 'kw';
