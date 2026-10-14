@@ -17,6 +17,12 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 - [JakiePrawo.pl](https://karolwilczynski.com/case/jakieprawo/): odpowiedzi o polskim prawie oparte na tekście przepisów z ISAP, z maskowaniem danych osobowych przed modelem.
 - [Parawan](https://karolwilczynski.com/case/parawan/): lokalne usuwanie danych osobowych z tekstu przed wklejeniem do czatu AI; jeden plik HTML, reguły i sumy kontrolne.
 - [Urzędnik i AI](https://karolwilczynski.com/case/urzednik-i-ai/): mapa gotowych promptów dla administracji publicznej; statyczna strona bez serwera i logowania.
+- [UpFor.pl](https://karolwilczynski.com/case/upfor/): kalendarz dostępności dla grup graczy (zamknięta beta); sloty liczone w czasie zegarowym mimo zmiany czasu, model AI wybiera tylko spośród okien policzonych deterministycznie.
+- [AutoMargiela](https://karolwilczynski.com/case/automargiela/): śledzenie cen perfum w trzech sklepach na Raspberry Pi; strażnik pokrycia danych, historia cen w gicie, bez płatnych API i modeli językowych.
+- [Majeranek](https://karolwilczynski.com/case/majeranek/): rankingi filmów, gier, książek i muzyki (wersja alfa); RLS jako granica bezpieczeństwa, ELO i rekomendacje liczone w Postgresie.
+- [AIgets.me](https://karolwilczynski.com/case/aigets/): prototyp kreatora instrukcji systemowej dla asystentów AI; kreator przycięty po przeglądzie wpływu pytań na wynik.
+- [Małe narzędzia](https://karolwilczynski.com/case/narzedzia/): Claude Usage (Stream Deck), ISAP-scraper (API ELI Sejmu), Stefka (lokalne streszczenia nagrań z PLLuM), Anonimizator AI, Multi-Sequence Clicker.
+- [Analizy danych](https://karolwilczynski.com/case/analizy-danych/): prognozy kursu z raportów ESPI z GPT-4o-mini (metoda i jej ograniczenia) oraz analizy rynku gier i Airbnb.
 
 ## Projekty
 - Zorza: https://zorza.karolwilczynski.com
