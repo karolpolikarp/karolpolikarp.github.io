@@ -112,7 +112,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="style.css?v=87">
+    <link rel="stylesheet" href="style.css?v=88">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -593,6 +593,7 @@
                                         <div class="showcase-panel is-active" role="tabpanel" id="panel-prawo-opis" aria-labelledby="tab-prawo-opis">
                                             <p data-en="A search engine where you ask in plain language and get back the specific article, the statute name, and a link to the full text in ISAP. You don't need to know which act to look in first.">Wyszukiwarka, w której pytasz o coś zwykłym językiem, a w odpowiedzi dostajesz konkretny artykuł, nazwę ustawy i link do pełnego tekstu w ISAP. Nie trzeba wcześniej wiedzieć, w którym akcie szukać.</p>
                                             <p data-en="Every answer stays verifiable: it always points to the original source instead of replacing it with the model's own words.">Każdą odpowiedź da się zweryfikować: zawsze prowadzi do oryginalnego źródła, zamiast zastępować je słowami modelu.</p>
+                                            <p data-en="The online beta has been frozen since July 2026 and runs without the server that fetched the verbatim provision text from ISAP. The search engine points to the legal basis; it does not give legal advice.">Wersja online (beta) jest zamrożona od lipca 2026 i&nbsp;działa bez serwera, który pobierał dosłowny tekst przepisu z&nbsp;ISAP. Wyszukiwarka wskazuje podstawę prawną, ale nie udziela porad prawnych.</p>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-prawo-tech" aria-labelledby="tab-prawo-tech" hidden>
                                             <div class="gh-badges">
@@ -612,7 +613,7 @@
                                             <ul class="showcase-list">
                                                 <li data-en="Quoting the whole article inflated answers ~3.8× → only the cited paragraph is cut out">Cytat wstawiał cały artykuł i rozdymał odpowiedź ~3,8× → wycinany jest wskazany ustęp</li>
                                                 <li data-en="Weak matches hit a similar but wrong act → fail-closed: better to abstain">Słabe dopasowanie trafiało w podobny, zły akt → fail-closed: lepiej odmówić</li>
-                                                <li data-en="A local Bielik instead of Claude? 81 questions → NO-GO; quote fidelity 61% vs 98.3%">Lokalny Bielik zamiast Claude’a? 81 pytań → NO-GO; wierność cytatu 61% wobec 98,3%</li>
+                                                <li data-en="A local Bielik instead of Claude? 81 questions (17 July 2026) → NO-GO: agreement of the model’s own quotes with ISAP 61% vs 98.3% (in correct answers); since 18 July 2026 the desktop app inserts the provision text from ISAP in code, not through the model">Lokalny Bielik zamiast Claude’a? 81&nbsp;pytań (17&nbsp;lipca 2026) → NO-GO: zgodność cytatów pisanych przez model z&nbsp;ISAP 61% wobec 98,3% (w&nbsp;poprawnych odpowiedziach); od 18&nbsp;lipca 2026 w&nbsp;aplikacji desktopowej tekst przepisu z&nbsp;ISAP wstawia kod, nie model</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -663,7 +664,7 @@
                                         <span class="tag">Discord</span>
                                         <span class="tag tag-year">2026</span>
                                     </div>
-                                    <h3 class="showcase-title">UpFor.pl <span class="project-badge-alpha">BETA</span></h3>
+                                    <h3 class="showcase-title">UpFor.pl <span class="project-badge-alpha" data-en="CLOSED BETA">ZAMKNIĘTA BETA</span></h3>
                                     <p class="showcase-subtitle" data-en="Gaming availability calendar with AI">Kalendarz dostępności gamingowej z AI</p>
 
                                     <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: UpFor.pl" data-en-aria="Details: UpFor.pl">
@@ -673,29 +674,30 @@
                                     </div>
                                     <div class="showcase-panels">
                                         <div class="showcase-panel is-active" role="tabpanel" id="panel-upfor-opis" aria-labelledby="tab-upfor-opis">
-                                            <p data-en="An app that helps a group settle on a time to play together. Everyone marks their free hours on a weekly grid, and it works out when everyone is available at once and shows it as a heatmap.">Apka, która pomaga ekipie ustalić wspólny termin grania. Każdy zaznacza swoje wolne godziny na tygodniowej siatce, a aplikacja liczy, kiedy wszyscy mają czas naraz, i pokazuje to jako heatmapę.</p>
-                                            <p data-en="Claude suggests a concrete session time. The whole thing runs inside Discord, where the group already hangs out, and it doesn't collect data it doesn't need.">Konkretny termin sesji podpowiada Claude. Całość działa w Discordzie, gdzie grupa i tak siedzi, i nie zbiera niepotrzebnych danych.</p>
+                                            <p data-en="An app that helps a group settle on a time to play together. Everyone marks their free hours on a weekly grid; a heatmap shows how many people are free in each half-hour and picks out the windows when at least half the group (and at least two people) can play.">Apka, która pomaga ekipie ustalić wspólny termin grania. Każdy zaznacza swoje wolne godziny na tygodniowej siatce, a&nbsp;heatmapa pokazuje, ile osób ma czas w&nbsp;każdej półgodzinie, i&nbsp;wskazuje okna, w&nbsp;których może grać co najmniej połowa ekipy (minimum dwie osoby).</p>
+                                            <p data-en="Claude suggests games and can tie each one to one of the upcoming shared windows (at least two people, at least an hour); when there is too little data or the call fails, rules take over. It is a web app with Discord login; an agreed session is posted to the group’s Discord channel once the group adds a webhook (the Discord bot is dormant).">Claude proponuje gry i&nbsp;do każdej może przypisać jedno z&nbsp;najbliższych wspólnych okien (co najmniej dwie osoby, minimum godzina); gdy danych jest za mało albo wywołanie się nie uda, zamiast niego podpowiadają reguły. To aplikacja webowa z&nbsp;logowaniem przez Discorda; umówiona sesja trafia na kanał grupy na Discordzie, jeśli grupa podepnie webhook (bot Discorda jest uśpiony).</p>
+                                            <p data-en="It is a closed beta before public launch: the landing page is public, the app needs an invitation.">To zamknięta beta przed publicznym startem: strona główna jest publiczna, a&nbsp;aplikacja wymaga zaproszenia.</p>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-upfor-tech" aria-labelledby="tab-upfor-tech" hidden>
                                             <div class="gh-badges">
-                                                <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~124k</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold" data-en="1,868">1868</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="data models">modele danych</span><span class="gh-v gh-v-gold">28</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~177k</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold" data-en="3,342">3342</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="data models">modele danych</span><span class="gh-v gh-v-gold">29</span></span>
                                                 <span class="gh-badge"><span class="gh-k" data-en="tRPC procedures">procedury tRPC</span><span class="gh-v gh-v-gold">124</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="slash commands">slash-komendy</span><span class="gh-v gh-v-gold">18</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="migrations">migracje</span><span class="gh-v gh-v-gold">24</span></span>
                                             </div>
                                             <ul class="showcase-list">
                                                 <li data-en="7×48 grid (7 days × 48 half-hour slots), rendered as an interactive overlap heatmap">Siatka 7×48 (7 dni × 48 półgodzinnych slotów) jako interaktywna heatmapa nakładania się dostępności</li>
-                                                <li data-en="The Discord bot and the app share one real-time state: Postgres LISTEN/NOTIFY → SSE; 19 tRPC routers in a Turborepo monorepo">Bot Discord i aplikacja dzielą jeden stan w czasie rzeczywistym: Postgres LISTEN/NOTIFY → SSE; 19 routerów tRPC w monorepo Turborepo</li>
+                                                <li data-en="19 tRPC routers in a Turborepo monorepo; real-time updates (Postgres LISTEN/NOTIFY → SSE) have been off by default since 28 August 2026, and the client polls every 30–120 s">19&nbsp;routerów tRPC w&nbsp;monorepo Turborepo; aktualizacje na żywo (Postgres LISTEN/NOTIFY → SSE) są domyślnie wyłączone od 28&nbsp;sierpnia 2026, a&nbsp;klient odpytuje serwer co 30–120&nbsp;s</li>
                                                 <li data-en="A deterministic core computes up to 5 shared windows from the heatmap; through forced tool-use Claude Haiku 4.5 proposes 3–5 games, each pointing to one of those windows by index — an index outside the list is dropped, so it can’t invent a time slot">Do 5 wspólnych okien z heatmapy liczy deterministyczny rdzeń; Claude Haiku 4.5 przez wymuszone tool-use proponuje 3–5 gier, każdą z indeksem jednego z tych okien — indeks spoza listy jest odrzucany, więc model nie wymyśli terminu</li>
-                                                <li data-en="Growth loop: a Discord channel per group, a public /bot page and group invite landings with UTM attribution">Pętla wzrostu: kanał Discord dla każdej grupy, publiczna strona /bot i landing zaproszeń do grupy z atrybucją UTM</li>
+                                                <li data-en="Figures: repository state on 14 October 2026 (code including tests; tests: run of 10 October 2026)">Liczby: stan repozytorium na 14&nbsp;października 2026 (kod razem z&nbsp;testami; testy: przebieg z&nbsp;10&nbsp;października 2026)</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-upfor-chall" aria-labelledby="tab-upfor-chall" hidden>
                                             <ul class="showcase-list">
                                                 <li data-en="The autumn DST Sunday has 25 hours, so a click at 20:00 saved 19:00 → a slot is a wall-clock hour, not “midnight + i × 30 min”">Jesienna niedziela zmiany czasu ma 25 h, więc klik 20:00 zapisywał 19:00 → slot to godzina na zegarze, nie „północ + i × 30 min”</li>
                                                 <li data-en="For an hour after the clock change the zone offset came out stale (+2 h instead of +1 h) → it is computed for the exact instant">Przez godzinę po zmianie czasu przesunięcie strefy wychodziło stare (+2 h zamiast +1 h) → liczone dla konkretnej chwili</li>
-                                                <li data-en="A 15-minute fallback scheduler didn’t fit the GitHub Actions minutes quota → an external pinger drives the crons; Actions only checks 4× a day (dead-man’s switch)">Zapasowy scheduler co 15 min nie mieścił się w limicie minut GitHub Actions → crony uruchamia zewnętrzny pinger, a Actions 4× na dobę tylko pilnuje (dead-man’s switch)</li>
+                                                <li data-en="At full cadence a 15-minute fallback schedule on GitHub Actions would have exceeded the minutes quota (estimate: ~2,880 min a month), and in 7 days it fired only 46 of its 672 scheduled runs (measured 5 September 2026) → the crons are meant to be driven by an external pinger; Actions only checks 4× a day (dead-man’s switch)">Zapasowy harmonogram GitHub Actions co 15&nbsp;min przy pełnej kadencji przekroczyłby limit minut (szacunek: ~2&nbsp;880&nbsp;min miesięcznie), a&nbsp;w&nbsp;ciągu 7&nbsp;dni wykonał tylko 46 z&nbsp;672 zaplanowanych uruchomień (pomiar z&nbsp;5&nbsp;września 2026) → crony ma uruchamiać zewnętrzny pinger, a&nbsp;Actions 4× na dobę tylko pilnuje (dead-man’s switch)</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -704,6 +706,10 @@
                                         <a href="https://upfor.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
                                             <span data-en="See live">Zobacz na żywo</span>
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                                        </a>
+                                        <a href="/case/upfor/" class="project-link">
+                                            <span data-en="Case study">Studium przypadku</span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                                         </a>
                                     </div>
                                 </div>
@@ -749,19 +755,20 @@
                                     <div class="showcase-panels">
                                         <div class="showcase-panel is-active" role="tabpanel" id="panel-margiela-opis" aria-labelledby="tab-margiela-opis">
                                             <p data-en="A tool that tracks Maison Margiela perfume prices (the Replica line) across several stores at once, instead of checking the same fragrances across different sites by hand.">Narzędzie, które śledzi ceny perfum Maison Margiela (linia Replica) w kilku sklepach naraz, zamiast ręcznego sprawdzania tych samych zapachów po różnych stronach.</p>
-                                            <p data-en="You set a threshold in a Telegram bot, and when the price drops below it you get a message linking to the change history. A dashboard shows what’s cheaper right now and where.">Próg ustawiasz w bocie Telegrama, a gdy cena spadnie poniżej, przychodzi wiadomość z linkiem do historii zmian. Panel pokazuje, co i gdzie aktualnie potaniało.</p>
+                                            <p data-en="It keeps the price history of each bottle, and a dashboard shows what’s cheaper right now and where. When a price drops by 5% or more, I get a private alert.">Zapisuje historię cen każdego flakonu, a&nbsp;panel pokazuje, co i&nbsp;gdzie aktualnie potaniało. Gdy cena spadnie o&nbsp;5% lub więcej, dostaję prywatny alert.</p>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-margiela-tech" aria-labelledby="tab-margiela-tech" hidden>
                                             <div class="gh-badges">
-                                                <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~21k</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold">292</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="price readings">odczyty cen</span><span class="gh-v gh-v-gold" data-en="9,094">9094</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~40k</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold">787</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="daily price records">dzienne notowania</span><span class="gh-v gh-v-gold" data-en="9,853">9853</span></span>
                                                 <span class="gh-badge"><span class="gh-k" data-en="fragrances">zapachy</span><span class="gh-v gh-v-gold">26</span></span>
                                             </div>
                                             <ul class="showcase-list">
-                                                <li data-en="3 stores (Notino, Sephora, Flaconi) every 6 h from a systemd timer; price history since January 2026">3 sklepy (Notino, Sephora, Flaconi) co 6 h z timera systemd; historia cen od stycznia 2026</li>
-                                                <li data-en="A private alert on a drop over 5%, a public one (Discord + Telegram) at ≥ 10% or a record low">Alert prywatny przy spadku powyżej 5%, publiczny (Discord + Telegram) przy ≥ 10% albo rekordzie</li>
+                                                <li data-en="3 stores (Notino, Flaconi, Sephora) every 6 h from a systemd timer; some Sephora prices come from a public price-comparison site because the store blocks automated access to its product pages; price history since January 2026, with gaps (the longest from June to the end of July 2026)">3&nbsp;sklepy (Notino, Flaconi, Sephora) co 6&nbsp;h z&nbsp;timera systemd; część cen Sephory pochodzi z&nbsp;publicznej porównywarki, bo sklep blokuje automatyczny dostęp do stron produktów; historia cen od stycznia 2026, z&nbsp;przerwami (najdłuższa od czerwca do końca lipca 2026)</li>
+                                                <li data-en="A private alert on a drop of 5% or more; the public channel (≥&nbsp;10% or an all-time low) is built but switched off (as of 10 October 2026)">Alert prywatny przy spadku od 5%; kanał publiczny (≥&nbsp;10% albo najniższa cena w&nbsp;historii) jest gotowy, ale wyłączony (stan na 10&nbsp;października 2026)</li>
                                                 <li data-en="An /analytics tab: trend, seasonality, store correlations and buy signals from z-score and percentiles">Zakładka /analytics: trend, sezonowość, korelacje sklepów i sygnały kupna z z-score i percentyli</li>
+                                                <li data-en="Figures: repository state on 14 October 2026 (code including tests and templates; tests: run of 10 October 2026)">Liczby: stan repozytorium na 14&nbsp;października 2026 (kod razem z&nbsp;testami i&nbsp;szablonami; testy: przebieg z&nbsp;10&nbsp;października 2026)</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-margiela-chall" aria-labelledby="tab-margiela-chall" hidden>
@@ -777,6 +784,10 @@
                                         <a href="https://replica.karolwilczynski.com" target="_blank" rel="noopener" class="project-link project-link-primary">
                                             <span data-en="See live">Zobacz na żywo</span>
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                                        </a>
+                                        <a href="/case/automargiela/" class="project-link">
+                                            <span data-en="Case study">Studium przypadku</span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                                         </a>
                                     </div>
                                 </div>
@@ -810,13 +821,13 @@
                                 <div class="showcase-info">
                                     <div class="project-tags">
                                         <span class="tag">TypeScript</span>
-                                        <span class="tag">Next.js 14</span>
+                                        <span class="tag">Next.js 15</span>
                                         <span class="tag">AI</span>
                                         <span class="tag">Supabase</span>
                                         <span class="tag tag-year">2026</span>
                                     </div>
                                     <h3 class="showcase-title">Majeranek <span class="project-badge-alpha">ALPHA</span></h3>
-                                    <p class="showcase-subtitle" data-en="Smart recommendations based on lists">Inteligentne rekomendacje na podstawie list</p>
+                                    <p class="showcase-subtitle" data-en="Rankings and recommendations based on your lists">Rankingi i&nbsp;rekomendacje na podstawie list</p>
 
                                     <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: Majeranek" data-en-aria="Details: Majeranek">
                                         <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-majeranek-opis" aria-controls="panel-majeranek-opis" data-en="Overview">Opis</button>
@@ -825,27 +836,28 @@
                                     </div>
                                     <div class="showcase-panels">
                                         <div class="showcase-panel is-active" role="tabpanel" id="panel-majeranek-opis" aria-labelledby="tab-majeranek-opis">
-                                            <p data-en="An app where you arrange your lists of films, games, books and music by dragging titles around. From those ratings, a language model tries to guess what else you might like.">Aplikacja, w której układasz swoje listy filmów, gier, książek i muzyki, przeciągając tytuły. Na podstawie tych ocen model językowy próbuje zgadnąć, co jeszcze może Ci się spodobać.</p>
-                                            <p data-en="The question is whether recommendations can carry across categories: a film from music taste, a book from favourite games. This is an early version that puts it to the test.">Chodzi o to, czy rekomendacje da się przenosić między kategoriami: film na bazie gustu muzycznego, książka na bazie ulubionych gier. To wczesna wersja, która to sprawdza.</p>
+                                            <p data-en="An app where you arrange your lists of films, games, books and music by dragging titles around. From those rankings and head-to-head duels, a deterministic taste engine in the database (collaborative filtering plus categories) suggests what else you might like; Claude adds suggestions only when you ask.">Aplikacja, w&nbsp;której układasz swoje listy filmów, gier, książek i&nbsp;muzyki, przeciągając tytuły. Z&nbsp;tych rankingów i&nbsp;pojedynków deterministyczny silnik gustu w&nbsp;bazie (filtrowanie kolaboracyjne plus kategorie) podpowiada, co jeszcze może Ci się spodobać; Claude dokłada propozycje tylko na żądanie.</p>
+                                            <p data-en="The question is whether recommendations can carry across categories: a film from music taste, a book from favourite games. This is an early version meant to test it; I have not measured recommendation quality yet.">Chodzi o&nbsp;to, czy rekomendacje da się przenosić między kategoriami: film na bazie gustu muzycznego, książka na bazie ulubionych gier. To wczesna wersja, która ma to sprawdzić; jakości rekomendacji jeszcze nie mierzyłem.</p>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-majeranek-tech" aria-labelledby="tab-majeranek-tech" hidden>
                                             <div class="gh-badges">
-                                                <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~120k</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold">465</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="tables with RLS">tabele z RLS</span><span class="gh-v gh-v-gold">41 / 41</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="i18n keys">klucze i18n</span><span class="gh-v gh-v-gold" data-en="2,468">2468</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~104k</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold">758</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="tables with RLS">tabele z RLS</span><span class="gh-v gh-v-gold">49 / 49</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="i18n keys">klucze i18n</span><span class="gh-v gh-v-gold" data-en="2,658">2658</span></span>
                                             </div>
                                             <ul class="showcase-list">
-                                                <li data-en="Tier lists ordered by drag &amp; drop or head-to-head duels: ELO / Glicko-2 rankings">Tier listy układane przeciąganiem albo pojedynkami parami: rankingi ELO / Glicko-2</li>
-                                                <li data-en="Cross-media recommendations: Claude plus collaborative filtering in Postgres">Rekomendacje cross-mediowe: Claude plus filtrowanie kolaboracyjne w Postgresie</li>
+                                                <li data-en="Tier lists ordered by drag &amp; drop or head-to-head duels; the ELO ranking (K=32) is computed in Postgres">Tier listy układane przeciąganiem albo pojedynkami parami; ranking ELO (K=32) liczony w&nbsp;Postgresie</li>
+                                                <li data-en="Recommendations: collaborative filtering and a taste engine in Postgres; cross-category suggestions (e.g. a film from music taste) come from Claude, only on request">Rekomendacje: filtrowanie kolaboracyjne i&nbsp;silnik gustu w&nbsp;Postgresie; propozycje między kategoriami (np. film z&nbsp;gustu muzycznego) daje Claude, tylko na żądanie</li>
                                                 <li data-en="Full PL/EN bilingualism; a test makes sure both languages have the same key set">Pełna dwujęzyczność PL/EN; test pilnuje, by oba języki miały ten sam zestaw kluczy</li>
+                                                <li data-en="Figures: repository state on 14 October 2026 (code including tests, generated types and SQL)">Liczby: stan repozytorium na 14&nbsp;października 2026 (kod razem z&nbsp;testami, generowanymi typami i&nbsp;SQL)</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-majeranek-chall" aria-labelledby="tab-majeranek-chall" hidden>
                                             <ul class="showcase-list">
-                                                <li data-en="LLM-only recommendations were merely “plausible” → collaborative filtering in the database">Rekomendacje z samego LLM były tylko „prawdopodobne” → filtrowanie kolaboracyjne w bazie</li>
+                                                <li data-en="LLM-only recommendations read only your own rankings, with no signal from other users → collaborative filtering in the database">Rekomendacje z&nbsp;samego LLM czytały tylko Twoje rankingi, bez sygnału od innych użytkowników → filtrowanie kolaboracyjne w&nbsp;bazie</li>
                                                 <li data-en="Likes could be inflated with the public key → triggers count only real rows">Polubienia dało się podbić publicznym kluczem → triggery liczą tylko realne wiersze</li>
-                                                <li data-en="Rankings must react instantly → ELO preview in the browser, Glicko-2 on the server">Ranking ma reagować od razu → podgląd ELO w przeglądarce, Glicko-2 na serwerze</li>
+                                                <li data-en="Rankings must react instantly and votes must not get lost → ELO preview in the browser, saved by one atomic call in Postgres with a per-ranking lock">Ranking ma reagować od razu, a&nbsp;głosy nie mogą się gubić → podgląd ELO w&nbsp;przeglądarce, zapis jednym atomowym wywołaniem w&nbsp;Postgresie z&nbsp;blokadą na ranking</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -854,6 +866,10 @@
                                         <a href="https://majeranek.vercel.app" target="_blank" rel="noopener" class="project-link project-link-primary">
                                             <span data-en="See live">Zobacz na żywo</span>
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                                        </a>
+                                        <a href="/case/majeranek/" class="project-link">
+                                            <span data-en="Case study">Studium przypadku</span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                                         </a>
                                     </div>
                                 </div>
@@ -889,8 +905,8 @@
                                         <span class="tag">UX</span>
                                         <span class="tag tag-year">2026</span>
                                     </div>
-                                    <h3 class="showcase-title">AIgets.me <span class="project-badge-wip" data-en="WIP">W BUDOWIE</span></h3>
-                                    <p class="showcase-subtitle" data-en="One personality profile for many AI models">Jeden profil osobowości dla wielu modeli AI</p>
+                                    <h3 class="showcase-title">AIgets.me <span class="project-badge-wip" data-en="PROTOTYPE">PROTOTYP</span></h3>
+                                    <p class="showcase-subtitle" data-en="One system instruction for many AI assistants">Jedna instrukcja systemowa dla wielu asystentów AI</p>
 
                                     <div class="showcase-tabs" role="tablist" aria-label="Szczegóły: AIgets.me" data-en-aria="Details: AIgets.me">
                                         <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" id="tab-aigets-opis" aria-controls="panel-aigets-opis" data-en="Overview">Opis</button>
@@ -899,25 +915,26 @@
                                     </div>
                                     <div class="showcase-panels">
                                         <div class="showcase-panel is-active" role="tabpanel" id="panel-aigets-opis" aria-labelledby="tab-aigets-opis">
-                                            <p data-en="Instead of explaining who you are and how you like to work to every AI assistant from scratch, you describe it once. AIgets.me turns that into a single profile and exports it as a ready-made system prompt.">Zamiast za każdym razem tłumaczyć asystentowi AI, kim jesteś i jak lubisz pracować, opisujesz to raz. AIgets.me składa z tego jeden profil i eksportuje go jako gotowy system prompt.</p>
-                                            <p data-en="You paste that profile into Claude, GPT or another model so it answers in your style right away. The project is still in progress; the profile configurator already works.">Taki profil wklejasz do Claude, GPT czy innego modelu, żeby od razu odpowiadał w Twoim stylu. Projekt jest w budowie; działa już sam konfigurator profilu.</p>
+                                            <p data-en="Instead of explaining who you are and how you like to work to every AI assistant from scratch, you describe it once. AIgets.me turns that into one system instruction, ready to copy or export to a file.">Zamiast za każdym razem tłumaczyć asystentowi AI, kim jesteś i&nbsp;jak lubisz pracować, opisujesz to raz. AIgets.me składa z&nbsp;tego jedną instrukcję systemową, gotową do skopiowania albo eksportu do pliku.</p>
+                                            <p data-en="You paste the same instruction into Claude, ChatGPT or Gemini so they answer in your style right away. The whole flow works, from the questions to the export, but it is a prototype that has not been launched; last changed in June 2026.">Tę samą instrukcję wklejasz do Claude’a, ChatGPT czy Gemini, żeby od razu odpowiadały w&nbsp;Twoim stylu. Cały przebieg działa, od pytań po eksport, ale to prototyp przed publicznym startem; ostatnie zmiany w&nbsp;czerwcu 2026.</p>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-aigets-tech" aria-labelledby="tab-aigets-tech" hidden>
                                             <div class="gh-badges">
                                                 <span class="gh-badge"><span class="gh-k" data-en="code">kod</span><span class="gh-v gh-v-gold">~35k</span></span>
                                                 <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold">86</span></span>
-                                                <span class="gh-badge"><span class="gh-k" data-en="steps">kroki</span><span class="gh-v gh-v-gold">13</span></span>
+                                                <span class="gh-badge"><span class="gh-k" data-en="steps">kroki</span><span class="gh-v gh-v-gold">11</span></span>
                                                 <span class="gh-badge"><span class="gh-k" data-en="toggles">przełączniki</span><span class="gh-v gh-v-gold">10</span></span>
                                             </div>
                                             <ul class="showcase-list">
-                                                <li data-en="The builder collects tone, context and work style; the output is a ready-made system prompt">Kreator zbiera ton, kontekst i styl pracy; wynik to gotowy system prompt</li>
-                                                <li data-en="Claude Haiku generates the prompt in a serverless function; without it a local static generator takes over">Prompt generuje Claude Haiku w funkcji serverless; bez niej działa lokalny generator statyczny</li>
-                                                <li data-en="4 target models: Claude, ChatGPT, Gemini and a universal variant">4 docelowe modele: Claude, ChatGPT, Gemini i wariant uniwersalny</li>
+                                                <li data-en="The builder collects tone, context and work style; the output is a ready-made system instruction">Kreator zbiera ton, kontekst i&nbsp;styl pracy; wynik to gotowa instrukcja systemowa</li>
+                                                <li data-en="A serverless function calls Claude Haiku; if the call fails (an error, a timeout, no key), a local generator builds the instruction and the UI says so">Funkcja serverless wywołuje Claude Haiku; gdy wywołanie się nie uda (błąd, limit czasu, brak klucza), instrukcję składa lokalny generator, a&nbsp;interfejs o&nbsp;tym informuje</li>
+                                                <li data-en="One instruction for every assistant: picking Claude, ChatGPT, Gemini or the universal option changes the hint on where to paste it and the export file name; the instruction text stays the same">Jedna instrukcja dla każdego asystenta: wybór Claude’a, ChatGPT, Gemini albo wariantu uniwersalnego zmienia podpowiedź, gdzie ją wkleić, i&nbsp;nazwę pliku eksportu; treść instrukcji jest ta sama</li>
+                                                <li data-en="Figures: repository state on 22 June 2026 (the last change)">Liczby: stan repozytorium na 22&nbsp;czerwca 2026 (ostatnia zmiana)</li>
                                             </ul>
                                         </div>
                                         <div class="showcase-panel" role="tabpanel" id="panel-aigets-chall" aria-labelledby="tab-aigets-chall" hidden>
                                             <ul class="showcase-list">
-                                                <li data-en="The builder had 19 steps → repeats and one-line-output steps cut → 13">Kreator miał 19 kroków → wycięte powtórzenia i kroki o jednej linijce wyniku → 13</li>
+                                                <li data-en="The builder had 19 screens → repeats and one-line-output steps cut → 14 screens, 11 of them questions">Kreator miał 19&nbsp;ekranów → wycięte powtórzenia i&nbsp;kroki o&nbsp;jednej linijce wyniku → 14&nbsp;ekranów, w&nbsp;tym 11&nbsp;z&nbsp;pytaniami</li>
                                                 <li data-en="Free text goes into the prompt → XML/HTML tags are stripped before it reaches the model">Wolne pola idą do promptu → znaczniki XML/HTML usuwane, zanim trafią do modelu</li>
                                                 <li data-en="A reload mid-generation = a second paid call → back to the last input step">Odświeżenie w trakcie generacji = drugie płatne wywołanie → powrót do ostatniego kroku</li>
                                             </ul>
@@ -925,9 +942,9 @@
                                     </div>
 
                                     <div class="showcase-cta">
-                                        <a href="https://whoisi.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link project-link-primary">
-                                            <span data-en="See live">Zobacz na żywo</span>
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                                        <a href="/case/aigets/" class="project-link project-link-primary">
+                                            <span data-en="Case study">Studium przypadku</span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                                         </a>
                                     </div>
                                 </div>
@@ -1016,6 +1033,102 @@
                             </a>
                             </div>
                         </article>
+                        <article class="tools-card">
+                            <div class="tools-card-head">
+                                <span class="tools-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.5 6.5c-.6-1.7-2-2.5-3.7-2.5-2.1 0-3.6 1.2-3.6 2.9 0 3.9 7.6 2.8 7.6 7 0 1.5-1 2.6-2.5 3"/><path d="M9.5 17.5c.6 1.7 2 2.5 3.7 2.5 2.1 0 3.6-1.2 3.6-2.9 0-3.9-7.6-2.8-7.6-7 0-1.5 1-2.6 2.5-3"/></svg></span>
+                                <h3>UpFor.pl</h3>
+                            </div>
+                            <p data-en="Daylight saving shifted clicks by an hour, so a slot is a wall-clock hour, not “midnight + 30 min”. The model only picks from windows a deterministic core has computed.">Zmiana czasu przesuwała kliknięcia o&nbsp;godzinę, więc slot to godzina na zegarze, nie „północ + 30&nbsp;min”. Model wybiera tylko spośród okien policzonych przez deterministyczny rdzeń.</p>
+                            <div class="gh-badges">
+                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold" data-en="3,342">3&nbsp;342</span></span>
+                                <span class="gh-badge"><span class="gh-k" data-en="tRPC procedures">procedury tRPC</span><span class="gh-v gh-v-gold">124</span></span>
+                            </div>
+                            <div class="tools-card-foot">
+                                <a class="tools-card-link" href="/case/upfor/"><span data-en="Read the case study">Czytaj studium</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </a>
+                            </div>
+                        </article>
+                        <article class="tools-card">
+                            <div class="tools-card-head">
+                                <span class="tools-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.5 6.5c-.6-1.7-2-2.5-3.7-2.5-2.1 0-3.6 1.2-3.6 2.9 0 3.9 7.6 2.8 7.6 7 0 1.5-1 2.6-2.5 3"/><path d="M9.5 17.5c.6 1.7 2 2.5 3.7 2.5 2.1 0 3.6-1.2 3.6-2.9 0-3.9-7.6-2.8-7.6-7 0-1.5 1-2.6 2.5-3"/></svg></span>
+                                <h3>AutoMargiela</h3>
+                            </div>
+                            <p data-en="A coverage watchdog spots a store that has quietly stopped delivering prices: within 6 h at most instead of after 7 days. No paid APIs and no language models.">Strażnik pokrycia wykrywa sklep, który po cichu przestał dostarczać ceny: zamiast po 7&nbsp;dniach najpóźniej po 6&nbsp;h. Bez płatnych API i&nbsp;bez modeli językowych.</p>
+                            <div class="gh-badges">
+                                <span class="gh-badge"><span class="gh-k" data-en="daily price records">dzienne notowania</span><span class="gh-v gh-v-gold" data-en="9,853">9&nbsp;853</span></span>
+                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold">787</span></span>
+                            </div>
+                            <div class="tools-card-foot">
+                                <a class="tools-card-link" href="/case/automargiela/"><span data-en="Read the case study">Czytaj studium</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </a>
+                            </div>
+                        </article>
+                        <article class="tools-card">
+                            <div class="tools-card-head">
+                                <span class="tools-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.5 6.5c-.6-1.7-2-2.5-3.7-2.5-2.1 0-3.6 1.2-3.6 2.9 0 3.9 7.6 2.8 7.6 7 0 1.5-1 2.6-2.5 3"/><path d="M9.5 17.5c.6 1.7 2 2.5 3.7 2.5 2.1 0 3.6-1.2 3.6-2.9 0-3.9-7.6-2.8-7.6-7 0-1.5 1-2.6 2.5-3"/></svg></span>
+                                <h3>Majeranek</h3>
+                            </div>
+                            <p data-en="The browser talks to the database directly, so RLS is the security boundary. Postgres computes the ELO ranking and the recommendations; Claude runs only on request.">Przeglądarka rozmawia z&nbsp;bazą bezpośrednio, więc granicą bezpieczeństwa jest RLS. Ranking ELO i&nbsp;rekomendacje liczy Postgres, a&nbsp;Claude działa tylko na żądanie.</p>
+                            <div class="gh-badges">
+                                <span class="gh-badge"><span class="gh-k" data-en="tables with RLS">tabele z RLS</span><span class="gh-v gh-v-gold">49 / 49</span></span>
+                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold">758</span></span>
+                            </div>
+                            <div class="tools-card-foot">
+                                <a class="tools-card-link" href="/case/majeranek/"><span data-en="Read the case study">Czytaj studium</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </a>
+                            </div>
+                        </article>
+                        <article class="tools-card">
+                            <div class="tools-card-head">
+                                <span class="tools-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.5 6.5c-.6-1.7-2-2.5-3.7-2.5-2.1 0-3.6 1.2-3.6 2.9 0 3.9 7.6 2.8 7.6 7 0 1.5-1 2.6-2.5 3"/><path d="M9.5 17.5c.6 1.7 2 2.5 3.7 2.5 2.1 0 3.6-1.2 3.6-2.9 0-3.9-7.6-2.8-7.6-7 0-1.5 1-2.6 2.5-3"/></svg></span>
+                                <h3>AIgets.me</h3>
+                            </div>
+                            <p data-en="A wizard trimmed after a review: 11 of 16 questions stayed, because the rest duplicated others or added a single sentence to the result. Answers reach the model as data, not instructions.">Kreator przycięty po przeglądzie: z&nbsp;16&nbsp;pytań zostało 11, bo część dublowała inne albo wnosiła do wyniku jedno zdanie. Odpowiedzi trafiają do modelu jako dane, nie polecenia.</p>
+                            <div class="gh-badges">
+                                <span class="gh-badge"><span class="gh-k" data-en="screens">ekrany</span><span class="gh-v gh-v-gold">19 → 14</span></span>
+                                <span class="gh-badge"><span class="gh-k" data-en="tests">testy</span><span class="gh-v gh-v-gold">86</span></span>
+                            </div>
+                            <div class="tools-card-foot">
+                                <a class="tools-card-link" href="/case/aigets/"><span data-en="Read the case study">Czytaj studium</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </a>
+                            </div>
+                        </article>
+                        <article class="tools-card">
+                            <div class="tools-card-head">
+                                <span class="tools-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.5 6.5c-.6-1.7-2-2.5-3.7-2.5-2.1 0-3.6 1.2-3.6 2.9 0 3.9 7.6 2.8 7.6 7 0 1.5-1 2.6-2.5 3"/><path d="M9.5 17.5c.6 1.7 2 2.5 3.7 2.5 2.1 0 3.6-1.2 3.6-2.9 0-3.9-7.6-2.8-7.6-7 0-1.5 1-2.6 2.5-3"/></svg></span>
+                                <h3 data-en="Small tools">Małe narzędzia</h3>
+                            </div>
+                            <p data-en="Five public tools, each with one decision and its cost. After moving to the Sejm API, ISAP-scraper fetched 23,318 acts; the earlier version returned 0 without an error.">Pięć publicznych narzędzi, przy każdym jedna decyzja i&nbsp;jej koszt. ISAP-scraper po przejściu na API Sejmu pobrał 23&nbsp;318 aktów, a&nbsp;wcześniejsza wersja zwracała 0 bez błędu.</p>
+                            <div class="gh-badges">
+                                <span class="gh-badge"><span class="gh-k" data-en="tools">narzędzia</span><span class="gh-v gh-v-gold">5</span></span>
+                                <span class="gh-badge"><span class="gh-k" data-en="acts from the API">akty z API</span><span class="gh-v gh-v-gold" data-en="23,318">23&nbsp;318</span></span>
+                            </div>
+                            <div class="tools-card-foot">
+                                <a class="tools-card-link" href="/case/narzedzia/"><span data-en="Read the case study">Czytaj studium</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </a>
+                            </div>
+                        </article>
+                        <article class="tools-card">
+                            <div class="tools-card-head">
+                                <span class="tools-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.5 6.5c-.6-1.7-2-2.5-3.7-2.5-2.1 0-3.6 1.2-3.6 2.9 0 3.9 7.6 2.8 7.6 7 0 1.5-1 2.6-2.5 3"/><path d="M9.5 17.5c.6 1.7 2 2.5 3.7 2.5 2.1 0 3.6-1.2 3.6-2.9 0-3.9-7.6-2.8-7.6-7 0-1.5 1-2.6 2.5-3"/></svg></span>
+                                <h3 data-en="Data analyses">Analizy danych</h3>
+                            </div>
+                            <p data-en="Five projects on public data. In most depth: can GPT-4o-mini predict a share move from an ESPI filing — the method and its weak spots rather than a result.">Pięć projektów na publicznych danych. Najszerzej: czy GPT-4o-mini przewidzi ruch kursu po raporcie ESPI — opis metody i&nbsp;jej słabych punktów zamiast wyniku.</p>
+                            <div class="gh-badges">
+                                <span class="gh-badge"><span class="gh-k" data-en="projects">projekty</span><span class="gh-v gh-v-gold">5</span></span>
+                                <span class="gh-badge"><span class="gh-k" data-en="ESPI reports">raporty ESPI</span><span class="gh-v gh-v-gold">134</span></span>
+                            </div>
+                            <div class="tools-card-foot">
+                                <a class="tools-card-link" href="/case/analizy-danych/"><span data-en="Read the case study">Czytaj studium</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </a>
+                            </div>
+                        </article>
                     </div>
                 </section>
 
@@ -1061,7 +1174,7 @@
                             <div class="project-tags">
                                 <span class="tag">Node.js</span>
                                 <span class="tag">Stream Deck</span>
-                                <span class="tag">offline</span>
+                                <span class="tag">WebSocket</span>
                             </div>
                             <p data-en="A Stream Deck plugin that keeps your Claude limits on physical keys: the 5-hour session, the week, the Fable limit, usage credits and today's token cost. Limits come once a minute from the same endpoint Claude Code's /usage uses; the cost is computed offline from local transcripts. Node.js 20, one dependency, no telemetry — it talks to two hosts and that's it.">Wtyczka do Stream Decka, która trzyma limity Claude'a na fizycznych klawiszach: sesję 5-godzinną, tydzień, limit Fable, pulę kredytów i dzisiejszy koszt tokenów. Limity pobiera raz na minutę z tego samego endpointu, z którego korzysta /usage w Claude Code, a koszt liczy offline z lokalnych transkryptów. Node.js 20, jedna zależność, zero telemetrii — łączy się z dwoma hostami i tyle.</p>
                             <div class="tools-card-foot">
@@ -1072,6 +1185,9 @@
                             </a>
                                 <a class="tools-card-link tools-card-link--secondary" href="https://github.com/karolpolikarp/claude-usage-streamdeck" target="_blank" rel="noopener"><span data-en="Repository">Repozytorium</span>
                                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                            </a>
+                                <a class="tools-card-link tools-card-link--secondary" href="/case/narzedzia/#claude-usage"><span data-en="Case study">Studium przypadku</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                             </a>
                             </div>
                         </article>
@@ -1089,12 +1205,15 @@
                                 <span class="tag">ONNX</span>
                                 <span class="tag">NER</span>
                             </div>
-                            <p data-en-html="An optional add-on for Parawan — an AI layer (NER) that catches the rare and foreign surnames the rules miss: “Achtelik”, “Nguyen”, “Müller”. It runs entirely on your machine, on text that is already masked, so it can only add masks: recall on rare surnames climbs from 21% to 79–90% while precision holds at &lt;span class=&quot;scramble-num&quot;&gt;99.6%&lt;/span&gt;. Still in progress: it needs the core published to npm and a ~125 MB model pack built separately.">Opcjonalny dodatek do Parawana — warstwa AI (NER), która wyłapuje rzadkie i obce nazwiska, których nie widzą reguły: „Achtelik”, „Nguyen”, „Müller”. Działa w całości na Twoim komputerze, na tekście już zamaskowanym, więc może tylko dołożyć maski: recall na rzadkich nazwiskach rośnie z 21% do 79–90%, a precyzja zostaje na <span class="scramble-num">99,6%</span>. Wciąż w budowie: wymaga rdzenia opublikowanego w npm i paczki modelu (~125 MB) budowanej osobno.</p>
+                            <p data-en-html="An optional add-on for Parawan — an AI layer (NER) that catches the rare and foreign surnames the rules miss: “Achtelik”, “Nguyen”, “Müller”. It runs entirely on your machine, on text that is already masked, so it can only add masks: in a benchmark on 12 July 2026 (synthetic sentences, 19 rare surnames), recall rose from 21% to 79% with the model that runs in the browser (ONNX) and up to 90% with the optional NER services in Docker, while precision (across the whole set) held at &lt;span class=&quot;scramble-num&quot;&gt;99.6%&lt;/span&gt;. Still in progress: it needs the core published to npm and a ~125 MB model pack built separately.">Opcjonalny dodatek do Parawana — warstwa AI (NER), która wyłapuje rzadkie i&nbsp;obce nazwiska, których nie widzą reguły: „Achtelik”, „Nguyen”, „Müller”. Działa w&nbsp;całości na Twoim komputerze, na tekście już zamaskowanym, więc może tylko dołożyć maski: w&nbsp;pomiarze z&nbsp;12&nbsp;lipca 2026 (zdania syntetyczne, 19&nbsp;rzadkich nazwisk) recall wzrósł z&nbsp;21% do 79% z&nbsp;modelem działającym w&nbsp;przeglądarce (ONNX) i&nbsp;do 90% z&nbsp;opcjonalnymi usługami NER w&nbsp;Dockerze, a&nbsp;precyzja (na całym zestawie) pozostała na poziomie <span class="scramble-num">99,6%</span>. Wciąż w&nbsp;budowie: wymaga rdzenia opublikowanego w&nbsp;npm i&nbsp;paczki modelu (~125&nbsp;MB) budowanej osobno.</p>
                             <div class="tools-card-foot">
                                 <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~2.9k</span></span>
                                 <span class="tag-mit">Apache 2.0</span>
                                 <a class="tools-card-link" href="https://github.com/karolpolikarp/anonimizator-ai" target="_blank" rel="noopener"><span data-en="Repository">Repozytorium</span>
                                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                            </a>
+                                <a class="tools-card-link tools-card-link--secondary" href="/case/narzedzia/#anonimizator-ai"><span data-en="Case study">Studium przypadku</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                             </a>
                             </div>
                         </article>
@@ -1112,13 +1231,13 @@
                                 <span class="tag">PLLuM-12B</span>
                                 <span class="tag">on-device</span>
                             </div>
-                            <p data-en="Drop in a meeting recording and Stefka returns a transcription of what was said, plus a short summary. Everything runs offline on macOS (Apple Silicon): Whisper handles the audio, the PLLuM-12B model (~13 GB) summarises it locally. Built around running PLLuM locally, for sensitive data that shouldn't leave the laptop.">Wrzucasz nagranie ze spotkania, a Stefka zwraca transkrypcję treści i krótkie podsumowanie. Wszystko offline na macOS (Apple Silicon): Whisper przetwarza dźwięk, a model PLLuM-12B (~13 GB) streszcza go lokalnie. Powstała z myślą o lokalnym wykorzystaniu PLLuM i o danych wrażliwych, które nie powinny opuszczać laptopa.</p>
+                            <p data-en="A prototype: drop in a recording (or a text document) and Stefka returns a structured summary, fragment by fragment. Everything runs offline on macOS (Apple Silicon): Whisper turns the audio into text and the PLLuM-12B model (~13 GB) summarises it locally, so the files never leave the computer. The code is MIT-licensed; the default PLLuM model has a non-commercial licence (CC BY-NC 4.0).">Prototyp: wrzucasz nagranie (albo dokument tekstowy), a&nbsp;Stefka zwraca uporządkowane streszczenie, fragment po fragmencie. Wszystko offline na macOS (Apple Silicon): Whisper zamienia dźwięk na tekst, a&nbsp;model PLLuM-12B (~13&nbsp;GB) streszcza go lokalnie, więc pliki nie opuszczają komputera. Kod jest na licencji MIT; domyślny model PLLuM ma licencję niekomercyjną (CC BY-NC 4.0).</p>
                             <div class="tools-card-foot">
+                                <a class="tools-card-link" href="/case/narzedzia/#stefka"><span data-en="Case study">Studium przypadku</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </a>
                                 <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~3k</span></span>
                                 <span class="tag-mit">MIT</span>
-                                <a class="tools-card-link" href="https://github.com/karolpolikarp/Stefka-PPLuM-macOS.Silicon" target="_blank" rel="noopener"><span data-en="Repository">Repozytorium</span>
-                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
-                            </a>
                             </div>
                         </article>
 
@@ -1135,12 +1254,15 @@
                                 <span class="tag">CLI</span>
                                 <span class="tag">ISAP</span>
                             </div>
-                            <p data-en="Tracks changes in Polish law (Journal of Laws and Monitor Polski) straight from the Polish Parliament API, without clicking through ISAP by hand. Six CLI modes: search, full act metadata, CSV/JSON export and a daily check for new acts.">Śledzi zmiany w polskim prawie (Dziennik Ustaw i Monitor Polski) prosto z API Sejmu RP, bez ręcznego przeklikiwania ISAP. Sześć trybów CLI: wyszukiwanie, pełne metadane aktów, eksport do CSV/JSON i codzienne sprawdzanie nowych aktów.</p>
+                            <p data-en="Tracks changes in Polish law (Journal of Laws and Monitor Polski) straight from the Polish Parliament API, without clicking through ISAP by hand. Six CLI modes: fetching acts from a chosen range of years into a local JSON database, a daily check for new acts, flagging acts that the Sejm API marks as no longer in force, downloading full texts (PDF/HTML), CSV export and statistics. As a library it also returns a single article by its number.">Śledzi zmiany w&nbsp;polskim prawie (Dziennik Ustaw i&nbsp;Monitor Polski) prosto z&nbsp;API Sejmu RP, bez ręcznego przeklikiwania ISAP. Sześć trybów CLI: pobieranie aktów z&nbsp;wybranych lat do lokalnej bazy JSON, codzienne sprawdzanie nowych aktów, wykrywanie aktów, które według API Sejmu utraciły moc, pobieranie pełnych tekstów (PDF/HTML), eksport do CSV i&nbsp;statystyki. Jako biblioteka zwraca też pojedynczy artykuł po numerze.</p>
                             <div class="tools-card-foot">
                                 <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~1.5k</span></span>
                                 <span class="tag-mit">MIT</span>
                                 <a class="tools-card-link" href="https://github.com/karolpolikarp/ISAP-scraper" target="_blank" rel="noopener"><span data-en="Repository">Repozytorium</span>
                                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                            </a>
+                                <a class="tools-card-link tools-card-link--secondary" href="/case/narzedzia/#isap-scraper"><span data-en="Case study">Studium przypadku</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                             </a>
                             </div>
                         </article>
@@ -1158,12 +1280,15 @@
                                 <span class="tag">Swing</span>
                                 <span class="tag">Robot</span>
                             </div>
-                            <p data-en="An auto-clicker that clicks like a human. Bézier-curve cursor motion and randomised delays keep sequences from looking robotic. Record several click sequences and replay them on a loop. Java (Swing), zero dependencies beyond the standard library.">Autoklikacz, który klika jak człowiek. Ruch kursora po krzywej Béziera i losowe opóźnienia sprawiają, że sekwencje nie wyglądają maszynowo. Nagrywasz wiele sekwencji kliknięć i odtwarzasz je w pętli. Java (Swing), zero zależności poza standardową biblioteką.</p>
+                            <p data-en="An auto-clicker for automating your own repetitive tasks on the computer: you mark points on the screen, chain them into sequences and replay them on a loop. The cursor moves along a Bézier curve with random delays. Automated clicking can break the terms of some games and services, so use it only where it is allowed. Java (Swing), no dependencies beyond the standard library.">Autoklikacz do automatyzacji własnych, powtarzalnych czynności na komputerze: zaznaczasz punkty na ekranie, łączysz je w&nbsp;sekwencje i&nbsp;odtwarzasz w&nbsp;pętli. Kursor porusza się po krzywej Béziera z&nbsp;losowymi opóźnieniami. Automatyzacja klikania może naruszać regulaminy niektórych gier i&nbsp;serwisów, więc używaj go tylko tam, gdzie jest to dozwolone. Java (Swing), zero zależności poza standardową biblioteką.</p>
                             <div class="tools-card-foot">
                                 <span class="tag-loc"><span class="loc-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>LOC</span><span class="loc-v">~1.1k</span></span>
                                 <span class="tag-mit">MIT</span>
                                 <a class="tools-card-link" href="https://github.com/karolpolikarp/Multi-Sequence-Clicker" target="_blank" rel="noopener"><span data-en="Repository">Repozytorium</span>
                                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                            </a>
+                                <a class="tools-card-link tools-card-link--secondary" href="/case/narzedzia/#clicker"><span data-en="Case study">Studium przypadku</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                             </a>
                             </div>
                         </article>
@@ -1179,7 +1304,7 @@
                         <!-- Kafel flagowy -->
                         <a class="ds-tile ds-tile--feature" href="https://github.com/karolpolikarp/ds-SGH-Prognozy-gieldowe-z-ESPI" target="_blank" rel="noopener">
                             <img class="ds-tile-shot" src="assets/images/espi.webp" alt="" loading="lazy" onerror="this.remove()">
-                            <span class="tag tag-year">2025</span>
+                            <span class="tag tag-year">2024</span>
                             <div class="ds-tile-body">
                                 <div class="project-tags">
                                     <span class="tag">Python</span>
@@ -1187,7 +1312,7 @@
                                     <span class="tag">Pandas</span>
                                 </div>
                                 <h3 data-en="Stock forecasts from ESPI">Prognozy giełdowe z ESPI</h3>
-                                <p data-en="Can GPT-4o-mini read ESPI filings and predict Allegro's stock price? Forecasts from 134 reports and 1,050 sessions, matched against what actually happened.">Czy GPT-4o-mini, czytając komunikaty ESPI, przewidzi kurs Allegro? Prognozy z 134 raportów i 1050 sesji zestawione z rzeczywistością.</p>
+                                <p data-en="Can GPT-4o-mini read an ESPI filing and predict how the share price reacts? A dataset of 134 Allegro reports and 1,050 trading sessions (to 17 December 2024); the code matches a forecast at 5 horizons against what actually happened, one report at a time. The run saved in the repository covers a single CD Projekt report. A course exercise, not an investment tool or advice.">Czy GPT-4o-mini, czytając komunikat ESPI, przewidzi reakcję kursu? Zbiór: 134&nbsp;raporty Allegro i&nbsp;1&nbsp;050&nbsp;sesji giełdowych (do 17&nbsp;grudnia 2024); kod zestawia prognozę w&nbsp;5&nbsp;horyzontach z&nbsp;rzeczywistością, po jednym raporcie. Zapisany w&nbsp;repozytorium przebieg dotyczy jednego raportu CD Projekt. To ćwiczenie z&nbsp;zajęć, nie narzędzie ani porada inwestycyjna.</p>
                             </div>
                         </a>
 
@@ -1202,7 +1327,7 @@
                                     <span class="tag">PCA</span>
                                 </div>
                                 <h3 data-en="Video game market">Rynek gier wideo</h3>
-                                <p data-en="What makes a game sell? ~16.5k titles, K-Means segments and a RandomForest model that predicts it.">Co decyduje o sprzedaży gry? ~16,5 tys. tytułów, segmenty K-Means i model RandomForest, który ją prognozuje.</p>
+                                <p data-en="What makes a game sell? 16.6k records (11.5k titles), of which the analysis covers the 12.4k from 1980–2010: K-Means segments and a RandomForest model that explains about a quarter of the variance in sales on test data (R² 0.25 on a log scale).">Co decyduje o&nbsp;sprzedaży gry? 16,6&nbsp;tys. rekordów (11,5&nbsp;tys. tytułów), z&nbsp;czego analiza obejmuje 12,4&nbsp;tys. z&nbsp;lat 1980–2010: segmenty K-Means i&nbsp;model RandomForest, który na danych testowych wyjaśnia ok.&nbsp;¼ zmienności sprzedaży (R²&nbsp;0,25 w&nbsp;skali logarytmicznej).</p>
                             </div>
                         </a>
 
@@ -1217,7 +1342,7 @@
                                     <span class="tag">k-means</span>
                                 </div>
                                 <h3 data-en="Airbnb Winnipeg">Airbnb Winnipeg</h3>
-                                <p data-en="1,626 Airbnb listings and the full R pipeline: from MICE imputation to k-means and 4 host types. With an interactive map.">1626 ofert Airbnb i pełen pipeline w R: od imputacji MICE po k-means, który wyłonił 4 typy gospodarzy. Z interaktywną mapą.</p>
+                                <p data-en="1,626 Airbnb listings and the full R pipeline: from MICE imputation to splitting hosts into 4 types with k-means (k set in advance). Hosts with more than one listing hold 59.7% of all listings.">1&nbsp;626 ofert Airbnb i&nbsp;pełen pipeline w&nbsp;R: od imputacji MICE po podział gospodarzy na 4&nbsp;typy metodą k-means (k ustalone z&nbsp;góry). Do gospodarzy z&nbsp;więcej niż jedną ofertą należy 59,7% wszystkich ofert.</p>
                             </div>
                         </a>
 
@@ -1231,7 +1356,7 @@
                                     <span class="tag">statsmodels</span>
                                 </div>
                                 <h3 data-en="Airbnb Washington">Airbnb Waszyngton</h3>
-                                <p data-en="What really drives the rental price? 5,454 D.C. Airbnb listings: correlations and association tests in Python (chi-square, OLS).">Co naprawdę napędza cenę najmu? 5454 oferty Airbnb w Waszyngtonie: korelacje i testy związków zmiennych w Pythonie (chi-kwadrat, OLS).</p>
+                                <p data-en="What really drives the rental price? 5,454 D.C. Airbnb listings: correlations and measures of association in Python (Cramér’s V from chi-square, R² from OLS).">Co naprawdę napędza cenę najmu? 5&nbsp;454 oferty Airbnb w&nbsp;Waszyngtonie: korelacje i&nbsp;miary związku zmiennych w&nbsp;Pythonie (V&nbsp;Craméra z&nbsp;chi-kwadrat, R² z&nbsp;OLS).</p>
                             </div>
                         </a>
 
@@ -1246,7 +1371,7 @@
                                     <span class="tag">PCA</span>
                                 </div>
                                 <h3 data-en="User segmentation">Segmentacja użytkowników</h3>
-                                <p data-en="8,378 speed-dating records, ~200 variables squeezed into 10 features. PCA + K-Means: 3 segments (38/33/29%) for campaigns.">8378 obserwacji speed datingu, ~200 zmiennych ściśniętych do 10 cech. PCA + K-Means: 3 segmenty (38/33/29%) pod kampanie.</p>
+                                <p data-en="8,378 speed-dating records and ~200 variables. In the write-up: PCA + K-Means on 10 features, 3 segments (38/33/29%) for campaigns; the notebook in the repository is the course version (6 features, 4 clusters).">8&nbsp;378 obserwacji speed datingu i&nbsp;~200&nbsp;zmiennych. W&nbsp;opisie wyników: PCA + K-Means na 10&nbsp;cechach, 3&nbsp;segmenty (38/33/29%) pod kampanie; notebook w&nbsp;repozytorium to wersja z&nbsp;zajęć (6&nbsp;cech, 4&nbsp;skupienia).</p>
                             </div>
                         </a>
 
@@ -1254,6 +1379,9 @@
                 </section>
 
                 <div class="projects-footer">
+                    <a class="btn btn-secondary" href="/case/analizy-danych/">
+                        <span data-en="Data analyses: case study">Analizy danych: studium</span>
+                    </a>
                     <a class="btn btn-secondary" href="https://github.com/karolpolikarp" target="_blank" rel="noopener">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
                         <span data-en="All repositories">Wszystkie repozytoria</span>

@@ -42,7 +42,7 @@ Opening `index.html` directly mostly works, but the particle scenes (ES module i
 ├── particle-morph.js # Particle morphing engine (ES module, // @ts-check, ~780 lines) - see "Animations"
 ├── particles.js    # The hero + contact particle scenes (ES module, ~440 lines, loaded after page load)
 ├── 404.html        # Custom 404 page (Polish, self-contained styles)
-├── case/<slug>/index.html # Case-study subpages (zorza, jakieprawo, parawan, urzednik-i-ai; ~390-400 lines each) - see "Case studies"
+├── case/<slug>/index.html # Case-study subpages (zorza, jakieprawo, parawan, urzednik-i-ai, upfor, automargiela, majeranek, aigets, narzedzia, analizy-danych; ~390-450 lines each) - see "Case studies"
 ├── robots.txt      # Search engine crawl rules
 ├── sitemap.xml     # XML sitemap for SEO
 ├── llms.txt        # Plain-text site summary for LLM crawlers (pages, case studies, projects)
@@ -286,7 +286,12 @@ Preserve these features when making changes.
   evidence with source and date → lessons). Same `style.css` / `script.js` (absolute paths), styles in the
   "CASE STUDIES" block at the end of `style.css` (`.case-*`, diagram classes `.cd-*`).
 - Every number on these pages must be verifiable in the project's repository and carry a date. Private repos
-  (Zorza, JakiePrawo, Urzędnik i AI) are never linked or named; only Parawan's code is public.
+  (Zorza, JakiePrawo and its local variant, Urzędnik i AI, UpFor, AutoMargiela, Majeranek, AIgets.me) are never linked
+  or named; public: Parawan, the small tools and the `ds-*` notebooks. No user or audience data on case pages.
+- Two pages are combined: `narzedzia` (one `§` section per small tool, anchors `#claude-usage`, `#isap-scraper`,
+  `#stefka`, `#anonimizator-ai`, `#clicker`, linked from the tool cards) and `analizy-danych` (ESPI + the notebooks).
+- Pager ring: zorza → jakieprawo → parawan → urzednik-i-ai → upfor → automargiela → majeranek → aigets → narzedzia →
+  analizy-danych → zorza.
 - When adding a page: link it from the `#studia` cards, the project's carousel CTA, the pager on the other case
   pages, `sitemap.xml` and `llms.txt`; keep the nav order Projekty, Studia przypadków, Kontakt (as on the home page).
 - Each page has `TechArticle` JSON-LD with `datePublished` / `dateModified`; update `dateModified` (and the

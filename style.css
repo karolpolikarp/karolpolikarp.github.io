@@ -2097,7 +2097,9 @@ section {
 /* Closing CTA centered under the Projects section */
 .projects-footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: var(--space-md);
     margin-top: var(--space-2xl);
 }
 
