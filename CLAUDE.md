@@ -52,6 +52,7 @@ Opening `index.html` directly mostly works, but the particle scenes (ES module i
 ├── deno.json       # `deno lint` config only (excludes untracked dirs, allows `window`) - no build
 ├── README.md       # Project documentation for humans
 ├── CLAUDE.md       # This file - AI assistant guidance
+├── DESIGN.md       # Visual system and section rules (Gablota, tokens, what not to do)
 ├── BACKLOG.md      # Deferred tasks (incl. everything for the untracked `projekty/` sub-page)
 └── assets/
     └── images/     # Project screenshots (WebP), profile photo, OG card, easter egg images
@@ -65,8 +66,8 @@ live in the root. Untracked local files (`projekty/`, `analytics/`, `analytics.j
 
 ### index.html
 - Complete page structure with semantic HTML5
-- Sections: nav, hero (Experience / Education / Skills tabs), projects (`#projekty`: apps carousel,
-  case-study cards `#studia`, tools, Data Science bento), contact (`#kontakt`, particle finale), footer
+- Sections: nav, hero (Experience / Education / Skills tabs), projects (`#projekty`: the „Gablota” band
+  `section.gablota#studia` with one tile per project, then the Data Science bento), contact (`#kontakt`, particle finale), footer
 - Hidden for now: `#o-mnie`, `#kompetencje`, `#blog` carry inline `style="display: none;"`. Their markup, CSS and
   JS are kept on purpose so they can be switched back on later - do not delete them as "dead code"
 - SEO meta tags (Open Graph, Twitter Cards, JSON-LD)
@@ -100,7 +101,8 @@ Contains modular components (in order):
 10. **cats easter egg** - `window.cats.show()` + Konami code (one overlay at a time, labels follow the language)
 11. **EmailProtection** - Anti-scraper email obfuscation
 12. **HeroTabs** - Experience / Education / Skills tab panels (keyboard-navigable)
-13. **ProjectShowcase** - Projects carousel (tabs, JS-built dots and counter, screenshot galleries, swipe,
+13. **ProjectShowcase** - Former projects carousel; its markup was replaced by the Gablota (2026-10), the module
+    exits early when `.showcase-carousel` is absent (tabs, JS-built dots and counter, screenshot galleries, swipe,
     autoplay with independent pause reasons: hover, focus, hidden tab, off-screen, user pause button)
 14. **TechHighlighter** - Wraps known stack/brand names in `<span class="kw">`; re-runs on `languagechange`
 15. **NumberScramble** - Numbers marked `<span class="scramble-num">` in the HTML (PL and `data-en-html`) roll
@@ -179,14 +181,12 @@ Decorative layer added on top of the existing design (nothing else in the layout
 
 ## Common Tasks
 
-### Adding a New Project to the Carousel
-1. In `index.html` (`#projekty` → `.showcase-track`), copy an existing `<article class="showcase-slide">`
-2. Give its tab/panel ids a new slug (`tab-<slug>-opis` / `panel-<slug>-opis`, `-tech`, `-chall`)
-3. Update the "N z M" `aria-label` + `data-en-aria="N of M: …"` on **every** slide (and the tablist's
-   `Szczegóły: …` / `Details: …`); dots and the counter are built by `ProjectShowcase` from the slides
-4. Add WebP screenshots to `assets/images/`; one `.showcase-thumb` per screenshot (a gallery with a single
-   thumbnail is hidden automatically); main `<img>` gets `alt` + `data-en-alt`
-5. Smaller tools go into `.tools-card` in the "Narzędzia" block instead
+### Adding a New Project to the Gablota
+1. In `index.html` (`section.gablota` → `.gablota-grid`), copy an `<article class="g-tile …">`; size class
+   `g-tile--xl` / `--m` / `--s` plus a grid-placement class (see the block at the end of `style.css` and `DESIGN.md`)
+2. Tile = `.g-main` stretched link to `/case/<slug>/` (`aria-label` + `data-en-aria`), `.g-shot` with a WebP screenshot
+   (`width`/`height`, `alt` + `data-en-alt`), `.g-cap` with name, decision sentence, one number, `.g-ext` live/repo links
+3. Small tools go into the `.g-tools-list` (link to `/case/narzedzia/#<anchor>`)
 
 ### Modifying Colors
 1. Edit CSS custom properties in `:root` selector in `style.css`
@@ -214,7 +214,7 @@ Decorative layer added on top of the existing design (nothing else in the layout
 - Maintain responsive design (test at mobile and desktop widths)
 - Keep dark mode parity with all changes
 - Use existing CSS custom properties
-- Test interactive elements (carousel, theme & language toggles, navigation)
+- Test interactive elements (Gablota tiles and links, theme & language toggles, navigation)
 - Preserve the Windows 95 aesthetic elements
 
 ### DO NOT
@@ -255,8 +255,8 @@ Before committing changes, verify:
 |---------|-----|---------|
 | Navigation | `.nav` | Logo, links, theme toggle |
 | Hero | `#hero` | Introduction, Experience / Education / Skills tabs, CTA, `§ { }` particles |
-| Projects | `#projekty` | Apps carousel, tools, Data Science bento |
-| Case studies | `#studia` | Cards linking to `/case/<slug>/` (nested inside `#projekty`) |
+| Projects | `#projekty` | Gablota band (one tile per project), Data Science bento |
+| Case studies | `#studia` | The Gablota band itself; every tile links to `/case/<slug>/` |
 | About | `#o-mnie` | Personal background (**hidden**, `display: none`, kept for later) |
 | Skills | `#kompetencje` | Core competencies (**hidden**, kept for later) |
 | Blog | `#blog` | Publication previews (**hidden**, kept for later) |
@@ -292,7 +292,7 @@ Preserve these features when making changes.
   `#stefka`, `#anonimizator-ai`, `#clicker`, linked from the tool cards) and `analizy-danych` (ESPI + the notebooks).
 - Pager ring: zorza → jakieprawo → parawan → urzednik-i-ai → upfor → automargiela → majeranek → aigets → narzedzia →
   analizy-danych → zorza.
-- When adding a page: link it from the `#studia` cards, the project's carousel CTA, the pager on the other case
+- When adding a page: link it from its Gablota tile, the pager on the other case
   pages, `sitemap.xml` and `llms.txt`; keep the nav order Projekty, Studia przypadków, Kontakt (as on the home page).
 - Each page has `TechArticle` JSON-LD with `datePublished` / `dateModified`; update `dateModified` (and the
   sitemap `lastmod`) when the text changes.
