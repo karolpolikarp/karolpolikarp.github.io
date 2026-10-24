@@ -5404,7 +5404,7 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 [data-theme="dark"] .contact.s1-section {
     /* Verde Alpi marble: a darker field behind the content, veins quietly visible around it */
     background:
-        radial-gradient(700px 440px at 50% 430px, rgba(18, 16, 13, 0.86) 0%, rgba(18, 16, 13, 0.74) 60%, rgba(18, 16, 13, 0.6) 100%),
+        radial-gradient(700px 440px at 50% 430px, rgba(18, 16, 13, 0.8) 0%, rgba(18, 16, 13, 0.62) 60%, rgba(18, 16, 13, 0.45) 100%),
         linear-gradient(180deg, var(--color-bg) 0%, transparent 16%, transparent 82%, var(--color-bg) 100%),
         url("assets/images/brand/verde-alpi.webp") center / cover no-repeat,
         var(--color-bg);
