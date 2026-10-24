@@ -340,7 +340,7 @@ body::before {
     inset: 0;
     opacity: 0.03;
     pointer-events: none;
-    z-index: 999;
+    z-index: 98;            /* above the content, below the project tiles (99) and the nav (100) */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     contain: strict;
 }
@@ -4436,6 +4436,7 @@ section {
 /* ---------- tile ---------- */
 .g-tile {
     position: relative;
+    z-index: 99;            /* screenshots and clips above the page noise (98), below the nav (100) */
     display: flex;
     flex-direction: column;
     background: var(--g-tile);
@@ -4446,16 +4447,10 @@ section {
 }
 .g-shot {
     position: relative;
-    flex: 1 1 auto;
-    min-height: 220px;
+    flex: none;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     background: var(--g-shot-bg);
-}
-.g-tile--xl .g-shot { min-height: 340px; }
-.g-tile--s .g-shot { min-height: 180px; }
-@media (min-width: 1100px) {
-    .g-tile--xl .g-shot { min-height: 380px; }
-    .g-tile--m .g-shot { min-height: 230px; }
 }
 .g-shot img {
     position: absolute;
@@ -4471,7 +4466,6 @@ section {
     content: '';
     position: absolute;
     inset: 0;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
     pointer-events: none;
 }
 
@@ -4611,28 +4605,15 @@ section {
 /* keyword highlighter (script.js): key terms in gold on the green band */
 .gablota .kw { color: var(--g-gold); background: none; font-weight: 600; }
 
-/* ---------- motion: the object leans into the light ---------- */
+/* ---------- motion: only the clip moves, inside a fixed frame ---------- */
 @media (prefers-reduced-motion: no-preference) {
-    .g-shot img { transition: transform 200ms var(--g-ease); }
-    .g-name,
-    .g-kind,
-    .g-decision { transition: transform 200ms var(--g-ease); }
     .g-tools-list a { transition: background-color 200ms var(--g-ease); }
 }
 @media (hover: hover) and (pointer: fine) {
-    .g-tile:hover .g-shot img { transform: scale(1.03); }
-    .g-tile:hover .g-name,
-    .g-tile:hover .g-kind,
-    .g-tile:hover .g-decision { transform: translateY(-3px); }
     .g-tools-list a:hover { background: var(--g-hover); }
+    .g-tile:hover { border-color: var(--g-gold); }
 }
-.g-tile:focus-within .g-shot img { transform: scale(1.03); }
-.g-tile:focus-within .g-name,
-.g-tile:focus-within .g-kind,
-.g-tile:focus-within .g-decision { transform: translateY(-3px); }
-@media (prefers-reduced-motion: reduce) {
-    .g-tile .g-shot img, .g-tile .g-name, .g-tile .g-kind, .g-tile .g-decision { transform: none !important; }
-}
+.g-tile:focus-within { border-color: var(--g-gold); }
 
 /* the Data Science block follows the band on the old background */
 .gablota + .container .ds-section { margin-top: var(--space-3xl); }
@@ -4642,10 +4623,10 @@ section {
     .gablota-inner { padding: 0 var(--space-md); }
     .gablota-title { font-size: var(--text-3xl); }
     .g-tile--xl .g-name { font-size: var(--text-3xl); }
-    .g-tile--xl .g-shot, .g-shot { min-height: 0; aspect-ratio: 16 / 10; flex: none; }
+    .g-shot { aspect-ratio: 16 / 9; }
 }
 /* Urzędnik i AI: tall tile, keep the headline of the map (left edge) in frame */
-.g-urzednik .g-shot img { object-position: left top; }
+
 
 /* ================================================
    WYSTĄPIENIA (#wystapienia): a typographic list by year, newest first.
@@ -4783,3 +4764,17 @@ section {
 
 /* Wystąpienia: intro in full ink, not grey */
 #wystapienia .section-desc { color: var(--color-text); }
+
+/* Projects and Talks share the hero's ground: warm gold glow over a soft gradient */
+[data-theme="dark"] .projects,
+[data-theme="dark"] .talks {
+    background:
+        radial-gradient(ellipse 80% 40% at 50% 0%, rgba(201, 169, 98, 0.09), transparent 60%),
+        linear-gradient(180deg, var(--color-bg-accent) 0%, var(--color-bg-alt) 30%, var(--color-bg) 100%);
+}
+[data-theme="light"] .projects,
+[data-theme="light"] .talks {
+    background:
+        radial-gradient(ellipse 80% 40% at 50% 0%, var(--color-accent-subtle), transparent 60%),
+        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+}
