@@ -206,10 +206,10 @@ const LanguageManager = {
         if (!this.toggle) return;
         if (this.currentLang === 'en') {
             this.toggle.classList.add('lang-en');
-            this.toggle.setAttribute('aria-label', 'Prze\u0142\u0105cz na polski');
+            this.toggle.setAttribute('aria-label', 'PL EN: prze\u0142\u0105cz na polski');
         } else {
             this.toggle.classList.remove('lang-en');
-            this.toggle.setAttribute('aria-label', 'Switch to English');
+            this.toggle.setAttribute('aria-label', 'PL EN: switch to English');
         }
     }
 };
@@ -764,26 +764,22 @@ const ProjectShowcase = {
     positionMobileControls() {
         if (!this.carousel) return;
         if (!window.matchMedia('(max-width: 768px)').matches) {
-            this.carousel.style.removeProperty('--sc-arrow-top');
-            this.carousel.style.removeProperty('--sc-badge-top');
+            ['--sc-arrow-top', '--sc-badge-top', '--sc-edge-left', '--sc-edge-right']
+                .forEach(prop => this.carousel.style.removeProperty(prop));
             return;
         }
         const slide = this.slides[this.index];
-        if (!slide) return;
-        const carTop = this.carousel.getBoundingClientRect().top;
-        // Strzałki na wysokości wiersza zakładek (Opis/Techniczne/Wyzwania),
-        // żeby tworzyły z nimi jedną linię.
-        const ref = slide.querySelector('.showcase-tabs') || slide.querySelector('.showcase-stage');
-        if (ref) {
-            const r = ref.getBoundingClientRect();
-            this.carousel.style.setProperty('--sc-arrow-top', (r.top - carTop + r.height / 2) + 'px');
-        }
-        // Licznik 01/05 zostaje w rogu zrzutu.
-        const stage = slide.querySelector('.showcase-stage');
-        if (stage) {
-            const sr = stage.getBoundingClientRect();
-            this.carousel.style.setProperty('--sc-badge-top', (sr.top - carTop + 12) + 'px');
-        }
+        const stage = slide && slide.querySelector('.showcase-stage');
+        if (!stage) return;
+        // Strzałki na bokach zrzutu (w połowie jego wysokości), licznik w jego
+        // prawym górnym rogu; rząd zakładek zostaje wolny.
+        const car = this.carousel.getBoundingClientRect();
+        const sr = stage.getBoundingClientRect();
+        const s = this.carousel.style;
+        s.setProperty('--sc-arrow-top', (sr.top - car.top + sr.height / 2) + 'px');
+        s.setProperty('--sc-badge-top', (sr.top - car.top + 10) + 'px');
+        s.setProperty('--sc-edge-left', (sr.left - car.left + 8) + 'px');
+        s.setProperty('--sc-edge-right', (car.right - sr.right + 8) + 'px');
     },
 
     lang() { return document.documentElement.lang === 'en' ? 'en' : 'pl'; },
@@ -854,6 +850,8 @@ const ProjectShowcase = {
         vp.addEventListener('pointerdown', (e) => {
             startX = e.clientX; startY = e.clientY; tracking = true;
         }, { passive: true });
+        // A drag that ends outside the viewport or loses capture must not leave a stale start point.
+        vp.addEventListener('lostpointercapture', () => { tracking = false; });
         vp.addEventListener('pointerup', (e) => {
             if (!tracking) return;
             tracking = false;
@@ -1030,7 +1028,8 @@ const TechHighlighter = {
 
     init() {
         const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        this.re = new RegExp('\\b(' + this.terms.map(esc).join('|') + ')\\b', 'g');
+        // Whole tokens only: no "GPT" out of "GPT-4o-mini", no "Claude" out of "Claude’a".
+        this.re = new RegExp('\\b(' + this.terms.map(esc).join('|') + ')(?![\\w\'’-])', 'g');
         this.run();
         document.addEventListener('languagechange', () => this.run());
     },
