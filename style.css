@@ -4777,3 +4777,118 @@ section {
 [data-theme="light"] .talks {
     background: var(--color-bg);
 }
+
+
+/* ================================================
+   S1 „PROSTO” (structure prototype): one heading per section, left-aligned on the
+   container edge, an even vertical rhythm and the page ground running through.
+   Order: hero → Projekty (Gablota + Analizy danych) → Wystąpienia → Kontakt.
+   ================================================ */
+/* every gap between two sections = 2 × 4rem; hero → Projekty keeps the hero's own 6rem */
+main > .s1-section {
+    padding: var(--space-3xl) 0;
+}
+main > #projekty.s1-section { padding-top: var(--space-4xl); }
+.s1-section .ds-bento { max-width: none; }
+
+/* no bands, no lines between sections: the ground just continues */
+[data-theme="dark"] main > .s1-section,
+[data-theme="light"] main > .s1-section {
+    background: var(--color-bg);
+    box-shadow: none;
+}
+main > .s1-section::before { display: none; }
+[data-theme="dark"] .contact.s1-section {
+    background:
+        radial-gradient(ellipse 60% 45% at 50% 100%, rgba(201, 169, 98, 0.05) 0%, transparent 60%),
+        var(--color-bg);
+}
+
+.s1-head {
+    max-width: 60ch;
+    margin: 0 0 var(--space-2xl);
+}
+.s1-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 4.5vw, 3.1rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--color-text);
+    margin: 0 0 var(--space-sm);
+}
+.s1-lede {
+    font-size: var(--text-lg);
+    line-height: 1.55;
+    color: var(--color-text);
+    margin: 0;
+}
+
+/* Gablota sits directly under the Projekty heading */
+.s1-section .gablota { padding: 0; }
+
+/* Analizy danych: a sub-part of Projekty, heading on the same left edge */
+.s1-section .ds-section { margin-top: var(--space-3xl); }
+.s1-subtitle.ds-heading {
+    text-align: left;
+    font-size: var(--text-4xl);
+    margin: 0 0 var(--space-lg);
+    color: var(--color-text);
+}
+.s1-section .projects-footer {
+    justify-content: flex-start;
+    margin-top: var(--space-xl);
+}
+
+/* Wystąpienia: the list takes the container width; earlier years fold away */
+.s1-section .talks-wrap { max-width: none; margin: 0; }
+.s1-more { margin-top: var(--space-lg); }
+.s1-more > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    cursor: pointer;
+    list-style: none;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    color: var(--color-text);
+    transition: border-color var(--transition-base), background-color var(--transition-base);
+}
+.s1-more > summary::-webkit-details-marker { display: none; }
+.s1-more > summary::after {
+    content: '';
+    width: 0.45em;
+    height: 0.45em;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+}
+.s1-more[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+.s1-more > summary:hover { border-color: var(--color-primary); }
+[data-theme="dark"] .s1-more > summary:hover { border-color: var(--color-accent); }
+.s1-more > summary:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 3px; }
+.s1-more[open] > summary { margin-bottom: var(--space-xl); }
+
+@media (max-width: 767px) {
+    main > .s1-section { padding: var(--space-2xl) 0; }
+    main > #projekty.s1-section { padding-top: var(--space-3xl); }
+    .s1-head { margin-bottom: var(--space-xl); }
+    .s1-lede { font-size: var(--text-md); }
+    .s1-subtitle.ds-heading { font-size: var(--text-3xl); }
+}
+/* Kontakt stays the centred finale; its intro in full ink like the other ledes */
+#kontakt.s1-section .section-desc { color: var(--color-text); }
+
+/* Analizy danych: heading and "Wszystkie repozytoria" on one line */
+.ds-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+.ds-head .ds-heading { margin: 0; }
+.ds-head .ds-repos { padding: 0.6rem 1.1rem; font-size: var(--text-sm); }
+.ds-head .ds-repos svg { width: 16px; height: 16px; }

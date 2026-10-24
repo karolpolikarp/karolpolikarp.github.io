@@ -112,7 +112,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="style.css?v=101">
+    <link rel="stylesheet" href="style.css?v=102">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -127,7 +127,6 @@
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#projekty">Projekty</a></li>
-                <li><a href="#studia" data-en="Case studies">Studia przypadków</a></li>
                 <li><a href="#wystapienia" data-en="Talks">Wystąpienia</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
@@ -374,20 +373,17 @@
         <div class="section-divider"></div>
 
         <!-- Projects Section -->
-        <section id="projekty" class="projects">
+        <section id="projekty" class="projects s1-section" aria-labelledby="projekty-heading">
             <div class="container">
-                <header class="section-header">
-                    <h2 class="section-title">Projekty</h2>
+                <header class="s1-head">
+                    <h2 class="s1-title" id="projekty-heading" data-en="Projects">Projekty</h2>
+                    <p class="s1-lede" data-en="Applications and tools at the meeting point of law, administration and AI. Every tile opens the project's case study: the problem, the decisions and what they cost.">Aplikacje i&nbsp;narzędzia na styku prawa, administracji i&nbsp;AI. Każdy kafel otwiera studium projektu: problem, decyzje i&nbsp;ich koszt.</p>
                 </header>
             </div>
 
             <!-- Gablota: every project once, the case study inside its tile -->
-            <section class="gablota" id="studia" aria-labelledby="gablota-heading">
+            <div class="gablota" id="studia">
                 <div class="gablota-inner">
-                    <div class="gablota-head">
-                        <h3 class="gablota-title" id="gablota-heading" data-en="Case studies">Studia przypadków</h3>
-                        <p class="gablota-lede" data-en="Every tile opens the project's case study: the problem, the decisions and what they cost, with numbers from the repository.">Każdy kafel otwiera studium projektu: problem, decyzje i&nbsp;ich koszt, z&nbsp;liczbami z&nbsp;repozytorium.</p>
-                    </div>
 
                     <div class="gablota-grid">
 
@@ -524,13 +520,16 @@
 
                     </div>
                 </div>
-            </section>
+            </div>
 
             <div class="container">
 
-                <!-- Data Science / Notebooki -->
+                <!-- Analizy danych (Data Science notebooks) -->
                 <section class="ds-section" aria-labelledby="ds-heading">
-                    <h3 class="ds-heading" id="ds-heading">Data Science</h3>
+                    <div class="ds-head">
+                        <h3 class="ds-heading s1-subtitle" id="ds-heading" data-en="Data analysis">Analizy danych</h3>
+                        <a class="btn btn-secondary ds-repos" href="https://github.com/karolpolikarp" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg> <span data-en="All repositories">Wszystkie repozytoria</span> </a>
+                    </div>
                     <div class="ds-bento">
 
                         <!-- Kafel flagowy -->
@@ -609,13 +608,6 @@
 
                     </div>
                 </section>
-
-                <div class="projects-footer">
-                    <a class="btn btn-secondary" href="https://github.com/karolpolikarp" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
-                        <span data-en="All repositories">Wszystkie repozytoria</span>
-                    </a>
-                </div>
             </div>
         </section>
 
@@ -880,11 +872,11 @@
         </section>
 
         <!-- Wystąpienia / Talks -->
-        <section id="wystapienia" class="talks" aria-labelledby="talks-heading">
+        <section id="wystapienia" class="talks s1-section" aria-labelledby="talks-heading">
             <div class="container">
-                <header class="section-header">
-                    <h2 class="section-title" id="talks-heading" data-en="Talks">Wystąpienia</h2>
-                    <p class="section-desc" data-en="Conferences, panels, seminars and delegations on AI in public administration and AI regulatory sandboxes.">Konferencje, panele, seminaria i&nbsp;delegacje: AI w&nbsp;administracji i&nbsp;piaskownice regulacyjne AI.</p>
+                <header class="s1-head">
+                    <h2 class="s1-title" id="talks-heading" data-en="Talks">Wystąpienia</h2>
+                    <p class="s1-lede" data-en="Conferences, panels, seminars and delegations on AI in public administration and AI regulatory sandboxes.">Konferencje, panele, seminaria i&nbsp;delegacje: AI w&nbsp;administracji i&nbsp;piaskownice regulacyjne AI.</p>
                 </header>
                 <div class="talks-wrap">
                     <h3 class="talks-year">2026</h3>
@@ -976,6 +968,8 @@
                             </div>
                         </li>
                     </ol>
+                    <details class="s1-more">
+                        <summary><span data-en="Earlier: 2025 and 2024 (11 events)">Wcześniej: 2025 i&nbsp;2024 (11 wydarzeń)</span></summary>
                     <h3 class="talks-year">2025</h3>
                     <ol class="talks-list">
                         <li class="talk talk--line">
@@ -1062,18 +1056,17 @@
                             </div>
                         </li>
                     </ol>
+                    </details>
                 </div>
             </div>
         </section>
 
-        <div class="section-divider"></div>
-
         <!-- Contact Section -->
-        <section id="kontakt" class="contact">
+        <section id="kontakt" class="contact s1-section">
             <div class="container">
                 <header class="section-header">
                     <h2 class="section-title">Kontakt</h2>
-                    <p class="section-desc" data-en="Write if you want to talk about a project, collaboration or a talk — about where AI meets law and public administration.">Napisz, jeśli chcesz porozmawiać o projekcie, współpracy albo wystąpieniu — o tym, jak AI spotyka się z prawem i administracją.</p>
+                    <p class="section-desc" data-en="Email is easiest: questions about the projects and the code, invitations to panels and lectures.">Najprościej mailem: pytania o&nbsp;projekty i&nbsp;kod, zaproszenia na panele i&nbsp;wykłady.</p>
                 </header>
 
                 <div class="contact-finale" aria-hidden="true">
