@@ -1254,6 +1254,111 @@ const TalksMap = {
 TalksMap.init();
 
 // ================================================
+// NAV SCROLL-SPY — the nav link of the section crossing the middle of the
+// viewport gets aria-current="true" (styled with a phthalo underline).
+// Home page only: case pages link to /#… and have no such sections.
+// ================================================
+const NavSpy = {
+    init() {
+        if (!('IntersectionObserver' in window)) return;
+        const links = new Map();
+        document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+            const section = document.getElementById(a.getAttribute('href').slice(1));
+            if (section) links.set(section, a);
+        });
+        if (!links.size) return;
+        const visible = new Set();
+        const update = () => {
+            // the last section (in document order) touching the middle band wins
+            let current = null;
+            links.forEach((a, section) => { if (visible.has(section)) current = a; });
+            links.forEach(a => {
+                if (a === current) a.setAttribute('aria-current', 'true');
+                else a.removeAttribute('aria-current');
+            });
+        };
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
+            update();
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        links.forEach((_a, section) => io.observe(section));
+    }
+};
+
+NavSpy.init();
+
+// ================================================
+// SCROLL MOTION — see "SCROLL MOTION" in style.css.
+// Tiles (Gablota, Data Science): staggered reveal, once, in reading order.
+// Case pages: "Kluczowe decyzje" become stacked sticky cards when every card fits
+// under the nav (heights read only on resize, never per scroll frame).
+// Nothing is armed under prefers-reduced-motion: the page stays static.
+// ================================================
+const ScrollMotion = {
+    init() {
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
+        this.reveal();
+        this.stack();
+    },
+
+    reveal() {
+        const tiles = [];
+        document.querySelectorAll('.gablota-grid, .ds-bento').forEach(grid => {
+            grid.classList.add('is-motion');
+            grid.querySelectorAll(':scope > .g-tile, :scope > .g-tools, :scope > .ds-tile').forEach(t => tiles.push(t));
+        });
+        if (!tiles.length) return;
+        const io = new IntersectionObserver(entries => {
+            // tiles entering together get 70 ms steps in document (reading) order
+            entries.filter(e => e.isIntersecting)
+                .map(e => e.target)
+                .sort((a, b) => tiles.indexOf(a) - tiles.indexOf(b))
+                .forEach((tile, n) => {
+                    tile.style.setProperty('--d', Math.min(n, 6) * 70 + 'ms');
+                    tile.classList.add('is-in');
+                    io.unobserve(tile);
+                });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        tiles.forEach(t => io.observe(t));
+    },
+
+    stack() {
+        const lists = document.querySelectorAll('.case-decisions');
+        if (!lists.length) return;
+        const wide = window.matchMedia('(min-width: 900px)');
+        const fits = [];
+        lists.forEach(list => {
+            const cards = Array.from(list.children).filter(c => c.classList.contains('case-decision'));
+            if (cards.length < 2) return;
+            list.style.setProperty('--n', String(cards.length));
+            cards.forEach((c, i) => c.style.setProperty('--i', String(i)));
+            fits.push(() => {
+                // every card that gets covered must fit under the nav with its pile offset
+                // (96px + 14px per card + margin); the last card is never covered
+                const room = window.innerHeight - 96 - cards.length * 14 - 24;
+                const ok = wide.matches && cards.slice(0, -1).every(c => c.offsetHeight <= room);
+                list.classList.toggle('is-stack', ok);
+            });
+        });
+        let queued = false;
+        const check = () => {
+            if (queued) return;
+            queued = true;
+            requestAnimationFrame(() => { queued = false; fits.forEach(f => f()); });
+        };
+        check();
+        window.addEventListener('resize', check, { passive: true });
+        if ('ResizeObserver' in window) {
+            const ro = new ResizeObserver(check);
+            lists.forEach(l => ro.observe(l));
+        }
+        document.addEventListener('languagechange', check);
+    }
+};
+
+ScrollMotion.init();
+
+// ================================================
 // PARTICLES — hero and contact scenes (particles.js + particle-morph.js).
 // Fetched only after the page has loaded, so they never compete with the first paint.
 // ================================================

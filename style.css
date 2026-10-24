@@ -4380,7 +4380,7 @@ section {
     background: var(--g-field);
     color: var(--g-ink);
     padding: var(--space-3xl) 0;
-    scroll-margin-top: 80px;
+    scroll-margin-top: 104px;   /* nav is 89px: links to /#studia land with the tiles clear of it */
     /* one soft pool of light from above, like a showcase lamp */
 }
 .gablota-inner {
@@ -5190,4 +5190,229 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     .g-tools-list li:nth-child(5),
     .g-tools-list li:last-child:nth-child(3n + 2) { grid-column: span 3; }
     .g-tools-list li:nth-child(n + 4) .g-tool-shot { aspect-ratio: 16 / 7; }
+}
+
+/* ================================================
+   PHTHALO ACCENTS — a second layer of phthalo green on top of the palette
+   (nav state, progress bar, title rules, links, case pages, talks, focus, footer).
+   Accent only: never a ground. Contrast measured: phthalo-mid on cream 7.6:1.
+   ================================================ */
+:root { --color-focus: var(--color-phthalo-mid); }
+[data-theme="dark"] { --color-focus: var(--color-accent); }
+*:focus-visible { outline-color: var(--color-focus); }
+.skip-link:focus { outline-color: var(--color-focus); }
+
+/* nav: hover underline phthalo -> gold; the section in view (scroll-spy) keeps it */
+.nav-links a::after {
+    background: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-accent));
+}
+[data-theme="dark"] .nav-links a::after {
+    background: linear-gradient(90deg, var(--color-phthalo-light), var(--color-accent));
+}
+.nav-links a[aria-current="true"] { color: var(--color-phthalo-mid); }
+[data-theme="dark"] .nav-links a[aria-current="true"] { color: var(--color-primary-on-dark); }
+.nav-links a[aria-current="true"]::after { width: 100%; }
+
+/* scroll progress: phthalo into gold */
+.scroll-progress-bar,
+[data-theme="dark"] .scroll-progress-bar {
+    background: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-phthalo-light) 45%, var(--color-accent));
+}
+
+/* the short phthalo -> gold rule of .s1-title, also under Kontakt and case-page h2
+   (drawn as a background so it works on the flex .case-h2 too) */
+#kontakt .section-title,
+.case-h2 {
+    padding-bottom: 0.4em;
+    background-image: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-accent));
+    background-repeat: no-repeat;
+    background-size: 56px 3px;
+    background-position: left bottom;
+}
+#kontakt .section-title { background-position: center bottom; padding-bottom: 0.22em; }
+
+/* links in running text: phthalo underline, gold on hover */
+.case-hero p a:not(.btn),
+.case-section :is(p, li, dd, figcaption) a:not(.btn),
+.s1-lede a {
+    text-decoration: underline;
+    text-decoration-color: var(--color-phthalo-light);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition-base), color var(--transition-base);
+}
+.case-hero p a:not(.btn):hover,
+.case-section :is(p, li, dd, figcaption) a:not(.btn):hover,
+.s1-lede a:hover {
+    color: var(--color-primary);
+    text-decoration-color: var(--color-accent);
+}
+[data-theme="dark"] .case-hero p a:not(.btn):hover,
+[data-theme="dark"] .case-section :is(p, li, dd, figcaption) a:not(.btn):hover,
+[data-theme="dark"] .s1-lede a:hover { color: var(--color-primary-on-dark); }
+.g-ext:hover { text-decoration-color: var(--g-gold); }
+
+/* case pages: breadcrumb, contents, decisions, evidence */
+.case-breadcrumb a { color: var(--color-phthalo-mid); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; }
+.case-breadcrumb a:hover { text-decoration-color: var(--color-accent); }
+.case-breadcrumb [aria-current="page"] { color: var(--color-text); font-weight: 600; }
+[data-theme="dark"] .case-breadcrumb a { color: var(--color-primary-on-dark); }
+.case-toc a { color: var(--color-phthalo-mid); }
+.case-toc a:hover,
+.case-toc a:focus-visible { background: var(--color-phthalo-mid); border-color: var(--color-phthalo-mid); color: #fff; }
+[data-theme="dark"] .case-toc a { color: var(--color-primary-on-dark); }
+[data-theme="dark"] .case-toc a:hover,
+[data-theme="dark"] .case-toc a:focus-visible { background: var(--color-phthalo-mid); border-color: var(--color-phthalo-light); color: #fff; }
+.case-decision::before {
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-accent));
+}
+.case-decision-grid dt:first-child { color: var(--color-phthalo-mid); font-weight: 600; }
+[data-theme="dark"] .case-decision-grid dt:first-child { color: var(--color-phthalo-light); }
+.case-stat-value { color: var(--color-phthalo-mid); }
+
+/* talks: year numerals phthalo (gold in dark), land dots lean phthalo, pins stay gold */
+.talks-year-num { color: var(--color-phthalo-mid); }
+[data-theme="dark"] .talks-year-num { color: var(--color-accent); }
+.talks { --tm-land: rgba(29, 92, 67, 0.26); }
+[data-theme="dark"] .talks { --tm-land: rgba(58, 154, 112, 0.3); }
+
+/* footer: a thin phthalo hairline on top */
+.footer::before {
+    background: linear-gradient(90deg, transparent, var(--color-phthalo-light) 20%, var(--color-accent) 50%, var(--color-phthalo-light) 80%, transparent);
+    opacity: 0.55;
+}
+
+/* ================================================
+   SCROLL MOTION — authored scroll moments (ScrollMotion in script.js)
+   1. Gablota + Data Science tiles: staggered reveal on entering the viewport, once.
+   2. Case pages, "Kluczowe decyzje": stacked sticky cards on desktop (>= 900px),
+      the cards underneath recede slightly (scroll-driven where supported).
+   3. Talks: the year heading stays visible while its events scroll (desktop).
+   4. Section titles: the phthalo rule draws in as the title enters.
+   Transform/opacity only. Under prefers-reduced-motion everything is static
+   (JS does not arm 1 and 2; 3 is a plain sticky heading; 4 sits in a motion query).
+   ================================================ */
+
+/* 1. tiles: the grid is armed by JS (.is-motion), each tile gets .is-in and a --d delay */
+@media (prefers-reduced-motion: no-preference) {
+    .is-motion > :is(.g-tile, .g-tools, .ds-tile) {
+        animation: none;            /* replaces the scroll-scrubbed reveal of .ds-tile */
+        opacity: 0;
+        translate: 0 16px;
+        transition:
+            opacity 460ms cubic-bezier(0.23, 1, 0.32, 1) var(--d, 0ms),
+            translate 460ms cubic-bezier(0.23, 1, 0.32, 1) var(--d, 0ms),
+            transform var(--transition-base),
+            box-shadow var(--transition-base);
+    }
+    .is-motion > :is(.g-tile, .g-tools, .ds-tile).is-in {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+/* 2. key decisions: a pile of cards. JS adds .is-stack only when every card fits
+   under the nav (so no text is ever hidden below the fold) and sets --i / --n. */
+@media (min-width: 900px) {
+    .case-decisions.is-stack {
+        --stack-top: 96px;          /* nav (89px) + breathing room */
+        --stack-step: 14px;
+        gap: var(--space-xl);
+        view-timeline: --decisions block;
+    }
+    .case-decisions.is-stack > .case-decision {
+        position: sticky;
+        top: calc(var(--stack-top) + var(--i, 0) * var(--stack-step));
+        transform-origin: 50% 0;
+        box-shadow: 0 -12px 28px -20px rgba(18, 53, 36, 0.35);
+    }
+    [data-theme="dark"] .case-decisions.is-stack > .case-decision {
+        box-shadow: 0 -12px 28px -16px rgba(0, 0, 0, 0.7);
+    }
+    /* a focused link never stays covered by the next card */
+    .case-decisions.is-stack > .case-decision:focus-within { z-index: 1; }
+}
+@supports (animation-timeline: view()) {
+    @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+        .case-decisions.is-stack > .case-decision {
+            --recede: calc(1 - (var(--n, 1) - 1 - var(--i, 0)) * 0.02);
+            animation: scrollReveal linear both, decisionRecede linear both;
+            animation-timeline: view(), --decisions;
+            animation-range:
+                entry 0% entry 60%,
+                exit-crossing calc(var(--i, 0) / var(--n, 1) * 100%) exit-crossing 100%;
+        }
+    }
+}
+@keyframes decisionRecede {
+    to { scale: var(--recede, 1); }
+}
+
+/* 3. talks: the year sticks under the nav until its group ends */
+@media (min-width: 960px) {
+    .talks-year {
+        position: sticky;
+        top: 88px;          /* flush under the nav (89px incl. its border) */
+        z-index: 2;
+        margin-inline: calc(-1 * var(--space-md));
+        padding: var(--space-sm) var(--space-md);
+        background: var(--color-bg);
+    }
+}
+
+/* 4. section titles: the phthalo rule draws from 0 to full width as the title enters */
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .s1-title { view-timeline: --title-rule block; }
+        .s1-title::after {
+            transform-origin: left center;
+            animation: ruleDraw linear both;
+            animation-timeline: --title-rule;
+            animation-range: entry 100% cover 40%;
+        }
+    }
+}
+@keyframes ruleDraw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* ================================================
+   POLISH 25.10: decision cards without the gradient stripe and grey mono labels;
+   § numerals readable on cream; phthalo pigment texture behind the contact finale (dark).
+   ================================================ */
+.case-decision::before {
+    height: 1px;
+    border-radius: 0;
+    background: var(--color-phthalo-mid);
+    opacity: 0.5;
+}
+.case-decision-grid dt {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-phthalo-mid);
+}
+[data-theme="dark"] .case-decision-grid dt { color: #7cc9a3; }
+.case-decision-grid dd { color: var(--color-text); }
+.case-h2-num { color: var(--color-phthalo-mid); }
+[data-theme="dark"] .case-h2-num { color: var(--color-accent); }
+
+[data-theme="dark"] .contact.s1-section {
+    background:
+        linear-gradient(90deg, var(--color-bg) 0%, rgba(18, 16, 13, 0.82) 45%, rgba(18, 16, 13, 0.55) 100%),
+        linear-gradient(180deg, var(--color-bg) 0%, transparent 30%, transparent 75%, var(--color-bg) 100%),
+        url("assets/images/brand/phthalo-texture.webp") right center / cover no-repeat,
+        var(--color-bg);
+}
+@media (max-width: 767px) {
+    [data-theme="dark"] .contact.s1-section {
+        background:
+            linear-gradient(180deg, var(--color-bg) 0%, rgba(18, 16, 13, 0.7) 40%, rgba(18, 16, 13, 0.7) 70%, var(--color-bg) 100%),
+            url("assets/images/brand/phthalo-texture-sm.webp") 70% center / cover no-repeat,
+            var(--color-bg);
+    }
 }
