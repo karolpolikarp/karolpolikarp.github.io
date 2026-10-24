@@ -4364,8 +4364,8 @@ section {
    ================================================ */
 :root {
     /* The field is darker than --color-primary-dark so screenshots read as lit. */
-    --g-field: #00261a;
-    --g-tile: #013322;
+    --g-field: #04211d;                     /* phthalo green, deep */
+    --g-tile: #073029;
     --g-tile-edge: rgba(201, 169, 98, 0.16);
     --g-ink: #f5f3f0;                       /* = dark-theme --color-text */
     --g-ink-2: rgba(245, 243, 240, 0.78);
@@ -4374,8 +4374,8 @@ section {
     --g-ease: cubic-bezier(0.23, 1, 0.32, 1);
 }
 [data-theme="dark"] {
-    --g-field: #00170f;
-    --g-tile: #022418;
+    --g-field: #031915;
+    --g-tile: #062722;
 }
 
 .gablota {
@@ -4452,7 +4452,7 @@ section {
     flex: 1 1 auto;
     min-height: 220px;
     overflow: hidden;
-    background: #000d08;
+    background: #020f0d;
 }
 .g-tile--xl .g-shot { min-height: 340px; }
 .g-tile--s .g-shot { min-height: 180px; }
@@ -4627,7 +4627,7 @@ section {
     .g-tile:hover .g-name,
     .g-tile:hover .g-kind,
     .g-tile:hover .g-decision { transform: translateY(-3px); }
-    .g-tools-list a:hover { background: #024029; }
+    .g-tools-list a:hover { background: #0a3d34; }
 }
 .g-tile:focus-within .g-shot img { transform: scale(1.03); }
 .g-tile:focus-within .g-name,
