@@ -1196,6 +1196,64 @@ const ScrollProgress = {
 ScrollProgress.init();
 
 // ================================================
+// TALKS MAP — #wystapienia: pins drop in once when the map scrolls into view;
+// hovering an event lights its city pin, hovering (or tapping) a pin lights its
+// events. The list carries every city as text, so the map is only a picture.
+// ================================================
+const TalksMap = {
+    active: null,
+
+    init() {
+        const section = document.getElementById('wystapienia');
+        const map = section && section.querySelector('.talks-map');
+        if (!map) return;
+        this.map = map;
+        this.pins = new Map(Array.from(map.querySelectorAll('.tm-pin'), pin => [pin.dataset.city, pin]));
+        this.items = Array.from(section.querySelectorAll('.talk[data-city]'));
+
+        if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+            map.classList.add('is-armed');
+            const io = new IntersectionObserver(entries => {
+                if (entries.some(e => e.isIntersecting)) {
+                    map.classList.add('is-in');
+                    io.disconnect();
+                }
+            }, { threshold: 0.4 });
+            io.observe(map);
+        }
+
+        // Hover only for a real mouse: on touch the emulated mouseenter would fire
+        // right before the click and the click would toggle the pin straight back off.
+        const isMouse = e => e.pointerType === 'mouse';
+        this.items.forEach(li => {
+            li.addEventListener('pointerenter', e => { if (isMouse(e)) this.set(li.dataset.city); });
+            li.addEventListener('pointerleave', e => { if (isMouse(e)) this.set(null); });
+        });
+        this.pins.forEach((pin, city) => {
+            pin.addEventListener('pointerenter', e => { if (isMouse(e)) this.set(city); });
+            pin.addEventListener('pointerleave', e => { if (isMouse(e)) this.set(null); });
+            pin.addEventListener('pointerdown', e => { this.lastPointer = e.pointerType; });
+            pin.addEventListener('click', e => {
+                if (this.lastPointer === 'mouse') return; // the hover already shows it
+                e.stopPropagation();
+                this.set(this.active === city ? null : city);
+            });
+        });
+        // a tap anywhere else clears a pinned city
+        document.addEventListener('click', () => { if (this.active) this.set(null); });
+    },
+
+    set(city) {
+        this.active = city;
+        this.map.classList.toggle('has-active', Boolean(city));
+        this.pins.forEach((pin, c) => pin.classList.toggle('is-active', c === city));
+        this.items.forEach(li => li.classList.toggle('is-active', li.dataset.city === city));
+    }
+};
+
+TalksMap.init();
+
+// ================================================
 // PARTICLES — hero and contact scenes (particles.js + particle-morph.js).
 // Fetched only after the page has loaded, so they never compete with the first paint.
 // ================================================

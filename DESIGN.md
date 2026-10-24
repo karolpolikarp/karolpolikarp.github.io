@@ -22,8 +22,12 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
   links above it („Strona projektu” where the app itself is not open). Order: law and public
   administration first — Urzędnik i AI + JakiePrawo.pl, then Zorza + Parawan, then AutoMargiela,
   UpFor.pl, Majeranek, then AIgets.me + the small-tools list (`/case/narzedzia/#<anchor>`).
-- **Wystąpienia (`#wystapienia`):** list by year; date, role badge (speaking roles green, expert
-  roles gold, attendance/delegation outlined), event in Playfair, topic, city.
+- **Wystąpienia (`#wystapienia`):** dot-matrix map of Europe (static inline SVG generated offline from
+  Natural Earth 1:50m, gold pins sized by event count; sticky on the right on desktop, on top on mobile)
+  next to the list by year (big Playfair year numeral). Item = date tile (Playfair day + month; ranges,
+  „od”, month-only in italics) + role badge (speaking: green pill; expert roles: gold square tag;
+  attendance/delegation: dashed outline) + city with a pin dot + event in Playfair + topic. Pins drop in
+  once on scroll; hovering an event lights its pin and vice versa (`TalksMap`).
 - **Data Science:** green bento tiles with the notebook screenshot under a green veil (author's choice —
   keep the veil).
 - **Contact + footer:** unchanged.
