@@ -17,13 +17,18 @@
     <style>
         :root {
             --color-primary: #004d2b;
+            --color-phthalo: #1d5c43;
             --color-accent: #c9a962;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #fdfcfa;
-            color: #1a1a1a;
+            /* marbled endpaper of an old law book, darkened in the middle for the text */
+            background:
+                radial-gradient(ellipse 60% 55% at 50% 50%, rgba(18, 16, 13, 0.88) 0%, rgba(18, 16, 13, 0.55) 70%, rgba(18, 16, 13, 0.35) 100%),
+                url("/assets/images/brand/marmur-sm.webp") center / cover no-repeat,
+                #12100d;
+            color: #f5f3f0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -31,28 +36,38 @@
             text-align: center;
             padding: 2rem;
         }
+        @media (min-width: 1200px) {
+            body {
+                background:
+                    radial-gradient(ellipse 60% 55% at 50% 50%, rgba(18, 16, 13, 0.88) 0%, rgba(18, 16, 13, 0.55) 70%, rgba(18, 16, 13, 0.35) 100%),
+                    url("/assets/images/brand/marmur.webp") center / cover no-repeat,
+                    #12100d;
+            }
+        }
         h1 {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: 4rem;
-            color: var(--color-primary);
+            color: var(--color-accent);
             margin-bottom: 0.5rem;
         }
         p {
             font-size: 1.1rem;
-            color: #5a5a5a;
+            color: #f5f3f0;
             margin-bottom: 2rem;
         }
         a {
             display: inline-block;
             padding: 0.75rem 2rem;
-            background: var(--color-primary);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-phthalo) 100%);
             color: #fff;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
-            transition: background 250ms ease;
+            box-shadow: inset 0 0 0 1px rgba(201, 169, 98, 0.45);
+            transition: background 250ms ease, color 250ms ease;
         }
-        a:hover { background: #1a6b42; }
+        a:hover { background: var(--color-accent); color: #12100d; }
+        a:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
     </style>
 </head>
 <body>
