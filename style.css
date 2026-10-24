@@ -5122,3 +5122,72 @@ main > .s1-section::before { display: none; }
 .ds-head .ds-heading { margin: 0; }
 .ds-head .ds-repos { padding: 0.6rem 1.1rem; font-size: var(--text-sm); }
 .ds-head .ds-repos svg { width: 16px; height: 16px; }
+
+/* Small tools: each with a real image on top, like the data-analysis tiles */
+.g-tools-list a { padding: 0 0 var(--space-md); gap: 0.35rem; }
+.g-tools-list .g-tool-name,
+.g-tools-list .g-tool-line { padding: 0 var(--space-md); }
+.g-tool-shot {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    margin-bottom: var(--space-sm);
+    background: var(--g-shot-bg);
+    border-bottom: 1px solid var(--g-tile-edge);
+}
+.g-tool-shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+/* ================================================
+   PHTHALO GREEN — the brand's second green, used as accents on top of the
+   British Racing Green + gold palette (never as a page ground).
+   ================================================ */
+:root {
+    --color-phthalo: #123524;
+    --color-phthalo-mid: #1d5c43;
+    --color-phthalo-light: #3a9a70;
+}
+::selection { background: var(--color-phthalo-mid); color: #fff; }
+html { scrollbar-color: var(--color-phthalo-mid) transparent; }
+.kpw-stop-a { stop-color: var(--color-phthalo-mid); }
+[data-theme="dark"] .kpw-stop-a { stop-color: var(--color-phthalo-light); }
+/* primary button: racing green into phthalo */
+.btn-primary { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-phthalo) 100%); }
+/* section titles: a short phthalo rule under the heading */
+.s1-title { position: relative; padding-bottom: 0.35em; }
+.s1-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 56px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-accent));
+}
+/* project tiles: phthalo edge on hover/focus in the light theme, gold in dark */
+@media (hover: hover) and (pointer: fine) {
+    .g-tile:hover { border-color: var(--color-phthalo-mid); }
+    [data-theme="dark"] .g-tile:hover { border-color: var(--color-accent); }
+}
+.g-tile:focus-within { border-color: var(--color-phthalo-mid); }
+[data-theme="dark"] .g-tile:focus-within { border-color: var(--color-accent); }
+.g-ext { text-decoration-color: var(--color-phthalo-light); }
+.g-badge--status { border-color: var(--color-phthalo-mid); color: var(--color-phthalo-mid); }
+[data-theme="dark"] .g-badge--status { border-color: var(--color-phthalo-light); color: #7cc9a3; }
+.talk-role--speak,
+[data-theme="dark"] .talk-role--speak { background: var(--color-phthalo-mid); border-color: var(--color-phthalo-mid); }
+
+/* 5 tools with images: 3 on top, 2 below (6-column grid), images capped in height */
+@media (min-width: 900px) {
+    .g-tools-list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .g-tools-list li { grid-column: span 2; }
+    .g-tools-list li:nth-child(4),
+    .g-tools-list li:nth-child(5),
+    .g-tools-list li:last-child:nth-child(3n + 2) { grid-column: span 3; }
+    .g-tools-list li:nth-child(n + 4) .g-tool-shot { aspect-ratio: 16 / 7; }
+}

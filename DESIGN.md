@@ -5,6 +5,10 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
 ## Identity (do not change without the author)
 - **Colours:** British Racing Green `--color-primary` #004d2b, gold `--color-accent` #c9a962, warm cream
   neutrals (`--color-bg` #fdfcfa). Dark theme keeps the same roles on near-black (#12100d).
+- **Phthalo green (accent only):** `--color-phthalo` #123524, `--color-phthalo-mid` #1d5c43,
+  `--color-phthalo-light` #3a9a70 — selection, scrollbar, logo sparkle, primary-button gradient, the short
+  rule under section titles, tile hover/focus edge (light theme), status badges, speaking-role badges.
+  Never as a page ground (the author rejected green grounds that drift to blue/grey). No cyan/mint.
 - **Type:** Playfair Display (names, headings), DM Sans (text, UI), JetBrains Mono (numbers, measurements
   and code only — not as decoration).
 - **Signature:** the § → { } particle sign in the hero and the contact finale, motto „Od paragrafu do
