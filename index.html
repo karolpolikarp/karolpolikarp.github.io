@@ -112,7 +112,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="style.css?v=92">
+    <link rel="stylesheet" href="style.css?v=95">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -390,84 +390,104 @@
 
                     <div class="gablota-grid">
 
-                        <article class="g-tile g-tile--xl g-zorza">
-                            <a class="g-main" href="/case/zorza/" aria-label="Zorza: studium przypadku" data-en-aria="Zorza: case study"></a>
-                            <div class="g-shot"><img src="assets/images/zorza.webp" width="1600" height="900" alt="Zrzut ekranu: pulpit Zorzy" data-en-alt="Screenshot: the Zorza dashboard" loading="lazy"></div>
+                        <article class="g-tile g-tile--xl g-urzednik">
+                            <a class="g-main" href="/case/urzednik-i-ai/" aria-label="Urzędnik i AI: studium przypadku" data-en-aria="Civil Servant &amp; AI: case study"></a>
+                            <div class="g-shot" data-video="assets/videos/urzednik-i-ai.mp4"><img src="assets/images/urzednik.webp" width="1600" height="900" alt="Zrzut ekranu: Urzędnik i AI, mapa zastosowań" data-en-alt="Screenshot: Civil Servant &amp; AI, the map of uses" loading="lazy"></div>
                             <div class="g-cap">
-                                <h4 class="g-name">Zorza</h4>
-                                <p class="g-kind" data-en="A personal news-monitoring desk merging 100 channels">Osobisty pulpit nasłuchu łączący 100&nbsp;kanałów treści</p>
-                                <p class="g-decision" data-en="Reposts collapse into a counter on the original, and credibility comes from open rules, not an AI model; each card shows the rules that fired.">Przedruk zwija w&nbsp;licznik przy oryginale, a&nbsp;wiarygodność liczą jawne reguły, nie model AI; karta wpisu pokazuje reguły, które zadziałały.</p>
+                                <p class="g-badges"><span class="g-badge g-badge--status" data-en="Live · v1.4.0">Działa publicznie · v1.4.0</span><span class="g-badge">React 19</span><span class="g-badge">TypeScript</span><span class="g-badge">Playwright</span></p>
+                                <h4 class="g-name" data-en="Civil Servant &amp; AI">Urzędnik i AI</h4>
+                                <p class="g-kind" data-en="A map of 527 prompts for government and local administration">Mapa 527 promptów dla administracji rządowej i&nbsp;samorządowej</p>
+                                <p class="g-decision" data-en-html="Each prompt carries a <strong class=&quot;g-hl&quot;>data level</strong> that says which tool it may be used in; the catalogue itself <strong class=&quot;g-hl&quot;>sends nothing</strong> and stores nothing, and a test enforces it.">Każdy prompt ma <strong class="g-hl">poziom danych</strong>, który mówi, w&nbsp;jakim narzędziu wolno go użyć; sam katalog <strong class="g-hl">niczego nie wysyła</strong> ani nie zapisuje, pilnuje tego test.</p>
                                 <div class="g-foot">
-                                    <p class="g-num"><span class="g-num-v" data-en="58,134">58&nbsp;134</span> <span class="g-num-k" data-en="items in 30-day archive · 1 Aug 2026">wpisy w&nbsp;archiwum (30&nbsp;dni) · 1.08.2026</span></p>
-                                    <a class="g-ext" href="https://zorza.karolwilczynski.com" target="_blank" rel="noopener"><span data-en="Live">Na żywo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                                    <p class="g-num"><span class="g-num-v">0</span> <span class="g-num-k" data-en="network requests after load · E2E test, 27 Sep 2026">żądań sieciowych po załadowaniu · test E2E, 27.09.2026</span></p>
+                                    <a class="g-ext" href="https://promptyurzednika.karolwilczynski.com/" target="_blank" rel="noopener"><span data-en="Live">Na żywo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                                 </div>
                             </div>
                         </article>
 
                         <article class="g-tile g-tile--xl g-jakieprawo">
                             <a class="g-main" href="/case/jakieprawo/" aria-label="JakiePrawo.pl: studium przypadku" data-en-aria="JakiePrawo.pl: case study"></a>
-                            <div class="g-shot"><img src="assets/images/obraz_2026-01-09_205957107.webp" width="1462" height="1127" alt="Zrzut ekranu: strona główna JakiePrawo.pl" data-en-alt="Screenshot: the JakiePrawo.pl home page" loading="lazy"></div>
+                            <div class="g-shot" data-video="assets/videos/jakieprawo.mp4"><img src="assets/images/obraz_2026-01-09_205957107.webp" width="1462" height="1127" alt="Zrzut ekranu: strona główna JakiePrawo.pl" data-en-alt="Screenshot: the JakiePrawo.pl home page" loading="lazy"></div>
                             <div class="g-cap">
+                                <p class="g-badges"><span class="g-badge g-badge--status" data-en="Beta · online version frozen">Beta · wersja online zamrożona</span><span class="g-badge">Claude API</span><span class="g-badge">MCP</span><span class="g-badge">Bielik</span></p>
                                 <h4 class="g-name">JakiePrawo.pl</h4>
-                                <p class="g-kind" data-en="Finds the law for plain-language questions · beta">Wyszukiwarka prawa na pytania zwykłym językiem · beta</p>
-                                <p class="g-decision" data-en="Aims to cite the article with its verbatim ISAP text; an unconfirmed quotation is removed or flagged as unverified, not shown as the wrong law.">Ma wskazać artykuł z&nbsp;dosłownym tekstem z&nbsp;ISAP; cytat niepotwierdzony usuwa albo oznacza jako niezweryfikowany, zamiast pokazać zły przepis.</p>
+                                <p class="g-kind" data-en="Finds the law for plain-language questions">Wyszukiwarka prawa na pytania zwykłym językiem</p>
+                                <p class="g-decision" data-en-html="It is meant to point to the article with its <strong class=&quot;g-hl&quot;>verbatim ISAP text</strong>; an unconfirmed quotation is removed or marked unverified rather than shown as the wrong provision.">Ma wskazać artykuł z&nbsp;<strong class="g-hl">dosłownym tekstem z&nbsp;ISAP</strong>; cytat niepotwierdzony usuwa albo oznacza jako niezweryfikowany, zamiast pokazać zły przepis.</p>
                                 <div class="g-foot">
-                                    <p class="g-num"><span class="g-num-v" data-en="98.3%">98,3%</span> <span class="g-num-k" data-en="quote match with ISAP, test 17 Jul 2026">zgodności z&nbsp;ISAP w&nbsp;teście, 17.07.2026</span></p>
+                                    <p class="g-num"><span class="g-num-v" data-en="98.3%">98,3%</span> <span class="g-num-k" data-en="quote match with ISAP (Claude Haiku, test setup) · 17 Jul 2026">zgodności cytatu z&nbsp;ISAP (Claude Haiku, konfiguracja testowa) · 17.07.2026</span></p>
                                     <a class="g-ext" href="https://jakieprawo.pl" target="_blank" rel="noopener"><span data-en="Live">Na żywo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                                 </div>
                             </div>
                         </article>
 
-                        <article class="g-tile g-tile--tall g-urzednik">
-                            <a class="g-main" href="/case/urzednik-i-ai/" aria-label="Urzędnik i AI: studium przypadku" data-en-aria="Civil Servant &amp; AI: case study"></a>
-                            <div class="g-shot"><img src="assets/images/urzednik.webp" width="1600" height="900" alt="Zrzut ekranu: Urzędnik i AI, mapa zastosowań" data-en-alt="Screenshot: Civil Servant &amp; AI, the map of uses" loading="lazy"></div>
+                        <article class="g-tile g-tile--xl g-zorza">
+                            <a class="g-main" href="/case/zorza/" aria-label="Zorza: studium przypadku" data-en-aria="Zorza: case study"></a>
+                            <div class="g-shot" data-video="assets/videos/zorza.mp4"><img src="assets/images/zorza.webp" width="1600" height="900" alt="Zrzut ekranu: pulpit Zorzy" data-en-alt="Screenshot: the Zorza dashboard" loading="lazy"></div>
                             <div class="g-cap">
-                                <h4 class="g-name" data-en="Civil Servant &amp; AI">Urzędnik i AI</h4>
-                                <p class="g-kind" data-en="527 ready-made prompts for civil servants · live">527 gotowych promptów dla urzędników · działa publicznie</p>
-                                <p class="g-decision" data-en="Each prompt carries a data level that says which tool it may be used in; the catalogue itself sends and stores nothing, and a test enforces it.">Każdy prompt ma poziom danych, który mówi, w&nbsp;jakim narzędziu wolno go użyć; sam katalog niczego nie wysyła ani nie zapisuje, pilnuje tego test.</p>
+                                <p class="g-badges"><span class="g-badge g-badge--status" data-en="Running on a Raspberry Pi 5">Działa na Raspberry Pi 5</span><span class="g-badge">TypeScript</span><span class="g-badge">SQLite FTS5</span><span class="g-badge">Claude Haiku</span></p>
+                                <h4 class="g-name">Zorza</h4>
+                                <p class="g-kind" data-en="A personal listening desk that merges 100 content channels">Osobisty pulpit nasłuchu łączący 100&nbsp;kanałów treści</p>
+                                <p class="g-decision" data-en-html="A repost folds into a counter next to the original, and credibility comes from <strong class=&quot;g-hl&quot;>open rules, not an AI model</strong>; each item card shows the rules that fired.">Przedruk zwija w&nbsp;licznik przy oryginale, a&nbsp;wiarygodność liczą <strong class="g-hl">jawne reguły, nie model AI</strong>; karta wpisu pokazuje reguły, które zadziałały.</p>
                                 <div class="g-foot">
-                                    <p class="g-num"><span class="g-num-v" data-en="429 of 527">429 z&nbsp;527</span> <span class="g-num-k" data-en="prompts on internal or sensitive data">promptów na dane wewnętrzne lub wrażliwe</span></p>
-                                    <a class="g-ext" href="https://promptyurzednika.karolwilczynski.com/" target="_blank" rel="noopener"><span data-en="Live">Na żywo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                                    <p class="g-num"><span class="g-num-v" data-en="58,134">58&nbsp;134</span> <span class="g-num-k" data-en="items in 30-day archive · 1 Aug 2026">wpisy w&nbsp;archiwum (30&nbsp;dni) · 1.08.2026</span></p>
+                                    <a class="g-ext" href="https://zorza.karolwilczynski.com" target="_blank" rel="noopener"><span data-en="Project page">Strona projektu</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                                 </div>
                             </div>
                         </article>
 
                         <article class="g-tile g-tile--m g-parawan">
                             <a class="g-main" href="/case/parawan/" aria-label="Parawan: studium przypadku" data-en-aria="Parawan: case study"></a>
-                            <div class="g-shot"><img src="assets/images/parawan.webp" width="880" height="1107" alt="Zrzut ekranu: Parawan" data-en-alt="Screenshot: Parawan" loading="lazy"></div>
+                            <div class="g-shot" data-video="assets/videos/parawan.mp4"><img src="assets/images/parawan.webp" width="880" height="1107" alt="Zrzut ekranu: Parawan" data-en-alt="Screenshot: Parawan" loading="lazy"></div>
                             <div class="g-cap">
+                                <p class="g-badges"><span class="g-badge g-badge--status" data-en="Released · v0.46.22 · open source">Wydany · v0.46.22 · open source</span><span class="g-badge">TypeScript</span><span class="g-badge">Vite</span><span class="g-badge">Vitest</span></p>
                                 <h4 class="g-name">Parawan</h4>
-                                <p class="g-kind" data-en="Masks personal data before text goes into an AI chat">Maskuje dane osobowe, zanim tekst trafi do czatu AI</p>
-                                <p class="g-decision" data-en="One HTML file, with rules and checksums instead of a model: the text never leaves the computer, as anyone can check by going offline.">Jeden plik HTML, reguły i&nbsp;sumy kontrolne zamiast modelu: tekst nie opuszcza komputera, co każdy sprawdzi, wyłączając internet.</p>
+                                <p class="g-decision" data-en-html="<strong class=&quot;g-hl&quot;>One HTML file</strong>, with rules and checksums instead of a model: the text never leaves the computer, as anyone can check by <strong class=&quot;g-hl&quot;>going offline</strong>."><strong class="g-hl">Jeden plik HTML</strong>, reguły i&nbsp;sumy kontrolne zamiast modelu: tekst nie opuszcza komputera, co każdy sprawdzi, <strong class="g-hl">wyłączając internet</strong>.</p>
                                 <div class="g-foot">
-                                    <p class="g-num"><span class="g-num-v" data-en="94.8%">94,8%</span> <span class="g-num-k" data-en="of data caught in the test, 20 Jul 2026">wykrytych danych w&nbsp;teście, 20.07.2026</span></p>
+                                    <p class="g-num"><span class="g-num-v" data-en="94.8%">94,8%</span> <span class="g-num-k" data-en="of data caught, 99.7% of text left intact · synthetic test, 20 Jul 2026">wykrytych danych, 99,7% tekstu nietknięte · syntetyczny test, 20.07.2026</span></p>
                                     <a class="g-ext" href="https://parawan.karolwilczynski.com/" target="_blank" rel="noopener"><span data-en="Live">Na żywo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                                     <a class="g-ext" href="https://github.com/karolpolikarp/parawan" target="_blank" rel="noopener"><span>GitHub</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                                 </div>
                             </div>
                         </article>
 
+                        <article class="g-tile g-tile--m g-margiela">
+                            <a class="g-main" href="/case/automargiela/" aria-label="AutoMargiela: studium przypadku" data-en-aria="AutoMargiela: case study"></a>
+                            <div class="g-shot" data-video="assets/videos/automargiela.mp4"><img src="assets/images/margiela.webp?v=3" width="1004" height="700" alt="Zrzut ekranu: AutoMargiela" data-en-alt="Screenshot: AutoMargiela" loading="lazy"></div>
+                            <div class="g-cap">
+                                <p class="g-badges"><span class="g-badge g-badge--status" data-en="Pre-launch">Przed startem</span><span class="g-badge">Python</span><span class="g-badge">Playwright</span><span class="g-badge">SQLite</span></p>
+                                <h4 class="g-name">AutoMargiela</h4>
+                                <p class="g-kind" data-en="Tracks perfume prices in three shops, no paid APIs">Śledzi ceny perfum w&nbsp;trzech sklepach, bez płatnych API</p>
+                                <p class="g-decision" data-en-html="Alerts fire not only on a crash but also when a shop <strong class=&quot;g-hl&quot;>quietly</strong> stops supplying prices: caught <strong class=&quot;g-hl&quot;>within 6 hours instead of after 7 days</strong>.">Alarm podnosi nie tylko awaria, ale też sklep, który <strong class="g-hl">po cichu</strong> przestał podawać ceny: wykrycie <strong class="g-hl">najpóźniej po 6&nbsp;h zamiast po 7&nbsp;dniach</strong>.</p>
+                                <div class="g-foot">
+                                    <p class="g-num"><span class="g-num-v" data-en="PLN 117">117&nbsp;zł</span> <span class="g-num-k" data-en="median price gap per bottle, 21 Sep 2026">mediana różnicy cen flakonu, 21.09.2026</span></p>
+                                    <a class="g-ext" href="https://replica.karolwilczynski.com" target="_blank" rel="noopener"><span data-en="Project page">Strona projektu</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                                </div>
+                            </div>
+                        </article>
+
                         <article class="g-tile g-tile--m g-upfor">
                             <a class="g-main" href="/case/upfor/" aria-label="UpFor.pl: studium przypadku" data-en-aria="UpFor.pl: case study"></a>
-                            <div class="g-shot"><img src="assets/images/upfor.webp?v=4" width="1600" height="900" alt="Zrzut ekranu: UpFor.pl" data-en-alt="Screenshot: UpFor.pl" loading="lazy"></div>
+                            <div class="g-shot" data-video="assets/videos/upfor.mp4"><img src="assets/images/upfor.webp?v=4" width="1600" height="900" alt="Zrzut ekranu: UpFor.pl" data-en-alt="Screenshot: UpFor.pl" loading="lazy"></div>
                             <div class="g-cap">
+                                <p class="g-badges"><span class="g-badge g-badge--status" data-en="Closed beta">Zamknięta beta</span><span class="g-badge">Next.js</span><span class="g-badge">tRPC</span><span class="g-badge">Claude Haiku</span></p>
                                 <h4 class="g-name">UpFor.pl</h4>
-                                <p class="g-kind" data-en="A shared calendar for gaming groups · closed beta">Wspólny kalendarz dla ekip graczy · zamknięta beta</p>
-                                <p class="g-decision" data-en="Plain code finds the hours when everyone is free and the AI model only suggests games for them, so it cannot invent a time that is not in the data.">Wspólne wolne godziny liczy zwykły kod, a&nbsp;model AI tylko dobiera do nich gry, więc nie może wymyślić terminu, którego nie ma w&nbsp;danych.</p>
+                                <p class="g-kind" data-en="A shared calendar for gaming groups">Wspólny kalendarz dla ekip graczy</p>
+                                <p class="g-decision" data-en-html="<strong class=&quot;g-hl&quot;>Plain code</strong> finds the hours when everyone is free and the AI model only suggests games for them, so it <strong class=&quot;g-hl&quot;>cannot invent a time</strong> that is not in the data.">Wspólne wolne godziny liczy <strong class="g-hl">zwykły kod</strong>, a&nbsp;model AI tylko dobiera do nich gry, więc <strong class="g-hl">nie może wymyślić terminu</strong>, którego nie ma w&nbsp;danych.</p>
                                 <div class="g-foot">
-                                    <p class="g-num"><span class="g-num-v">15</span> <span class="g-num-k" data-en="clock-change bugs · 3 Oct 2026">błędów zmiany czasu · 3.10.2026</span></p>
-                                    <a class="g-ext" href="https://upfor.pl" target="_blank" rel="noopener"><span data-en="Live">Na żywo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                                    <p class="g-num"><span class="g-num-v" data-en="3,342">3&nbsp;342</span> <span class="g-num-k" data-en="unit tests · 10 Oct 2026">testy jednostkowe · 10.10.2026</span></p>
+                                    <a class="g-ext" href="https://upfor.pl" target="_blank" rel="noopener"><span data-en="Project page">Strona projektu</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                                 </div>
                             </div>
                         </article>
 
                         <article class="g-tile g-tile--m g-majeranek">
                             <a class="g-main" href="/case/majeranek/" aria-label="Majeranek: studium przypadku" data-en-aria="Majeranek: case study"></a>
-                            <div class="g-shot"><img src="assets/images/majeranek.webp?v=3" width="1600" height="1200" alt="Zrzut ekranu: Majeranek" data-en-alt="Screenshot: Majeranek" loading="lazy"></div>
+                            <div class="g-shot" data-video="assets/videos/majeranek.mp4"><img src="assets/images/majeranek.webp?v=3" width="1600" height="1200" alt="Zrzut ekranu: Majeranek" data-en-alt="Screenshot: Majeranek" loading="lazy"></div>
                             <div class="g-cap">
+                                <p class="g-badges"><span class="g-badge g-badge--status" data-en="Alpha">Alfa</span><span class="g-badge">Next.js</span><span class="g-badge">Supabase</span><span class="g-badge">PostgreSQL</span></p>
                                 <h4 class="g-name">Majeranek</h4>
-                                <p class="g-kind" data-en="Rankings of films, games, books and music · alpha">Rankingi filmów, gier, książek i&nbsp;muzyki · alfa</p>
-                                <p class="g-decision" data-en="The browser talks to the database directly, so every table is guarded by access rules (RLS); AI recommendations start only on a click.">Przeglądarka łączy się z&nbsp;bazą bezpośrednio, więc każdą tabelę chronią reguły dostępu (RLS); AI rekomenduje dopiero po kliknięciu.</p>
+                                <p class="g-kind" data-en="Rankings of films, games, books and music">Rankingi filmów, gier, książek i&nbsp;muzyki</p>
+                                <p class="g-decision" data-en-html="The browser talks to the database directly, so every table is guarded by <strong class=&quot;g-hl&quot;>access rules (RLS)</strong>; AI recommends only <strong class=&quot;g-hl&quot;>after a click</strong>.">Przeglądarka łączy się z&nbsp;bazą bezpośrednio, więc każdą tabelę chronią <strong class="g-hl">reguły dostępu (RLS)</strong>; AI rekomenduje dopiero <strong class="g-hl">po kliknięciu</strong>.</p>
                                 <div class="g-foot">
                                     <p class="g-num"><span class="g-num-v" data-en="49 of 49">49 z&nbsp;49</span> <span class="g-num-k" data-en="tables with access rules · 14 Oct 2026">tabel z&nbsp;regułami dostępu · 14.10.2026</span></p>
                                     <a class="g-ext" href="https://majeranek.vercel.app" target="_blank" rel="noopener"><span data-en="Live">Na żywo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
@@ -475,32 +495,20 @@
                             </div>
                         </article>
 
-                        <article class="g-tile g-tile--m g-margiela">
-                            <a class="g-main" href="/case/automargiela/" aria-label="AutoMargiela: studium przypadku" data-en-aria="AutoMargiela: case study"></a>
-                            <div class="g-shot"><img src="assets/images/margiela.webp?v=3" width="1004" height="700" alt="Zrzut ekranu: AutoMargiela" data-en-alt="Screenshot: AutoMargiela" loading="lazy"></div>
-                            <div class="g-cap">
-                                <h4 class="g-name">AutoMargiela</h4>
-                                <p class="g-kind" data-en="Tracks perfume prices in three Polish shops · pre-launch">Śledzi ceny perfum w&nbsp;trzech sklepach · przed startem</p>
-                                <p class="g-decision" data-en="Alerts fire not only on a crash but also when a shop quietly stops supplying prices: caught within 6 hours instead of after 7 days.">Alarm podnosi nie tylko awaria, ale też sklep, który po cichu przestał podawać ceny: wykrycie najpóźniej po 6&nbsp;h zamiast po 7&nbsp;dniach.</p>
-                                <div class="g-foot">
-                                    <p class="g-num"><span class="g-num-v" data-en="PLN 117">117&nbsp;zł</span> <span class="g-num-k" data-en="median price gap per bottle, 21 Sep 2026">mediana różnicy cen flakonu, 21.09.2026</span></p>
-                                    <a class="g-ext" href="https://replica.karolwilczynski.com" target="_blank" rel="noopener"><span data-en="Live">Na żywo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
-                                </div>
-                            </div>
-                        </article>
-
                         <article class="g-tile g-tile--s g-aigets">
                             <a class="g-main" href="/case/aigets/" aria-label="AIgets.me: studium przypadku" data-en-aria="AIgets.me: case study"></a>
-                            <div class="g-shot"><img src="assets/images/whoisi.webp" width="1524" height="1232" alt="Zrzut ekranu: kreator AIgets.me" data-en-alt="Screenshot: the AIgets.me wizard" loading="lazy"></div>
+                            <div class="g-shot" data-video="assets/videos/aigets.mp4"><img src="assets/images/whoisi.webp" width="1524" height="1232" alt="Zrzut ekranu: kreator AIgets.me" data-en-alt="Screenshot: the AIgets.me wizard" loading="lazy"></div>
                             <div class="g-cap">
+                                <p class="g-badges"><span class="g-badge g-badge--status" data-en="Prototype · unchanged since 22 Jun 2026">Prototyp · bez zmian od 22.06.2026</span><span class="g-badge">React 19</span><span class="g-badge">Vite</span><span class="g-badge">Claude Haiku</span></p>
                                 <h4 class="g-name">AIgets.me</h4>
-                                <p class="g-kind" data-en="Builds standing instructions for an AI assistant · prototype">Kreator stałej instrukcji dla asystenta AI · prototyp</p>
-                                <p class="g-decision" data-en="Turns the answers into one instruction to paste into Claude, ChatGPT or Gemini; they reach the model as data, kept apart from its instructions.">Z&nbsp;odpowiedzi składa jedną instrukcję do wklejenia w&nbsp;Claude’a, ChatGPT albo Gemini; do modelu trafiają one jako dane, oddzielone od poleceń.</p>
+                                <p class="g-kind" data-en="Builds standing instructions for an AI assistant">Kreator stałej instrukcji dla asystenta AI</p>
+                                <p class="g-decision" data-en-html="It turns your answers into one instruction to paste into Claude, ChatGPT or Gemini; they reach the model <strong class=&quot;g-hl&quot;>as data</strong>, kept apart from the instructions.">Z&nbsp;odpowiedzi składa jedną instrukcję do wklejenia w&nbsp;Claude’a, ChatGPT albo Gemini; do modelu trafiają one <strong class="g-hl">jako dane</strong>, oddzielone od poleceń.</p>
                                 <div class="g-foot">
                                     <p class="g-num"><span class="g-num-v">16 → 11</span> <span class="g-num-k" data-en="questions after the 21 Feb 2026 review">pytań po przeglądzie z&nbsp;21.02.2026</span></p>
                                 </div>
                             </div>
                         </article>
+
 
                         <div class="g-tools">
                             <h4 class="g-tools-title"><a href="/case/narzedzia/"><span data-en="Small tools">Małe narzędzia</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></h4>
@@ -510,7 +518,6 @@
                                 <li><a href="/case/narzedzia/#anonimizator-ai"><span class="g-tool-name">Anonimizator AI</span><span class="g-tool-line" data-en="Parawan + AI: foreign names 4 → 15/19 · in progress">Parawan + AI: obce nazwiska 4 → 15 z&nbsp;19 · w&nbsp;budowie</span></a></li>
                                 <li><a href="/case/narzedzia/#stefka"><span class="g-tool-name">Stefka</span><span class="g-tool-line" data-en="Summarises recordings locally with PLLuM · prototype">Streszcza nagrania lokalnie modelem PLLuM · prototyp</span></a></li>
                                 <li><a href="/case/narzedzia/#clicker"><span class="g-tool-name">Multi-Sequence Clicker</span><span class="g-tool-line" data-en="Replays planned sequences of mouse clicks">Powtarza zaplanowane sekwencje kliknięć myszą</span></a></li>
-                                <li><a href="/case/analizy-danych/"><span class="g-tool-name" data-en="Data analyses">Analizy danych</span><span class="g-tool-line" data-en="Five public-data analyses, incl. ESPI filings">Pięć analiz publicznych danych, m.in. raporty ESPI</span></a></li>
                             </ul>
                         </div>
 
@@ -526,7 +533,7 @@
                     <div class="ds-bento">
 
                         <!-- Kafel flagowy -->
-                        <a class="ds-tile ds-tile--feature" href="https://github.com/karolpolikarp/ds-SGH-Prognozy-gieldowe-z-ESPI" target="_blank" rel="noopener">
+                        <a class="ds-tile ds-tile--feature" href="/case/analizy-danych/#espi">
                             <img class="ds-tile-shot" src="assets/images/espi.webp" alt="" loading="lazy" onerror="this.remove()">
                             <span class="tag tag-year">2024</span>
                             <div class="ds-tile-body">
@@ -541,7 +548,7 @@
                         </a>
 
                         <!-- Drugi mocny kafel — gry wideo -->
-                        <a class="ds-tile ds-tile--highlight" href="https://github.com/karolpolikarp/ds-VideoGameSales" target="_blank" rel="noopener">
+                        <a class="ds-tile ds-tile--highlight" href="/case/analizy-danych/#gry">
                             <img class="ds-tile-shot" src="assets/images/videogames.webp" alt="" loading="lazy" onerror="this.remove()">
                             <span class="tag tag-year">2025</span>
                             <div class="ds-tile-body">
@@ -556,7 +563,7 @@
                         </a>
 
                         <!-- Para Airbnb: Winnipeg + Waszyngton -->
-                        <a class="ds-tile ds-tile--pair" href="https://github.com/karolpolikarp/ds-Winnipeg" target="_blank" rel="noopener">
+                        <a class="ds-tile ds-tile--pair" href="/case/analizy-danych/#winnipeg">
                             <img class="ds-tile-shot" src="assets/images/winnipeg.webp" alt="" loading="lazy" onerror="this.remove()">
                             <span class="tag tag-year">2025</span>
                             <div class="ds-tile-body">
@@ -570,7 +577,7 @@
                             </div>
                         </a>
 
-                        <a class="ds-tile ds-tile--pair" href="https://github.com/karolpolikarp/ds-WashingtonDC" target="_blank" rel="noopener">
+                        <a class="ds-tile ds-tile--pair" href="/case/analizy-danych/#waszyngton">
                             <img class="ds-tile-shot" src="assets/images/washington.webp" alt="" loading="lazy" onerror="this.remove()">
                             <span class="tag tag-year">2024</span>
                             <div class="ds-tile-body">
@@ -585,7 +592,7 @@
                         </a>
 
                         <!-- Najmniejszy — speed dating (szeroki, niski pasek) -->
-                        <a class="ds-tile ds-tile--wide" href="https://github.com/karolpolikarp/ds-speed-dating" target="_blank" rel="noopener">
+                        <a class="ds-tile ds-tile--wide" href="/case/analizy-danych/#segmentacja">
                             <img class="ds-tile-shot" src="assets/images/speed-dating.webp" alt="" loading="lazy" onerror="this.remove()">
                             <span class="tag tag-year">2024</span>
                             <div class="ds-tile-body">
@@ -603,9 +610,6 @@
                 </section>
 
                 <div class="projects-footer">
-                    <a class="btn btn-secondary" href="/case/analizy-danych/">
-                        <span data-en="Data analyses: case study">Analizy danych: studium</span>
-                    </a>
                     <a class="btn btn-secondary" href="https://github.com/karolpolikarp" target="_blank" rel="noopener">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
                         <span data-en="All repositories">Wszystkie repozytoria</span>
@@ -879,74 +883,181 @@
             <div class="container">
                 <header class="section-header">
                     <h2 class="section-title" id="talks-heading" data-en="Talks">Wystąpienia</h2>
-                    <p class="section-desc" data-en="Conferences, panels and seminars where I spoke about AI in public administration and AI regulatory sandboxes.">Konferencje, panele i&nbsp;seminaria, na których mówiłem o&nbsp;AI w&nbsp;administracji i&nbsp;piaskownicach regulacyjnych AI.</p>
+                    <p class="section-desc" data-en="Conferences, panels, seminars and delegations on AI in public administration and AI regulatory sandboxes.">Konferencje, panele, seminaria i&nbsp;delegacje: AI w&nbsp;administracji i&nbsp;piaskownice regulacyjne AI.</p>
                 </header>
                 <div class="talks-wrap">
                     <h3 class="talks-year">2026</h3>
                     <ol class="talks-list">
-                        <li class="talk">
-                            <time class="talk-date" datetime="2026-10-18">18.10.2026</time>
+                        <li class="talk talk--gold">
+                            <time class="talk-date" datetime="2026-10-18" data-en="18 Oct 2026">18.10.2026</time>
                             <div class="talk-body">
-                                <p class="talk-event" data-en="Hackathon Warsaw Open Data">Hackathon Warsaw Open Data</p>
-                                <p class="talk-meta"><span data-en="Jury">Jury</span> · <span data-en="Warsaw">Warszawa</span></p>
+                                <p class="talk-event"><span class="talk-role talk-role--gold" data-en="Jury">Jury</span> <span data-en="Hackathon Warsaw Open Data">Hackathon Warsaw Open Data</span></p>
+                                <p class="talk-meta" data-en="Warsaw">Warszawa</p>
                             </div>
                         </li>
-                        <li class="talk">
-                            <time class="talk-date" datetime="2026-10-05">5.10.2026</time>
+                        <li class="talk talk--speak">
+                            <time class="talk-date" datetime="2026-10-05" data-en="5 Oct 2026">5.10.2026</time>
                             <div class="talk-body">
-                                <p class="talk-event" data-en="24th Local Government Forum of Capital and Finance">XXIV Samorządowe Forum Kapitału i Finansów</p>
+                                <p class="talk-event"><span class="talk-role talk-role--speak" data-en="Panel">Panel</span> <span data-en="24th Local Government Forum of Capital and Finance">XXIV Samorządowe Forum Kapitału i&nbsp;Finansów</span></p>
                                 <p class="talk-topic" data-en="“Digital city: data, AI and digital twins in local government”">„Cyfrowe miasto: dane, AI i&nbsp;cyfrowe bliźniaki w&nbsp;zarządzaniu JST”</p>
-                                <p class="talk-meta"><span data-en="Panel">Panel</span> · <span data-en="Katowice">Katowice</span></p>
+                                <p class="talk-meta" data-en="Katowice">Katowice</p>
                             </div>
                         </li>
-                        <li class="talk">
-                            <time class="talk-date" datetime="2026-09-25">25.09.2026</time>
+                        <li class="talk talk--speak">
+                            <time class="talk-date" datetime="2026-09-25" data-en="25 Sep 2026">25.09.2026</time>
                             <div class="talk-body">
-                                <p class="talk-event" data-en="New Mobility Congress 2026">Kongres Nowej Mobilności 2026</p>
+                                <p class="talk-event"><span class="talk-role talk-role--speak" data-en="Panel">Panel</span> <span data-en="New Mobility Congress 2026">Kongres Nowej Mobilności 2026</span></p>
                                 <p class="talk-topic" data-en="“AI in imagining the city: where can artificial intelligence really help us?”">„AI w&nbsp;wymyślaniu miasta. W&nbsp;czym może nam realnie pomóc sztuczna inteligencja”</p>
-                                <p class="talk-meta"><span data-en="Panel">Panel</span> · <span data-en="Katowice">Katowice</span></p>
+                                <p class="talk-meta" data-en="Katowice">Katowice</p>
                             </div>
                         </li>
-                        <li class="talk">
-                            <time class="talk-date" datetime="2026-06-29">29.06.2026</time>
+                        <li class="talk talk--speak">
+                            <time class="talk-date" datetime="2026-09" data-en="September 2026">wrzesień 2026</time>
                             <div class="talk-body">
-                                <p class="talk-event" data-en="Breakfast with PLLuM (NASK)">Śniadanie z&nbsp;PLLuM (NASK)</p>
+                                <p class="talk-event"><span class="talk-role talk-role--speak" data-en="Talk">Prezentacja</span> <span data-en="Forum Teleinformatyki 2026">Forum Teleinformatyki 2026</span></p>
+                                <p class="talk-topic" data-en="An AI assistant for civil servants">Asystent Urzędniczy AI</p>
+                                <p class="talk-meta" data-en="Warsaw">Warszawa</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--speak">
+                            <time class="talk-date" datetime="2026-06-29" data-en="29 Jun 2026">29.06.2026</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--speak" data-en="Talk">Prezentacja</span> <span data-en="Breakfast with PLLuM (NASK)">Śniadanie z&nbsp;PLLuM (NASK)</span></p>
                                 <p class="talk-topic" data-en="Internal rules for using AI in a public office">Wewnętrzne zasady korzystania z&nbsp;AI w&nbsp;urzędzie</p>
-                                <p class="talk-meta"><span data-en="Talk">Prezentacja</span> · <span data-en="Warsaw">Warszawa</span></p>
+                                <p class="talk-meta" data-en="Warsaw">Warszawa</p>
                             </div>
                         </li>
-                        <li class="talk">
-                            <time class="talk-date" datetime="2026-03-30">30–31.03.2026</time>
+                        <li class="talk talk--speak">
+                            <time class="talk-date" datetime="2026-05-22" data-en="22 May 2026">22.05.2026</time>
                             <div class="talk-body">
-                                <p class="talk-event" data-en="UK–Hungarian AI Council: AI Standards Workshop">UK–Hungarian AI Council: AI Standards Workshop</p>
+                                <p class="talk-event"><span class="talk-role talk-role--speak" data-en="Talk">Prezentacja</span> <span data-en="Workshop for Directors General (KSAP, Chancellery of the Prime Minister), Good Practice Forum">Warsztaty Dyrektorek i&nbsp;Dyrektorów Generalnych (KSAP, KPRM), Forum Dobrych Praktyk</span></p>
+                                <p class="talk-topic" data-en="“The Ministry of Digital Affairs’ path to deploying artificial intelligence safely”">„Droga Ministerstwa Cyfryzacji do bezpiecznego wdrażania sztucznej inteligencji”</p>
+                                <p class="talk-meta" data-en="Łańsk">Łańsk</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--gold">
+                            <time class="talk-date" datetime="2026-04-16" data-en="16–17 Apr 2026">16–17.04.2026</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--gold" data-en="Subgroup member">Członek podgrupy</span> <span data-en="2nd EUSAiR Co-Creation Workshop">2nd EUSAiR Co-Creation Workshop</span></p>
+                                <p class="talk-topic" data-en="AI Board subgroup on AI regulatory sandboxes">Podgrupa AI Board ds. piaskownic regulacyjnych AI</p>
+                                <p class="talk-meta" data-en="Brussels">Bruksela</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--speak">
+                            <time class="talk-date" datetime="2026-03-30" data-en="30–31 Mar 2026">30–31.03.2026</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--speak" data-en="Talk">Prezentacja</span> <span data-en="UK–Hungarian AI Council: AI Standards Workshop">UK–Hungarian AI Council: AI Standards Workshop</span></p>
                                 <p class="talk-topic" data-en="“Designing an AI Regulatory Sandbox under the AI Act: from legal mandate to operational model”">„Designing an AI Regulatory Sandbox under the AI Act: from legal mandate to operational model”</p>
-                                <p class="talk-meta"><span data-en="Talk">Prezentacja</span> · <span data-en="Budapest">Budapeszt</span></p>
+                                <p class="talk-meta" data-en="Budapest">Budapeszt</p>
                             </div>
                         </li>
-                        <li class="talk">
-                            <time class="talk-date" datetime="2026-03-26">26.03.2026</time>
+                        <li class="talk talk--speak">
+                            <time class="talk-date" datetime="2026-03-26" data-en="26 Mar 2026">26.03.2026</time>
                             <div class="talk-body">
-                                <p class="talk-event" data-en="International seminar on AI regulatory sandboxes (Poland–Korea Knowledge Sharing Program)">Międzynarodowe seminarium o&nbsp;piaskownicach regulacyjnych AI (Knowledge Sharing Program Polska–Korea)</p>
-                                <p class="talk-topic" data-en="The Polish model of AI regulatory sandboxes">Polski model piaskownic regulacyjnych AI</p>
-                                <p class="talk-meta"><span data-en="Talk and panel">Prezentacja i&nbsp;panel</span> · <span data-en="Warsaw">Warszawa</span></p>
+                                <p class="talk-event"><span class="talk-role talk-role--speak" data-en="Panel">Panel</span> <span data-en="International seminar on AI regulatory sandboxes (Poland–Korea Knowledge Sharing Program)">Międzynarodowe seminarium o&nbsp;piaskownicach regulacyjnych AI (Knowledge Sharing Program Polska–Korea)</span></p>
+                                <p class="talk-topic" data-en="Talk on the Polish sandbox model and panel discussion">Prezentacja o&nbsp;polskim modelu piaskownic i&nbsp;dyskusja panelowa</p>
+                                <p class="talk-meta" data-en="Warsaw">Warszawa</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--line">
+                            <time class="talk-date" datetime="2026-03-24" data-en="24 Mar 2026">24.03.2026</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--line" data-en="Attendee">Udział</span> <span data-en="Microsoft AI Summit">Microsoft AI Summit</span></p>
+                                <p class="talk-meta" data-en="Warsaw">Warszawa</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--line">
+                            <time class="talk-date" datetime="2026-03" data-en="March 2026">marzec 2026</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--line" data-en="Delegation">Delegacja</span> <span data-en="Polish delegation visit to Lithuania">Wizyta polskiej delegacji na Litwie</span></p>
+                                <p class="talk-topic" data-en="Talk on the Polish model of AI regulatory sandboxes">Wystąpienie o&nbsp;polskim modelu piaskownic regulacyjnych AI</p>
+                                <p class="talk-meta" data-en="Vilnius">Wilno</p>
                             </div>
                         </li>
                     </ol>
                     <h3 class="talks-year">2025</h3>
                     <ol class="talks-list">
-                        <li class="talk">
-                            <time class="talk-date" datetime="2025-09-29">29.09.2025</time>
+                        <li class="talk talk--line">
+                            <time class="talk-date" datetime="2025-11-20" data-en="20–21 Nov 2025">20–21.11.2025</time>
                             <div class="talk-body">
-                                <p class="talk-event" data-en="Pairing Europe’s Potential (EUDI Wallet POTENTIAL pilot)">Pairing Europe’s Potential (pilotaż EUDI Wallet POTENTIAL)</p>
-                                <p class="talk-topic" data-en="“AI and EUDI Wallet ecosystem – how to implement future in your wallet”">„AI and EUDI Wallet ecosystem – how to implement future in your wallet”</p>
-                                <p class="talk-meta"><span data-en="Panel moderator">Moderacja panelu</span> · <span data-en="Wrocław">Wrocław</span></p>
+                                <p class="talk-event"><span class="talk-role talk-role--line" data-en="Attendee">Udział</span> <span data-en="Data Science Summit 2025">Data Science Summit 2025</span></p>
+                                <p class="talk-meta" data-en="Warsaw">Warszawa</p>
                             </div>
                         </li>
-                        <li class="talk">
-                            <time class="talk-date" datetime="2025-02-25">25.02.2025</time>
+                        <li class="talk talk--gold">
+                            <time class="talk-date" datetime="2025-11-18" data-en="18 Nov 2025">18.11.2025</time>
                             <div class="talk-body">
-                                <p class="talk-event" data-en="Webinar on the Central Register of Building Emissions for local governments (with the Association of Municipalities and Counties of Wielkopolska)">Webinar o&nbsp;Centralnej Ewidencji Emisyjności Budynków dla samorządów (ze Stowarzyszeniem Gmin i&nbsp;Powiatów Wielkopolski)</p>
-                                <p class="talk-meta"><span data-en="Talk and Q&amp;A">Prezentacja i&nbsp;pytania</span> · <span data-en="online">online</span></p>
+                                <p class="talk-event"><span class="talk-role talk-role--gold" data-en="Expert">Ekspert</span> <span data-en="KDI–Alan Turing Institute Joint Seminar">KDI–Alan Turing Institute Joint Seminar</span></p>
+                                <p class="talk-topic" data-en="“AI Standards and Regulations – Leveraging AI Standards and Regulatory Frameworks through Sandboxes”">„AI Standards and Regulations – Leveraging AI Standards and Regulatory Frameworks through Sandboxes”</p>
+                                <p class="talk-meta" data-en="London">Londyn</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--line">
+                            <time class="talk-date" datetime="2025-10-27" data-en="27 Oct 2025">27.10.2025</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--line" data-en="Attendee">Udział</span> <span data-en="Breakfast with PLLuM (NASK), first edition">Śniadanie z&nbsp;PLLuM (NASK), pierwsza edycja</span></p>
+                                <p class="talk-meta" data-en="Warsaw">Warszawa</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--speak">
+                            <time class="talk-date" datetime="2025-10-23" data-en="23 Oct 2025">23.10.2025</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--speak" data-en="Lead">Prowadzenie</span> <span data-en="Meeting with the Innovation Agency Lithuania">Spotkanie z&nbsp;Agencją Innowacji Litwy</span></p>
+                                <p class="talk-topic" data-en="Lessons from launching the Lithuanian AI sandbox">Doświadczenia z&nbsp;uruchomienia litewskiej piaskownicy AI</p>
+                                <p class="talk-meta" data-en="online">online</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--speak">
+                            <time class="talk-date" datetime="2025-09-29" data-en="29 Sep 2025">29.09.2025</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--speak" data-en="Moderator">Moderacja</span> <span data-en="Pairing Europe’s Potential (EUDI Wallet POTENTIAL pilot)">Pairing Europe’s Potential (pilotaż EUDI Wallet POTENTIAL)</span></p>
+                                <p class="talk-topic" data-en="“AI and EUDI Wallet ecosystem – how to implement future in your wallet”">„AI and EUDI Wallet ecosystem – how to implement future in your wallet”</p>
+                                <p class="talk-meta" data-en="Wrocław">Wrocław</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--line">
+                            <time class="talk-date" datetime="2025-07-02" data-en="2–3 Jul 2025">2–3.07.2025</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--line" data-en="Delegation">Delegacja</span> <span data-en="“The Future of Digital Investments in the EU”, opening of the Danish EU Council presidency">„The Future of Digital Investments in the EU”, otwarcie duńskiej prezydencji w&nbsp;Radzie UE</span></p>
+                                <p class="talk-meta" data-en="Aalborg">Aalborg</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--line">
+                            <time class="talk-date" datetime="2025-06-17" data-en="17–18 Jun 2025">17–18.06.2025</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--line" data-en="Attendee">Udział</span> <span data-en="Digital Summit 2025, closing the Polish EU Council presidency">Digital Summit 2025, zamknięcie polskiej prezydencji w&nbsp;Radzie UE</span></p>
+                                <p class="talk-meta" data-en="Gdańsk">Gdańsk</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--line">
+                            <time class="talk-date" datetime="2025-05-28" data-en="28 May 2025">28.05.2025</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--line" data-en="Delegation">Delegacja</span> <span data-en="Embassy of Lithuania: Polish–Lithuanian cooperation on AI regulatory sandboxes">Ambasada Litwy: współpraca polsko-litewska przy piaskownicach regulacyjnych AI</span></p>
+                                <p class="talk-meta" data-en="Warsaw">Warszawa</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--speak">
+                            <time class="talk-date" datetime="2025-02-25" data-en="25 Feb 2025">25.02.2025</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--speak" data-en="Talk">Prezentacja</span> <span data-en="Webinar on the Central Register of Building Emissions for local governments (with the Association of Municipalities and Counties of Wielkopolska)">Webinar o&nbsp;Centralnej Ewidencji Emisyjności Budynków dla samorządów (ze Stowarzyszeniem Gmin i&nbsp;Powiatów Wielkopolski)</span></p>
+                                <p class="talk-meta" data-en="online">online</p>
+                            </div>
+                        </li>
+                    </ol>
+                    <h3 class="talks-year">2024</h3>
+                    <ol class="talks-list">
+                        <li class="talk talk--gold">
+                            <time class="talk-date" datetime="2024-12-02" data-en="since 2 Dec 2024">od 2.12.2024</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--gold" data-en="Subgroup member">Członek podgrupy</span> <span data-en="Meetings of the AI Board subgroup on AI regulatory sandboxes">Posiedzenia podgrupy AI Board ds. piaskownic regulacyjnych AI</span></p>
+                                <p class="talk-meta" data-en="online / Brussels">online / Bruksela</p>
+                            </div>
+                        </li>
+                        <li class="talk talk--line">
+                            <time class="talk-date" datetime="2024-11-27" data-en="27 Nov 2024">27.11.2024</time>
+                            <div class="talk-body">
+                                <p class="talk-event"><span class="talk-role talk-role--line" data-en="Attendee">Udział</span> <span data-en="Bielik Summit 2024, first edition">Bielik Summit 2024, pierwsza edycja</span></p>
+                                <p class="talk-meta" data-en="Warsaw">Warszawa</p>
                             </div>
                         </li>
                     </ol>
@@ -1027,7 +1138,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=47" defer></script>
+    <script src="script.js?v=48" defer></script>
     <script src="analytics.js?v=1" defer></script>
 </body>
 </html>

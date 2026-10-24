@@ -4422,14 +4422,16 @@ section {
 }
 @media (min-width: 768px) {
     .gablota-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
-    .g-tile--xl, .g-urzednik, .g-tools { grid-column: span 2; }
+    .g-tile--xl, .g-tools { grid-column: span 2; }
 }
 @media (min-width: 1100px) {
     .gablota-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
-    .g-zorza      { grid-column: span 7; }
+    /* law and public administration first: Urzędnik i AI + JakiePrawo, then Zorza + Parawan */
+    .g-urzednik   { grid-column: span 7; }
     .g-jakieprawo { grid-column: span 5; }
-    .g-urzednik   { grid-column: span 4; grid-row: span 2; }
-    .g-parawan, .g-upfor, .g-majeranek, .g-margiela { grid-column: span 4; }
+    .g-zorza      { grid-column: span 7; }
+    .g-parawan    { grid-column: span 5; }
+    .g-upfor, .g-majeranek, .g-margiela { grid-column: span 4; }
     .g-aigets     { grid-column: span 4; }
     .g-tools      { grid-column: span 8; }
 }
@@ -4529,14 +4531,15 @@ section {
 }
 .g-num {
     margin: 0 auto 0 0;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--g-ink-3);
+    font-size: var(--text-sm);
+    color: var(--g-ink-2);
 }
 .g-num-v {
+    font-family: var(--font-serif);
     color: var(--g-gold);
     font-weight: 600;
-    font-size: var(--text-md);
+    font-size: var(--text-xl);
+    margin-right: 0.15em;
 }
 .g-ext {
     position: relative;
@@ -4604,12 +4607,12 @@ section {
     text-decoration: none;
 }
 .g-tool-name { font-weight: 600; font-size: var(--text-md); }
-.g-tool-line { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--g-ink-3); line-height: 1.5; }
+.g-tool-line { font-size: var(--text-sm); color: var(--g-ink-2); line-height: 1.5; }
 .g-tools-list a:hover .g-tool-name { color: var(--g-gold); }
 .g-tools-list a:focus-visible { outline: 2px solid var(--g-gold); outline-offset: -2px; }
 
-/* keyword highlighter (script.js) adds .kw inside the band: keep it readable on green */
-.gablota .kw { color: inherit; background: none; }
+/* keyword highlighter (script.js): key terms in gold on the green band */
+.gablota .kw { color: var(--g-gold); background: none; font-weight: 600; }
 
 /* ---------- motion: the object leans into the light ---------- */
 @media (prefers-reduced-motion: no-preference) {
@@ -4656,12 +4659,13 @@ section {
     margin: 0 auto;
 }
 .talks-year {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
     font-weight: 600;
-    color: var(--color-text-tertiary);
+    color: var(--color-primary);
     margin: var(--space-xl) 0 var(--space-sm);
 }
+[data-theme="dark"] .talks-year { color: var(--color-accent); }
 .talks-year:first-child { margin-top: 0; }
 .talks-list {
     list-style: none;
@@ -4677,17 +4681,18 @@ section {
     border-bottom: 1px solid var(--color-border);
 }
 .talk-date {
-    font-family: var(--font-mono);
     font-size: var(--text-sm);
-    color: var(--color-text-secondary);
-    padding-top: 0.3em;
+    font-weight: 600;
+    color: var(--color-text);
+    padding-top: 0.25em;
+    font-variant-numeric: tabular-nums;
 }
 .talk-event {
     margin: 0;
     font-family: var(--font-serif);
     font-size: var(--text-lg);
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.35;
     color: var(--color-text);
 }
 .talk-topic {
@@ -4699,12 +4704,83 @@ section {
 .talk-meta {
     margin: var(--space-xs) 0 0;
     font-size: var(--text-sm);
-    color: var(--color-text-secondary);
+    color: var(--color-text);
+    opacity: 0.8;
 }
+/* Role badge before the event name: speaking roles filled green, expert roles gold,
+   attendance and delegations outlined (and the whole row a touch quieter). */
+.talk-role {
+    display: inline-block;
+    vertical-align: 0.2em;
+    margin-right: 0.5em;
+    padding: 2px 9px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    line-height: 1.6;
+    white-space: nowrap;
+}
+.talk-role--speak { background: var(--color-primary); color: #fff; }
+.talk-role--gold { background: var(--color-accent); color: #1e1b17; }
+.talk-role--line { border: 1px solid var(--color-border); color: var(--color-text); }
+[data-theme="dark"] .talk-role--speak { background: var(--color-primary-light); }
+.talk--line .talk-event { font-size: var(--text-md); }
 @media (max-width: 767px) {
     .talk {
         grid-template-columns: 1fr;
         gap: var(--space-xs);
     }
     .talk-date { padding-top: 0; }
+}
+
+/* Gablota hover clip: fades in over the screenshot once it is actually playing */
+.g-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    opacity: 0;
+    transition: opacity 250ms ease-out;
+    pointer-events: none;
+}
+.g-shot.is-playing .g-video { opacity: 1; }
+
+/* Gablota badges: status first (gold outline), then the stack as quiet chips;
+   key phrases in the decision sentence in gold. */
+.g-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 var(--space-xs);
+}
+.g-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(245, 243, 240, 0.18);
+    background: rgba(245, 243, 240, 0.06);
+    color: var(--g-ink);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+.g-badge--status {
+    border-color: var(--g-gold);
+    background: rgba(201, 169, 98, 0.14);
+    color: #ecd9ae;
+    font-weight: 600;
+}
+.g-hl {
+    color: var(--g-gold);
+    font-weight: 600;
+}
+.gablota .g-hl .kw { color: inherit; }
+/* 5 tools in a 3-column grid: the last one spans the empty cell */
+@media (min-width: 900px) {
+    .g-tools-list li:last-child:nth-child(3n + 2) { grid-column: span 2; }
 }

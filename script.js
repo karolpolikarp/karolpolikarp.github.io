@@ -1023,8 +1023,8 @@ const TechHighlighter = {
         'Selenium', 'Supabase', 'Postgres', 'Cloudflare', 'Discordzie', 'Discord', 'Whisperze',
         'Whisper', 'Béziera', 'Bézier', 'Telegrama', 'Telegram', 'OpenAI', 'Claude', 'macOS', 'PLLuM', 'Python', 'SQLite',
         'Flask', 'React', 'tRPC', 'Swing', 'Java', 'ISAP', 'CLI', 'GPT', 'MCP', 'CSV',
-        'JSON', 'ONNX', 'NER', 'RLS', 'RSS'],
-    selector: '.showcase-panel p, .tools-card p, .showcase-subtitle',
+        'JSON', 'ONNX', 'NER', 'RLS', 'RSS', 'Bielik', 'HTML', 'ISAP', 'Gemini', 'ChatGPT'],
+    selector: '.showcase-panel p, .tools-card p, .showcase-subtitle, .g-decision, .g-tool-line',
 
     init() {
         const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -1066,6 +1066,54 @@ const TechHighlighter = {
 };
 
 TechHighlighter.init();
+
+// ==========================================
+// GablotaVideo - a short silent clip plays over a tile's screenshot on hover/focus
+// (desktop pointer only; never under reduced motion; the clip loads on first hover)
+// ==========================================
+const GablotaVideo = {
+    init() {
+        const shots = document.querySelectorAll('.g-shot[data-video]');
+        if (!shots.length) return;
+        const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+        shots.forEach(shot => {
+            const tile = shot.closest('.g-tile');
+            if (!tile) return;
+            let video = null;
+            const play = () => {
+                if (!fine.matches || reduce.matches) return;
+                if (!video) {
+                    video = document.createElement('video');
+                    video.className = 'g-video';
+                    video.src = shot.dataset.video;
+                    video.muted = true;
+                    video.loop = true;
+                    video.playsInline = true;
+                    video.preload = 'auto';
+                    video.setAttribute('aria-hidden', 'true');
+                    video.addEventListener('playing', () => shot.classList.add('is-playing'));
+                    video.addEventListener('error', () => { shot.classList.remove('is-playing'); });
+                    shot.appendChild(video);
+                }
+                const p = video.play();
+                if (p && p.catch) p.catch(() => {});
+            };
+            const stop = () => {
+                if (!video) return;
+                video.pause();
+                video.currentTime = 0;
+                shot.classList.remove('is-playing');
+            };
+            tile.addEventListener('pointerenter', play);
+            tile.addEventListener('pointerleave', stop);
+            tile.addEventListener('focusin', play);
+            tile.addEventListener('focusout', (e) => { if (!tile.contains(e.relatedTarget)) stop(); });
+        });
+    }
+};
+GablotaVideo.init();
+
 
 // ================================================
 // NUMBER SCRAMBLE — key project numbers (marked <span class="scramble-num"> in the HTML, both
