@@ -21,7 +21,8 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
   real screenshot (the lit object; a short silent clip plays over it on hover, `data-video`) + badges
   (status in gold outline, then 2–3 stack chips) + name in Playfair + one-line kind in gold + one
   decision sentence with 1–2 key phrases in gold (`.g-hl`) + one number (Playfair gold value, label
-  with source and date in DM Sans). The whole tile links to
+  with source and date „· DD.MM.YYYY” in DM Sans; live/repo links right of it on a hairline foot) + a closing
+  green bar „§ Czytaj studium przypadku … N min →” that says where the tile goes. The whole tile links to
   `/case/<slug>/` (stretched `.g-main` link with an aria-label); live site / repo are small `.g-ext`
   links above it („Strona projektu” where the app itself is not open). Order: law and public
   administration first — Urzędnik i AI + JakiePrawo.pl, then Zorza + Parawan, then AutoMargiela,

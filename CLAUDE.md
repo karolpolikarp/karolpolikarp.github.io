@@ -187,6 +187,7 @@ Decorative layer added on top of the existing design (nothing else in the layout
    `g-tile--xl` / `--m` / `--s` plus a grid-placement class (see the block at the end of `style.css` and `DESIGN.md`)
 2. Tile = `.g-main` stretched link to `/case/<slug>/` (`aria-label` + `data-en-aria`), `.g-shot` with a WebP screenshot
    (`width`/`height`, `alt` + `data-en-alt`), `.g-cap` with name, decision sentence, one number, `.g-ext` live/repo links
+   (in `.g-links`), and the closing `.g-read` bar „§ Czytaj studium przypadku … N min →” (reading time of the case page, ~200 words/min)
 3. Small tools go into the `.g-tools-list` (link to `/case/narzedzia/#<anchor>`)
 
 ### Modifying Colors
