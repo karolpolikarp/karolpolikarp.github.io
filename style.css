@@ -5762,3 +5762,23 @@ main > #wystapienia.s1-section { padding-bottom: calc(180px + var(--space-4xl) +
     main > #wystapienia.s1-section { padding-bottom: calc(120px + var(--space-2xl)); }
 }
 
+/* contact (26.10 b): the § { } sign forms behind the motto instead of above it; the motto sits on top,
+   the particles are fainter and step back further where its words are (quiet zone in particles.js);
+   even spacing: heading, motto with its sign, tiles */
+.contact-finale { max-width: 940px; margin: var(--space-xl) auto var(--space-3xl); }
+.contact-finale .contact-motto {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+.contact-finale.is-live .contact-motto { text-shadow: 0 2px 18px var(--color-bg); }
+#finaleParticles { --pm-alpha: 0.55; }
+[data-theme="dark"] #finaleParticles { --pm-alpha: 0.5; }
+#kontakt .section-header { margin-bottom: 0; }
+/* without particles (no JS / no canvas) the static formula stays faint behind the motto */
+.contact-finale-fallback { opacity: 0.25; }
+

@@ -1395,7 +1395,7 @@ ScrollMotion.init();
 window.addEventListener('load', () => {
     // Only the home page has particle scenes; case-study pages skip the fetch.
     if (!document.getElementById('heroParticles') && !document.getElementById('finaleParticles')) return;
-    import('/particles.js?v=27').catch(() => {
+    import('/particles.js?v=28').catch(() => {
         // decoration only — the page is complete without it
     });
 }, { once: true });

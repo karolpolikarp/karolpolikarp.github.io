@@ -335,6 +335,8 @@ function finaleScene(finale) {
         maxDpr: 2,
         trail: 0.6,
         pointerTarget: finale.parentElement ?? finale,
+        // the sign forms behind the motto: the particles step back where its words are
+        quiet: { selector: '#kontakt .motto-text', factor: 0.3, pad: 10 },
         startOnVisible: true,
         sequence: [{ shape: 0, at: 0 }, { shape: 1, at: 1.8 }]
     });
