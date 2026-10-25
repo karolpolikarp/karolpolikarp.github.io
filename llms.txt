@@ -25,7 +25,7 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 - [Analizy danych](https://karolwilczynski.com/case/analizy-danych/): prognozy kursu z raportów ESPI z GPT-4o-mini (metoda i jej ograniczenia) oraz analizy rynku gier i Airbnb.
 
 ## Wystąpienia publiczne (wybrane)
-- 2026: Hackathon Warsaw Open Data (jury); XXIV Samorządowe Forum Kapitału i Finansów i Kongres Nowej Mobilności (panele o AI w mieście); Śniadanie z PLLuM, NASK (prezentacja o zasadach korzystania z AI w urzędzie); UK–Hungarian AI Council, Budapeszt, i seminarium Knowledge Sharing Program Polska–Korea (prezentacje o piaskownicach regulacyjnych AI).
+- 2026: szkolenie dla pracowników JST „AI w codziennej pracy urzędu. Od promptu do gotowego dokumentu” (150 uczestników); webinarium GUS „AI nie musi wiedzieć wszystkiego” w Europejskim Miesiącu Cyberbezpieczeństwa (ok. 1000 uczestników); Hackathon Warsaw Open Data (jury); XXIV Samorządowe Forum Kapitału i Finansów i Kongres Nowej Mobilności (panele o AI w mieście); Śniadanie z PLLuM, NASK (prezentacja o zasadach korzystania z AI w urzędzie); UK–Hungarian AI Council, Budapeszt, i seminarium Knowledge Sharing Program Polska–Korea (prezentacje o piaskownicach regulacyjnych AI).
 - 2025: Pairing Europe’s Potential, Wrocław (moderacja panelu o AI i EUDI Wallet); KDI–Alan Turing Institute, Londyn (ekspert, piaskownice regulacyjne AI); od czerwca członek podgrupy AI Board ds. piaskownic regulacyjnych AI.
 
 ## Projekty
