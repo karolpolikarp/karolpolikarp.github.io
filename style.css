@@ -5240,17 +5240,8 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     to { scale: var(--recede, 1); }
 }
 
-/* 3. talks: the year sticks under the nav until its group ends */
-@media (min-width: 960px) {
-    .talks-year {
-        position: sticky;
-        top: 88px;          /* flush under the nav (89px incl. its border) */
-        z-index: 2;
-        margin-inline: calc(-1 * var(--space-md));
-        padding: var(--space-sm) var(--space-md);
-        background: var(--color-bg);
-    }
-}
+/* 3. talks: the year heading scrolls with its group (it used to stick under the nav and covered the last
+   item of each year; the current year is shown by the big numeral next to the map) */
 
 
 /* ================================================
