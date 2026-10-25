@@ -5757,7 +5757,7 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 
 /* room to breathe after the last talk: the contact marble starts 180px above its section, so the talks end
    with more space than that and the marble fades in over empty ground, not over the last item */
-main > #wystapienia.s1-section { padding-bottom: calc(180px + var(--space-3xl)); }
+main > #wystapienia.s1-section { padding-bottom: calc(180px + var(--space-4xl) + var(--space-xl)); }
 @media (max-width: 767px) {
     main > #wystapienia.s1-section { padding-bottom: calc(120px + var(--space-2xl)); }
 }
