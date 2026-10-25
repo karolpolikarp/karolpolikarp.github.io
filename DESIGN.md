@@ -26,7 +26,8 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
   `/case/<slug>/` (stretched `.g-main` link with an aria-label); live site / repo are small `.g-ext`
   buttons with a globe / GitHub icon („Strona projektu” where the app itself is not open). Caption order:
   status line with a dot (green live, gold beta/alpha, open ring not started) -> name (large Playfair) ->
-  kind (italic serif) -> decision -> stack chips -> number + link buttons -> case-study bar. Tile order (the
+  kind (italic serif) -> two short points (`.g-points`, check marks, one gold key phrase each) -> stack chips ->
+  number (value, label, then source and date on its own line) + link buttons -> case-study bar. Tile order (the
   author's): Zorza + UpFor.pl, Urzędnik i AI + Parawan, AutoMargiela, AIgets.me, Majeranek, then
   JakiePrawo.pl next to the „Narzędzia” box (five rows: image, name, line, arrow; `/case/narzedzia/#<anchor>`).
 - **Wystąpienia (`#wystapienia`):** dot-matrix map of Europe (static inline SVG generated offline from
