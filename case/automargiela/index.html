@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
+    <title data-en="AutoMargiela: case study | Karol Polikarp Wilczyński">AutoMargiela: studium przypadku | Karol Polikarp Wilczyński</title>
+    <meta name="description" content="Jak śledzę ceny perfum w trzech sklepach na jednym Raspberry Pi: cena, którą płaci klient, alarm na brakujące dane zamiast ślepego „sukcesu” i historia cen w gicie." data-en-content="How I track perfume prices across three stores on one Raspberry Pi: the price the customer pays, an alarm on missing data instead of a blind “success”, and price history in git.">
+    <meta name="author" content="Karol Polikarp Wilczyński">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://karolwilczynski.com/case/automargiela/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Karol Polikarp Wilczyński">
+    <meta property="og:url" content="https://karolwilczynski.com/case/automargiela/">
+    <meta property="og:title" content="AutoMargiela: studium przypadku | Karol Polikarp Wilczyński">
+    <meta property="og:description" content="Jak śledzę ceny perfum w trzech sklepach na jednym Raspberry Pi: cena, którą płaci klient, alarm na brakujące dane zamiast ślepego „sukcesu” i historia cen w gicie.">
+    <meta property="og:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://karolwilczynski.com/case/automargiela/">
+    <meta name="twitter:title" content="AutoMargiela: studium przypadku | Karol Polikarp Wilczyński">
+    <meta name="twitter:description" content="Jak śledzę ceny perfum w trzech sklepach na jednym Raspberry Pi: cena, którą płaci klient, alarm na brakujące dane zamiast ślepego „sukcesu” i historia cen w gicie.">
+    <meta name="twitter:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
+    <meta name="twitter:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <meta name="theme-color" content="#004d2b">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "AutoMargiela: studium przypadku",
+        "description": "Jak śledzę ceny perfum w trzech sklepach na jednym Raspberry Pi: cena, którą płaci klient, alarm na brakujące dane zamiast ślepego „sukcesu” i historia cen w gicie.",
+        "url": "https://karolwilczynski.com/case/automargiela/",
+        "inLanguage": "pl-PL",
+        "datePublished": "2026-10-14",
+        "dateModified": "2026-10-14",
+        "image": "https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2",
+        "author": {
+            "@type": "Person",
+            "@id": "https://karolwilczynski.com/#person",
+            "name": "Karol Polikarp Wilczyński",
+            "url": "https://karolwilczynski.com"
+        },
+        "isPartOf": {
+            "@id": "https://karolwilczynski.com/#website"
+        },
+        "about": {
+            "@type": "SoftwareApplication",
+            "name": "AutoMargiela",
+            "url": "https://replica.karolwilczynski.com"
+        }
+    }
+    </script>
+
+    <!-- Fonts - async loading for faster first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="/style.css?v=157">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#tresc" class="skip-link">Przejdź do treści</a>
+
+    <nav class="nav" aria-label="Główna nawigacja" data-en-aria="Main navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Strona główna" data-en-aria="Home page">
+                <span class="logo-main">kpw<span class="logo-sparkle" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="kpwSpark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop class="kpw-stop-a" offset="0"/><stop class="kpw-stop-b" offset="1"/></linearGradient></defs><path class="logo-spark logo-spark-lg" d="M10.5 1.4C10.5 8.1 8.1 10.5 1.4 10.5C8.1 10.5 10.5 12.9 10.5 19.6C10.5 12.9 12.9 10.5 19.6 10.5C12.9 10.5 10.5 8.1 10.5 1.4Z"/><path class="logo-spark logo-spark-sm" d="M19 4C19 6.2 18.2 7 16 7C18.2 7 19 7.8 19 10C19 7.8 19.8 7 22 7C19.8 7 19 6.2 19 4Z"/></svg></span></span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/#projekty"><span data-en="Projects">Projekty</span></a></li>
+
+                <li><a href="/#wystapienia"><span data-en="Public talks">Wystąpienia publiczne</span></a></li>
+                <li><a href="/#kontakt"><span data-en="Contact">Kontakt</span></a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="nav-social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/karolpwilczynski" target="_blank" rel="noopener" class="nav-social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.78M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.69 1.69 1.69 0 0 0-1.69 1.69 1.68 1.68 0 0 0 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                </a>
+            </div>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Przełącz motyw jasny/ciemny" data-en-aria="Toggle light/dark theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <button type="button" class="lang-toggle" id="langToggle" aria-label="PL EN: switch to English">
+                <span class="lang-label lang-pl">PL</span>
+                <span class="lang-label lang-en">EN</span>
+            </button>
+            <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div>
+    </nav>
+
+    <main id="tresc" class="case">
+        <header class="case-hero">
+            <div class="container case-container">
+                <nav class="case-breadcrumb" aria-label="Okruszki" data-en-aria="Breadcrumb">
+                    <a href="/"><span data-en="Home">Strona główna</span></a>
+                    <span aria-hidden="true">/</span>
+                    <a href="/#studia"><span data-en="Case studies">Studia przypadków</span></a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">AutoMargiela</span>
+                </nav>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Playwright</span>
+                    <span class="tag">Flask</span>
+                    <span class="tag">SQLite</span>
+                    <span class="tag">Raspberry Pi</span>
+                </div>
+                <h1 class="case-title">AutoMargiela</h1>
+                <p class="case-subtitle" data-en="A perfume price tracker across three Polish stores">Tracker cen perfum w&nbsp;trzech polskich sklepach</p>
+                <p class="case-lead" data-en="The same perfume bottle costs different amounts at three Polish stores, and the cheapest store keeps changing: on 21 September 2026 the median gap between the cheapest and the dearest offer was 117 zł, and over 60 days the cheapest store changed 141 times. I built a tracker that four times a day records the selling price of the 100 ml bottle — at Notino including the promotion, and for Sephora partly from its offer on Ceneo.pl — and shows where it is cheapest today. It runs on its own on a Raspberry Pi 5, with no paid APIs and no language-model calls, and it raises an alarm not only when the process fails but also when a store quietly stops delivering data.">Ten sam flakon perfum kosztuje w&nbsp;trzech polskich sklepach różnie, a&nbsp;najtańszy sklep ciągle się zmienia: 21&nbsp;września 2026 mediana różnicy między najtańszą a&nbsp;najdroższą ofertą wynosiła 117&nbsp;zł, a&nbsp;w&nbsp;ciągu 60&nbsp;dni najtańszy sklep zmienił się 141&nbsp;razy. Zbudowałem tracker, który cztery razy na dobę zapisuje cenę sprzedaży flakonu 100&nbsp;ml — w&nbsp;Notino razem z&nbsp;promocją, a&nbsp;dla Sephory częściowo z&nbsp;jej oferty na Ceneo.pl — i&nbsp;pokazuje, gdzie jest dziś najtaniej. Działa sam na Raspberry Pi 5, bez płatnych API i&nbsp;bez wywołań modeli językowych, a&nbsp;alarm podnosi nie tylko wtedy, gdy proces padnie, ale też wtedy, gdy któryś sklep po cichu przestanie dostarczać dane.</p>
+                <dl class="case-facts">
+                    <div><dt data-en="Role">Rola</dt><dd data-en="Design, decisions and verification; most of the code written by an AI assistant under my direction">Projekt, decyzje i&nbsp;weryfikacja; kod w&nbsp;większości napisał asystent AI pod moim kierunkiem</dd></div>
+                    <div><dt data-en="Period">Okres</dt><dd data-en="Since January 2026 (last code change: 10 October 2026)">Od stycznia 2026 (ostatnia zmiana kodu: 10&nbsp;października 2026)</dd></div>
+                    <div><dt data-en="Status">Status</dt><dd data-en="Running on a Raspberry Pi 5, four runs a day; the site is publicly reachable but not yet officially launched (as of 14 October 2026)">Działa na Raspberry Pi 5, cztery przebiegi na dobę; strona jest dostępna publicznie, ale jeszcze przed oficjalnym startem (stan na 14&nbsp;października 2026)</dd></div>
+                    <div><dt data-en="Code">Kod</dt><dd data-en="Private repository">Repozytorium prywatne</dd></div>
+                </dl>
+                <div class="showcase-cta">
+                    <a href="https://replica.karolwilczynski.com" target="_blank" rel="noopener" class="project-link project-link-primary">
+                        <span data-en="Project page">Strona projektu</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+                <nav class="case-toc" aria-label="Spis treści" data-en-aria="Contents">
+                    <a href="#problem"><span data-en="Problem">Problem</span></a>
+                    <a href="#ograniczenia"><span data-en="Constraints">Ograniczenia</span></a>
+                    <a href="#architektura"><span data-en="Architecture">Architektura</span></a>
+                    <a href="#decyzje"><span data-en="Decisions">Decyzje</span></a>
+                    <a href="#dowody"><span data-en="Evidence">Dowody</span></a>
+                    <a href="#wnioski"><span data-en="Lessons">Wnioski</span></a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container case-container">
+            <section id="problem" class="case-section" aria-labelledby="h-problem">
+                <h2 class="case-h2" id="h-problem"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span data-en="Problem and context">Problem i&nbsp;kontekst</span></h2>
+                <p data-en="AutoMargiela began on 7 January 2026 as my own script, which checked the prices of Maison Margiela perfumes from the REPLICA line at Flaconi and Notino and sent a message on Telegram or Discord when one of them dropped. REPLICA is the name of the brand’s fragrance line, not a word for copies. Sephora, price-history charts, analytics and a public website followed; the site runs under the name “REPLICA Price Tracker”.">AutoMargiela zaczęła się 7&nbsp;stycznia 2026 jako mój własny skrypt, który sprawdzał ceny perfum Maison Margiela z&nbsp;linii REPLICA we&nbsp;Flaconi i&nbsp;Notino i&nbsp;dawał znać na Telegramie albo Discordzie, gdy któraś spadła. REPLICA to nazwa linii zapachów tej marki, a&nbsp;nie określenie podróbek. Potem doszły Sephora, wykresy historii cen, analityka i&nbsp;publiczna strona, która działa pod nazwą „REPLICA Price Tracker”.</p>
+                <p data-en="The problem could be measured on the collected data. On 21 September 2026, across 22 fragrances priced by at least two stores, the median gap between the cheapest and the dearest offer for the same bottle was 117 zł, and the largest was 248.90 zł. Over 60 days the cheapest store changed 141 times, and only 1 of the 22 fragrances kept the same cheapest seller the whole time. Checking by hand means three browser tabs and no memory of yesterday, and without knowing whether a price fell over the past month you cannot tell whether the one in front of you is good.">Problem dało się zmierzyć na zebranych danych. 21&nbsp;września 2026, dla 22&nbsp;zapachów wycenianych przez co najmniej dwa sklepy, mediana różnicy między najtańszą a&nbsp;najdroższą ofertą tego samego flakonu wynosiła 117&nbsp;zł, a&nbsp;największa różnica — 248,90&nbsp;zł. W&nbsp;ciągu 60&nbsp;dni najtańszy sklep zmienił się 141&nbsp;razy, a&nbsp;tylko 1&nbsp;z&nbsp;22&nbsp;zapachów miał przez cały ten czas tego samego najtańszego sprzedawcę. Ręczne sprawdzanie to trzy karty w&nbsp;przeglądarce i&nbsp;zero pamięci o&nbsp;tym, jak było wczoraj, a&nbsp;bez wiedzy, czy cena w&nbsp;ostatnim miesiącu spadała, nie da się ocenić, czy ta widziana teraz jest dobra.</p>
+                <p data-en="The goal: for every fragrance, show today’s lowest price across the three stores together with its full history, and send word when a price drops. The scope is narrow: three stores, one line from one brand (25 fragrances in the catalogue as of 14 October 2026) and 100 ml bottles only. The site plays no part in the purchase itself and earns nothing from its links to the stores.">Cel: dla każdego zapachu pokazać dzisiejszą najniższą cenę z&nbsp;trzech sklepów razem z&nbsp;pełną historią i&nbsp;dać znać, gdy cena spadnie. Zakres jest wąski: trzy sklepy, jedna linia jednej marki (25&nbsp;zapachów w&nbsp;katalogu, stan na 14&nbsp;października 2026) i&nbsp;wyłącznie flakony 100&nbsp;ml. Strona nie pośredniczy w&nbsp;zakupach i&nbsp;nie zarabia na linkach do sklepów.</p>
+                <p data-en="Most of the code was written by an AI assistant (Claude Code): 281 of 466 commits list it as co-author (as of 14 October 2026). My part is scope, decisions and verification: a scraper change has to pass a full live run before it reaches the repository, and for a visual change I pick one of three variants prepared with screenshots.">Kod w&nbsp;większości pisał asystent AI (Claude Code): 281 z&nbsp;466&nbsp;commitów wymienia go jako współautora (stan na 14&nbsp;października 2026). Moja rola to zakres, decyzje i&nbsp;weryfikacja: zmiana scrapera musi przejść pełny przebieg na żywo, zanim trafi do repozytorium, a&nbsp;przy zmianie wyglądu wybieram jeden z&nbsp;trzech wariantów przygotowanych ze zrzutami ekranu.</p>
+            </section>
+
+            <section id="ograniczenia" class="case-section" aria-labelledby="h-ograniczenia">
+                <h2 class="case-h2" id="h-ograniczenia"><span class="case-h2-num" aria-hidden="true" translate="no">§ 2</span><span data-en="Constraints">Ograniczenia</span></h2>
+                <p data-en="A few conditions shaped every later choice:">Kilka warunków wyznaczyło wszystkie późniejsze wybory:</p>
+                <ul class="showcase-list">
+                    <li data-en="One computer: a Raspberry Pi 5, no cloud; the site reaches the internet through a free Cloudflare tunnel. The data lived on an SD card — and on 16 July 2026 that card physically died.">Jeden komputer: Raspberry Pi 5, bez chmury; strona wychodzi do internetu przez darmowy tunel Cloudflare. Dane leżały na karcie SD — i&nbsp;ta karta 16&nbsp;lipca 2026 fizycznie padła.</li>
+                    <li data-en="No paid APIs: the scraper uses no paid API, and at run time no module calls a language model. The only real cost is time: a full run on 21 September 2026 took 14 min 48 s, so with four runs a day that is about an hour of browser time on the Pi.">Bez płatnych API: scraper nie korzysta z&nbsp;żadnego płatnego API, a&nbsp;w&nbsp;czasie działania żaden moduł nie wywołuje modelu językowego. Jedyny realny koszt to czas: pełny przebieg 21&nbsp;września 2026 trwał 14&nbsp;min 48&nbsp;s, czyli przy czterech przebiegach na dobę ok.&nbsp;godzinę pracy przeglądarki na Pi.</li>
+                    <li data-en="Sources with no contract: some store pages are closed to automated traffic. I collect only the prices a store shows every visitor, and I do it slowly: about 38 store page visits and 13 Ceneo.pl lookups per run (21 September 2026). Where a store keeps automated traffic off its product pages, I take the price from the public Ceneo.pl comparison site.">Źródła bez umowy: część stron sklepów jest zamknięta dla ruchu automatycznego. Zbieram tylko ceny, które sklep pokazuje każdemu odwiedzającemu, i&nbsp;robię to powoli: ok.&nbsp;38&nbsp;wejść na strony sklepów i&nbsp;13&nbsp;zapytań do Ceneo.pl na przebieg (21&nbsp;września 2026). Gdzie sklep nie wpuszcza automatu na strony produktów, cenę biorę z&nbsp;publicznej porównywarki Ceneo.pl.</li>
+                    <li data-en="Exactly this product: stores mix in prices of 30 and 50 ml bottles, “zł / 100 ml” unit rates, refills, candles, minis and gift sets. The recorded price must be for the 100 ml bottle, so every price passes name and URL filters and a 300–1,000 zł band.">Dokładnie ten produkt: sklepy mieszają ceny flakonów 30 i&nbsp;50&nbsp;ml, przeliczenia „zł / 100&nbsp;ml”, wkłady, świece, miniatury i&nbsp;zestawy. Zapisana cena ma dotyczyć flakonu 100&nbsp;ml, więc każdą sprawdzają filtry nazw i&nbsp;adresów oraz pasmo 300–1&nbsp;000&nbsp;zł.</li>
+                    <li data-en="Unattended operation: nobody checks it daily, so every failure has to raise its own alarm, and after 13 hours without new prices the site marks its data as stale by itself.">Praca bez nadzoru: nikt nie sprawdza tego codziennie, więc każda awaria musi sama podnieść alarm, a&nbsp;strona po 13&nbsp;godzinach bez nowych cen sama oznacza dane jako nieaktualne.</li>
+                </ul>
+            </section>
+
+            <section id="architektura" class="case-section" aria-labelledby="h-architektura">
+                <h2 class="case-h2" id="h-architektura"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span data-en="Architecture">Architektura</span></h2>
+                <p data-en="Four times a day (at 00:00, 06:00, 12:00 and 18:00) a systemd timer starts the Python scraper. Playwright drives a Chromium browser and goes through Flaconi, Notino and Sephora in turn. The fragrances that Sephora sells only as 100 ml bottles are priced straight from its search results; for the classic line, which Sephora also sells in 30 ml bottles (and for every fragrance when Sephora’s search is blocked), the scraper reads Sephora’s price from the public offer listing on Ceneo.pl. Every price passes filters: is it a tracked fragrance (with aliases, because stores name them differently), is it a bottle rather than a refill or a gift set, and is it within the 300–1,000 zł band. The result goes into SQLite: one row per day, store and fragrance, which later runs on the same day update. Since 10 October 2026 the scraper saves after each store, so the results of finished stores stay even when the next one fails.">Cztery razy na dobę (o&nbsp;0:00, 6:00, 12:00 i&nbsp;18:00) timer systemd uruchamia scraper w&nbsp;Pythonie. Playwright steruje przeglądarką Chromium i&nbsp;przechodzi kolejno przez Flaconi, Notino i&nbsp;Sephorę. Zapachy, które Sephora sprzedaje tylko we flakonach 100&nbsp;ml, scraper wycenia wprost z&nbsp;wyników wyszukiwania sklepu; dla linii klasycznej, sprzedawanej tam też we flakonach 30&nbsp;ml (a&nbsp;gdy wyszukiwarka Sephory jest zablokowana — dla wszystkich zapachów), cenę Sephory czyta z&nbsp;publicznej listy ofert na Ceneo.pl. Każda cena przechodzi przez filtry: czy to śledzony zapach (z&nbsp;aliasami, bo sklepy nazywają je różnie), czy to flakon, a&nbsp;nie wkład albo zestaw, i&nbsp;czy mieści się w&nbsp;paśmie 300–1&nbsp;000&nbsp;zł. Wynik trafia do SQLite: jeden wiersz na dzień, sklep i&nbsp;zapach, a&nbsp;kolejne przebiegi tego samego dnia go aktualizują. Od 10&nbsp;października 2026 scraper zapisuje dane po każdym sklepie, więc wyniki ukończonych sklepów zostają, nawet gdy kolejny zawiedzie.</p>
+                <p data-en="A Flask website shows today’s lowest prices, each fragrance’s history on charts (Chart.js) and an analytics page: trend, seasonality, correlations between stores and indicators of whether a price is low against its own history (percentiles and the z-score, i.e. how many standard deviations a price sits from the mean). Notifications go to Discord and Telegram: a private alert for me on a drop of at least 5%, and in the Telegram bot you can set a threshold for a chosen fragrance — when the price falls below it, the bot sends a message linking to the price history. A public deals channel (a record low or a drop of at least 10%) is built and tested but switched off (as of 10 October 2026): 9 of the 8,370 records in the history (0.11%) are one-day price spikes, up or down, that bounce straight back; 3 of them are drops that would cross the public alert threshold (measured on 21 September 2026).">Strona we Flasku pokazuje dzisiejsze najniższe ceny, historię każdego zapachu na wykresach (Chart.js) i&nbsp;stronę analityki: trend, sezonowość, korelacje między sklepami i&nbsp;wskaźniki, czy cena jest nisko na tle własnej historii (percentyle i&nbsp;z-score, czyli o&nbsp;ile odchyleń standardowych cena odbiega od średniej). Powiadomienia idą na Discord i&nbsp;Telegram: prywatny alert dla mnie przy spadku o&nbsp;co najmniej 5%, a&nbsp;w&nbsp;bocie Telegrama można ustawić próg dla wybranego zapachu — gdy cena spadnie poniżej niego, bot wysyła wiadomość z&nbsp;linkiem do historii cen. Publiczny kanał okazji (rekord albo spadek o&nbsp;co najmniej 10%) jest zbudowany i&nbsp;przetestowany, ale wyłączony (stan na 10&nbsp;października 2026): 9 z&nbsp;8&nbsp;370&nbsp;notowań w&nbsp;historii (0,11%) to jednodniowe skoki ceny w&nbsp;górę albo w&nbsp;dół, po których cena od razu wraca; 3 z&nbsp;nich to spadki, które przekroczyłyby próg publicznego alertu (pomiar z&nbsp;21&nbsp;września 2026).</p>
+                <p data-en="Every night at 03:30 a copy of the database goes into seven local snapshots, onto a USB stick and — as a commit — into the repository on GitHub. Three mechanisms watch the runs: a systemd alert when the process fails, a coverage watchdog after each store, and a heartbeat sent to an outside service after every successful run.">Co noc o&nbsp;3:30 kopia bazy trafia do siedmiu lokalnych migawek, na pendrive i&nbsp;— jako commit — do repozytorium na GitHubie. Nad przebiegami czuwają trzy mechanizmy: alert systemd przy awarii procesu, strażnik pokrycia po każdym sklepie i&nbsp;sygnał życia (heartbeat) wysyłany do zewnętrznej usługi po każdym udanym przebiegu.</p>
+                <figure class="case-diagram">
+                    <svg viewBox="0 0 360 330" role="img" aria-labelledby="arch-title arch-desc">
+                        <title id="arch-title" data-en="Data flow in the price tracker">Przepływ danych w trackerze cen</title>
+                        <desc id="arch-desc" data-en="A scraper that runs four times a day reads the Flaconi, Notino and Sephora pages and offers from Ceneo.pl, and saves the selling price of the 100 ml bottle to an SQLite database that is copied into git every night. Watchdogs check that every store delivered data and that the run happened at all. A Flask website reads from the database, and alerts about price drops and failures go to Discord and Telegram.">Scraper uruchamiany cztery razy na dobę czyta strony Flaconi, Notino i Sephory oraz oferty z Ceneo.pl i zapisuje cenę sprzedaży flakonu 100 ml do bazy SQLite, której kopia co noc trafia do gita. Strażnicy sprawdzają, czy każdy sklep dostarczył dane i czy przebieg w ogóle się odbył. Z bazy korzysta strona we Flasku, a alerty o spadkach cen i awariach idą na Discord i Telegram.</desc>
+                        <defs>
+                            <marker id="cd-arrow-automargiela" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path class="cd-arrow" d="M0 0L10 5L0 10z"/>
+                            </marker>
+                        </defs>
+                        <rect class="cd-box cd-box--ext" x="20" y="10" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="97.5" y="31" text-anchor="middle">Flaconi, Notino</text>
+                        <text class="cd-note" x="97.5" y="49" text-anchor="middle" data-en="store pages">strony sklepów</text>
+                        <rect class="cd-box cd-box--ext" x="185" y="10" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="262.5" y="31" text-anchor="middle">Sephora</text>
+                        <text class="cd-note" x="262.5" y="49" text-anchor="middle" data-en="plus Ceneo.pl offers">i oferty z Ceneo.pl</text>
+                        <path class="cd-edge" d="M97.5 62V92" marker-end="url(#cd-arrow-automargiela)"/>
+                        <path class="cd-edge" d="M262.5 62V92" marker-end="url(#cd-arrow-automargiela)"/>
+                        <rect class="cd-box cd-box--key" x="20" y="96" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="117" text-anchor="middle">Scraper (Playwright)</text>
+                        <text class="cd-note" x="180" y="135" text-anchor="middle" data-en="every 6 h · selling price · 100 ml only">co 6 h · cena sprzedaży · tylko 100 ml</text>
+                        <path class="cd-edge" d="M97.5 148V178" marker-end="url(#cd-arrow-automargiela)"/>
+                        <path class="cd-edge" d="M262.5 148V178" marker-end="url(#cd-arrow-automargiela)"/>
+                        <rect class="cd-box" x="20" y="182" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="97.5" y="203" text-anchor="middle" data-en="SQLite database">Baza SQLite</text>
+                        <text class="cd-note" x="97.5" y="221" text-anchor="middle" data-en="nightly copy in git">kopia w gicie co noc</text>
+                        <rect class="cd-box cd-box--key" x="185" y="182" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="262.5" y="203" text-anchor="middle" data-en="Watchdogs">Strażnicy</text>
+                        <text class="cd-note" x="262.5" y="221" text-anchor="middle" data-en="coverage · heartbeat">pokrycie · heartbeat</text>
+                        <path class="cd-edge" d="M97.5 234V264" marker-end="url(#cd-arrow-automargiela)"/>
+                        <path class="cd-edge" d="M150 234V249H225V264" marker-end="url(#cd-arrow-automargiela)"/>
+                        <path class="cd-edge" d="M262.5 234V264" marker-end="url(#cd-arrow-automargiela)"/>
+                        <rect class="cd-box" x="20" y="268" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="97.5" y="289" text-anchor="middle" data-en="Flask website">Strona we Flasku</text>
+                        <text class="cd-note" x="97.5" y="307" text-anchor="middle" data-en="history, analytics">historia i analityka</text>
+                        <rect class="cd-box" x="185" y="268" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="262.5" y="289" text-anchor="middle">Discord, Telegram</text>
+                        <text class="cd-note" x="262.5" y="307" text-anchor="middle" data-en="price drops, failures">spadki cen i awarie</text>
+                    </svg>
+                    <figcaption data-en="The gold frames mark the two key decisions: a scraper that records the selling price for the 100 ml bottle only, and watchdogs that raise an alarm even when a run ended in “success” but a store delivered too little data, or when the heartbeat never arrived. Dashed frames mark external sources.">Złotą ramką zaznaczyłem dwa miejsca kluczowych decyzji: scraper, który zapisuje cenę sprzedaży wyłącznie dla flakonu 100&nbsp;ml, i&nbsp;strażników, którzy alarmują także wtedy, gdy przebieg skończył się „sukcesem”, ale sklep dostarczył za mało danych, albo gdy sygnał życia w&nbsp;ogóle nie przyszedł. Przerywane ramki oznaczają źródła zewnętrzne.</figcaption>
+                </figure>
+            </section>
+
+            <section id="decyzje" class="case-section" aria-labelledby="h-decyzje">
+                <h2 class="case-h2" id="h-decyzje"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span data-en="Key decisions">Kluczowe decyzje</span></h2>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="The price the customer pays, not the base price">Cena, którą płaci klient, nie cena bazowa</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="At Notino, once the variant data the store’s site relies on confirms the 100 ml bottle, I fetch the product page and record the lowest 100 ml price from its structured data (JSON-LD) — the selling price, promotion included.">W&nbsp;Notino, gdy dane o&nbsp;wariantach, z&nbsp;których korzysta strona sklepu, potwierdzą flakon 100&nbsp;ml, pobieram stronę produktu i&nbsp;zapisuję najniższą cenę flakonu 100&nbsp;ml z&nbsp;jej danych strukturalnych (JSON-LD), czyli cenę sprzedaży razem z&nbsp;promocją.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="The base price from the same variant data, which the scraper used before.">Cena bazowa z&nbsp;tych samych danych o&nbsp;wariantach, z&nbsp;której scraper korzystał wcześniej.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="During a promotion checked on 4 June 2026 the variant data said 539 zł while the customer paid 431.20 zł, i.e. 20% less; the promotion does not show up in that data. Promotions now show in the recorded prices: on 20 July 2026 eight Notino bottles fell by exactly 20.0%, and on 27 July, 17 of the 22 rose by 16–51%. A live check on 28 July showed the JSON-LD prices matching the recorded ones to the grosz, so the jump was real, not a reading error.">Podczas promocji sprawdzonej 4&nbsp;czerwca 2026 dane o&nbsp;wariantach podawały 539&nbsp;zł, a&nbsp;klient płacił 431,20&nbsp;zł, czyli o&nbsp;20% mniej; promocji w&nbsp;tych danych nie widać. W&nbsp;zapisanych cenach promocje są już widoczne: 20&nbsp;lipca 2026 osiem flakonów w&nbsp;Notino potaniało dokładnie o&nbsp;20,0%, a&nbsp;27&nbsp;lipca podrożało 17 z&nbsp;22&nbsp;flakonów o&nbsp;16–51%. Sprawdzenie na żywo 28&nbsp;lipca pokazało, że ceny z&nbsp;JSON-LD zgadzają się z&nbsp;zapisanymi co do grosza, więc skok był prawdziwy, a&nbsp;nie błędem odczytu.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="One extra page fetch per Notino product, and fragility: the store writes “100 ml” with a non-breaking space, so the size check silently rejected variants — on 17 July 2026 only 6 Notino products were saved instead of 22, without a single error line; the fix of 18 July (which also covered a second, related bug) brought back all 22.">Jedno dodatkowe pobranie strony na każdy produkt Notino i&nbsp;kruchość: sklep zapisuje „100&nbsp;ml” z&nbsp;twardą spacją, przez co sprawdzanie rozmiaru po cichu odrzucało warianty — 17&nbsp;lipca 2026 z&nbsp;Notino zapisało się 6&nbsp;produktów zamiast 22, bez ani jednej linii błędu; poprawka z&nbsp;18&nbsp;lipca (obejmująca też drugi, powiązany błąd) przywróciła wszystkie 22.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="Sephora’s price from Ceneo.pl’s public offer listing">Cena Sephory z&nbsp;publicznej listy ofert Ceneo.pl</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="For the classic line of fragrances I take Sephora’s prices from the public offer listing on the 100 ml bottle’s page at the Ceneo.pl price-comparison site. The sephora.pl offer counts only if it is tied to the same product as the page and names no other size.">Ceny Sephory dla klasycznej linii zapachów biorę z&nbsp;publicznej listy ofert na stronie flakonu 100&nbsp;ml w&nbsp;porównywarce Ceneo.pl. Oferta sklepu sephora.pl liczy się tylko wtedy, gdy jest przypięta do tego samego produktu co strona i&nbsp;nie wymienia innej pojemności.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Sephora’s own product pages — the store keeps automated traffic off them (checked on 2–4 June 2026), so I do not use them.">Strony produktów samej Sephory — sklep nie wpuszcza na nie ruchu automatycznego (sprawdzone 2–4&nbsp;czerwca 2026), więc z&nbsp;nich nie korzystam.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="Since late May 2026 the tile for classic-line fragrances in Sephora’s search results shows only the 30 ml price and a per-100 ml rate. On Ceneo, the notino.pl and flaconi.pl offers matched my own readings to the grosz (4 June 2026). Sephora coverage rose from 7 to about 17 of 21 fragrances (5 June 2026), and when Sephora’s search is blocked this route prices 18 of 21 fragrances in 327 s (13 September 2026).">Od końca maja 2026 kafelek zapachów z&nbsp;linii klasycznej w&nbsp;wynikach wyszukiwania Sephory pokazuje tylko cenę flakonu 30&nbsp;ml i&nbsp;przeliczenie na 100&nbsp;ml. Na Ceneo oferty notino.pl i&nbsp;flaconi.pl zgadzały się z&nbsp;moim własnym odczytem co do grosza (4&nbsp;czerwca 2026). Pokrycie Sephory wzrosło z&nbsp;7 do ok.&nbsp;17 z&nbsp;21&nbsp;zapachów (5&nbsp;czerwca 2026), a&nbsp;gdy wyszukiwarka Sephory jest zablokowana, ta droga wycenia 18 z&nbsp;21&nbsp;zapachów w&nbsp;327&nbsp;s (13&nbsp;września 2026).</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="An indirect source has traps of its own. On 11 September 2026 the scraper took a 30 ml bottle at 315.00 zł from Ceneo’s “similar offers” section and recorded it in the 100 ml history: the site showed a 49.6% drop, a false record low and a “Deal of the day”. I fixed it the next day and deleted the bad row. Out of stock looks like missing data, because Ceneo then drops the offer, and each search takes about 11 s (as of 14 October 2026).">Źródło pośrednie ma własne pułapki. 11&nbsp;września 2026 scraper wziął z&nbsp;sekcji „podobne oferty” na Ceneo flakon 30&nbsp;ml za 315,00&nbsp;zł i&nbsp;zapisał go w&nbsp;historii 100&nbsp;ml: na stronie pojawił się spadek o&nbsp;49,6%, fałszywy rekord i&nbsp;„Okazja dnia”. Poprawiłem to następnego dnia i&nbsp;usunąłem błędny wiersz. Brak towaru wygląda jak brak danych, bo Ceneo usuwa wtedy ofertę, a&nbsp;każde wyszukiwanie zajmuje ok.&nbsp;11&nbsp;s (stan na 14&nbsp;października 2026).</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="An alarm on the output, not just on a failed process">Alarm na wynik, nie tylko na awarię procesu</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="After each store — even when scraping it ends in an exception — a coverage watchdog compares the number of products saved with the median of the last 12 healthy runs (as of 14 October 2026). If the count falls below half, it sends a warning to Discord and Telegram. It stays silent when every store has failed, because systemd is already raising the alarm then.">Po każdym sklepie — także gdy jego obsługa skończy się wyjątkiem — strażnik pokrycia porównuje liczbę zapisanych produktów z&nbsp;medianą ostatnich 12&nbsp;zdrowych przebiegów (stan na 14&nbsp;października 2026). Gdy wynik spada poniżej połowy, wysyła ostrzeżenie na Discord i&nbsp;Telegram. Milczy, gdy padły wszystkie sklepy, bo wtedy alarmuje już systemd.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Exit codes, the systemd alert and the heartbeat only — each of them answers the question “did the process crash?”. I measured and rejected two other ideas (September 2026): a quarantine for suspicious drops could not tell an error from a real price — the most suspicious drop in the history repeated in five consecutive runs, so the quarantine would have let it through — and muting repeated alerts would have cut their number by 20%, not the estimated 54% (an effect overstated 2.7 times).">Tylko kody wyjścia, alert systemd i&nbsp;sygnał życia — każdy z&nbsp;tych mechanizmów odpowiada na pytanie „czy proces padł?”. Dwa inne pomysły zmierzyłem i&nbsp;odrzuciłem (wrzesień 2026): kwarantanna podejrzanych spadków nie odróżniłaby błędu od prawdziwej ceny — najbardziej podejrzany spadek w&nbsp;historii powtórzył się w&nbsp;pięciu kolejnych przebiegach, więc kwarantanna by go przepuściła — a&nbsp;wyciszanie powtórzonych alertów ograniczyłoby ich liczbę o&nbsp;20%, a&nbsp;nie o&nbsp;szacowane 54% (efekt zawyżony 2,7&nbsp;raza).</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="I lost data silently, for days at a time: according to the project’s notes (September 2026), in June 2026 only 7 Notino products instead of 22 were saved for five days (because of the non-breaking space described above), and on 21–26 August 2026 Sephora fell from about 20 to 9–12 fragrances a day, because the store had rebuilt its results list. The runs ended with exit code 0, so the systemd alert stayed silent (and the heartbeat, added on 6 September 2026, would have stayed green too). Replaying 230 runs from 56 days (30 July – 23 September 2026) through the deployed module produced 7 alerts to send and caught both August’s Sephora collapse and September’s block on its search within the first day. Time to detect a silent collapse fell from 7 days to at most 6 hours.">Po cichu traciłem dane, i&nbsp;to przez kolejne dni: według notatek projektu (wrzesień 2026) w&nbsp;czerwcu 2026 przez pięć dni z&nbsp;Notino zapisywało się 7&nbsp;produktów zamiast 22 (przez opisaną wyżej twardą spację), a&nbsp;21–26&nbsp;sierpnia 2026 Sephora spadła z&nbsp;ok.&nbsp;20 do 9–12&nbsp;zapachów dziennie, bo sklep przebudował listę wyników. Przebiegi kończyły się kodem 0, więc alert systemd milczał (a&nbsp;sygnał życia, dodany 6&nbsp;września 2026, też świeciłby na zielono). Odtworzenie 230&nbsp;przebiegów z&nbsp;56&nbsp;dni (30&nbsp;lipca – 23&nbsp;września 2026) przez wdrożony moduł dało 7&nbsp;alarmów do wysłania i&nbsp;w&nbsp;pierwszej dobie złapało zarówno sierpniową zapaść Sephory, jak i&nbsp;wrześniową blokadę jej wyszukiwarki. Czas wykrycia cichej zapaści spadł z&nbsp;7&nbsp;dni do najwyżej 6&nbsp;godzin.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The half threshold misses partial losses, such as 22 down to 17 products, and until the watchdog has built up a history it is blind. The first version “learned the failure”: every weak run went into the median, so after about 7 such runs the outage looked normal. I fixed that on 10 October 2026 — the median now counts healthy runs only.">Próg połowy nie łapie strat częściowych, np.&nbsp;z&nbsp;22 do 17&nbsp;produktów, a&nbsp;zanim strażnik zbierze historię, jest ślepy. Pierwsza wersja „uczyła się awarii”: każdy słaby przebieg trafiał do mediany, więc po ok.&nbsp;7&nbsp;takich przebiegach awaria wyglądała jak norma. Poprawiłem to 10&nbsp;października 2026 — mediana liczy już tylko zdrowe przebiegi.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="A heartbeat whose absence someone else reports">Sygnał życia, którego brak zgłasza ktoś inny</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="After every successful run the scraper sends a heartbeat to an outside service, healthchecks.io (6 h period, 2 h grace), which raises the alarm when the signal is missing. systemd retries a failed run up to three times, every 15 minutes.">Po każdym udanym przebiegu scraper wysyła sygnał życia do zewnętrznej usługi healthchecks.io (okres 6&nbsp;h, tolerancja 2&nbsp;h), która alarmuje, gdy sygnału brak. Nieudany przebieg systemd ponawia do trzech razy co 15&nbsp;minut.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Outgoing alerts only: on failure, systemd starts a script that sends a notification to Discord and Telegram.">Tylko alerty wychodzące: przy awarii systemd uruchamia skrypt, który wysyła powiadomienie na Discord i&nbsp;Telegram.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="On 1 September 2026 the Pi lost DNS. The scraper correctly exited with an error and the alert fired, but it failed for the same reason: without DNS nothing could be sent. The tally: three failed runs, zero notifications, about 36 h of silence and a day without a single row in the database. Since the rebuild on 31 July 2026 the data covers 74 of 75 days (as of 14 October 2026); the missing day is 1 September.">1&nbsp;września 2026 Pi straciło DNS. Scraper poprawnie zakończył się błędem i&nbsp;alert się uruchomił, ale padł z&nbsp;tej samej przyczyny: bez DNS nie dało się niczego wysłać. Bilans: trzy nieudane przebiegi, zero powiadomień, ok.&nbsp;36&nbsp;h ciszy i&nbsp;dzień bez ani jednego wiersza w&nbsp;bazie. Od odbudowy 31&nbsp;lipca 2026 dane obejmują 74 z&nbsp;75&nbsp;dni (stan na 14&nbsp;października 2026); brakujący dzień to właśnie 1&nbsp;września.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The grace period has to be derived from the retry schedule: recovering from a network outage can legitimately take about 97 minutes, so a grace shorter than 2 h would raise false alarms. The retry window had to be worked out again (from 90 minutes to 5 hours, 10 October 2026), because slow failures never used it up. While fixing the DNS outage (6 September 2026) it emerged that the Telegram channel had never been configured and a working Discord had hidden that — since then the alert reports its result for each channel separately.">Tolerancję trzeba wyprowadzić z&nbsp;harmonogramu ponowień: odzyskanie po awarii sieci może zająć ok.&nbsp;97&nbsp;minut, więc tolerancja krótsza niż 2&nbsp;h dawałaby fałszywe alarmy. Okno ponowień trzeba było policzyć jeszcze raz (z&nbsp;90&nbsp;minut na 5&nbsp;godzin, 10&nbsp;października 2026), bo powolne awarie nigdy go nie wyczerpywały. Przy naprawie po awarii DNS (6&nbsp;września 2026) okazało się, że kanał Telegrama nigdy nie był skonfigurowany, a&nbsp;działający Discord to maskował — od tego czasu alert raportuje wynik osobno dla każdego kanału.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="Price history in git, off the device">Historia cen w&nbsp;gicie, poza urządzeniem</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The prices.db database file is tracked in the repository. Every night at 03:30 (since 6 September 2026) a script makes a consistent copy, commits it and pushes it to GitHub; on top of that come 7 local snapshots and a copy on a USB stick. The Telegram bot’s subscriptions live in a separate database that never goes into git.">Plik bazy prices.db jest śledzony w&nbsp;repozytorium. Co noc o&nbsp;3:30 (od 6&nbsp;września 2026) skrypt robi spójną kopię, commituje ją i&nbsp;wypycha na GitHub; do tego 7&nbsp;lokalnych migawek i&nbsp;kopia na pendrivie. Subskrypcje bota Telegrama są w&nbsp;osobnej bazie, która nigdy nie trafia do gita.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="A database outside the repository with backups on the same medium. That was the setup when the card died: the backup added on 29 May 2026 kept 7 snapshots on the same SD card.">Baza poza repozytorium i&nbsp;kopie na tym samym nośniku. Tak było, gdy padła karta: kopia zapasowa dodana 29&nbsp;maja 2026 trzymała 7&nbsp;migawek na tej samej karcie SD.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="The Pi’s SD card physically died on 16 July 2026. The history up to 8 June survived only because a copy of the database sat on a second computer; on 19 July 2026 the database entered the repository for the first time, and since 6 September 2026 the Pi has committed it every night. The loss: 9 June – 16 July 2026. The rebuild on Debian 13 on 31 July 2026 exposed gaps in the recovery runbook (missing system libraries among them), so I corrected it.">Karta SD w&nbsp;Pi fizycznie padła 16&nbsp;lipca 2026. Historia do 8&nbsp;czerwca przetrwała tylko dlatego, że kopia bazy leżała na drugim komputerze; 19&nbsp;lipca 2026 baza po raz pierwszy trafiła do repozytorium, a&nbsp;od 6&nbsp;września 2026 Pi samo commituje ją co noc. Strata: od 9&nbsp;czerwca do 16&nbsp;lipca 2026. Odbudowa na Debianie 13 (31&nbsp;lipca 2026) pokazała luki w&nbsp;instrukcji odtworzenia (m.in. brakujące biblioteki systemowe), więc ją poprawiłem.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="A binary file in git: conflicts when two computers committed copies in parallel (resolved with an SQL merge on 1 August 2026), and a growing .git directory, about 1 MB a day (as of 10 October 2026) — partly why I also rejected a database index. It takes discipline: nothing that concerns the bot’s users may enter the tracked file.">Binarny plik w&nbsp;gicie: konflikty, gdy kopie commitowały równolegle dwa komputery (rozwiązane scaleniem w&nbsp;SQL 1&nbsp;sierpnia 2026), i&nbsp;rosnący katalog .git, ok.&nbsp;1&nbsp;MB dziennie (stan na 10&nbsp;października 2026) — m.in. dlatego odrzuciłem też indeks w&nbsp;bazie. To wymaga dyscypliny: do śledzonego pliku nie może trafić nic, co dotyczy osób korzystających z&nbsp;bota.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="A cache keyed to data freshness instead of an index or a rewrite">Cache zależny od świeżości danych zamiast indeksu i&nbsp;przebudowy</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="Results computed from the database are kept in memory until the data next changes. The key is the row count and the latest timestamp in the database, the file signature and the local date.">Wyniki liczone z&nbsp;bazy są trzymane w&nbsp;pamięci do najbliższej zmiany danych. Kluczem jest liczba wierszy i&nbsp;najnowszy znacznik czasu w&nbsp;bazie, sygnatura pliku i&nbsp;lokalna data.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="A database index: 28.3 → 24.0 ms (−15%) for +436 kB in a file committed every night — rejected. A short HTML cache on Cloudflare’s edge servers: no effect, because Cloudflare does not cache HTML by default — rolled back. I shelved the planned rewrite of chart drawing in a 4,968-line template: two lines turning off the charts’ entry animation gave more than the rewrite was expected to — the analytics page’s mobile Lighthouse score rose from 46 to 66, and total blocking time (TBT) fell from 2,340 to 860 ms (measurements from 21 September 2026).">Indeks w&nbsp;bazie: 28,3 → 24,0&nbsp;ms (−15%) za +436&nbsp;kB w&nbsp;pliku commitowanym co noc — odrzucony. Krótki cache HTML na serwerach brzegowych Cloudflare: bez efektu, bo Cloudflare domyślnie nie buforuje HTML — wycofany. Planowaną przebudowę rysowania wykresów w&nbsp;szablonie na 4&nbsp;968&nbsp;linii odłożyłem: dwie linie wyłączające animację wejścia wykresów dały więcej, niż miała dać przebudowa — wynik Lighthouse strony analityki w&nbsp;profilu mobilnym wzrósł z&nbsp;46 do 66, a&nbsp;czas blokowania wątku głównego (TBT) spadł z&nbsp;2&nbsp;340 do 860&nbsp;ms (pomiary z&nbsp;21&nbsp;września 2026).</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="Measurement on the Pi (21 September 2026, median of 8 samples) showed the analytics page spending 494 of its 698 ms in one pure function (its result depends only on its inputs) — the database was not the problem. With the cache: analytics 698 → 55 ms (−92%), home page 127 → 45 ms, full dashboard 148 → 65 ms.">Pomiar na Pi (21&nbsp;września 2026, mediana z&nbsp;8&nbsp;próbek) pokazał, że strona analityki spędzała 494 z&nbsp;698&nbsp;ms w&nbsp;jednej czystej funkcji (jej wynik zależy tylko od danych wejściowych) — to nie był problem bazy. Po wprowadzeniu cache: analityka 698 → 55&nbsp;ms (−92%), strona główna 127 → 45&nbsp;ms, pełny panel 148 → 65&nbsp;ms.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The first request after a restart still takes about 770 ms (measured on 21 September 2026). The first version of the key had no date, so during a scraper outage lasting several days the site could have served week-old prices as the “Deal of the day” with no stale-data warning; a code review caught it and I fixed it on 10 October 2026.">Pierwsze żądanie po restarcie nadal trwa ok.&nbsp;770&nbsp;ms (pomiar z&nbsp;21&nbsp;września 2026). Pierwsza wersja klucza nie zawierała daty, więc przy kilkudniowej awarii scrapera strona mogłaby podawać ceny sprzed tygodnia jako „Okazję dnia” bez ostrzeżenia o&nbsp;nieaktualnych danych; wyłapał to przegląd kodu, a&nbsp;poprawkę wdrożyłem 10&nbsp;października 2026.</dd>
+                        </dl>
+                    </article>
+                </div>
+            </section>
+
+            <section id="dowody" class="case-section" aria-labelledby="h-dowody">
+                <h2 class="case-h2" id="h-dowody"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span data-en="Evidence">Dowody</span></h2>
+                <p data-en="The numbers come from the repository: the copy of the price database, the test run, measurements on the production Raspberry Pi and a replay of the scraper logs.">Liczby pochodzą z&nbsp;repozytorium: z&nbsp;kopii bazy cen, przebiegu testów, pomiarów na produkcyjnym Raspberry Pi i&nbsp;odtworzenia logów scrapera.</p>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="117&nbsp;zł">117&nbsp;zł</span>
+                        <span class="case-stat-label" data-en="median gap between the cheapest and dearest store for the same bottle, across 22 fragrances (largest 248.90 zł)">mediana różnicy między najtańszym a&nbsp;najdroższym sklepem dla tego samego flakonu, 22&nbsp;zapachy (maks. 248,90&nbsp;zł)</span>
+                        <span class="case-stat-source" data-en="measured on project data · 2026-09-21">pomiar na danych projektu · 2026-09-21</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="9,853">9&nbsp;853</span>
+                        <span class="case-stat-label" data-en="daily price records (store × fragrance × day, 100 ml bottles only) since 7 January 2026, daily from March 2026, with a gap after the SD card failure">dzienne notowania cen (sklep × zapach × dzień, tylko flakony 100&nbsp;ml) od 7&nbsp;stycznia 2026, regularnie od marca 2026, z&nbsp;luką po awarii karty SD</span>
+                        <span class="case-stat-source" data-en="database copy in the repository · 2026-10-14">kopia bazy w&nbsp;repozytorium · 2026-10-14</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="787">787</span>
+                        <span class="case-stat-label" data-en="automated tests; CI runs them together with linting, type checking, a secrets scan and a dependency audit">testów automatycznych; CI uruchamia je razem z&nbsp;lintem, kontrolą typów, skanem sekretów i&nbsp;audytem zależności</span>
+                        <span class="case-stat-source" data-en="test run · 2026-10-10">przebieg testów · 2026-10-10</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="55&nbsp;ms">55&nbsp;ms</span>
+                        <span class="case-stat-label" data-en="server time of the analytics page with the data-layer cache; 698 ms before (−92%), median of 8 samples">czas serwera strony analityki z&nbsp;cache warstwy danych; wcześniej 698&nbsp;ms (−92%), mediana z&nbsp;8&nbsp;próbek</span>
+                        <span class="case-stat-source" data-en="measured on the Pi · 2026-09-21">pomiar na Pi · 2026-09-21</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="≤&nbsp;6&nbsp;h">≤&nbsp;6&nbsp;h</span>
+                        <span class="case-stat-label" data-en="time to detect a store’s silent collapse (below half its usual product count) with the coverage watchdog, down from 7 days; a replay of 230 runs over 56 days produced 7 alerts to send">czas wykrycia cichej zapaści sklepu (poniżej połowy zwykłej liczby produktów) ze strażnikiem pokrycia, wcześniej 7&nbsp;dni; odtworzenie 230&nbsp;przebiegów z&nbsp;56&nbsp;dni dało 7&nbsp;alarmów do wysłania</span>
+                        <span class="case-stat-source" data-en="scraper log replay · 2026-09-23">odtworzenie logu scrapera · 2026-09-23</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="0">0</span>
+                        <span class="case-stat-label" data-en="paid APIs and language-model calls per run; a full run (3 stores plus Ceneo.pl) took 14 min 48 s">płatnych API i&nbsp;wywołań modelu językowego w&nbsp;przebiegu; pełny przebieg (3&nbsp;sklepy i&nbsp;Ceneo.pl) trwał 14&nbsp;min 48&nbsp;s</span>
+                        <span class="case-stat-source" data-en="run measurement · 2026-09-21">pomiar przebiegu · 2026-09-21</span>
+                    </div>
+                </div>
+                <p class="case-source-note" data-en="State of the project’s private repository as of 14 October 2026: 466 commits since 7 January 2026; each measurement carries its own date. The price history has gaps: among them, the data from 9 June – 16 July 2026 was lost with the SD card, and 1 September 2026 has no rows at all. No visitor data, on purpose.">Stan prywatnego repozytorium projektu na 14&nbsp;października 2026: 466&nbsp;commitów od 7&nbsp;stycznia 2026; każdy pomiar ma własną datę. Historia cen ma luki: m.in. dane z&nbsp;okresu 9&nbsp;czerwca – 16&nbsp;lipca 2026 przepadły razem z&nbsp;kartą SD, a&nbsp;z&nbsp;1&nbsp;września 2026 nie ma żadnego wiersza. Celowo bez danych o&nbsp;odwiedzających.</p>
+            </section>
+
+            <section id="wnioski" class="case-section" aria-labelledby="h-wnioski">
+                <h2 class="case-h2" id="h-wnioski"><span class="case-h2-num" aria-hidden="true" translate="no">§ 6</span><span data-en="What I learned">Czego się nauczyłem</span></h2>
+                <ul class="showcase-list">
+                    <li data-en="Exit code 0 does not yet mean success. This project’s most insidious failures ended in “success”: the process ran while a store quietly vanished from the data. I look at what a run produced, not only at whether it finished.">Kod wyjścia 0 to jeszcze nie sukces. Najbardziej podstępne awarie tego projektu kończyły się „sukcesem”: proces działał, a&nbsp;sklep po cichu znikał z&nbsp;danych. Patrzę na to, co przebieg wyprodukował, a&nbsp;nie tylko na to, czy się zakończył.</li>
+                    <li data-en="A silent fallback is worse than none. When Sephora rebuilt its results list in August 2026, the fallback path returned rows without prices while the run reported “3/3 stores OK” — as a result, about half of Sephora’s prices were missing for almost a week.">Cicha ścieżka zapasowa jest gorsza niż jej brak. Gdy w&nbsp;sierpniu 2026 Sephora przebudowała listę wyników, ścieżka zapasowa zwracała wiersze bez cen, a&nbsp;przebieg raportował „3/3 sklepów OK” — w&nbsp;efekcie przez prawie tydzień brakowało ok.&nbsp;połowy cen Sephory.</li>
+                    <li data-en="A backup on the same device is not a backup. The price history up to 8 June was saved by a copy of the database on a second computer, not by seven snapshots on the same SD card — which is why the database now goes onto a USB stick and into the repository on GitHub every night.">Kopia na tym samym urządzeniu nie jest kopią. Historię cen do 8&nbsp;czerwca uratowała kopia bazy na drugim komputerze, a&nbsp;nie siedem migawek na tej samej karcie SD — dlatego dziś baza co noc trafia na pendrive i&nbsp;do repozytorium na GitHubie.</li>
+                    <li data-en="A price must belong to exactly the product the customer pays for — otherwise it is better not to record it. One 30 ml offer in the 100 ml history was enough for the site to present a false record low as the “Deal of the day”.">Cena musi dotyczyć dokładnie tego produktu, za który płaci klient — inaczej lepiej jej nie zapisywać. Jedna oferta 30&nbsp;ml w&nbsp;historii 100&nbsp;ml wystarczyła, żeby strona pokazała fałszywy rekord jako „Okazję dnia”.</li>
+                    <li data-en="I measure, keep what measurably improves things and roll back the rest. Lighthouse on the Pi has noise of around ±10 points (September 2026), so a single run settles nothing, and I rolled back the short HTML cache in full because it had no measurable effect.">Mierzę, zostawiam to, co daje mierzalną poprawę, a&nbsp;resztę wycofuję. Lighthouse na Pi ma szum rzędu ±10&nbsp;punktów (wrzesień 2026), więc pojedynczy przebieg niczego nie rozstrzyga, a&nbsp;krótki cache HTML wycofałem w&nbsp;całości, bo nie dał mierzalnego efektu.</li>
+                </ul>
+            </section>
+
+            <nav class="case-pager" aria-label="Inne studia przypadków" data-en-aria="Other case studies">
+                <a class="case-pager-link" href="/case/upfor/">
+                    <span class="case-pager-dir" data-en="← Previous">← Poprzednie</span>
+                    <span class="case-pager-title">UpFor.pl</span>
+                </a>
+                <a class="case-pager-link case-pager-link--next" href="/case/majeranek/">
+                    <span class="case-pager-dir" data-en="Next →">Następne →</span>
+                    <span class="case-pager-title">Majeranek</span>
+                </a>
+            </nav>
+            <p class="case-back"><a class="btn btn-secondary" href="/#projekty"><span data-en="All projects">Wszystkie projekty</span></a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-start">
+                    <button type="button" class="start-button" aria-label="Na górę strony" data-en-aria="Back to top" onclick="window.scrollTo({top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'})">
+                        <span class="start-icon" aria-hidden="true">🖥️</span>
+                        <span>Start</span>
+                    </button>
+                </div>
+                <div class="footer-center">
+                    <p class="footer-tech">© 2025-2026 Karol Wilczyński</p>
+                </div>
+                <div class="footer-clock">
+                    <span id="clock">00:00</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js?v=62" defer></script>
+</body>
+</html>

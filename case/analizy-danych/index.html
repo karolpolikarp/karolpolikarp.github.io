@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
+    <title data-en="Data analyses: case study | Karol Polikarp Wilczyński">Analizy danych: studium przypadku | Karol Polikarp Wilczyński</title>
+    <meta name="description" content="Pięć projektów studyjnych na publicznych danych: czy GPT-4o-mini przewidzi kurs z raportów ESPI, rynek gier wideo, Airbnb w Winnipeg i Waszyngtonie oraz segmentacja — metoda, wyniki i ograniczenia." data-en-content="Five study projects on public data: can GPT-4o-mini predict share moves from ESPI reports, the video game market, Airbnb in Winnipeg and Washington, and a segmentation — method, results and limits.">
+    <meta name="author" content="Karol Polikarp Wilczyński">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://karolwilczynski.com/case/analizy-danych/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Karol Polikarp Wilczyński">
+    <meta property="og:url" content="https://karolwilczynski.com/case/analizy-danych/">
+    <meta property="og:title" content="Analizy danych: studium przypadku | Karol Polikarp Wilczyński">
+    <meta property="og:description" content="Pięć projektów studyjnych na publicznych danych: czy GPT-4o-mini przewidzi kurs z raportów ESPI, rynek gier wideo, Airbnb w Winnipeg i Waszyngtonie oraz segmentacja — metoda, wyniki i ograniczenia.">
+    <meta property="og:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://karolwilczynski.com/case/analizy-danych/">
+    <meta name="twitter:title" content="Analizy danych: studium przypadku | Karol Polikarp Wilczyński">
+    <meta name="twitter:description" content="Pięć projektów studyjnych na publicznych danych: czy GPT-4o-mini przewidzi kurs z raportów ESPI, rynek gier wideo, Airbnb w Winnipeg i Waszyngtonie oraz segmentacja — metoda, wyniki i ograniczenia.">
+    <meta name="twitter:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
+    <meta name="twitter:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <meta name="theme-color" content="#004d2b">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Analizy danych: studium przypadku",
+        "description": "Pięć projektów studyjnych na publicznych danych: czy GPT-4o-mini przewidzi kurs z raportów ESPI, rynek gier wideo, Airbnb w Winnipeg i Waszyngtonie oraz segmentacja — metoda, wyniki i ograniczenia.",
+        "url": "https://karolwilczynski.com/case/analizy-danych/",
+        "inLanguage": "pl-PL",
+        "datePublished": "2026-10-14",
+        "dateModified": "2026-10-14",
+        "image": "https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2",
+        "author": {
+            "@type": "Person",
+            "@id": "https://karolwilczynski.com/#person",
+            "name": "Karol Polikarp Wilczyński",
+            "url": "https://karolwilczynski.com"
+        },
+        "isPartOf": {
+            "@id": "https://karolwilczynski.com/#website"
+        },
+        "about": [
+            {
+                "@type": "SoftwareSourceCode",
+                "name": "Prognozy giełdowe z ESPI",
+                "codeRepository": "https://github.com/karolpolikarp/ds-SGH-Prognozy-gieldowe-z-ESPI"
+            },
+            {
+                "@type": "SoftwareSourceCode",
+                "name": "Ewolucja globalnego rynku gier wideo",
+                "codeRepository": "https://github.com/karolpolikarp/ds-VideoGameSales"
+            },
+            {
+                "@type": "SoftwareSourceCode",
+                "name": "Analiza rynku Airbnb w Waszyngtonie (Python)",
+                "codeRepository": "https://github.com/karolpolikarp/ds-WashingtonDC"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Fonts - async loading for faster first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="/style.css?v=157">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#tresc" class="skip-link">Przejdź do treści</a>
+
+    <nav class="nav" aria-label="Główna nawigacja" data-en-aria="Main navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Strona główna" data-en-aria="Home page">
+                <span class="logo-main">kpw<span class="logo-sparkle" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="kpwSpark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop class="kpw-stop-a" offset="0"/><stop class="kpw-stop-b" offset="1"/></linearGradient></defs><path class="logo-spark logo-spark-lg" d="M10.5 1.4C10.5 8.1 8.1 10.5 1.4 10.5C8.1 10.5 10.5 12.9 10.5 19.6C10.5 12.9 12.9 10.5 19.6 10.5C12.9 10.5 10.5 8.1 10.5 1.4Z"/><path class="logo-spark logo-spark-sm" d="M19 4C19 6.2 18.2 7 16 7C18.2 7 19 7.8 19 10C19 7.8 19.8 7 22 7C19.8 7 19 6.2 19 4Z"/></svg></span></span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/#projekty"><span data-en="Projects">Projekty</span></a></li>
+
+                <li><a href="/#wystapienia"><span data-en="Public talks">Wystąpienia publiczne</span></a></li>
+                <li><a href="/#kontakt"><span data-en="Contact">Kontakt</span></a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="nav-social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/karolpwilczynski" target="_blank" rel="noopener" class="nav-social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.78M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.69 1.69 1.69 0 0 0-1.69 1.69 1.68 1.68 0 0 0 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                </a>
+            </div>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Przełącz motyw jasny/ciemny" data-en-aria="Toggle light/dark theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <button type="button" class="lang-toggle" id="langToggle" aria-label="PL EN: switch to English">
+                <span class="lang-label lang-pl">PL</span>
+                <span class="lang-label lang-en">EN</span>
+            </button>
+            <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div>
+    </nav>
+
+    <main id="tresc" class="case">
+        <header class="case-hero">
+            <div class="container case-container">
+                <nav class="case-breadcrumb" aria-label="Okruszki" data-en-aria="Breadcrumb">
+                    <a href="/"><span data-en="Home">Strona główna</span></a>
+                    <span aria-hidden="true">/</span>
+                    <a href="/#studia"><span data-en="Case studies">Studia przypadków</span></a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page" data-en="Data analyses">Analizy danych</span>
+                </nav>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">R</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">scikit-learn</span>
+                    <span class="tag">GPT-4o-mini</span>
+                </div>
+                <h1 class="case-title" data-en="Data analyses">Analizy danych</h1>
+                <p class="case-subtitle" data-en="Five study projects on public data">Pięć projektów studyjnych na publicznych danych</p>
+                <p class="case-lead" data-en="Each of these projects starts with a public dataset and one question, and ends with an answer that has to stand up to scrutiny — or with an account of why there is no answer yet. I describe the December 2024 study in most detail: can GPT-4o-mini, reading Allegro’s current reports, predict how the share price moves? The dataset holds 134 reports, but the repository stores a single forecast, and that one is for a different company’s report — so I show the method and its weak points, not a result. Alongside it are three market analyses and a short segmentation, and several of them teach the same lesson: a number in a conclusion has to come from the computation and mean what was computed.">Każdy z&nbsp;tych projektów zaczyna się od publicznego zbioru danych i&nbsp;jednego pytania, a&nbsp;kończy odpowiedzią, której trzeba umieć bronić — albo opisem, dlaczego odpowiedzi jeszcze nie ma. Najszerzej opisuję badanie z&nbsp;grudnia 2024: czy GPT-4o-mini, czytając raporty bieżące Allegro, przewidzi ruch kursu akcji. Zbiór liczy 134&nbsp;raporty, ale w&nbsp;repozytorium jest tylko jedna zapisana prognoza, i&nbsp;to dla raportu innej spółki — dlatego pokazuję metodę i&nbsp;jej słabe punkty, a&nbsp;nie wynik. Obok są trzy analizy rynków i&nbsp;krótka segmentacja, a&nbsp;w&nbsp;kilku z&nbsp;nich powtarza się ta sama lekcja: liczba we wniosku musi pochodzić z&nbsp;obliczeń i&nbsp;znaczyć to, co policzono.</p>
+                <dl class="case-facts">
+                    <div><dt data-en="Role">Rola</dt><dd data-en="Analysis, code (partly with an AI assistant) and write-up">Analiza, kod (częściowo z&nbsp;asystentem AI) i&nbsp;opis wyników</dd></div>
+                    <div><dt data-en="Period">Okres</dt><dd data-en="December 2024 – June 2025; two analyses with no recorded date">grudzień 2024 – czerwiec 2025; dwie analizy bez zapisanej daty</dd></div>
+                    <div><dt data-en="Status">Status</dt><dd data-en="Completed study projects (as of 14 October 2026)">Zakończone projekty studyjne (stan na 14&nbsp;października 2026)</dd></div>
+                    <div><dt data-en="Code">Kod</dt><dd data-en="Public (5 repositories)">Publiczny (5&nbsp;repozytoriów)</dd></div>
+                </dl>
+                <nav class="case-toc" aria-label="Spis treści" data-en-aria="Contents">
+                    <a href="#espi"><span data-en="ESPI forecasts">Prognozy z&nbsp;ESPI</span></a>
+                    <a href="#gry"><span data-en="Video games">Gry wideo</span></a>
+                    <a href="#winnipeg"><span data-en="Airbnb Winnipeg">Airbnb Winnipeg</span></a>
+                    <a href="#waszyngton"><span data-en="Airbnb Washington">Airbnb Waszyngton</span></a>
+                    <a href="#segmentacja"><span data-en="Segmentation">Segmentacja</span></a>
+                    <a href="#wnioski"><span data-en="Lessons">Wnioski</span></a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container case-container">
+            <section id="espi" class="case-section" aria-labelledby="h-espi">
+                <h2 class="case-h2" id="h-espi"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span data-en="Stock forecasts from ESPI">Prognozy giełdowe z&nbsp;ESPI</span></h2>
+                <p data-en="In December 2024, for a course at SGH, I tested whether the GPT-4o-mini language model, reading an Allegro current report, could predict a short-term move in the share price. Listed companies file current reports through ESPI (the Electronic Information Transmission System). It is unstructured text — about a contract, financing or changes on the management board — that an investor has to translate into an expectation about the share price.">W&nbsp;grudniu 2024, w&nbsp;ramach zajęć w&nbsp;SGH, sprawdzałem, czy model językowy GPT-4o-mini, czytając raport bieżący Allegro, przewidzi krótkoterminową zmianę kursu akcji. Spółki giełdowe przekazują raporty bieżące przez system ESPI (Elektroniczny System Przekazywania Informacji). To tekst bez struktury — o&nbsp;umowie, finansowaniu czy zmianach w&nbsp;zarządzie — który inwestor musi sam przełożyć na oczekiwanie co do kursu.</p>
+                <p data-en="I collected the reports myself. A Python script (requests and BeautifulSoup) pulled 134 Allegro current reports, from 10 October 2020 to 12 December 2024, from the public search page of PAP’s ESPI/EBI service. Next to them sits a file of daily prices: 1,050 sessions, from Allegro’s first session on 12 October 2020 to 17 December 2024 (I did not record the price source in the repository). The script stores only the report’s date, not its time, and walks at most six pages of results, so I do not know whether 134 is the complete set. The repository’s README says “~1500 reports”; that is the number of lines in the CSV file, because a report’s text spans several lines — there are 134 reports.">Raporty zebrałem sam. Skrypt w&nbsp;Pythonie (requests i&nbsp;BeautifulSoup) pobrał z&nbsp;publicznej wyszukiwarki serwisu ESPI/EBI PAP 134&nbsp;raporty bieżące Allegro, od 10&nbsp;października 2020 do 12&nbsp;grudnia 2024. Obok leży plik z&nbsp;notowaniami dziennymi: 1&nbsp;050&nbsp;sesji, od pierwszej sesji Allegro 12&nbsp;października 2020 do 17&nbsp;grudnia 2024 (źródła cen nie zapisałem w&nbsp;repozytorium). Skrypt zapisuje tylko datę raportu, bez godziny, i&nbsp;przegląda najwyżej sześć stron wyników, więc nie wiem, czy 134 to komplet. README w&nbsp;repozytorium podaje „~1500 raportów”; to liczba linii pliku CSV, bo treść raportu zajmuje po kilka linii — raportów jest 134.</p>
+                <p data-en="The notebook takes one report at a time. To its text it adds the closing price from the session before the report, statistics from the previous 100 sessions (share of up days, average gain and loss, largest moves, daily volatility) and technical indicators: 5-, 10-, 20-, 50- and 100-session moving averages and a “100-day volatility”. GPT-4o-mini (temperature 0.1, i.e. answers with little randomness) is told that the market has not yet opened on the report day, and returns a forecast of the price change over five horizons: D0 (the report day), D3, D7, D14 and D30, counted in calendar days. The notebook sets the forecast against the actual change in the closing price and draws a chart, and GPT-4o writes a summary note. I treat those notes as an illustration of the pipeline, not as conclusions — and they are not investment advice.">Notebook bierze jeden raport naraz. Do jego treści dokłada cenę zamknięcia z&nbsp;sesji przed raportem, statystyki ze 100&nbsp;poprzednich sesji (odsetek dni wzrostowych, średni wzrost i&nbsp;spadek, największe ruchy, zmienność dzienna) oraz wskaźniki techniczne: średnie kroczące z&nbsp;5, 10, 20, 50 i&nbsp;100&nbsp;sesji i&nbsp;„zmienność 100-dniową”. GPT-4o-mini (temperatura 0,1, czyli odpowiedzi mało losowe) dostaje informację, że jest przed otwarciem rynku w&nbsp;dniu raportu, i&nbsp;zwraca prognozę zmiany kursu w&nbsp;pięciu horyzontach: D0 (dzień raportu), D3, D7, D14 i&nbsp;D30, liczonych w&nbsp;dniach kalendarzowych. Notebook zestawia prognozę z&nbsp;rzeczywistą zmianą ceny zamknięcia i&nbsp;rysuje wykres, a&nbsp;GPT-4o pisze notatkę podsumowującą. Te notatki traktuję jako ilustrację działania potoku, nie jako wnioski — i&nbsp;nie są one poradą inwestycyjną.</p>
+                <p data-en="A few design properties are visible directly in the public notebook:">Kilka cech projektu widać wprost w&nbsp;publicznym notebooku:</p>
+                <ul class="showcase-list">
+                    <li data-en="Apart from the data (the report text, the previous session’s price, the statistics and the indicators), the prompt suggests no numeric ranges and no market narrative, but it repeatedly encourages boldness: “Don’t be conservative… make bold forecasts”, “Don’t limit yourself to small percentages”, “Don’t be afraid to suggest larger percentage changes if the data point that way”; it also allows forecasts beyond the historical maximum rises and falls. That is steering too — towards bigger numbers.">Poza danymi (treść raportu, cena z&nbsp;poprzedniej sesji, statystyki i&nbsp;wskaźniki) prompt nie podsuwa zakresów liczbowych ani narracji rynkowej, ale kilka razy zachęca do śmiałości: „Nie bądź zachowawczy… generuj prognozy odważnie”, „Nie ograniczaj się do małych wartości procentowych”, „Nie bój się sugerować większych zmian procentowych, jeśli dane na to wskazują”; dopuszcza też prognozy powyżej historycznych maksimów wzrostów i&nbsp;spadków. To też jest sterowanie — w&nbsp;stronę większych liczb.</li>
+                    <li data-en="The answer has a fixed format: first “D0: [number]%” to “D30: [number]%”, numbers only, then the reasoning. A regular expression takes only a number with a per cent sign that stands at most 20 characters after the horizon label. Each later match overwrites the earlier one, so a phrase such as “D7 … 12%” in the reasoning would replace the forecast, and a missing horizon shows up only as “N/A” in the table.">Odpowiedź ma sztywny format: najpierw od „D0: [liczba]%” do „D30: [liczba]%”, same liczby, potem uzasadnienie. Wyrażenie regularne bierze tylko liczbę ze znakiem procentu, stojącą najwyżej 20&nbsp;znaków za etykietą horyzontu. Każde kolejne dopasowanie nadpisuje poprzednie, więc fraza w&nbsp;rodzaju „D7 … 12%” w&nbsp;uzasadnieniu zastąpiłaby prognozę, a&nbsp;brak horyzontu widać tylko jako „N/A” w&nbsp;tabeli.</li>
+                    <li data-en="The 100-session statistics and the moving averages use only sessions before the report, so the report-day price does not enter them. The exception is the 100-day volatility — more on that below. The averages are clean only on the first call, though: the indicator function then overwrites them with a version that includes the report day, so in a loop over many reports the leak would return in the averages too.">Statystyki ze 100&nbsp;sesji i&nbsp;średnie kroczące liczę wyłącznie z&nbsp;sesji przed raportem, więc cena z&nbsp;dnia raportu do nich nie trafia. Wyjątkiem jest zmienność 100-dniowa — o&nbsp;niej niżej. Średnie są jednak czyste tylko przy pierwszym wywołaniu: funkcja wskaźników nadpisuje je potem wersją z&nbsp;dniem raportu, więc w&nbsp;pętli po wielu raportach przeciek wróciłby też w&nbsp;średnich.</li>
+                </ul>
+                <p data-en="The only result stored in the repository is not about Allegro. The notebook run of 18 December 2024 covers a CD Projekt report of 29 January 2021 about a class action against the company: a forecast of −5, −10, −15, −20 and −25% against actual moves of −16.4, −16.2, −19.6, −27.9 and −35.2%. The direction is right at all five horizons, and the largest gap is 11.4 percentage points (pp) on the report day. The forecast is an even ladder in 5 pp steps; a single sample cannot show whether the model read the report or repeated a pattern. The CD Projekt price and report files this run used are not in the repository, so the run cannot be reproduced from the repository alone.">Jedyny wynik zapisany w&nbsp;repozytorium nie dotyczy Allegro. Przebieg notebooka z&nbsp;18&nbsp;grudnia 2024 obejmuje raport CD Projekt z&nbsp;29&nbsp;stycznia 2021 o&nbsp;pozwie zbiorowym przeciwko spółce: prognoza −5, −10, −15, −20 i&nbsp;−25% wobec rzeczywistych −16,4, −16,2, −19,6, −27,9 i&nbsp;−35,2%. Kierunek zgadza się we wszystkich pięciu horyzontach, a&nbsp;największa różnica to 11,4&nbsp;punktu procentowego (pkt proc.) w&nbsp;dniu raportu. Prognoza to równe schodki co 5&nbsp;pkt proc.; z&nbsp;jednej próby nie da się rozstrzygnąć, czy model odczytał raport, czy powtórzył schemat. Plików z&nbsp;cenami i&nbsp;raportami CD Projekt, na których działał ten przebieg, w&nbsp;repozytorium nie ma, więc z&nbsp;samego repozytorium nie da się go odtworzyć.</p>
+                <p data-en="So the study shows a method and its threats to validity, not a result. Even the set for a future batch evaluation is smaller than it looks: only 114 of the 134 reports can be evaluated cleanly, because only they have at least 100 earlier sessions, a full 30 days after the report and a date on a session day (counted on the repository data, as of 14 October 2026). The two biggest threats — the model’s own knowledge and a sample of one — are described in the cards below. There are three more:">Badanie pokazuje więc metodę i&nbsp;zagrożenia dla jej trafności, a&nbsp;nie wynik. Nawet zbiór do przyszłej oceny zbiorczej jest mniejszy, niż się wydaje: bez zastrzeżeń da się ocenić tylko 114 ze 134&nbsp;raportów, bo tylko one mają co najmniej 100&nbsp;wcześniejszych sesji, pełne 30&nbsp;dni po raporcie i&nbsp;datę w&nbsp;dniu sesji (policzone na danych z&nbsp;repozytorium, stan na 14&nbsp;października 2026). Dwa największe zagrożenia — wiedzę samego modelu i&nbsp;próbę jednego przypadku — opisuję w&nbsp;kartach niżej. Są jeszcze trzy:</p>
+                <ul class="showcase-list">
+                    <li data-en="Calendar days instead of sessions. D3 or D7 uses the close of the last session no later than 3 or 7 calendar days after the report, so a horizon spans a varying number of sessions. 8 of the 134 reports are dated on a day without a session. Two of them (31 December 2021 and 20 January 2024) get D0 = 0 by construction, and six predate Allegro’s first session — for them, and for the report from the day of that first session, the code has no base price and stops with an error. For 6 reports at the end of the set D30 silently stops at the last available price.">Dni kalendarzowe zamiast sesji. D3 czy D7 liczy się z&nbsp;ceny zamknięcia ostatniej sesji nie później niż 3 czy 7&nbsp;dni kalendarzowych po raporcie, więc horyzont obejmuje różną liczbę sesji. Datę dnia bez sesji ma 8&nbsp;ze 134&nbsp;raportów. Dwa z&nbsp;nich (31&nbsp;grudnia 2021 i&nbsp;20&nbsp;stycznia 2024) dostają D0&nbsp;=&nbsp;0 z&nbsp;samej konstrukcji, a&nbsp;sześć pochodzi sprzed pierwszej sesji Allegro — dla nich i&nbsp;dla raportu z&nbsp;dnia tej pierwszej sesji kod nie ma ceny bazowej i&nbsp;przerywa działanie błędem. Przy 6&nbsp;raportach z&nbsp;końca zbioru D30 po cichu kończy się na ostatniej dostępnej cenie.</li>
+                    <li data-en="A date with no time. It is unknown whether a report came out before, during or after the session, and D0 is the change from the previous close to the close on the report day.">Data bez godziny. Nie wiadomo, czy raport wyszedł przed sesją, w&nbsp;jej trakcie czy po niej, a&nbsp;D0 to zmiana od zamknięcia poprzedniej sesji do zamknięcia w&nbsp;dniu raportu.</li>
+                    <li data-en="A leak from the report day. The “100-day volatility” in the prompt already includes the move on the day the model is meant to predict. In the stored run this pushed it from 4.32% the day before to 4.61% — a small leak, but a leak.">Przeciek z&nbsp;dnia raportu. „Zmienność 100-dniowa” w&nbsp;prompcie obejmuje już zmianę z&nbsp;dnia, który model ma przewidzieć. W&nbsp;zapisanym przebiegu wzrosła przez to z&nbsp;4,32% dzień wcześniej do 4,61% — mały przeciek, ale przeciek.</li>
+                </ul>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="“Limit your knowledge to the report day” instead of reports the model cannot know">„Ogranicz wiedzę do dnia raportu” zamiast raportów spoza wiedzy modelu</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The prompt tells the model that the market has not yet opened on the report day and that it must limit its knowledge to that day.">Prompt mówi modelowi, że jest przed otwarciem rynku w&nbsp;dniu raportu i&nbsp;ma ograniczyć swoją wiedzę do tego dnia.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Test only on reports published after the date the model’s training data reaches.">Testować tylko raporty opublikowane po dacie, do której sięgają dane treningowe modelu.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="I did not record a reason. The Allegro set spans 2020–2024, and the prompt instruction is the notebook’s only safeguard against the model knowing the later price.">Uzasadnienia nie zapisałem. Zbiór Allegro obejmuje lata 2020–2024, a&nbsp;instrukcja w&nbsp;prompcie to jedyne zabezpieczenie notebooka przed tym, że model zna dalszy kurs.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The instruction can be neither enforced nor checked, and the system message (the instruction that sets the model’s role) opens with “Using your knowledge, take on the role of an experienced stock market analyst…”, which works against it. The report in the stored run is from January 2021 and I ran the model in December 2024, so its training data may have shown it how the price behaved afterwards. A correct direction therefore does not prove that the model “read” the report; a result like this is at best an upper bound.">Tej instrukcji nie da się wymusić ani sprawdzić, a&nbsp;komunikat systemowy (instrukcja, która ustala modelowi rolę) zaczyna się od słów „Korzystając ze swojej wiedzy, wejdź w&nbsp;rolę doświadczonego analityka giełdowego…”, co działa wbrew niej. Raport z&nbsp;zapisanego przebiegu jest ze stycznia 2021, a&nbsp;model uruchomiłem w&nbsp;grudniu 2024, więc w&nbsp;danych treningowych mógł widzieć, jak kurs zachował się potem. Trafny kierunek nie dowodzi zatem, że model „przeczytał” raport; taki wynik można traktować najwyżej jako górną granicę.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="One report in depth instead of a measure over the whole set">Jeden raport w&nbsp;głąb zamiast miary na całym zbiorze</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The analysis function takes the address of one report, and the notebook runs it for one chosen report: a table, a chart and a note.">Funkcja analizy przyjmuje adres jednego raportu, a&nbsp;notebook uruchamia ją dla jednego wybranego raportu: tabela, wykres i&nbsp;notatka.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="A loop over all reports and aggregate measures — mean error and the share of correct directions — compared with a simple baseline such as a “no change” forecast.">Pętla po wszystkich raportach i&nbsp;miary zbiorcze — średni błąd i&nbsp;odsetek trafionych kierunków — porównane z&nbsp;prostym punktem odniesienia, np. prognozą „bez zmian”.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="I did not record a reason here either. The notebook is built as a single-case analysis, and every forecast is a separate paid API call.">Tu też uzasadnienia nie zapisałem. Notebook jest zbudowany jako analiza jednego przypadku, a&nbsp;każda prognoza to osobne płatne wywołanie API.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="I never computed accuracy over the 134 reports. The repository holds one forecast (n = 1) with no baseline, so it is unknown whether the model does better than guessing.">Trafności na 134&nbsp;raportach nie policzyłem. W&nbsp;repozytorium jest jedna prognoza (n&nbsp;=&nbsp;1) bez punktu odniesienia, więc nie wiadomo, czy model radzi sobie lepiej niż zgadywanie.</dd>
+                        </dl>
+                    </article>
+                </div>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="134">134</span>
+                        <span class="case-stat-label" data-en="Allegro current reports in the set, 10 October 2020 to 12 December 2024">raporty bieżące Allegro w&nbsp;zbiorze, od 10&nbsp;października 2020 do 12&nbsp;grudnia 2024</span>
+                        <span class="case-stat-source" data-en="report file · as of 2026-10-14">plik raportów · stan na 2026-10-14</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="1,050">1&nbsp;050</span>
+                        <span class="case-stat-label" data-en="Allegro trading sessions, 12 October 2020 to 17 December 2024">sesji notowań Allegro, od 12&nbsp;października 2020 do 17&nbsp;grudnia 2024</span>
+                        <span class="case-stat-source" data-en="price file · as of 2026-10-14">plik cen · stan na 2026-10-14</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="114">114</span>
+                        <span class="case-stat-label" data-en="of the 134 reports can be evaluated cleanly: 100 sessions back, a full 30 days ahead, a session-day date">ze 134&nbsp;raportów da się ocenić bez zastrzeżeń: 100&nbsp;sesji wstecz, pełne 30&nbsp;dni naprzód, data w&nbsp;dniu sesji</span>
+                        <span class="case-stat-source" data-en="count on the repository data · 2026-10-14">pomiar na danych repozytorium · 2026-10-14</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="1">1</span>
+                        <span class="case-stat-label" data-en="stored forecast in the repository (CD Projekt report of 29 January 2021): direction right at 5 of 5 horizons, largest gap 11.4 pp — no baseline, and the model may have known the later price">zapisana prognoza w&nbsp;repozytorium (raport CD Projekt z&nbsp;29&nbsp;stycznia 2021): kierunek trafiony w&nbsp;5 z&nbsp;5&nbsp;horyzontów, największa różnica 11,4&nbsp;pkt proc. — bez punktu odniesienia, a&nbsp;model mógł znać dalszy kurs</span>
+                        <span class="case-stat-source" data-en="notebook run · 2024-12-18">przebieg notebooka · 2024-12-18</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="4.61%">4,61%</span>
+                        <span class="case-stat-label" data-en="100-day volatility given to the model, with the report day included; the day before it was 4.32%">zmienność 100-dniowa podana modelowi, z&nbsp;wliczonym dniem raportu; dzień wcześniej 4,32%</span>
+                        <span class="case-stat-source" data-en="notebook run · 2024-12-18">przebieg notebooka · 2024-12-18</span>
+                    </div>
+                </div>
+                <div class="showcase-cta">
+                    <a href="https://github.com/karolpolikarp/ds-SGH-Prognozy-gieldowe-z-ESPI" target="_blank" rel="noopener" class="project-link project-link-primary" aria-label="Repozytorium na GitHubie: Prognozy giełdowe z ESPI" data-en-aria="Repository on GitHub: Stock forecasts from ESPI">
+                        <span data-en="Repository on GitHub">Repozytorium na GitHubie</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+            </section>
+
+            <section id="gry" class="case-section" aria-labelledby="h-gry">
+                <h2 class="case-h2" id="h-gry"><span class="case-h2-num" aria-hidden="true" translate="no">§ 2</span><span data-en="The video game market">Rynek gier wideo</span></h2>
+                <p data-en="The question was: what makes a game sell? The data is the public Video Game Sales dataset from Kaggle: 16,598 records (a game on a given platform), 11,493 unique titles, the years 1980–2020. The data file is not in the repository; it has to be downloaded from Kaggle. I did the analysis in June 2025 as a university project and uploaded the notebooks on 14 and 15 June 2025.">Pytanie brzmiało: co decyduje o&nbsp;sprzedaży gry? Dane to publiczny zbiór Video Game Sales z&nbsp;Kaggle: 16&nbsp;598&nbsp;rekordów (gra na danej platformie), 11&nbsp;493&nbsp;unikalne tytuły, lata 1980–2020. Pliku z&nbsp;danymi nie ma w&nbsp;repozytorium, trzeba go pobrać z&nbsp;Kaggle. Analizę zrobiłem w&nbsp;czerwcu 2025 jako projekt na studia, a&nbsp;notebooki wgrałem 14 i&nbsp;15&nbsp;czerwca 2025.</p>
+                <p data-en="In Python (pandas, scikit-learn) I went from a quality audit to a model. Among other things, the audit found that in 2,041 records from 1980–2010 (16.4%) regional sales do not add up to global sales; I kept them in the data with a flag. Then segmentation: 191 platform–genre pairs (each with at least 5 games), PCA (principal component analysis, which squeezes many features into a few axes) and K-Means with 5 clusters, checked against Ward’s hierarchical clustering. Finally a random forest predicting the logarithm of sales, scored on a held-out 20% of the data. An earlier version, also in the repository, fitted the model to raw sales on the whole set and reported no quality measure at all.">W&nbsp;Pythonie (pandas, scikit-learn) przeszedłem od audytu jakości do modelu. Audyt wykazał m.in., że w&nbsp;2&nbsp;041&nbsp;rekordach z&nbsp;lat 1980–2010 (16,4%) suma sprzedaży regionalnej nie zgadza się ze sprzedażą globalną; zostawiłem je w&nbsp;danych z&nbsp;flagą. Potem segmentacja: 191&nbsp;par platforma–gatunek (każda z&nbsp;co najmniej 5&nbsp;grami), PCA (analiza głównych składowych, która ściska wiele cech do kilku osi) i&nbsp;K-Means z&nbsp;5&nbsp;skupieniami, sprawdzony grupowaniem hierarchicznym Warda. Na koniec las losowy (RandomForest) przewidujący logarytm sprzedaży, oceniany na odłożonych 20% danych. Wcześniejsza wersja, też w&nbsp;repozytorium, dopasowywała model do surowej sprzedaży na całym zbiorze i&nbsp;nie podawała żadnej miary jakości.</p>
+                <p data-en="The first two PCA components explain 61.3% of the variance, the silhouette score for five clusters (from −1 to 1; higher means better-separated groups) is 0.366, and the agreement with Ward’s split (adjusted Rand index) is 0.448: the two methods agree only in part. In the model the publisher carries the most weight (34.5%), then years since 1980 (24.9%) and genre (19.1%), and the platform only 8.5%.">Dwie pierwsze składowe PCA wyjaśniają 61,3% zmienności, wskaźnik silhouette dla pięciu skupień (od −1 do 1; im wyżej, tym wyraźniej oddzielone grupy) wynosi 0,366, a&nbsp;zgodność z&nbsp;podziałem Warda (skorygowany indeks Randa) — 0,448: dwie metody zgadzają się tylko częściowo. W&nbsp;modelu największą wagę ma wydawca (34,5%), potem lata od 1980 (24,9%) i&nbsp;gatunek (19,1%), a&nbsp;platforma tylko 8,5%.</p>
+                <p data-en="The main limitation lies in the text, not the data. Part of the conclusions block at the end of the notebook was hard-coded, and those sentences contradict numbers printed earlier in the same output: “Platform choice is key (40% of success)”, while the model gives the platform 8.5% importance (plus 9.0% for its popularity); “1% of games = 30% of sales”, while the computation says 11.3% of games and 61.0% of sales; and “Growth 1980-2010: 5176x” does come from the computation, but the formula computes a percentage, not a multiple. In the model notebook (a separate K-Means run, not the one with silhouette 0.366) the cluster names were hard-coded to cluster numbers rather than derived from their contents — the name “Japanese – JP dominance” went to a cluster whose top platforms are the Wii and PS2. On top of that the model explains only about a quarter of the variance, and label encoding treats platform, genre and publisher as ordered numbers.">Główne ograniczenie leży w&nbsp;tekście, nie w&nbsp;danych. Część bloku wniosków na końcu notebooka była wpisana na sztywno i&nbsp;te zdania przeczą liczbom wypisanym wcześniej w&nbsp;tym samym wyniku: „Kluczowe znaczenie wyboru platformy (40% sukcesu)”, podczas gdy model daje platformie 8,5% ważności (plus 9,0% za jej popularność); „1% gier = 30% sprzedaży”, podczas gdy obliczenia mówią o&nbsp;11,3% gier i&nbsp;61,0% sprzedaży; a&nbsp;„Wzrost 1980-2010: 5176x” wprawdzie pochodzi z&nbsp;obliczeń, ale wzór liczy procenty, a&nbsp;nie krotność. Nazwy skupień w&nbsp;notebooku z&nbsp;modelem (osobne grupowanie K-Means, nie to z&nbsp;silhouette 0,366) były przypisane na sztywno do numerów skupień, a&nbsp;nie wyprowadzone z&nbsp;ich zawartości — nazwę „Japońskie - Dominacja JP” dostało skupienie, w&nbsp;którym przodują Wii i&nbsp;PS2. Do tego model wyjaśnia tylko ok. ćwierci zmienności, a&nbsp;kodowanie etykietami traktuje platformę, gatunek i&nbsp;wydawcę jak liczby uporządkowane.</p>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="Data up to 2010 instead of the full 1980–2020 range">Dane do 2010 roku zamiast pełnego zakresu 1980–2020</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="I analyse only 1980–2010: 12,441 of 16,598 records (75.0%).">Analizuję tylko lata 1980–2010: 12&nbsp;441 z&nbsp;16&nbsp;598&nbsp;rekordów (75,0%).</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="The full 1980–2020 range, or 1980–2015 as in an earlier iteration (15,979 records).">Pełny zakres 1980–2020 albo lata 1980–2015, jak we wcześniejszej iteracji (15&nbsp;979&nbsp;rekordów).</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="After 2010 the data thins out: 2000–2009 averages 920.8 games a year, 2010 onwards 571.7 (37.9% fewer); 2017 has 3 games and 2020 just one. In the audit I flagged post-2010 games as incomplete data.">Po 2010 roku dane się przerzedzają: lata 2000–2009 dają średnio 920,8&nbsp;gry rocznie, okres od 2010 — 571,7 (o&nbsp;37,9% mniej), a&nbsp;rok 2017 ma 3&nbsp;gry, 2020 — jedną. W&nbsp;audycie oznaczyłem gry po 2010 roku jako niepełne dane.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="4,157 records dropped, including the PS4 and 3DS era. Every conclusion covers 1980–2010 only, and the drop in sales after 2010 cannot be studied on this data.">Odpadło 4&nbsp;157&nbsp;rekordów, w&nbsp;tym okres PS4 i&nbsp;3DS. Każdy wniosek dotyczy tylko lat 1980–2010, a&nbsp;spadku sprzedaży po 2010 roku nie da się na tych danych zbadać.</dd>
+                        </dl>
+                    </article>
+                </div>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="75.0%">75,0%</span>
+                        <span class="case-stat-label" data-en="of records kept after narrowing to 1980–2010: 12,441 of 16,598">rekordów zostało po zawężeniu do lat 1980–2010: 12&nbsp;441 z&nbsp;16&nbsp;598</span>
+                        <span class="case-stat-source" data-en="notebook · 2025-06-15">notebook · 2025-06-15</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="61.0%">61,0%</span>
+                        <span class="case-stat-label" data-en="of 1980–2010 sales comes from 11.3% of games (1,402 above the outlier fence)">sprzedaży z&nbsp;lat 1980–2010 przypada na 11,3% gier (1&nbsp;402 powyżej progu wartości odstających)</span>
+                        <span class="case-stat-source" data-en="notebook · 2025-06-15">notebook · 2025-06-15</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="0.254">0,254</span>
+                        <span class="case-stat-label" data-en="R² of the sales model on the held-out 20%: it explains about a quarter of the variance in log sales (RMSE 0.388)">R² modelu sprzedaży na odłożonych 20%: wyjaśnia ok. ćwierci zmienności logarytmu sprzedaży (RMSE 0,388)</span>
+                        <span class="case-stat-source" data-en="notebook · 2025-06-15">notebook · 2025-06-15</span>
+                    </div>
+                </div>
+                <div class="showcase-cta">
+                    <a href="https://github.com/karolpolikarp/ds-VideoGameSales" target="_blank" rel="noopener" class="project-link project-link-primary" aria-label="Repozytorium na GitHubie: Rynek gier wideo" data-en-aria="Repository on GitHub: The video game market">
+                        <span data-en="Repository on GitHub">Repozytorium na GitHubie</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+            </section>
+
+            <section id="winnipeg" class="case-section" aria-labelledby="h-winnipeg">
+                <h2 class="case-h2" id="h-winnipeg"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span data-en="Airbnb in Winnipeg (R)">Airbnb w&nbsp;Winnipeg (R)</span></h2>
+                <p data-en="This was a course project in R, built around nine set tasks: from data types and missing values to segmentation and a map. Among other things, the analysis looks at who offers listings in the city and what goes with a higher price. The data is the Inside Airbnb snapshot for Winnipeg of 7 March 2025: 1,626 listings, 79 variables, 15 neighbourhoods. I ran the notebook on 14 June 2025.">To projekt na zaliczenie w&nbsp;języku R, ułożony wokół dziewięciu zadanych kroków: od typów danych i&nbsp;braków po segmentację i&nbsp;mapę. Analiza sprawdza m.in., kto wystawia oferty w&nbsp;mieście i&nbsp;co idzie w&nbsp;parze z&nbsp;wyższą ceną. Dane to migawka Inside Airbnb dla Winnipeg z&nbsp;7&nbsp;marca 2025: 1&nbsp;626&nbsp;ofert, 79&nbsp;zmiennych, 15&nbsp;dzielnic. Notebook uruchomiłem 14&nbsp;czerwca 2025.</p>
+                <p data-en="I removed 173 listings with no price, capped price and the minimum and maximum number of nights at the 1st and 99th percentiles (without dropping rows), and filled gaps in beds, bathrooms and guest ratings with MICE (multiple imputation in which each variable with gaps is predicted from the others). I measured links with price by Pearson and Spearman correlation, and for categorical variables by R² from regressing price on one variable. For pairs of categorical variables I computed Cramér’s V (the strength of association between two categorical variables, from 0 to 1). I split hosts (not listings) into 4 groups with k-means. The result went into a report and an HTML presentation, both in the repository.">Usunąłem 173&nbsp;oferty bez ceny, cenę oraz minimalną i&nbsp;maksymalną liczbę nocy przyciąłem do 1. i&nbsp;99. percentyla (bez usuwania wierszy), a&nbsp;braki w&nbsp;łóżkach, łazienkach i&nbsp;ocenach gości uzupełniłem metodą MICE (wielokrotna imputacja, w&nbsp;której każdą zmienną z&nbsp;brakami przewiduje się z&nbsp;pozostałych). Związki z&nbsp;ceną mierzyłem korelacją Pearsona i&nbsp;Spearmana, a&nbsp;dla zmiennych kategorycznych — R² z&nbsp;regresji ceny na jedną zmienną. Dla par zmiennych kategorycznych policzyłem V Craméra (siła związku dwóch zmiennych kategorycznych, od 0 do 1). Gospodarzy (nie oferty) podzieliłem metodą k-means na 4&nbsp;grupy. Wynik trafił do raportu i&nbsp;prezentacji w&nbsp;HTML; oba są w&nbsp;repozytorium.</p>
+                <p data-en="The main limitation is the host segmentation. I set the number of groups (k = 4) in advance, without checking it against silhouette or any other measure, and the groups came out very uneven: 712, 80, 27 and 5 hosts. Their names (“Premium”, “Mega players”) come from thresholds written into the code. The presentation drifted from the analysis in places — it gives 35 neighbourhoods instead of the 15 in the data — and the interactive map the code produces is not in the repository.">Główne ograniczenie to segmentacja gospodarzy. Liczbę grup (k&nbsp;=&nbsp;4) przyjąłem z&nbsp;góry, bez sprawdzenia wskaźnikiem silhouette ani inną miarą, a&nbsp;grupy wyszły bardzo nierówne: 712, 80, 27 i&nbsp;5&nbsp;gospodarzy. Ich nazwy („Premium”, „Mega-gracze”) wynikają z&nbsp;progów wpisanych w&nbsp;kod. Prezentacja miejscami rozjechała się z&nbsp;analizą — podaje 35&nbsp;dzielnic zamiast 15 w&nbsp;danych — a&nbsp;interaktywnej mapy, którą tworzy kod, nie ma w&nbsp;repozytorium.</p>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="MICE imputation instead of dropping incomplete listings">Imputacja MICE zamiast usuwania niepełnych ofert</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="I drop only the 173 listings with no price. Beds, bathrooms, 7 guest ratings and reviews per month are filled with MICE using predictive mean matching (pmm): 3 imputations of 5 iterations each.">Usuwam tylko 173&nbsp;oferty bez ceny. Łóżka, łazienki, 7&nbsp;ocen gości i&nbsp;liczbę recenzji na miesiąc uzupełniam metodą MICE w&nbsp;wariancie pmm (predictive mean matching): 3&nbsp;imputacje po 5&nbsp;iteracji.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Dropping every incomplete listing — another 197 had no ratings — or filling with the median, as in the Washington analysis.">Usunięcie każdej niepełnej oferty — kolejnych 197 nie miało ocen — albo uzupełnienie medianą, jak w&nbsp;analizie z&nbsp;Waszyngtonu.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="89.4% of the original data stays (1,453 of 1,626), and the imputation took 2.0 s.">Zostaje 89,4% pierwotnych danych (1&nbsp;453 z&nbsp;1&nbsp;626), a&nbsp;imputacja trwała 2,0&nbsp;s.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="197 listings with no guest rating at all received a rating computed by the model — values that describe nothing real, and the host segmentation uses the average rating. I used only the first of the three imputations, so the uncertainty of the imputation itself was lost.">197&nbsp;ofert bez żadnej oceny gości dostało ocenę wyliczoną z&nbsp;modelu — te wartości nie opisują niczego realnego, a&nbsp;segmentacja gospodarzy korzysta ze średniej oceny. Dalej użyłem tylko pierwszej z&nbsp;trzech imputacji, więc niepewność samej imputacji przepadła.</dd>
+                        </dl>
+                    </article>
+                </div>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="1,453">1&nbsp;453</span>
+                        <span class="case-stat-label" data-en="listings after cleaning, out of 1,626 (−10.6%: only the listings with no price)">oferty po czyszczeniu, z&nbsp;1&nbsp;626 (−10,6%: tylko oferty bez ceny)</span>
+                        <span class="case-stat-source" data-en="notebook run · 2025-06-14">przebieg notebooka · 2025-06-14</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="59.7%">59,7%</span>
+                        <span class="case-stat-label" data-en="of listings belong to hosts with more than one listing (970 of 1,626)">ofert należy do gospodarzy z&nbsp;więcej niż jedną ofertą (970 z&nbsp;1&nbsp;626)</span>
+                        <span class="case-stat-source" data-en="notebook run · 2025-06-14">przebieg notebooka · 2025-06-14</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="0.549">0,549</span>
+                        <span class="case-stat-label" data-en="correlation between guest capacity and price, the strongest numeric link (Spearman 0.666); for property type R² = 0.182 against price">korelacja liczby gości z&nbsp;ceną, najsilniejsza wśród zmiennych liczbowych (Spearman 0,666); dla typu obiektu R²&nbsp;=&nbsp;0,182 względem ceny</span>
+                        <span class="case-stat-source" data-en="notebook run · 2025-06-14">przebieg notebooka · 2025-06-14</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="waszyngton" class="case-section" aria-labelledby="h-waszyngton">
+                <h2 class="case-h2" id="h-waszyngton"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span data-en="Airbnb in Washington">Airbnb w&nbsp;Waszyngtonie</span></h2>
+                <p data-en="Same domain, different toolkit: Python instead of R. The question: what shapes the price of a night in Washington? The data is the Inside Airbnb snapshot of 17 September 2024: 5,454 listings and 75 columns, of which 932 listings (17.1%) have no price. The notebook did not record when it was run; I uploaded it to the repository on 9 June 2026.">Ta sama dziedzina, inny warsztat: Python zamiast R. Pytanie: co kształtuje cenę noclegu w&nbsp;Waszyngtonie? Dane to migawka Inside Airbnb z&nbsp;17&nbsp;września 2024: 5&nbsp;454&nbsp;oferty i&nbsp;75&nbsp;kolumn, przy czym 932&nbsp;oferty (17,1%) nie mają ceny. Daty uruchomienia notebook nie zapisał; do repozytorium wgrałem go 9&nbsp;czerwca 2026.</p>
+                <p data-en="In Python (pandas, SciPy, statsmodels) I removed the listings with no price, then those outside the 1st–99th percentile of price — 4,441 remained. Guest ratings were filled with the median within each room type. I measured associations by variable type: Pearson correlation for numeric pairs, Cramér’s V for categorical pairs, and R² from regressing price on a single categorical variable.">W&nbsp;Pythonie (pandas, SciPy, statsmodels) usunąłem oferty bez ceny, a&nbsp;potem te spoza przedziału od 1. do 99. percentyla ceny — zostało 4&nbsp;441. Oceny gości uzupełniłem medianą w&nbsp;obrębie typu pokoju. Związki mierzyłem według typu zmiennych: korelacją Pearsona dla par liczbowych, V Craméra dla par kategorycznych i&nbsp;R² z&nbsp;regresji ceny na jedną zmienną kategoryczną.</p>
+                <p data-en="The main limitation: this describes associations, it does not measure effects. There are no p-values (significance tests) and no model with several variables at once, so no effect is isolated. The notebook’s summary says “Effect on price: an additional bathroom (+45.7% to the price)”, while 0.457 is the correlation coefficient between bathrooms and price, not a percentage effect; medians are called averages there, and the sentence about higher prices at weekends has no basis, because I did not analyse calendar data.">Główne ograniczenie: to opis związków, a&nbsp;nie pomiar wpływu. Nie ma wartości p (testów istotności) ani modelu z&nbsp;wieloma zmiennymi naraz, więc żaden efekt nie jest wyodrębniony. Podsumowanie w&nbsp;notebooku mówi: „Wpływ na cenę: dodatkowa łazienka (+45.7% do ceny)”, a&nbsp;0,457 to współczynnik korelacji łazienek z&nbsp;ceną, nie efekt procentowy; mediany są tam nazwane średnimi, a&nbsp;zdanie o&nbsp;wyższych cenach w&nbsp;weekendy nie ma oparcia, bo danych kalendarzowych nie analizowałem.</p>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="Percentiles instead of the IQR rule — two cities, two ways">Percentyle zamiast reguły IQR — dwa miasta, dwa sposoby</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="In Washington I remove listings priced outside the 1st–99th percentile (4,522 → 4,441). In Winnipeg the same percentiles cap the price, but the rows stay.">W&nbsp;Waszyngtonie usuwam oferty z&nbsp;ceną spoza 1.–99. percentyla (4&nbsp;522 → 4&nbsp;441). W&nbsp;Winnipeg te same percentyle przycinają cenę, ale wiersze zostają.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="The rule of 1.5 times the interquartile range (IQR). The notebook applies it only for one histogram, and only after the percentile cut: of the 4,441 listings it leaves 4,136.">Reguła 1,5&nbsp;rozstępu międzykwartylowego (IQR). Notebook stosuje ją tylko do jednego histogramu, i&nbsp;to już po odcięciu percentyli: z&nbsp;4&nbsp;441&nbsp;ofert zostawia 4&nbsp;136.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="I did not record a reason. Before the percentile cut the price distribution is extremely skewed (skewness 16.5; a maximum of 7,000 USD against a median of 130 USD), and even after cutting the extreme 1% at each end the IQR rule would remove another 305 listings.">Uzasadnienia nie zapisałem. Przed odcięciem percentyli rozkład ceny jest skrajnie skośny (skośność 16,5; maksimum 7&nbsp;000&nbsp;USD przy medianie 130&nbsp;USD), a&nbsp;nawet po odcięciu skrajnych 1% z&nbsp;każdej strony reguła IQR usunęłaby kolejnych 305&nbsp;ofert.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="Both thresholds are arbitrary. Washington loses real expensive listings, Winnipeg keeps them at an artificially capped price, so the two cities’ numbers cannot be compared directly.">Oba progi są arbitralne. Waszyngton traci prawdziwe drogie oferty, Winnipeg zatrzymuje je ze sztucznie przyciętą ceną, więc liczb z&nbsp;dwóch miast nie da się wprost porównać.</dd>
+                        </dl>
+                    </article>
+                </div>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="4,441">4&nbsp;441</span>
+                        <span class="case-stat-label" data-en="listings after removing missing prices and prices outside the 1st–99th percentile (out of 5,454)">ofert po usunięciu braków ceny i&nbsp;cen spoza 1.–99. percentyla (z&nbsp;5&nbsp;454)</span>
+                        <span class="case-stat-source" data-en="notebook uploaded 2026-06-09">notebook wgrany 2026-06-09</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="0.513">0,513</span>
+                        <span class="case-stat-label" data-en="correlation between guest capacity and price, the strongest numeric link (0.549 in Winnipeg)">korelacja liczby gości z&nbsp;ceną, najsilniejsza wśród zmiennych liczbowych (w&nbsp;Winnipeg 0,549)</span>
+                        <span class="case-stat-source" data-en="notebook uploaded 2026-06-09">notebook wgrany 2026-06-09</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="0.332">0,332</span>
+                        <span class="case-stat-label" data-en="R²: property type explains a third of the variance in price; room type and property type nearly duplicate each other (Cramér’s V 0.897)">R²: typ obiektu wyjaśnia jedną trzecią zmienności ceny; typ pokoju i&nbsp;typ obiektu prawie się dublują (V Craméra 0,897)</span>
+                        <span class="case-stat-source" data-en="notebook uploaded 2026-06-09">notebook wgrany 2026-06-09</span>
+                    </div>
+                </div>
+                <div class="showcase-cta">
+                    <a href="https://github.com/karolpolikarp/ds-WashingtonDC" target="_blank" rel="noopener" class="project-link project-link-primary" aria-label="Repozytorium na GitHubie: Airbnb w Waszyngtonie" data-en-aria="Repository on GitHub: Airbnb in Washington">
+                        <span data-en="Repository on GitHub">Repozytorium na GitHubie</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+            </section>
+
+            <section id="segmentacja" class="case-section" aria-labelledby="h-segmentacja">
+                <h2 class="case-h2" id="h-segmentacja"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span data-en="Segmenting speed-dating participants">Segmentacja uczestników speed datingu</span></h2>
+                <p data-en="The last project is a segmentation of speed-dating participants for the campaign of a fictional dating app. The data is a public dataset from an experiment: 8,378 rows (one row is one date), 195 variables, 551 participants. The repository holds a write-up of the results for a marketing team: three segments, each with a profile and suggested channels.">Ostatni projekt to segmentacja uczestników speed datingu na potrzeby kampanii fikcyjnej aplikacji randkowej. Dane to publiczny zbiór z&nbsp;eksperymentu: 8&nbsp;378&nbsp;wierszy (jeden wiersz to jedno spotkanie), 195&nbsp;zmiennych, 551&nbsp;uczestników. W&nbsp;repozytorium jest opis wyników dla zespołu marketingu: trzy segmenty, każdy z&nbsp;profilem i&nbsp;propozycją kanałów.</p>
+                <p data-en="The notebook in the repository is not the code behind the numbers in the write-up: it runs a different setup (6 features, 4 clusters). The code that produced those numbers is not in the repository, so I do not quote them here. One thing can be said without them: the write-up states that the silhouette score was highest for two groups, and that three were chosen because the split was meant to be more differentiated and useful for marketing. I uploaded the files on 9 June 2026; the repository does not record when the analysis was done.">Notebook w&nbsp;repozytorium nie jest kodem, który dał liczby z&nbsp;opisu: działa w&nbsp;innym ustawieniu (6&nbsp;cech, 4&nbsp;skupienia). Kodu, który dał te liczby, w&nbsp;repozytorium nie ma, więc ich tu nie przytaczam. Jedno da się powiedzieć bez nich: opis stwierdza wprost, że wskaźnik silhouette był najwyższy dla dwóch grup, a&nbsp;przyjęto trzy, bo podział miał być bardziej zróżnicowany i&nbsp;przydatny dla marketingu. Pliki wgrałem 9&nbsp;czerwca 2026; daty samej analizy repozytorium nie zapisuje.</p>
+            </section>
+
+            <section id="wnioski" class="case-section" aria-labelledby="h-wnioski">
+                <h2 class="case-h2" id="h-wnioski"><span class="case-h2-num" aria-hidden="true" translate="no">§ 6</span><span data-en="What I learned">Czego się nauczyłem</span></h2>
+                <ul class="showcase-list">
+                    <li data-en="A number in a conclusion has to come from the computation and mean what was computed. In the games analysis the “40% of success” attributed to platform choice carried over from an earlier iteration, even though the model gave the platform 8.5%; in Washington a correlation of 0.457 turned into “+45.7% to the price”. Every sentence with a number should be generated from the variable, and clusters should be named only after looking at them.">Liczba we wniosku musi pochodzić z&nbsp;obliczeń i&nbsp;znaczyć to, co policzono. W&nbsp;analizie gier „40% sukcesu” przypisane wyborowi platformy przeszło z&nbsp;wcześniejszej iteracji, choć model dawał platformie 8,5%; w&nbsp;Waszyngtonie korelacja 0,457 zamieniła się w&nbsp;„+45.7% do ceny”. Każde zdanie z&nbsp;liczbą powinno powstawać ze zmiennej, a&nbsp;skupienia trzeba nazywać dopiero po ich obejrzeniu.</li>
+                    <li data-en="In forecasting, the model’s own knowledge is a threat to validity. An instruction to “limit your knowledge to day X” guarantees nothing: a fair test uses reports outside the model’s training data, or treats the result as an upper bound. The same goes for features — each needs a check that it cannot see the day it is meant to predict, which the 100-day volatility in the ESPI study could.">W&nbsp;prognozowaniu wiedza samego modelu to zagrożenie dla trafności. Polecenie „ogranicz wiedzę do dnia X” niczego nie gwarantuje: uczciwy test bierze raporty spoza danych treningowych modelu albo traktuje wynik jako górną granicę. To samo dotyczy cech — każda potrzebuje sprawdzenia, czy nie widzi dnia, który ma przewidzieć, a&nbsp;zmienność 100-dniowa w&nbsp;badaniu ESPI go widziała.</li>
+                    <li data-en="One case is an anecdote. A pipeline that produces a forecast for one report should also produce an aggregate measure and a baseline from the start — without them even five correct directions out of five say little.">Jeden przypadek to anegdota. Potok, który liczy prognozę dla jednego raportu, powinien od początku liczyć też miarę zbiorczą i&nbsp;punkt odniesienia — bez nich nawet pięć trafionych kierunków na pięć niewiele mówi.</li>
+                    <li data-en="A metric suggests candidates, the use decides the number of segments — but that has to be said openly. In the segmentation three groups were chosen against the silhouette score, and the write-up admits it; in Winnipeg I set k = 4 without checking, and one of the groups has five hosts. And the code that produced the published numbers has to be published too.">Miara wskazuje kandydatów, liczbę segmentów wybiera zastosowanie — ale trzeba to napisać wprost. W&nbsp;segmentacji trzy grupy przyjęto wbrew wskaźnikowi silhouette i&nbsp;opis to przyznaje; w&nbsp;Winnipeg przyjąłem k&nbsp;=&nbsp;4 bez sprawdzenia i&nbsp;jedna z&nbsp;grup ma pięciu gospodarzy. Opublikować trzeba też kod, który dał opublikowane liczby.</li>
+                </ul>
+                <p class="case-source-note" data-en="The figures come from five public repositories as of 14 October 2026. The report and session counts in the ESPI study (134, 1,050, 114, 8, 6 and 2) were counted on the repository’s data files on 14 October 2026. The rest are stored notebook outputs, each with the date of the run or, where the notebook did not record it, of the upload; I did not re-run the notebooks. No user data — these are study projects.">Liczby pochodzą z&nbsp;pięciu publicznych repozytoriów, stan na 14&nbsp;października 2026. Liczby raportów i&nbsp;sesji w&nbsp;badaniu ESPI (134, 1&nbsp;050, 114, 8, 6 i&nbsp;2) policzono na plikach danych z&nbsp;repozytorium 14&nbsp;października 2026. Pozostałe to zapisane wyniki notebooków, każdy z&nbsp;datą przebiegu albo — gdy notebook jej nie zapisał — wgrania pliku; notebooków nie uruchamiałem ponownie. Bez danych o&nbsp;użytkownikach — to projekty studyjne.</p>
+            </section>
+
+            <nav class="case-pager" aria-label="Inne studia przypadków" data-en-aria="Other case studies">
+                <a class="case-pager-link" href="/case/narzedzia/">
+                    <span class="case-pager-dir" data-en="← Previous">← Poprzednie</span>
+                    <span class="case-pager-title" data-en="Small tools">Małe narzędzia</span>
+                </a>
+                <a class="case-pager-link case-pager-link--next" href="/case/zorza/">
+                    <span class="case-pager-dir" data-en="Next →">Następne →</span>
+                    <span class="case-pager-title">Zorza</span>
+                </a>
+            </nav>
+            <p class="case-back"><a class="btn btn-secondary" href="/#projekty"><span data-en="All projects">Wszystkie projekty</span></a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-start">
+                    <button type="button" class="start-button" aria-label="Na górę strony" data-en-aria="Back to top" onclick="window.scrollTo({top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'})">
+                        <span class="start-icon" aria-hidden="true">🖥️</span>
+                        <span>Start</span>
+                    </button>
+                </div>
+                <div class="footer-center">
+                    <p class="footer-tech">© 2025-2026 Karol Wilczyński</p>
+                </div>
+                <div class="footer-clock">
+                    <span id="clock">00:00</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js?v=62" defer></script>
+</body>
+</html>

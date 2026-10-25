@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
+    <title data-en="AIgets.me: case study | Karol Polikarp Wilczyński">AIgets.me: studium przypadku | Karol Polikarp Wilczyński</title>
+    <meta name="description" content="Prototyp kreatora instrukcji systemowej dla asystentów AI: lista pytań skrócona według wpływu na wynik, odpowiedzi użytkownika traktowane jako dane i zapasowy generator, który działa bez API." data-en-content="A prototype wizard that writes a system instruction for AI assistants: a question list cut by each question’s effect on the output, user answers treated as data and a backup generator that works without the API.">
+    <meta name="author" content="Karol Polikarp Wilczyński">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://karolwilczynski.com/case/aigets/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Karol Polikarp Wilczyński">
+    <meta property="og:url" content="https://karolwilczynski.com/case/aigets/">
+    <meta property="og:title" content="AIgets.me: studium przypadku | Karol Polikarp Wilczyński">
+    <meta property="og:description" content="Prototyp kreatora instrukcji systemowej dla asystentów AI: lista pytań skrócona według wpływu na wynik, odpowiedzi użytkownika traktowane jako dane i zapasowy generator, który działa bez API.">
+    <meta property="og:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://karolwilczynski.com/case/aigets/">
+    <meta name="twitter:title" content="AIgets.me: studium przypadku | Karol Polikarp Wilczyński">
+    <meta name="twitter:description" content="Prototyp kreatora instrukcji systemowej dla asystentów AI: lista pytań skrócona według wpływu na wynik, odpowiedzi użytkownika traktowane jako dane i zapasowy generator, który działa bez API.">
+    <meta name="twitter:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
+    <meta name="twitter:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <meta name="theme-color" content="#004d2b">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "AIgets.me: studium przypadku",
+        "description": "Prototyp kreatora instrukcji systemowej dla asystentów AI: lista pytań skrócona według wpływu na wynik, odpowiedzi użytkownika traktowane jako dane i zapasowy generator, który działa bez API.",
+        "url": "https://karolwilczynski.com/case/aigets/",
+        "inLanguage": "pl-PL",
+        "datePublished": "2026-10-14",
+        "dateModified": "2026-10-14",
+        "image": "https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2",
+        "author": {
+            "@type": "Person",
+            "@id": "https://karolwilczynski.com/#person",
+            "name": "Karol Polikarp Wilczyński",
+            "url": "https://karolwilczynski.com"
+        },
+        "isPartOf": {
+            "@id": "https://karolwilczynski.com/#website"
+        },
+        "about": {
+            "@type": "SoftwareApplication",
+            "name": "AIgets.me"
+        }
+    }
+    </script>
+
+    <!-- Fonts - async loading for faster first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="/style.css?v=157">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#tresc" class="skip-link">Przejdź do treści</a>
+
+    <nav class="nav" aria-label="Główna nawigacja" data-en-aria="Main navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Strona główna" data-en-aria="Home page">
+                <span class="logo-main">kpw<span class="logo-sparkle" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="kpwSpark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop class="kpw-stop-a" offset="0"/><stop class="kpw-stop-b" offset="1"/></linearGradient></defs><path class="logo-spark logo-spark-lg" d="M10.5 1.4C10.5 8.1 8.1 10.5 1.4 10.5C8.1 10.5 10.5 12.9 10.5 19.6C10.5 12.9 12.9 10.5 19.6 10.5C12.9 10.5 10.5 8.1 10.5 1.4Z"/><path class="logo-spark logo-spark-sm" d="M19 4C19 6.2 18.2 7 16 7C18.2 7 19 7.8 19 10C19 7.8 19.8 7 22 7C19.8 7 19 6.2 19 4Z"/></svg></span></span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/#projekty"><span data-en="Projects">Projekty</span></a></li>
+
+                <li><a href="/#wystapienia"><span data-en="Public talks">Wystąpienia publiczne</span></a></li>
+                <li><a href="/#kontakt"><span data-en="Contact">Kontakt</span></a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="nav-social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/karolpwilczynski" target="_blank" rel="noopener" class="nav-social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.78M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.69 1.69 1.69 0 0 0-1.69 1.69 1.68 1.68 0 0 0 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                </a>
+            </div>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Przełącz motyw jasny/ciemny" data-en-aria="Toggle light/dark theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <button type="button" class="lang-toggle" id="langToggle" aria-label="PL EN: switch to English">
+                <span class="lang-label lang-pl">PL</span>
+                <span class="lang-label lang-en">EN</span>
+            </button>
+            <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div>
+    </nav>
+
+    <main id="tresc" class="case">
+        <header class="case-hero">
+            <div class="container case-container">
+                <nav class="case-breadcrumb" aria-label="Okruszki" data-en-aria="Breadcrumb">
+                    <a href="/"><span data-en="Home">Strona główna</span></a>
+                    <span aria-hidden="true">/</span>
+                    <a href="/#studia"><span data-en="Case studies">Studia przypadków</span></a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">AIgets.me</span>
+                </nav>
+                <div class="project-tags">
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">React 19</span>
+                    <span class="tag">Vite</span>
+                    <span class="tag">Vercel</span>
+                    <span class="tag">Claude Haiku</span>
+                </div>
+                <h1 class="case-title">AIgets.me</h1>
+                <p class="case-subtitle" data-en="A system-instruction wizard for AI assistants">Kreator instrukcji systemowej dla asystentów AI</p>
+                <p class="case-lead" data-en="Anyone who works with an AI assistant every day explains all over again, in every conversation, who they are and what answers they expect. AIgets.me (the project’s name, not a web address) is a prototype wizard that turns the answers to 11 questions into one system instruction to paste into Claude, ChatGPT or Gemini. The key decision was a cut: on 21 February 2026, after a review of what each question added to the output, 16 questions became 11. The project has not launched publicly, and the repository has had no new commits since 22 June 2026.">Kto codziennie pracuje z&nbsp;asystentem AI, w&nbsp;każdej rozmowie od nowa tłumaczy, kim jest i&nbsp;jakich odpowiedzi oczekuje. AIgets.me (nazwa projektu, nie adres strony) to prototyp kreatora, który z&nbsp;odpowiedzi na 11&nbsp;pytań składa jedną instrukcję systemową do wklejenia w&nbsp;Claude, ChatGPT albo Gemini. Kluczową decyzją było cięcie: 21&nbsp;lutego 2026, po przeglądzie tego, co każde pytanie wnosi do wyniku, z&nbsp;16&nbsp;pytań zostało 11. Projekt nie wystartował publicznie, a&nbsp;od 22&nbsp;czerwca 2026 w&nbsp;repozytorium nie ma nowych commitów.</p>
+                <dl class="case-facts">
+                    <div><dt data-en="Role">Rola</dt><dd data-en="Product, decisions and review; code written by an AI coding assistant (Claude Code) under my direction">Produkt, decyzje i&nbsp;przegląd zmian; kod pisał asystent AI do programowania (Claude Code) pod moim kierunkiem</dd></div>
+                    <div><dt data-en="Period">Okres</dt><dd data-en="18 January – 22 June 2026">18&nbsp;stycznia – 22&nbsp;czerwca 2026</dd></div>
+                    <div><dt data-en="Status">Status</dt><dd data-en="Prototype, not launched; last commit 22 June 2026 (as of 14 October 2026)">Prototyp, bez publicznego startu; ostatni commit 22&nbsp;czerwca 2026 (stan na 14&nbsp;października 2026)</dd></div>
+                    <div><dt data-en="Code">Kod</dt><dd data-en="Private repository">Repozytorium prywatne</dd></div>
+                </dl>
+                <nav class="case-toc" aria-label="Spis treści" data-en-aria="Contents">
+                    <a href="#problem"><span data-en="Problem">Problem</span></a>
+                    <a href="#ograniczenia"><span data-en="Constraints">Ograniczenia</span></a>
+                    <a href="#architektura"><span data-en="Architecture">Architektura</span></a>
+                    <a href="#decyzje"><span data-en="Decisions">Decyzje</span></a>
+                    <a href="#dowody"><span data-en="Evidence">Dowody</span></a>
+                    <a href="#wnioski"><span data-en="Lessons">Wnioski</span></a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container case-container">
+            <section id="problem" class="case-section" aria-labelledby="h-problem">
+                <h2 class="case-h2" id="h-problem"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span data-en="Problem and context">Problem i&nbsp;kontekst</span></h2>
+                <p data-en="AIgets.me is a wizard for people who use AI assistants every day but do not want to write a system instruction themselves. Such an instruction tells the model how to behave in every conversation: what tone to take, how much detail to give, which format to use and what to avoid. That is what sets it apart from a prompt, which is a one-off request — so the app consistently says “instruction”, not “prompt”.">AIgets.me to kreator dla osób, które codziennie korzystają z&nbsp;asystentów AI, ale nie chcą samodzielnie pisać instrukcji systemowej. Taka instrukcja mówi modelowi, jak ma się zachowywać we wszystkich rozmowach: jakim tonem pisać, jak szczegółowo, w&nbsp;jakim formacie i&nbsp;czego unikać. Tym różni się od promptu, czyli jednorazowego polecenia — dlatego aplikacja konsekwentnie mówi o&nbsp;instrukcji, nie o&nbsp;prompcie.</p>
+                <p data-en="Without one, every conversation has to begin with an introduction, and the assistant adds phrases that bring nothing. The wizard’s “avoid” list names them outright, among them: “Great question!”, excessive apologies, repeating the question, “As an AI…”, moralising. The goal was a short wizard that produces one instruction (the brief given to the model asks for 150–250 words per language), ready to copy or download and paste into the assistant. The wizard defaults to Polish, and the output can be in Polish, in English or in both.">Bez niej każdą rozmowę trzeba zaczynać od przedstawienia się, a&nbsp;asystent dodaje zwroty, które niczego nie wnoszą. Lista „czego unikać” w&nbsp;kreatorze nazywa je wprost, m.in.: „Świetne pytanie!”, nadmiar przeprosin, powtarzanie pytania, „Jako AI…”, moralizowanie. Celem był krótki kreator, z&nbsp;którego powstaje jedna instrukcja (polecenie dla modelu zakłada 150–250&nbsp;słów na język), gotowa do skopiowania albo pobrania i&nbsp;wklejenia w&nbsp;asystencie. Kreator domyślnie działa po polsku, a&nbsp;wynik może być po polsku, po angielsku albo w&nbsp;obu językach.</p>
+                <p data-en="In this project the code was written by an AI coding assistant (Claude Code). Repository state as of 14 October 2026: 174 of the 255 commits are its changes and 71 more are my merges of its pull requests; I also made the fixes of 22 June 2026 with the assistant. I decided what should be built, reviewed the changes and chose which of them went in. The repository holds no user research and the app collects no analytics, so the problem statement is my own framing and the evidence below is technical only.">W&nbsp;tym projekcie kod pisał asystent AI do programowania (Claude Code). Stan repozytorium na 14&nbsp;października 2026: 174 z&nbsp;255&nbsp;commitów to jego zmiany, a&nbsp;71&nbsp;kolejnych to moje scalenia jego pull requestów; poprawki z&nbsp;22&nbsp;czerwca 2026 też przygotowałem z&nbsp;asystentem. Ja ustalałem, co ma powstać, przeglądałem zmiany i&nbsp;decydowałem, które z&nbsp;nich wchodzą. W&nbsp;repozytorium nie ma badań z&nbsp;użytkownikami, a&nbsp;aplikacja nie zbiera analityki, więc opis problemu to moje własne ujęcie, a&nbsp;dowody poniżej są wyłącznie techniczne.</p>
+            </section>
+
+            <section id="ograniczenia" class="case-section" aria-labelledby="h-ograniczenia">
+                <h2 class="case-h2" id="h-ograniczenia"><span class="case-h2-num" aria-hidden="true" translate="no">§ 2</span><span data-en="Constraints">Ograniczenia</span></h2>
+                <p data-en="A few conditions shaped every later choice:">Kilka warunków wyznaczyło wszystkie późniejsze wybory:</p>
+                <ul class="showcase-list">
+                    <li data-en="No accounts and no database: a static app on Vercel plus one serverless function. The app keeps the answers only in the browser tab (sessionStorage); for generation it sends them in one request to the function, which passes them on to the model’s API.">Bez kont i&nbsp;bez bazy danych: statyczna aplikacja na Vercelu i&nbsp;jedna funkcja serverless. Aplikacja przechowuje odpowiedzi tylko w&nbsp;karcie przeglądarki (sessionStorage); przy generowaniu wysyła je jednym żądaniem do funkcji, a&nbsp;ta przekazuje je do API modelu.</li>
+                    <li data-en="The app was meant to be free, while every generation is a paid model call on my API key, so abuse and repeat calls have to be capped without a database to count them in.">Aplikacja miała być bezpłatna, a&nbsp;każde generowanie to płatne wywołanie modelu z&nbsp;mojego klucza API. Nadużycia i&nbsp;powtórne wywołania trzeba więc ograniczać bez bazy, w&nbsp;której dałoby się je liczyć.</li>
+                    <li data-en="There has to be a result even without the API: in local development there is no serverless function, and the key or the service can fail.">Wynik musi powstać także bez API: lokalnie, w&nbsp;trybie deweloperskim, nie ma funkcji serverless, a&nbsp;klucz albo usługa mogą zawieść.</li>
+                    <li data-en="Free text ends up in a prompt: the expertise question accepts custom topics, and someone could type an instruction to the model there instead (so-called prompt injection).">Wolny tekst trafia do promptu: w&nbsp;pytaniu o&nbsp;obszary wiedzy można dopisać własny temat, a&nbsp;ktoś mógłby wpisać tam polecenie dla modelu (tzw. prompt injection).</li>
+                    <li data-en="Before a public launch I wanted a privacy policy, terms of service, a cookie policy and a GDPR notice in Polish. Drafts were written on 22 June 2026; they need completing before a launch.">Przed publicznym startem chciałem mieć po polsku politykę prywatności, regulamin, zasady cookies i&nbsp;informację RODO. Ich wersje robocze powstały 22&nbsp;czerwca 2026; przed startem trzeba je uzupełnić.</li>
+                    <li data-en="A side project without CI: two intensive bursts (18 January – 6 March 2026, and one day, 22 June 2026). The README asks for lint, tests and the build to be run by hand before committing, but nothing enforces it; on deploy, Vercel checks only types and whether the app builds, and does not run the tests.">Projekt poboczny bez CI: dwa okresy intensywnej pracy (18&nbsp;stycznia – 6&nbsp;marca 2026 i&nbsp;jeden dzień, 22&nbsp;czerwca 2026). README zaleca ręczne uruchamianie lintu, testów i&nbsp;buildu przed commitem, ale nic tego nie wymusza; przy wdrożeniu Vercel sprawdza tylko typy i&nbsp;to, czy aplikacja się buduje, a&nbsp;testów nie uruchamia.</li>
+                </ul>
+            </section>
+
+            <section id="architektura" class="case-section" aria-labelledby="h-architektura">
+                <h2 class="case-h2" id="h-architektura"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span data-en="Architecture">Architektura</span></h2>
+                <p data-en="The browser runs a React 19 and Vite app; the wizard itself loads only when the user enters it. It has 11 questions — industries, experience, expertise, AI use cases, tone, answer length, formatting, emoji, what to avoid, language and 10 toggles for extra rules — plus three technical screens: intro, generation and result. The questions are asked plainly, with defaults marked. The first versions used metaphors and game elements, which I began removing at the end of January 2026; on 22 June 2026 I replaced the last of them with plain controls. In seven steps a “Your AI will reply like this” preview shows a pre-written sample reply (not model output) that changes with each choice. sessionStorage holds the step, the answers and the finished output.">W&nbsp;przeglądarce działa aplikacja w&nbsp;React 19 i&nbsp;Vite; sam kreator doładowuje się dopiero po wejściu. Ma 11&nbsp;pytań — branże, doświadczenie, obszary wiedzy, zastosowania AI, ton, długość odpowiedzi, formatowanie, emoji, czego unikać, język i&nbsp;10&nbsp;przełączników dodatkowych zasad — oraz trzy ekrany techniczne: wstęp, generowanie i&nbsp;wynik. Pytania są zadane wprost, z&nbsp;zaznaczonymi wartościami domyślnymi. Pierwsze wersje miały metafory i&nbsp;elementy gry, które usuwałem od końca stycznia 2026, a&nbsp;ostatnie z&nbsp;nich 22&nbsp;czerwca 2026 zastąpiłem zwykłymi kontrolkami. W&nbsp;siedmiu krokach podgląd „Tak odpowie Twoje AI” pokazuje przygotowaną wcześniej przykładową odpowiedź (nie odpowiedź modelu), która zmienia się razem z&nbsp;wyborem. Krok, odpowiedzi i&nbsp;gotowy wynik trzyma sessionStorage.</p>
+                <p data-en="The answers go in one request to a serverless function (Node.js); the browser waits up to 30 seconds, and the generation can be cancelled at any time. Before anything reaches the model, the function checks the method, the content type and size, the request’s origin and the per-IP limit, then validates every field against a strict schema. The instruction for the model (a meta-prompt in a Polish, English or bilingual version) goes into the system parameter, and the user’s profile goes into the message as data inside XML tags. The code calls Claude Haiku; when that fails, the browser builds the instruction with a local static generator. The result can be copied or downloaded as .txt, .md or .json, with a hint on where to paste it in Claude, ChatGPT and Gemini.">Odpowiedzi trafiają jednym żądaniem do funkcji serverless (Node.js); przeglądarka czeka do 30&nbsp;sekund, a&nbsp;generowanie można w&nbsp;każdej chwili anulować. Zanim cokolwiek trafi do modelu, funkcja sprawdza metodę, typ i&nbsp;rozmiar treści, pochodzenie żądania oraz limit na adres IP, a&nbsp;potem waliduje każde pole według ścisłego schematu. Instrukcja dla modelu (metaprompt w&nbsp;wersji polskiej, angielskiej albo dwujęzycznej) trafia do parametru system, a&nbsp;profil użytkownika — do wiadomości, jako dane w&nbsp;znacznikach XML. Kod wywołuje Claude Haiku; gdy to się nie uda, przeglądarka składa instrukcję lokalnym generatorem statycznym. Wynik można skopiować albo pobrać jako .txt, .md lub .json, z&nbsp;podpowiedzią, gdzie wkleić go w&nbsp;Claude, ChatGPT i&nbsp;Gemini.</p>
+                <figure class="case-diagram">
+                    <svg viewBox="0 0 360 502" role="img" aria-labelledby="arch-title arch-desc">
+                        <title id="arch-title" data-en="Data flow in AIgets.me">Przepływ danych w&nbsp;AIgets.me</title>
+                        <desc id="arch-desc" data-en="The wizard in the browser sends the answers in one request to a serverless function. Request checks and validation stand in front of the paid model, and the answers reach it as data, separate from the instruction. The function calls Claude Haiku; when that fails, a local fallback in the browser builds the instruction and shows a banner. Either way the user gets a system instruction to copy or download.">Kreator w&nbsp;przeglądarce wysyła odpowiedzi jednym żądaniem do funkcji serverless. Przed płatnym modelem stoją kontrole żądania i&nbsp;walidacja, a&nbsp;odpowiedzi trafiają do niego jako dane, oddzielone od instrukcji. Funkcja wywołuje Claude Haiku; gdy to się nie uda, lokalny generator w&nbsp;przeglądarce składa instrukcję i&nbsp;pokazuje baner. W&nbsp;obu przypadkach użytkownik dostaje instrukcję systemową do skopiowania albo pobrania.</desc>
+                        <defs>
+                            <marker id="cd-arrow-aigets" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path class="cd-arrow" d="M0 0L10 5L0 10z"/>
+                            </marker>
+                        </defs>
+                        <rect class="cd-box" x="20" y="10" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="31" text-anchor="middle" data-en="Wizard in the browser">Kreator w&nbsp;przeglądarce</text>
+                        <text class="cd-note" x="180" y="49" text-anchor="middle" data-en="React 19 · 11 questions · sessionStorage">React 19 · 11&nbsp;pytań · sessionStorage</text>
+                        <path class="cd-edge" d="M180 62V92" marker-end="url(#cd-arrow-aigets)"/>
+                        <rect class="cd-box" x="20" y="96" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="117" text-anchor="middle" data-en="Serverless function (Node.js)">Funkcja serverless (Node.js)</text>
+                        <text class="cd-note" x="180" y="135" text-anchor="middle" data-en="one request; the browser waits up to 30 s">jedno żądanie; przeglądarka czeka do 30&nbsp;s</text>
+                        <path class="cd-edge" d="M180 148V178" marker-end="url(#cd-arrow-aigets)"/>
+                        <rect class="cd-box cd-box--key" x="20" y="182" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="203" text-anchor="middle" data-en="Checks before the paid model">Kontrole przed płatnym modelem</text>
+                        <text class="cd-note" x="180" y="221" text-anchor="middle" data-en="10 KB · 15/h per IP · allowlists">10&nbsp;KB · 15/h na IP · listy dozwolonych</text>
+                        <path class="cd-edge" d="M180 234V264" marker-end="url(#cd-arrow-aigets)"/>
+                        <rect class="cd-box" x="20" y="268" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="289" text-anchor="middle" data-en="Answers as data">Odpowiedzi jako dane</text>
+                        <text class="cd-note" x="180" y="307" text-anchor="middle" data-en="meta-prompt in system, profile in XML">metaprompt w&nbsp;system, profil w&nbsp;XML</text>
+                        <path class="cd-edge" d="M95 320V350" marker-end="url(#cd-arrow-aigets)"/>
+                        <rect class="cd-box cd-box--ext" x="20" y="354" width="150" height="52" rx="8"/>
+                        <text class="cd-label" x="95" y="375" text-anchor="middle">Claude Haiku</text>
+                        <text class="cd-note" x="95" y="393" text-anchor="middle" data-en="paid Anthropic API">płatne API Anthropic</text>
+                        <path class="cd-edge" d="M170 380H186" marker-end="url(#cd-arrow-aigets)"/>
+                        <rect class="cd-box cd-box--key" x="190" y="354" width="150" height="52" rx="8"/>
+                        <text class="cd-label" x="265" y="375" text-anchor="middle" data-en="Static fallback">Wersja zapasowa</text>
+                        <text class="cd-note" x="265" y="393" text-anchor="middle" data-en="local, with a banner">lokalnie, z&nbsp;banerem</text>
+                        <path class="cd-edge" d="M95 406V436" marker-end="url(#cd-arrow-aigets)"/>
+                        <path class="cd-edge" d="M265 406V436" marker-end="url(#cd-arrow-aigets)"/>
+                        <rect class="cd-box" x="20" y="440" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="461" text-anchor="middle" data-en="System instruction">Instrukcja systemowa</text>
+                        <text class="cd-note" x="180" y="479" text-anchor="middle" data-en="copy · .txt .md .json · where to paste">kopiuj · .txt .md .json · gdzie wkleić</text>
+                    </svg>
+                    <figcaption data-en="The gold frames mark the two key decisions: checks in front of the paid model and a fallback that always returns a result. The dashed frame marks an external service. The fallback runs on any error: a rejected request, the 30-second timeout, a missing key or an API failure.">Złotą ramką zaznaczyłem dwa miejsca kluczowych decyzji: kontrole przed płatnym modelem i&nbsp;wersję zapasową, która zawsze zwraca wynik. Przerywana ramka oznacza usługę zewnętrzną. Wersja zapasowa włącza się przy każdym błędzie: odrzuconym żądaniu, przekroczeniu 30&nbsp;sekund, braku klucza albo awarii API.</figcaption>
+                </figure>
+            </section>
+
+            <section id="decyzje" class="case-section" aria-labelledby="h-decyzje">
+                <h2 class="case-h2" id="h-decyzje"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span data-en="Key decisions">Kluczowe decyzje</span></h2>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="Cutting the wizard by its effect on the output">Kreator skrócony według wpływu na wynik</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="On 21 February 2026 I removed four steps: two scenario quizzes (thinking style and work style), AI “superpowers” and a simulated “concise or detailed” chat. I folded challenges into the AI use-cases question, moved the expertise question right after experience and moved the language choice near the end. The same day I deleted the dead code: 3,764 lines in 20 files.">21&nbsp;lutego 2026 usunąłem cztery kroki: dwa quizy ze scenariuszami (styl myślenia i&nbsp;styl pracy), „supermoce” AI i&nbsp;symulowany czat „zwięźle czy szczegółowo”. Wyzwania dołączyłem do pytania o&nbsp;zastosowania AI, pytanie o&nbsp;obszary wiedzy przeniosłem tuż za doświadczenie, a&nbsp;wybór języka pod koniec. Tego samego dnia usunąłem martwy kod: 3&nbsp;764&nbsp;wiersze w&nbsp;20&nbsp;plikach.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Keep the gamified steps, or build what the same review proposed: an “AI Arena” (5 rounds of picking the better of two replies instead of stating preferences), drag interactions instead of checkboxes and an assistant character that gains features with each step.">Zostawić grywalizowane kroki albo zbudować to, co proponował ten sam przegląd: „AI Arena” (5&nbsp;rund wyboru lepszej z&nbsp;dwóch odpowiedzi zamiast deklaracji), przeciąganie elementów zamiast pól wyboru i&nbsp;postać asystenta, która z&nbsp;każdym krokiem nabiera cech.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="The review of 21 February set every step against what it adds to the instruction. The two quizzes took 9 scenarios and produced one sentence. Ten of the 15 data-collecting steps were plain checkboxes or radio buttons in an animated costume. Six pairs of options in different steps overlapped, so the instruction could say the same thing twice, and the “concise or detailed” step could contradict the answer-length slider. The expertise question sat 12 steps after the experience question, although together they make the first two lines of the output.">Przegląd z&nbsp;21&nbsp;lutego zestawił każdy krok z&nbsp;tym, co wnosi do instrukcji. Dwa quizy wymagały 9&nbsp;scenariuszy, a&nbsp;dawały jedno zdanie. Spośród 15&nbsp;kroków zbierających dane 10 było zwykłymi polami wyboru albo przyciskami opcji w&nbsp;animowanym kostiumie. Sześć par opcji z&nbsp;różnych kroków pokrywało się, więc instrukcja mogła mówić dwa razy to samo, a&nbsp;krok „zwięźle czy szczegółowo” mógł przeczyć suwakowi długości odpowiedzi. Pytanie o&nbsp;obszary wiedzy stało 12&nbsp;kroków za pytaniem o&nbsp;doświadczenie, choć razem tworzą pierwsze dwa wiersze wyniku.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="Preferences are still stated rather than revealed through choices. I also removed the simulated chat, which the review rated as the step with the best data quality, and never built the comparisons meant to replace it. There is no record of any of these changes being tested with people.">Preferencje są nadal deklarowane, a&nbsp;nie ujawniane w&nbsp;wyborach. Usunąłem też symulowany czat, który przegląd uznał za krok o&nbsp;najlepszej jakości danych, a&nbsp;porównań, które miały go zastąpić, nie zbudowałem. Nie ma zapisów, że którąkolwiek z&nbsp;tych zmian sprawdzano na ludziach.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="A static fallback, visible since June">Wersja zapasowa, od czerwca z&nbsp;widocznym banerem</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The code calls Claude Haiku in a serverless function. When the call fails, takes longer than 30 seconds or the key is missing, the browser builds the instruction with a local static generator (in Polish, English or both). Since 22 June 2026 such a result carries the banner “AI generation was unavailable — showing a local backup version.” and a retry button.">Kod wywołuje Claude Haiku w&nbsp;funkcji serverless. Gdy wywołanie się nie uda, trwa dłużej niż 30&nbsp;sekund albo brakuje klucza, przeglądarka składa instrukcję lokalnym generatorem statycznym (po polsku, po angielsku albo w&nbsp;obu językach). Od 22&nbsp;czerwca 2026 taki wynik ma baner „Generowanie przez AI było niedostępne — pokazujemy wersję zapasową.” i&nbsp;przycisk ponowienia.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="A template alone — that is how the first version of 18 January 2026 worked; the model call was added the same day.">Sam szablon — tak działała pierwsza wersja z&nbsp;18&nbsp;stycznia 2026; wywołanie modelu doszło tego samego dnia.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="The model was meant to write flowing text instead of a filled-in template, and the meta-prompt tells it to reconcile conflicting preferences: “concise” plus “tables” becomes the rule “For simple questions, respond briefly. For complex topics, use structure (lists, tables).” The template guarantees a result in local development and when the API fails.">Model miał pisać płynny tekst zamiast wypełnionego szablonu, a&nbsp;metaprompt każe mu godzić sprzeczne preferencje: „zwięźle” i&nbsp;„tabele” zamieniają się w&nbsp;zasadę „Przy prostych pytaniach odpowiadaj zwięźle. Przy złożonych tematach używaj struktury (listy, tabele).” Szablon gwarantuje wynik w&nbsp;pracy lokalnej i&nbsp;przy awarii API.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="Two generators to keep in step, and the function holds its own copy of the translation maps. Until 22 June 2026 the switch to the template was silent — the screen reported success. The code points to the alias of Claude Haiku 3.5, which, according to Anthropic’s model list (as of 6 October 2026), was retired on 19 February 2026. As of 14 October 2026 it has not been verified on the live demo whether generation gets a model reply; if it does not, every generation since then has ended in the fallback, and before June that was invisible.">Dwa generatory do utrzymania w&nbsp;zgodzie, a&nbsp;funkcja ma własną kopię słowników tłumaczeń. Do 22&nbsp;czerwca 2026 przejście na szablon było ciche — ekran zgłaszał sukces. Kod wskazuje alias modelu Claude Haiku 3.5, który według listy modeli Anthropic (stan na 6&nbsp;października 2026) wycofano 19&nbsp;lutego 2026. Stan na 14&nbsp;października 2026: na działającym demo nie zweryfikowano, czy generowanie dostaje odpowiedź modelu; jeśli nie, od tamtej pory każde generowanie kończy się wersją zapasową, a&nbsp;przed czerwcem nie było tego widać.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="User answers as data, not instructions">Odpowiedzi użytkownika jako dane, nie polecenia</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The meta-prompt goes into the system parameter, and the user’s profile goes into the message as data inside XML tags. Every answer picked from a list of options is checked against an allowlist. The function trims free text to 100 characters and strips control characters and XML/HTML tags from it; lists are capped at 20 items (formatting at 10, expertise at 30), and the whole request at 10 KB.">Metaprompt trafia do parametru system, a&nbsp;profil użytkownika — do wiadomości, jako dane w&nbsp;znacznikach XML. Odpowiedzi wybierane z&nbsp;listy opcji funkcja porównuje z&nbsp;listą dozwolonych wartości. Wolny tekst przycina do 100&nbsp;znaków, usuwa z&nbsp;niego znaki sterujące oraz znaczniki XML/HTML; listy mają limit 20&nbsp;pozycji (formatowanie 10, obszary wiedzy 30), a&nbsp;całe żądanie 10&nbsp;KB.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="The first version of the function accepted any JSON, checked only that preferences were present and put everything into a single message.">Pierwsza wersja funkcji przyjmowała dowolny JSON, sprawdzała tylko, czy w&nbsp;ogóle są preferencje, i&nbsp;wkładała wszystko do jednej wiadomości.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="The expertise question accepts free text, and that text ends up in a prompt. With the instruction and the data kept apart, a command typed there is meant to reach the model as one more area of expertise, not as an order. I added the separation and the limits on 14 February 2026 and the tag stripping on 6 March 2026.">W&nbsp;pytaniu o&nbsp;obszary wiedzy można dopisać własny tekst, a&nbsp;ten trafia do promptu. Gdy instrukcja i&nbsp;dane są rozdzielone, polecenie wpisane w&nbsp;tym miejscu ma dotrzeć do modelu jako kolejny obszar wiedzy, nie jako rozkaz. Rozdzielenie i&nbsp;limity wprowadziłem 14&nbsp;lutego 2026, usuwanie znaczników 6&nbsp;marca 2026.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The regular expression that strips tags also deletes ordinary text in angle brackets (such as a skill typed as &lt;div&gt;). The limits truncate silently, and unknown values disappear without a message. Separation and cleaning reduce the injection risk; they do not remove it.">Wyrażenie regularne, które usuwa znaczniki, kasuje też zwykły tekst w&nbsp;nawiasach kątowych (np. umiejętność wpisaną jako &lt;div&gt;). Limity przycinają po cichu, a&nbsp;nieznane wartości znikają bez komunikatu. Rozdzielenie i&nbsp;czyszczenie zmniejszają ryzyko wstrzyknięcia, ale go nie usuwają.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="Abuse control without a database">Limit nadużyć bez bazy danych</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The function rejects requests sent from other sites (it compares the domain in the Origin header with the host it runs on, so it fits any deployment) and counts requests in memory, with a limit of 15 an hour per IP address. Above that it answers with code 429 and a Retry-After header saying when to try again.">Funkcja odrzuca żądania wysłane z&nbsp;innych stron (porównuje domenę z&nbsp;nagłówka Origin z&nbsp;adresem, pod którym działa, więc pasuje do każdego wdrożenia) i&nbsp;liczy żądania w&nbsp;pamięci, z&nbsp;limitem 15 na godzinę na adres IP. Po przekroczeniu odpowiada kodem 429 i&nbsp;podaje w&nbsp;nagłówku Retry-After, kiedy spróbować ponownie.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="A fixed allowlist of domains (CORS) tied to one address. The project has no shared store for counters, because it has no database at all.">Stała lista dozwolonych domen (CORS) przypięta do jednego adresu. Wspólnego magazynu liczników projekt nie ma, bo nie ma żadnej bazy.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="It is a free app with no backend, and every generation is paid for on my own API key; a code comment warns outright about other sites calling the API to “burn” that key. The limit has been in place since 14 February 2026; on 6 March 2026 I added cleanup of the counter map, which had until then grown without bound, and on 22 June 2026 the origin check and the Retry-After header.">To bezpłatna aplikacja bez backendu, a&nbsp;za każde generowanie płacę z&nbsp;własnego klucza API; komentarz w&nbsp;kodzie wprost ostrzega przed cudzymi stronami, które mogłyby wywoływać to API i&nbsp;„palić” klucz. Limit działa od 14&nbsp;lutego 2026; 6&nbsp;marca 2026 doszło czyszczenie mapy liczników, która wcześniej rosła bez końca, a&nbsp;22&nbsp;czerwca 2026 — sprawdzanie pochodzenia i&nbsp;nagłówek Retry-After.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The limit is simple: a brake on minor abuse, not full protection.">Limit jest prosty: to hamulec na drobne nadużycia, nie pełna ochrona.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="A reload does not trigger a second paid call">Odświeżenie strony nie uruchamia drugiego płatnego wywołania</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The finished instruction is saved in sessionStorage. After a reload during generation the wizard returns to the last question; after a reload on the result screen with no saved text it generates the instruction afresh instead of quietly substituting the weaker fallback.">Gotowa instrukcja zapisuje się w&nbsp;sessionStorage. Po odświeżeniu strony w&nbsp;trakcie generowania kreator wraca do ostatniego pytania, a&nbsp;po odświeżeniu na ekranie wyniku bez zapisanego tekstu generuje instrukcję od nowa, zamiast po cichu podstawić słabszą wersję zapasową.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="The previous behaviour: a reload during generation started it again — and with it a paid API call; a reload on the result screen quietly substituted the fallback.">Poprzednie zachowanie: odświeżenie strony w&nbsp;trakcie generowania uruchamiało je od nowa — a&nbsp;z&nbsp;nim płatne wywołanie API; odświeżenie na ekranie wyniku po cichu podstawiało wersję zapasową.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="Every call costs money and counts towards the limit of 15 an hour. A separate flag also guards against React’s Strict Mode calling it twice.">Każde wywołanie kosztuje i&nbsp;wlicza się do limitu 15 na godzinę. Osobna flaga chroni też przed podwójnym wywołaniem w&nbsp;trybie Strict Mode Reacta.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="After a reload mid-generation the user has to start it again. State is kept only in one browser tab: there is no history and no accounts. The change landed only on 22 June 2026.">Po odświeżeniu w&nbsp;trakcie generowania trzeba je uruchomić jeszcze raz. Stan jest przechowywany tylko w&nbsp;jednej karcie przeglądarki: nie ma historii ani kont. Zmiana weszła dopiero 22&nbsp;czerwca 2026.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="One instruction for every assistant">Jedna instrukcja dla każdego asystenta</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="Choosing an assistant — Claude, ChatGPT, Gemini or a universal option — changes only the hint on where to paste the instruction and the name of the downloaded file. The text stays the same: the function validates the choice but never passes it to the model.">Wybór asystenta — Claude, ChatGPT, Gemini albo wariant uniwersalny — zmienia tylko podpowiedź, gdzie wkleić instrukcję, i&nbsp;nazwę pobieranego pliku. Treść jest ta sama: funkcja sprawdza wybór, ale nie przekazuje go modelowi.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="“Optimisation for each model”, i.e. separate formatting for ChatGPT or Gemini; it is still listed as planned in the project documentation.">„Optymalizacja pod model”, czyli osobne formatowanie dla ChatGPT czy Gemini; nadal figuruje w&nbsp;planach w&nbsp;dokumentacji projektu.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="A code comment from 22 June 2026 puts it this way: the real value is telling the user exactly where to paste the text in each assistant, not a fake “optimise for X”. No measurement exists that would show different versions of the text working better in different assistants.">Komentarz w&nbsp;kodzie z&nbsp;22&nbsp;czerwca 2026 ujmuje to tak: realną wartością jest wskazanie, gdzie dokładnie wkleić tekst w&nbsp;danym asystencie, a&nbsp;nie udawane „optymalizuj pod X”. Nie ma pomiaru, który pokazywałby, że różne wersje tekstu działają lepiej w&nbsp;różnych asystentach.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The Markdown export still carries an “Optimized for: …” line that contradicts this decision. The paths to settings in other companies’ apps (e.g. in ChatGPT: Settings → Personalization → Custom Instructions) are hard-coded and will go stale when those apps change.">Eksport do Markdown wciąż ma wiersz „Optymalizowane dla: …”, który przeczy tej decyzji. Ścieżki do ustawień w&nbsp;cudzych aplikacjach (np. w&nbsp;ChatGPT: Ustawienia → Personalizacja → Instrukcje niestandardowe) są wpisane na sztywno i&nbsp;zdezaktualizują się, gdy te aplikacje się zmienią.</dd>
+                        </dl>
+                    </article>
+                </div>
+            </section>
+
+            <section id="dowody" class="case-section" aria-labelledby="h-dowody">
+                <h2 class="case-h2" id="h-dowody"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span data-en="Evidence">Dowody</span></h2>
+                <p data-en="The app has not launched, so there are no production measurements and no user data. The numbers come from the repository: the test run, the function’s configuration, the change history and the wizard review of 21 February 2026.">Aplikacja nie wystartowała, więc nie ma pomiarów z&nbsp;produkcji ani danych o&nbsp;użytkownikach. Liczby pochodzą z&nbsp;repozytorium: z&nbsp;przebiegu testów, konfiguracji funkcji, historii zmian i&nbsp;przeglądu kreatora z&nbsp;21&nbsp;lutego 2026.</p>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="19 → 14">19 → 14</span>
+                        <span class="case-stat-label" data-en="wizard screens after the cut, i.e. from 16 to 11 questions">ekranów kreatora po cięciu, czyli z&nbsp;16 do 11&nbsp;pytań</span>
+                        <span class="case-stat-source" data-en="wizard review and change · 2026-02-21">przegląd i&nbsp;zmiana kreatora · 2026-02-21</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="9">9</span>
+                        <span class="case-stat-label" data-en="scenarios in two quizzes (5 + 4) that produced one sentence of the instruction">scenariuszy w&nbsp;dwóch quizach (5&nbsp;+&nbsp;4), które dawały jedno zdanie instrukcji</span>
+                        <span class="case-stat-source" data-en="wizard review · 2026-02-21">przegląd kreatora · 2026-02-21</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="6">6</span>
+                        <span class="case-stat-label" data-en="pairs of overlapping options in different steps (e.g. the “facts only” superpower and the “facts over opinions” toggle); all went with the superpowers step">par pokrywających się opcji w&nbsp;różnych krokach (np. supermoc „tylko fakty” i&nbsp;przełącznik „fakty ponad opinie”); zniknęły razem z&nbsp;krokiem „supermoce”</span>
+                        <span class="case-stat-source" data-en="wizard review · 2026-02-21">przegląd kreatora · 2026-02-21</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="3,764">3&nbsp;764</span>
+                        <span class="case-stat-label" data-en="lines of dead code deleted from 20 files after the cut">wiersze martwego kodu usunięte z&nbsp;20&nbsp;plików po cięciu</span>
+                        <span class="case-stat-source" data-en="change history · 2026-02-21">historia zmian · 2026-02-21</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="86">86</span>
+                        <span class="case-stat-label" data-en="automated tests (Vitest) passing after the test suite was repaired; run by hand, with no CI">testów automatycznych (Vitest) przechodzi po naprawie zestawu; uruchamiane ręcznie, bez CI</span>
+                        <span class="case-stat-source" data-en="test run · 2026-06-22">przebieg testów · 2026-06-22</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="15/h">15/h</span>
+                        <span class="case-stat-label" data-en="generations per hour from one IP address; requests up to 10 KB, text up to 100 characters per entry">generowań na godzinę z&nbsp;jednego adresu IP; żądanie do 10&nbsp;KB, tekst do 100&nbsp;znaków na wpis</span>
+                        <span class="case-stat-source" data-en="function configuration · as of 2026-06-22">konfiguracja funkcji · stan na 2026-06-22</span>
+                    </div>
+                </div>
+                <p class="case-source-note" data-en="Repository state as of 14 October 2026 (last commit: 22 June 2026): 255 commits and 72 pull requests since 18 January 2026. The repository is private. No production measurements and no user data — the app has not launched and collects no analytics.">Stan repozytorium na 14&nbsp;października 2026 (ostatni commit: 22&nbsp;czerwca 2026): 255&nbsp;commitów i&nbsp;72&nbsp;pull requesty od 18&nbsp;stycznia 2026. Repozytorium jest prywatne. Bez pomiarów z&nbsp;produkcji i&nbsp;bez danych o&nbsp;użytkownikach — aplikacja nie wystartowała i&nbsp;nie zbiera analityki.</p>
+            </section>
+
+            <section id="wnioski" class="case-section" aria-labelledby="h-wnioski">
+                <h2 class="case-h2" id="h-wnioski"><span class="case-h2-num" aria-hidden="true" translate="no">§ 6</span><span data-en="What I learned">Czego się nauczyłem</span></h2>
+                <ul class="showcase-list">
+                    <li data-en="A question in a wizard has to earn its place by its effect on the output, not by how interesting it looks. Two quizzes with 9 scenarios produced one sentence; only a table of “step → effect on the instruction” showed what to cut.">Pytanie w&nbsp;kreatorze trzeba rozliczać z&nbsp;jego wpływu na wynik, nie z&nbsp;tego, jak ciekawie wygląda. Dwa quizy z&nbsp;9&nbsp;scenariuszami dawały jedno zdanie; dopiero tabela „krok → wpływ na instrukcję” pokazała, co wyciąć.</li>
+                    <li data-en="With an AI assistant iteration is cheap, so it multiplies. On 18 January 2026 the wizard went through 14, 21, 16 and 19 screens; in the first 13 days I replaced the app’s whole look 10 times (one change was reverted); in February the language step moved to second place and, three days later, near the end. What brought order was a written review with a table of effects on the output, not another round of changes.">Z&nbsp;asystentem AI iteracja jest tania, więc się mnoży. 18&nbsp;stycznia 2026 kreator miał kolejno 14, 21, 16 i&nbsp;19&nbsp;ekranów; w&nbsp;pierwszych 13&nbsp;dniach 10&nbsp;razy wymieniałem cały wygląd aplikacji (jedną zmianę cofnąłem); w&nbsp;lutym krok wyboru języka trafił na drugie miejsce, a&nbsp;trzy dni później pod koniec. Porządek przyniósł dopiero pisemny przegląd z&nbsp;tabelą wpływu na wynik, nie kolejna runda zmian.</li>
+                    <li data-en="Code that looks finished needs automatic quality gates. A code review I asked the assistant for on 26 January 2026 found that the advertised bilingual mode silently returned Polish only (the fix went in the same day). Without CI nothing flagged failing tests: on 18 February 2026 I fixed 4 tests that had already been failing, and on 22 June 2026 I had to repair the whole suite (a change of test environment); only then did 86 tests pass.">Kod, który wygląda na gotowy, potrzebuje automatycznych bramek jakości. Przegląd kodu, który 26&nbsp;stycznia 2026 zleciłem asystentowi, wykazał, że zapowiadany tryb dwujęzyczny po cichu zwracał tylko polski tekst (poprawka weszła tego samego dnia). Bez CI nic nie sygnalizowało niezaliczonych testów: 18&nbsp;lutego 2026 naprawiłem 4&nbsp;testy, które nie przechodziły już wcześniej, a&nbsp;22&nbsp;czerwca 2026 musiałem naprawić cały zestaw (zmiana środowiska testowego); dopiero wtedy przeszło 86&nbsp;testów.</li>
+                    <li data-en="Counts shown in the interface should be derived from the source, not typed in. In February 2026 the question count on the welcome screen was corrected by hand three times (18 → 17 → 16 → 12); since 22 June 2026 the app derives it from the list of steps. The same day the demo’s landing page got a hard-coded “13 steps”, and that evening I “corrected” the step counter in its mock-up from the right 11 to 13; as of 14 October 2026 the landing page still says 13.">Liczby w&nbsp;interfejsie trzeba wyprowadzać ze źródła, nie wpisywać ręcznie. W&nbsp;lutym 2026 liczbę pytań na ekranie powitalnym poprawiałem ręcznie trzy razy (18 → 17 → 16 → 12); od 22&nbsp;czerwca 2026 aplikacja liczy ją z&nbsp;listy kroków. Tego samego dnia strona startowa wersji demo dostała wpisane na sztywno „13&nbsp;kroków”, a&nbsp;wieczorem „poprawiłem” licznik na jej makiecie z&nbsp;prawidłowego 11 na 13; stan na 14&nbsp;października 2026: strona startowa nadal podaje 13.</li>
+                    <li data-en="A silent fallback turns an outage into an invisible drop in quality. The June banner is half the fix; the other half is the model id in configuration and a signal when the fallback starts showing up more often than usual.">Cicha wersja zapasowa zamienia awarię w&nbsp;niewidoczny spadek jakości. Baner z&nbsp;czerwca to połowa rozwiązania; druga połowa to identyfikator modelu w&nbsp;konfiguracji i&nbsp;sygnał, gdy wersja zapasowa zaczyna pojawiać się częściej niż zwykle.</li>
+                </ul>
+            </section>
+
+            <nav class="case-pager" aria-label="Inne studia przypadków" data-en-aria="Other case studies">
+                <a class="case-pager-link" href="/case/majeranek/">
+                    <span class="case-pager-dir" data-en="← Previous">← Poprzednie</span>
+                    <span class="case-pager-title">Majeranek</span>
+                </a>
+                <a class="case-pager-link case-pager-link--next" href="/case/narzedzia/">
+                    <span class="case-pager-dir" data-en="Next →">Następne →</span>
+                    <span class="case-pager-title" data-en="Small tools">Małe narzędzia</span>
+                </a>
+            </nav>
+            <p class="case-back"><a class="btn btn-secondary" href="/#projekty"><span data-en="All projects">Wszystkie projekty</span></a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-start">
+                    <button type="button" class="start-button" aria-label="Na górę strony" data-en-aria="Back to top" onclick="window.scrollTo({top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'})">
+                        <span class="start-icon" aria-hidden="true">🖥️</span>
+                        <span>Start</span>
+                    </button>
+                </div>
+                <div class="footer-center">
+                    <p class="footer-tech">© 2025-2026 Karol Wilczyński</p>
+                </div>
+                <div class="footer-clock">
+                    <span id="clock">00:00</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js?v=62" defer></script>
+</body>
+</html>

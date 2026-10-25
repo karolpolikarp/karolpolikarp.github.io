@@ -291,8 +291,9 @@ function heroScene(hero, L) {
         width: L.cw,          // design space = canvas pixels, so shapes can follow the layout
         height: L.ch,
         shapes: heroShapes(L),
-        count: 1500,
-        mobileCount: 700,
+        // the sign itself moved to the contact finale (2026-10-25): the hero keeps only the drifting dust
+        count: 0,
+        mobileCount: 0,
         dust: 260,
         mobileDust: 110,
         colorVars: COLOR_VARS,
@@ -300,8 +301,8 @@ function heroScene(hero, L) {
         maxDpr: 1.5,
         trail: 0.5,       // short trails: the streaks vanish quickly
         // a grand entrance, then the sign recedes into a quiet watermark
-        fadeIn: 1.6,
-        settle: { after: 1.6, factor: 0.7, duration: 2.2 },
+        fadeIn: 0.9,
+        settle: { after: 1.0, factor: 0.7, duration: 1.6 },
         // particles fade to a whisper behind the text, so every line stays readable
         quiet: {
             selector: '#hero .hero-greeting, #hero .hero-avatar, #hero .hero-title, #hero .hero-subtitle, ' +
@@ -312,7 +313,7 @@ function heroScene(hero, L) {
         },
         pointerTarget: hero.closest('section') ?? hero,
         repel: { radius: 60 },   // a small dent under the pointer, not a blast (design space = canvas px here)
-        sequence: [{ shape: 0, at: 0 }, { shape: 1, at: 2.2 }, { shape: 2, at: 4.4 }]
+        sequence: [{ shape: 0, at: 0 }, { shape: 1, at: 1.2 }, { shape: 2, at: 2.4 }]
     });
 }
 

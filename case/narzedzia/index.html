@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
+    <title data-en="Small tools: case study | Karol Polikarp Wilczyński">Małe narzędzia: studium przypadku | Karol Polikarp Wilczyński</title>
+    <meta name="description" content="Pięć małych, publicznych narzędzi: limity Claude’a na Stream Decku, akty prawne z API Sejmu, lokalne streszczenia modelem PLLuM, dodatek AI do Parawana i autoklikacz — każde z decyzją i jej kosztem." data-en-content="Five small public tools: Claude limits on a Stream Deck, legal acts from the Sejm API, local summaries with the PLLuM model, an AI add-on for Parawan and an auto-clicker — each with one decision and its cost.">
+    <meta name="author" content="Karol Polikarp Wilczyński">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://karolwilczynski.com/case/narzedzia/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Karol Polikarp Wilczyński">
+    <meta property="og:url" content="https://karolwilczynski.com/case/narzedzia/">
+    <meta property="og:title" content="Małe narzędzia: studium przypadku | Karol Polikarp Wilczyński">
+    <meta property="og:description" content="Pięć małych, publicznych narzędzi: limity Claude’a na Stream Decku, akty prawne z API Sejmu, lokalne streszczenia modelem PLLuM, dodatek AI do Parawana i autoklikacz — każde z decyzją i jej kosztem.">
+    <meta property="og:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://karolwilczynski.com/case/narzedzia/">
+    <meta name="twitter:title" content="Małe narzędzia: studium przypadku | Karol Polikarp Wilczyński">
+    <meta name="twitter:description" content="Pięć małych, publicznych narzędzi: limity Claude’a na Stream Decku, akty prawne z API Sejmu, lokalne streszczenia modelem PLLuM, dodatek AI do Parawana i autoklikacz — każde z decyzją i jej kosztem.">
+    <meta name="twitter:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
+    <meta name="twitter:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <meta name="theme-color" content="#004d2b">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Małe narzędzia: studium przypadku",
+        "description": "Pięć małych, publicznych narzędzi: limity Claude’a na Stream Decku, akty prawne z API Sejmu, lokalne streszczenia modelem PLLuM, dodatek AI do Parawana i autoklikacz — każde z decyzją i jej kosztem.",
+        "url": "https://karolwilczynski.com/case/narzedzia/",
+        "inLanguage": "pl-PL",
+        "datePublished": "2026-10-14",
+        "dateModified": "2026-10-14",
+        "image": "https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2",
+        "author": {
+            "@type": "Person",
+            "@id": "https://karolwilczynski.com/#person",
+            "name": "Karol Polikarp Wilczyński",
+            "url": "https://karolwilczynski.com"
+        },
+        "isPartOf": {
+            "@id": "https://karolwilczynski.com/#website"
+        },
+        "about": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "Claude Usage",
+                "url": "https://karolwilczynski.com/claude-usage-streamdeck/"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "ISAP-scraper",
+                "url": "https://github.com/karolpolikarp/ISAP-scraper"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "Stefka"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "Anonimizator AI",
+                "url": "https://github.com/karolpolikarp/anonimizator-ai"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "Multi-Sequence Clicker",
+                "url": "https://github.com/karolpolikarp/Multi-Sequence-Clicker"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Fonts - async loading for faster first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="/style.css?v=157">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#tresc" class="skip-link">Przejdź do treści</a>
+
+    <nav class="nav" aria-label="Główna nawigacja" data-en-aria="Main navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Strona główna" data-en-aria="Home page">
+                <span class="logo-main">kpw<span class="logo-sparkle" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="kpwSpark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop class="kpw-stop-a" offset="0"/><stop class="kpw-stop-b" offset="1"/></linearGradient></defs><path class="logo-spark logo-spark-lg" d="M10.5 1.4C10.5 8.1 8.1 10.5 1.4 10.5C8.1 10.5 10.5 12.9 10.5 19.6C10.5 12.9 12.9 10.5 19.6 10.5C12.9 10.5 10.5 8.1 10.5 1.4Z"/><path class="logo-spark logo-spark-sm" d="M19 4C19 6.2 18.2 7 16 7C18.2 7 19 7.8 19 10C19 7.8 19.8 7 22 7C19.8 7 19 6.2 19 4Z"/></svg></span></span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/#projekty"><span data-en="Projects">Projekty</span></a></li>
+
+                <li><a href="/#wystapienia"><span data-en="Public talks">Wystąpienia publiczne</span></a></li>
+                <li><a href="/#kontakt"><span data-en="Contact">Kontakt</span></a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="nav-social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/karolpwilczynski" target="_blank" rel="noopener" class="nav-social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.78M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.69 1.69 1.69 0 0 0-1.69 1.69 1.68 1.68 0 0 0 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                </a>
+            </div>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Przełącz motyw jasny/ciemny" data-en-aria="Toggle light/dark theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <button type="button" class="lang-toggle" id="langToggle" aria-label="PL EN: switch to English">
+                <span class="lang-label lang-pl">PL</span>
+                <span class="lang-label lang-en">EN</span>
+            </button>
+            <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div>
+    </nav>
+
+    <main id="tresc" class="case">
+        <header class="case-hero">
+            <div class="container case-container">
+                <nav class="case-breadcrumb" aria-label="Okruszki" data-en-aria="Breadcrumb">
+                    <a href="/"><span data-en="Home">Strona główna</span></a>
+                    <span aria-hidden="true">/</span>
+                    <a href="/#studia"><span data-en="Case studies">Studia przypadków</span></a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page" data-en="Small tools">Małe narzędzia</span>
+                </nav>
+                <div class="project-tags">
+                    <span class="tag">Node.js</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">PLLuM-12B</span>
+                </div>
+                <h1 class="case-title" data-en="Small tools">Małe narzędzia</h1>
+                <p class="case-subtitle" data-en="Five small tools that run on the user’s own computer — with no server of mine in between">Pięć małych narzędzi uruchamianych na komputerze użytkownika — bez mojego serwera po drodze</p>
+                <p class="case-lead" data-en="Not every problem needs an app with an account and a server. Each of these five tools does one thing: it shows Claude’s limits on Stream Deck keys, downloads legal acts from the Sejm API, summarises a recording with the local PLLuM model, adds an AI model to Parawan or repeats clicks. All of them are meant to run on the user’s own computer (Anonimizator AI is still a work in progress and does not work out of the box), and their code is public. For each one I describe one decision and its cost — for example, the first version of ISAP-scraper returned 0 acts without reporting an error, while the version built on the official Sejm API downloaded 23,318 acts from 2020–2026 (10 June 2026).">Nie każdy problem potrzebuje aplikacji z&nbsp;kontem i&nbsp;serwerem. Każde z&nbsp;tych pięciu narzędzi robi jedną rzecz: pokazuje limity Claude’a na klawiszach Stream Decka, pobiera akty prawne z&nbsp;API Sejmu, streszcza nagranie lokalnym modelem PLLuM, dokłada model AI do Parawana albo powtarza kliknięcia. Wszystkie są pomyślane do uruchamiania na komputerze użytkownika (Anonimizator AI jest jeszcze w&nbsp;budowie i&nbsp;nie działa „z&nbsp;pudełka”), a&nbsp;ich kod jest publiczny. Przy każdym opisuję jedną decyzję i&nbsp;jej koszt — na przykład pierwsza wersja ISAP-scrapera zwracała 0&nbsp;aktów i&nbsp;nie zgłaszała błędu, a&nbsp;wersja oparta na oficjalnym API Sejmu pobrała 23&nbsp;318&nbsp;aktów z&nbsp;lat 2020–2026 (10&nbsp;czerwca 2026).</p>
+                <dl class="case-facts">
+                    <div><dt data-en="Role">Rola</dt><dd data-en="Design, code (with an AI assistant in four of the tools) and publication">Projekt, kod (w&nbsp;czterech narzędziach z&nbsp;asystentem AI) i&nbsp;publikacja</dd></div>
+                    <div><dt data-en="Period">Okres</dt><dd>2025–2026</dd></div>
+                    <div><dt data-en="Status">Status</dt><dd data-en="Five public repositories; Stefka is a prototype and Anonimizator AI a work in progress (as of 14 October 2026)">Pięć publicznych repozytoriów; Stefka to prototyp, a&nbsp;Anonimizator AI jest w&nbsp;budowie (stan na 14&nbsp;października 2026)</dd></div>
+                    <div><dt data-en="Code">Kod</dt><dd data-en="Public (MIT; Anonimizator AI: Apache 2.0)">Publiczny (MIT; Anonimizator AI: Apache 2.0)</dd></div>
+                </dl>
+                <nav class="case-toc" aria-label="Spis treści" data-en-aria="Contents">
+                    <a href="#claude-usage"><span>Claude Usage</span></a>
+                    <a href="#isap-scraper"><span>ISAP-scraper</span></a>
+                    <a href="#stefka"><span>Stefka</span></a>
+                    <a href="#anonimizator-ai"><span>Anonimizator AI</span></a>
+                    <a href="#clicker"><span>Multi-Sequence Clicker</span></a>
+                    <a href="#wnioski"><span data-en="Lessons">Wnioski</span></a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container case-container">
+            <section id="claude-usage" class="case-section" aria-labelledby="h-claude-usage">
+                <h2 class="case-h2" id="h-claude-usage"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span>Claude Usage (Stream Deck)</span></h2>
+                <p data-en="Claude Code on a subscription works within limits: a 5-hour window, a weekly cap across all models and a separate weekly window for the Fable model. They are visible only on demand, by typing /usage. Claude Usage is a plugin for the Stream Deck — a keypad in which every key has a small 72×72-pixel screen — and keeps those values in view all the time. The bar changes colour from green (below 50%) to red (above 90%), so you read the colour before the number.">Claude Code na subskrypcji pracuje w&nbsp;ramach limitów: okna 5-godzinnego, limitu tygodniowego dla wszystkich modeli i&nbsp;osobnego okna tygodniowego dla modelu Fable. Widać je tylko na żądanie, po wpisaniu /usage. Claude Usage to wtyczka do Stream Decka — klawiatury, w&nbsp;której każdy klawisz ma mały ekran 72×72&nbsp;piksele — i&nbsp;trzyma te wartości stale na widoku. Kolor paska zmienia się od zielonego (poniżej 50%) do czerwonego (powyżej 90%), więc najpierw widać kolor, a&nbsp;dopiero potem liczbę.</p>
+                <p data-en="Five keys show the session, the week, the Fable window, credit spending and “cost today” — today’s tokens priced at API list rates (nothing is billed on a subscription; it is a measure of effort). The four limit keys need the network: one request a minute to the Anthropic API, using the token Claude Code is logged in with. Only the cost is computed offline, from local session transcripts.">Pięć klawiszy pokazuje sesję, tydzień, okno Fable, wydatki z&nbsp;kredytów i&nbsp;„koszt dziś”, czyli dzisiejsze tokeny przeliczone po cenniku API (na subskrypcji nikt go nie nalicza; to miara intensywności pracy). Cztery klawisze limitów potrzebują sieci: jedno zapytanie na minutę do API Anthropic, z&nbsp;tokenem, którym zalogowany jest Claude Code. Tylko koszt powstaje offline, z&nbsp;lokalnych transkryptów sesji.</p>
+                <p data-en="It is an unofficial plugin, not affiliated with Anthropic or Elgato. It uses Claude Code’s login and a limits endpoint that requires a beta header, so it may stop working without notice, and it is worth checking the current subscription terms before installing it. When the token is due to expire or the API rejects it with 401, the plugin refreshes it and writes the new tokens back to Claude Code’s login file — atomically, with a backup of the previous file. I have tested the plugin on Windows only; the macOS install has not been tested.">To nieoficjalna wtyczka, niezwiązana z&nbsp;Anthropic ani z&nbsp;Elgato. Korzysta z&nbsp;logowania Claude Code i&nbsp;z&nbsp;endpointu limitów, który wymaga nagłówka wersji beta, więc może przestać działać bez zapowiedzi, a&nbsp;przed instalacją warto sprawdzić aktualne warunki korzystania z&nbsp;subskrypcji. Gdy token ma wygasnąć albo API odrzuca go kodem 401, wtyczka go odświeża i&nbsp;zapisuje nowe tokeny z&nbsp;powrotem do pliku logowania Claude Code — atomowo, z&nbsp;kopią poprzedniego pliku. Wtyczkę sprawdzałem tylko na Windows; instalacji na macOS nie testowałem.</p>
+                <div class="showcase-cta">
+                    <a href="https://karolwilczynski.com/claude-usage-streamdeck/" target="_blank" rel="noopener" class="project-link project-link-primary">
+                        <span data-en="Project page">Strona projektu</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                    <a href="https://github.com/karolpolikarp/claude-usage-streamdeck" target="_blank" rel="noopener" class="project-link">
+                        <span data-en="Repository">Repozytorium</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="Responses overwritten, not added up">Odpowiedzi nadpisywane, nie sumowane</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="I compute the day’s cost from local transcripts: entries with the same key (request ID + message ID) are overwritten, and each file is read from where the previous scan stopped.">Koszt dnia liczę z&nbsp;lokalnych transkryptów: wpisy o&nbsp;tym samym kluczu (identyfikator zapytania + identyfikator wiadomości) nadpisuję, a&nbsp;każdy plik czytam od miejsca, w&nbsp;którym zatrzymał się poprzedni odczyt.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Adding up every entry and re-reading every file from the start each minute.">Sumowanie każdego wpisu i&nbsp;czytanie wszystkich plików od początku co minutę.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="A transcript stores the same response several times as the response grows, so a sum would inflate the total several-fold (README, 26 July 2026). Reading only the new bytes shortens every later scan (measurements below).">Transkrypt zapisuje tę samą odpowiedź kilka razy, w&nbsp;miarę jak odpowiedź rośnie, więc suma wielokrotnie zawyżałaby wynik (README, 26&nbsp;lipca 2026). Czytanie tylko nowych bajtów skraca każdy kolejny odczyt (pomiary niżej).</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="State lives in memory, so after a restart of the Stream Deck app the plugin re-reads all of today’s files once. I keep the model price table by hand: a model missing from it is not priced and adds nothing to the cost, so the total then comes out too low.">Stan jest trzymany w&nbsp;pamięci, więc po restarcie aplikacji Stream Deck wtyczka raz czyta wszystkie dzisiejsze pliki od nowa. Cennik modeli prowadzę ręcznie: model, którego w&nbsp;nim brak, nie jest wyceniany i&nbsp;nie zwiększa kosztu, więc wynik wychodzi wtedy zaniżony.</dd>
+                        </dl>
+                    </article>
+                </div>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="2">2</span>
+                        <span class="case-stat-label" data-en="hosts the plugin talks to (the Anthropic API and the token server); one dependency (ws), no telemetry">hosty, z&nbsp;którymi łączy się wtyczka (API Anthropic i&nbsp;serwer tokenów); jedna zależność (ws), bez telemetrii</span>
+                        <span class="case-stat-source" data-en="bin/usage.js, package.json · 2026-07-26">bin/usage.js, package.json · 2026-07-26</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="~40&nbsp;ms">~40&nbsp;ms</span>
+                        <span class="case-stat-label" data-en="for each later scan of today’s transcripts, which reads only the new bytes; the day’s first scan takes about 220 ms (on my computer)">trwa każdy kolejny odczyt dzisiejszych transkryptów, który czyta tylko nowe bajty; pierwszy odczyt dnia ok.&nbsp;220&nbsp;ms (na moim komputerze)</span>
+                        <span class="case-stat-source" data-en="README · 2026-07-26">README · 2026-07-26</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="1,389">1&nbsp;389</span>
+                        <span class="case-stat-label" data-en="lines of JavaScript, 1,090 of them in the plugin itself and the rest in development tools">wierszy JavaScriptu, w&nbsp;tym 1&nbsp;090 w&nbsp;samej wtyczce, a&nbsp;reszta w&nbsp;narzędziach deweloperskich</span>
+                        <span class="case-stat-source" data-en="repository state (v1.3.2) · 2026-10-14">stan repozytorium (v1.3.2) · 2026-10-14</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="isap-scraper" class="case-section" aria-labelledby="h-isap-scraper">
+                <h2 class="case-h2" id="h-isap-scraper"><span class="case-h2-num" aria-hidden="true" translate="no">§ 2</span><span>ISAP-scraper</span></h2>
+                <p data-en="Legal acts published in the Journal of Laws (Dziennik Ustaw) and Monitor Polski can be browsed in ISAP, the online legal acts system of the Sejm (the lower house of the Polish parliament), but following changes there means clicking through by hand. ISAP-scraper is a command-line tool and a Python library. It builds a local JSON database of acts with their in-force status, checks for new acts every 24 hours in monitoring mode, detects repealed acts, exports the list to CSV, and downloads full texts (PDF and HTML) and single articles by number, including superscript numbers such as Art. 33¹. The in-force status is the inForce field from the Sejm API — supporting data, not a determination of whether a provision is in force.">Akty prawne z&nbsp;Dziennika Ustaw i&nbsp;Monitora Polskiego można przeglądać w&nbsp;sejmowym serwisie ISAP (Internetowym Systemie Aktów Prawnych), ale śledzenie zmian wymaga tam ręcznego przeklikiwania. ISAP-scraper to narzędzie wiersza poleceń i&nbsp;biblioteka w&nbsp;Pythonie. Buduje w&nbsp;pliku JSON lokalną bazę aktów wraz ze statusem obowiązywania, w&nbsp;trybie monitorowania co 24&nbsp;godziny sprawdza nowe akty, wykrywa akty uchylone, eksportuje listę do CSV, pobiera pełne teksty (PDF i&nbsp;HTML) oraz pojedyncze artykuły po numerze, także z&nbsp;indeksem górnym, np. art.&nbsp;33¹. Status obowiązywania to pole inForce z&nbsp;API Sejmu — dane pomocnicze, a&nbsp;nie rozstrzygnięcie, czy przepis obowiązuje.</p>
+                <p data-en="The first version, from November 2025, parsed the site’s HTML. But the site sits behind a web application firewall (WAF), which sent back a JavaScript challenge page instead of the list of acts — with HTTP status 200 — so the script returned 0 acts, raised no error and looked as if it worked. In June 2026 I rewrote the data layer to use the Sejm’s official ELI API. The project has no automated tests: I checked the June 2026 code changes against the live API and recorded the results in the commit and pull request descriptions.">Pierwsza wersja z&nbsp;listopada 2025 czytała HTML serwisu. Serwis stoi jednak za zaporą aplikacyjną (WAF), która zamiast listy aktów odsyłała stronę z&nbsp;testem JavaScript, i&nbsp;to z&nbsp;kodem HTTP 200 — skrypt zwracał więc 0&nbsp;aktów, nie zgłaszał błędu i&nbsp;wyglądał, jakby działał. W&nbsp;czerwcu 2026 przepisałem warstwę pobierania danych na oficjalne API ELI Sejmu. Projekt nie ma testów automatycznych: zmiany kodu z&nbsp;czerwca 2026 sprawdzałem na żywym API, a&nbsp;wyniki zapisywałem w&nbsp;opisach commitów i&nbsp;pull requestów.</p>
+                <div class="showcase-cta">
+                    <a href="https://github.com/karolpolikarp/ISAP-scraper" target="_blank" rel="noopener" class="project-link project-link-primary">
+                        <span data-en="Repository">Repozytorium</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="The official API instead of parsing HTML">Oficjalne API zamiast czytania HTML</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The data comes from the Sejm’s ELI API (api.sejm.gov.pl/eli), which returns JSON: one request per publisher and year returns the whole list of acts, and the in-force status and the links between acts arrive as data fields.">Dane pochodzą z&nbsp;API ELI Sejmu (api.sejm.gov.pl/eli), które zwraca JSON: jedno zapytanie na rocznik wydawcy daje całą listę aktów, a&nbsp;status obowiązywania i&nbsp;powiązania między aktami przychodzą jako pola danych.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="An HTML scraper of isap.sejm.gov.pl built on BeautifulSoup and lxml — the first version, from November 2025.">Scraper HTML serwisu isap.sejm.gov.pl oparty na bibliotekach BeautifulSoup i&nbsp;lxml — pierwsza wersja z&nbsp;listopada 2025.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="Behind the firewall, the HTML scraper returned 0 acts. After the rewrite, a full download of the Journal of Laws and Monitor Polski for 2020–2026 returned 23,318 acts in a dozen or so seconds (10 June 2026), and three libraries dropped out of the dependencies: beautifulsoup4, lxml and python-dateutil.">Scraper HTML za zaporą zwracał 0&nbsp;aktów. Po przepisaniu pełne pobranie Dziennika Ustaw i&nbsp;Monitora Polskiego z&nbsp;lat 2020–2026 dało 23&nbsp;318&nbsp;aktów w&nbsp;kilkanaście sekund (10&nbsp;czerwca 2026), a&nbsp;z&nbsp;zależności wypadły trzy biblioteki: beautifulsoup4, lxml i&nbsp;python-dateutil.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The tool can do only what the API exposes. The newest consolidated texts of the codes are sometimes available only as PDF (e.g. the Civil Code, Journal of Laws 2025 item 1071), and then an article cannot be fetched by number. Fetching an article by number also costs an extra request for the act’s structure.">Narzędzie umie tyle, ile udostępnia API. Najnowsze teksty jednolite kodeksów bywają dostępne tylko w&nbsp;PDF (np. Kodeks cywilny, Dz.U. 2025 poz.&nbsp;1071), a&nbsp;wtedy artykułu po numerze nie da się pobrać. Pobranie artykułu po numerze kosztuje też dodatkowe zapytanie o&nbsp;strukturę aktu.</dd>
+                        </dl>
+                    </article>
+                </div>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="23,318">23&nbsp;318</span>
+                        <span class="case-stat-label" data-en="acts from the Journal of Laws and Monitor Polski (2020–2026) downloaded from the ELI API in a dozen or so seconds; the old HTML scraper returned 0">aktów z&nbsp;Dziennika Ustaw i&nbsp;Monitora Polskiego (2020–2026) pobranych z&nbsp;API ELI w&nbsp;kilkanaście sekund; stary scraper HTML zwracał 0</span>
+                        <span class="case-stat-source" data-en="PR #1 description · 2026-06-10">opis PR #1 · 2026-06-10</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="6">6</span>
+                        <span class="case-stat-label" data-en="command-line modes: scrape-all, check-new, find-replaced, fetch-texts, export and stats">trybów wiersza poleceń: scrape-all, check-new, find-replaced, fetch-texts, export i&nbsp;stats</span>
+                        <span class="case-stat-source" data-en="isap_scraper.py · state as of 2026-10-14">isap_scraper.py · stan na 2026-10-14</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="450">450</span>
+                        <span class="case-stat-label" data-en="articles in the act I tested fetching by number on: Art. 2, 100 and 300 correct, Art. 480 — nothing, as expected">artykułów w&nbsp;ustawie, na której sprawdziłem pobieranie po numerze: art.&nbsp;2, 100 i&nbsp;300 poprawnie, art.&nbsp;480 — brak, zgodnie z&nbsp;oczekiwaniem</span>
+                        <span class="case-stat-source" data-en="commit a0907e9 · 2026-06-10">commit a0907e9 · 2026-06-10</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="stefka" class="case-section" aria-labelledby="h-stefka">
+                <h2 class="case-h2" id="h-stefka"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span>Stefka</span></h2>
+                <p data-en="Stefka turns a meeting recording into structured text without sending anything off the computer — a requirement when the meeting’s content is sensitive. It is a local web app (FastAPI) that listens only on the computer itself (localhost). Speech is turned into text by mlx-whisper, the Whisper speech-recognition model in a version for Apple chips, and the Polish language model PLLuM-12B, run locally through Ollama, summarises the transcript fragment by fragment. The app also accepts TXT, MD, DOCX and PDF files. The download is a Markdown, PDF or DOCX file containing the PLLuM summaries assembled into one document; the transcript itself is not offered for download.">Stefka zamienia nagranie spotkania w&nbsp;uporządkowany tekst bez wysyłania czegokolwiek poza komputer — to warunek, gdy treść spotkania jest wrażliwa. To lokalna aplikacja webowa (FastAPI), która nasłuchuje tylko na tym samym komputerze (localhost). Mowę na tekst zamienia mlx-whisper, czyli model rozpoznawania mowy Whisper w&nbsp;wersji na procesory Apple, a&nbsp;polski model językowy PLLuM-12B, uruchamiany lokalnie przez Ollamę, streszcza transkrypcję fragment po fragmencie. Aplikacja przyjmuje też pliki TXT, MD, DOCX i&nbsp;PDF. Do pobrania jest plik Markdown, PDF albo DOCX ze streszczeniami z&nbsp;PLLuM złożonymi w&nbsp;jeden dokument; samej transkrypcji aplikacja do pobrania nie udostępnia.</p>
+                <p data-en="It is a prototype. The README calls it a proof of concept built in a few hours: the first versions date from March 2026, and in June I prepared the repository for publication. It runs only on macOS with Apple Silicon (a requirement of the MLX library), needs at least 32 GB of RAM and serves one user at a time, with no job queue. The code is MIT-licensed, but the default model, PLLuM-12B-nc-instruct, has a non-commercial licence (CC-BY-NC-4.0); for commercial use the README points to a variant licensed under Apache 2.0.">To prototyp. W&nbsp;README nazywam go dowodem koncepcji zbudowanym w&nbsp;kilka godzin: pierwsze wersje powstały w&nbsp;marcu 2026, a&nbsp;w&nbsp;czerwcu przygotowałem repozytorium do publikacji. Działa wyłącznie na macOS z&nbsp;procesorem Apple Silicon (wymóg biblioteki MLX), potrzebuje co najmniej 32&nbsp;GB RAM i&nbsp;obsługuje jednego użytkownika naraz, bez kolejki zadań. Kod jest na licencji MIT, ale domyślny model, PLLuM-12B-nc-instruct, ma licencję niekomercyjną (CC-BY-NC-4.0); do zastosowań komercyjnych README wskazuje wariant na licencji Apache 2.0.</p>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="Many short prompts instead of one long one">Wiele krótkich promptów zamiast jednego długiego</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="Since the fixes of March 2026 the text has been split into fragments of about 6,000 characters with a 400-character overlap. PLLuM summarises each fragment from a short, 24-word prompt, and Python code assembles the result, with no step in which the model merges the parts.">Od poprawek z&nbsp;marca 2026 tekst jest dzielony na fragmenty po ok.&nbsp;6&nbsp;000&nbsp;znaków z&nbsp;zakładką 400&nbsp;znaków. PLLuM streszcza każdy fragment według krótkiego, 24-wyrazowego promptu, a&nbsp;całość składa kod w&nbsp;Pythonie, bez kroku, w&nbsp;którym model łączyłby wyniki.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="The earlier approach (March 2026): texts of up to 18,000 characters went to the model whole, with one long, 555-word prompt describing the output format; longer ones were split into 15,000-character fragments, and the model merged the partial results with a separate prompt.">Wcześniejsze podejście (marzec 2026): teksty do 18&nbsp;000&nbsp;znaków szły do modelu w&nbsp;całości, z&nbsp;jednym długim, 555-wyrazowym promptem opisującym format wyniku; dłuższe dzielono na fragmenty po 15&nbsp;000&nbsp;znaków, a&nbsp;częściowe wyniki model łączył osobnym promptem.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="In the project spec I noted that in my setup (PLLuM-12B converted to Q8_0 and run through Ollama, March 2026) the model “can’t cope with one prompt on a long text (&gt;8K characters)”: the output was short, hallucinated and different every time. The second observation: “the shorter the prompt, the better the output” — the model ignored long, complex instructions.">W&nbsp;specyfikacji projektu zapisałem, że w&nbsp;mojej konfiguracji (PLLuM-12B po konwersji do Q8_0, uruchamiany przez Ollamę, marzec 2026) model „nie daje rady z&nbsp;jednym promptem na długi tekst (&gt;8K znaków)”: wynik był krótki, z&nbsp;halucynacjami i&nbsp;za każdym razem inny. Druga obserwacja: „im krótszy prompt, tym lepszy output” — długie, złożone instrukcje model ignorował.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The result does not group topics: it runs chronologically, fragment by fragment, and quality varies between fragments. Some of the model’s habits are fixed only in code — it removes preambles, dialogue formatting and names that are not in the source text — but that filter can be too aggressive and remove a real name.">Wynik nie grupuje wątków tematycznie: układa się chronologicznie, fragment po fragmencie, a&nbsp;jakość różni się między fragmentami. Część nawyków modelu poprawia dopiero kod — usuwa wstępy, zapis w&nbsp;formie dialogu oraz imiona i&nbsp;nazwiska, których nie ma w&nbsp;tekście źródłowym — ale ten filtr bywa zbyt agresywny i&nbsp;potrafi usunąć prawdziwe imię.</dd>
+                        </dl>
+                    </article>
+                </div>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="20">20</span>
+                        <span class="case-stat-label" data-en="Whisper hallucination patterns on silence and noise (e.g. “Dziękuję za oglądanie”, Polish for “Thanks for watching”); the app cuts them from the transcript when they repeat, and 12 of them even when they appear once">wzorców halucynacji Whispera na ciszy i&nbsp;szumie (np. „Dziękuję za oglądanie”); aplikacja wycina je z&nbsp;transkrypcji, gdy się powtarzają, a&nbsp;12 z&nbsp;nich także pojedynczo</span>
+                        <span class="case-stat-source" data-en="app/services/transcription.py · state as of 2026-10-14">app/services/transcription.py · stan na 2026-10-14</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="~13&nbsp;GB">~13&nbsp;GB</span>
+                        <span class="case-stat-label" data-en="the PLLuM-12B model after conversion to GGUF (Q8_0); the whole app uses about 20–23 GB of memory while working">model PLLuM-12B po konwersji do formatu GGUF (Q8_0); cała aplikacja zajmuje w&nbsp;pracy ok.&nbsp;20–23&nbsp;GB pamięci</span>
+                        <span class="case-stat-source" data-en="README · 2026-06-09">README · 2026-06-09</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="10">10</span>
+                        <span class="case-stat-label" data-en="smoke tests (quick checks of the pipeline logic) that do not need the model running; added at publication, with no tests before that">testów dymnych (szybkich sprawdzeń logiki przetwarzania), które nie wymagają uruchomionego modelu; dodane przy publikacji, wcześniej testów nie było</span>
+                        <span class="case-stat-source" data-en="tests/test_smoke.py · 2026-06-09">tests/test_smoke.py · 2026-06-09</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="anonimizator-ai" class="case-section" aria-labelledby="h-anonimizator-ai">
+                <h2 class="case-h2" id="h-anonimizator-ai"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span>Anonimizator AI</span></h2>
+                <p data-en-html="Anonimizator AI is an optional add-on for Parawan — my local anonymiser for Polish personal data, described in a &lt;a href=&quot;/case/parawan/&quot;&gt;separate case study&lt;/a&gt;. Parawan’s rules miss most rare and foreign surnames that have no Polish suffix (-ski, -cki) and no context, such as “Achtelik”, “Nguyen” or “Müller”: in the benchmark of 12 July 2026 the core alone, i.e. the rules and the dictionary, found 4 of 19 of them. The add-on brings in an NER (named-entity recognition) model that runs in the browser through ONNX or as a local service, and the text never leaves the computer. The model receives text already masked by the rules, so it can only add masks; if it fails, the rules’ result stands. Why it is a separate repository rather than part of the HTML file is explained there, in the decision “AI as a separate add-on”.">Anonimizator AI to opcjonalny dodatek do Parawana — mojego lokalnego anonimizatora polskich danych osobowych, opisanego w&nbsp;<a href="/case/parawan/">osobnym studium przypadku</a>. Reguły Parawana nie łapią większości rzadkich i&nbsp;obcych nazwisk bez polskiego sufiksu (-ski, -cki) i&nbsp;bez kontekstu, takich jak „Achtelik”, „Nguyen” czy „Müller”: w&nbsp;benchmarku z&nbsp;12&nbsp;lipca 2026 sam rdzeń, czyli reguły i&nbsp;słownik, wykrył 4 z&nbsp;19 takich nazwisk. Dodatek dokłada model NER (rozpoznawania nazw własnych), uruchamiany w&nbsp;przeglądarce przez ONNX albo jako lokalna usługa, a&nbsp;tekst nie opuszcza komputera. Model dostaje tekst już zamaskowany przez reguły, więc może tylko dołożyć maski; gdy zawiedzie, zostaje wynik reguł. Dlaczego to osobne repozytorium, a&nbsp;nie część pliku HTML, wyjaśniam tam, w&nbsp;decyzji „AI jako osobny dodatek”.</p>
+                <p data-en="Status as of 14 October 2026: work in progress. Parawan’s core is not yet published on npm, and the model pack (about 125 MB) has to be built separately, so the add-on does not work out of the box.">Stan na 14&nbsp;października 2026: w&nbsp;budowie. Rdzeń Parawana nie jest jeszcze opublikowany w&nbsp;rejestrze npm, a&nbsp;paczkę modelu (ok.&nbsp;125&nbsp;MB) trzeba zbudować osobno, więc dodatek nie działa „z&nbsp;pudełka”.</p>
+                <div class="showcase-cta">
+                    <a href="https://github.com/karolpolikarp/anonimizator-ai" target="_blank" rel="noopener" class="project-link project-link-primary">
+                        <span data-en="Repository">Repozytorium</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="FastPDN instead of the model with the better model-card score">FastPDN zamiast modelu z&nbsp;lepszym wynikiem na karcie modelu</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The clarin-pl/FastPDN model: a smaller, distilled version of the Polish HerBERT model, trained on the KPWr corpus with names in full inflection.">Model clarin-pl/FastPDN: mniejsza, destylowana wersja polskiego modelu HerBERT, uczona na korpusie KPWr z&nbsp;nazwami w&nbsp;pełnej odmianie.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="A public HerBERT model fine-tuned for NER on the WikiANN dataset, with an F1 of 0.896 according to its model card.">Publiczny model HerBERT dostrojony do NER na zbiorze WikiANN, z&nbsp;wynikiem F1&nbsp;0,896 według karty modelu.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="On realistic sentences (a test on 4 July 2026) the model with the better metric found a fragment of one person out of 7 — Wikipedia-based datasets are mostly in the nominative case. FastPDN found 7 of 7 with complete spans and in that test did better than spaCy, which dropped the part of a double-barrelled surname after the hyphen.">Na realistycznych zdaniach (test z&nbsp;4&nbsp;lipca 2026) model z&nbsp;lepszą metryką na 7&nbsp;osób wykrył fragment jednej — zbiory z&nbsp;Wikipedii to głównie mianowniki. FastPDN znalazł 7&nbsp;z&nbsp;7 z&nbsp;pełnymi zakresami i&nbsp;w&nbsp;tym teście wypadł lepiej niż spaCy, który w&nbsp;nazwiskach dwuczłonowych gubił człon po łączniku.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="In the browser the model runs quantised to int8 (weights stored in 8 bits, which makes the model smaller). In the benchmark of 4 July 2026 (159 cases) that cost about 2 percentage points of recall — the share of data to hide that was caught: 97.5% against 99.4% for FastPDN run as a service. In the benchmark of 12 July, on a different set of 260 sentences and after a fix to subword grouping in the int8 model’s output (11 July), the gap in overall recall was 0.4 points (98.4% against 98.8%).">W&nbsp;przeglądarce model działa po kwantyzacji do int8 (wagi zapisane w&nbsp;8&nbsp;bitach, co zmniejsza model). W&nbsp;benchmarku z&nbsp;4&nbsp;lipca 2026 (159&nbsp;przypadków) kosztowało to ok.&nbsp;2&nbsp;punkty procentowe recallu, czyli odsetka wykrytych danych do ukrycia: 97,5% wobec 99,4% dla FastPDN uruchamianego jako usługa. W&nbsp;benchmarku z&nbsp;12&nbsp;lipca, na innym zbiorze 260&nbsp;zdań i&nbsp;po poprawce grupowania podsłów w&nbsp;wynikach modelu int8 (11&nbsp;lipca), różnica w&nbsp;recallu łącznym wyniosła 0,4&nbsp;punktu (98,4% wobec 98,8%).</dd>
+                        </dl>
+                    </article>
+                </div>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="78.9%">78,9%</span>
+                        <span class="case-stat-label" data-en="recall of the int8 ONNX model on 19 synthetic sentences with surnames that have no Polish suffix and no context (15 of 19; run under Node.js in the benchmark, the same model that runs in the browser in the add-on), against 21.1% (4 of 19) for the core alone; the local FastPDN and spaCy services: 84.2% and 89.5%">recall modelu ONNX int8 w&nbsp;19 syntetycznych zdaniach z&nbsp;nazwiskami bez polskiego sufiksu i&nbsp;bez kontekstu (15 z&nbsp;19; w&nbsp;benchmarku uruchomiony w&nbsp;Node.js, ten sam model, który w&nbsp;dodatku działa w&nbsp;przeglądarce), wobec 21,1% (4 z&nbsp;19) dla samego rdzenia; lokalne usługi FastPDN i&nbsp;spaCy: 84,2% i&nbsp;89,5%</span>
+                        <span class="case-stat-source" data-en="Parawan’s docs/BENCHMARK.md · 2026-07-12">docs/BENCHMARK.md Parawana · 2026-07-12</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="99.6%">99,6%</span>
+                        <span class="case-stat-label" data-en="precision (proxy): of 280 fragments that must stay in the text (e.g. provision numbers, case references, names of institutions), 279 were kept — the same with and without the model">precyzja (proxy): z&nbsp;280 fragmentów, które muszą zostać w&nbsp;tekście (np. numery przepisów, sygnatury akt, nazwy instytucji), zachowanych zostało 279 — tyle samo z&nbsp;modelem i&nbsp;bez niego</span>
+                        <span class="case-stat-source" data-en="Parawan’s docs/BENCHMARK.md · 2026-07-12">docs/BENCHMARK.md Parawana · 2026-07-12</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="clicker" class="case-section" aria-labelledby="h-clicker">
+                <h2 class="case-h2" id="h-clicker"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span>Multi-Sequence Clicker</span></h2>
+                <p data-en="Multi-Sequence Clicker is a Java auto-clicker for automating your own repetitive on-screen tasks. You mark points by hovering the cursor over them and pressing the space bar, then group them into sequences and the sequences into a pattern with a repeat count for each step. The whole pattern can run a set number of times or indefinitely. The cursor moves smoothly between points instead of jumping. As the README says, automated clicking may break the terms of service of some games and services, so the tool is meant only for places where that is allowed. It is the smallest project on this page: no tests and no history of code changes — the code went into the repository as a single upload in August 2025, and only a README and a licence were added in June 2026.">Multi-Sequence Clicker to autoklikacz w&nbsp;Javie do automatyzacji własnych, powtarzalnych czynności na ekranie. Punkty zaznacza się, najeżdżając na nie kursorem i&nbsp;naciskając spację; potem łączy się je w&nbsp;sekwencje, a&nbsp;sekwencje we wzorzec z&nbsp;liczbą powtórzeń każdego kroku. Całość można powtórzyć określoną liczbę razy albo bez końca. Kursor przesuwa się płynnie między punktami, zamiast przeskakiwać. Jak piszę w&nbsp;README, automatyzacja klikania może naruszać regulaminy niektórych gier i&nbsp;serwisów, więc narzędzie jest przeznaczone do użytku tylko tam, gdzie jest to dozwolone. To najmniejszy projekt na tej stronie: bez testów i&nbsp;bez historii zmian kodu — kod trafił do repozytorium jednym wgraniem w&nbsp;sierpniu 2025, a&nbsp;w&nbsp;czerwcu 2026 doszły tylko README i&nbsp;licencja.</p>
+                <div class="showcase-cta">
+                    <a href="https://github.com/karolpolikarp/Multi-Sequence-Clicker" target="_blank" rel="noopener" class="project-link project-link-primary">
+                        <span data-en="Repository">Repozytorium</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="One file, standard library only">Jeden plik, tylko biblioteka standardowa</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The whole app is one file, Clicker3.java (1,082 lines, as of 14 October 2026): Swing for the interface and java.awt.Robot for mouse movement and clicks, with no external dependencies.">Cała aplikacja to jeden plik Clicker3.java (1&nbsp;082&nbsp;wiersze, stan na 14&nbsp;października 2026): Swing do interfejsu i&nbsp;java.awt.Robot do ruchu myszy i&nbsp;kliknięć, bez zewnętrznych zależności.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="I didn’t record one; the repository holds only the finished code, with no earlier versions.">Nie zapisałem żadnej; w&nbsp;repozytorium jest tylko gotowy kod, bez wcześniejszych wersji.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="I didn’t record the reason either. The README describes the effect: the only requirement is JDK 8 or newer (compile with javac and start with java, no libraries to download), and the whole code fits in one file.">Powodu też nie zapisałem. Skutek opisuje README: jedynym wymaganiem jest JDK&nbsp;8 lub nowszy (kompilacja przez javac i&nbsp;start przez java, bez pobierania bibliotek), a&nbsp;cały kod mieści się w&nbsp;jednym pliku.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The code shows that the keyboard shortcuts (R, S, ESC) work only while the program’s window has focus, because there is no global key hook, and that sequences and patterns live only in memory — after closing the app they have to be set up again. On macOS, java.awt.Robot needs Accessibility and Screen Recording permissions for the terminal or IDE.">Z&nbsp;kodu wynika, że skróty klawiszowe (R, S, ESC) działają tylko wtedy, gdy okno programu ma fokus, bo nie ma globalnego przechwytywania klawiszy, a&nbsp;sekwencje i&nbsp;wzorce istnieją tylko w&nbsp;pamięci — po zamknięciu programu trzeba je ustawić od nowa. Na macOS java.awt.Robot wymaga uprawnień Dostępności i&nbsp;Nagrywania ekranu dla terminala albo IDE.</dd>
+                        </dl>
+                    </article>
+                </div>
+            </section>
+
+            <section id="wnioski" class="case-section" aria-labelledby="h-wnioski">
+                <h2 class="case-h2" id="h-wnioski"><span class="case-h2-num" aria-hidden="true" translate="no">§ 6</span><span data-en="What I learned">Czego się nauczyłem</span></h2>
+                <ul class="showcase-list">
+                    <li data-en="An empty result should be treated as an error until you know where it came from. The first version of ISAP-scraper returned 0 acts without any error, and fetching an article by number silently returned nothing for every code divided into parts — I found and fixed that bug on the day I added the feature and checked the fix on Art. 33¹ of the Civil Code (10 June 2026). When collecting data, an official API is also a better choice than parsing a page.">Pusty wynik trzeba traktować jak błąd, dopóki nie wiadomo, skąd się wziął. Pierwsza wersja ISAP-scrapera zwracała 0&nbsp;aktów bez żadnego błędu, a&nbsp;pobieranie artykułu po numerze po cichu nie zwracało niczego dla każdego kodeksu podzielonego na części — ten błąd wykryłem i&nbsp;naprawiłem tego samego dnia, w&nbsp;którym dodałem tę funkcję, i&nbsp;sprawdziłem poprawkę na art.&nbsp;33¹ Kodeksu cywilnego (10&nbsp;czerwca 2026). Przy zbieraniu danych lepiej też sięgać po oficjalne API niż czytać stronę.</li>
+                    <li data-en="A model has to be checked on your own texts. The NER model with the better model-card metric found a fragment of one person out of seven, and PLLuM-12B in my setup ignored long instructions and handled short ones better. With a small model it is better to break the task into simple steps and clean up the output in code than to keep adding sentences to the prompt.">Model trzeba sprawdzić na własnych tekstach. Model NER z&nbsp;lepszą metryką na karcie modelu znalazł fragment jednej osoby z&nbsp;siedmiu, a&nbsp;PLLuM-12B w&nbsp;mojej konfiguracji ignorował długie instrukcje i&nbsp;lepiej radził sobie z&nbsp;krótkimi. Przy małym modelu lepiej rozłożyć zadanie na proste kroki i&nbsp;posprzątać wynik w&nbsp;kodzie, niż dopisywać kolejne zdania do promptu.</li>
+                    <li data-en="When a tool has access to login credentials or private text, the architecture decides where that data goes, and the description of it is part of the product. In the analysis of options for Parawan (4 July 2026; now in the Anonimizator AI repository) I rejected a cloud language model, because the text would go to a third party. The Claude Usage README has a section of its own on data (two hosts, no telemetry), and the cost scan takes only the model, token counts, timestamps and IDs from the transcripts — it neither uses nor stores message content.">Gdy narzędzie ma dostęp do danych logowania albo prywatnego tekstu, o&nbsp;tym, dokąd te dane trafiają, decyduje architektura, a&nbsp;jej opis jest częścią produktu. W&nbsp;analizie rozwiązań dla Parawana (4&nbsp;lipca 2026; dziś w&nbsp;repozytorium Anonimizatora AI) odrzuciłem model językowy w&nbsp;chmurze, bo tekst trafiałby do podmiotu trzeciego. README Claude Usage ma osobną sekcję o&nbsp;danych (dwa hosty, brak telemetrii), a&nbsp;skan transkryptów bierze z&nbsp;nich tylko model, liczby tokenów, znaczniki czasu i&nbsp;identyfikatory — treści wiadomości nie wykorzystuje ani nie zapisuje.</li>
+                </ul>
+                <p class="case-source-note" data-en="Public repository state as of 14 October 2026: claude-usage-streamdeck — version 1.3.2, 9 commits on 26 July 2026; ISAP-scraper — 19 commits from 6 November 2025 to 11 June 2026; Stefka-PPLuM-macOS.Silicon — 11 commits from 20 March to 9 June 2026; anonimizator-ai — 3 commits on 13 July 2026, with the AI results taken from Parawan’s benchmark of 12 July 2026 (a set of 260 synthetic sentences, which does not replace an evaluation on real documents; later runs skip the AI layers); Multi-Sequence-Clicker — 3 commits from 25 August 2025 to 11 June 2026. Lines of code counted on 14 October 2026. No user data.">Stan publicznych repozytoriów na 14&nbsp;października 2026: claude-usage-streamdeck — wersja 1.3.2, 9&nbsp;commitów z&nbsp;26&nbsp;lipca 2026; ISAP-scraper — 19&nbsp;commitów od 6&nbsp;listopada 2025 do 11&nbsp;czerwca 2026; Stefka-PPLuM-macOS.Silicon — 11&nbsp;commitów od 20&nbsp;marca do 9&nbsp;czerwca 2026; anonimizator-ai — 3&nbsp;commity z&nbsp;13&nbsp;lipca 2026, a&nbsp;wyniki AI pochodzą z&nbsp;benchmarku Parawana z&nbsp;12&nbsp;lipca 2026 (zbiór 260&nbsp;syntetycznych zdań nie zastępuje oceny na prawdziwych dokumentach; późniejsze przebiegi pomijają warstwy AI); Multi-Sequence-Clicker — 3&nbsp;commity od 25&nbsp;sierpnia 2025 do 11&nbsp;czerwca 2026. Wiersze kodu policzone 14&nbsp;października 2026. Bez danych o&nbsp;użytkownikach.</p>
+            </section>
+
+            <nav class="case-pager" aria-label="Inne studia przypadków" data-en-aria="Other case studies">
+                <a class="case-pager-link" href="/case/aigets/">
+                    <span class="case-pager-dir" data-en="← Previous">← Poprzednie</span>
+                    <span class="case-pager-title">AIgets.me</span>
+                </a>
+                <a class="case-pager-link case-pager-link--next" href="/case/analizy-danych/">
+                    <span class="case-pager-dir" data-en="Next →">Następne →</span>
+                    <span class="case-pager-title" data-en="Data analyses">Analizy danych</span>
+                </a>
+            </nav>
+            <p class="case-back"><a class="btn btn-secondary" href="/#projekty"><span data-en="All projects">Wszystkie projekty</span></a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-start">
+                    <button type="button" class="start-button" aria-label="Na górę strony" data-en-aria="Back to top" onclick="window.scrollTo({top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'})">
+                        <span class="start-icon" aria-hidden="true">🖥️</span>
+                        <span>Start</span>
+                    </button>
+                </div>
+                <div class="footer-center">
+                    <p class="footer-tech">© 2025-2026 Karol Wilczyński</p>
+                </div>
+                <div class="footer-clock">
+                    <span id="clock">00:00</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js?v=62" defer></script>
+</body>
+</html>

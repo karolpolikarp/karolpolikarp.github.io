@@ -1,16 +1,42 @@
 # Karol Polikarp Wilczyński
 
-> Specjalista AI governance i legal tech. Pracuje na styku sztucznej inteligencji, prawa, ICT i administracji publicznej w Polsce. Buduje narzędzia do pracy z polskim prawem oraz automatyzacje oparte o modele językowe (LLM).
+> Pracuję na styku AI, prawa i administracji publicznej — i sam buduję narzędzia, które to łączą.
 
 Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowanym po stronie klienta. Jeden kanoniczny URL na stronę.
 
 ## Kim jestem
-- Obszary: AI Act, AI governance, legal tech, piaskownice regulacyjne, polityka publiczna, automatyzacja prawa.
-- Stack: Python, Claude API, vanilla web (HTML/CSS/JS).
+- Prawnik (Uniwersytet Warszawski); dalsze kształcenie w AI, big data i programowaniu (SGH, PJATK).
+- Doświadczenie: Ministerstwo Cyfryzacji (główny specjalista, Wydział Innowacyjnych Polityk Publicznych), wcześniej Główny Urząd Nadzoru Budowlanego i Instytut Badań Edukacyjnych.
+- Obszary: AI w administracji publicznej, narzędzia do pracy z prawem, ochrona danych osobowych w pracy z modelami językowymi, analiza danych.
 
 ## Strony
-- [Strona główna](https://karolwilczynski.com/): wprowadzenie, kompetencje, kontakt.
-- [Projekty](https://karolwilczynski.com/projekty/): galeria projektów AI / legal tech (m.in. upfor, JakiePrawo.pl, majeranek, AutoMargiela).
+- [Strona główna](https://karolwilczynski.com/): wprowadzenie, doświadczenie, projekty, analiza danych, wystąpienia publiczne, kontakt.
+
+## Projekty (opisy na stronie głównej; studia przypadków wkrótce)
+- Zorza: nasłuch informacyjny w czasie rzeczywistym z wyjaśnialną oceną wiarygodności, self-hosted na Raspberry Pi.
+- JakiePrawo.pl: odpowiedzi o polskim prawie oparte na tekście przepisów z ISAP.
+- Parawan: lokalne usuwanie danych osobowych z tekstu przed wklejeniem do czatu AI; jeden plik HTML.
+- Urzędnik i AI: mapa gotowych promptów dla administracji publicznej z poziomem danych przy każdym.
+- UpFor.pl: kalendarz dostępności dla grup graczy (zamknięta beta).
+- AutoMargiela: śledzenie cen perfum w trzech sklepach; analityka cen na żywo: https://replica.karolwilczynski.com/analytics
+- Majeranek: rankingi filmów, gier, książek i muzyki (wersja alfa).
+- Kamerton: kreator instrukcji systemowej dla asystentów AI (https://whoisi.vercel.app).
+- Narzędzia: Claude Usage (Stream Deck), ISAP-scraper, Stefka, Anonimizator AI, Multi-Sequence Clicker (kod publiczny na GitHubie).
+- Analiza danych: prognozy z raportów ESPI, rynek gier wideo, Airbnb (Winnipeg, Waszyngton), segmentacja (kod publiczny na GitHubie).
+
+## Wystąpienia publiczne (wybrane)
+- 2026: szkolenie dla pracowników JST „AI w codziennej pracy urzędu. Od promptu do gotowego dokumentu” (150 uczestników); webinarium GUS „AI nie musi wiedzieć wszystkiego” w Europejskim Miesiącu Cyberbezpieczeństwa (ok. 1000 uczestników); Hackathon Warsaw Open Data (jury); XXIV Samorządowe Forum Kapitału i Finansów i Kongres Nowej Mobilności (panele o AI w mieście); Śniadanie z PLLuM, NASK (prezentacja o zasadach korzystania z AI w urzędzie); UK–Hungarian AI Council, Budapeszt, i seminarium Knowledge Sharing Program Polska–Korea (prezentacje o piaskownicach regulacyjnych AI).
+- 2025: Pairing Europe’s Potential, Wrocław (moderacja panelu o AI i EUDI Wallet); KDI–Alan Turing Institute, Londyn (ekspert, piaskownice regulacyjne AI); od czerwca członek podgrupy AI Board ds. piaskownic regulacyjnych AI.
+
+## Projekty
+- Zorza: https://zorza.karolwilczynski.com
+- JakiePrawo.pl: https://jakieprawo.pl
+- Parawan: https://parawan.karolwilczynski.com/ (kod: https://github.com/karolpolikarp/parawan)
+- Urzędnik i AI: https://promptyurzednika.karolwilczynski.com/
+- UpFor.pl (kalendarz dostępności dla grup graczy): https://upfor.pl
+- Majeranek (rankingi ulubionych rzeczy): https://majeranek.vercel.app
+- AutoMargiela (śledzenie cen perfum): https://replica.karolwilczynski.com
+- Narzędzia i analizy danych: https://github.com/karolpolikarp
 
 ## Kontakt i profile
 - LinkedIn: https://www.linkedin.com/in/karolpwilczynski/

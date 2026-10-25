@@ -159,31 +159,6 @@
     background: radial-gradient(circle, rgba(0, 140, 70, 0.1) 0%, transparent 70%);
 }
 
-[data-theme="dark"] .gradient-blob {
-    opacity: 0.2;
-    mix-blend-mode: screen;
-}
-
-[data-theme="dark"] .blob-1 {
-    background: radial-gradient(circle, rgba(0, 140, 70, 0.3) 0%, rgba(0, 100, 50, 0.15) 35%, transparent 65%);
-}
-
-[data-theme="dark"] .blob-2 {
-    background: radial-gradient(circle, rgba(160, 50, 50, 0.28) 0%, rgba(139, 46, 46, 0.12) 35%, transparent 65%);
-}
-
-[data-theme="dark"] .blob-3 {
-    background: radial-gradient(circle, rgba(220, 180, 100, 0.25) 0%, rgba(201, 169, 98, 0.1) 35%, transparent 65%);
-}
-
-[data-theme="dark"] .blob-4 {
-    background: radial-gradient(circle, rgba(160, 50, 50, 0.22) 0%, rgba(107, 29, 29, 0.1) 35%, transparent 65%);
-}
-
-[data-theme="dark"] .blob-5 {
-    background: radial-gradient(circle, rgba(0, 120, 60, 0.2) 0%, rgba(201, 169, 98, 0.1) 35%, transparent 65%);
-}
-
 [data-theme="dark"] .projects,
 [data-theme="dark"] .about,
 [data-theme="dark"] .blog {
@@ -192,26 +167,8 @@
         inset 0 8px 24px -12px rgba(0, 0, 0, 0.15);
 }
 
-[data-theme="dark"] .neural-network {
-    opacity: 0.15;
-}
-
-[data-theme="dark"] .neural-line {
-    stroke: var(--color-primary-light);
-}
-
-[data-theme="dark"] .neural-node {
-    fill: var(--color-primary-light);
-}
-
 [data-theme="dark"] body::before {
     opacity: 0.02;
-}
-
-[data-theme="dark"] .keyword {
-    background: linear-gradient(135deg, rgba(0, 140, 70, 0.2) 0%, rgba(0, 100, 50, 0.12) 100%);
-    border-color: rgba(0, 140, 70, 0.35);
-    color: var(--color-primary-on-dark);
 }
 
 [data-theme="dark"] .footer {
@@ -224,16 +181,9 @@
     color: var(--color-accent);
 }
 
-[data-theme="dark"] .contact-link-icon,
 [data-theme="dark"] .contact-tile-icon {
     color: var(--color-accent);
     background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.05) 100%);
-}
-
-[data-theme="dark"] .contact-link-primary,
-[data-theme="dark"] .contact-tile-primary {
-    background: rgba(0, 140, 70, 0.06);
-    border-color: rgba(139, 46, 46, 0.25);
 }
 
 [data-theme="dark"] .edu-timeline-marker {
@@ -274,18 +224,6 @@
     color: var(--color-accent);
 }
 
-[data-theme="dark"] .email-big {
-    color: var(--color-accent);
-}
-
-[data-theme="dark"] .contact-availability {
-    color: var(--color-primary-dark);
-}
-
-[data-theme="dark"] .project-placeholder {
-    color: var(--color-primary-on-dark);
-}
-
 [data-theme="dark"] .theme-toggle:hover {
     background: rgba(0, 140, 70, 0.12);
     border-color: var(--color-primary-light);
@@ -299,11 +237,6 @@
 
 [data-theme="dark"] .project-link-primary:hover {
     background: #1a8a52;
-    color: #fff;
-}
-
-[data-theme="dark"] .project-badge {
-    background: var(--color-primary-light);
     color: #fff;
 }
 
@@ -322,14 +255,6 @@
 [data-theme="dark"] .start-button {
     background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
     color: #fff;
-}
-
-[data-theme="dark"] .position-item {
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="dark"] .position-item:hover {
-    border-color: rgba(139, 46, 46, 0.35);
 }
 
 @media (max-width: 768px) {
@@ -410,7 +335,7 @@ body::before {
     inset: 0;
     opacity: 0.03;
     pointer-events: none;
-    z-index: 999;
+    z-index: 98;            /* above the content, below the project tiles (99) and the nav (100) */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     contain: strict;
 }
@@ -732,190 +657,8 @@ section {
     z-index: 0;
 }
 
-/* ================================================
-   ABSTRACT GRADIENT BLOBS - Background Depth
-   ================================================ */
-
-.gradient-blobs {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.gradient-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.7;
-    mix-blend-mode: multiply;
-    will-change: transform;
-    contain: layout style;
-}
-
-[data-theme="dark"] .gradient-blob {
-    opacity: 0.85;
-    mix-blend-mode: screen;
-}
-
-/* Primary green blob - top left */
-.blob-1 {
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(0, 77, 43, 0.18) 0%, rgba(0, 77, 43, 0.08) 35%, transparent 65%);
-    top: -25%;
-    left: -15%;
-    animation: blobFloat1 25s ease-in-out infinite;
-}
-
-/* Burgundy/red blob - top right */
-.blob-2 {
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(120, 30, 40, 0.12) 0%, rgba(139, 46, 46, 0.06) 40%, transparent 70%);
-    top: -5%;
-    right: -10%;
-    animation: blobFloat2 30s ease-in-out infinite;
-}
-
-/* Gold accent blob - center */
-.blob-3 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(201, 169, 98, 0.14) 0%, rgba(201, 169, 98, 0.06) 40%, transparent 70%);
-    top: 35%;
-    left: 25%;
-    animation: blobFloat3 20s ease-in-out infinite;
-}
-
-/* Deep burgundy blob - bottom left */
-.blob-4 {
-    width: 850px;
-    height: 850px;
-    background: radial-gradient(circle, rgba(120, 30, 40, 0.10) 0%, rgba(107, 29, 29, 0.05) 40%, transparent 70%);
-    bottom: -15%;
-    left: -10%;
-    animation: blobFloat4 28s ease-in-out infinite;
-}
-
-/* Small accent blob - bottom right */
-.blob-5 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(0, 77, 43, 0.12) 0%, rgba(201, 169, 98, 0.08) 35%, transparent 65%);
-    bottom: 5%;
-    right: 0%;
-    animation: blobFloat5 22s ease-in-out infinite;
-}
-
-@keyframes blobFloat1 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(40px, 30px) scale(1.05); }
-    50% { transform: translate(20px, -20px) scale(0.95); }
-    75% { transform: translate(-30px, 20px) scale(1.02); }
-}
-
-@keyframes blobFloat2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(-50px, 40px) scale(1.08); }
-    66% { transform: translate(30px, -30px) scale(0.92); }
-}
-
-@keyframes blobFloat3 {
-    0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-    50% { transform: translate(60px, -40px) scale(1.1) rotate(10deg); }
-}
-
-@keyframes blobFloat4 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(50px, -20px) scale(0.95); }
-    50% { transform: translate(30px, 40px) scale(1.05); }
-    75% { transform: translate(-40px, 10px) scale(1); }
-}
-
-@keyframes blobFloat5 {
-    0%, 100% { transform: translate(0, 0); }
-    33% { transform: translate(-30px, -50px); }
-    66% { transform: translate(40px, 30px); }
-}
-
-/* Hide blobs on mobile for performance */
-@media (max-width: 768px) {
-    .gradient-blobs {
-        display: none;
-    }
-}
-
-/* Neural network lines SVG */
-.neural-network {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 99;
-    opacity: 0.1;
-}
-
-.neural-network svg {
-    width: 100%;
-    height: 100%;
-}
-
-.neural-line {
-    stroke: var(--color-primary);
-    stroke-width: 1;
-    fill: none;
-    stroke-dasharray: 8 12;
-    animation: dashMove 30s linear infinite;
-    will-change: stroke-dashoffset;
-}
-
-.neural-line-accent {
-    stroke: var(--color-accent);
-    stroke-width: 0.5;
-    stroke-dasharray: 4 16;
-    animation: dashMove 25s linear infinite reverse;
-}
-
-.neural-node {
-    fill: var(--color-primary);
-    opacity: 0.5;
-    animation: nodePulse 4s ease-in-out infinite;
-}
-
-.neural-node-accent {
-    fill: var(--color-accent);
-    opacity: 0.4;
-    animation: nodePulse 4s ease-in-out infinite;
-    animation-delay: -2s;
-}
-
-@keyframes dashMove {
-    0% {
-        stroke-dashoffset: 0;
-    }
-    100% {
-        stroke-dashoffset: 200;
-    }
-}
-
-@keyframes nodePulse {
-    0%, 100% {
-        opacity: 0.3;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.6;
-        transform: scale(1.2);
-    }
-}
-
 /* Hide decorative elements on mobile for performance */
 @media (max-width: 768px) {
-    .neural-network {
-        display: none;
-    }
-
     body::before {
         opacity: 0.02;
     }
@@ -937,6 +680,11 @@ section {
 }
 
 .hero-visual {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     min-width: 0;
     max-width: 100%;
     overflow: hidden;
@@ -1020,13 +768,6 @@ section {
     color: var(--color-accent);
 }
 
-.hero-bio {
-    font-size: var(--text-md);
-    color: var(--color-text-tertiary);
-    max-width: 500px;
-    margin-bottom: var(--space-2xl);
-}
-
 .hero-cta {
     display: flex;
     gap: var(--space-md);
@@ -1035,51 +776,6 @@ section {
 /* Na desktopie social żyje w pasku nav — w hero pokazujemy je tylko na mobilce. */
 .hero-cta-actions { display: flex; align-items: center; gap: var(--space-md); }
 .hero-social-link { display: none; }
-
-/* Hero Keywords */
-.hero-keywords {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-2xl);
-}
-
-.keyword {
-    font-size: var(--text-xs);
-    font-weight: 600;
-    padding: var(--space-xs) var(--space-md);
-    background: linear-gradient(135deg, rgba(0, 77, 43, 0.1) 0%, rgba(201, 169, 98, 0.08) 100%);
-    color: var(--color-primary);
-    border-radius: var(--radius-full);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border: 1px solid rgba(0, 77, 43, 0.2);
-    cursor: default;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
-.keyword:hover {
-    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(201, 169, 98, 0.35);
-    border-color: transparent;
-}
-
-/* Alternate keywords use burgundy on hover */
-.keyword:nth-child(3n+2):hover {
-    background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
-    box-shadow: 0 4px 12px var(--color-burgundy-glow);
-}
-
-.hero-visual {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
 /* Hero Intro with Avatar */
 .hero-intro {
@@ -1163,82 +859,12 @@ section {
     background: linear-gradient(90deg, transparent, var(--color-burgundy-light), var(--color-accent), var(--color-burgundy-light), transparent);
 }
 
-.positions-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-lg);
-    position: relative;
-    z-index: 1;
-}
-
-.position-item {
-    color: white;
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-}
-
-.position-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.position-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--space-xs);
-}
-
-.position-icon svg {
-    width: 22px;
-    height: 22px;
-}
-
-.position-title {
-    font-family: var(--font-serif);
-    font-size: var(--text-md);
-    font-weight: 600;
-    line-height: 1.3;
-}
-
-.position-desc {
-    font-size: var(--text-sm);
-    opacity: 0.8;
-    line-height: 1.5;
-}
-
 /* ================================================
    SECTION HEADER
    ================================================ */
 .section-header {
     text-align: center;
     margin-bottom: var(--space-3xl);
-}
-
-.section-label {
-    display: inline-block;
-    font-size: var(--text-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--color-primary-light);
-    margin-bottom: var(--space-md);
-}
-
-[data-theme="dark"] .section-label {
-    color: var(--color-primary-on-dark);
 }
 
 .section-title {
@@ -1282,124 +908,6 @@ section {
     right: 0;
     height: 1px;
     background: linear-gradient(90deg, transparent 5%, var(--color-border) 50%, transparent 95%);
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xl);
-}
-
-.project-card {
-    background: var(--color-surface);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-md);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-}
-
-.project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(201, 169, 98, 0.04) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Burgundy left accent bar on project cards */
-.project-card::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, var(--color-burgundy) 0%, var(--color-burgundy-light) 100%);
-    transform: scaleY(0);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2;
-}
-
-.project-card:hover::after {
-    transform: scaleY(1);
-}
-
-.project-card:hover::before {
-    opacity: 1;
-}
-
-.project-card:hover {
-    transform: translateY(-6px);
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.1),
-        0 4px 12px rgba(0, 0, 0, 0.05),
-        0 0 0 1px rgba(201, 169, 98, 0.2);
-    border-color: var(--color-accent);
-}
-
-[data-theme="dark"] .project-card {
-    box-shadow: 0 2px 0 rgba(255,255,255,0.03) inset, 0 8px 24px rgba(0,0,0,0.5);
-}
-[data-theme="dark"] .project-card:hover {
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,169,98,0.2);
-}
-
-.project-image {
-    background: linear-gradient(135deg, var(--color-primary-subtle), var(--color-bg-alt));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-    overflow: hidden;
-    position: relative;
-}
-
-.project-placeholder {
-    width: 80px;
-    height: 80px;
-    color: var(--color-primary);
-    opacity: 0.5;
-    position: relative;
-    z-index: 0;
-}
-
-.project-placeholder svg {
-    width: 100%;
-    height: 100%;
-}
-
-/* Project image - for actual images instead of placeholders */
-.project-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform var(--transition-slow), opacity var(--transition-base);
-    z-index: 1;
-}
-
-.project-card:hover .project-img {
-    transform: scale(1.05);
-}
-
-/* Project Video on Hover — hidden until videos are recorded */
-.project-video,
-.project-video-hint {
-    display: none;
-}
-
-.project-content {
-    padding: var(--space-xl);
-    display: flex;
-    flex-direction: column;
 }
 
 .project-tags {
@@ -1500,18 +1008,6 @@ section {
     background: var(--color-burgundy);
 }
 
-.project-title {
-    font-family: var(--font-serif);
-    font-size: var(--text-xl);
-    font-weight: 600;
-    margin-bottom: var(--space-sm);
-}
-
-.project-links {
-    display: flex;
-    gap: var(--space-lg);
-}
-
 .project-link {
     display: inline-flex;
     align-items: center;
@@ -1556,115 +1052,6 @@ section {
     background: linear-gradient(90deg, transparent, var(--color-border), transparent);
 }
 
-.contact-content {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-    height: 100%;
-}
-
-.contact-links .contact-link {
-    flex: 1;
-}
-
-.contact-link {
-    display: flex;
-    align-items: center;
-    gap: var(--space-lg);
-    padding: var(--space-md) var(--space-lg);
-    background: var(--color-surface);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-link::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, var(--color-burgundy) 0%, var(--color-burgundy-light) 100%);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-}
-
-.contact-link:hover::before {
-    transform: scaleY(1);
-}
-
-.contact-link:hover {
-    border-color: var(--color-accent);
-    box-shadow: 0 10px 30px rgba(201, 169, 98, 0.15), 0 4px 8px rgba(0, 0, 0, 0.06);
-    transform: translateX(4px);
-}
-
-.contact-link-primary {
-    background: var(--color-primary-subtle);
-    border-color: var(--color-primary-light);
-}
-
-.contact-link-icon {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba(0, 77, 43, 0.08) 0%, rgba(201, 169, 98, 0.06) 100%);
-    border-radius: var(--radius-md);
-    color: var(--color-primary);
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
-.contact-link:hover .contact-link-icon {
-    background: var(--color-accent);
-    color: var(--color-primary-dark);
-    transform: scale(1.05);
-}
-
-.contact-link-icon svg {
-    width: 22px;
-    height: 22px;
-}
-
-.contact-link-content {
-    flex: 1;
-}
-
-.contact-link-label {
-    display: block;
-    font-size: var(--text-xs);
-    color: var(--color-text-tertiary);
-    margin-bottom: 2px;
-}
-
-.contact-link-value {
-    font-weight: 500;
-}
-
-.contact-link-arrow {
-    width: 20px;
-    height: 20px;
-    color: var(--color-text-tertiary);
-    transition: all var(--transition-fast);
-}
-
-.contact-link:hover .contact-link-arrow {
-    color: var(--color-accent);
-    transform: translate(2px, -2px);
-}
-
 /* Contact Tiles */
 .contact-tiles {
     display: grid;
@@ -1694,11 +1081,6 @@ section {
     border-color: var(--color-accent);
     box-shadow: 0 10px 30px rgba(201, 169, 98, 0.15), 0 4px 8px rgba(0, 0, 0, 0.06);
     transform: translateY(-4px);
-}
-
-.contact-tile-primary {
-    background: var(--color-primary-subtle);
-    border-color: var(--color-primary-light);
 }
 
 .contact-tile-icon {
@@ -1734,55 +1116,6 @@ section {
     font-size: var(--text-base);
     font-weight: 600;
     color: var(--color-text);
-}
-
-.contact-cta {
-    padding: 0;
-    display: flex;
-}
-
-.contact-availability {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    font-size: var(--text-base);
-    font-weight: 600;
-    color: var(--color-primary-dark);
-    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-    padding: var(--space-sm) var(--space-lg);
-    border-radius: var(--radius-full);
-    box-shadow: 0 4px 15px rgba(201, 169, 98, 0.3);
-    transition: all 0.3s ease;
-}
-
-.contact-availability:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(201, 169, 98, 0.4);
-}
-
-.availability-dot {
-    width: 10px;
-    height: 10px;
-    background: #3fb950;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-    box-shadow: 0 0 10px rgba(63, 185, 80, 0.6);
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.2); }
-}
-
-.email-big {
-    font-size: clamp(1.2rem, 3vw, 1.75rem);
-    font-weight: 600;
-    color: var(--color-primary);
-    transition: opacity var(--transition-fast);
-}
-
-.email-big:hover {
-    opacity: 0.8;
 }
 
 /* ================================================
@@ -2381,20 +1714,6 @@ section {
 /* ================================================
    PROJECT ENHANCEMENTS
    ================================================ */
-.project-badge {
-    position: absolute;
-    top: var(--space-md);
-    left: var(--space-md);
-    font-size: var(--text-2xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: var(--space-xs) var(--space-sm);
-    background: var(--color-primary);
-    color: white;
-    border-radius: var(--radius-full);
-    z-index: 2;
-}
 
 /* Amber ALPHA badge - outlined/bordered style */
 .project-badge-alpha {
@@ -2444,17 +1763,6 @@ section {
     background: rgba(255, 255, 255, 0.04);
 }
 
-/* Under-construction cards: muted by default, fully visible on hover */
-.project-card.project-wip {
-    opacity: 0.65;
-    filter: saturate(0.8);
-}
-
-.project-card.project-wip:hover {
-    opacity: 1;
-    filter: saturate(1);
-}
-
 .project-link-primary {
     background: var(--color-primary);
     color: white;
@@ -2465,37 +1773,6 @@ section {
 .project-link-primary:hover {
     background: var(--color-primary-dark);
     color: white;
-}
-
-.project-duo-image {
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-}
-
-.project-duo-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-base);
-}
-
-.project-duo-content {
-    padding: var(--space-lg);
-    flex: 1;
-}
-
-.project-duo-content h3 {
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    font-weight: 600;
-    margin-bottom: var(--space-xs);
-}
-
-.project-duo-content p {
-    font-size: var(--text-base);
-    color: var(--color-text-secondary);
-    line-height: 1.5;
 }
 
 /* --- Data Science & Tools subsections --- */
@@ -2521,12 +1798,6 @@ section {
 /* Nagłówek "Aplikacje" nad karuzelą — bliżej tytułu sekcji */
 .apps-heading {
     margin-top: var(--space-lg);
-}
-.ds-heading-note {
-    font-family: var(--font-sans);
-    font-size: var(--text-base);
-    font-weight: 400;
-    color: var(--color-text-tertiary);
 }
 
 /* Data Science — bento 12-kolumn, mieszane rozmiary, każdy kafel ze zrzutem
@@ -2816,7 +2087,9 @@ section {
 /* Closing CTA centered under the Projects section */
 .projects-footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: var(--space-md);
     margin-top: var(--space-2xl);
 }
 
@@ -2902,16 +2175,6 @@ section {
     font-size: var(--text-sm);
 }
 
-.footer-stack {
-    color: var(--color-text-secondary);
-    font-weight: 500;
-}
-
-.footer-divider {
-    color: var(--color-accent);
-    font-weight: 600;
-}
-
 .footer-clock {
     padding: var(--space-sm) var(--space-md);
     background: var(--color-surface);
@@ -2974,14 +2237,6 @@ section {
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    .positions-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (max-width: 768px) {
@@ -3007,19 +2262,6 @@ section {
     .hero-subtitle {
         overflow-wrap: break-word;
         word-wrap: break-word;
-    }
-
-    .positions-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: var(--space-md);
-    }
-
-    .position-title {
-        font-size: var(--text-base);
-    }
-
-    .position-desc {
-        font-size: var(--text-xs);
     }
 
     .nav-links {
@@ -3114,10 +2356,6 @@ section {
         grid-template-columns: 1fr;
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
     .footer-content {
         flex-direction: row;
         gap: var(--space-md);
@@ -3139,31 +2377,6 @@ section {
 @media (max-width: 480px) {
     .container {
         padding: 0 var(--space-md);
-    }
-
-    .project-content {
-        padding: var(--space-lg);
-    }
-
-    .contact-link {
-        padding: var(--space-md);
-    }
-
-    .contact-link-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .positions-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .position-item {
-        padding: var(--space-md);
-    }
-
-    .hero-keywords {
-        justify-content: center;
     }
 
     .hero-avatar {
@@ -3630,46 +2843,10 @@ section {
     transform: translateY(0);
 }
 
-.fade-in-left {
-    opacity: 0;
-    transform: translateX(-40px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in-left.animated {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.fade-in-right {
-    opacity: 0;
-    transform: translateX(40px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in-right.animated {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.scale-in {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.scale-in.animated {
-    opacity: 1;
-    transform: scale(1);
-}
-
 /* Staggered animations */
 .stagger-1 { transition-delay: 0.1s; }
 .stagger-2 { transition-delay: 0.2s; }
 .stagger-3 { transition-delay: 0.3s; }
-.stagger-4 { transition-delay: 0.4s; }
-.stagger-5 { transition-delay: 0.5s; }
-.stagger-6 { transition-delay: 0.6s; }
 
 /* ================================================
    REDUCED MOTION ACCESSIBILITY
@@ -3684,48 +2861,23 @@ section {
         scroll-behavior: auto !important;
     }
 
-    .gradient-blob,
     .hero::before,
     .positions::before,
-    .neural-line,
-    .neural-line-accent,
-    .neural-node,
-    .neural-node-accent,
     .logo-main,
     .logo-sparkle,
-    .status-dot,
-    .availability-dot,
-    .contact-cta-box::before,
-    .cat-easter-egg-subtitle,
-    .project-placeholder-whoisi::before,
-    .project-placeholder-whoisi svg {
+    .cat-easter-egg-subtitle {
         animation: none !important;
     }
 
-    .gradient-blob,
-    .neural-line,
     .positions::before,
     .logo-main {
         will-change: auto;
     }
 
     .reveal,
-    .fade-in-up,
-    .fade-in-left,
-    .fade-in-right,
-    .scale-in {
+    .fade-in-up {
         opacity: 1;
         transform: none;
-    }
-}
-
-/* ================================================
-   PERFORMANCE: Low-power / slow device hints
-   ================================================ */
-@media (prefers-reduced-motion: no-preference) {
-    /* GPU-promote only when animations are allowed */
-    .gradient-blob {
-        transform: translateZ(0);
     }
 }
 
@@ -4155,6 +3307,18 @@ section {
     font-size: var(--text-md);
 }
 
+/* Phones: the secondary links (case study, GitHub) wrap under the primary button; keep their rows text-height
+   so the extra link doesn't make every slide in the carousel taller. */
+@media (max-width: 768px) {
+    .showcase-cta {
+        row-gap: 0;
+    }
+
+    .showcase-cta .project-link:not(.project-link-primary) {
+        padding: var(--space-sm) 0;
+    }
+}
+
 /* --- Controls (arrows, dots, counter) --- */
 .showcase-controls {
     display: flex;
@@ -4507,7 +3671,7 @@ section {
 /* hero without particles (no JS, module or canvas blocked): the soft static glow the floating shapes
    used to give; it fades out as soon as the particle canvas goes live */
 .hero-bg-decoration::before {
-    content: '';
+    content: none;          /* the coloured glow spots read as stains (2026-10-25); the hero ground stays plain */
     position: absolute;
     inset: 0;
     background:
@@ -4544,15 +3708,6 @@ section {
     --pm-alpha: 0.62;
 }
 
-/* the finale glows, but stays gold instead of burning out to white */
-[data-theme="dark"] #finaleParticles {
-    --pm-alpha: 0.72;
-}
-
-#finaleParticles {
-    --pm-alpha: 0.95;
-}
-
 /* light theme hero: the warm glow the dark theme already has, so the scene sits on some depth */
 [data-theme="light"] .hero {
     background:
@@ -4560,45 +3715,9 @@ section {
         linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
 }
 
-/* contact finale: particles split into "§ … { }" above the tiles */
-.contact-finale {
-    position: relative;
-    max-width: 880px;
-    margin: 0 auto;
-    aspect-ratio: 1600 / 560;
-}
-
-.contact-finale-fallback {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.1em;
-    font-size: clamp(3rem, 1.5rem + 9vw, 8.5rem);
-    line-height: 1;
-}
-
-.contact-finale.is-live .contact-finale-fallback {
-    visibility: hidden;
-}
-
-.formula-para {
-    font-family: var(--font-serif);
-    font-weight: 700;
-    color: var(--pm-0);
-}
-
-.formula-code {
-    word-spacing: 0.35em;
-    font-family: var(--font-mono);
-    font-weight: 600;
-    color: var(--pm-1);
-}
-
-/* the motto: the key words in the colours of "§" and "{ }" above */
+/* the motto closes the page (the hero carries the particle sign): key words in the colours of "§" and "{ }" */
 .contact-motto {
-    margin: var(--space-sm) auto var(--space-2xl);
+    margin: 0 auto var(--space-2xl);
     padding: 0 var(--space-md);
     text-align: center;
     text-wrap: balance;
@@ -4738,9 +3857,10 @@ section {
         .ds-heading,
         .tools-card,
         .ds-tile,
-        .contact-finale,
         .contact-motto,
-        .contact-tile {
+        .contact-tile,
+        .case-decision,
+        .case-stat {
             animation: scrollReveal linear both;
             animation-timeline: view();
             /* ends once 60% of the element has entered, so even the last tiles at the page bottom finish */
@@ -4753,3 +3873,1983 @@ section {
     from { opacity: 0; translate: 0 36px; }
     to { opacity: 1; translate: 0 0; }
 }
+
+/* ================================================
+   CASE STUDIES (/case/<slug>/): the same look as the home page,
+   a narrower text column; section headings numbered with a paragraph sign (§).
+   ================================================ */
+.case {
+    padding-top: calc(var(--space-3xl) + 60px);
+    padding-bottom: var(--space-3xl);
+}
+
+.case-container {
+    max-width: var(--container-narrow);
+}
+
+.case-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-sm);
+    margin-bottom: var(--space-lg);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+}
+
+.case-breadcrumb a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.case-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+[data-theme="dark"] .case-breadcrumb a {
+    color: var(--color-primary-on-dark);
+}
+
+.case-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+}
+
+.case-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+.case-lead {
+    font-size: var(--text-xl);
+    line-height: 1.55;
+    color: var(--color-text);
+    margin-bottom: var(--space-xl);
+}
+
+.case-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md) var(--space-lg);
+    margin: 0 0 var(--space-lg);
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.case-facts dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    margin-bottom: 2px;
+}
+
+.case-facts dd {
+    margin: 0;
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.case-hero .showcase-cta {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.case-toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+.case-toc a {
+    padding: 6px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+}
+
+.case-toc a:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+}
+
+[data-theme="dark"] .case-toc a {
+    color: var(--color-primary-on-dark);
+}
+
+[data-theme="dark"] .case-toc a:hover {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary-light);
+    color: #fff;
+}
+
+/* overrides the global `section { padding: 6rem 0 }`: a long read needs smaller gaps */
+.case-section {
+    padding: var(--space-2xl) 0 0;
+    scroll-margin-top: 90px;
+}
+
+.case-h2 {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+}
+
+.case-h2-num {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-accent-dark);
+}
+
+[data-theme="dark"] .case-h2-num {
+    color: var(--color-accent);
+}
+
+.case-section p {
+    font-size: var(--text-md);
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.case-section .showcase-list li {
+    line-height: 1.65;
+    margin-bottom: var(--space-sm);
+}
+
+.case-source-note {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+}
+
+/* Architecture diagram: inline SVG drawn with tokens, so it works in both themes */
+.case-diagram {
+    margin: var(--space-lg) 0 0;
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-text-tertiary);
+}
+
+.case-diagram svg {
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.case-diagram figcaption {
+    margin-top: var(--space-md);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--color-text-tertiary);
+    text-align: center;
+}
+
+.cd-box {
+    fill: var(--color-bg-alt);
+    stroke: var(--color-border);
+    stroke-width: 1.5;
+}
+
+.cd-box--key {
+    fill: var(--color-accent-subtle);
+    stroke: var(--color-accent);
+}
+
+.cd-box--ext {
+    fill: none;
+    stroke-dasharray: 4 3;
+}
+
+.cd-edge {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+}
+
+.cd-arrow {
+    fill: currentColor;
+}
+
+.cd-label {
+    fill: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cd-note {
+    fill: var(--color-text-tertiary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+
+/* Key decisions: a card like .tools-card (green→gold bar), no lift on hover */
+.case-decisions {
+    display: grid;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.case-decision {
+    position: relative;
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.case-decision::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+.case-decision h3 {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: var(--space-md);
+}
+
+.case-decision-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xs) var(--space-lg);
+    margin: 0;
+}
+
+.case-decision-grid dt {
+    margin-top: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+}
+
+.case-decision-grid dt:first-child {
+    margin-top: 0;
+}
+
+.case-decision-grid dd {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
+/* Evidence: numbers with a date and a source */
+.case-evidence {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.case-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--space-lg) var(--space-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.case-stat-value {
+    font-family: var(--font-serif);
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--color-primary);
+}
+
+[data-theme="dark"] .case-stat-value {
+    color: var(--color-primary-on-dark);
+}
+
+.case-stat-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-text);
+}
+
+.case-stat-source {
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    color: var(--color-text-tertiary);
+    overflow-wrap: anywhere;
+}
+
+/* Other case studies + back link */
+.case-pager {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+}
+
+.case-pager-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: border-color var(--transition-base);
+}
+
+.case-pager-link:hover {
+    border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .case-pager-link:hover {
+    border-color: var(--color-primary-on-dark);
+}
+
+.case-pager-dir {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+}
+
+.case-pager-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    font-weight: 600;
+}
+
+.case-back {
+    margin-top: var(--space-xl);
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .case-facts {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .case-diagram {
+        padding: var(--space-lg);
+    }
+
+    .case-decision-grid {
+        grid-template-columns: 8.5rem 1fr;
+    }
+
+    .case-decision-grid dt {
+        margin-top: 0;
+        padding-top: 3px;
+    }
+
+    .case-pager {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .case-pager-link--next {
+        text-align: right;
+    }
+}
+
+/* ================================================
+   PROJEKTY — „Gablota” (#studia): every project once, as an exhibit tile
+   Tiles on the site ground in both themes. Screenshots are the
+   objects; every tile links to its case study, a small link to the live site.
+   ================================================ */
+:root {
+    /* The tiles sit on the site's own ground (cream / warm dark), like the rest of the page. */
+    --g-field: transparent;
+    --g-tile: var(--color-surface);
+    --g-tile-edge: var(--color-border);
+    --g-ink: var(--color-text);
+    --g-ink-2: var(--color-text);
+    --g-ink-3: var(--color-text);
+    --g-gold: var(--color-primary);         /* accent on cream: green (gold is too light here) */
+    --g-badge-bg: var(--color-bg-alt);
+    --g-shot-bg: var(--color-bg-alt);
+    --g-hover: var(--color-bg-alt);
+    --g-ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+[data-theme="dark"] {
+    --g-gold: var(--color-accent);          /* accent on the warm dark: gold */
+}
+
+.gablota {
+    background: var(--g-field);
+    color: var(--g-ink);
+    padding: var(--space-3xl) 0;
+    scroll-margin-top: 104px;   /* nav is 89px: links to /#studia land with the tiles clear of it */
+    /* one soft pool of light from above, like a showcase lamp */
+}
+.gablota-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+.gablota-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm) var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+.gablota-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    color: var(--g-ink);
+    margin: 0;
+}
+.gablota-lede {
+    max-width: 46ch;
+    margin: 0;
+    color: var(--g-ink-2);
+    font-size: var(--text-md);
+    line-height: 1.55;
+}
+
+/* ---------- grid ---------- */
+.gablota-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+}
+@media (min-width: 768px) {
+    .gablota-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+    .g-tile--xl, .g-tools { grid-column: span 2; }
+}
+@media (min-width: 1100px) {
+    .gablota-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    /* the author's order: Zorza + UpFor, Urzędnik i AI + Parawan, then AutoMargiela, AIgets.me, Majeranek,
+       then JakiePrawo next to the tools */
+    .g-zorza      { grid-column: span 7; }
+    .g-upfor      { grid-column: span 5; }
+    .g-urzednik   { grid-column: span 7; }
+    .g-parawan    { grid-column: span 5; }
+    .g-margiela, .g-aigets, .g-majeranek { grid-column: span 4; }
+    .g-tools      { grid-column: span 8; order: 1; }
+    .g-jakieprawo { grid-column: span 4; order: 2; }
+}
+
+/* ---------- tile ---------- */
+.g-tile {
+    position: relative;
+    z-index: 99;            /* screenshots and clips above the page noise (98), below the nav (100) */
+    display: flex;
+    flex-direction: column;
+    background: var(--g-tile);
+    border: 1px solid var(--g-tile-edge);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    isolation: isolate;
+}
+.g-shot {
+    position: relative;
+    flex: none;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--g-shot-bg);
+}
+.g-shot img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transform-origin: 50% 30%;
+}
+/* the lit object sits under a faint vignette so the edge meets the dark field */
+.g-shot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+
+/* ---------- caption ---------- */
+.g-cap {
+    position: relative;
+    padding: var(--space-lg) var(--space-lg) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    background: var(--g-tile);
+}
+.g-name {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--g-ink);
+}
+.g-tile--xl .g-name { font-size: var(--text-4xl); }
+/* the whole tile opens the case study: an empty, labelled link over the tile */
+.g-main {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+}
+.g-main:focus-visible {
+    outline: 2px solid var(--g-gold);
+    outline-offset: 3px;
+}
+.g-kind {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--g-gold);
+    letter-spacing: 0.01em;
+}
+.g-decision {
+    margin: 0;
+    color: var(--g-ink-2);
+    font-size: var(--text-base);
+    line-height: 1.55;
+    max-width: 62ch;
+}
+.g-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-xs) var(--space-md);
+    margin-top: auto;
+    padding-top: var(--space-sm);
+}
+.g-num {
+    margin: 0 auto 0 0;
+    font-size: var(--text-sm);
+    color: var(--g-ink-2);
+}
+.g-num-v {
+    font-family: var(--font-serif);
+    color: var(--g-gold);
+    font-weight: 600;
+    font-size: var(--text-xl);
+    margin-right: 0.15em;
+}
+.g-ext {
+    position: relative;
+    z-index: 2;              /* above the stretched case-study link */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    padding: 0.35rem 0;      /* 24px+ hit area without a visible box */
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--g-ink-2);
+    text-decoration: underline;
+    text-decoration-color: var(--g-gold);
+    text-underline-offset: 3px;
+}
+.g-ext svg { width: 12px; height: 12px; }
+.g-ext:hover { color: var(--g-gold); }
+.g-ext:focus-visible { outline: 2px solid var(--g-gold); outline-offset: 2px; border-radius: 2px; }
+
+
+/* ---------- small tools ---------- */
+.g-tools {
+    border-top: 1px solid var(--g-tile-edge);
+    padding-top: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+@media (min-width: 1100px) {
+    .g-tools { border-top: 0; padding-top: 0; }
+}
+.g-tools-title { margin: 0; font-family: var(--font-serif); font-size: var(--text-2xl); font-weight: 600; }
+.g-tools-title a {
+    color: var(--g-ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+.g-tools-title svg { width: 18px; height: 18px; color: var(--g-gold); }
+.g-tools-title a:hover { color: var(--g-gold); }
+.g-tools-title a:focus-visible { outline: 2px solid var(--g-gold); outline-offset: 3px; }
+.g-tools-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--g-tile-edge);
+    border: 1px solid var(--g-tile-edge);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    flex: 1;
+}
+.g-tools-list li { display: flex; }
+@media (min-width: 900px) { .g-tools-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.g-tools-list a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: var(--space-md) var(--space-md) var(--space-lg);
+    background: var(--g-tile);
+    color: var(--g-ink);
+    text-decoration: none;
+}
+.g-tool-name { font-weight: 600; font-size: var(--text-md); }
+.g-tool-line { font-size: var(--text-sm); color: var(--g-ink-2); line-height: 1.5; }
+.g-tools-list a:hover .g-tool-name { color: var(--g-gold); }
+.g-tools-list a:focus-visible { outline: 2px solid var(--g-gold); outline-offset: -2px; }
+
+/* keyword highlighter (script.js): key terms in gold on the green band */
+.gablota .kw { color: var(--g-gold); background: none; font-weight: 600; }
+
+/* ---------- motion: only the clip moves, inside a fixed frame ---------- */
+@media (prefers-reduced-motion: no-preference) {
+    .g-tools-list a { transition: background-color 200ms var(--g-ease); }
+}
+@media (hover: hover) and (pointer: fine) {
+    .g-tools-list a:hover { background: var(--g-hover); }
+    .g-tile:hover { border-color: var(--g-gold); }
+}
+.g-tile:focus-within { border-color: var(--g-gold); }
+
+/* the Data Science block follows the band on the old background */
+.gablota + .container .ds-section { margin-top: var(--space-3xl); }
+
+@media (max-width: 767px) {
+    .gablota { padding: var(--space-2xl) 0; }
+    .gablota-inner { padding: 0 var(--space-md); }
+    .gablota-title { font-size: var(--text-3xl); }
+    .g-tile--xl .g-name { font-size: var(--text-3xl); }
+    .g-shot { aspect-ratio: 16 / 9; }
+}
+/* Urzędnik i AI: tall tile, keep the headline of the map (left edge) in frame */
+
+
+/* ================================================
+   WYSTĄPIENIA (#wystapienia): a dot-matrix map of Europe (static SVG, generated
+   offline from Natural Earth 1:50m) next to the list by year. Desktop: the map is
+   sticky on the right while the list scrolls; mobile: map on top.
+   Pins drop in once when the map scrolls into view (TalksMap in script.js);
+   hovering an event lights its city, hovering a pin lights its events.
+   ================================================ */
+.talks {
+    --tm-land: rgba(0, 77, 43, 0.24);
+    --tm-pin: var(--color-accent);
+    --tm-pin-ring: var(--color-primary);
+    --tm-halo: rgba(201, 169, 98, 0.32);
+    --talk-hl: rgba(0, 77, 43, 0.06);
+    --talk-hl-bar: var(--color-accent-dark);
+    --talk-date-bg: var(--color-surface, #fff);
+}
+[data-theme="dark"] .talks {
+    --tm-land: rgba(245, 243, 240, 0.2);
+    --tm-pin-ring: var(--color-bg);
+    --tm-halo: rgba(201, 169, 98, 0.28);
+    --talk-hl: rgba(245, 243, 240, 0.05);
+    --talk-hl-bar: var(--color-accent);
+    --talk-date-bg: var(--color-bg-alt);
+}
+
+.talks-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+}
+.talks-aside { min-width: 0; }
+@media (min-width: 960px) {
+    .talks-layout {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+        gap: var(--space-3xl);
+        align-items: start;
+    }
+    .talks-aside {
+        grid-column: 2;
+        grid-row: 1;
+        position: sticky;
+        top: 6.5rem;
+    }
+    .talks-wrap { grid-column: 1; grid-row: 1; }
+}
+
+/* --- map --- */
+.talks-map { margin: 0; }
+.tm-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+.tm-land {
+    fill: none;
+    stroke: var(--tm-land);
+    stroke-width: 4;
+    stroke-linecap: round;
+}
+.tm-pin { cursor: pointer; }
+.tm-dot {
+    fill: var(--tm-pin);
+    stroke: var(--tm-pin-ring);
+    stroke-width: 2;
+}
+.tm-halo { fill: var(--tm-halo); }
+/* touch: a wider invisible ring turns each pin into a bigger tap target */
+@media (pointer: coarse) {
+    .tm-halo {
+        stroke: transparent;
+        stroke-width: 16px;
+        pointer-events: all;
+    }
+}
+.tm-dot,
+.tm-halo {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+.tm-label {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    fill: var(--color-text);
+    paint-order: stroke;
+    stroke: var(--color-bg);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+}
+.tm-count {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    fill: var(--color-primary);
+}
+[data-theme="dark"] .tm-count { fill: var(--color-accent); }
+/* one city lit: the others step back */
+/* the dots fade, the names stay readable (a 0.3 label over land dots looked broken) */
+.talks-map.has-active .tm-pin:not(.is-active) .tm-dot,
+.talks-map.has-active .tm-pin:not(.is-active) .tm-halo { opacity: 0.3; }
+.talks-map.has-active .tm-pin:not(.is-active) .tm-label { opacity: 0.6; }
+.tm-pin.is-active .tm-dot { transform: scale(1.3); }
+.tm-pin.is-active .tm-halo { transform: scale(1.6); }
+
+/* --- list by year --- */
+.talks-group + .talks-group { margin-top: var(--space-2xl); }
+.talks-year {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    margin: 0 0 var(--space-sm);
+}
+.talks-year-num {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 4.5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: lining-nums;
+    color: var(--color-primary);
+}
+[data-theme="dark"] .talks-year-num { color: var(--color-accent); }
+.talks-year-count {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+}
+.talks-year::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    align-self: center;
+    background: var(--color-border);
+}
+.talks-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.talk {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: var(--space-md) var(--space-lg);
+    margin: 0 calc(-1 * var(--space-md));
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+.talk:last-child { border-bottom: 0; }
+.talk::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: var(--space-md);
+    bottom: var(--space-md);
+    width: 3px;
+    border-radius: 3px;
+    background: var(--talk-hl-bar);
+    opacity: 0;
+}
+.talk.is-active { background: var(--talk-hl); border-bottom-color: transparent; }
+.talk.is-active::before { opacity: 1; }
+
+/* date block: big day, month underneath; the year is the group heading */
+.talk-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: start;
+    min-height: 4.25rem;
+    padding: var(--space-sm) var(--space-xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--talk-date-bg);
+    color: var(--color-text);
+    text-align: center;
+    line-height: 1;
+}
+.td-day {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-variant-numeric: lining-nums tabular-nums;
+    color: var(--color-primary);
+}
+[data-theme="dark"] .td-day { color: var(--color-accent); }
+.td-day--range { font-size: 1.15rem; letter-spacing: -0.02em; }
+.td-mon {
+    margin-top: 0.3rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+.td-day--month { font-size: 1.3rem; font-style: italic; }
+.td-pre {
+    margin-bottom: 0.2rem;
+    font-size: var(--text-xs);
+    font-weight: 600;
+}
+
+.talk-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs) var(--space-md);
+    margin: 0 0 var(--space-sm);
+}
+.talk-city {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+}
+.talk-city::before {
+    content: '';
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--tm-pin);
+    box-shadow: 0 0 0 1.5px var(--tm-pin-ring);
+}
+.talk-city--online::before {
+    background: transparent;
+    box-shadow: inset 0 0 0 1.5px var(--color-text);
+}
+.talk-event {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--color-text);
+}
+.talk--line .talk-event { font-size: var(--text-md); }
+.talk-topic {
+    margin: var(--space-xs) 0 0;
+    font-size: var(--text-base);
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+/* Role badges, one height, three kinds that differ in fill AND shape:
+   speaking = filled green pill, expert roles = filled gold tag (square corners),
+   attendance / delegation = outlined pill. */
+.talk-role {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    height: 1.6rem;
+    padding: 0 0.7rem;
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+}
+.talk-role--speak { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+.talk-role--gold {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #1e1b17;
+    border-radius: var(--radius-sm);
+}
+.talk-role--line {
+    background: transparent;
+    border-color: var(--color-text);
+    border-style: dashed;
+    color: var(--color-text);
+    font-weight: 600;
+}
+.talk-role--speak::before {
+    content: '';
+    width: 0.4em;
+    height: 0.4em;
+    border-radius: 50%;
+    background: var(--color-accent);
+}
+[data-theme="dark"] .talk-role--speak { background: var(--color-primary-light); border-color: var(--color-primary-light); }
+
+@media (prefers-reduced-motion: no-preference) {
+    .tm-pin-in {
+        transition: transform 560ms cubic-bezier(0.34, 1.45, 0.64, 1) calc(var(--i, 0) * 80ms),
+                    opacity 240ms ease-out calc(var(--i, 0) * 80ms);
+    }
+    .talks-map.is-armed:not(.is-in) .tm-pin-in {
+        opacity: 0;
+        transform: translateY(-22px);
+    }
+    .tm-label,
+    .tm-dot,
+    .tm-halo { transition: opacity 200ms ease-out, transform 220ms cubic-bezier(0.23, 1, 0.32, 1); }
+    .talk { transition: background-color 200ms ease-out; }
+    .talk::before { transition: opacity 200ms ease-out; }
+}
+
+@media (max-width: 959px) {
+    .talks-map { max-width: 560px; }
+}
+@media (max-width: 767px) {
+    .talk {
+        grid-template-columns: 3.75rem minmax(0, 1fr);
+        gap: var(--space-sm) var(--space-md);
+        margin: 0 calc(-1 * var(--space-sm));
+        padding: var(--space-md) var(--space-sm);
+    }
+    .talk-date { min-height: 3.75rem; }
+    .td-day { font-size: 1.5rem; }
+    .td-day--range { font-size: 1rem; }
+    .tm-label { font-size: 19px; stroke-width: 5px; }
+}
+
+/* Gablota hover clip: fades in over the screenshot once it is actually playing */
+.g-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    opacity: 0;
+    transition: opacity 250ms ease-out;
+    pointer-events: none;
+}
+.g-shot.is-playing .g-video { opacity: 1; }
+
+/* Gablota badges: status first (gold outline), then the stack as quiet chips;
+   key phrases in the decision sentence in gold. */
+.g-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 var(--space-xs);
+}
+.g-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background: var(--g-badge-bg);
+    color: var(--g-ink);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+.g-badge--status {
+    border-color: var(--g-gold);
+    background: transparent;
+    color: var(--g-gold);
+    font-weight: 600;
+}
+.g-hl {
+    color: var(--g-gold);
+    font-weight: 600;
+}
+.gablota .g-hl .kw { color: inherit; }
+
+/* Wystąpienia: intro in full ink, not grey */
+#wystapienia .section-desc { color: var(--color-text); }
+
+/* Projects and Talks share the hero's ground: warm gold glow over a soft gradient */
+[data-theme="dark"] .projects,
+[data-theme="dark"] .talks {
+    /* continue from where the hero ends (--color-bg): no brown band, only a faint warm glow */
+    background:
+        radial-gradient(ellipse 70% 30% at 50% 0%, rgba(201, 169, 98, 0.035), transparent 65%),
+        var(--color-bg);
+}
+[data-theme="light"] .projects,
+[data-theme="light"] .talks {
+    background: var(--color-bg);
+}
+
+
+/* ================================================
+   S1 „PROSTO” (structure prototype): one heading per section, left-aligned on the
+   container edge, an even vertical rhythm and the page ground running through.
+   Order: hero → Projekty (Gablota + Analizy danych) → Wystąpienia → Kontakt.
+   ================================================ */
+/* every gap between two sections = 2 × 4rem; hero → Projekty keeps the hero's own 6rem */
+main > .s1-section {
+    padding: var(--space-3xl) 0;
+}
+main > #projekty.s1-section { padding-top: var(--space-4xl); }
+.s1-section .ds-bento { max-width: none; }
+
+/* no bands, no lines between sections: the ground just continues */
+[data-theme="dark"] main > .s1-section,
+[data-theme="light"] main > .s1-section {
+    background: var(--color-bg);
+    box-shadow: none;
+}
+main > .s1-section::before { display: none; }
+[data-theme="dark"] .contact.s1-section {
+    background:
+        radial-gradient(ellipse 60% 45% at 50% 100%, rgba(201, 169, 98, 0.05) 0%, transparent 60%),
+        var(--color-bg);
+}
+
+.s1-head {
+    max-width: 60ch;
+    margin: 0 0 var(--space-2xl);
+}
+.s1-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 4.5vw, 3.1rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--color-text);
+    margin: 0 0 var(--space-sm);
+}
+.s1-lede {
+    font-size: var(--text-lg);
+    line-height: 1.55;
+    color: var(--color-text);
+    margin: 0;
+}
+
+/* Gablota sits directly under the Projekty heading */
+.s1-section .gablota { padding: 0; }
+
+/* Analizy danych: a sub-part of Projekty, heading on the same left edge */
+.s1-section .ds-section { margin-top: var(--space-3xl); }
+.s1-subtitle.ds-heading {
+    text-align: left;
+    font-size: var(--text-4xl);
+    margin: 0 0 var(--space-lg);
+    color: var(--color-text);
+}
+.s1-section .projects-footer {
+    justify-content: flex-start;
+    margin-top: var(--space-xl);
+}
+
+@media (max-width: 767px) {
+    main > .s1-section { padding: var(--space-2xl) 0; }
+    main > #projekty.s1-section { padding-top: var(--space-3xl); }
+    .s1-head { margin-bottom: var(--space-xl); }
+    .s1-lede { font-size: var(--text-md); }
+    .s1-subtitle.ds-heading { font-size: var(--text-3xl); }
+}
+/* Kontakt stays the centred finale; its intro in full ink like the other ledes */
+#kontakt.s1-section .section-desc { color: var(--color-text); }
+
+/* Analizy danych: heading and "Wszystkie repozytoria" on one line */
+.ds-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+.ds-head .ds-heading { margin: 0; }
+.ds-head .ds-repos { padding: 0.6rem 1.1rem; font-size: var(--text-sm); }
+.ds-head .ds-repos svg { width: 16px; height: 16px; }
+
+/* Small tools: each with a real image on top, like the data-analysis tiles */
+.g-tools-list a { padding: 0 0 var(--space-md); gap: 0.35rem; }
+.g-tools-list .g-tool-name,
+.g-tools-list .g-tool-line { padding: 0 var(--space-md); }
+.g-tool-shot {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    margin-bottom: var(--space-sm);
+    background: var(--g-shot-bg);
+    border-bottom: 1px solid var(--g-tile-edge);
+}
+.g-tool-shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+/* ================================================
+   PHTHALO GREEN — the brand's second green, used as accents on top of the
+   British Racing Green + gold palette (never as a page ground).
+   ================================================ */
+:root {
+    --color-phthalo: #123524;
+    --color-phthalo-mid: #1d5c43;
+    --color-phthalo-light: #3a9a70;
+}
+::selection { background: var(--color-phthalo-mid); color: #fff; }
+html { scrollbar-color: var(--color-phthalo-mid) transparent; }
+.kpw-stop-a { stop-color: var(--color-phthalo-mid); }
+[data-theme="dark"] .kpw-stop-a { stop-color: var(--color-phthalo-light); }
+/* primary button: racing green into phthalo */
+.btn-primary { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-phthalo) 100%); }
+/* project tiles: phthalo edge on hover/focus in the light theme, gold in dark */
+@media (hover: hover) and (pointer: fine) {
+    .g-tile:hover { border-color: var(--color-phthalo-mid); }
+    [data-theme="dark"] .g-tile:hover { border-color: var(--color-accent); }
+}
+.g-tile:focus-within { border-color: var(--color-phthalo-mid); }
+[data-theme="dark"] .g-tile:focus-within { border-color: var(--color-accent); }
+.g-ext { text-decoration-color: var(--color-phthalo-light); }
+.g-badge--status { border-color: var(--color-phthalo-mid); color: var(--color-phthalo-mid); }
+[data-theme="dark"] .g-badge--status { border-color: var(--color-phthalo-light); color: #7cc9a3; }
+.talk-role--speak,
+[data-theme="dark"] .talk-role--speak { background: var(--color-phthalo-mid); border-color: var(--color-phthalo-mid); }
+
+
+/* ================================================
+   PHTHALO ACCENTS — a second layer of phthalo green on top of the palette
+   (nav state, progress bar, title rules, links, case pages, talks, focus, footer).
+   Accent only: never a ground. Contrast measured: phthalo-mid on cream 7.6:1.
+   ================================================ */
+:root { --color-focus: var(--color-phthalo-mid); }
+[data-theme="dark"] { --color-focus: var(--color-accent); }
+*:focus-visible { outline-color: var(--color-focus); }
+.skip-link:focus { outline-color: var(--color-focus); }
+
+/* nav: hover underline phthalo -> gold; the section in view (scroll-spy) keeps it */
+.nav-links a::after {
+    background: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-accent));
+}
+[data-theme="dark"] .nav-links a::after {
+    background: linear-gradient(90deg, var(--color-phthalo-light), var(--color-accent));
+}
+.nav-links a[aria-current="true"] { color: var(--color-phthalo-mid); }
+[data-theme="dark"] .nav-links a[aria-current="true"] { color: var(--color-primary-on-dark); }
+.nav-links a[aria-current="true"]::after { width: 100%; }
+
+/* scroll progress: phthalo into gold */
+.scroll-progress-bar,
+[data-theme="dark"] .scroll-progress-bar {
+    background: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-phthalo-light) 45%, var(--color-accent));
+}
+
+/* a short phthalo -> gold rule under the case-page h2 (drawn as a background so it works on the flex .case-h2) */
+.case-h2 {
+    padding-bottom: 0.4em;
+    background-image: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-accent));
+    background-repeat: no-repeat;
+    background-size: 56px 3px;
+    background-position: left bottom;
+}
+
+/* links in running text: phthalo underline, gold on hover */
+.case-hero p a:not(.btn),
+.case-section :is(p, li, dd, figcaption) a:not(.btn),
+.s1-lede a {
+    text-decoration: underline;
+    text-decoration-color: var(--color-phthalo-light);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition-base), color var(--transition-base);
+}
+.case-hero p a:not(.btn):hover,
+.case-section :is(p, li, dd, figcaption) a:not(.btn):hover,
+.s1-lede a:hover {
+    color: var(--color-primary);
+    text-decoration-color: var(--color-accent);
+}
+[data-theme="dark"] .case-hero p a:not(.btn):hover,
+[data-theme="dark"] .case-section :is(p, li, dd, figcaption) a:not(.btn):hover,
+[data-theme="dark"] .s1-lede a:hover { color: var(--color-primary-on-dark); }
+.g-ext:hover { text-decoration-color: var(--g-gold); }
+
+/* case pages: breadcrumb, contents, decisions, evidence */
+.case-breadcrumb a { color: var(--color-phthalo-mid); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; }
+.case-breadcrumb a:hover { text-decoration-color: var(--color-accent); }
+.case-breadcrumb [aria-current="page"] { color: var(--color-text); font-weight: 600; }
+[data-theme="dark"] .case-breadcrumb a { color: var(--color-primary-on-dark); }
+.case-toc a { color: var(--color-phthalo-mid); }
+.case-toc a:hover,
+.case-toc a:focus-visible { background: var(--color-phthalo-mid); border-color: var(--color-phthalo-mid); color: #fff; }
+[data-theme="dark"] .case-toc a { color: var(--color-primary-on-dark); }
+[data-theme="dark"] .case-toc a:hover,
+[data-theme="dark"] .case-toc a:focus-visible { background: var(--color-phthalo-mid); border-color: var(--color-phthalo-light); color: #fff; }
+.case-decision::before {
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-accent));
+}
+.case-decision-grid dt:first-child { color: var(--color-phthalo-mid); font-weight: 600; }
+[data-theme="dark"] .case-decision-grid dt:first-child { color: var(--color-phthalo-light); }
+.case-stat-value { color: var(--color-phthalo-mid); }
+
+/* talks: year numerals phthalo (gold in dark), land dots lean phthalo, pins stay gold */
+.talks-year-num { color: var(--color-phthalo-mid); }
+[data-theme="dark"] .talks-year-num { color: var(--color-accent); }
+.talks { --tm-land: rgba(29, 92, 67, 0.26); }
+[data-theme="dark"] .talks { --tm-land: rgba(58, 154, 112, 0.3); }
+
+/* footer: a thin phthalo hairline on top */
+.footer::before {
+    background: linear-gradient(90deg, transparent, var(--color-phthalo-light) 20%, var(--color-accent) 50%, var(--color-phthalo-light) 80%, transparent);
+    opacity: 0.55;
+}
+
+/* ================================================
+   SCROLL MOTION — authored scroll moments (ScrollMotion in script.js)
+   1. Gablota + Data Science tiles: staggered reveal on entering the viewport, once.
+   2. Case pages, "Kluczowe decyzje": stacked sticky cards on desktop (>= 900px),
+      the cards underneath recede slightly (scroll-driven where supported).
+   3. Talks: the year heading stays visible while its events scroll (desktop).
+   4. Section titles: the phthalo rule draws in as the title enters.
+   Transform/opacity only. Under prefers-reduced-motion everything is static
+   (JS does not arm 1 and 2; 3 is a plain sticky heading; 4 sits in a motion query).
+   ================================================ */
+
+/* 1. tiles: the grid is armed by JS (.is-motion), each tile gets .is-in and a --d delay */
+@media (prefers-reduced-motion: no-preference) {
+    .is-motion > :is(.g-tile, .g-tools, .ds-tile) {
+        animation: none;            /* replaces the scroll-scrubbed reveal of .ds-tile */
+        opacity: 0;
+        translate: 0 16px;
+        transition:
+            opacity 460ms cubic-bezier(0.23, 1, 0.32, 1) var(--d, 0ms),
+            translate 460ms cubic-bezier(0.23, 1, 0.32, 1) var(--d, 0ms),
+            transform var(--transition-base),
+            box-shadow var(--transition-base);
+    }
+    .is-motion > :is(.g-tile, .g-tools, .ds-tile).is-in {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+/* 2. key decisions: a pile of cards. JS adds .is-stack only when every card fits
+   under the nav (so no text is ever hidden below the fold) and sets --i / --n. */
+@media (min-width: 900px) {
+    .case-decisions.is-stack {
+        --stack-top: 96px;          /* nav (89px) + breathing room */
+        --stack-step: 14px;
+        gap: var(--space-xl);
+        view-timeline: --decisions block;
+    }
+    .case-decisions.is-stack > .case-decision {
+        position: sticky;
+        top: calc(var(--stack-top) + var(--i, 0) * var(--stack-step));
+        transform-origin: 50% 0;
+        box-shadow: 0 -12px 28px -20px rgba(18, 53, 36, 0.35);
+    }
+    [data-theme="dark"] .case-decisions.is-stack > .case-decision {
+        box-shadow: 0 -12px 28px -16px rgba(0, 0, 0, 0.7);
+    }
+    /* a focused link never stays covered by the next card */
+    .case-decisions.is-stack > .case-decision:focus-within { z-index: 1; }
+}
+@supports (animation-timeline: view()) {
+    @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+        .case-decisions.is-stack > .case-decision {
+            --recede: calc(1 - (var(--n, 1) - 1 - var(--i, 0)) * 0.02);
+            animation: scrollReveal linear both, decisionRecede linear both;
+            animation-timeline: view(), --decisions;
+            animation-range:
+                entry 0% entry 60%,
+                exit-crossing calc(var(--i, 0) / var(--n, 1) * 100%) exit-crossing 100%;
+        }
+    }
+}
+@keyframes decisionRecede {
+    to { scale: var(--recede, 1); }
+}
+
+/* 3. talks: the year heading scrolls with its group (it used to stick under the nav and covered the last
+   item of each year; the current year is shown by the big numeral next to the map) */
+
+
+/* ================================================
+   POLISH 25.10: decision cards without the gradient stripe and grey mono labels;
+   § numerals readable on cream; marbled endpaper texture behind the contact finale (dark).
+   ================================================ */
+.case-decision::before {
+    height: 1px;
+    border-radius: 0;
+    background: var(--color-phthalo-mid);
+    opacity: 0.5;
+}
+.case-decision-grid dt {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-phthalo-mid);
+}
+[data-theme="dark"] .case-decision-grid dt { color: #7cc9a3; }
+.case-decision-grid dd { color: var(--color-text); }
+.case-h2-num { color: var(--color-phthalo-mid); }
+[data-theme="dark"] .case-h2-num { color: var(--color-accent); }
+
+/* Verde Alpi marble behind the contact section (dark): the blur is baked into the image from the 4K
+   original (plus a light GPU blur), darker in the middle. The layer starts 180px above the section and
+   fades in from nothing over half its height, so there is no edge where the talks end. */
+[data-theme="dark"] .contact.s1-section {
+    background: var(--color-bg);
+    overflow-x: clip;
+}
+[data-theme="dark"] .contact.s1-section::after {
+    content: '';
+    position: absolute;
+    inset: -180px -40px 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url("assets/images/brand/verde-alpi-soft.webp?v=1") center / cover no-repeat;
+    filter: blur(3px) saturate(1.05);
+    opacity: 0.55;
+    -webkit-mask-image:
+        radial-gradient(760px 480px at 50% 55%, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.6) 55%, #000 100%),
+        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.02) 8%, rgba(0, 0, 0, 0.07) 15%, rgba(0, 0, 0, 0.16) 22%, rgba(0, 0, 0, 0.3) 29%, rgba(0, 0, 0, 0.48) 36%, rgba(0, 0, 0, 0.67) 43%, rgba(0, 0, 0, 0.84) 50%, #000 58%, #000 76%, rgba(0, 0, 0, 0.55) 89%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+        radial-gradient(760px 480px at 50% 55%, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.6) 55%, #000 100%),
+        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.02) 8%, rgba(0, 0, 0, 0.07) 15%, rgba(0, 0, 0, 0.16) 22%, rgba(0, 0, 0, 0.3) 29%, rgba(0, 0, 0, 0.48) 36%, rgba(0, 0, 0, 0.67) 43%, rgba(0, 0, 0, 0.84) 50%, #000 58%, #000 76%, rgba(0, 0, 0, 0.55) 89%, transparent 100%);
+    mask-composite: intersect;
+}
+[data-theme="dark"] .contact.s1-section > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Case-study headers: Verde Alpi marble, quiet (dark: dimmed photo; light: faint multiply) */
+.case-hero { position: relative; isolation: isolate; }
+.case-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: url("assets/images/brand/verde-alpi-soft.webp?v=1") center / cover no-repeat;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+}
+[data-theme="dark"] .case-hero::before {
+    opacity: 0.3;
+    mix-blend-mode: normal;
+    filter: blur(2px);
+}
+
+/* ================================================
+   PROJEKTY POLISH (25.10): tiles in a row end on one line, the number and the links share a ruled foot,
+   small tools with images of one height (desktop) and a compact list on phones.
+   ================================================ */
+/* the caption fills the tile, so every foot in a row sits on the same baseline */
+.g-cap { flex: 1; }
+.g-foot {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-xs) var(--space-lg);
+    margin-top: auto;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--g-tile-edge);
+}
+.g-num { flex: 1; min-width: 0; margin: 0; line-height: 1.5; }
+.g-links {
+    flex: none;
+    display: flex;
+    gap: var(--space-md);
+}
+.g-links .g-ext { padding: 0.15rem 0; }
+@media (max-width: 479px) {
+    .g-foot { flex-direction: column; align-items: flex-start; }
+}
+
+/* the light screenshots glare on the dark band: a touch dimmer there */
+[data-theme="dark"] .g-tool-shot img { filter: brightness(0.9); }
+
+/* ================================================
+   CASE-STUDY BAR: every project tile ends with "§ Czytaj studium przypadku … 8 min →",
+   like the spine of a file; the whole tile is the link (.g-main), the bar only says where it goes.
+   ================================================ */
+.g-read {
+    display: flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: 0.8rem var(--space-lg);
+    background: var(--color-primary);
+    color: var(--color-bg);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+[data-theme="dark"] .g-read {
+    color: var(--color-text);
+    background: color-mix(in srgb, var(--color-primary) 85%, var(--color-bg));
+}
+.g-read-time { margin-left: auto; font-weight: 500; opacity: 0.8; }
+.g-read-arrow { display: inline-block; color: var(--color-accent); }
+@media (prefers-reduced-motion: no-preference) {
+    .g-read { transition: background-color 250ms var(--g-ease); }
+    .g-read-arrow { transition: transform 250ms var(--g-ease); }
+}
+/* the bar is its own link (to the case study); the rest of the tile opens the project's site */
+.g-read { position: relative; z-index: 2; text-decoration: none; }
+.g-read:hover { background: var(--color-phthalo-mid); color: var(--color-bg); }
+[data-theme="dark"] .g-read:hover { color: var(--color-text); }
+.g-read:hover .g-read-arrow,
+.g-read:focus-visible .g-read-arrow { transform: translateX(4px); }
+.g-read:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; background: var(--color-phthalo-mid); }
+
+/* ================================================
+   PROJEKTY 25.10 (b): the caption reads status -> name -> kind -> decision -> stack -> number + links;
+   live site / repo as real buttons with an icon; the tools in a box of their own.
+   ================================================ */
+/* status: its own line with a dot (green: live, gold: beta/alpha, open ring: not started / prototype) */
+.g-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--g-ink);
+}
+.g-status-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--g-gold); }
+.g-status--live .g-status-dot { background: var(--color-phthalo-light); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-phthalo-light) 22%, transparent); }
+.g-status--soon .g-status-dot { background: transparent; box-shadow: inset 0 0 0 2px var(--g-gold); }
+@media (prefers-reduced-motion: no-preference) {
+    .g-status--live .g-status-dot { animation: gLive 2.4s ease-in-out infinite; }
+}
+@keyframes gLive {
+    0%, 100% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-phthalo-light) 28%, transparent); }
+    50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-phthalo-light) 6%, transparent); }
+}
+/* the name larger, the kind as an italic serif line */
+.g-name { font-size: clamp(1.9rem, 2.4vw, 2.4rem); line-height: 1.05; letter-spacing: -0.01em; }
+.g-tile--xl .g-name { font-size: clamp(2.3rem, 3.4vw, 3.4rem); }
+.g-kind { font-family: var(--font-serif); font-style: italic; font-size: var(--text-md); font-weight: 500; letter-spacing: 0; margin-top: -0.15rem; }
+/* the stack: quieter chips under the decision */
+.g-stack { margin: 0; }
+.g-stack .g-badge { font-size: 0.72rem; padding: 2px 9px; }
+/* live site / repo: buttons, clearly not the case-study link */
+.g-links { gap: var(--space-sm); flex-wrap: wrap; justify-content: flex-end; }
+.g-ext,
+.g-links .g-ext {
+    gap: 0.4em;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--g-gold);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--g-ink);
+    text-decoration: none;
+    background: transparent;
+    white-space: nowrap;
+}
+.g-ext svg { width: 13px; height: 13px; }
+.g-ext .g-ext-ico { width: 14px; height: 14px; color: var(--g-gold); }
+@media (prefers-reduced-motion: no-preference) {
+    .g-ext { transition: background-color 200ms var(--g-ease), color 200ms var(--g-ease); }
+}
+.g-ext:hover { background: var(--g-gold); color: var(--color-bg); text-decoration: none; }
+.g-ext:hover .g-ext-ico { color: inherit; }
+
+/* Narzędzia: a box of its own, the five tools as cards with large images (five across on wide screens) */
+.g-tools {
+    padding: var(--space-lg);
+    border: 1px solid var(--g-tile-edge);
+    border-radius: var(--radius-lg);
+    background:
+        radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--color-phthalo-mid) 16%, transparent), transparent 60%),
+        var(--g-tile);
+    gap: var(--space-md);
+}
+@media (min-width: 1100px) { .g-tools { padding: var(--space-lg); border: 1px solid var(--g-tile-edge); } }
+.g-tools-title { font-size: clamp(1.9rem, 2.4vw, 2.4rem); }
+.g-tools-title a { gap: var(--space-sm); }
+.g-tools-title svg { width: 22px; height: 22px; }
+.g-tools-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+}
+.g-tools-list li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+/* from 900px: three cards on top, the last two wider below (6-column grid) */
+@media (min-width: 900px) {
+    .g-tools-list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .g-tools-list li { grid-column: span 2; }
+    .g-tools-list li:nth-child(n + 4),
+    .g-tools-list li:last-child:nth-child(odd) { grid-column: span 3; }
+    .g-tools-list li:nth-child(n + 4):nth-child(n) .g-tool-shot { aspect-ratio: 16 / 7; }
+}
+.g-tools-list li { display: flex; }
+.g-tools-list a,
+.g-tools-list li a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0 0 var(--space-md);
+    border: 1px solid var(--g-tile-edge);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--g-tile);
+}
+.g-tools-list .g-tool-shot,
+.g-tools-list li:nth-child(n) .g-tool-shot {
+    aspect-ratio: 16 / 10;
+    margin: 0 0 var(--space-xs);
+    border: 0;
+    border-bottom: 1px solid var(--g-tile-edge);
+    border-radius: 0;
+}
+.g-tools-list .g-tool-name,
+.g-tools-list .g-tool-line { padding: 0 var(--space-md); }
+.g-tools-list .g-tool-name { font-family: var(--font-serif); font-size: 1.2rem; display: flex; justify-content: space-between; gap: var(--space-sm); }
+.g-tools-list .g-tool-name::after { content: '→'; font-family: var(--font-sans); color: var(--g-gold); font-weight: 700; }
+@media (prefers-reduced-motion: no-preference) {
+    .g-tools-list .g-tool-name::after { transition: transform 250ms var(--g-ease); }
+    .g-tool-shot img { transition: transform 400ms var(--g-ease); }
+}
+.g-tools-list a:hover .g-tool-name::after { transform: translateX(4px); }
+.g-tools-list a:hover .g-tool-shot img { transform: scale(1.05); }
+.g-tools-list a:hover { border-color: var(--g-gold); }
+/* the odd last card on two columns: image wide and low */
+@media (max-width: 899px) { .g-tools-list li:last-child:nth-child(odd) .g-tool-shot { aspect-ratio: 32 / 10; } }
+@media (max-width: 599px) {
+    .g-tools-list { gap: var(--space-sm); }
+    .g-tools-list .g-tool-name { font-size: 1.05rem; }
+    .g-tools-list .g-tool-name, .g-tools-list .g-tool-line { padding: 0 var(--space-sm); }
+}
+
+/* tile caption as points: two short lines, each with its key phrase in gold */
+.g-points { list-style: none; margin: var(--space-xs) 0 0; padding: 0; display: grid; gap: 0.4rem; }
+.g-points li { position: relative; padding-left: 1.55rem; font-size: var(--text-md); line-height: 1.45; color: var(--g-ink); }
+.g-points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.42em;
+    width: 0.95rem;
+    height: 0.95rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--g-gold) 18%, transparent);
+    box-shadow: inset 0 0 0 1.5px var(--g-gold);
+}
+.g-points li::after {
+    content: '';
+    position: absolute;
+    left: 0.31rem;
+    top: calc(0.42em + 0.25rem);
+    width: 0.32rem;
+    height: 0.2rem;
+    border-left: 2px solid var(--g-gold);
+    border-bottom: 2px solid var(--g-gold);
+    transform: rotate(-45deg);
+}
+.g-tile--xl .g-points li { font-size: 1.12rem; }
+/* the number: value, label, then source and date on their own line */
+.g-num-d { display: block; margin-top: 0.15rem; font-size: var(--text-xs); color: var(--g-ink); opacity: 0.78; }
+
+
+/* ================================================
+   ANALIZY DANYCH: the live tile — AutoMargiela's analytics page on current data, first and widest
+   (always dark like the page it shows; the whole tile opens the live page, the buttons sit above that link)
+   ================================================ */
+.ds-tile--live {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    justify-content: initial;
+    min-height: 400px;
+    /* the same green as the other analysis tiles: their veil (.ds-tile::after) over a light notebook
+       screenshot at 0.52 over the primary gradient, rebuilt here without a picture under the text */
+    background:
+        linear-gradient(to top, rgba(0, 39, 21, 0.93) 0%, rgba(0, 50, 28, 0.7) 50%, rgba(0, 61, 35, 0.46) 100%),
+        linear-gradient(rgba(240, 242, 240, 0.5), rgba(240, 242, 240, 0.5)),
+        var(--color-primary-gradient);
+    border: 1px solid transparent;
+}
+.ds-tile--live::after { display: none; }
+.ds-live-main { position: absolute; inset: 0; z-index: 3; border-radius: inherit; }
+.ds-live-main:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.ds-live-shot, .ds-live-shot.g-shot { position: relative; overflow: hidden; min-height: 260px; aspect-ratio: auto; background: transparent; }
+.ds-live-shot img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+    -webkit-mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
+}
+.ds-live-body {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-xl) var(--space-xl) var(--space-xl) var(--space-md);
+    text-shadow: none;
+}
+.ds-live-body h3 { font-family: var(--font-serif); font-weight: 600; color: #fff; font-size: clamp(1.9rem, 2.8vw, 2.8rem); line-height: 1.08; margin: var(--space-xs) 0 0; }
+.ds-live-body p { font-size: var(--text-base); color: rgba(255, 255, 255, 0.9); }
+.ds-hl { color: var(--color-accent); font-weight: 600; }
+.ds-live-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: #fff !important;
+}
+.ds-live-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--color-phthalo-light); box-shadow: 0 0 0 4px rgba(58, 154, 112, 0.25); }
+@media (prefers-reduced-motion: no-preference) {
+    .ds-live-dot { animation: gLive 2.4s ease-in-out infinite; }
+}
+.ds-live-nums { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-xl); margin-top: var(--space-xs); }
+.ds-live-num { margin: 0; font-size: var(--text-sm) !important; }
+.ds-live-asof { margin: 0; font-size: var(--text-xs) !important; color: rgba(255, 255, 255, 0.8) !important; }
+.ds-live-num-v { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; color: var(--color-accent); margin-right: 0.2em; }
+.ds-live-links { position: relative; z-index: 4; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-lg); margin-top: var(--space-sm); }
+.ds-live-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.55rem 1.05rem;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    color: #14110c;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-decoration: none;
+}
+.ds-live-btn svg { width: 15px; height: 15px; }
+.ds-live-btn:hover { background: #ddc07a; }
+.ds-live-link { color: #fff; font-size: var(--text-sm); font-weight: 600; text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 3px; }
+.ds-live-link:hover { color: var(--color-accent); }
+:is(.ds-live-btn, .ds-live-link):focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+@media (max-width: 1000px) {
+    .ds-tile--live { grid-template-columns: 1fr; }
+    .ds-live-shot { aspect-ratio: 16 / 9; min-height: 0; }
+    .ds-live-shot img { -webkit-mask-image: none; mask-image: none; }
+    .ds-live-body { padding: var(--space-lg); }
+}
+
+/* a tile without a number keeps its links on the right */
+.g-foot:not(:has(.g-num)) { justify-content: flex-end; }
+/* the small JakiePrawo tile: a smaller name */
+.g-tile--s .g-name { font-size: clamp(1.7rem, 2vw, 2.1rem); }
+
+
+/* ================================================
+   WYSTĄPIENIA (wide screens): the map is the background of the whole section, pinned for its full height;
+   the list scrolls over it on the left. Kept quiet: faint land dots, dimmed names, a barely drawn year.
+   The city of the event in the middle of the screen lights up by itself (TalksMap, script.js).
+   ================================================ */
+.talks-bigyear { display: none; }
+@media (min-width: 960px) {
+    #wystapienia .talks-layout { display: block; position: relative; }
+    /* the aside spans the whole list (full width of the screen); the map inside it sticks under the nav
+       and stops where the list stops, fading out at its bottom edge */
+    #wystapienia .talks-aside {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(50% - 50vw);
+        right: calc(50% - 50vw);
+        z-index: 0;
+        pointer-events: none;
+    }
+    #wystapienia .talks-map {
+        position: sticky;
+        top: 89px;
+        height: calc(100vh - 89px);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        gap: var(--space-sm);
+        padding: 4vh max(2vw, calc((100vw - var(--container-max)) / 2)) 6vh 0;
+        -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 74%, transparent 98%);
+        mask-image: linear-gradient(180deg, #000 0%, #000 74%, transparent 98%);
+    }
+    #wystapienia .tm-svg {
+        position: relative;
+        width: min(50vw, 780px);
+        height: auto;
+        max-height: 100%;
+    }
+    #wystapienia .tm-pin { pointer-events: auto; }
+    #wystapienia .talks-wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+        padding-right: var(--space-3xl);
+        background: linear-gradient(90deg, var(--color-bg) 0%, var(--color-bg) 82%, transparent 100%);
+    }
+    /* quieter map */
+    #wystapienia { --tm-land: rgba(29, 92, 67, 0.13); }
+    [data-theme="dark"] #wystapienia { --tm-land: rgba(58, 154, 112, 0.14); }
+    #wystapienia .tm-label { opacity: 0.8; font-size: 11px; font-weight: 500; }
+    #wystapienia .tm-pin.is-active .tm-label { opacity: 0.95; font-weight: 600; }
+    #wystapienia .tm-pin:not(.is-active) :is(.tm-dot, .tm-halo) { opacity: 0.4; }
+    #wystapienia .tm-pin.is-active .tm-dot { opacity: 1; }
+    .talks-bigyear {
+        display: block;
+        order: 2;
+        font-family: var(--font-serif);
+        font-weight: 700;
+        font-size: clamp(3rem, 6vw, 6rem);
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--color-primary);
+        opacity: 0.22;
+    }
+    [data-theme="dark"] .talks-bigyear { -webkit-text-stroke-color: var(--color-accent); }
+}
+@media (min-width: 960px) and (prefers-reduced-motion: no-preference) {
+    #wystapienia .tm-pin.is-active .tm-halo { animation: tmPulse 2.2s ease-in-out infinite; }
+}
+@keyframes tmPulse {
+    0%, 100% { transform: scale(1.5); opacity: 0.9; }
+    50% { transform: scale(2); opacity: 0.35; }
+}
+
+/* hero timeline: the employer / school in full ink, not a small grey line */
+.emp-company,
+.edu-school { color: var(--color-text); }
+
+
+/* every row: the screenshots of the tiles side by side have one height (each picture was captured in its
+   tile's proportions, so nothing is stretched); spare height stays in the caption, its foot at the bottom */
+@media (min-width: 768px) {
+    .g-tile > .g-shot { flex: none; }
+    .g-tile > .g-cap { flex: 1; }
+    .g-tile > .g-shot :is(img, video) { object-position: left top; }
+}
+@media (min-width: 1100px) {
+    .g-tile--xl > .g-shot { aspect-ratio: auto; height: clamp(20rem, 30vw, 27rem); }
+    .g-tile--s > .g-shot { aspect-ratio: auto; height: 15rem; }
+}
+
+/* contact finale (moved here from the hero): "§" splits into "§ … { }" between the heading and the motto,
+   kept small so the tiles stay on the first screen */
+.contact-finale {
+    position: relative;
+    max-width: 620px;
+    margin: 0 auto;
+    aspect-ratio: 1600 / 560;
+}
+.contact-finale-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.1em;
+    font-size: clamp(2.5rem, 1.2rem + 6vw, 6rem);
+    line-height: 1;
+}
+.contact-finale.is-live .contact-finale-fallback { visibility: hidden; }
+.formula-para { font-family: var(--font-serif); font-weight: 700; color: var(--pm-0); }
+.formula-code { word-spacing: 0.35em; font-family: var(--font-mono); font-weight: 600; color: var(--pm-1); }
+#finaleParticles { --pm-alpha: 0.95; }
+[data-theme="dark"] #finaleParticles { --pm-alpha: 0.72; }
+#kontakt .section-header { margin-bottom: var(--space-sm); }
+
+/* NO GREY TEXT (author's rule): the secondary and tertiary text colours are the full ink in both themes;
+   hierarchy comes from size, weight, serif and gold/green, not from greying text out */
+:root,
+[data-theme="dark"] {
+    --color-text-secondary: var(--color-text);
+    --color-text-tertiary: var(--color-text);
+}
+
+/* room to breathe after the last talk: the contact marble starts 180px above its section, so the talks end
+   with more space than that and the marble fades in over empty ground, not over the last item */
+main > #wystapienia.s1-section { padding-bottom: calc(180px + var(--space-4xl) + var(--space-xl)); }
+@media (max-width: 767px) {
+    main > #wystapienia.s1-section { padding-bottom: calc(120px + var(--space-2xl)); }
+}
+
+/* contact: heading, then the § { } sign on its own, then the motto, then the tiles (even steps) */
+.contact-finale { max-width: 760px; margin: var(--space-2xl) auto var(--space-xl); }
+#kontakt .section-header { margin-bottom: 0; }
+#kontakt .contact-motto { margin: 0 auto var(--space-4xl); }
+main > #kontakt.s1-section { padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
+
+/* hero „Kompetencje”: rows, not boxes — the group name in gold serif on the left, chips on the right,
+   hairlines between groups; key skills in gold; certificates as a ticked list, AI_devs in one column */
+.skills-rows { display: grid; max-width: 560px; margin: 0 auto; }
+.skills-row {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr);
+    gap: var(--space-md);
+    align-items: start;
+    padding: 13px 0;
+    border-top: 1px solid var(--color-border);
+}
+.skills-row:first-child { border-top: 0; padding-top: 0; }
+.skills-row-label {
+    margin: 3px 0 0;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-primary);
+}
+[data-theme="dark"] .skills-row-label { color: var(--color-accent); }
+.skills-row-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.skills-row-chips span {
+    font-size: var(--text-xs);
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+.skills-row-chips span.k {
+    font-weight: 600;
+    border-color: var(--color-accent-dark);
+    background: color-mix(in srgb, var(--color-accent) 22%, var(--color-bg));
+}
+[data-theme="dark"] .skills-row-chips span.k {
+    border-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 16%, var(--color-bg));
+}
+.skills-certs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 6px var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+}
+/* each certificate gets a small rosette (award) icon, drawn as a mask so it takes the accent colour */
+.skills-certs li { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+.skills-certs li::before {
+    content: '';
+    flex: none;
+    width: 15px;
+    height: 15px;
+    background: var(--color-accent-dark);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='9' r='6'/%3E%3Cpath d='M8.6 13.9 7 22l5-3 5 3-1.6-8.1'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='9' r='6'/%3E%3Cpath d='M8.6 13.9 7 22l5-3 5 3-1.6-8.1'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+[data-theme="dark"] .skills-certs li::before { background: var(--color-accent); }
+/* the certificate row: its name above the list, so the two columns get the full width and don't wrap */
+.skills-row:has(.skills-certs) { grid-template-columns: 1fr; gap: var(--space-sm); }
+.skills-row:has(.skills-certs) .skills-row-label { margin: 0; }
+@media (max-width: 479px) {
+    .skills-row { grid-template-columns: 1fr; gap: var(--space-xs); }
+    .skills-row-label { margin: 0; }
+}
+
+/* tiles: one typeface for the caption text (the kind line is DM Sans, upright, not an italic serif) and a short
+   description paragraph instead of ticked points */
+.g-kind { font-family: var(--font-sans); font-style: normal; font-size: var(--text-sm); font-weight: 600; margin-top: 0; }
+.g-desc { margin: var(--space-xs) 0 0; font-size: var(--text-base); line-height: 1.6; color: var(--g-ink); max-width: 62ch; }
+.g-tile--xl .g-desc { font-size: 1.02rem; }
+
+/* case studies on hold: the bar is a quiet label, not a link */
+.g-read--soon { cursor: default; }
+.g-read--soon:hover { background: var(--color-primary); color: var(--color-bg); }
+[data-theme="dark"] .g-read--soon,
+[data-theme="dark"] .g-read--soon:hover { color: var(--color-text); background: color-mix(in srgb, var(--color-primary) 85%, var(--color-bg)); }
+.g-read--soon span { opacity: 0.85; font-weight: 600; }
+/* the tools box title without its link arrow */
+.g-tools-title { color: var(--g-ink); }
+
+/* logo: just "kpw" with its sparkle, a size up now that the phonetic line is gone */
+.logo-main { font-size: clamp(2.6rem, 3.4vw, 3.1rem); line-height: 1; }
+.logo-sparkle svg { width: 26px; height: 26px; }
+

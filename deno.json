@@ -1,0 +1,14 @@
+{
+  "lint": {
+    "exclude": [
+      "projekty/",
+      "analytics/",
+      "analytics.js",
+      "stats.js",
+      ".claude/"
+    ],
+    "rules": {
+      "exclude": ["no-window", "no-window-prefix"]
+    }
+  }
+}

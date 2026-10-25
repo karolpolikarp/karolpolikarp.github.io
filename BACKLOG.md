@@ -13,7 +13,7 @@ trzeba podejść do niej całościowo — to nie jest zmiana „przy okazji".
 - [ ] `git add projekty/` + commit (bez tego strona nie istnieje publicznie).
 - [ ] Dodać `<url>` dla `https://karolwilczynski.com/projekty/` do `sitemap.xml`
       (changefreq monthly, priority ~0.8).
-- [ ] Dodać widoczny link z głównej strony (`index.html` `.projects-footer`, ~937–942),
+- [ ] Dodać widoczny link z głównej strony (`index.html` `.projects-footer` na końcu `#projekty`),
       np. „Wszystkie projekty →" z `data-en="All projects →"`. **Dopiero po wdrożeniu** —
       nie linkować do niewdrożonej podstrony.
 
@@ -28,7 +28,7 @@ trzeba podejść do niej całościowo — to nie jest zmiana „przy okazji".
 - [ ] `upfor.png` (799 KB) → `../assets/images/upfor.webp` (70 KB) i usunąć osierocony PNG
       (`projekty/index.html` ~138; plik ładowany podwójnie — `<img>` + tło w `projekty.js`:340).
 - [ ] `espi.png` → `../assets/images/espi.webp` (`projekty/index.html` ~474) i usunąć orphaned PNG.
-- [ ] Google Fonts asynchronicznie — wzorzec preload + `media="print"` z `index.html`:108–110
+- [ ] Google Fonts asynchronicznie — wzorzec preload + `media="print"` + `<noscript>` z `<head>` w `index.html`
       (`projekty/index.html` ~53; przy okazji dorównać wagi, brak JetBrains Mono 600).
 
 ### Dostępność / PL-EN parytet (podstrona)
@@ -54,11 +54,14 @@ trzeba podejść do niej całościowo — to nie jest zmiana „przy okazji".
 ---
 
 ## Pomysły „kiedyś" (główna strona, nie pilne)
-- [ ] Per-slajdowe `aria-label` karuzeli zostają polskie w EN: „1 z 5: …" (`index.html` ~385–693)
-      i „Szczegóły: …" na tablistach slajdów. `aria-roledescription` już usunięto; pełne
-      tłumaczenie wymaga mechanizmu `data-aria-en` (jak na podstronie `projekty/`). Niska waga.
+- [x] ~~Per-slajdowe `aria-label` karuzeli zostają polskie w EN~~ — zrobione: każdy `.showcase-slide`
+      („N z 7: …"), tablista slajdu („Szczegóły: …") i miniatury („Zrzut N") mają `data-en-aria`;
+      kropki tłumaczy `ProjectShowcase`, strzałki/kropki/karuzelę `LanguageManager.attrTranslations`.
 - [ ] Wyeksportować avatar `karol-photo.jpg` (904×916) jako ~320×320 WebP (<15 KB) —
       renderowany 160×160, `fetchpriority=high`, to najcięższy obraz above-the-fold.
-- [ ] Drugi zrzut do mini-galerii UpFor (TODO w `index.html` ~476–477); przy okazji
-      `aria-pressed` na aktywnej miniaturze.
+- [x] ~~Drugi zrzut do mini-galerii UpFor~~ — zrobione: slajd UpFor.pl ma 4 miniatury
+      (`upfor`, `upfor-kalendarz`, `upfor-grupa`, `upfor-ai` .webp).
+- [ ] `aria-pressed` (lub `aria-current`) na aktywnej miniaturze galerii karuzeli — dziś stan
+      niesie tylko klasa `.is-active` (`ProjectShowcase.setupGalleries` w `script.js`).
+      Wymaga zmiany w `index.html` (stan początkowy) i `script.js`.
 - [ ] Rozważyć wspólny moduł `prefs.js` (theme/lang) współdzielony z podstroną `projekty/`.

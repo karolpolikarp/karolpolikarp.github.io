@@ -1,4 +1,17 @@
 // ================================================
+// SAFE STORAGE — localStorage can throw (private mode, blocked site data,
+// sandboxed frames); a SecurityError must never stop the rest of the script.
+// ================================================
+const SafeStorage = {
+    get(key) {
+        try { return localStorage.getItem(key); } catch { return null; }
+    },
+    set(key, value) {
+        try { localStorage.setItem(key, value); } catch { /* storage unavailable */ }
+    }
+};
+
+// ================================================
 // THEME TOGGLE (DARK/LIGHT MODE)
 // ================================================
 const ThemeManager = {
@@ -16,7 +29,7 @@ const ThemeManager = {
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
         document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
+        SafeStorage.set('theme', newTheme);
         this.toggle?.setAttribute('aria-pressed', String(newTheme === 'dark'));
 
         // Add transition effect
@@ -46,7 +59,6 @@ const LanguageManager = {
 
         // Hero
         ['.greeting-text', "Hi, I'm"],
-        ['.hero-subtitle', 'I work at the intersection of <span class="accent">artificial intelligence</span>, <span class="accent">data analysis</span>, <span class="accent">ICT</span>, <span class="accent">public policy</span>, <span class="accent">law</span> and <span class="accent">public administration</span>.', true],
         ['.hero-cta .btn-primary span', 'See projects'],
         ['.hero-cta .btn-secondary', 'Contact'],
 
@@ -115,7 +127,15 @@ const LanguageManager = {
             this.originals.set(el, isHTML ? el.innerHTML : el.textContent);
         });
 
-        const savedLang = localStorage.getItem('lang');
+        // Attributes: data-en-content (meta description), data-en-aria (aria-label), data-en-alt (img alt).
+        // <title data-en> needs nothing extra: [data-en] above already covers it.
+        this.attrEls = [
+            ...Array.from(document.querySelectorAll('[data-en-content]'), el => [el, 'content', 'data-en-content']),
+            ...Array.from(document.querySelectorAll('[data-en-aria]'), el => [el, 'aria-label', 'data-en-aria']),
+            ...Array.from(document.querySelectorAll('[data-en-alt]'), el => [el, 'alt', 'data-en-alt']),
+        ].map(([el, attr, enAttr]) => ({ el, attr, pl: el.getAttribute(attr), en: el.getAttribute(enAttr) }));
+
+        const savedLang = SafeStorage.get('lang');
         if (savedLang === 'en') {
             this.setLanguage('en', false);
         }
@@ -146,9 +166,6 @@ const LanguageManager = {
                 if (el.hasAttribute('data-en-html')) el.innerHTML = el.getAttribute('data-en-html');
                 else el.textContent = el.getAttribute('data-en');
             });
-            document.title = 'Karol Polikarp Wilczy\u0144ski | AI, Law, Technology';
-            document.querySelector('meta[name="description"]')?.setAttribute('content',
-                'I work at the intersection of AI, ICT, law and public administration. Building tools for working with Polish law and automations.');
         } else {
             this.translations.forEach(([selector, , isHTML]) => {
                 document.querySelectorAll(selector).forEach((el, i) => {
@@ -166,10 +183,12 @@ const LanguageManager = {
                 if (el.hasAttribute('data-en-html')) el.innerHTML = original;
                 else el.textContent = original;
             });
-            document.title = 'Karol Polikarp Wilczy\u0144ski | AI, Prawo, Technologia';
-            document.querySelector('meta[name="description"]')?.setAttribute('content',
-                'Pracuj\u0119 na styku AI, ICT, prawa i administracji publicznej. Buduj\u0119 narz\u0119dzia do pracy z polskim prawem i automatyzacje.');
         }
+
+        this.attrEls?.forEach(({ el, attr, pl, en }) => {
+            const value = lang === 'en' ? en : pl;
+            if (value !== null) el.setAttribute(attr, value);
+        });
 
         // Email display
         const emailDisplay = document.getElementById('emailDisplay');
@@ -180,17 +199,17 @@ const LanguageManager = {
 
         this.updateToggle();
         document.dispatchEvent(new CustomEvent('languagechange', { detail: { lang: lang } }));
-        if (save) localStorage.setItem('lang', lang);
+        if (save) SafeStorage.set('lang', lang);
     },
 
     updateToggle() {
         if (!this.toggle) return;
         if (this.currentLang === 'en') {
             this.toggle.classList.add('lang-en');
-            this.toggle.setAttribute('aria-label', 'Prze\u0142\u0105cz na polski');
+            this.toggle.setAttribute('aria-label', 'PL EN: prze\u0142\u0105cz na polski');
         } else {
             this.toggle.classList.remove('lang-en');
-            this.toggle.setAttribute('aria-label', 'Switch to English');
+            this.toggle.setAttribute('aria-label', 'PL EN: switch to English');
         }
     }
 };
@@ -234,19 +253,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         // Skip if href is just "#" or empty
         if (!href || href === '#') return;
 
+        let target;
         try {
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        } catch (err) {
+            target = document.querySelector(href);
+        } catch {
             // Invalid selector, let browser handle default behavior
             console.warn('Invalid anchor href:', href);
+            return;
         }
+        if (!target) return;
+
+        e.preventDefault();
+        target.scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'start'
+        });
+        // Keep the URL in sync, as the default link behaviour would.
+        if (location.hash !== href) {
+            // Resolved against this document's own URL (not a <base href>), so it never leaves the page.
+            try { history.pushState(null, '', location.pathname + location.search + href); } catch { /* e.g. sandboxed frame */ }
+        }
+        // Move focus to the target too (skip link, TOC), so keyboard and screen-reader
+        // users continue from there. Non-focusable targets get a temporary tabindex="-1"
+        // (no focus ring on the whole section), removed again once focus leaves.
+        if (!target.matches('a[href], button, input, select, textarea, [tabindex]')) {
+            target.setAttribute('tabindex', '-1');
+            target.style.outline = 'none';
+            target.addEventListener('blur', () => {
+                target.removeAttribute('tabindex');
+                target.style.removeProperty('outline');
+            }, { once: true });
+        }
+        target.focus({ preventScroll: true });
     });
 });
 
@@ -258,7 +296,7 @@ const ScrollAnimations = {
     init() {
         // Original reveal elements
         const revealElements = document.querySelectorAll(
-            '.skill-card, .project-card, .contact-link, .education-list li'
+            '.skill-card, .education-list li'
         );
 
         const revealObserver = new IntersectionObserver((entries) => {
@@ -276,9 +314,7 @@ const ScrollAnimations = {
         });
 
         // New fade-in animations
-        const fadeElements = document.querySelectorAll(
-            '.fade-in-up, .fade-in-left, .fade-in-right, .scale-in'
-        );
+        const fadeElements = document.querySelectorAll('.fade-in-up');
 
         const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -312,27 +348,6 @@ const ScrollAnimations = {
             header.style.transform = 'translateY(30px)';
             header.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             headerObserver.observe(header);
-        });
-
-        // Position items staggered animation
-        const positionItems = document.querySelectorAll('.position-item');
-        const positionObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 100);
-                    positionObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        positionItems.forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
-            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            positionObserver.observe(item);
         });
     }
 };
@@ -402,7 +417,7 @@ const MagneticButtons = {
     }
 };
 
-MagneticButtons.init();
+// MagneticButtons.init(); — off since 2026-10-25: the buttons slid after the cursor and looked like they tilted
 
 // ================================================
 // NAVBAR SCROLL EFFECT (throttled with rAF)
@@ -416,9 +431,9 @@ window.addEventListener('scroll', () => {
     requestAnimationFrame(() => {
         const currentScroll = window.pageYOffset;
         if (currentScroll > 100) {
-            nav.classList.add('nav-scrolled');
+            nav?.classList.add('nav-scrolled');
         } else {
-            nav.classList.remove('nav-scrolled');
+            nav?.classList.remove('nav-scrolled');
         }
         navScrollRaf = false;
     });
@@ -442,23 +457,6 @@ updateClock();
 setInterval(updateClock, 15000);
 
 // ================================================
-// PROJECT VIDEO ON HOVER
-// ================================================
-document.querySelectorAll('.project-has-video').forEach(container => {
-    const video = container.querySelector('.project-video');
-    if (!video) return;
-
-    container.addEventListener('mouseenter', () => {
-        video.play().catch(() => {});
-    });
-
-    container.addEventListener('mouseleave', () => {
-        video.pause();
-        video.currentTime = 0;
-    });
-});
-
-// ================================================
 // CATS EASTER EGG  (devtools: cats.show('Pimpek'|'Fryderyk'|'Both'))
 // ================================================
 const cats = {
@@ -468,18 +466,21 @@ const cats = {
             console.log("cats.show('Pimpek' | 'Fryderyk' | 'Both')");
             return;
         }
+        // Already open (e.g. Konami code typed twice) — don't stack a second dialog.
+        if (document.querySelector('.cat-easter-egg-overlay')) return;
+        const en = LanguageManager.currentLang === 'en';
         const previouslyFocused = document.activeElement;
         const overlay = document.createElement('div');
         overlay.className = 'cat-easter-egg-overlay';
         overlay.setAttribute('role', 'dialog');
         overlay.setAttribute('aria-modal', 'true');
-        overlay.setAttribute('aria-label', 'Zdjęcia kotów');
+        overlay.setAttribute('aria-label', en ? 'Cat photos' : 'Zdjęcia kotów');
         const container = document.createElement('div');
         container.className = 'cat-easter-egg-container';
         const closeBtn = document.createElement('button');
         closeBtn.className = 'cat-easter-egg-close';
         closeBtn.innerHTML = '×';
-        closeBtn.setAttribute('aria-label', 'Zamknij');
+        closeBtn.setAttribute('aria-label', en ? 'Close' : 'Zamknij');
         const keyHandler = (e) => {
             if (e.key === 'Escape') closeModal();
             if (e.key === 'Tab') { e.preventDefault(); closeBtn.focus(); }
@@ -501,21 +502,21 @@ const cats = {
         if (cat === 'both') {
             ['pimpek', 'fryderyk'].forEach(name => {
                 const img = document.createElement('img');
-                img.src = 'assets/images/cats/' + name + '.jpg';
+                img.src = '/assets/images/cats/' + name + '.jpg';
                 img.alt = name.charAt(0).toUpperCase() + name.slice(1);
                 img.className = 'cat-easter-egg-img';
                 imageContainer.appendChild(img);
             });
         } else {
             const img = document.createElement('img');
-            img.src = 'assets/images/cats/' + cat + '.jpg';
+            img.src = '/assets/images/cats/' + cat + '.jpg';
             img.alt = catNames[cat];
             img.className = 'cat-easter-egg-img cat-easter-egg-img-single';
             imageContainer.appendChild(img);
         }
         const subtitle = document.createElement('p');
         subtitle.className = 'cat-easter-egg-subtitle';
-        subtitle.textContent = 'Sekretni asystenci prawni 🐾';
+        subtitle.textContent = (en ? 'Secret legal assistants' : 'Sekretni asystenci prawni') + ' 🐾';
         content.appendChild(title);
         content.appendChild(imageContainer);
         content.appendChild(subtitle);
@@ -575,64 +576,6 @@ const EmailProtection = {
 };
 
 EmailProtection.init();
-
-// ================================================
-// PERFORMANCE: Pause off-screen animations
-// ================================================
-const AnimationPauser = {
-    init() {
-        if (prefersReducedMotion) return;
-
-        // Pause gradient blob animations when not visible
-        const blobs = document.querySelector('.gradient-blobs');
-        if (blobs) {
-            // Blobs are fixed-position so always "visible" - but we can pause
-            // when user is at the very bottom or in certain sections
-            // For fixed elements, we use a page visibility approach instead
-            document.addEventListener('visibilitychange', () => {
-                const blobEls = blobs.querySelectorAll('.gradient-blob');
-                blobEls.forEach(blob => {
-                    blob.style.animationPlayState = document.hidden ? 'paused' : 'running';
-                });
-            });
-        }
-
-        // Pause neural network animation when tab is hidden
-        const neural = document.querySelector('.neural-network');
-        if (neural) {
-            document.addEventListener('visibilitychange', () => {
-                const lines = neural.querySelectorAll('.neural-line, .neural-line-accent, .neural-node, .neural-node-accent');
-                lines.forEach(el => {
-                    el.style.animationPlayState = document.hidden ? 'paused' : 'running';
-                });
-            });
-        }
-
-        // Pause positions glow when not visible
-        const positions = document.querySelector('.positions');
-        if (positions) {
-            const posObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    positions.style.setProperty('--anim-state', entry.isIntersecting ? 'running' : 'paused');
-                });
-            }, { threshold: 0 });
-            posObserver.observe(positions);
-        }
-
-        // Pause console status dot when not visible
-        const consoleDot = document.querySelector('.status-dot');
-        if (consoleDot) {
-            const dotObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    consoleDot.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
-                });
-            }, { threshold: 0 });
-            dotObserver.observe(consoleDot);
-        }
-    }
-};
-
-AnimationPauser.init();
 
 // Hero Tabs
 const HeroTabs = {
@@ -744,7 +687,7 @@ const ProjectShowcase = {
 
     buildDots() {
         if (!this.dotsWrap) return;
-        this.dots = this.slides.map((slide, i) => {
+        this.dots = this.slides.map((_slide, i) => {
             const dot = document.createElement('button');
             dot.type = 'button';
             dot.className = 'showcase-dot' + (i === 0 ? ' is-active' : '');
@@ -821,26 +764,22 @@ const ProjectShowcase = {
     positionMobileControls() {
         if (!this.carousel) return;
         if (!window.matchMedia('(max-width: 768px)').matches) {
-            this.carousel.style.removeProperty('--sc-arrow-top');
-            this.carousel.style.removeProperty('--sc-badge-top');
+            ['--sc-arrow-top', '--sc-badge-top', '--sc-edge-left', '--sc-edge-right']
+                .forEach(prop => this.carousel.style.removeProperty(prop));
             return;
         }
         const slide = this.slides[this.index];
-        if (!slide) return;
-        const carTop = this.carousel.getBoundingClientRect().top;
-        // Strzałki na wysokości wiersza zakładek (Opis/Techniczne/Wyzwania),
-        // żeby tworzyły z nimi jedną linię.
-        const ref = slide.querySelector('.showcase-tabs') || slide.querySelector('.showcase-stage');
-        if (ref) {
-            const r = ref.getBoundingClientRect();
-            this.carousel.style.setProperty('--sc-arrow-top', (r.top - carTop + r.height / 2) + 'px');
-        }
-        // Licznik 01/05 zostaje w rogu zrzutu.
-        const stage = slide.querySelector('.showcase-stage');
-        if (stage) {
-            const sr = stage.getBoundingClientRect();
-            this.carousel.style.setProperty('--sc-badge-top', (sr.top - carTop + 12) + 'px');
-        }
+        const stage = slide && slide.querySelector('.showcase-stage');
+        if (!stage) return;
+        // Strzałki na bokach zrzutu (w połowie jego wysokości), licznik w jego
+        // prawym górnym rogu; rząd zakładek zostaje wolny.
+        const car = this.carousel.getBoundingClientRect();
+        const sr = stage.getBoundingClientRect();
+        const s = this.carousel.style;
+        s.setProperty('--sc-arrow-top', (sr.top - car.top + sr.height / 2) + 'px');
+        s.setProperty('--sc-badge-top', (sr.top - car.top + 10) + 'px');
+        s.setProperty('--sc-edge-left', (sr.left - car.left + 8) + 'px');
+        s.setProperty('--sc-edge-right', (car.right - sr.right + 8) + 'px');
     },
 
     lang() { return document.documentElement.lang === 'en' ? 'en' : 'pl'; },
@@ -911,6 +850,8 @@ const ProjectShowcase = {
         vp.addEventListener('pointerdown', (e) => {
             startX = e.clientX; startY = e.clientY; tracking = true;
         }, { passive: true });
+        // A drag that ends outside the viewport or loses capture must not leave a stale start point.
+        vp.addEventListener('lostpointercapture', () => { tracking = false; });
         vp.addEventListener('pointerup', (e) => {
             if (!tracking) return;
             tracking = false;
@@ -1009,35 +950,52 @@ const ProjectShowcase = {
     bindAutoplay() {
         if (this.reduceMotion || this.count <= 1) return;
         this.delay = 7000;
-        this.paused = false;
         this.userPaused = false;
+        // Independent pause reasons: one event must never clear another's pause
+        // (e.g. coming back on screen must not resume while the pointer or focus is inside).
+        this.pauseFlags = { hovered: false, focused: false, hidden: document.hidden, offscreen: false };
         this.addPauseButton();
         this._startAutoplay = () => {
             this.stopAutoplay();
-            this.timer = setInterval(() => { if (!this.paused && !this.userPaused) this.next(); }, this.delay);
+            this.timer = setInterval(() => { if (!this.isAutoplayPaused()) this.next(); }, this.delay);
         };
 
-        this.carousel.addEventListener('mouseenter', () => { this.paused = true; });
-        this.carousel.addEventListener('mouseleave', () => { this.paused = false; });
-        this.carousel.addEventListener('focusin', () => { this.paused = true; });
-        this.carousel.addEventListener('focusout', () => {
-            if (!this.carousel.contains(document.activeElement)) this.paused = false;
+        // Pointer inside (mouse hover; a touch only while the finger is down).
+        this.carousel.addEventListener('pointerenter', () => { this.pauseFlags.hovered = true; });
+        this.carousel.addEventListener('pointerleave', () => { this.pauseFlags.hovered = false; });
+        // Keyboard focus inside. A mouse click also focuses the arrow it hit, which used to be
+        // ignored once the pointer left; keep that by pausing only for visible (keyboard) focus.
+        this.carousel.addEventListener('focusin', (e) => {
+            let visible = true;
+            try { visible = e.target.matches(':focus-visible'); } catch { /* no :focus-visible support */ }
+            this.pauseFlags.focused = visible;
         });
-        document.addEventListener('visibilitychange', () => { this.paused = document.hidden; });
+        this.carousel.addEventListener('focusout', (e) => {
+            // Moving within the carousel fires focusin next, which sets the flag again.
+            if (!this.carousel.contains(e.relatedTarget)) this.pauseFlags.focused = false;
+        });
+        document.addEventListener('visibilitychange', () => { this.pauseFlags.hidden = document.hidden; });
 
         // Only run autoplay while the carousel is on screen.
         if ('IntersectionObserver' in window) {
             const io = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     this.onScreen = entry.isIntersecting;
-                    if (entry.isIntersecting) { this.paused = false; this._startAutoplay(); }
-                    else { this.stopAutoplay(); }
+                    this.pauseFlags.offscreen = !entry.isIntersecting;
+                    if (entry.isIntersecting) this._startAutoplay();
+                    else this.stopAutoplay();
                 });
             }, { threshold: 0.3 });
             io.observe(this.carousel);
         } else {
             this._startAutoplay();
         }
+    },
+
+    isAutoplayPaused() {
+        if (this.userPaused) return true;
+        const f = this.pauseFlags;
+        return !!f && (f.hovered || f.focused || f.hidden || f.offscreen);
     },
 
     stopAutoplay() {
@@ -1065,12 +1023,13 @@ const TechHighlighter = {
         'Selenium', 'Supabase', 'Postgres', 'Cloudflare', 'Discordzie', 'Discord', 'Whisperze',
         'Whisper', 'Béziera', 'Bézier', 'Telegrama', 'Telegram', 'OpenAI', 'Claude', 'macOS', 'PLLuM', 'Python', 'SQLite',
         'Flask', 'React', 'tRPC', 'Swing', 'Java', 'ISAP', 'CLI', 'GPT', 'MCP', 'CSV',
-        'JSON', 'ONNX', 'NER', 'RLS', 'RSS'],
-    selector: '.showcase-panel p, .tools-card p, .showcase-subtitle',
+        'JSON', 'ONNX', 'NER', 'RLS', 'RSS', 'Bielik', 'HTML', 'ISAP', 'Gemini', 'ChatGPT'],
+    selector: '.showcase-panel p, .tools-card p, .showcase-subtitle, .g-decision, .g-tool-line',
 
     init() {
         const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        this.re = new RegExp('\\b(' + this.terms.map(esc).join('|') + ')\\b', 'g');
+        // Whole tokens only: no "GPT" out of "GPT-4o-mini", no "Claude" out of "Claude’a".
+        this.re = new RegExp('\\b(' + this.terms.map(esc).join('|') + ')(?![\\w\'’-])', 'g');
         this.run();
         document.addEventListener('languagechange', () => this.run());
     },
@@ -1082,8 +1041,7 @@ const TechHighlighter = {
     mark(el) {
         const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
         const targets = [];
-        let node;
-        while (node = walker.nextNode()) {
+        for (let node = walker.nextNode(); node; node = walker.nextNode()) {
             if (node.parentElement.classList.contains('kw')) continue;
             this.re.lastIndex = 0;
             if (this.re.test(node.nodeValue)) targets.push(node);
@@ -1091,9 +1049,9 @@ const TechHighlighter = {
         targets.forEach(textNode => {
             const text = textNode.nodeValue;
             const frag = document.createDocumentFragment();
-            let last = 0, m;
+            let last = 0;
             this.re.lastIndex = 0;
-            while (m = this.re.exec(text)) {
+            for (let m = this.re.exec(text); m; m = this.re.exec(text)) {
                 if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
                 const span = document.createElement('span');
                 span.className = 'kw';
@@ -1108,6 +1066,54 @@ const TechHighlighter = {
 };
 
 TechHighlighter.init();
+
+// ==========================================
+// GablotaVideo - a short silent clip plays over a tile's screenshot on hover/focus
+// (desktop pointer only; never under reduced motion; the clip loads on first hover)
+// ==========================================
+const GablotaVideo = {
+    init() {
+        const shots = document.querySelectorAll('.g-shot[data-video]');
+        if (!shots.length) return;
+        const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+        shots.forEach(shot => {
+            const tile = shot.closest('.g-tile, .ds-tile');
+            if (!tile) return;
+            let video = null;
+            const play = () => {
+                if (!fine.matches || reduce.matches) return;
+                if (!video) {
+                    video = document.createElement('video');
+                    video.className = 'g-video';
+                    video.src = shot.dataset.video;
+                    video.muted = true;
+                    video.loop = true;
+                    video.playsInline = true;
+                    video.preload = 'auto';
+                    video.setAttribute('aria-hidden', 'true');
+                    video.addEventListener('playing', () => shot.classList.add('is-playing'));
+                    video.addEventListener('error', () => { shot.classList.remove('is-playing'); });
+                    shot.appendChild(video);
+                }
+                const p = video.play();
+                if (p && p.catch) p.catch(() => {});
+            };
+            const stop = () => {
+                if (!video) return;
+                video.pause();
+                video.currentTime = 0;
+                shot.classList.remove('is-playing');
+            };
+            tile.addEventListener('pointerenter', play);
+            tile.addEventListener('pointerleave', stop);
+            tile.addEventListener('focusin', play);
+            tile.addEventListener('focusout', (e) => { if (!tile.contains(e.relatedTarget)) stop(); });
+        });
+    }
+};
+GablotaVideo.init();
+
 
 // ================================================
 // NUMBER SCRAMBLE — key project numbers (marked <span class="scramble-num"> in the HTML, both
@@ -1190,11 +1196,206 @@ const ScrollProgress = {
 ScrollProgress.init();
 
 // ================================================
+// TALKS MAP — #wystapienia: pins drop in once when the map scrolls into view;
+// hovering an event lights its city pin, hovering (or tapping) a pin lights its
+// events. The list carries every city as text, so the map is only a picture.
+// ================================================
+const TalksMap = {
+    active: null,
+
+    init() {
+        const section = document.getElementById('wystapienia');
+        const map = section && section.querySelector('.talks-map');
+        if (!map) return;
+        this.map = map;
+        this.pins = new Map(Array.from(map.querySelectorAll('.tm-pin'), pin => [pin.dataset.city, pin]));
+        this.items = Array.from(section.querySelectorAll('.talk[data-city]'));
+
+        if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+            map.classList.add('is-armed');
+            const io = new IntersectionObserver(entries => {
+                if (entries.some(e => e.isIntersecting)) {
+                    map.classList.add('is-in');
+                    io.disconnect();
+                }
+            }, { threshold: 0.4 });
+            io.observe(map);
+        }
+
+        // Hover only for a real mouse: on touch the emulated mouseenter would fire
+        // right before the click and the click would toggle the pin straight back off.
+        const isMouse = e => e.pointerType === 'mouse';
+        // leaving a hovered row or pin goes back to the city the scroll position points at
+        this.items.forEach(li => {
+            li.addEventListener('pointerenter', e => { if (isMouse(e)) this.set(li.dataset.city); });
+            li.addEventListener('pointerleave', e => { if (isMouse(e)) this.set(this.scrollCity); });
+        });
+        this.pins.forEach((pin, city) => {
+            pin.addEventListener('pointerenter', e => { if (isMouse(e)) this.set(city); });
+            pin.addEventListener('pointerleave', e => { if (isMouse(e)) this.set(this.scrollCity); });
+            pin.addEventListener('pointerdown', e => { this.lastPointer = e.pointerType; });
+            pin.addEventListener('click', e => {
+                if (this.lastPointer === 'mouse') return; // the hover already shows it
+                e.stopPropagation();
+                this.set(this.active === city ? null : city);
+            });
+        });
+        // a tap anywhere else clears a pinned city
+        document.addEventListener('click', () => { if (this.active) this.set(null); });
+
+        this.initWide(section);
+    },
+
+    // Wide screens: the map is the pinned background of the section (style.css). It is cropped to the area
+    // with the pins, the event crossing the middle of the screen lights its city, and the big year follows.
+    initWide(section) {
+        const svg = this.map.querySelector('svg');
+        const wide = window.matchMedia('(min-width: 960px)');
+        const fullBox = svg.getAttribute('viewBox');
+        const fit = () => svg.setAttribute('viewBox', wide.matches ? '100 40 410 290' : fullBox);
+        fit();
+        wide.addEventListener('change', fit);
+
+        if (!('IntersectionObserver' in window)) return;
+        const all = Array.from(section.querySelectorAll('.talk'));
+        const year = document.getElementById('talksBigYear');
+        this.scrollCity = null;
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting || !wide.matches) return;
+                const li = entry.target;
+                this.scrollCity = li.dataset.city || null;
+                this.set(this.scrollCity);
+                const time = li.querySelector('time');
+                if (year && time) year.textContent = time.getAttribute('datetime').slice(0, 4);
+            });
+        }, { rootMargin: '-48% 0px -48% 0px' });
+        all.forEach(li => io.observe(li));
+    },
+
+    set(city) {
+        this.active = city;
+        this.map.classList.toggle('has-active', Boolean(city));
+        this.pins.forEach((pin, c) => pin.classList.toggle('is-active', c === city));
+        this.items.forEach(li => li.classList.toggle('is-active', li.dataset.city === city));
+    }
+};
+
+TalksMap.init();
+
+// ================================================
+// NAV SCROLL-SPY — the nav link of the section crossing the middle of the
+// viewport gets aria-current="true" (styled with a phthalo underline).
+// Home page only: case pages link to /#… and have no such sections.
+// ================================================
+const NavSpy = {
+    init() {
+        if (!('IntersectionObserver' in window)) return;
+        const links = new Map();
+        document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+            const section = document.getElementById(a.getAttribute('href').slice(1));
+            if (section) links.set(section, a);
+        });
+        if (!links.size) return;
+        const visible = new Set();
+        const update = () => {
+            // the last section (in document order) touching the middle band wins
+            let current = null;
+            links.forEach((a, section) => { if (visible.has(section)) current = a; });
+            links.forEach(a => {
+                if (a === current) a.setAttribute('aria-current', 'true');
+                else a.removeAttribute('aria-current');
+            });
+        };
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
+            update();
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        links.forEach((_a, section) => io.observe(section));
+    }
+};
+
+NavSpy.init();
+
+// ================================================
+// SCROLL MOTION — see "SCROLL MOTION" in style.css.
+// Tiles (Gablota, Data Science): staggered reveal, once, in reading order.
+// Case pages: "Kluczowe decyzje" become stacked sticky cards when every card fits
+// under the nav (heights read only on resize, never per scroll frame).
+// Nothing is armed under prefers-reduced-motion: the page stays static.
+// ================================================
+const ScrollMotion = {
+    init() {
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
+        this.reveal();
+        this.stack();
+    },
+
+    reveal() {
+        const tiles = [];
+        document.querySelectorAll('.gablota-grid, .ds-bento').forEach(grid => {
+            grid.classList.add('is-motion');
+            grid.querySelectorAll(':scope > .g-tile, :scope > .g-tools, :scope > .ds-tile').forEach(t => tiles.push(t));
+        });
+        if (!tiles.length) return;
+        const io = new IntersectionObserver(entries => {
+            // tiles entering together get 70 ms steps in document (reading) order
+            entries.filter(e => e.isIntersecting)
+                .map(e => e.target)
+                .sort((a, b) => tiles.indexOf(a) - tiles.indexOf(b))
+                .forEach((tile, n) => {
+                    tile.style.setProperty('--d', Math.min(n, 6) * 70 + 'ms');
+                    tile.classList.add('is-in');
+                    io.unobserve(tile);
+                });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        tiles.forEach(t => io.observe(t));
+    },
+
+    stack() {
+        const lists = document.querySelectorAll('.case-decisions');
+        if (!lists.length) return;
+        const wide = window.matchMedia('(min-width: 900px)');
+        const fits = [];
+        lists.forEach(list => {
+            const cards = Array.from(list.children).filter(c => c.classList.contains('case-decision'));
+            if (cards.length < 2) return;
+            list.style.setProperty('--n', String(cards.length));
+            cards.forEach((c, i) => c.style.setProperty('--i', String(i)));
+            fits.push(() => {
+                // every card that gets covered must fit under the nav with its pile offset
+                // (96px + 14px per card + margin); the last card is never covered
+                const room = window.innerHeight - 96 - cards.length * 14 - 24;
+                const ok = wide.matches && cards.slice(0, -1).every(c => c.offsetHeight <= room);
+                list.classList.toggle('is-stack', ok);
+            });
+        });
+        let queued = false;
+        const check = () => {
+            if (queued) return;
+            queued = true;
+            requestAnimationFrame(() => { queued = false; fits.forEach(f => f()); });
+        };
+        check();
+        window.addEventListener('resize', check, { passive: true });
+        if ('ResizeObserver' in window) {
+            const ro = new ResizeObserver(check);
+            lists.forEach(l => ro.observe(l));
+        }
+        document.addEventListener('languagechange', check);
+    }
+};
+
+ScrollMotion.init();
+
+// ================================================
 // PARTICLES — hero and contact scenes (particles.js + particle-morph.js).
 // Fetched only after the page has loaded, so they never compete with the first paint.
 // ================================================
 window.addEventListener('load', () => {
-    import('./particles.js?v=25').catch(() => {
+    // Only the home page has particle scenes; case-study pages skip the fetch.
+    if (!document.getElementById('heroParticles') && !document.getElementById('finaleParticles')) return;
+    import('/particles.js?v=30').catch(() => {
         // decoration only — the page is complete without it
     });
 }, { once: true });

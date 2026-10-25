@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
+    <title data-en="UpFor.pl: case study | Karol Polikarp Wilczyński">UpFor.pl: studium przypadku | Karol Polikarp Wilczyński</title>
+    <meta name="description" content="Jak zbudowałem kalendarz dostępności dla ekip graczy: slot jako godzina na zegarze, model AI, który tylko wybiera z policzonych okien, i ukryte liczniki darmowych planów." data-en-content="How I built an availability calendar for gaming groups: a slot as clock time, an AI model that only picks from computed windows, and the hidden meters of free tiers.">
+    <meta name="author" content="Karol Polikarp Wilczyński">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://karolwilczynski.com/case/upfor/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Karol Polikarp Wilczyński">
+    <meta property="og:url" content="https://karolwilczynski.com/case/upfor/">
+    <meta property="og:title" content="UpFor.pl: studium przypadku | Karol Polikarp Wilczyński">
+    <meta property="og:description" content="Jak zbudowałem kalendarz dostępności dla ekip graczy: slot jako godzina na zegarze, model AI, który tylko wybiera z policzonych okien, i ukryte liczniki darmowych planów.">
+    <meta property="og:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://karolwilczynski.com/case/upfor/">
+    <meta name="twitter:title" content="UpFor.pl: studium przypadku | Karol Polikarp Wilczyński">
+    <meta name="twitter:description" content="Jak zbudowałem kalendarz dostępności dla ekip graczy: slot jako godzina na zegarze, model AI, który tylko wybiera z policzonych okien, i ukryte liczniki darmowych planów.">
+    <meta name="twitter:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
+    <meta name="twitter:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <meta name="theme-color" content="#004d2b">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "UpFor.pl: studium przypadku",
+        "description": "Jak zbudowałem kalendarz dostępności dla ekip graczy: slot jako godzina na zegarze, model AI, który tylko wybiera z policzonych okien, i ukryte liczniki darmowych planów.",
+        "url": "https://karolwilczynski.com/case/upfor/",
+        "inLanguage": "pl-PL",
+        "datePublished": "2026-10-14",
+        "dateModified": "2026-10-14",
+        "image": "https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2",
+        "author": {
+            "@type": "Person",
+            "@id": "https://karolwilczynski.com/#person",
+            "name": "Karol Polikarp Wilczyński",
+            "url": "https://karolwilczynski.com"
+        },
+        "isPartOf": {
+            "@id": "https://karolwilczynski.com/#website"
+        },
+        "about": {
+            "@type": "SoftwareApplication",
+            "name": "UpFor.pl",
+            "url": "https://upfor.pl"
+        }
+    }
+    </script>
+
+    <!-- Fonts - async loading for faster first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="/style.css?v=157">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#tresc" class="skip-link">Przejdź do treści</a>
+
+    <nav class="nav" aria-label="Główna nawigacja" data-en-aria="Main navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Strona główna" data-en-aria="Home page">
+                <span class="logo-main">kpw<span class="logo-sparkle" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><defs><linearGradient id="kpwSpark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop class="kpw-stop-a" offset="0"/><stop class="kpw-stop-b" offset="1"/></linearGradient></defs><path class="logo-spark logo-spark-lg" d="M10.5 1.4C10.5 8.1 8.1 10.5 1.4 10.5C8.1 10.5 10.5 12.9 10.5 19.6C10.5 12.9 12.9 10.5 19.6 10.5C12.9 10.5 10.5 8.1 10.5 1.4Z"/><path class="logo-spark logo-spark-sm" d="M19 4C19 6.2 18.2 7 16 7C18.2 7 19 7.8 19 10C19 7.8 19.8 7 22 7C19.8 7 19 6.2 19 4Z"/></svg></span></span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/#projekty"><span data-en="Projects">Projekty</span></a></li>
+
+                <li><a href="/#wystapienia"><span data-en="Public talks">Wystąpienia publiczne</span></a></li>
+                <li><a href="/#kontakt"><span data-en="Contact">Kontakt</span></a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://github.com/karolpolikarp" target="_blank" rel="noopener" class="nav-social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.56 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.3-1.21 3.3-1.21.66 1.65.25 2.87.12 3.17.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.21.68.83.56A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5Z"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/karolpwilczynski" target="_blank" rel="noopener" class="nav-social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.78M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68 1.68 1.68 0 0 0-1.68-1.69 1.69 1.69 0 0 0-1.69 1.69 1.68 1.68 0 0 0 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                </a>
+            </div>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Przełącz motyw jasny/ciemny" data-en-aria="Toggle light/dark theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <button type="button" class="lang-toggle" id="langToggle" aria-label="PL EN: switch to English">
+                <span class="lang-label lang-pl">PL</span>
+                <span class="lang-label lang-en">EN</span>
+            </button>
+            <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div>
+    </nav>
+
+    <main id="tresc" class="case">
+        <header class="case-hero">
+            <div class="container case-container">
+                <nav class="case-breadcrumb" aria-label="Okruszki" data-en-aria="Breadcrumb">
+                    <a href="/"><span data-en="Home">Strona główna</span></a>
+                    <span aria-hidden="true">/</span>
+                    <a href="/#studia"><span data-en="Case studies">Studia przypadków</span></a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">UpFor.pl</span>
+                </nav>
+                <div class="project-tags">
+                    <span class="tag">Next.js 15</span>
+                    <span class="tag">tRPC</span>
+                    <span class="tag">Postgres (Neon)</span>
+                    <span class="tag">Claude Haiku</span>
+                    <span class="tag">Discord</span>
+                </div>
+                <h1 class="case-title">UpFor.pl</h1>
+                <p class="case-subtitle" data-en="An availability calendar for groups who play together">Kalendarz dostępności dla ekip, które grają razem</p>
+                <p class="case-lead" data-en="The question “who’s playing?” got lost in the chat, and once we had agreed on a time, half the group forgot. I built an app in which everyone paints their week on a grid of 7 × 48 half-hour slots, a deterministic core computes the shared windows, Claude Haiku picks games for them (when there are no windows or the model fails, rules make the proposals), and the session goes to the group’s Discord channel. Time and cost taught me the most: the clock change shifted clicks by an hour, and the free tiers had meters that the AI bill never showed. As of 14 October 2026 it is a closed beta before public launch, with 3,342 unit tests (from the run on 10 October).">Pytanie „kto gra?” rzucone na czat ginęło, a&nbsp;gdy już się umówiliśmy, połowa zapominała. Zbudowałem aplikację, w&nbsp;której każdy maluje swój tydzień na siatce 7&nbsp;×&nbsp;48&nbsp;półgodzinnych slotów, deterministyczny rdzeń liczy wspólne okna, Claude Haiku dobiera do nich gry (gdy okien brak albo model zawiedzie, propozycje dają reguły), a&nbsp;sesja trafia na kanał grupy na Discordzie. Najwięcej nauczyły mnie czas i&nbsp;koszty: zmiana czasu przesuwała kliknięcia o&nbsp;godzinę, a&nbsp;darmowe plany miały liczniki, których nie widać w&nbsp;rachunku za AI. Stan na 14&nbsp;października 2026: zamknięta beta przed publicznym startem i&nbsp;3&nbsp;342&nbsp;testy jednostkowe (przebieg z&nbsp;10&nbsp;października).</p>
+                <dl class="case-facts">
+                    <div><dt data-en="Role">Rola</dt><dd data-en="Idea, decisions and review; most of the code written by an AI coding assistant under my direction; configuration and deployment">Pomysł, decyzje i&nbsp;przegląd; większość kodu napisał asystent AI pod moim kierunkiem; konfiguracja i&nbsp;wdrożenie</dd></div>
+                    <div><dt data-en="Period">Okres</dt><dd data-en="April–October 2026">kwiecień–październik 2026</dd></div>
+                    <div><dt data-en="Status">Status</dt><dd data-en="Closed beta before public launch; Discord bot dormant (as of 14 October 2026); reminders waiting for the scheduler to be started (as of 10 October 2026)">Zamknięta beta przed publicznym startem; bot Discorda uśpiony (stan na 14&nbsp;października 2026); przypomnienia czekają na uruchomienie harmonogramu (stan na 10&nbsp;października 2026)</dd></div>
+                    <div><dt data-en="Code">Kod</dt><dd data-en="Private repository">Repozytorium prywatne</dd></div>
+                </dl>
+                <div class="showcase-cta">
+                    <a href="https://upfor.pl" target="_blank" rel="noopener" class="project-link project-link-primary">
+                        <span data-en="Project page">Strona projektu</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+                <nav class="case-toc" aria-label="Spis treści" data-en-aria="Contents">
+                    <a href="#problem"><span data-en="Problem">Problem</span></a>
+                    <a href="#ograniczenia"><span data-en="Constraints">Ograniczenia</span></a>
+                    <a href="#architektura"><span data-en="Architecture">Architektura</span></a>
+                    <a href="#decyzje"><span data-en="Decisions">Decyzje</span></a>
+                    <a href="#dowody"><span data-en="Evidence">Dowody</span></a>
+                    <a href="#wnioski"><span data-en="Lessons">Wnioski</span></a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container case-container">
+            <section id="problem" class="case-section" aria-labelledby="h-problem">
+                <h2 class="case-h2" id="h-problem"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span data-en="Problem and context">Problem i&nbsp;kontekst</span></h2>
+                <p data-en="I made UpFor because the same problem kept coming back: “@here who’s playing?” got lost in the Discord chat, and once we had agreed on a time, half the group forgot. A group of adult friends wants to play together, but nobody knows when the others are free, and too few people answer a question thrown into the chat to settle on a time.">Zrobiłem UpFor, bo ciągle wracał ten sam problem: „@here kto gra?” ginęło w&nbsp;czacie Discorda, a&nbsp;gdy już się umówiliśmy, połowa zapominała. Dorosła grupa znajomych chce grać razem, ale nikt nie wie, kiedy pozostali mają czas, a&nbsp;na pytanie rzucone na czat odpowiada za mało osób, żeby się umówić.</p>
+                <p data-en="Existing tools solve a different problem. Doodle, When2meet and Rallly are one-off polls about a specific event, and the scheduling bots on Discord collect sign-ups for a time someone has already picked. Gamers think in blocks: “Friday evening”, “weekdays after 9 pm”. UpFor looks for a time in lasting, weekly availability: everyone paints their week, the group sees a heatmap of overlapping free time and its “golden windows”, Claude Haiku suggests a game for a window (without windows, rules make the proposals), and the session goes to the channel where the group already spends its time.">Istniejące narzędzia rozwiązują inny problem. Doodle, When2meet czy Rallly to jednorazowe ankiety dotyczące konkretnego wydarzenia, a&nbsp;boty do planowania na Discordzie zbierają zapisy na termin, który ktoś już wybrał. Gracze myślą blokami: „piątek wieczorem”, „w&nbsp;tygodniu po 21:00”. UpFor szuka terminu w&nbsp;trwałej, cotygodniowej dostępności: każdy maluje swój tydzień, grupa widzi mapę cieplną nakładania się wolnego czasu i&nbsp;„złote okna”, Claude Haiku proponuje grę do okna (bez okien propozycje dają reguły), a&nbsp;sesja trafia na kanał, na którym ekipa i&nbsp;tak siedzi.</p>
+                <p data-en="To start with, I am aiming at a regular crew of 3–6 people who play co-op or party games and arrange sessions on their own Discord server. The project documentation treats demand itself as an unproven hypothesis and the main risk. A separate hypothesis concerns the “mark it once” promise: it holds only if nobody has to come back and paint every week, and today they do. A “Jak w zeszłym tygodniu” (“same as last week”) button copies the previous week, but someone has to click it; an automatic template is waiting for data. It is a closed beta before public launch, so the evidence below is technical only.">Na początek celuję w&nbsp;stałą ekipę 3–6&nbsp;osób, która gra w&nbsp;gry kooperacyjne albo imprezowe i&nbsp;umawia się na własnym serwerze Discorda. Sam popyt dokumentacja projektu traktuje jako niesprawdzoną hipotezę i&nbsp;główne ryzyko. Osobna hipoteza dotyczy obietnicy „zaznacz raz”: trzyma się ona tylko wtedy, gdy nikt nie musi co tydzień wracać do malowania, a&nbsp;dziś musi. Przycisk „Jak w&nbsp;zeszłym tygodniu” kopiuje poprzedni tydzień, ale trzeba go kliknąć samemu; automatyczny szablon czeka na dane. To zamknięta beta przed publicznym startem, dlatego dowody poniżej są wyłącznie techniczne.</p>
+            </section>
+
+            <section id="ograniczenia" class="case-section" aria-labelledby="h-ograniczenia">
+                <h2 class="case-h2" id="h-ograniczenia"><span class="case-h2-num" aria-hidden="true" translate="no">§ 2</span><span data-en="Constraints">Ograniczenia</span></h2>
+                <p data-en="A few conditions shaped every later choice:">Kilka warunków wyznaczyło wszystkie późniejsze wybory:</p>
+                <ul class="showcase-list">
+                    <li data-en="A solo project done after hours: first commit on 20 April 2026, latest on 11 October 2026 (repository state as of 14 October 2026).">Projekt solo, po godzinach: pierwszy commit 20&nbsp;kwietnia 2026, ostatni 11&nbsp;października 2026 (stan repozytorium na 14&nbsp;października 2026).</li>
+                    <li data-en="A budget close to zero, so free tiers. Vercel Hobby allows at most 2 cron jobs (tasks run on a schedule) and caps function run time (as of September 2026). The free Neon tier gives about 192 hours of database compute a month (as of May 2026) and 0.5 GB of storage (as of October 2026), and it only suspends the database after a period of inactivity.">Budżet bliski zera, czyli darmowe plany. Vercel Hobby pozwala na najwyżej 2&nbsp;crony (zadania uruchamiane według harmonogramu) i&nbsp;ogranicza czas działania funkcji (stan z&nbsp;września 2026). Darmowy Neon daje ok.&nbsp;192&nbsp;godziny pracy bazy miesięcznie (stan z&nbsp;maja 2026) i&nbsp;0,5&nbsp;GB miejsca (stan z&nbsp;października 2026), a&nbsp;usypia bazę dopiero po okresie bezczynności.</li>
+                    <li data-en="A private repository, so GitHub Actions minutes are billed and every run is rounded up to a full minute.">Prywatne repozytorium, więc minuty GitHub Actions są płatne, a&nbsp;każdy przebieg zaokrągla się w&nbsp;górę do pełnej minuty.</li>
+                    <li data-en="AI cost under a hard cap: since 24 August 2026 game matching has one shared budget of 5 USD a week, and the cost of every call is logged in the database.">Koszt AI z&nbsp;twardym limitem: od 24&nbsp;sierpnia 2026 dobór gier ma jeden wspólny budżet 5&nbsp;USD tygodniowo, a&nbsp;koszt każdego wywołania trafia do bazy.</li>
+                    <li data-en="Time zones as first-class data: everyone has their own zone, timestamps in the database are in UTC, and a week is a date plus clock times in its owner’s zone; one group can be spread across continents.">Strefy czasowe jako pełnoprawna część danych: każdy ma własną strefę, znaczniki czasu w&nbsp;bazie są w&nbsp;UTC, a&nbsp;tydzień to data i&nbsp;godziny na zegarze właściciela; jedna ekipa może być rozrzucona po kontynentach.</li>
+                    <li data-en="Privacy as a design requirement: data in the EU (Frankfurt), one visibility filter on every query for someone else’s data, and data export. At first login Discord shares only basic account details and the e-mail address, and the server list only when it is needed. A profile is public by default; everyone can narrow its visibility in the settings (as of 14 October 2026).">Prywatność jako wymaganie projektowe: dane w&nbsp;UE (Frankfurt), jeden filtr widoczności dla każdego zapytania o&nbsp;cudze dane i&nbsp;eksport danych. Przy pierwszym logowaniu Discord udostępnia tylko podstawowe dane konta i&nbsp;adres e-mail, a&nbsp;listę serwerów dopiero wtedy, gdy jest potrzebna. Profil jest domyślnie publiczny; każdy może zawęzić jego widoczność w&nbsp;ustawieniach (stan na 14&nbsp;października 2026).</li>
+                </ul>
+            </section>
+
+            <section id="architektura" class="case-section" aria-labelledby="h-architektura">
+                <h2 class="case-h2" id="h-architektura"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span data-en="Architecture">Architektura</span></h2>
+                <p data-en="It is a TypeScript monorepo (Turborepo). The Next.js 15 web app runs on Vercel; the browser talks to its server through tRPC, and the data goes through Prisma into Postgres 17 on Neon (EU). Login uses a Discord account. A week is a grid of 7 × 48 half-hour cells, each holding one of four values: not free, maybe, up for it, or taken by a session. Clicks go through a single queue in the browser that sends at most one change at a time, and the server writes the week in a transaction under a lock.">To monorepo w&nbsp;TypeScripcie (Turborepo). Aplikacja webowa w&nbsp;Next.js 15 działa na Vercelu; przeglądarka rozmawia z&nbsp;jej serwerem przez tRPC, a&nbsp;dane trafiają przez Prismę do Postgresa 17 w&nbsp;Neonie (UE). Do logowania służy konto Discorda. Tydzień to siatka 7&nbsp;×&nbsp;48&nbsp;półgodzinnych komórek, a&nbsp;każda ma jedną z&nbsp;czterech wartości: brak czasu, może, gram albo zajęte przez sesję. Kliknięcia przechodzą przez jedną kolejkę w&nbsp;przeglądarce, która wysyła najwyżej jedną zmianę naraz, a&nbsp;serwer zapisuje tydzień w&nbsp;transakcji pod blokadą.</p>
+                <p data-en="The availability maths sits in a separate package, with no database and no framework. It computes the heatmap from the weeks of members in different zones and the “golden windows”: continuous stretches in which at least half the group is free, and never fewer than 2 people. For game matching the core passes on at most 5 future windows, and the language model chooses only from what it has been given. Creating a session stores notifications, which reach Discord through a channel webhook supplied by the group owner — one message per event. Reminders and status changes are meant to be run by one aggregate endpoint, called every 5 minutes by an external pinger.">Matematyka dostępności jest w&nbsp;osobnym pakiecie, bez bazy i&nbsp;bez frameworka. Liczy mapę cieplną z&nbsp;tygodni członków w&nbsp;różnych strefach i&nbsp;„złote okna”: ciągłe odcinki, w&nbsp;których wolna jest co najmniej połowa ekipy, minimum 2&nbsp;osoby. Do doboru gry rdzeń przekazuje najwyżej 5&nbsp;przyszłych okien, a&nbsp;model językowy wybiera tylko spośród tego, co dostał. Utworzenie sesji zapisuje powiadomienia, a&nbsp;na Discorda trafiają one przez webhook kanału, który podaje właściciel grupy — jedna wiadomość na zdarzenie. Przypomnienia i&nbsp;zmiany statusów ma uruchamiać jeden zbiorczy endpoint, wywoływany co 5&nbsp;minut przez zewnętrzny pinger.</p>
+                <p data-en="Two parts exist in the code but are switched off. The Discord bot on Fly.io is dormant, and on 23 September 2026 I decided that the public launch would go ahead without it. Live updates (Postgres LISTEN/NOTIFY → SSE) have been gated off by default since 28 August 2026 because of database cost, so the browser polls the server every 30, 60 or 120 seconds. On 10 October 2026 the external pinger was not running yet either, so reminders before a session were not being sent.">Dwie części istnieją w&nbsp;kodzie, ale są wyłączone. Bot Discorda na Fly.io jest uśpiony, a&nbsp;23&nbsp;września 2026 zdecydowałem, że publiczny start odbędzie się bez niego. Aktualizacje na żywo (Postgres LISTEN/NOTIFY → SSE) są od 28&nbsp;sierpnia 2026 domyślnie zamknięte z&nbsp;powodu kosztu bazy, więc przeglądarka odpytuje serwer co 30, 60 albo 120&nbsp;sekund. Zewnętrzny pinger 10&nbsp;października 2026 też jeszcze nie działał, więc przypomnienia przed sesją nie wychodziły.</p>
+                <figure class="case-diagram">
+                    <svg viewBox="0 0 360 588" role="img" aria-labelledby="arch-title arch-desc">
+                        <title id="arch-title" data-en="Data flow in UpFor.pl">Przepływ danych w UpFor.pl</title>
+                        <desc id="arch-desc" data-en="The browser and the Discord login lead to the API on Vercel, which stores weeks in Postgres on Neon. A deterministic core computes golden windows in clock time, and the Claude Haiku model may only choose a game and a window index. Sessions and reminders become notifications, which a webhook delivers to the group’s Discord channel; reminders are meant to be triggered on schedule by an external pinger.">Przeglądarka i logowanie kontem Discorda prowadzą do API na Vercelu, które zapisuje tygodnie w Postgresie w Neonie. Deterministyczny rdzeń liczy złote okna w czasie na zegarze, a model Claude Haiku może tylko wybrać grę i indeks okna. Sesje i przypomnienia stają się powiadomieniami, które webhook dostarcza na kanał grupy na Discordzie; przypomnienia ma uruchamiać według harmonogramu zewnętrzny pinger.</desc>
+                        <defs>
+                            <marker id="cd-arrow-upfor" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path class="cd-arrow" d="M0 0L10 5L0 10z"/>
+                            </marker>
+                        </defs>
+                        <rect class="cd-box" x="20" y="10" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="97.5" y="31" text-anchor="middle" data-en="Browser">Przeglądarka</text>
+                        <text class="cd-note" x="97.5" y="49" text-anchor="middle" data-en="PWA · 7×48 grid">PWA · siatka 7×48</text>
+                        <rect class="cd-box cd-box--ext" x="185" y="10" width="155" height="52" rx="8"/>
+                        <text class="cd-label" x="262.5" y="31" text-anchor="middle">Discord OAuth</text>
+                        <text class="cd-note" x="262.5" y="49" text-anchor="middle" data-en="login">logowanie</text>
+                        <path class="cd-edge" d="M97.5 62V92" marker-end="url(#cd-arrow-upfor)"/>
+                        <path class="cd-edge" d="M262.5 62V92" marker-end="url(#cd-arrow-upfor)"/>
+                        <rect class="cd-box" x="20" y="96" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="117" text-anchor="middle">Next.js 15 + tRPC (Vercel)</text>
+                        <text class="cd-note" x="180" y="135" text-anchor="middle" data-en="week writes under an advisory lock">zapis tygodnia pod blokadą doradczą</text>
+                        <path class="cd-edge" d="M180 148V178" marker-end="url(#cd-arrow-upfor)"/>
+                        <rect class="cd-box" x="20" y="182" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="203" text-anchor="middle" data-en="Postgres 17 on Neon (EU)">Postgres 17 w Neonie (UE)</text>
+                        <text class="cd-note" x="180" y="221" text-anchor="middle" data-en="Prisma · weeks, sessions, notifications">Prisma · tygodnie, sesje, powiadomienia</text>
+                        <path class="cd-edge" d="M180 234V264" marker-end="url(#cd-arrow-upfor)"/>
+                        <rect class="cd-box cd-box--key" x="20" y="268" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="289" text-anchor="middle" data-en="Core: clock time">Rdzeń: czas na zegarze</text>
+                        <text class="cd-note" x="180" y="307" text-anchor="middle" data-en="heatmap · golden windows ≥ 2 people">mapa cieplna · złote okna ≥ 2 osoby</text>
+                        <path class="cd-edge" d="M110 320V350" marker-end="url(#cd-arrow-upfor)"/>
+                        <rect class="cd-box cd-box--key" x="20" y="354" width="180" height="52" rx="8"/>
+                        <text class="cd-label" x="110" y="375" text-anchor="middle" data-en="Model only picks">Model tylko wybiera</text>
+                        <text class="cd-note" x="110" y="393" text-anchor="middle" data-en="≤ 5 windows, index only">≤ 5 okien, tylko indeks</text>
+                        <path class="cd-edge" d="M202 380H234" marker-start="url(#cd-arrow-upfor)" marker-end="url(#cd-arrow-upfor)"/>
+                        <rect class="cd-box cd-box--ext" x="236" y="354" width="104" height="52" rx="8"/>
+                        <text class="cd-label" x="288" y="375" text-anchor="middle">Anthropic</text>
+                        <text class="cd-note" x="288" y="393" text-anchor="middle">Haiku 4.5</text>
+                        <path class="cd-edge" d="M110 406V436" marker-end="url(#cd-arrow-upfor)"/>
+                        <rect class="cd-box" x="20" y="440" width="180" height="52" rx="8"/>
+                        <text class="cd-label" x="110" y="461" text-anchor="middle" data-en="Notifications">Powiadomienia</text>
+                        <text class="cd-note" x="110" y="479" text-anchor="middle" data-en="sessions, reminders">sesje, przypomnienia</text>
+                        <path class="cd-edge" d="M234 466H202" marker-end="url(#cd-arrow-upfor)"/>
+                        <rect class="cd-box cd-box--ext" x="236" y="440" width="104" height="52" rx="8"/>
+                        <text class="cd-label" x="288" y="461" text-anchor="middle">Pinger</text>
+                        <text class="cd-note" x="288" y="479" text-anchor="middle" data-en="every 5 min">co 5 min</text>
+                        <path class="cd-edge" d="M110 492V522" marker-end="url(#cd-arrow-upfor)"/>
+                        <rect class="cd-box cd-box--ext" x="20" y="526" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="547" text-anchor="middle" data-en="Group’s Discord channel">Kanał grupy na Discordzie</text>
+                        <text class="cd-note" x="180" y="565" text-anchor="middle" data-en="webhook · one message per event">webhook · jedna wiadomość na zdarzenie</text>
+                    </svg>
+                    <figcaption data-en="The gold frames mark the two key decisions: windows computed deterministically in clock time, and a model that may only choose a game and a window index. Dashed frames mark external services; on 10 October 2026 the pinger was not running yet. The diagram leaves out the parts that are switched off: the dormant bot and live updates over SSE.">Złotą ramką zaznaczyłem dwa miejsca kluczowych decyzji: okna liczone deterministycznie w&nbsp;czasie na zegarze i&nbsp;model, który może tylko wybrać grę oraz indeks okna. Przerywane ramki oznaczają usługi zewnętrzne; pinger 10&nbsp;października 2026 jeszcze nie działał. Na schemacie pominąłem części wyłączone: uśpionego bota i&nbsp;aktualizacje na żywo przez SSE.</figcaption>
+                </figure>
+            </section>
+
+            <section id="decyzje" class="case-section" aria-labelledby="h-decyzje">
+                <h2 class="case-h2" id="h-decyzje"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span data-en="Key decisions">Kluczowe decyzje</span></h2>
+                <div class="case-decisions">
+                    <article class="case-decision">
+                        <h3 data-en="A slot is clock time, enforced by types">Slot to godzina na zegarze, pilnowana przez typy</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="A grid cell means a day and a time on the clock in the week owner’s zone, not “midnight plus i × 30 minutes”. One function computes a cell’s instant, another reads the zone offset at that instant, and the start of a week has its own type (WeekStartInstant) that TypeScript will not let anyone confuse with UTC midnight of the date.">Komórka siatki oznacza dzień i&nbsp;godzinę na zegarze w&nbsp;strefie właściciela tygodnia, a&nbsp;nie „północ plus i&nbsp;×&nbsp;30&nbsp;minut”. Chwilę komórki liczy jedna funkcja, przesunięcie strefy w&nbsp;tej chwili — druga, a&nbsp;początek tygodnia ma własny typ (WeekStartInstant), którego TypeScript nie pozwala pomylić z&nbsp;północą UTC danej daty.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="What the code did before: “week start + i × 30 minutes” arithmetic on a plain Date, and the zone offset from the date-fns-tz library, which gave the old offset for an hour after the clock change.">To, co kod robił wcześniej: arytmetyka „początek tygodnia + i&nbsp;×&nbsp;30&nbsp;minut” na zwykłym Date i&nbsp;przesunięcie strefy z&nbsp;biblioteki date-fns-tz, które przez godzinę po zmianie czasu podawało stare przesunięcie.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="On 26 April 2026 it turned out that 8 call sites in production code passed UTC midnight to the heatmap instead of a real instant: in Warsaw (UTC+2) Sunday hours painted 20:00–23:00 showed as 18:00–21:00 in every view of other people’s availability (group heatmap, friends, dashboard, public profile, the windows sent to the AI). The core tests used the correct function, so the bug was visible only in the interface. Once I had introduced the type, the TypeScript compiler pointed to a ninth call site that the manual fix had missed. On 3 October 2026, before the autumn clock change, I fixed further bugs of this class: on the 25-hour Sunday a click at 20:00 saved 19:00, and in UTC− zones (the Americas) painting landed in the previous week.">26&nbsp;kwietnia 2026 okazało się, że 8&nbsp;miejsc w&nbsp;kodzie produkcyjnym przekazywało do mapy cieplnej północ UTC zamiast prawdziwej chwili: w&nbsp;Warszawie (UTC+2) godziny zamalowane w&nbsp;niedzielę 20:00–23:00 wyświetlały się jako 18:00–21:00 we wszystkich widokach cudzej dostępności (mapa grupy, znajomi, pulpit, profil publiczny, okna przekazywane AI). Testy rdzenia używały poprawnej funkcji, więc błąd był widoczny tylko w&nbsp;interfejsie. Gdy wprowadziłem ten typ, kompilator TypeScriptu wskazał dziewiąte miejsce, które przeoczyła ręczna poprawka. 3&nbsp;października 2026, przed jesienną zmianą czasu, poprawiłem kolejne błędy tej klasy: w&nbsp;25-godzinną niedzielę kliknięcie o&nbsp;20:00 zapisywało 19:00, a&nbsp;w&nbsp;strefach UTC− (obie Ameryki) malowanie trafiało do poprzedniego tygodnia.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="Weeks with a clock change take a slower, cached path. A click in the repeated autumn hour means its first occurrence, and a click in the spring gap does nothing. Zones whose clocks change at midnight (such as Santiago and Cairo) needed separate handling of the start of a day. The type does not protect values that cross the network, so input from the browser needs its own normalisation. As of 14 October 2026 a manual test of painting on Sunday 25 October was still ahead of me.">Tygodnie ze zmianą czasu idą wolniejszą ścieżką, z&nbsp;pamięcią podręczną. Kliknięcie w&nbsp;powtórzoną jesienną godzinę oznacza jej pierwsze wystąpienie, a&nbsp;kliknięcie w&nbsp;wiosenną lukę nic nie robi. Strefy, w&nbsp;których czas zmienia się o&nbsp;północy (np. Santiago i&nbsp;Kair), wymagały osobnej obsługi początku dnia. Typ nie chroni wartości, które przechodzą przez sieć, więc dane z&nbsp;przeglądarki trzeba normalizować osobno. Ręczną próbę malowania w&nbsp;niedzielę 25&nbsp;października 2026 miałem jeszcze przed sobą (stan na 14&nbsp;października 2026).</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="The model only picks; the core decides what is possible">Model tylko wybiera, rdzeń decyduje, co jest możliwe</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="The deterministic core computes at most 5 windows (at least 2 people, at least an hour, future only) and a game catalogue that puts members’ libraries first. Claude Haiku 4.5 must call a single tool and return 3–5 proposals: a game ID from the catalogue and an index into the window list. An index outside the list is cleared, a game outside the catalogue is dropped, and any failure switches to rule-based scoring.">Deterministyczny rdzeń liczy najwyżej 5&nbsp;okien (co najmniej 2&nbsp;osoby, co najmniej godzina, tylko przyszłe) i&nbsp;katalog gier, w&nbsp;którym pierwszeństwo mają biblioteki członków. Claude Haiku 4.5 musi wywołać jedno narzędzie i&nbsp;zwrócić 3–5&nbsp;propozycji: identyfikator gry z&nbsp;katalogu i&nbsp;indeks okna z&nbsp;listy. Indeks spoza listy zostaje wyczyszczony, gra spoza katalogu wypada, a&nbsp;każda awaria przełącza na punktację z&nbsp;reguł.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Free text parsed afterwards, or a model that proposes times itself. There was also an escalation to Sonnet when no window existed; I removed it on 1 May 2026 to cut costs.">Wolny tekst parsowany po fakcie albo model, który sam proponuje godziny. Wcześniej istniało też przełączanie na Sonneta, gdy brakowało okien; usunąłem je 1&nbsp;maja 2026, żeby obniżyć koszty.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="The model cannot invent a time that is not in the data, and there is no free text to parse. The feature does not fail: a missing key, a rate limit, an exhausted budget, no windows or an API error all lead to rule-based proposals. A low temperature (0.2) is meant to limit randomness in the proposals, and a 25-second timeout with a single retry limits the wait.">Model nie może wymyślić terminu, którego nie ma w&nbsp;danych, a&nbsp;wolnego tekstu nie trzeba parsować. Funkcja nie kończy się błędem: brak klucza, limit zapytań, wyczerpany budżet, brak okien albo błąd API dają propozycje z&nbsp;reguł. Niska temperatura (0,2) ma ograniczać losowość propozycji, a&nbsp;limit czasu 25&nbsp;sekund z&nbsp;jednym ponowieniem ogranicza czekanie.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="With sparse beta data the model path usually had no window at all (May–July 2026), so below the AI card sits a section of proposals computed entirely by rules, at no API cost. On 15 June 2026 it turned out that a hard filter “max players ≥ group size” was removing co-op games for up to 4 players from groups of 6–8, so every such group got the same big MMOs; the cause lay three layers below the symptom. The 5 USD weekly budget is shared, so once it runs out everyone gets rule-based proposals.">Przy rzadkich danych z&nbsp;bety ścieżka z&nbsp;modelem zwykle nie miała żadnego okna (maj–lipiec 2026), dlatego pod kartą AI stoi sekcja propozycji liczona w&nbsp;całości regułami, bez kosztu API. 15&nbsp;czerwca 2026 okazało się, że twardy filtr „maksymalna liczba graczy ≥ wielkość ekipy” wycinał gry kooperacyjne do 4&nbsp;osób dla grup 6–8&nbsp;osób, więc każda taka grupa dostawała te same duże MMO; przyczyna leżała trzy warstwy pod objawem. Budżet 5&nbsp;USD tygodniowo jest wspólny, więc gdy się wyczerpie, wszyscy dostają propozycje z&nbsp;reguł.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="Live updates from Postgres, then switching them off">Aktualizacje na żywo z&nbsp;Postgresa, a&nbsp;potem ich wyłączenie</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="From 20 April 2026 changes went live straight from the database: a trigger sends pg_notify, a thin endpoint passes them to the browser over SSE, and the bot reads the same notifications — no Redis, no broker. On 3 July 2026 the bot’s two paths that kept the database awake (the heartbeat and the LISTEN listener) got one shared switch, off by default; SSE came under it on 28 August (since then the browser polls the server every 30, 60 or 120 seconds), and the bot’s remaining background jobs on 4 September.">Od 20&nbsp;kwietnia 2026 zmiany szły na żywo prosto z&nbsp;bazy: wyzwalacz wysyła pg_notify, cienki endpoint przekazuje je przeglądarce przez SSE, a&nbsp;bot czyta te same powiadomienia — bez Redisa i&nbsp;bez brokera. 3&nbsp;lipca 2026 dwie ścieżki bota, które nie pozwalały bazie zasnąć (puls i&nbsp;nasłuch LISTEN), dostały jeden wspólny przełącznik, domyślnie wyłączony; 28&nbsp;sierpnia trafiło pod niego SSE (odtąd przeglądarka odpytuje serwer co 30, 60 albo 120&nbsp;sekund), a&nbsp;4&nbsp;września pozostałe zadania bota w&nbsp;tle.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="A managed real-time service such as Pusher or Ably.">Zarządzana usługa czasu rzeczywistego, np. Pusher albo Ably.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="The database already knows when rows change, so a separate service was unnecessary. The cost turned up elsewhere: LISTEN needs a permanent connection and the bot wrote a heartbeat every 60 seconds, so the free Neon database never went to sleep. The estimate of 31 May 2026: about 730 hours of database compute a month against about 192 in the free tier. By that estimate the quota would last about 8 days; running out of it took the beta down on 31 May, 19 June and 28 June.">Baza i&nbsp;tak wie, kiedy zmieniają się wiersze, więc osobna usługa była zbędna. Koszt pojawił się gdzie indziej: LISTEN wymaga stałego połączenia, a&nbsp;bot co 60&nbsp;sekund zapisywał puls, więc darmowy Neon nigdy nie zasypiał. Szacunek z&nbsp;31&nbsp;maja 2026: ok.&nbsp;730&nbsp;godzin pracy bazy miesięcznie wobec ok.&nbsp;192 w&nbsp;darmowym planie. Według tego szacunku limit wystarczał na ok.&nbsp;8&nbsp;dni; jego wyczerpanie zatrzymało betę 31&nbsp;maja, 19 i&nbsp;28&nbsp;czerwca.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="As of 10 October 2026 production has no live refresh. A later review found one more path: every open browser tab held its own LISTEN connection to the database. The conclusion of the incident note: switching off a single path is a placebo, and the database will only sleep once all of them stop waking it. Before I turn SSE back on, tabs have to share one listener.">Stan na 10&nbsp;października 2026: na produkcji nie ma odświeżania na żywo. Późniejszy przegląd znalazł jeszcze jedną ścieżkę: każda otwarta karta przeglądarki trzymała własne połączenie LISTEN z&nbsp;bazą. Wniosek z&nbsp;notatki po incydencie: wyłączenie jednej ścieżki to placebo, baza zaśnie dopiero wtedy, gdy przestaną ją budzić wszystkie. Zanim włączę SSE z&nbsp;powrotem, karty muszą dzielić jednego słuchacza.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="Scheduler: an external pinger, cadence in code, Actions only watching">Scheduler: zewnętrzny pinger, rytm w&nbsp;kodzie, Actions tylko pilnuje</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="Since 4 September 2026 almost all periodic work (apart from two Vercel cron jobs) goes through one aggregate endpoint that an external pinger is meant to call every 5 minutes. Before touching the database, the code decides whether to work: every 10 minutes from 10:00 to 02:30 Warsaw time, less often otherwise (every 30 minutes since 13 September). GitHub Actions checks the state 4 times a day and raises an alarm when the cron jobs go silent; it runs overdue work only after that check.">Od 4&nbsp;września 2026 prawie cała praca okresowa (poza dwoma cronami Vercela) idzie przez jeden zbiorczy endpoint, który zewnętrzny pinger ma wywoływać co 5&nbsp;minut. Zanim kod dotknie bazy, sam decyduje, czy pracować: od 10:00 do 02:30 czasu warszawskiego co 10&nbsp;minut, poza tym rzadziej (od 13&nbsp;września co 30&nbsp;minut). GitHub Actions 4&nbsp;razy na dobę najpierw sprawdza stan i&nbsp;alarmuje, gdy crony milczą; zaległą pracę uruchamia dopiero po tym sprawdzeniu.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="First the Discord bot on Fly.io as the scheduler for 9 of 11 cron jobs — a single point of failure that also kept the database awake. Then a GitHub Actions schedule every 15 minutes.">Najpierw bot Discorda na Fly.io jako scheduler 9 z&nbsp;11&nbsp;cronów — pojedynczy punkt awarii, który przy okazji nie pozwalał bazie zasnąć. Potem harmonogram GitHub Actions co 15&nbsp;minut.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="A schedule every 15 minutes meant about 2,880 billed minutes a month against the plan’s limit of 2,000 at the time (estimate of 4 September 2026). The stronger reason came from a measurement on 5 September: the schedule promised 96 runs a day, but in the 7 days from 29 August it fired 46 times, about 7%. Every one of those runs reported success, because missing configuration ended the job without an error. Along the way it turned out that no cron job had done any work since April while monitoring stayed green: the switched-off jobs returned “skipped” before recording a run, and the old watchdog raised an alarm only for the “stale” state.">Harmonogram co 15&nbsp;minut to ok.&nbsp;2&nbsp;880&nbsp;płatnych minut miesięcznie przy ówczesnym limicie planu 2&nbsp;000 (szacunek z&nbsp;4&nbsp;września 2026). Mocniejszy powód dał pomiar z&nbsp;5&nbsp;września: harmonogram obiecywał 96&nbsp;przebiegów na dobę, a&nbsp;przez 7&nbsp;dni od 29&nbsp;sierpnia uruchomił się 46&nbsp;razy, czyli ok.&nbsp;7%. Każdy z&nbsp;tych przebiegów zgłosił sukces, bo brak wymaganej konfiguracji kończył zadanie bez błędu. Przy tym wyszło na jaw, że od kwietnia żaden cron nie wykonał pracy, a&nbsp;monitoring był zielony: wyłączone crony zwracały „pominięto”, zanim zapisały przebieg, a&nbsp;stary strażnik alarmował tylko przy stanie „przeterminowany”.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="The solution depends on an outside service, and on 10 October 2026 the pinger had not been started yet: reminders were not being sent, and the app derived a session’s status from the clock when it was read instead of storing it. The Actions watchdog has been red for weeks because I have not finished configuring it (as of 10 October 2026). On 13 September I shortened the night cadence from 60 to 30 minutes, because reminder windows were shorter than the gap; that costs seven extra database wake-ups a day.">Rozwiązanie zależy od zewnętrznej usługi, a&nbsp;10&nbsp;października 2026 pinger jeszcze nie był uruchomiony: przypomnienia nie wychodziły, a&nbsp;status sesji aplikacja wyliczała z&nbsp;zegara przy odczycie, zamiast go zapisywać. Strażnik w&nbsp;Actions od tygodni świeci na czerwono, bo nie dokończyłem jego konfiguracji (stan na 10&nbsp;października 2026). 13&nbsp;września skróciłem nocny rytm z&nbsp;60 do 30&nbsp;minut, bo okna przypomnień były krótsze niż przerwa; kosztuje to siedem dodatkowych wybudzeń bazy na dobę.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="An advisory lock per week instead of Serializable">Blokada doradcza na tydzień zamiast Serializable</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="Every read-modify-write of the 336-slot array starts with a Postgres advisory lock (pg_advisory_xact_lock) on the key user + week. When several weeks are involved, the locks are taken in ascending order, and they release themselves on commit or rollback.">Każdy cykl odczyt–zmiana–zapis tablicy 336&nbsp;slotów zaczyna się od blokady doradczej Postgresa (pg_advisory_xact_lock) na kluczu użytkownik + tydzień. Przy kilku tygodniach blokady są zakładane w&nbsp;kolejności rosnącej, a&nbsp;zwalniają się same przy zatwierdzeniu albo wycofaniu transakcji.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="A Serializable transaction with retries (from 1 May 2026) produced false deadlocks when painting across a week boundary, so the code went back to ReadCommitted, which loses updates. SELECT … FOR UPDATE cannot lock a row that does not exist yet.">Transakcja Serializable z&nbsp;ponowieniami (od 1&nbsp;maja 2026) dawała fałszywe zakleszczenia przy malowaniu przez granicę tygodni, więc kod wrócił do ReadCommitted, który gubi zapisy. SELECT … FOR UPDATE nie zablokuje wiersza, którego jeszcze nie ma.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="Fast painting lost slots, and the E2E tests had been red because of it for about 3 weeks. A measurement on a real Neon database on 4 July 2026: three parallel transactions write different slots of the same week; without the lock 2 of 3 writes survived, with it 3 of 3.">Szybkie malowanie gubiło sloty, a&nbsp;testy E2E były z&nbsp;tego powodu czerwone od ok.&nbsp;3&nbsp;tygodni. Pomiar na prawdziwej bazie Neon 4&nbsp;lipca 2026: trzy równoległe transakcje zapisują różne sloty tego samego tygodnia; bez blokady przetrwały 2 z&nbsp;3&nbsp;zapisów, z&nbsp;blokadą 3 z&nbsp;3.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="Every new write path has to take the lock inside the transaction — a rule in the project instructions enforces that, not the compiler. One person’s writes to one week are serialised, and the browser got a queue: at most one change on its way to the server, the next batch 2 seconds after the previous one finishes, so that fast clicking stays within the rate limit.">Każda nowa ścieżka zapisu musi założyć blokadę wewnątrz transakcji — pilnuje tego reguła w&nbsp;instrukcjach projektu, nie kompilator. Zapisy jednej osoby w&nbsp;jednym tygodniu idą po kolei, a&nbsp;przeglądarka dostała kolejkę: najwyżej jedna zmiana w&nbsp;drodze do serwera, następna paczka 2&nbsp;sekundy po zakończeniu poprzedniej, żeby szybkie klikanie mieściło się w&nbsp;limicie zapytań.</dd>
+                        </dl>
+                    </article>
+                </div>
+            </section>
+
+            <section id="dowody" class="case-section" aria-labelledby="h-dowody">
+                <h2 class="case-h2" id="h-dowody"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span data-en="Evidence">Dowody</span></h2>
+                <p data-en="The numbers come from the repository: the test run, the code, the project documentation and measurements recorded in change descriptions.">Liczby pochodzą z&nbsp;repozytorium: z&nbsp;przebiegu testów, kodu, dokumentacji projektu i&nbsp;pomiarów zapisanych w&nbsp;opisach zmian.</p>
+                <div class="case-evidence">
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="3,342">3&nbsp;342</span>
+                        <span class="case-stat-label" data-en="unit tests in 237 files, plus 12 Playwright E2E specs (including painting on a clock-change day)">testy jednostkowe w&nbsp;237&nbsp;plikach, do tego 12&nbsp;plików testów E2E (Playwright), m.in. malowanie w&nbsp;dniu zmiany czasu</span>
+                        <span class="case-stat-source" data-en="test run · 2026-10-10">przebieg testów · 2026-10-10</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="124">124</span>
+                        <span class="case-stat-label" data-en="tRPC procedures in 19 routers; data model: 29 Prisma models and 24 migrations">procedury tRPC w&nbsp;19&nbsp;routerach; model danych: 29&nbsp;modeli Prisma i&nbsp;24&nbsp;migracje</span>
+                        <span class="case-stat-source" data-en="repository state · 2026-10-14">stan repozytorium · 2026-10-14</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="46">46</span>
+                        <span class="case-stat-label" data-en="GitHub Actions scheduled runs in 7 days instead of the 672 planned (about 7%); every one reported success">przebiegów harmonogramu GitHub Actions w&nbsp;7&nbsp;dni zamiast 672&nbsp;zaplanowanych (ok.&nbsp;7%); każdy zgłosił sukces</span>
+                        <span class="case-stat-source" data-en="schedule measurement · 2026-09-05">pomiar harmonogramu · 2026-09-05</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="3 of 3">3&nbsp;z&nbsp;3</span>
+                        <span class="case-stat-label" data-en="parallel writes to different slots of one week kept with the advisory lock; 2 of 3 without it">równoległe zapisy różnych slotów jednego tygodnia zachowane z&nbsp;blokadą doradczą; bez niej 2 z&nbsp;3</span>
+                        <span class="case-stat-source" data-en="measured on Neon · 2026-07-04">pomiar na Neonie · 2026-07-04</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="6.2&nbsp;s">6,2&nbsp;s</span>
+                        <span class="case-stat-label" data-en="LCP (time until the largest element appears) of the UpFor landing page in Lighthouse’s simulated mobile profile after optimisation, down from 8.2 s (medians of 3 runs on a local production build); page weight from 1,234 to 773 KB; production on the same day, before the fixes: 8.4–8.9 s; the 2.5 s target still not met">LCP (czas do wyświetlenia największego elementu) strony startowej UpFor w&nbsp;symulowanym profilu mobilnym Lighthouse po optymalizacji, wcześniej 8,2&nbsp;s (mediany z&nbsp;3&nbsp;przebiegów na lokalnym buildzie produkcyjnym); waga strony z&nbsp;1&nbsp;234 do 773&nbsp;KB; produkcja tego dnia, przed poprawkami: 8,4–8,9&nbsp;s; cel 2,5&nbsp;s nadal nieosiągnięty</span>
+                        <span class="case-stat-source" data-en="Lighthouse 13.5, local run · 2026-10-04">Lighthouse 13.5, pomiar lokalny · 2026-10-04</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-value scramble-num" data-en="15">15</span>
+                        <span class="case-stat-label" data-en="older bugs of the same class as the clock-change bug, found in a code review in which 41 AI agents deliberately hunted for faults, and fixed before the autumn clock change">starszych błędów tej samej klasy co błąd zmiany czasu, znalezionych w&nbsp;przeglądzie kodu, w&nbsp;którym 41&nbsp;agentów AI celowo szukało usterek, i&nbsp;naprawionych przed jesienną zmianą czasu</span>
+                        <span class="case-stat-source" data-en="code review · 2026-10-03">przegląd kodu · 2026-10-03</span>
+                    </div>
+                </div>
+                <p class="case-source-note" data-en="Repository state as of 14 October 2026: 1,237 commits on the main branch since 20 April 2026; 815 of the 992 non-merge commits list an AI assistant as co-author. The repository is private. I deliberately give no user or traffic figures: this is a closed beta before public launch.">Stan repozytorium na 14&nbsp;października 2026: 1&nbsp;237&nbsp;commitów na gałęzi głównej od 20&nbsp;kwietnia 2026; 815 z&nbsp;992&nbsp;commitów bez scaleń ma asystenta AI jako współautora. Repozytorium jest prywatne. Celowo nie podaję liczb dotyczących użytkowników ani ruchu: to zamknięta beta przed publicznym startem.</p>
+            </section>
+
+            <section id="wnioski" class="case-section" aria-labelledby="h-wnioski">
+                <h2 class="case-h2" id="h-wnioski"><span class="case-h2-num" aria-hidden="true" translate="no">§ 6</span><span data-en="What I learned">Czego się nauczyłem</span></h2>
+                <ul class="showcase-list">
+                    <li data-en="Time is a domain, not a utility. One function for computing an instant and a separate type for the start of a week turned confusing UTC midnight with a real instant into a compile error: the compiler pointed to a call site the manual fix had missed. But the 15 older bugs of the same class only surfaced in a code review in which AI agents deliberately hunted for faults, and a test that checked the new code with the same formula proved nothing until a comparison with an independent reference replaced it.">Czas to dziedzina, nie funkcja pomocnicza. Jedna funkcja do liczenia chwili i&nbsp;osobny typ dla początku tygodnia zamieniły pomylenie północy UTC z&nbsp;prawdziwą chwilą w&nbsp;błąd kompilacji: kompilator wskazał miejsce, które przeoczyła ręczna poprawka. Ale 15&nbsp;starszych błędów tej samej klasy znalazł dopiero przegląd kodu, w&nbsp;którym agenci AI celowo szukali usterek, a&nbsp;test sprawdzający nowy kod tą samą formułą niczego nie dowodził, dopóki nie zastąpiło go porównanie z&nbsp;niezależnym wzorcem.</li>
+                    <li data-en="Free tiers have a hidden meter. I watched AI dollars and the freshness of the bot’s heartbeat, while what took the beta down was database compute time, which I was not measuring at all; on top of that, the GitHub Actions schedule exceeded the minutes limit on paper.">Darmowe plany mają ukryty licznik. Pilnowałem dolarów za AI i&nbsp;świeżości pulsu bota, a&nbsp;betę zatrzymywał czas pracy bazy, którego w&nbsp;ogóle nie mierzyłem; do tego harmonogram w&nbsp;GitHub Actions na papierze przekraczał limit minut.</li>
+                    <li data-en="A watchdog must raise an alarm when it cannot see. For months “skipped” and “unknown” counted as healthy, and a watchdog that first ran the job itself and only then checked measured its own work instead of the silence.">Strażnik musi alarmować, gdy nie widzi. Przez miesiące „pominięto” i&nbsp;„nieznany” liczyły się jako dobry stan, a&nbsp;strażnik, który najpierw sam uruchamiał zadanie, a&nbsp;dopiero potem sprawdzał, mierzył własną pracę zamiast ciszy.</li>
+                    <li data-en="I check model behaviour on realistic data, not only in unit tests. The symptom “the AI suggests the same games to everyone” had its cause three layers down, in the catalogue filter, not in the model.">Zachowanie modelu sprawdzam na danych zbliżonych do prawdziwych, nie tylko w&nbsp;testach jednostkowych. Objaw „AI proponuje wszystkim te same gry” miał przyczynę trzy warstwy niżej, w&nbsp;filtrze katalogu, a&nbsp;nie w&nbsp;modelu.</li>
+                </ul>
+            </section>
+
+            <nav class="case-pager" aria-label="Inne studia przypadków" data-en-aria="Other case studies">
+                <a class="case-pager-link" href="/case/urzednik-i-ai/">
+                    <span class="case-pager-dir" data-en="← Previous">← Poprzednie</span>
+                    <span class="case-pager-title" data-en="Civil Servant &amp; AI">Urzędnik i&nbsp;AI</span>
+                </a>
+                <a class="case-pager-link case-pager-link--next" href="/case/automargiela/">
+                    <span class="case-pager-dir" data-en="Next →">Następne →</span>
+                    <span class="case-pager-title">AutoMargiela</span>
+                </a>
+            </nav>
+            <p class="case-back"><a class="btn btn-secondary" href="/#projekty"><span data-en="All projects">Wszystkie projekty</span></a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-start">
+                    <button type="button" class="start-button" aria-label="Na górę strony" data-en-aria="Back to top" onclick="window.scrollTo({top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'})">
+                        <span class="start-icon" aria-hidden="true">🖥️</span>
+                        <span>Start</span>
+                    </button>
+                </div>
+                <div class="footer-center">
+                    <p class="footer-tech">© 2025-2026 Karol Wilczyński</p>
+                </div>
+                <div class="footer-clock">
+                    <span id="clock">00:00</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js?v=62" defer></script>
+</body>
+</html>
