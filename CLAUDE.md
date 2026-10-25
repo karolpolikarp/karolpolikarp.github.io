@@ -121,7 +121,7 @@ Decorative layer added on top of the existing design (nothing else in the layout
   phones the sign sits behind the name. When the layout moves that spot (resize, language, tab), `reshape()`
   lets the particles flow there. Then it recedes into a quiet watermark and freezes once idle (12 s with a
   mouse, 6 s on touch; the pointer wakes it); the pointer repels particles.
-- **2026-10-26:** the author moved the particle sign from the hero to the contact section: the hero scene keeps
+- **2026-10-25:** the author moved the particle sign from the hero to the contact section: the hero scene keeps
   only the drifting dust (`count: 0` in `heroScene`, `particles.js`), the coloured glow spots behind it are off
   (`.hero-bg-decoration::before { content: none }`), and a small `.contact-finale` with `#finaleParticles` stands on
   its own between „Kontakt” and the motto (the author did not want it behind the motto; max 620px wide).

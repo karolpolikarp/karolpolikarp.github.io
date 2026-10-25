@@ -291,7 +291,7 @@ function heroScene(hero, L) {
         width: L.cw,          // design space = canvas pixels, so shapes can follow the layout
         height: L.ch,
         shapes: heroShapes(L),
-        // the sign itself moved to the contact finale (2026-10-26): the hero keeps only the drifting dust
+        // the sign itself moved to the contact finale (2026-10-25): the hero keeps only the drifting dust
         count: 0,
         mobileCount: 0,
         dust: 260,

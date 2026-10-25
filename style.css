@@ -3671,7 +3671,7 @@ section {
 /* hero without particles (no JS, module or canvas blocked): the soft static glow the floating shapes
    used to give; it fades out as soon as the particle canvas goes live */
 .hero-bg-decoration::before {
-    content: none;          /* the coloured glow spots read as stains (2026-10-26); the hero ground stays plain */
+    content: none;          /* the coloured glow spots read as stains (2026-10-25); the hero ground stays plain */
     position: absolute;
     inset: 0;
     background:
@@ -5318,7 +5318,7 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 }
 
 /* ================================================
-   PROJEKTY POLISH (26.10): tiles in a row end on one line, the number and the links share a ruled foot,
+   PROJEKTY POLISH (25.10): tiles in a row end on one line, the number and the links share a ruled foot,
    small tools with images of one height (desktop) and a compact list on phones.
    ================================================ */
 /* the caption fills the tile, so every foot in a row sits on the same baseline */
@@ -5379,7 +5379,7 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 .g-read:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; background: var(--color-phthalo-mid); }
 
 /* ================================================
-   PROJEKTY 26.10 (b): the caption reads status -> name -> kind -> decision -> stack -> number + links;
+   PROJEKTY 25.10 (b): the caption reads status -> name -> kind -> decision -> stack -> number + links;
    live site / repo as real buttons with an icon; the tools in a box of their own.
    ================================================ */
 /* status: its own line with a dot (green: live, gold: beta/alpha, open ring: not started / prototype) */

@@ -23,7 +23,7 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
   decision sentence with 1–2 key phrases in gold (`.g-hl`) + one number (Playfair gold value, label
   with source and date „· DD.MM.YYYY” in DM Sans; live/repo links right of it on a hairline foot) + a closing
   green bar „Czytaj studium przypadku … N min →”, which is the link to the case study; the rest of the tile opens
-  the live site in a new tab (AIgets.me, with no live site, links to its case study). Before 26.10 the whole tile linked to
+  the live site in a new tab (AIgets.me, with no live site, links to its case study). Before 25.10 the whole tile linked to
   `/case/<slug>/` (stretched `.g-main` link with an aria-label); live site / repo are small `.g-ext`
   buttons with a globe / GitHub icon („Strona projektu” where the app itself is not open). Caption order:
   status line with a dot (green live, gold beta/alpha, open ring not started) -> name (large Playfair) ->
