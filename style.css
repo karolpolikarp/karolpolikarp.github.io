@@ -5561,10 +5561,13 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     justify-content: initial;
     min-height: 400px;
+    /* the same green as the other analysis tiles: their veil (.ds-tile::after) over a light notebook
+       screenshot at 0.52 over the primary gradient, rebuilt here without a picture under the text */
     background:
-        radial-gradient(90% 120% at 100% 0%, rgba(201, 169, 98, 0.14), transparent 60%),
+        linear-gradient(to top, rgba(0, 39, 21, 0.93) 0%, rgba(0, 50, 28, 0.7) 50%, rgba(0, 61, 35, 0.46) 100%),
+        linear-gradient(rgba(240, 242, 240, 0.5), rgba(240, 242, 240, 0.5)),
         var(--color-primary-gradient);
-    border: 1px solid rgba(201, 169, 98, 0.5);
+    border: 1px solid transparent;
 }
 .ds-tile--live::after { display: none; }
 .ds-live-main { position: absolute; inset: 0; z-index: 3; border-radius: inherit; }
