@@ -289,6 +289,11 @@ Preserve these features when making changes.
 
 ## Case studies
 
+> **On hold since 2026-10-26 („wkrótce”):** the home page does not link to any `/case/` page (the tile bar reads
+> „Studium przypadku · wkrótce”, tools and data-analysis tiles link to their GitHub repos), the case pages carry
+> `noindex, follow` and are out of `sitemap.xml` and `llms.txt`. To publish them again: restore the `.g-read` links,
+> the tool/DS links, the `index, follow` robots meta, the sitemap entries and the llms.txt section.
+
 - `case/<slug>/index.html`: long-form pages (problem → constraints → architecture SVG → decisions with their cost →
   evidence with source and date → lessons). Same `style.css` / `script.js` (absolute paths), styles in the
   "CASE STUDIES" block at the end of `style.css` (`.case-*`, diagram classes `.cd-*`).

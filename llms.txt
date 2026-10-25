@@ -10,19 +10,19 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 - Obszary: AI w administracji publicznej, narzędzia do pracy z prawem, ochrona danych osobowych w pracy z modelami językowymi, analiza danych.
 
 ## Strony
-- [Strona główna](https://karolwilczynski.com/): wprowadzenie, doświadczenie, projekty, studia przypadków, kontakt.
+- [Strona główna](https://karolwilczynski.com/): wprowadzenie, doświadczenie, projekty, analiza danych, wystąpienia publiczne, kontakt.
 
-## Studia przypadków (problem, ograniczenia, architektura, decyzje i ich koszt, dowody)
-- [Zorza](https://karolwilczynski.com/case/zorza/): nasłuch informacyjny w czasie rzeczywistym z wyjaśnialną oceną wiarygodności, self-hosted na Raspberry Pi.
-- [JakiePrawo.pl](https://karolwilczynski.com/case/jakieprawo/): odpowiedzi o polskim prawie oparte na tekście przepisów z ISAP, z maskowaniem danych osobowych przed modelem.
-- [Parawan](https://karolwilczynski.com/case/parawan/): lokalne usuwanie danych osobowych z tekstu przed wklejeniem do czatu AI; jeden plik HTML, reguły i sumy kontrolne.
-- [Urzędnik i AI](https://karolwilczynski.com/case/urzednik-i-ai/): mapa gotowych promptów dla administracji publicznej; statyczna strona bez serwera i logowania.
-- [UpFor.pl](https://karolwilczynski.com/case/upfor/): kalendarz dostępności dla grup graczy (zamknięta beta); sloty liczone w czasie zegarowym mimo zmiany czasu, model AI wybiera tylko spośród okien policzonych deterministycznie.
-- [AutoMargiela](https://karolwilczynski.com/case/automargiela/): śledzenie cen perfum w trzech sklepach na Raspberry Pi; strażnik pokrycia danych, historia cen w gicie, bez płatnych API i modeli językowych.
-- [Majeranek](https://karolwilczynski.com/case/majeranek/): rankingi filmów, gier, książek i muzyki (wersja alfa); RLS jako granica bezpieczeństwa, ELO i rekomendacje liczone w Postgresie.
-- [AIgets.me](https://karolwilczynski.com/case/aigets/): prototyp kreatora instrukcji systemowej dla asystentów AI; kreator przycięty po przeglądzie wpływu pytań na wynik.
-- [Małe narzędzia](https://karolwilczynski.com/case/narzedzia/): Claude Usage (Stream Deck), ISAP-scraper (API ELI Sejmu), Stefka (lokalne streszczenia nagrań z PLLuM), Anonimizator AI, Multi-Sequence Clicker.
-- [Analizy danych](https://karolwilczynski.com/case/analizy-danych/): prognozy kursu z raportów ESPI z GPT-4o-mini (metoda i jej ograniczenia) oraz analizy rynku gier i Airbnb. Na stronie głównej także analityka cen AutoMargieli na żywo (https://replica.karolwilczynski.com/analytics): sygnały z-score i percentyli, anomalie, trend, korelacje między sklepami; dane odświeżane cztery razy na dobę.
+## Projekty (opisy na stronie głównej; studia przypadków wkrótce)
+- Zorza: nasłuch informacyjny w czasie rzeczywistym z wyjaśnialną oceną wiarygodności, self-hosted na Raspberry Pi.
+- JakiePrawo.pl: odpowiedzi o polskim prawie oparte na tekście przepisów z ISAP.
+- Parawan: lokalne usuwanie danych osobowych z tekstu przed wklejeniem do czatu AI; jeden plik HTML.
+- Urzędnik i AI: mapa gotowych promptów dla administracji publicznej z poziomem danych przy każdym.
+- UpFor.pl: kalendarz dostępności dla grup graczy (zamknięta beta).
+- AutoMargiela: śledzenie cen perfum w trzech sklepach; analityka cen na żywo: https://replica.karolwilczynski.com/analytics
+- Majeranek: rankingi filmów, gier, książek i muzyki (wersja alfa).
+- AIgets.me: prototyp kreatora instrukcji systemowej dla asystentów AI.
+- Narzędzia: Claude Usage (Stream Deck), ISAP-scraper, Stefka, Anonimizator AI, Multi-Sequence Clicker (kod publiczny na GitHubie).
+- Analiza danych: prognozy z raportów ESPI, rynek gier wideo, Airbnb (Winnipeg, Waszyngton), segmentacja (kod publiczny na GitHubie).
 
 ## Wystąpienia publiczne (wybrane)
 - 2026: szkolenie dla pracowników JST „AI w codziennej pracy urzędu. Od promptu do gotowego dokumentu” (150 uczestników); webinarium GUS „AI nie musi wiedzieć wszystkiego” w Europejskim Miesiącu Cyberbezpieczeństwa (ok. 1000 uczestników); Hackathon Warsaw Open Data (jury); XXIV Samorządowe Forum Kapitału i Finansów i Kongres Nowej Mobilności (panele o AI w mieście); Śniadanie z PLLuM, NASK (prezentacja o zasadach korzystania z AI w urzędzie); UK–Hungarian AI Council, Budapeszt, i seminarium Knowledge Sharing Program Polska–Korea (prezentacje o piaskownicach regulacyjnych AI).

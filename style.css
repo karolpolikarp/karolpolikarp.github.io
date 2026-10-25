@@ -5840,3 +5840,12 @@ main > #kontakt.s1-section { padding-top: var(--space-4xl); padding-bottom: var(
 .g-desc { margin: var(--space-xs) 0 0; font-size: var(--text-base); line-height: 1.6; color: var(--g-ink); max-width: 62ch; }
 .g-tile--xl .g-desc { font-size: 1.02rem; }
 
+/* case studies on hold: the bar is a quiet label, not a link */
+.g-read--soon { cursor: default; }
+.g-read--soon:hover { background: var(--color-primary); color: var(--color-bg); }
+[data-theme="dark"] .g-read--soon,
+[data-theme="dark"] .g-read--soon:hover { color: var(--color-text); background: color-mix(in srgb, var(--color-primary) 85%, var(--color-bg)); }
+.g-read--soon span { opacity: 0.85; font-weight: 600; }
+/* the tools box title without its link arrow */
+.g-tools-title { color: var(--g-ink); }
+
