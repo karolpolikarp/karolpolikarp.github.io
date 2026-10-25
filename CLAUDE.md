@@ -190,9 +190,10 @@ Decorative layer added on top of the existing design (nothing else in the layout
 ### Adding a New Project to the Gablota
 1. In `index.html` (`section.gablota` → `.gablota-grid`), copy an `<article class="g-tile …">`; size class
    `g-tile--xl` / `--m` / `--s` plus a grid-placement class (see the block at the end of `style.css` and `DESIGN.md`)
-2. Tile = `.g-main` stretched link to `/case/<slug>/` (`aria-label` + `data-en-aria`), `.g-shot` with a WebP screenshot
+2. Tile = `.g-main` stretched link to the project's live site in a new tab (`/case/<slug>/` when there is none;
+   `aria-label` + `data-en-aria`), `.g-shot` with a WebP screenshot
    (`width`/`height`, `alt` + `data-en-alt`), `.g-cap` with status line, name, kind, two `.g-points`, optionally one number (`.g-num-v`, `.g-num-k`, `.g-num-d`), `.g-ext` live/repo links
-   (in `.g-links`), and the closing `.g-read` bar „§ Czytaj studium przypadku … N min →” (reading time of the case page, ~200 words/min)
+   (in `.g-links`), and the closing `.g-read` bar (its own link to `/case/<slug>/`) „Czytaj studium przypadku … N min →” (reading time of the case page, ~200 words/min)
 3. Small tools go into the `.g-tools-list` (link to `/case/narzedzia/#<anchor>`)
 
 ### Modifying Colors

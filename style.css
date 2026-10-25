@@ -5370,12 +5370,13 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     .g-read { transition: background-color 250ms var(--g-ease); }
     .g-read-arrow { transition: transform 250ms var(--g-ease); }
 }
-@media (hover: hover) and (pointer: fine) {
-    .g-tile:hover .g-read { background: var(--color-phthalo-mid); }
-    .g-tile:hover .g-read-arrow { transform: translateX(4px); }
-}
-.g-tile:focus-within .g-read { background: var(--color-phthalo-mid); }
-.g-tile:focus-within .g-read-arrow { transform: translateX(4px); }
+/* the bar is its own link (to the case study); the rest of the tile opens the project's site */
+.g-read { position: relative; z-index: 2; text-decoration: none; }
+.g-read:hover { background: var(--color-phthalo-mid); color: var(--color-bg); }
+[data-theme="dark"] .g-read:hover { color: var(--color-text); }
+.g-read:hover .g-read-arrow,
+.g-read:focus-visible .g-read-arrow { transform: translateX(4px); }
+.g-read:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; background: var(--color-phthalo-mid); }
 
 /* ================================================
    PROJEKTY 26.10 (b): the caption reads status -> name -> kind -> decision -> stack -> number + links;
@@ -5704,11 +5705,6 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 .emp-company,
 .edu-school { color: var(--color-text); }
 
-/* tools with near-white screenshots: in the dark theme they are dimmed and tinted into the warm dark,
-   so they stop glaring next to the dark ones */
-[data-theme="dark"] .g-tool-shot--light { background: #1b1813; }
-[data-theme="dark"] .g-tool-shot--light img { filter: brightness(0.62) contrast(1.08) sepia(0.18); }
-[data-theme="dark"] .g-tools-list a:hover .g-tool-shot--light img { filter: brightness(0.8) contrast(1.05) sepia(0.1); }
 
 /* every row: the screenshots of the tiles side by side have one height (each picture was captured in its
    tile's proportions, so nothing is stretched); spare height stays in the caption, its foot at the bottom */
