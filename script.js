@@ -417,7 +417,7 @@ const MagneticButtons = {
     }
 };
 
-MagneticButtons.init();
+// MagneticButtons.init(); — off since 2026-10-25: the buttons slid after the cursor and looked like they tilted
 
 // ================================================
 // NAVBAR SCROLL EFFECT (throttled with rAF)
