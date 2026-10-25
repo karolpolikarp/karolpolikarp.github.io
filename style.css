@@ -5764,3 +5764,73 @@ main > #wystapienia.s1-section { padding-bottom: calc(180px + var(--space-4xl) +
 #kontakt .contact-motto { margin: 0 auto var(--space-4xl); }
 main > #kontakt.s1-section { padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
 
+/* hero „Kompetencje”: rows, not boxes — the group name in gold serif on the left, chips on the right,
+   hairlines between groups; key skills in gold; certificates as a ticked list, AI_devs in one column */
+.skills-rows { display: grid; max-width: 560px; margin: 0 auto; }
+.skills-row {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr);
+    gap: var(--space-md);
+    align-items: start;
+    padding: 13px 0;
+    border-top: 1px solid var(--color-border);
+}
+.skills-row:first-child { border-top: 0; padding-top: 0; }
+.skills-row-label {
+    margin: 3px 0 0;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-primary);
+}
+[data-theme="dark"] .skills-row-label { color: var(--color-accent); }
+.skills-row-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.skills-row-chips span {
+    font-size: var(--text-xs);
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+.skills-row-chips span.k {
+    font-weight: 600;
+    border-color: var(--color-accent-dark);
+    background: color-mix(in srgb, var(--color-accent) 22%, var(--color-bg));
+}
+[data-theme="dark"] .skills-row-chips span.k {
+    border-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 16%, var(--color-bg));
+}
+.skills-certs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 6px var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+}
+/* each certificate gets a small rosette (award) icon, drawn as a mask so it takes the accent colour */
+.skills-certs li { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+.skills-certs li::before {
+    content: '';
+    flex: none;
+    width: 15px;
+    height: 15px;
+    background: var(--color-accent-dark);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='9' r='6'/%3E%3Cpath d='M8.6 13.9 7 22l5-3 5 3-1.6-8.1'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='9' r='6'/%3E%3Cpath d='M8.6 13.9 7 22l5-3 5 3-1.6-8.1'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+[data-theme="dark"] .skills-certs li::before { background: var(--color-accent); }
+/* the certificate row: its name above the list, so the two columns get the full width and don't wrap */
+.skills-row:has(.skills-certs) { grid-template-columns: 1fr; gap: var(--space-sm); }
+.skills-row:has(.skills-certs) .skills-row-label { margin: 0; }
+@media (max-width: 479px) {
+    .skills-row { grid-template-columns: 1fr; gap: var(--space-xs); }
+    .skills-row-label { margin: 0; }
+}
+
