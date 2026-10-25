@@ -7,7 +7,7 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
   neutrals (`--color-bg` #fdfcfa). Dark theme keeps the same roles on near-black (#12100d).
 - **Phthalo green (accent only):** `--color-phthalo` #123524, `--color-phthalo-mid` #1d5c43,
   `--color-phthalo-light` #3a9a70 — selection, scrollbar, logo sparkle, primary-button gradient, the short
-  rule under section titles, tile hover/focus edge (light theme), status badges, speaking-role badges.
+  rule under case-page h2 titles (not under home section titles), tile hover/focus edge (light theme), status badges, speaking-role badges.
   Never as a page ground (the author rejected green grounds that drift to blue/grey). No cyan/mint.
 - **Type:** Playfair Display (names, headings), DM Sans (text, UI), JetBrains Mono (numbers, measurements
   and code only — not as decoration).
