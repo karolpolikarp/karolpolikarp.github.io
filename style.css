@@ -5670,11 +5670,10 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     }
     #wystapienia .tm-svg {
         position: absolute;
-        top: 50%;
+        top: 6vh;
         right: max(2vw, calc((100vw - var(--container-max)) / 2));
         width: min(50vw, 760px);
-        max-height: 84%;
-        transform: translateY(-50%);
+        max-height: 80%;
     }
     #wystapienia .tm-pin { pointer-events: auto; }
     #wystapienia .talks-wrap {
@@ -5713,4 +5712,14 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     0%, 100% { transform: scale(1.5); opacity: 0.9; }
     50% { transform: scale(2); opacity: 0.35; }
 }
+
+/* hero timeline: the employer / school in full ink, not a small grey line */
+.emp-company,
+.edu-school { color: var(--color-text); }
+
+/* tools with near-white screenshots: in the dark theme they are dimmed and tinted into the warm dark,
+   so they stop glaring next to the dark ones */
+[data-theme="dark"] .g-tool-shot--light { background: #1b1813; }
+[data-theme="dark"] .g-tool-shot--light img { filter: brightness(0.62) contrast(1.08) sepia(0.18); }
+[data-theme="dark"] .g-tools-list a:hover .g-tool-shot--light img { filter: brightness(0.8) contrast(1.05) sepia(0.1); }
 
