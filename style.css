@@ -4363,7 +4363,7 @@ section {
 }
 @media (min-width: 768px) {
     .gablota-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
-    .g-tile--xl, .g-tile--wide, .g-tools { grid-column: span 2; }
+    .g-tile--xl, .g-tools { grid-column: span 2; }
 }
 @media (min-width: 1100px) {
     .gablota-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
@@ -4374,8 +4374,8 @@ section {
     .g-urzednik   { grid-column: span 7; }
     .g-parawan    { grid-column: span 5; }
     .g-margiela, .g-aigets, .g-majeranek { grid-column: span 4; }
-    .g-jakieprawo { grid-column: span 12; }
-    .g-tools      { grid-column: span 12; }
+    .g-tools      { grid-column: span 8; order: 1; }
+    .g-jakieprawo { grid-column: span 4; order: 2; }
 }
 
 /* ---------- tile ---------- */
@@ -5464,7 +5464,14 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     overflow: visible;
 }
 .g-tools-list li:last-child:nth-child(odd) { grid-column: 1 / -1; }
-@media (min-width: 900px) { .g-tools-list { grid-template-columns: repeat(5, minmax(0, 1fr)); } .g-tools-list li:last-child:nth-child(odd) { grid-column: auto; } }
+/* from 900px: three cards on top, the last two wider below (6-column grid) */
+@media (min-width: 900px) {
+    .g-tools-list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .g-tools-list li { grid-column: span 2; }
+    .g-tools-list li:nth-child(n + 4),
+    .g-tools-list li:last-child:nth-child(odd) { grid-column: span 3; }
+    .g-tools-list li:nth-child(n + 4):nth-child(n) .g-tool-shot { aspect-ratio: 16 / 7; }
+}
 .g-tools-list li { display: flex; }
 .g-tools-list a,
 .g-tools-list li a {
@@ -5534,22 +5541,6 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 /* the number: value, label, then source and date on their own line */
 .g-num-d { display: block; margin-top: 0.15rem; font-size: var(--text-xs); color: var(--g-ink); opacity: 0.78; }
 
-/* JakiePrawo: a wide tile, screenshot left and caption right (stacked on phones); on tablets Majeranek
-   gets the same shape, otherwise it would stand alone in its row */
-@media (min-width: 768px) {
-    .g-tile--wide { flex-direction: row; }
-    .g-tile--wide .g-shot { flex: 0 0 52%; aspect-ratio: auto; min-height: 20rem; }
-    .g-tile--wide .g-shot :is(img, video) { object-position: left top; }
-    .g-tile--wide .g-cap { padding: var(--space-xl); padding-bottom: calc(var(--space-xl) + 3rem); }
-    .g-tile--wide .g-read { position: absolute; left: 52%; right: 0; bottom: 0; }
-}
-@media (min-width: 768px) and (max-width: 1099px) {
-    .g-majeranek { grid-column: span 2; flex-direction: row; }
-    .g-majeranek .g-shot { flex: 0 0 52%; aspect-ratio: auto; min-height: 20rem; }
-    .g-majeranek .g-shot :is(img, video) { object-position: left top; }
-    .g-majeranek .g-cap { padding-bottom: calc(var(--space-lg) + 3rem); }
-    .g-majeranek .g-read { position: absolute; left: 52%; right: 0; bottom: 0; }
-}
 
 /* ================================================
    ANALIZY DANYCH: the live tile — AutoMargiela's analytics page on current data, first and widest
@@ -5636,5 +5627,18 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     .ds-live-shot { aspect-ratio: 16 / 9; min-height: 0; }
     .ds-live-shot img { -webkit-mask-image: none; mask-image: none; }
     .ds-live-body { padding: var(--space-lg); }
+}
+
+/* a tile without a number keeps its links on the right */
+.g-foot:not(:has(.g-num)) { justify-content: flex-end; }
+/* the small JakiePrawo tile: a smaller name */
+.g-tile--s .g-name { font-size: clamp(1.7rem, 2vw, 2.1rem); }
+
+/* when tiles in a row differ in text length, the extra height goes to the screenshot (anchored top-left),
+   not to a hole above the number */
+@media (min-width: 768px) {
+    .g-tile > .g-shot { flex: 1 0 auto; }
+    .g-tile > .g-cap { flex: none; }
+    .g-tile > .g-shot :is(img, video) { object-position: left top; }
 }
 

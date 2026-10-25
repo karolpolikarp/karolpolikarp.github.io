@@ -26,10 +26,13 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
   `/case/<slug>/` (stretched `.g-main` link with an aria-label); live site / repo are small `.g-ext`
   buttons with a globe / GitHub icon („Strona projektu” where the app itself is not open). Caption order:
   status line with a dot (green live, gold beta/alpha, open ring not started) -> name (large Playfair) ->
-  kind (italic serif) -> two short points (`.g-points`, check marks, one gold key phrase each) -> stack chips ->
-  number (value, label, then source and date on its own line) + link buttons -> case-study bar. Tile order (the
-  author's): Zorza + UpFor.pl, Urzędnik i AI + Parawan, AutoMargiela, AIgets.me, Majeranek, then
-  JakiePrawo.pl next to the „Narzędzia” box (five rows: image, name, line, arrow; `/case/narzedzia/#<anchor>`).
+  kind (italic serif) -> two short points written for the visitor (what it gives, not how it is built; one gold
+  key phrase each) -> one number that means something to a reader, or none (value, label, then source and date)
+  + link buttons -> case-study bar. No stack chips on tiles (they live on the case pages). Screenshots in
+  `assets/images/shots/`, captured from the live sites at a window matched to the tile (16:9 large, 80:63 for
+  the 5-column tiles, 1024×576 for the small ones); extra height in a row goes to the screenshot. Tile order (the
+  author's): Zorza + UpFor.pl, Urzędnik i AI + Parawan, AutoMargiela, AIgets.me, Majeranek, then the
+  „Narzędzia” box (8 columns: three cards, two wider below; `/case/narzedzia/#<anchor>`) + a small JakiePrawo.pl.
 - **Wystąpienia (`#wystapienia`):** dot-matrix map of Europe (static inline SVG generated offline from
   Natural Earth 1:50m, gold pins sized by event count; sticky on the right on desktop, on top on mobile)
   next to the list by year (big Playfair year numeral). Item = date tile (Playfair day + month; ranges,
