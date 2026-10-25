@@ -3671,7 +3671,7 @@ section {
 /* hero without particles (no JS, module or canvas blocked): the soft static glow the floating shapes
    used to give; it fades out as soon as the particle canvas goes live */
 .hero-bg-decoration::before {
-    content: '';
+    content: none;          /* the coloured glow spots read as stains (2026-10-26); the hero ground stays plain */
     position: absolute;
     inset: 0;
     background:
