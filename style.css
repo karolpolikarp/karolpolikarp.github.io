@@ -5658,15 +5658,20 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
         position: sticky;
         top: 89px;
         height: calc(100vh - 89px);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        gap: var(--space-sm);
+        padding: 4vh max(2vw, calc((100vw - var(--container-max)) / 2)) 6vh 0;
         -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 74%, transparent 98%);
         mask-image: linear-gradient(180deg, #000 0%, #000 74%, transparent 98%);
     }
     #wystapienia .tm-svg {
-        position: absolute;
-        top: 6vh;
-        right: max(2vw, calc((100vw - var(--container-max)) / 2));
-        width: min(50vw, 760px);
-        max-height: 80%;
+        position: relative;
+        width: min(50vw, 780px);
+        height: auto;
+        max-height: 100%;
     }
     #wystapienia .tm-pin { pointer-events: auto; }
     #wystapienia .talks-wrap {
@@ -5679,18 +5684,16 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     /* quieter map */
     #wystapienia { --tm-land: rgba(29, 92, 67, 0.13); }
     [data-theme="dark"] #wystapienia { --tm-land: rgba(58, 154, 112, 0.14); }
-    #wystapienia .tm-label { opacity: 0.4; font-size: 11px; font-weight: 500; }
+    #wystapienia .tm-label { opacity: 0.8; font-size: 11px; font-weight: 500; }
     #wystapienia .tm-pin.is-active .tm-label { opacity: 0.95; font-weight: 600; }
     #wystapienia .tm-pin:not(.is-active) :is(.tm-dot, .tm-halo) { opacity: 0.4; }
     #wystapienia .tm-pin.is-active .tm-dot { opacity: 1; }
     .talks-bigyear {
         display: block;
-        position: absolute;
-        right: max(2vw, calc((100vw - var(--container-max)) / 2));
-        bottom: 5vh;
+        order: 2;
         font-family: var(--font-serif);
         font-weight: 700;
-        font-size: clamp(4rem, 8vw, 8rem);
+        font-size: clamp(3rem, 6vw, 6rem);
         line-height: 1;
         color: transparent;
         -webkit-text-stroke: 1px var(--color-primary);
@@ -5726,5 +5729,38 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 @media (min-width: 1100px) {
     .g-tile--xl > .g-shot { aspect-ratio: auto; height: clamp(20rem, 30vw, 27rem); }
     .g-tile--s > .g-shot { aspect-ratio: auto; height: 15rem; }
+}
+
+/* contact finale (moved here from the hero): "§" splits into "§ … { }" between the heading and the motto,
+   kept small so the tiles stay on the first screen */
+.contact-finale {
+    position: relative;
+    max-width: 620px;
+    margin: 0 auto;
+    aspect-ratio: 1600 / 560;
+}
+.contact-finale-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.1em;
+    font-size: clamp(2.5rem, 1.2rem + 6vw, 6rem);
+    line-height: 1;
+}
+.contact-finale.is-live .contact-finale-fallback { visibility: hidden; }
+.formula-para { font-family: var(--font-serif); font-weight: 700; color: var(--pm-0); }
+.formula-code { word-spacing: 0.35em; font-family: var(--font-mono); font-weight: 600; color: var(--pm-1); }
+#finaleParticles { --pm-alpha: 0.95; }
+[data-theme="dark"] #finaleParticles { --pm-alpha: 0.72; }
+#kontakt .section-header { margin-bottom: var(--space-sm); }
+
+/* NO GREY TEXT (author's rule): the secondary and tertiary text colours are the full ink in both themes;
+   hierarchy comes from size, weight, serif and gold/green, not from greying text out */
+:root,
+[data-theme="dark"] {
+    --color-text-secondary: var(--color-text);
+    --color-text-tertiary: var(--color-text);
 }
 

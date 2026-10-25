@@ -121,6 +121,9 @@ Decorative layer added on top of the existing design (nothing else in the layout
   phones the sign sits behind the name. When the layout moves that spot (resize, language, tab), `reshape()`
   lets the particles flow there. Then it recedes into a quiet watermark and freezes once idle (12 s with a
   mouse, 6 s on touch; the pointer wakes it); the pointer repels particles.
+- **2026-10-26:** the author moved the particle sign from the hero to the contact section: `#heroParticles` is gone
+  from `index.html` (the hero keeps its static glow; `initHero` in `particles.js` simply finds no canvas), and a
+  small `.contact-finale` with `#finaleParticles` sits between „Kontakt” and the motto (max 620px wide).
 - **Contact motto** (`.contact-motto`): „Od paragrafu do parametru.” (`data-en-html`: one serif, „paragrafu” in
   the colour of `§`, „parametru” in the colour of `{ }`). The contact particle finale was removed (2026-10: too much
   on top of the marble, and a repeat of the hero); `particles.js` still has `finaleScene()` and starts it only
