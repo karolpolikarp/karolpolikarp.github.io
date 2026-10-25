@@ -5759,7 +5759,8 @@ main > #wystapienia.s1-section { padding-bottom: calc(180px + var(--space-4xl) +
 }
 
 /* contact: heading, then the § { } sign on its own, then the motto, then the tiles (even steps) */
-.contact-finale { max-width: 620px; margin: var(--space-lg) auto var(--space-md); }
+.contact-finale { max-width: 760px; margin: var(--space-2xl) auto var(--space-xl); }
 #kontakt .section-header { margin-bottom: 0; }
-#kontakt .contact-motto { margin: 0 auto var(--space-2xl); }
+#kontakt .contact-motto { margin: 0 auto var(--space-4xl); }
+main > #kontakt.s1-section { padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
 
