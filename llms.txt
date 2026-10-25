@@ -24,9 +24,9 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 - [Małe narzędzia](https://karolwilczynski.com/case/narzedzia/): Claude Usage (Stream Deck), ISAP-scraper (API ELI Sejmu), Stefka (lokalne streszczenia nagrań z PLLuM), Anonimizator AI, Multi-Sequence Clicker.
 - [Analizy danych](https://karolwilczynski.com/case/analizy-danych/): prognozy kursu z raportów ESPI z GPT-4o-mini (metoda i jej ograniczenia) oraz analizy rynku gier i Airbnb.
 
-## Wystąpienia (wybrane)
+## Wystąpienia publiczne (wybrane)
 - 2026: Hackathon Warsaw Open Data (jury); XXIV Samorządowe Forum Kapitału i Finansów i Kongres Nowej Mobilności (panele o AI w mieście); Śniadanie z PLLuM, NASK (prezentacja o zasadach korzystania z AI w urzędzie); UK–Hungarian AI Council, Budapeszt, i seminarium Knowledge Sharing Program Polska–Korea (prezentacje o piaskownicach regulacyjnych AI).
-- 2025: Pairing Europe’s Potential, Wrocław (moderacja panelu o AI i EUDI Wallet); webinar o CEEB dla samorządów.
+- 2025: Pairing Europe’s Potential, Wrocław (moderacja panelu o AI i EUDI Wallet); KDI–Alan Turing Institute, Londyn (ekspert, piaskownice regulacyjne AI); od czerwca członek podgrupy AI Board ds. piaskownic regulacyjnych AI.
 
 ## Projekty
 - Zorza: https://zorza.karolwilczynski.com
