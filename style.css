@@ -5554,10 +5554,7 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     min-height: 400px;
     /* the same green as the other analysis tiles: their veil (.ds-tile::after) over a light notebook
        screenshot at 0.52 over the primary gradient, rebuilt here without a picture under the text */
-    background:
-        linear-gradient(to top, rgba(0, 39, 21, 0.93) 0%, rgba(0, 50, 28, 0.7) 50%, rgba(0, 61, 35, 0.46) 100%),
-        linear-gradient(rgba(240, 242, 240, 0.5), rgba(240, 242, 240, 0.5)),
-        var(--color-primary-gradient);
+    background: var(--color-primary-gradient);
     border: 1px solid transparent;
 }
 .ds-tile--live::after { display: none; }
@@ -5642,22 +5639,23 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     .g-tile > .g-shot :is(img, video) { object-position: left top; }
 }
 
-/* the live tile's screenshot and clip sit under the same green as the tiles below: not at full strength,
-   a veil over them, and the sideways fade into the text kept */
-.ds-live-shot img,
-.ds-live-shot.is-playing .g-video { opacity: 0.6; }
-.ds-live-shot .g-video { -webkit-mask-image: linear-gradient(90deg, #000 72%, transparent 100%); mask-image: linear-gradient(90deg, #000 72%, transparent 100%); }
-.ds-live-shot::after {
+/* under the text of the live tile: like the tiles below, a faint screenshot of the analytics (0.52, slightly
+   blurred) under the same green veil, instead of a solid green field */
+.ds-live-body { isolation: isolate; }
+.ds-live-body::before,
+.ds-live-body::after {
     content: '';
     position: absolute;
     inset: 0;
-    z-index: 2;
+    z-index: -1;
     pointer-events: none;
-    background: linear-gradient(to top, rgba(0, 39, 21, 0.75) 0%, rgba(0, 50, 28, 0.45) 50%, rgba(0, 61, 35, 0.25) 100%);
-    -webkit-mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
-    mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
 }
-@media (max-width: 1000px) {
-    .ds-live-shot .g-video, .ds-live-shot::after { -webkit-mask-image: none; mask-image: none; }
+.ds-live-body::before {
+    background: url("assets/images/automargiela-analityka-tlo.webp") left top / cover no-repeat;
+    opacity: 0.52;
+    filter: blur(0.5px);
+}
+.ds-live-body::after {
+    background: linear-gradient(to top, rgba(0, 39, 21, 0.93) 0%, rgba(0, 50, 28, 0.7) 50%, rgba(0, 61, 35, 0.46) 100%);
 }
 
