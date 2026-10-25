@@ -4367,13 +4367,14 @@ section {
 }
 @media (min-width: 1100px) {
     .gablota-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
-    /* law and public administration first: Urzędnik i AI + JakiePrawo, then Zorza + Parawan */
-    .g-urzednik   { grid-column: span 7; }
-    .g-jakieprawo { grid-column: span 5; }
+    /* the author's order: Zorza + UpFor, Urzędnik i AI + Parawan, then AutoMargiela, AIgets.me, Majeranek,
+       then JakiePrawo next to the tools */
     .g-zorza      { grid-column: span 7; }
+    .g-upfor      { grid-column: span 5; }
+    .g-urzednik   { grid-column: span 7; }
     .g-parawan    { grid-column: span 5; }
-    .g-upfor, .g-majeranek, .g-margiela { grid-column: span 4; }
-    .g-aigets     { grid-column: span 4; }
+    .g-margiela, .g-aigets, .g-majeranek { grid-column: span 4; }
+    .g-jakieprawo { grid-column: span 4; }
     .g-tools      { grid-column: span 8; }
 }
 
@@ -4936,10 +4937,6 @@ section {
     font-weight: 600;
 }
 .gablota .g-hl .kw { color: inherit; }
-/* 5 tools in a 3-column grid: the last one spans the empty cell */
-@media (min-width: 900px) {
-    .g-tools-list li:last-child:nth-child(3n + 2) { grid-column: span 2; }
-}
 
 /* Wystąpienia: intro in full ink, not grey */
 #wystapienia .section-desc { color: var(--color-text); }
@@ -5088,15 +5085,6 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 .talk-role--speak,
 [data-theme="dark"] .talk-role--speak { background: var(--color-phthalo-mid); border-color: var(--color-phthalo-mid); }
 
-/* 5 tools with images: 3 on top, 2 below (6-column grid), images capped in height */
-@media (min-width: 900px) {
-    .g-tools-list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-    .g-tools-list li { grid-column: span 2; }
-    .g-tools-list li:nth-child(4),
-    .g-tools-list li:nth-child(5),
-    .g-tools-list li:last-child:nth-child(3n + 2) { grid-column: span 3; }
-    .g-tools-list li:nth-child(n + 4) .g-tool-shot { aspect-ratio: 16 / 7; }
-}
 
 /* ================================================
    PHTHALO ACCENTS — a second layer of phthalo green on top of the palette
@@ -5363,52 +5351,6 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     .g-foot { flex-direction: column; align-items: flex-start; }
 }
 
-/* small tools, desktop: all five images one height (16:9 on the three, 8:3 on the two wider ones) */
-@media (min-width: 900px) {
-    .g-tools-list li:nth-child(n + 4) .g-tool-shot { aspect-ratio: 8 / 3; }
-}
-/* 600-899px: two columns; an odd last tool spans both, image height kept */
-@media (min-width: 600px) and (max-width: 899px) {
-    .g-tools-list li:last-child:nth-child(odd) { grid-column: span 2; }
-    .g-tools-list li:last-child:nth-child(odd) .g-tool-shot { aspect-ratio: 32 / 9; }
-}
-/* phones: one tool per row, a small image on the left, the text beside it */
-@media (max-width: 599px) {
-    .g-tools-list { grid-template-columns: 1fr; }
-    .g-tools-list a {
-        display: grid;
-        grid-template-columns: 6.5rem minmax(0, 1fr);
-        grid-template-rows: auto 1fr;
-        column-gap: var(--space-md);
-        row-gap: 0.2rem;
-        padding: var(--space-sm);
-    }
-    .g-tools-list .g-tool-name,
-    .g-tools-list .g-tool-line { padding: 0; }
-    .g-tool-shot {
-        grid-row: 1 / 3;
-        aspect-ratio: 4 / 3;
-        margin: 0;
-        border: 1px solid var(--g-tile-edge);
-        border-radius: var(--radius-sm);
-    }
-}
-/* wide screens: the 5-column tile next to a 7-column one gets a taller screenshot of the same height
-   (16:9 x 5/7), so the two captions start level and neither tile has a hole above its foot */
-@media (min-width: 1100px) {
-    .g-jakieprawo .g-shot,
-    .g-parawan .g-shot { aspect-ratio: 80 / 63; }
-    /* the taller frame crops the sides: keep the headline on the left edge in view */
-    .g-jakieprawo .g-shot :is(img, video),
-    .g-parawan .g-shot :is(img, video) { object-position: left top; }
-}
-/* tablets (two columns): AIgets would stand alone with an empty cell beside it, so it takes the full row,
-   screenshot on the left and caption on the right */
-@media (min-width: 768px) and (max-width: 1099px) {
-    .g-aigets { grid-column: span 2; flex-direction: row; }
-    .g-aigets .g-shot { flex: 0 0 50%; aspect-ratio: auto; min-height: 16rem; }
-    .g-aigets .g-shot :is(img, video) { object-position: left top; }
-}
 /* the light screenshots glare on the dark band: a touch dimmer there */
 [data-theme="dark"] .g-tool-shot img { filter: brightness(0.9); }
 
@@ -5431,7 +5373,6 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     color: var(--color-text);
     background: color-mix(in srgb, var(--color-primary) 85%, var(--color-bg));
 }
-.g-read-sign { font-family: var(--font-serif); font-size: 1.2em; line-height: 1; color: var(--color-accent); }
 .g-read-time { margin-left: auto; font-weight: 500; opacity: 0.8; }
 .g-read-arrow { display: inline-block; color: var(--color-accent); }
 @media (prefers-reduced-motion: no-preference) {
@@ -5444,3 +5385,125 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 }
 .g-tile:focus-within .g-read { background: var(--color-phthalo-mid); }
 .g-tile:focus-within .g-read-arrow { transform: translateX(4px); }
+
+/* ================================================
+   PROJEKTY 26.10 (b): the caption reads status -> name -> kind -> decision -> stack -> number + links;
+   live site / repo as real buttons with an icon; the tools in a box of their own.
+   ================================================ */
+/* status: its own line with a dot (green: live, gold: beta/alpha, open ring: not started / prototype) */
+.g-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--g-ink);
+}
+.g-status-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--g-gold); }
+.g-status--live .g-status-dot { background: var(--color-phthalo-light); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-phthalo-light) 22%, transparent); }
+.g-status--soon .g-status-dot { background: transparent; box-shadow: inset 0 0 0 2px var(--g-gold); }
+@media (prefers-reduced-motion: no-preference) {
+    .g-status--live .g-status-dot { animation: gLive 2.4s ease-in-out infinite; }
+}
+@keyframes gLive {
+    0%, 100% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-phthalo-light) 28%, transparent); }
+    50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-phthalo-light) 6%, transparent); }
+}
+/* the name larger, the kind as an italic serif line */
+.g-name { font-size: clamp(1.9rem, 2.4vw, 2.4rem); line-height: 1.05; letter-spacing: -0.01em; }
+.g-tile--xl .g-name { font-size: clamp(2.3rem, 3.4vw, 3.4rem); }
+.g-kind { font-family: var(--font-serif); font-style: italic; font-size: var(--text-md); font-weight: 500; letter-spacing: 0; margin-top: -0.15rem; }
+/* the stack: quieter chips under the decision */
+.g-stack { margin: 0; }
+.g-stack .g-badge { font-size: 0.72rem; padding: 2px 9px; }
+/* live site / repo: buttons, clearly not the case-study link */
+.g-links { gap: var(--space-sm); flex-wrap: wrap; justify-content: flex-end; }
+.g-ext,
+.g-links .g-ext {
+    gap: 0.4em;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--g-gold);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--g-ink);
+    text-decoration: none;
+    background: transparent;
+    white-space: nowrap;
+}
+.g-ext svg { width: 13px; height: 13px; }
+.g-ext .g-ext-ico { width: 14px; height: 14px; color: var(--g-gold); }
+@media (prefers-reduced-motion: no-preference) {
+    .g-ext { transition: background-color 200ms var(--g-ease), color 200ms var(--g-ease); }
+}
+.g-ext:hover { background: var(--g-gold); color: var(--color-bg); text-decoration: none; }
+.g-ext:hover .g-ext-ico { color: inherit; }
+
+/* Narzędzia: a box of its own, five rows like a drawer of instruments */
+.g-tools {
+    padding: var(--space-lg);
+    border: 1px solid var(--g-tile-edge);
+    border-radius: var(--radius-lg);
+    background:
+        radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--color-phthalo-mid) 16%, transparent), transparent 60%),
+        var(--g-tile);
+    gap: var(--space-md);
+}
+@media (min-width: 1100px) { .g-tools { padding: var(--space-lg); border: 1px solid var(--g-tile-edge); } }
+.g-tools-title { font-size: clamp(1.9rem, 2.4vw, 2.4rem); }
+.g-tools-title a { gap: var(--space-sm); }
+.g-tools-title svg { width: 22px; height: 22px; }
+.g-tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+}
+.g-tools-list { flex: 1; }
+.g-tools-list li { display: flex; flex: 1; border-top: 1px solid var(--g-tile-edge); }
+.g-tools-list li > a { flex: 1; }
+.g-tools-list a,
+.g-tools-list li a {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: var(--space-md);
+    row-gap: 0.15rem;
+    align-items: center;
+    padding: var(--space-sm) var(--space-xs);
+    background: transparent;
+}
+.g-tools-list a::after {
+    content: '→';
+    grid-column: 3;
+    grid-row: 1 / 3;
+    color: var(--g-gold);
+    font-weight: 700;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .g-tools-list a::after { transition: transform 250ms var(--g-ease); }
+    .g-tool-shot img { transition: transform 400ms var(--g-ease); }
+}
+.g-tools-list a:hover::after { transform: translateX(4px); }
+.g-tools-list a:hover .g-tool-shot img { transform: scale(1.06); }
+.g-tools-list .g-tool-shot,
+.g-tools-list li:nth-child(n) .g-tool-shot {
+    grid-row: 1 / 3;
+    aspect-ratio: 16 / 10;
+    margin: 0;
+    border: 1px solid var(--g-tile-edge);
+    border-radius: var(--radius-sm);
+}
+.g-tools-list .g-tool-name,
+.g-tools-list .g-tool-line { padding: 0; grid-column: 2; }
+.g-tools-list .g-tool-name { align-self: end; font-family: var(--font-serif); font-size: 1.2rem; }
+.g-tools-list .g-tool-line { align-self: start; }
+@media (max-width: 599px) {
+    .g-tools { padding: var(--space-md); }
+    .g-tools-list a, .g-tools-list li a { grid-template-columns: 5.5rem minmax(0, 1fr) auto; }
+}
+

@@ -24,9 +24,11 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
   with source and date „· DD.MM.YYYY” in DM Sans; live/repo links right of it on a hairline foot) + a closing
   green bar „§ Czytaj studium przypadku … N min →” that says where the tile goes. The whole tile links to
   `/case/<slug>/` (stretched `.g-main` link with an aria-label); live site / repo are small `.g-ext`
-  links above it („Strona projektu” where the app itself is not open). Order: law and public
-  administration first — Urzędnik i AI + JakiePrawo.pl, then Zorza + Parawan, then AutoMargiela,
-  UpFor.pl, Majeranek, then AIgets.me + the small-tools list (`/case/narzedzia/#<anchor>`).
+  buttons with a globe / GitHub icon („Strona projektu” where the app itself is not open). Caption order:
+  status line with a dot (green live, gold beta/alpha, open ring not started) -> name (large Playfair) ->
+  kind (italic serif) -> decision -> stack chips -> number + link buttons -> case-study bar. Tile order (the
+  author's): Zorza + UpFor.pl, Urzędnik i AI + Parawan, AutoMargiela, AIgets.me, Majeranek, then
+  JakiePrawo.pl next to the „Narzędzia” box (five rows: image, name, line, arrow; `/case/narzedzia/#<anchor>`).
 - **Wystąpienia (`#wystapienia`):** dot-matrix map of Europe (static inline SVG generated offline from
   Natural Earth 1:50m, gold pins sized by event count; sticky on the right on desktop, on top on mobile)
   next to the list by year (big Playfair year numeral). Item = date tile (Playfair day + month; ranges,
