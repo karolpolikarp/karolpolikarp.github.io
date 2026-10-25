@@ -5634,13 +5634,6 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 /* the small JakiePrawo tile: a smaller name */
 .g-tile--s .g-name { font-size: clamp(1.7rem, 2vw, 2.1rem); }
 
-/* when tiles in a row differ in text length, the extra height goes to the screenshot (anchored top-left),
-   not to a hole above the number */
-@media (min-width: 768px) {
-    .g-tile > .g-shot { flex: 1 0 auto; }
-    .g-tile > .g-cap { flex: none; }
-    .g-tile > .g-shot :is(img, video) { object-position: left top; }
-}
 
 /* ================================================
    WYSTĄPIENIA (wide screens): the map is the background of the whole section, pinned for its full height;
@@ -5722,4 +5715,16 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 [data-theme="dark"] .g-tool-shot--light { background: #1b1813; }
 [data-theme="dark"] .g-tool-shot--light img { filter: brightness(0.62) contrast(1.08) sepia(0.18); }
 [data-theme="dark"] .g-tools-list a:hover .g-tool-shot--light img { filter: brightness(0.8) contrast(1.05) sepia(0.1); }
+
+/* every row: the screenshots of the tiles side by side have one height (each picture was captured in its
+   tile's proportions, so nothing is stretched); spare height stays in the caption, its foot at the bottom */
+@media (min-width: 768px) {
+    .g-tile > .g-shot { flex: none; }
+    .g-tile > .g-cap { flex: 1; }
+    .g-tile > .g-shot :is(img, video) { object-position: left top; }
+}
+@media (min-width: 1100px) {
+    .g-tile--xl > .g-shot { aspect-ratio: auto; height: clamp(20rem, 30vw, 27rem); }
+    .g-tile--s > .g-shot { aspect-ratio: auto; height: 15rem; }
+}
 
