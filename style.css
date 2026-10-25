@@ -5109,18 +5109,6 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 [data-theme="dark"] .kpw-stop-a { stop-color: var(--color-phthalo-light); }
 /* primary button: racing green into phthalo */
 .btn-primary { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-phthalo) 100%); }
-/* section titles: a short phthalo rule under the heading */
-.s1-title { position: relative; padding-bottom: 0.35em; }
-.s1-title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 56px;
-    height: 3px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-accent));
-}
 /* project tiles: phthalo edge on hover/focus in the light theme, gold in dark */
 @media (hover: hover) and (pointer: fine) {
     .g-tile:hover { border-color: var(--color-phthalo-mid); }
@@ -5171,9 +5159,7 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     background: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-phthalo-light) 45%, var(--color-accent));
 }
 
-/* the short phthalo -> gold rule of .s1-title, also under Kontakt and case-page h2
-   (drawn as a background so it works on the flex .case-h2 too) */
-#kontakt .section-title,
+/* a short phthalo -> gold rule under the case-page h2 (drawn as a background so it works on the flex .case-h2) */
 .case-h2 {
     padding-bottom: 0.4em;
     background-image: linear-gradient(90deg, var(--color-phthalo-mid), var(--color-accent));
@@ -5181,7 +5167,6 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     background-size: 56px 3px;
     background-position: left bottom;
 }
-#kontakt .section-title { background-position: center bottom; padding-bottom: 0.22em; }
 
 /* links in running text: phthalo underline, gold on hover */
 .case-hero p a:not(.btn),
@@ -5313,22 +5298,6 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     }
 }
 
-/* 4. section titles: the phthalo rule draws from 0 to full width as the title enters */
-@supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-        .s1-title { view-timeline: --title-rule block; }
-        .s1-title::after {
-            transform-origin: left center;
-            animation: ruleDraw linear both;
-            animation-timeline: --title-rule;
-            animation-range: entry 100% cover 40%;
-        }
-    }
-}
-@keyframes ruleDraw {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
-}
 
 /* ================================================
    POLISH 25.10: decision cards without the gradient stripe and grey mono labels;
