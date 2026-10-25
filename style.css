@@ -5507,3 +5507,92 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     .g-tools-list a, .g-tools-list li a { grid-template-columns: 5.5rem minmax(0, 1fr) auto; }
 }
 
+/* ================================================
+   ANALIZY DANYCH: the live tile — AutoMargiela's analytics page on current data, first and widest
+   (always dark like the page it shows; the whole tile opens the live page, the buttons sit above that link)
+   ================================================ */
+.ds-tile--live {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    justify-content: initial;
+    min-height: 400px;
+    background:
+        radial-gradient(90% 120% at 100% 0%, rgba(201, 169, 98, 0.12), transparent 60%),
+        linear-gradient(135deg, #10140f 0%, #0e0c09 100%);
+    border: 1px solid rgba(201, 169, 98, 0.45);
+}
+.ds-tile--live::after { display: none; }
+.ds-live-main { position: absolute; inset: 0; z-index: 3; border-radius: inherit; }
+.ds-live-main:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.ds-live-shot { position: relative; overflow: hidden; min-height: 260px; }
+.ds-live-shot img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+    -webkit-mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
+}
+.ds-live-shot-2 { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+    .ds-live-shot-2 { transition: opacity 500ms var(--g-ease); }
+}
+@media (hover: hover) and (pointer: fine) {
+    .ds-tile--live:hover .ds-live-shot-2 { opacity: 1; }
+}
+.ds-live-body {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-xl) var(--space-xl) var(--space-xl) var(--space-md);
+    text-shadow: none;
+}
+.ds-live-body h3 { font-family: var(--font-serif); font-weight: 600; color: #fff; font-size: clamp(1.9rem, 2.8vw, 2.8rem); line-height: 1.08; margin: var(--space-xs) 0 0; }
+.ds-live-body p { font-size: var(--text-base); color: rgba(255, 255, 255, 0.9); }
+.ds-hl { color: var(--color-accent); font-weight: 600; }
+.ds-live-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: #fff !important;
+}
+.ds-live-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--color-phthalo-light); box-shadow: 0 0 0 4px rgba(58, 154, 112, 0.25); }
+@media (prefers-reduced-motion: no-preference) {
+    .ds-live-dot { animation: gLive 2.4s ease-in-out infinite; }
+}
+.ds-live-num { margin: var(--space-xs) 0 0; font-size: var(--text-sm) !important; }
+.ds-live-num-v { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; color: var(--color-accent); margin-right: 0.2em; }
+.ds-live-links { position: relative; z-index: 4; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-lg); margin-top: var(--space-sm); }
+.ds-live-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.55rem 1.05rem;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    color: #14110c;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-decoration: none;
+}
+.ds-live-btn svg { width: 15px; height: 15px; }
+.ds-live-btn:hover { background: #ddc07a; }
+.ds-live-link { color: #fff; font-size: var(--text-sm); font-weight: 600; text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 3px; }
+.ds-live-link:hover { color: var(--color-accent); }
+:is(.ds-live-btn, .ds-live-link):focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+@media (max-width: 1000px) {
+    .ds-tile--live { grid-template-columns: 1fr; }
+    .ds-live-shot { aspect-ratio: 16 / 9; min-height: 0; }
+    .ds-live-shot img { -webkit-mask-image: none; mask-image: none; }
+    .ds-live-body { padding: var(--space-lg); }
+}
+
