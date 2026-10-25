@@ -11,7 +11,7 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
   Never as a page ground (the author rejected green grounds that drift to blue/grey). No cyan/mint.
 - **Type:** Playfair Display (names, headings), DM Sans (text, UI), JetBrains Mono (numbers, measurements
   and code only — not as decoration).
-- **Signature:** the § → { } particle sign in the hero and the contact finale, motto „Od paragrafu do
+- **Signature:** the § → { } particle sign in the hero (only there), the contact motto „Od paragrafu do
   parametru”. Win95 clock + Start button in the footer.
 
 ## Sections

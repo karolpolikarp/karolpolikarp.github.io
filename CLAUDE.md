@@ -67,7 +67,7 @@ live in the root. Untracked local files (`projekty/`, `analytics/`, `analytics.j
 ### index.html
 - Complete page structure with semantic HTML5
 - Sections: nav, hero (Experience / Education / Skills tabs), projects (`#projekty`: the „Gablota” band
-  `section.gablota#studia` with one tile per project, then the Data Science bento), contact (`#kontakt`, particle finale), footer
+  `section.gablota#studia` with one tile per project, then the Data Science bento), contact (`#kontakt`, motto + tiles), footer
 - Hidden for now: `#o-mnie`, `#kompetencje`, `#blog` carry inline `style="display: none;"`. Their markup, CSS and
   JS are kept on purpose so they can be switched back on later - do not delete them as "dead code"
 - SEO meta tags (Open Graph, Twitter Cards, JSON-LD)
@@ -121,9 +121,10 @@ Decorative layer added on top of the existing design (nothing else in the layout
   phones the sign sits behind the name. When the layout moves that spot (resize, language, tab), `reshape()`
   lets the particles flow there. Then it recedes into a quiet watermark and freezes once idle (12 s with a
   mouse, 6 s on touch; the pointer wakes it); the pointer repels particles.
-- **Contact finale** (`.contact-finale` + `#finaleParticles`): `§` splits into `§ … { }` when scrolled into view,
-  above the motto „Od paragrafu do parametru.” (`data-en-html`: one serif, „paragrafu” in the colour of `§`,
-  „parametru” in the colour of `{ }`). A static HTML formula is the no-JS fallback.
+- **Contact motto** (`.contact-motto`): „Od paragrafu do parametru.” (`data-en-html`: one serif, „paragrafu” in
+  the colour of `§`, „parametru” in the colour of `{ }`). The contact particle finale was removed (2026-10: too much
+  on top of the marble, and a repeat of the hero); `particles.js` still has `finaleScene()` and starts it only
+  if a `#finaleParticles` canvas exists.
 - **Number scramble**, **scroll progress bar**, **hero-tab timeline drawing** (CSS on
   `.hero-tab-panel.active`), **scroll-driven reveal** (`animation-timeline: view()` inside `@supports`).
 - Particle colours come from `--pm-0/1`, `--pm-dust`, `--pm-blend`, `--pm-alpha`, `--pm-size` (both themes, `style.css`).
@@ -260,7 +261,7 @@ Before committing changes, verify:
 | About | `#o-mnie` | Personal background (**hidden**, `display: none`, kept for later) |
 | Skills | `#kompetencje` | Core competencies (**hidden**, kept for later) |
 | Blog | `#blog` | Publication previews (**hidden**, kept for later) |
-| Contact | `#kontakt` | Email (obfuscated), GitHub, LinkedIn, particle finale + motto |
+| Contact | `#kontakt` | Email (obfuscated), GitHub, LinkedIn, motto |
 | Footer | `footer` | Windows 95 clock |
 
 ## Easter Eggs

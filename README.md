@@ -22,7 +22,7 @@ tools built along the way.
 ## Features
 
 - **Animations „Od paragrafu do parametru”** ("from paragraph to parameter"): particles gather into `§` (law)
-  and `{ }` (code) in the hero and again in the contact finale, plus number scramble, a scroll progress bar and
+  and `{ }` (code) in the hero, plus number scramble, a scroll progress bar and
   scroll-driven reveals. All of it honours `prefers-reduced-motion` and pauses when off-screen.
 - **PL/EN toggle**: the page is Polish-first. English is swapped in live on the client from `data-en*`
   attributes, and the choice is remembered.

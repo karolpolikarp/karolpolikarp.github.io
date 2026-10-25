@@ -3718,15 +3718,6 @@ section {
     --pm-alpha: 0.62;
 }
 
-/* the finale glows, but stays gold instead of burning out to white */
-[data-theme="dark"] #finaleParticles {
-    --pm-alpha: 0.72;
-}
-
-#finaleParticles {
-    --pm-alpha: 0.95;
-}
-
 /* light theme hero: the warm glow the dark theme already has, so the scene sits on some depth */
 [data-theme="light"] .hero {
     background:
@@ -3734,45 +3725,9 @@ section {
         linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
 }
 
-/* contact finale: particles split into "§ … { }" above the tiles */
-.contact-finale {
-    position: relative;
-    max-width: 880px;
-    margin: 0 auto;
-    aspect-ratio: 1600 / 560;
-}
-
-.contact-finale-fallback {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.1em;
-    font-size: clamp(3rem, 1.5rem + 9vw, 8.5rem);
-    line-height: 1;
-}
-
-.contact-finale.is-live .contact-finale-fallback {
-    visibility: hidden;
-}
-
-.formula-para {
-    font-family: var(--font-serif);
-    font-weight: 700;
-    color: var(--pm-0);
-}
-
-.formula-code {
-    word-spacing: 0.35em;
-    font-family: var(--font-mono);
-    font-weight: 600;
-    color: var(--pm-1);
-}
-
-/* the motto: the key words in the colours of "§" and "{ }" above */
+/* the motto closes the page (the hero carries the particle sign): key words in the colours of "§" and "{ }" */
 .contact-motto {
-    margin: var(--space-sm) auto var(--space-2xl);
+    margin: var(--space-xl) auto var(--space-2xl);
     padding: 0 var(--space-md);
     text-align: center;
     text-wrap: balance;
@@ -3912,7 +3867,6 @@ section {
         .ds-heading,
         .tools-card,
         .ds-tile,
-        .contact-finale,
         .contact-motto,
         .contact-tile,
         .case-decision,
