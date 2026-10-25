@@ -5642,22 +5642,3 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     .g-tile > .g-shot :is(img, video) { object-position: left top; }
 }
 
-/* the live tile's screenshot and clip sit under the same green as the tiles below: not at full strength,
-   a veil over them, and the sideways fade into the text kept */
-.ds-live-shot img,
-.ds-live-shot.is-playing .g-video { opacity: 0.6; }
-.ds-live-shot .g-video { -webkit-mask-image: linear-gradient(90deg, #000 72%, transparent 100%); mask-image: linear-gradient(90deg, #000 72%, transparent 100%); }
-.ds-live-shot::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background: linear-gradient(to top, rgba(0, 39, 21, 0.75) 0%, rgba(0, 50, 28, 0.45) 50%, rgba(0, 61, 35, 0.25) 100%);
-    -webkit-mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
-    mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
-}
-@media (max-width: 1000px) {
-    .ds-live-shot .g-video, .ds-live-shot::after { -webkit-mask-image: none; mask-image: none; }
-}
-
