@@ -5642,3 +5642,75 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
     .g-tile > .g-shot :is(img, video) { object-position: left top; }
 }
 
+/* ================================================
+   WYSTĄPIENIA (wide screens): the map is the background of the whole section, pinned for its full height;
+   the list scrolls over it on the left. Kept quiet: faint land dots, dimmed names, a barely drawn year.
+   The city of the event in the middle of the screen lights up by itself (TalksMap, script.js).
+   ================================================ */
+.talks-bigyear { display: none; }
+@media (min-width: 960px) {
+    #wystapienia .talks-layout { display: block; position: relative; }
+    /* the aside spans the whole list (full width of the screen); the map inside it sticks under the nav
+       and stops where the list stops, fading out at its bottom edge */
+    #wystapienia .talks-aside {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(50% - 50vw);
+        right: calc(50% - 50vw);
+        z-index: 0;
+        pointer-events: none;
+    }
+    #wystapienia .talks-map {
+        position: sticky;
+        top: 89px;
+        height: calc(100vh - 89px);
+        -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 74%, transparent 98%);
+        mask-image: linear-gradient(180deg, #000 0%, #000 74%, transparent 98%);
+    }
+    #wystapienia .tm-svg {
+        position: absolute;
+        top: 50%;
+        right: max(2vw, calc((100vw - var(--container-max)) / 2));
+        width: min(50vw, 760px);
+        max-height: 84%;
+        transform: translateY(-50%);
+    }
+    #wystapienia .tm-pin { pointer-events: auto; }
+    #wystapienia .talks-wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+        padding-right: var(--space-3xl);
+        background: linear-gradient(90deg, var(--color-bg) 0%, var(--color-bg) 82%, transparent 100%);
+    }
+    /* quieter map */
+    #wystapienia { --tm-land: rgba(29, 92, 67, 0.13); }
+    [data-theme="dark"] #wystapienia { --tm-land: rgba(58, 154, 112, 0.14); }
+    #wystapienia .tm-label { opacity: 0.4; font-size: 11px; font-weight: 500; }
+    #wystapienia .tm-pin.is-active .tm-label { opacity: 0.95; font-weight: 600; }
+    #wystapienia .tm-pin:not(.is-active) :is(.tm-dot, .tm-halo) { opacity: 0.4; }
+    #wystapienia .tm-pin.is-active .tm-dot { opacity: 1; }
+    .talks-bigyear {
+        display: block;
+        position: absolute;
+        right: max(2vw, calc((100vw - var(--container-max)) / 2));
+        bottom: 5vh;
+        font-family: var(--font-serif);
+        font-weight: 700;
+        font-size: clamp(4rem, 8vw, 8rem);
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--color-primary);
+        opacity: 0.22;
+    }
+    [data-theme="dark"] .talks-bigyear { -webkit-text-stroke-color: var(--color-accent); }
+}
+@media (min-width: 960px) and (prefers-reduced-motion: no-preference) {
+    #wystapienia .tm-pin.is-active .tm-halo { animation: tmPulse 2.2s ease-in-out infinite; }
+}
+@keyframes tmPulse {
+    0%, 100% { transform: scale(1.5); opacity: 0.9; }
+    50% { transform: scale(2); opacity: 0.35; }
+}
+

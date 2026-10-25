@@ -1225,13 +1225,14 @@ const TalksMap = {
         // Hover only for a real mouse: on touch the emulated mouseenter would fire
         // right before the click and the click would toggle the pin straight back off.
         const isMouse = e => e.pointerType === 'mouse';
+        // leaving a hovered row or pin goes back to the city the scroll position points at
         this.items.forEach(li => {
             li.addEventListener('pointerenter', e => { if (isMouse(e)) this.set(li.dataset.city); });
-            li.addEventListener('pointerleave', e => { if (isMouse(e)) this.set(null); });
+            li.addEventListener('pointerleave', e => { if (isMouse(e)) this.set(this.scrollCity); });
         });
         this.pins.forEach((pin, city) => {
             pin.addEventListener('pointerenter', e => { if (isMouse(e)) this.set(city); });
-            pin.addEventListener('pointerleave', e => { if (isMouse(e)) this.set(null); });
+            pin.addEventListener('pointerleave', e => { if (isMouse(e)) this.set(this.scrollCity); });
             pin.addEventListener('pointerdown', e => { this.lastPointer = e.pointerType; });
             pin.addEventListener('click', e => {
                 if (this.lastPointer === 'mouse') return; // the hover already shows it
@@ -1241,6 +1242,35 @@ const TalksMap = {
         });
         // a tap anywhere else clears a pinned city
         document.addEventListener('click', () => { if (this.active) this.set(null); });
+
+        this.initWide(section);
+    },
+
+    // Wide screens: the map is the pinned background of the section (style.css). It is cropped to the area
+    // with the pins, the event crossing the middle of the screen lights its city, and the big year follows.
+    initWide(section) {
+        const svg = this.map.querySelector('svg');
+        const wide = window.matchMedia('(min-width: 960px)');
+        const fullBox = svg.getAttribute('viewBox');
+        const fit = () => svg.setAttribute('viewBox', wide.matches ? '100 40 410 290' : fullBox);
+        fit();
+        wide.addEventListener('change', fit);
+
+        if (!('IntersectionObserver' in window)) return;
+        const all = Array.from(section.querySelectorAll('.talk'));
+        const year = document.getElementById('talksBigYear');
+        this.scrollCity = null;
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting || !wide.matches) return;
+                const li = entry.target;
+                this.scrollCity = li.dataset.city || null;
+                this.set(this.scrollCity);
+                const time = li.querySelector('time');
+                if (year && time) year.textContent = time.getAttribute('datetime').slice(0, 4);
+            });
+        }, { rootMargin: '-48% 0px -48% 0px' });
+        all.forEach(li => io.observe(li));
     },
 
     set(city) {

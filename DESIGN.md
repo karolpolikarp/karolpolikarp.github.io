@@ -34,7 +34,9 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
   author's): Zorza + UpFor.pl, Urzędnik i AI + Parawan, AutoMargiela, AIgets.me, Majeranek, then the
   „Narzędzia” box (8 columns: three cards, two wider below; `/case/narzedzia/#<anchor>`) + a small JakiePrawo.pl.
 - **Wystąpienia (`#wystapienia`):** dot-matrix map of Europe (static inline SVG generated offline from
-  Natural Earth 1:50m, gold pins sized by event count; sticky on the right on desktop, on top on mobile)
+  Natural Earth 1:50m, gold pins sized by event count). Wide screens: the map is the quiet, pinned
+  background of the whole list (cropped to the pins, faint land, dimmed names, a barely drawn year in the
+  corner, fading out at the bottom); the event in the middle of the screen lights its city. Mobile: on top
   next to the list by year (big Playfair year numeral). Item = date tile (Playfair day + month; ranges,
   „od”, month-only in italics) + role badge (speaking: green pill; expert roles: gold square tag;
   attendance/delegation: dashed outline) + city with a pin dot + event in Playfair + topic. Pins drop in
