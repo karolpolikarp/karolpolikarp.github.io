@@ -4711,24 +4711,6 @@ section {
 .tm-pin.is-active .tm-dot { transform: scale(1.3); }
 .tm-pin.is-active .tm-halo { transform: scale(1.6); }
 
-/* --- legend: the three badge kinds --- */
-.talks-legend {
-    list-style: none;
-    margin: var(--space-lg) 0 0;
-    padding: var(--space-md) 0 0;
-    border-top: 1px solid var(--color-border);
-    display: grid;
-    gap: var(--space-sm);
-}
-.talks-legend li {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    font-size: var(--text-sm);
-    color: var(--color-text);
-}
-.talks-legend .talk-role { min-width: 8.5rem; justify-content: center; }
-
 /* --- list by year --- */
 .talks-group + .talks-group { margin-top: var(--space-2xl); }
 .talks-year {
@@ -4928,7 +4910,6 @@ section {
 
 @media (max-width: 959px) {
     .talks-map { max-width: 560px; }
-    .talks-legend { max-width: 560px; }
 }
 @media (max-width: 767px) {
     .talk {
@@ -4941,8 +4922,6 @@ section {
     .td-day { font-size: 1.5rem; }
     .td-day--range { font-size: 1rem; }
     .tm-label { font-size: 19px; stroke-width: 5px; }
-    .talks-legend .talk-role { min-width: 7.5rem; }
-    .talks-legend li { align-items: flex-start; }
 }
 
 /* Gablota hover clip: fades in over the screenshot once it is actually playing */
