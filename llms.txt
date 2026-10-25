@@ -20,7 +20,7 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 - UpFor.pl: kalendarz dostępności dla grup graczy (zamknięta beta).
 - AutoMargiela: śledzenie cen perfum w trzech sklepach; analityka cen na żywo: https://replica.karolwilczynski.com/analytics
 - Majeranek: rankingi filmów, gier, książek i muzyki (wersja alfa).
-- AIgets.me: prototyp kreatora instrukcji systemowej dla asystentów AI.
+- Kamerton: kreator instrukcji systemowej dla asystentów AI (https://whoisi.vercel.app).
 - Narzędzia: Claude Usage (Stream Deck), ISAP-scraper, Stefka, Anonimizator AI, Multi-Sequence Clicker (kod publiczny na GitHubie).
 - Analiza danych: prognozy z raportów ESPI, rynek gier wideo, Airbnb (Winnipeg, Waszyngton), segmentacja (kod publiczny na GitHubie).
 

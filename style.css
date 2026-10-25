@@ -5849,3 +5849,7 @@ main > #kontakt.s1-section { padding-top: var(--space-4xl); padding-bottom: var(
 /* the tools box title without its link arrow */
 .g-tools-title { color: var(--g-ink); }
 
+/* logo: just "kpw" with its sparkle, a size up now that the phonetic line is gone */
+.logo-main { font-size: clamp(2.6rem, 3.4vw, 3.1rem); line-height: 1; }
+.logo-sparkle svg { width: 26px; height: 26px; }
+
