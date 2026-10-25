@@ -123,9 +123,8 @@ Decorative layer added on top of the existing design (nothing else in the layout
   mouse, 6 s on touch; the pointer wakes it); the pointer repels particles.
 - **2026-10-26:** the author moved the particle sign from the hero to the contact section: the hero scene keeps
   only the drifting dust (`count: 0` in `heroScene`, `particles.js`), the coloured glow spots behind it are off
-  (`.hero-bg-decoration::before { content: none }`), and `.contact-finale` with `#finaleParticles` holds the motto:
-  `§` forms behind „paragrafu”, `{ }` behind „parametru”; the particles are faint and step back where the words
-  are (`quiet` on `#kontakt .motto-text` in `finaleScene`).
+  (`.hero-bg-decoration::before { content: none }`), and a small `.contact-finale` with `#finaleParticles` stands on
+  its own between „Kontakt” and the motto (the author did not want it behind the motto; max 620px wide).
 - **Contact motto** (`.contact-motto`): „Od paragrafu do parametru.” (`data-en-html`: one serif, „paragrafu” in
   the colour of `§`, „parametru” in the colour of `{ }`). The contact particle finale was removed (2026-10: too much
   on top of the marble, and a repeat of the hero); `particles.js` still has `finaleScene()` and starts it only
