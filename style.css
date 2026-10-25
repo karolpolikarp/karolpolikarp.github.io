@@ -5834,3 +5834,9 @@ main > #kontakt.s1-section { padding-top: var(--space-4xl); padding-bottom: var(
     .skills-row-label { margin: 0; }
 }
 
+/* tiles: one typeface for the caption text (the kind line is DM Sans, upright, not an italic serif) and a short
+   description paragraph instead of ticked points */
+.g-kind { font-family: var(--font-sans); font-style: normal; font-size: var(--text-sm); font-weight: 600; margin-top: 0; }
+.g-desc { margin: var(--space-xs) 0 0; font-size: var(--text-base); line-height: 1.6; color: var(--g-ink); max-width: 62ch; }
+.g-tile--xl .g-desc { font-size: 1.02rem; }
+

@@ -1024,7 +1024,7 @@ const TechHighlighter = {
         'Whisper', 'Béziera', 'Bézier', 'Telegrama', 'Telegram', 'OpenAI', 'Claude', 'macOS', 'PLLuM', 'Python', 'SQLite',
         'Flask', 'React', 'tRPC', 'Swing', 'Java', 'ISAP', 'CLI', 'GPT', 'MCP', 'CSV',
         'JSON', 'ONNX', 'NER', 'RLS', 'RSS', 'Bielik', 'HTML', 'ISAP', 'Gemini', 'ChatGPT'],
-    selector: '.showcase-panel p, .tools-card p, .showcase-subtitle, .g-decision, .g-points li, .g-tool-line',
+    selector: '.showcase-panel p, .tools-card p, .showcase-subtitle, .g-decision, .g-tool-line',
 
     init() {
         const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
