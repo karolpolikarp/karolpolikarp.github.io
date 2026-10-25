@@ -5375,27 +5375,28 @@ html { scrollbar-color: var(--color-phthalo-mid) transparent; }
 [data-theme="dark"] .case-h2-num { color: var(--color-accent); }
 
 /* Verde Alpi marble behind the contact section (dark): the blur is baked into the image from the 4K
-   original (plus a light GPU blur), fades in slowly from the section above, darker in the middle. */
+   original (plus a light GPU blur), darker in the middle. The layer starts 180px above the section and
+   fades in from nothing over half its height, so there is no edge where the talks end. */
 [data-theme="dark"] .contact.s1-section {
     background: var(--color-bg);
-    overflow: hidden;
+    overflow-x: clip;
 }
 [data-theme="dark"] .contact.s1-section::after {
     content: '';
     position: absolute;
-    inset: -40px;
+    inset: -180px -40px 0;
     z-index: 0;
     pointer-events: none;
     background: url("assets/images/brand/verde-alpi-soft.webp?v=1") center / cover no-repeat;
     filter: blur(3px) saturate(1.05);
     opacity: 0.55;
     -webkit-mask-image:
-        radial-gradient(760px 480px at 50% 46%, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.6) 55%, #000 100%),
-        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.12) 10%, rgba(0, 0, 0, 0.4) 22%, rgba(0, 0, 0, 0.75) 34%, #000 46%, #000 72%, rgba(0, 0, 0, 0.6) 86%, transparent 100%);
+        radial-gradient(760px 480px at 50% 55%, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.6) 55%, #000 100%),
+        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.02) 8%, rgba(0, 0, 0, 0.07) 15%, rgba(0, 0, 0, 0.16) 22%, rgba(0, 0, 0, 0.3) 29%, rgba(0, 0, 0, 0.48) 36%, rgba(0, 0, 0, 0.67) 43%, rgba(0, 0, 0, 0.84) 50%, #000 58%, #000 76%, rgba(0, 0, 0, 0.55) 89%, transparent 100%);
     -webkit-mask-composite: source-in;
     mask-image:
-        radial-gradient(760px 480px at 50% 46%, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.6) 55%, #000 100%),
-        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.12) 10%, rgba(0, 0, 0, 0.4) 22%, rgba(0, 0, 0, 0.75) 34%, #000 46%, #000 72%, rgba(0, 0, 0, 0.6) 86%, transparent 100%);
+        radial-gradient(760px 480px at 50% 55%, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.6) 55%, #000 100%),
+        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.02) 8%, rgba(0, 0, 0, 0.07) 15%, rgba(0, 0, 0, 0.16) 22%, rgba(0, 0, 0, 0.3) 29%, rgba(0, 0, 0, 0.48) 36%, rgba(0, 0, 0, 0.67) 43%, rgba(0, 0, 0, 0.84) 50%, #000 58%, #000 76%, rgba(0, 0, 0, 0.55) 89%, transparent 100%);
     mask-composite: intersect;
 }
 [data-theme="dark"] .contact.s1-section > .container {
