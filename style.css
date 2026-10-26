@@ -5861,3 +5861,10 @@ body::before { content: none; }
 
 /* Kontakt: the same heading as Projekty and Wystąpienia publiczne (.s1-title), centred over the centred finale */
 #kontakt .s1-title { text-align: center; }
+
+/* hero without the particle sign: no tall empty area under the buttons; the intro sits centred against the
+   timeline column and the hero is only as tall as its content (2026-10-26) */
+@media (min-width: 769px) {
+    .hero { min-height: 0; padding-bottom: var(--space-3xl); }
+    .hero .container { align-items: center; }
+}
