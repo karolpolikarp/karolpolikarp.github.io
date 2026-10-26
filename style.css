@@ -5858,3 +5858,6 @@ main > #kontakt.s1-section { padding-top: var(--space-4xl); padding-bottom: var(
    dulled the screenshots and the hover clips like a dirty filter (2026-10-26) */
 body::before { content: none; }
 
+
+/* Kontakt: the same heading as Projekty and Wystąpienia publiczne (.s1-title), centred over the centred finale */
+#kontakt .s1-title { text-align: center; }
