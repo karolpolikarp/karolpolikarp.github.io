@@ -1348,7 +1348,9 @@ const ScrollMotion = {
                     tile.classList.add('is-in');
                     io.unobserve(tile);
                 });
-        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        // a tile starts as soon as its top edge is near the viewport (tall tiles used to stay blank until
+        // 12% of them was in view, so the first screen of Projekty looked empty)
+        }, { threshold: 0, rootMargin: '0px 0px 8% 0px' });
         tiles.forEach(t => io.observe(t));
     },
 

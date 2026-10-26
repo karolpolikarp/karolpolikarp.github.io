@@ -5853,3 +5853,18 @@ main > #kontakt.s1-section { padding-top: var(--space-4xl); padding-bottom: var(
 .logo-main { font-size: clamp(2.6rem, 3.4vw, 3.1rem); line-height: 1; }
 .logo-sparkle svg { width: 26px; height: 26px; }
 
+/* no grain over the page: the fixed noise layer (body::before, z-index 98) sat on top of the project tiles too —
+   their sections form their own stacking contexts, so the tiles' z-index 99 never lifted them above it — and it
+   dulled the screenshots and the hover clips like a dirty filter (2026-10-26) */
+body::before { content: none; }
+
+
+/* Kontakt: the same heading as Projekty and Wystąpienia publiczne (.s1-title), centred over the centred finale */
+#kontakt .s1-title { text-align: center; }
+
+/* hero without the particle sign: no tall empty area under the buttons; the intro sits centred against the
+   timeline column and the hero is only as tall as its content (2026-10-26) */
+@media (min-width: 769px) {
+    .hero { min-height: 0; padding-bottom: var(--space-3xl); }
+    .hero .container { align-items: center; }
+}
