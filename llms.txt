@@ -30,7 +30,7 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 
 ## Projekty
 - Zorza: https://zorza.karolwilczynski.com
-- JakiePrawo.pl: https://jakieprawo.pl
+- JakiePrawo.pl: https://jakieprawo.karolwilczynski.com
 - Parawan: https://parawan.karolwilczynski.com/ (kod: https://github.com/karolpolikarp/parawan)
 - Urzędnik i AI: https://promptyurzednika.karolwilczynski.com/
 - UpFor.pl (kalendarz dostępności dla grup graczy): https://upfor.pl
