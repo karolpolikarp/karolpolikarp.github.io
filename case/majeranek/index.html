@@ -319,7 +319,7 @@
                             <dt data-en="Alternative">Alternatywa</dt>
                             <dd data-en="Before, a sign-in wall stood in front of the editor, a numbered list was the default and templates had no pictures.">Wcześniej przed kreatorem stała ściana logowania, domyślna była lista numerowana, a&nbsp;szablony nie miały obrazków.</dd>
                             <dt data-en="Why">Dlaczego</dt>
-                            <dd data-en="On 31 October 2026 I analysed the tier list site TierMaker and wrote down 10 places where Majeranek lost to it. By my count the path to the first dragged item took about 7 clicks; the goal was 0 or 1.">31&nbsp;października 2026 przeanalizowałem serwis z&nbsp;tier listami TierMaker i&nbsp;spisałem 10&nbsp;miejsc, w&nbsp;których Majeranek z&nbsp;nim przegrywał. Według moich wyliczeń droga do pierwszego przeciągnięcia pozycji zajmowała ok.&nbsp;7&nbsp;kliknięć; celem było 0 albo 1.</dd>
+                            <dd data-en="On 31 October 2026 I analysed a popular tier-list site and wrote down 10 places where Majeranek lost to it. By my count the path to the first dragged item took about 7 clicks; the goal was 0 or 1.">31&nbsp;października 2026 przeanalizowałem popularny serwis z&nbsp;tier listami i&nbsp;spisałem 10&nbsp;miejsc, w&nbsp;których Majeranek z&nbsp;nim przegrywał. Według moich wyliczeń droga do pierwszego przeciągnięcia pozycji zajmowała ok.&nbsp;7&nbsp;kliknięć; celem było 0 albo 1.</dd>
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="A guest has no AI, no own images and no cover, and a guest’s draft moves to the account only when the account has no newer one. The community board appears only from 10 lists made from a template, and on 6 November 2026 no template had one yet. I have not measured the effect. Events for the creation path are recorded from 1 November, without personal data.">Gość nie ma AI, własnych obrazków ani okładki, a&nbsp;jego szkic przechodzi na konto tylko wtedy, gdy na koncie nie ma nowszego. Plansza społeczności pojawia się dopiero od 10&nbsp;list zrobionych z&nbsp;szablonu, a&nbsp;6&nbsp;listopada 2026 nie miał jej jeszcze żaden szablon. Efektu nie zmierzyłem. Zdarzenia ścieżki tworzenia zapisuję od 1&nbsp;listopada, bez danych osobowych.</dd>
                         </dl>
@@ -342,11 +342,11 @@
 
             <section id="dowody" class="case-section" aria-labelledby="h-dowody">
                 <h2 class="case-h2" id="h-dowody"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span data-en="Evidence">Dowody</span></h2>
-                <p data-en="The numbers come from the repository, from test runs, the migrations and change descriptions that record how each change was verified.">Liczby pochodzą z&nbsp;repozytorium, czyli z&nbsp;przebiegów testów, z&nbsp;migracji i&nbsp;z&nbsp;opisów zmian, które mówią, jak każdą z&nbsp;nich sprawdzono.</p>
+                <p data-en="The numbers come from the repository (test runs, migrations and change descriptions that record how each change was verified) and from the log of the daily production job.">Liczby pochodzą z&nbsp;repozytorium (przebiegi testów, migracje i&nbsp;opisy zmian, które mówią, jak każdą z&nbsp;nich sprawdzono) oraz z&nbsp;logu codziennego zadania na produkcji.</p>
                 <div class="case-evidence">
                     <div class="case-stat">
                         <span class="case-stat-value scramble-num" data-en="53&nbsp;/&nbsp;53">53&nbsp;/&nbsp;53</span>
-                        <span class="case-stat-label" data-en="tables in the public schema with RLS enabled (58 migration files, up to migration 057)">tabel w&nbsp;schemacie public z&nbsp;włączonym RLS (58&nbsp;plików migracji, stan po migracji 057)</span>
+                        <span class="case-stat-label" data-en="tables in the public schema with RLS enabled (58 migration files numbered 001 to 057, number 002 used twice)">tabel w&nbsp;schemacie public z&nbsp;włączonym RLS (58&nbsp;plików migracji z&nbsp;numerami 001–057, numer 002 użyty dwa razy)</span>
                         <span class="case-stat-source" data-en="repository state · 2026-11-07">stan repozytorium · 2026-11-07</span>
                     </div>
                     <div class="case-stat">
@@ -355,9 +355,9 @@
                         <span class="case-stat-source" data-en="CI run · 2026-11-07">przebieg CI · 2026-11-07</span>
                     </div>
                     <div class="case-stat">
-                        <span class="case-stat-value scramble-num" data-en="15">15</span>
-                        <span class="case-stat-label" data-en="votes is the session target for 10 items, instead of all 45 pairs">głosów to cel sesji dla 10&nbsp;pozycji, zamiast wszystkich 45&nbsp;par</span>
-                        <span class="case-stat-source" data-en="compare-session rule · 2026-06-02">reguła sesji porównań · 2026-06-02</span>
+                        <span class="case-stat-value scramble-num" data-en="2,250">2&nbsp;250</span>
+                        <span class="case-stat-label" data-en="item pairs in the similarity matrix on production, recomputed in 1.3 s in the latest run of the daily job (median of 25 runs since 10 October: 1.5 s)">par pozycji w&nbsp;macierzy podobieństw na produkcji, przeliczonych w&nbsp;1,3&nbsp;s w&nbsp;ostatnim przebiegu codziennego zadania (mediana z&nbsp;25&nbsp;przebiegów od 10&nbsp;października: 1,5&nbsp;s)</span>
+                        <span class="case-stat-source" data-en="GitHub Actions runs · 2026-10-10 – 2026-11-08">przebiegi GitHub Actions · 2026-10-10 – 2026-11-08</span>
                     </div>
                     <div class="case-stat">
                         <span class="case-stat-value scramble-num" data-en="16">16</span>
