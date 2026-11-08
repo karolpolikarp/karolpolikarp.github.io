@@ -52,7 +52,7 @@
         "url": "https://karolwilczynski.com/case/jakieprawo/",
         "inLanguage": "pl-PL",
         "datePublished": "2026-10-03",
-        "dateModified": "2026-11-07",
+        "dateModified": "2026-11-08",
         "image": "https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2",
         "author": {
             "@type": "Person",
@@ -77,7 +77,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="/style.css?v=160">
+    <link rel="stylesheet" href="/style.css?v=161">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -143,16 +143,18 @@
                 <div class="project-tags">
                     <span class="tag">React</span>
                     <span class="tag">Supabase</span>
+                    <span class="tag">Deno</span>
+                    <span class="tag">pgvector</span>
                     <span class="tag">Claude API</span>
                     <span class="tag">MCP</span>
                     <span class="tag">Bielik</span>
                 </div>
                 <h1 class="case-title">JakiePrawo.pl</h1>
                 <p class="case-subtitle" data-en="AI-powered Polish law search engine">Wyszukiwarka polskiego prawa z&nbsp;AI</p>
-                <p class="case-lead" data-en="People with a legal question rarely know which statute to look in. A chatbot without access to the source can make a provision up. I built a search engine designed to answer with a specific article and its verbatim text from ISAP, the official database of legal acts. I ran the evaluation, a test on a fixed set of questions, on 17 July 2026 on a local test configuration, not on the deployed service. Claude Haiku 4.5 answered, using the ELI MCP server, then still running, which gives the model the verbatim text of acts from ISAP. I wrote down the pass thresholds before the test. Agreement between the quoted text and ISAP averaged 98.3%. I computed the average on the 26 answers scored correct, with the right article and act, among the 29 questions with a reference ISAP text. Since July 2026 the online version has run without that server (see § 3). Since 7 November 2026 it is open to everyone and answers with Claude Haiku 5.5.">Kto ma pytanie prawne, zwykle nie wie, w&nbsp;której ustawie szukać. Czatbot bez dostępu do źródła potrafi zmyślić przepis. Zbudowałem wyszukiwarkę, która ma odpowiadać konkretnym artykułem z&nbsp;dosłownym tekstem z&nbsp;ISAP, oficjalnej bazy aktów prawnych. Ewaluację, czyli test na stałym zestawie pytań, przeprowadziłem 17&nbsp;lipca 2026 na lokalnej konfiguracji testowej, a&nbsp;nie na wdrożonej usłudze. Odpowiadał Claude Haiku 4.5 z&nbsp;działającym wtedy serwerem ELI MCP, który podaje modelowi dosłowny tekst aktów z&nbsp;ISAP. Progi zaliczenia spisałem przed testem. Cytowana treść zgadzała się z&nbsp;tekstem w&nbsp;ISAP średnio w&nbsp;98,3%. Średnią liczyłem na 26&nbsp;odpowiedziach ocenionych jako poprawne, z&nbsp;właściwym artykułem i&nbsp;aktem, spośród 29&nbsp;pytań z&nbsp;tekstem wzorcowym z&nbsp;ISAP. Od lipca 2026 wersja online działa bez tego serwera (zob. §&nbsp;3). Od 7&nbsp;listopada 2026 jest otwarta dla wszystkich i&nbsp;odpowiada na Claude Haiku 5.5.</p>
+                <p class="case-lead" data-en="People with a legal question rarely know which statute to look in, and a chatbot without access to the source can make a provision up. I built a search engine designed to answer with a specific article and its verbatim text from ISAP, the official database of legal acts. I mask personal data in the question on the server, before the text reaches a model from a US company. Checks that run after the answer is generated can only remove or soften text and never add a legal claim of their own, because a verbatim quote of the wrong provision does more harm than no quote. I wrote down the pass thresholds before the test, and the Polish model Bielik did not meet them. In the test of 17 July 2026 the quotes of Claude Haiku 4.5 matched ISAP by 98.3% on average across 26 correct answers, but on a local configuration with the provisions server that the online version has lacked since July.">Kto ma pytanie prawne, zwykle nie wie, w&nbsp;której ustawie szukać, a&nbsp;czatbot bez dostępu do źródła potrafi zmyślić przepis. Zbudowałem wyszukiwarkę, która ma odpowiadać konkretnym artykułem i&nbsp;dosłownym tekstem z&nbsp;ISAP, oficjalnej bazy aktów prawnych. Dane osobowe z&nbsp;pytania maskuję na serwerze, zanim tekst trafi do modelu od firmy z&nbsp;USA. Kontrole po wygenerowaniu odpowiedzi mogą tekst tylko usunąć albo złagodzić i&nbsp;nigdy nie dopisują własnego twierdzenia prawnego, bo dosłowny cytat złego przepisu szkodzi bardziej niż brak cytatu. Progi zaliczenia spisałem przed testem i&nbsp;polski model Bielik ich nie przeszedł. W&nbsp;teście z&nbsp;17&nbsp;lipca 2026 cytaty Claude Haiku 4.5 zgadzały się z&nbsp;ISAP średnio w&nbsp;98,3% na 26&nbsp;poprawnych odpowiedziach, ale na konfiguracji lokalnej z&nbsp;serwerem przepisów, którego wersja online nie ma od lipca.</p>
                 <dl class="case-facts">
                     <div><dt data-en="Role">Rola</dt><dd data-en="Author of the design, of the code written with an AI assistant and of the evaluation">Autor projektu, kodu pisanego z&nbsp;asystentem AI i&nbsp;ewaluacji</dd></div>
-                    <div><dt data-en="Period">Okres</dt><dd data-en="Since November 2025, ongoing">od listopada 2025, prace trwają</dd></div>
+                    <div><dt data-en="Period">Okres</dt><dd data-en="Since November 2025, still in development">od listopada 2025, rozwijany nadal</dd></div>
                     <div><dt data-en="Status">Status</dt><dd data-en="Online version in beta, open to everyone since 7 November 2026, with a daily question limit and still without the ELI MCP server. Desktop version 0.1.0 is ready to release but not yet published (as of 7 November 2026).">Wersja online w&nbsp;fazie beta, otwarta dla wszystkich od 7&nbsp;listopada 2026, z&nbsp;dziennym limitem pytań i&nbsp;nadal bez serwera ELI MCP. Wersja desktopowa 0.1.0 jest gotowa do wydania, ale jeszcze nieopublikowana (stan na 7&nbsp;listopada 2026).</dd></div>
                     <div><dt data-en="Code">Kod</dt><dd data-en="Private repository">Repozytorium prywatne</dd></div>
                 </dl>
@@ -195,53 +197,98 @@
 
             <section id="architektura" class="case-section" aria-labelledby="h-architektura">
                 <h2 class="case-h2" id="h-architektura"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span data-en="Architecture">Architektura</span></h2>
-                <p data-en="A question travels from the browser to an Edge function on the server, written in Deno. There, after input sanitisation, personal data is redacted, and only then does the text move on. First to the cache, a store of ready answers that recognises a question by its SHA-256 hash or by similarity of meaning with a 0.92 threshold. Then to hybrid search, which combines search by meaning in pgvector with keywords. Finally to the Claude agent, which calls MCP data-fetching tools on its own, in a loop. Until July 2026 my ELI MCP server ran on a Raspberry Pi. It found the act in its own catalogue and fetched the verbatim article text from ISAP. Since the Pi was shut down, the online version has run without it, and the same code is built into the desktop app. In the evaluation of 17 July 2026, 34.6% of the online version’s answers to 81 questions had a placeholder instead of the provision text. In November 2026 I prepared the server to run on Fly.io in Frankfurt, but as of 7 November 2026 it is not deployed yet. Seven layers against hallucinations, meaning things the model makes up, protect the answer. They include the list of allowed articles in the instructions for the model, validation of tool results and article numbers, and a minimal-answer fallback.">Pytanie trafia z&nbsp;przeglądarki do funkcji Edge na serwerze, napisanej w&nbsp;Deno. Tam po oczyszczeniu wejścia dane osobowe są maskowane i&nbsp;dopiero taki tekst idzie dalej. Najpierw do cache, czyli pamięci gotowych odpowiedzi, która rozpoznaje pytanie po skrócie SHA-256 albo po podobieństwie znaczenia z&nbsp;progiem 0,92. Potem do wyszukiwania hybrydowego, które łączy wyszukiwanie po znaczeniu w&nbsp;pgvector ze słowami kluczowymi. Na końcu do agenta Claude, który sam w&nbsp;pętli wywołuje narzędzia MCP do pobierania danych. Do lipca 2026 mój serwer ELI MCP działał na Raspberry Pi. Znajdował akt we własnym spisie i&nbsp;pobierał z&nbsp;ISAP dosłowny tekst artykułu. Od wyłączenia Pi wersja online działa bez niego, a&nbsp;ten sam kod jest wbudowany w&nbsp;aplikację desktopową. W&nbsp;ewaluacji z&nbsp;17&nbsp;lipca 2026 34,6% odpowiedzi wersji online na 81&nbsp;pytań miało znacznik zastępczy zamiast treści przepisu. W&nbsp;listopadzie 2026 przygotowałem serwer do uruchomienia na Fly.io we Frankfurcie, ale na 7&nbsp;listopada 2026 nie jest jeszcze wdrożony. Odpowiedź zabezpiecza siedem warstw przeciw halucynacjom, czyli zmyśleniom modelu. Należą do nich lista dozwolonych artykułów w&nbsp;poleceniu dla modelu, sprawdzanie wyników narzędzi i&nbsp;numerów artykułów oraz tryb minimalnej odpowiedzi.</p>
-                <p data-en="The local variant goes through the same steps, but answers are generated by Bielik-11B, a Polish model running on an RTX 4070 Ti with 12 GB. Instead of pgvector it uses bundled bge-m3 indexes for searching by meaning. They hold 61,181 vectors of articles and their fragments from over 220 acts, and title vectors for all 79,747 acts in the catalogue (snapshot of 18 July 2026). Apart from a one-time download of the model and the acceleration libraries, the network is used only to query the public Sejm API about acts. Details are in § 4.">Wariant lokalny przechodzi przez te same kroki, ale odpowiedzi generuje Bielik-11B, polski model uruchamiany na karcie RTX 4070 Ti z&nbsp;12&nbsp;GB. Zamiast pgvector działają wbudowane indeksy bge-m3 do wyszukiwania po znaczeniu. Mają 61&nbsp;181&nbsp;wektorów artykułów i&nbsp;ich fragmentów z&nbsp;ponad 220&nbsp;aktów oraz wektory tytułów wszystkich 79&nbsp;747&nbsp;aktów ze spisu (stan z&nbsp;18&nbsp;lipca 2026). Poza jednorazowym pobraniem modelu i&nbsp;bibliotek akceleracji sieć służy tylko do odpytywania publicznego API Sejmu o&nbsp;akty. Szczegóły opisuję w&nbsp;§&nbsp;4.</p>
+                <p data-en="A question travels from the browser to a function on the server. There I first mask personal data. The first stop is the cache, a store of ready answers. It recognises a question asked before, even in other words, and then answers without the model. A new question goes to a search that combines meaning with keywords. Then the Claude agent answers, calling tools that fetch provisions on its own, in a loop.">Pytanie trafia z&nbsp;przeglądarki do funkcji na serwerze. Tam najpierw maskuję dane osobowe. Pierwszy przystanek to cache, czyli pamięć gotowych odpowiedzi. Rozpoznaje pytanie zadane już wcześniej, także innymi słowami, i&nbsp;wtedy odpowiada bez modelu. Nowe pytanie trafia do wyszukiwania, które łączy znaczenie ze słowami kluczowymi. Potem odpowiada agent Claude, który sam w&nbsp;pętli wywołuje narzędzia do pobierania przepisów.</p>
+                <p data-en="The verbatim article text came from my ELI MCP server. Until July 2026 it ran on a Raspberry Pi, found the act in its own catalogue and fetched the article from ISAP. Since the Pi was shut down, the online version has run without it. In the evaluation of 17 July 2026, in the configuration without this server, 34.6% of answers to 81 questions had a placeholder instead of the provision text. In November 2026 I prepared the server to run on Fly.io in Frankfurt, but as of 7 November 2026 it is not deployed yet. The same server code is built into the desktop app.">Dosłowny tekst artykułu dawał mój serwer ELI MCP. Do lipca 2026 działał na Raspberry Pi, znajdował akt we własnym spisie i&nbsp;pobierał artykuł z&nbsp;ISAP. Od wyłączenia Pi wersja online działa bez niego. W&nbsp;ewaluacji z&nbsp;17&nbsp;lipca 2026, w&nbsp;konfiguracji bez tego serwera, 34,6% odpowiedzi na 81&nbsp;pytań miało znacznik zastępczy zamiast treści przepisu. W&nbsp;listopadzie 2026 przygotowałem serwer do uruchomienia na Fly.io we Frankfurcie, ale na 7&nbsp;listopada 2026 nie jest jeszcze wdrożony. Ten sam kod serwera jest wbudowany w&nbsp;aplikację desktopową.</p>
+                <p data-en="Before it is sent, the answer passes seven layers against hallucinations, meaning things the model makes up.">Przed wysłaniem odpowiedź przechodzi przez siedem warstw przeciw halucynacjom, czyli zmyśleniom modelu.</p>
+                <ul class="showcase-list">
+                    <li data-en="The list of allowed articles in the instructions for the model.">Lista dozwolonych artykułów w&nbsp;poleceniu dla modelu.</li>
+                    <li data-en="Validation of tool results.">Sprawdzanie wyników narzędzi.</li>
+                    <li data-en="Checking article numbers in the quotes.">Sprawdzanie numerów artykułów w&nbsp;cytatach.</li>
+                    <li data-en="Replacing made-up provision text with a link to ISAP.">Zastępowanie zmyślonej treści przepisu linkiem do ISAP.</li>
+                    <li data-en="Detecting typical warning signs of made-up text by pattern.">Wykrywanie typowych sygnałów zmyślenia według wzorców.</li>
+                    <li data-en="A three-grade score of each quote: verified, paraphrase, made up.">Ocena cytatu w&nbsp;trzech stopniach: zweryfikowany, parafraza, zmyślony.</li>
+                    <li data-en="A minimal answer when the other layers fail.">Minimalna odpowiedź, gdy pozostałe warstwy zawiodą.</li>
+                </ul>
                 <figure class="case-diagram">
                     <svg viewBox="0 0 360 416" role="img" aria-labelledby="arch-title arch-desc">
-                        <title id="arch-title" data-en="Query flow in JakiePrawo.pl">Przepływ zapytania w&nbsp;JakiePrawo.pl</title>
-                        <desc id="arch-desc" data-en="A question passes through personal-data redaction, the cache and hybrid search to the Claude agent, which fetches verbatim text from ISAP through the ELI MCP server. Citation guards check the answer before it is sent.">Pytanie przechodzi przez maskowanie danych osobowych, cache i&nbsp;wyszukiwanie hybrydowe do agenta Claude, który przez serwer ELI MCP pobiera dosłowny tekst z&nbsp;ISAP. Strażnicy cytatu sprawdzają odpowiedź przed wysłaniem.</desc>
+                        <title id="arch-title" data-en="Query flow in the online version of JakiePrawo.pl today">Przepływ zapytania w&nbsp;wersji online JakiePrawo.pl dziś</title>
+                        <desc id="arch-desc" data-en="A question passes through personal-data redaction to the cache and search. A question already in the cache goes straight to the answer. A new one goes to the Claude agent and then to the citation guards. The ELI MCP server, which fetched verbatim text from ISAP, has been off since July 2026.">Pytanie przechodzi przez maskowanie danych osobowych do cache i&nbsp;wyszukiwania. Pytanie obecne w&nbsp;cache idzie od razu do odpowiedzi. Nowe trafia do agenta Claude, a&nbsp;potem do strażników cytatu. Serwer ELI MCP, który pobierał dosłowny tekst z&nbsp;ISAP, jest wyłączony od lipca 2026.</desc>
                         <defs>
                             <marker id="cd-arrow-jakieprawo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                                 <path class="cd-arrow" d="M0 0L10 5L0 10z"/>
                             </marker>
                         </defs>
 
-                        <rect class="cd-box cd-box--key" x="20" y="10" width="320" height="52" rx="8"/>
-                        <text class="cd-label" x="180" y="31" text-anchor="middle" data-en="Personal-data redaction">Maskowanie danych osobowych</text>
-                        <text class="cd-note" x="180" y="49" text-anchor="middle" data-en="browser + server · before cache and LLM">przeglądarka + serwer · przed cache i&nbsp;LLM</text>
-                        <path class="cd-edge" d="M180 62V92" marker-end="url(#cd-arrow-jakieprawo)"/>
+                        <rect class="cd-box cd-box--key" x="40" y="10" width="300" height="52" rx="8"/>
+                        <text class="cd-label" x="190" y="31" text-anchor="middle" data-en="Personal-data redaction">Maskowanie danych osobowych</text>
+                        <text class="cd-note" x="190" y="49" text-anchor="middle" data-en="on the server · before cache and model">na serwerze · przed cache i&nbsp;modelem</text>
+                        <path class="cd-edge" d="M190 62V92" marker-end="url(#cd-arrow-jakieprawo)"/>
 
-                        <rect class="cd-box" x="20" y="96" width="320" height="52" rx="8"/>
-                        <text class="cd-label" x="180" y="117" text-anchor="middle" data-en="Cache and hybrid search">Cache i&nbsp;wyszukiwanie hybrydowe</text>
-                        <text class="cd-note" x="180" y="135" text-anchor="middle" data-en="pgvector + keywords">pgvector + słowa kluczowe</text>
-                        <path class="cd-edge" d="M90 148V178" marker-end="url(#cd-arrow-jakieprawo)"/>
+                        <rect class="cd-box" x="40" y="96" width="300" height="52" rx="8"/>
+                        <text class="cd-label" x="190" y="117" text-anchor="middle" data-en="Cache and search">Cache i&nbsp;wyszukiwanie</text>
+                        <text class="cd-note" x="190" y="135" text-anchor="middle" data-en="a cache hit skips the model">trafienie w&nbsp;cache omija model</text>
+                        <path class="cd-edge" d="M40 122H28V380H36" marker-end="url(#cd-arrow-jakieprawo)"/>
+                        <path class="cd-edge" d="M110 148V178" marker-end="url(#cd-arrow-jakieprawo)"/>
 
-                        <rect class="cd-box cd-box--ext" x="20" y="182" width="140" height="52" rx="8"/>
-                        <text class="cd-label" x="90" y="203" text-anchor="middle" data-en="Claude agent">Agent Claude</text>
-                        <text class="cd-note" x="90" y="221" text-anchor="middle" data-en="MCP tool-call loop">pętla wywołań MCP</text>
-                        <path class="cd-edge" d="M164 208H196" marker-start="url(#cd-arrow-jakieprawo)" marker-end="url(#cd-arrow-jakieprawo)"/>
+                        <rect class="cd-box cd-box--ext" x="40" y="182" width="140" height="52" rx="8"/>
+                        <text class="cd-label" x="110" y="203" text-anchor="middle" data-en="Claude agent">Agent Claude</text>
+                        <text class="cd-note" x="110" y="221" text-anchor="middle" data-en="Haiku 5.5, in a loop">Haiku 5.5 w&nbsp;pętli</text>
+                        <path class="cd-edge" d="M180 208H196" marker-end="url(#cd-arrow-jakieprawo)"/>
+                        <path class="cd-edge" d="M184 202l8 12M192 202l-8 12"/>
 
                         <rect class="cd-box" x="200" y="182" width="140" height="52" rx="8"/>
                         <text class="cd-label" x="270" y="203" text-anchor="middle" data-en="ELI MCP server">Serwer ELI MCP</text>
                         <text class="cd-note" x="270" y="221" text-anchor="middle" data-en="off since July 2026">wyłączony od 07.2026</text>
-                        <path class="cd-edge" d="M270 238V264" marker-start="url(#cd-arrow-jakieprawo)" marker-end="url(#cd-arrow-jakieprawo)"/>
-                        <path class="cd-edge" d="M90 234V264" marker-end="url(#cd-arrow-jakieprawo)"/>
+                        <path class="cd-edge" d="M270 234V264" marker-end="url(#cd-arrow-jakieprawo)"/>
+                        <path class="cd-edge" d="M110 234V264" marker-end="url(#cd-arrow-jakieprawo)"/>
 
-                        <rect class="cd-box cd-box--key" x="20" y="268" width="140" height="52" rx="8"/>
-                        <text class="cd-label" x="90" y="289" text-anchor="middle" data-en="Citation guards">Strażnicy cytatu</text>
-                        <text class="cd-note" x="90" y="307" text-anchor="middle" data-en="remove, never add">usuń, nie dopisuj</text>
+                        <rect class="cd-box cd-box--key" x="40" y="268" width="140" height="52" rx="8"/>
+                        <text class="cd-label" x="110" y="289" text-anchor="middle" data-en="Citation guards">Strażnicy cytatu</text>
+                        <text class="cd-note" x="110" y="307" text-anchor="middle" data-en="remove, never add">usuń, nie dopisuj</text>
 
                         <rect class="cd-box cd-box--ext" x="200" y="268" width="140" height="52" rx="8"/>
                         <text class="cd-label" x="270" y="289" text-anchor="middle" data-en="ISAP · Sejm API">ISAP · API Sejmu</text>
                         <text class="cd-note" x="270" y="307" text-anchor="middle" data-en="verbatim text">dosłowny tekst</text>
-                        <path class="cd-edge" d="M90 320V350" marker-end="url(#cd-arrow-jakieprawo)"/>
+                        <path class="cd-edge" d="M110 320V350" marker-end="url(#cd-arrow-jakieprawo)"/>
 
-                        <rect class="cd-box" x="20" y="354" width="320" height="52" rx="8"/>
-                        <text class="cd-label" x="180" y="375" text-anchor="middle" data-en="Answer with the provision">Odpowiedź z&nbsp;przepisem</text>
-                        <text class="cd-note" x="180" y="393" text-anchor="middle" data-en="quote + ISAP link · SSE stream">cytat + link do ISAP · strumień SSE</text>
+                        <rect class="cd-box" x="40" y="354" width="300" height="52" rx="8"/>
+                        <text class="cd-label" x="190" y="375" text-anchor="middle" data-en="Answer with the provision">Odpowiedź z&nbsp;przepisem</text>
+                        <text class="cd-note" x="190" y="393" text-anchor="middle" data-en="quote or placeholder · ISAP link">cytat albo znacznik · link do ISAP</text>
                     </svg>
-                    <figcaption data-en="Gold frames mark the two most important decisions. The first is redacting personal data before the question reaches the cache, the embeddings, the model or the database. The second is citation guards, automatic checks that would rather drop text than show the wrong provision. Dashed frames are external services. The ELI MCP server has been off since July 2026, so for now the online version does not fetch ISAP text through it.">Złotą ramką zaznaczyłem dwie najważniejsze decyzje. Pierwsza to maskowanie danych osobowych, zanim pytanie trafi do cache, embeddingów, modelu i&nbsp;bazy. Druga to strażnicy cytatu, czyli automatyczne kontrole, które wolą usunąć tekst, niż pokazać niewłaściwy przepis. Linią przerywaną zaznaczyłem usługi zewnętrzne. Serwer ELI MCP jest wyłączony od lipca 2026, więc wersja online na razie nie pobiera przez niego tekstu z&nbsp;ISAP.</figcaption>
+                    <figcaption data-en="As of 7 November 2026. Gold frames mark the two most important decisions, redacting data before the cache, the model and the database, and the citation guards. Dashed frames are external services. The line on the left is a cache hit. I crossed out the link to the ELI MCP server because it has not run since July 2026.">Stan na 7&nbsp;listopada 2026. Złotą ramką zaznaczyłem dwie najważniejsze decyzje, maskowanie danych przed cache, modelem i&nbsp;bazą oraz strażników cytatu. Linią przerywaną zaznaczyłem usługi zewnętrzne. Linia po lewej to trafienie w&nbsp;cache. Przekreśliłem połączenie z&nbsp;serwerem ELI MCP, bo od lipca 2026 nie działa.</figcaption>
+                </figure>
+                <p data-en="The local variant goes through the same steps. Answers are generated by Bielik-11B, a Polish model running on an RTX 4070 Ti graphics card with 12 GB of memory. The bundled index for searching by meaning, built on 20 July 2026, covers 61,181 articles and fragments in total from over 220 acts. On top of that come the titles of all 79,747 acts in the catalogue of 18 July 2026. Apart from a one-time download of the model and the libraries, the network is used only to query the public Sejm API about acts.">Wariant lokalny przechodzi przez te same kroki. Odpowiedzi generuje w&nbsp;nim Bielik-11B, polski model uruchamiany na karcie RTX 4070 Ti z&nbsp;12&nbsp;GB pamięci. Wbudowany indeks do wyszukiwania po znaczeniu z&nbsp;20&nbsp;lipca 2026 obejmuje łącznie 61&nbsp;181 artykułów i&nbsp;fragmentów z&nbsp;ponad 220&nbsp;aktów. Do tego dochodzą tytuły wszystkich 79&nbsp;747&nbsp;aktów ze spisu z&nbsp;18&nbsp;lipca 2026. Poza jednorazowym pobraniem modelu i&nbsp;bibliotek sieć służy tylko do odpytywania publicznego API Sejmu o&nbsp;akty.</p>
+                <figure class="case-diagram">
+                    <svg viewBox="0 0 360 244" role="img" aria-labelledby="desk-title desk-desc">
+                        <title id="desk-title" data-en="Query flow in the JakiePrawo desktop version">Przepływ zapytania w&nbsp;wersji desktopowej JakiePrawo</title>
+                        <desc id="desk-desc" data-en="Search and the Bielik model run on the computer. The public Sejm API receives requests for act text and search phrases built from the question, not the whole question. Code inserts the verbatim ISAP text only when the article and the act match.">Wyszukiwanie i&nbsp;model Bielik działają na komputerze. Do publicznego API Sejmu idą prośby o&nbsp;tekst aktu i&nbsp;frazy wyszukiwania zbudowane z&nbsp;pytania, a&nbsp;nie całe pytanie. Kod wstawia dosłowny tekst z&nbsp;ISAP tylko przy zgodnym artykule i&nbsp;akcie.</desc>
+                        <defs>
+                            <marker id="cd-arrow-jakieprawo-desk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path class="cd-arrow" d="M0 0L10 5L0 10z"/>
+                            </marker>
+                        </defs>
+
+                        <rect class="cd-box" x="20" y="10" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="31" text-anchor="middle" data-en="Search on the computer">Wyszukiwanie na komputerze</text>
+                        <text class="cd-note" x="180" y="49" text-anchor="middle" data-en="61,181 fragments · 79,747 titles">61&nbsp;181 fragmentów · 79&nbsp;747 tytułów</text>
+                        <path class="cd-edge" d="M90 62V92" marker-end="url(#cd-arrow-jakieprawo-desk)"/>
+
+                        <rect class="cd-box" x="20" y="96" width="140" height="52" rx="8"/>
+                        <text class="cd-label" x="90" y="117" text-anchor="middle" data-en="Bielik-11B">Bielik-11B</text>
+                        <text class="cd-note" x="90" y="135" text-anchor="middle" data-en="12 GB graphics card">karta 12&nbsp;GB</text>
+                        <path class="cd-edge" d="M270 62V92" marker-end="url(#cd-arrow-jakieprawo-desk)"/>
+
+                        <rect class="cd-box cd-box--ext" x="200" y="96" width="140" height="52" rx="8"/>
+                        <text class="cd-label" x="270" y="117" text-anchor="middle" data-en="Sejm API">API Sejmu</text>
+                        <text class="cd-note" x="270" y="135" text-anchor="middle" data-en="not the full question">bez całego pytania</text>
+                        <path class="cd-edge" d="M90 148V178" marker-end="url(#cd-arrow-jakieprawo-desk)"/>
+                        <path class="cd-edge" d="M270 148V178" marker-end="url(#cd-arrow-jakieprawo-desk)"/>
+
+                        <rect class="cd-box cd-box--key" x="20" y="182" width="320" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="203" text-anchor="middle" data-en="Code inserts the ISAP text">Kod wstawia tekst z&nbsp;ISAP</text>
+                        <text class="cd-note" x="180" y="221" text-anchor="middle" data-en="only if article and act match">tylko przy zgodnym artykule i&nbsp;akcie</text>
+                    </svg>
+                    <figcaption data-en="Desktop version 0.1.0, not yet published, as of 7 November 2026. The gold frame marks the step where code, not the model, inserts the provision.">Wersja desktopowa 0.1.0, jeszcze nieopublikowana, stan na 7&nbsp;listopada 2026. Złotą ramką zaznaczyłem krok, w&nbsp;którym przepis wstawia kod, a&nbsp;nie model.</figcaption>
                 </figure>
             </section>
 

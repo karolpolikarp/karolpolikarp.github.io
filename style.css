@@ -4058,6 +4058,10 @@ section {
     color: var(--color-text-tertiary);
 }
 
+.case-diagram + * {
+    margin-top: var(--space-lg);
+}
+
 .case-diagram svg {
     display: block;
     width: 100%;
