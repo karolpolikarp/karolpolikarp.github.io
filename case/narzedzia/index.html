@@ -99,7 +99,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="/style.css?v=161">
+    <link rel="stylesheet" href="/style.css?v=162">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -226,8 +226,34 @@
             <section id="claude-usage" class="case-section" aria-labelledby="h-claude-usage">
                 <h2 class="case-h2" id="h-claude-usage"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span>Claude Usage (Stream Deck)</span></h2>
                 <p data-en="On a subscription, Claude Code, an AI assistant for programming, has usage limits. They are visible only after typing /usage. Claude Usage keeps them in view all the time on a Stream Deck, a keypad in which every key has a small 72×72-pixel screen. The bar’s colour shifts from green below 50% to red above 90%, so the state shows before you read the number.">Claude Code, asystent AI do programowania, ma na subskrypcji limity zużycia. Widać je tylko po wpisaniu /usage. Claude Usage trzyma je stale na widoku na Stream Decku, klawiaturze, w&nbsp;której każdy klawisz ma mały ekran 72×72&nbsp;piksele. Kolor paska przechodzi od zielonego poniżej 50% do czerwonego powyżej 90%, więc stan widać, zanim przeczyta się liczbę.</p>
+                <figure class="case-media case-media--frame">
+                    <div class="case-media-shot">
+                        <img src="/assets/images/tools/claude-usage-klawisze.webp" width="784" height="160" alt="Ilustracja: pięć klawiszy Stream Decka z limitem sesji, tygodnia, modelu Fable, kredytami i kosztem dnia" data-en-alt="Illustration: five Stream Deck keys showing the session, week and Fable limits, credits and today’s cost" loading="lazy">
+                    </div>
+                    <figcaption data-en="Illustration: the five keys drawn by the plugin’s own renderer with sample values, not a real account.">Ilustracja: pięć klawiszy narysowanych kodem wtyczki z&nbsp;przykładowymi wartościami, nie z&nbsp;prawdziwego konta.</figcaption>
+                </figure>
                 <p data-en="Five keys show the 5-hour session, the weekly cap across all models, the separate weekly window for the Fable model, credit spending and “cost today”, today’s usage priced at API list rates. Nothing is billed on a subscription; the figure measures how much work was done. The four limit keys need the network and query the Anthropic API with Claude Code’s login key. Only the cost is computed offline, every minute, from local conversation transcripts.">Pięć klawiszy pokazuje 5-godzinną sesję, limit tygodniowy dla wszystkich modeli, osobne okno tygodniowe modelu Fable, wydatki z&nbsp;kredytów i&nbsp;„koszt dziś”, czyli dzisiejsze zużycie przeliczone po cenniku API. Na subskrypcji nikt tego kosztu nie nalicza; to miara intensywności pracy. Cztery klawisze limitów potrzebują sieci i&nbsp;pytają API Anthropic kluczem logowania Claude Code. Tylko koszt powstaje offline, co minutę, z&nbsp;lokalnych transkryptów rozmów.</p>
                 <p data-en="It is an unofficial plugin, not affiliated with Anthropic or Elgato. It uses Claude Code’s login and an API address for limits that only works with a beta flag in the request, so it may stop working without notice. It is a good idea to check the subscription terms before installing it. When the login key is about to expire or the API rejects it, the plugin refreshes it and writes it to Claude Code’s login file, in one step and with a copy of the previous file. I have tested the plugin on Windows only.">To nieoficjalna wtyczka, niezwiązana z&nbsp;Anthropic ani z&nbsp;Elgato. Korzysta z&nbsp;logowania Claude Code i&nbsp;z&nbsp;adresu API limitów, który działa tylko z&nbsp;oznaczeniem wersji beta w&nbsp;zapytaniu, więc może przestać działać bez zapowiedzi. Przed instalacją dobrze jest sprawdzić warunki subskrypcji. Gdy klucz logowania zaraz wygaśnie albo API go odrzuci, wtyczka go odświeża i&nbsp;zapisuje do pliku logowania Claude Code, w&nbsp;jednym kroku i&nbsp;z&nbsp;kopią poprzedniego pliku. Wtyczkę sprawdzałem tylko na Windows.</p>
+                <figure class="case-code">
+                    <div class="case-code-head">
+                        <span class="case-code-file">bin/cost.js</span>
+                        <span class="case-code-lang">JavaScript</span>
+                    </div>
+<pre tabindex="0" aria-label="Wycinek kodu: wpisy z transkryptu nadpisywane po identyfikatorze zapytania" data-en-aria="Code excerpt: transcript entries overwritten by request ID"><code style="font-variant-ligatures: none"><span class="tok-k">function</span> <span class="tok-f">ingest</span>(line, dayStartMs) {
+  <span class="tok-c">// … parse the JSON line</span>
+  <span class="tok-k">if</span> (entry.type !== <span class="tok-s">'assistant'</span>) <span class="tok-k">return</span>;
+  <span class="tok-k">const</span> message = entry.message;
+  <span class="tok-k">if</span> (!message || !message.usage) <span class="tok-k">return</span>;
+  <span class="tok-c">// … skip entries from other days</span>
+<span class="hl">  <span class="tok-k">const</span> key = <span class="tok-s">`${entry.requestId || ''}|${message.id || entry.uuid || ''}`</span>;</span>
+<span class="hl">  state.entries.<span class="tok-f">set</span>(key, {</span>
+    model: message.model,
+    tokens: <span class="tok-f">usageTokens</span>(message.usage),
+    sessionId: entry.sessionId || entry.session_id || <span class="tok-k">null</span>
+  });
+}</code></pre>
+                    <figcaption data-en="Excerpt from v1.3.3, shortened where marked with an ellipsis. The key is the request ID plus the message ID, so a later copy of the same response replaces the earlier one instead of adding to it (lines 7–8).">Wycinek z&nbsp;wersji 1.3.3, skrócony w&nbsp;miejscach z&nbsp;wielokropkiem. Kluczem jest identyfikator zapytania i&nbsp;wiadomości, więc kolejna kopia tej samej odpowiedzi zastępuje poprzednią, zamiast się doliczać (linie 7–8).</figcaption>
+                </figure>
                 <div class="showcase-cta">
                     <a href="https://karolwilczynski.com/claude-usage-streamdeck/" target="_blank" rel="noopener" class="project-link project-link-primary">
                         <span data-en="Project page">Strona projektu</span>
@@ -289,6 +315,18 @@
                 <h2 class="case-h2" id="h-isap-scraper"><span class="case-h2-num" aria-hidden="true" translate="no">§ 2</span><span>ISAP-scraper</span></h2>
                 <p data-en="Legal acts from the Journal of Laws (Dziennik Ustaw) and Monitor Polski can be browsed in ISAP, the online legal acts system of the Sejm (the lower house of the Polish parliament), but changes have to be followed there by hand. ISAP-scraper is a program run with text commands and also a Python library. It builds a local database of acts in a file, with their in-force status. In monitoring mode it checks for new acts every 24 hours. It also detects repealed acts, exports the list to a spreadsheet file and downloads full texts and single articles by number, including superscript numbers such as Art. 33¹. The in-force status comes from the Sejm API and does not determine whether a given provision is in force.">Akty prawne z&nbsp;Dziennika Ustaw i&nbsp;Monitora Polskiego można przeglądać w&nbsp;sejmowym Internetowym Systemie Aktów Prawnych, ISAP, ale zmiany trzeba tam śledzić ręcznie. ISAP-scraper to program uruchamiany poleceniami tekstowymi, a&nbsp;zarazem biblioteka w&nbsp;Pythonie. Buduje w&nbsp;pliku lokalną bazę aktów ze statusem obowiązywania. W&nbsp;trybie monitorowania co 24&nbsp;godziny sprawdza nowe akty. Wykrywa też akty uchylone, eksportuje listę do arkusza, pobiera pełne teksty oraz pojedyncze artykuły po numerze, także z&nbsp;indeksem górnym, np. art.&nbsp;33¹. Status obowiązywania pochodzi z&nbsp;API Sejmu i&nbsp;nie rozstrzyga, czy dany przepis obowiązuje.</p>
                 <p data-en="The first version, from November 2025, read the site’s HTML. But the site sits behind bot protection, which sent back a browser test instead of the list of acts and marked it as a correct response. So the script returned 0 acts, raised no error and looked as if it worked. In June 2026 I rewrote data fetching to use the Sejm’s official ELI API. The project has no automated tests. I checked the June 2026 changes against the live API and recorded the results in the change descriptions in the repository.">Pierwsza wersja z&nbsp;listopada 2025 czytała HTML serwisu. Serwis stoi jednak za zabezpieczeniem przed botami, które zamiast listy aktów odsyłało test dla przeglądarki i&nbsp;oznaczało go jako poprawną odpowiedź. Skrypt zwracał więc 0&nbsp;aktów, nie zgłaszał błędu i&nbsp;wyglądał, jakby działał. W&nbsp;czerwcu 2026 przepisałem pobieranie danych na oficjalne API ELI Sejmu. Projekt nie ma testów automatycznych. Zmiany z&nbsp;czerwca 2026 sprawdzałem na żywym API, a&nbsp;wyniki zapisywałem w&nbsp;opisach zmian w&nbsp;repozytorium.</p>
+                <div class="case-compare">
+                    <div class="case-compare-col">
+                        <p class="case-compare-label" data-en="Old HTML version">Stara wersja HTML</p>
+                        <p class="case-compare-value" data-en="0 acts">0&nbsp;aktów</p>
+                        <p class="case-compare-text" data-en="The scraper from November 2025, as it worked before the rewrite of 10 June 2026. The bot protection sent back a browser test marked as a correct response. No error (PR #1 description).">Scraper z&nbsp;listopada 2025 w&nbsp;stanie sprzed przepisania 10&nbsp;czerwca 2026. Zabezpieczenie przed botami odsyłało test dla przeglądarki oznaczony jako poprawna odpowiedź. Bez błędu (opis PR #1).</p>
+                    </div>
+                    <div class="case-compare-col case-compare-col--after">
+                        <p class="case-compare-label" data-en="ELI API, June 2026">API ELI, czerwiec 2026</p>
+                        <p class="case-compare-value" data-en="23,318 acts">23&nbsp;318&nbsp;aktów</p>
+                        <p class="case-compare-text" data-en="Journal of Laws and Monitor Polski 2020–2026 in a dozen or so seconds (PR #1 description, 10 June 2026).">Dziennik Ustaw i&nbsp;Monitor Polski z&nbsp;lat 2020–2026 w&nbsp;kilkanaście sekund (opis PR #1, 10&nbsp;czerwca 2026).</p>
+                    </div>
+                </div>
                 <div class="showcase-cta">
                     <a href="https://github.com/karolpolikarp/ISAP-scraper" target="_blank" rel="noopener" class="project-link project-link-primary">
                         <span data-en="Repository">Repozytorium</span>
@@ -312,11 +350,6 @@
                 </div>
                 <div class="case-evidence">
                     <div class="case-stat">
-                        <span class="case-stat-value scramble-num" data-en="23,318">23&nbsp;318</span>
-                        <span class="case-stat-label" data-en="acts from the Journal of Laws and Monitor Polski (2020–2026) downloaded from the ELI API in a dozen or so seconds; the old HTML scraper returned 0">aktów z&nbsp;Dziennika Ustaw i&nbsp;Monitora Polskiego (2020–2026) pobranych z&nbsp;API ELI w&nbsp;kilkanaście sekund; stary scraper HTML zwracał 0</span>
-                        <span class="case-stat-source" data-en="PR #1 description · 2026-06-10">opis PR #1 · 2026-06-10</span>
-                    </div>
-                    <div class="case-stat">
                         <span class="case-stat-value scramble-num" data-en="6">6</span>
                         <span class="case-stat-label" data-en="working modes named scrape-all, check-new, find-replaced, fetch-texts, export and stats">trybów pracy o&nbsp;nazwach scrape-all, check-new, find-replaced, fetch-texts, export i&nbsp;stats</span>
                         <span class="case-stat-source" data-en="isap_scraper.py · state as of 2026-11-07">isap_scraper.py · stan na 2026-11-07</span>
@@ -333,6 +366,27 @@
                 <h2 class="case-h2" id="h-stefka"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span>Stefka</span></h2>
                 <p data-en="When a meeting’s content is sensitive, the recording must not leave the computer. Stefka turns it into structured text without sending anything out. It is a browser app reachable only from the same computer. Speech is turned into text by the Whisper speech-recognition model in a version for Apple chips. The Polish language model PLLuM-12B, run locally, summarises the transcript fragment by fragment. The app also accepts text, Word and PDF files. The download is a Markdown, PDF or Word file with the summaries assembled into one document. The transcript itself is not offered for download.">Gdy treść spotkania jest wrażliwa, nagranie nie może opuścić komputera. Stefka zamienia je w&nbsp;uporządkowany tekst i&nbsp;niczego nie wysyła na zewnątrz. To aplikacja w&nbsp;przeglądarce, dostępna tylko z&nbsp;tego samego komputera. Mowę na tekst zamienia model rozpoznawania mowy Whisper w&nbsp;wersji na procesory Apple. Polski model językowy PLLuM-12B, uruchamiany lokalnie, streszcza transkrypcję fragment po fragmencie. Aplikacja przyjmuje też pliki tekstowe, Worda i&nbsp;PDF. Do pobrania jest plik Markdown, PDF albo Word ze streszczeniami złożonymi w&nbsp;jeden dokument. Samej transkrypcji aplikacja do pobrania nie udostępnia.</p>
                 <p data-en="It is a prototype. The README calls it a proof of concept built in a few hours. The first versions date from March 2026, and in June I prepared the repository for publication. It runs only on macOS with an Apple Silicon chip, because the MLX library requires it. It needs at least 32 GB of RAM and serves one user at a time, with no job queue. The code is MIT-licensed, but the default model has the non-commercial CC-BY-NC-4.0 licence. For commercial use the README points to a variant licensed under Apache 2.0.">To prototyp. W&nbsp;README nazywam go dowodem koncepcji zbudowanym w&nbsp;kilka godzin. Pierwsze wersje powstały w&nbsp;marcu 2026, a&nbsp;w&nbsp;czerwcu przygotowałem repozytorium do publikacji. Działa wyłącznie na macOS z&nbsp;procesorem Apple Silicon, bo tego wymaga biblioteka MLX. Potrzebuje co najmniej 32&nbsp;GB RAM i&nbsp;obsługuje jednego użytkownika naraz, bez kolejki zadań. Kod jest na licencji MIT, ale domyślny model ma niekomercyjną licencję CC-BY-NC-4.0. Do zastosowań komercyjnych README wskazuje wariant na licencji Apache 2.0.</p>
+                <figure class="case-code">
+                    <div class="case-code-head">
+                        <span class="case-code-file">app/services/llm.py</span>
+                        <span class="case-code-lang">Python</span>
+                    </div>
+<pre tabindex="0" aria-label="Wycinek kodu: krótki prompt dla każdego fragmentu i składanie notatki kodem" data-en-aria="Code excerpt: a short prompt for every fragment, the note assembled by code"><code style="font-variant-ligatures: none">CHUNK_SIZE = <span class="tok-n">6000</span>
+CHUNK_OVERLAP = <span class="tok-n">400</span>
+
+<span class="hl">SUMMARIZE_PROMPT = <span class="tok-s">"""\</span></span>
+<span class="hl"><span class="tok-s">Streść poniższy fragment spotkania w akapitach. \</span></span>
+<span class="hl"><span class="tok-s">Zachowaj imiona, nazwiska, daty, kwoty, nazwy. \</span></span>
+<span class="hl"><span class="tok-s">Nie anonimizuj. Nie pisz dialogu. Nie kopiuj surowego tekstu. Zacznij od treści."""</span></span>
+
+<span class="tok-c"># … inside structure_note()</span>
+chunks = <span class="tok-f">_split_into_chunks</span>(text, CHUNK_SIZE)
+<span class="tok-k">for</span> i, chunk <span class="tok-k">in</span> <span class="tok-f">enumerate</span>(chunks):
+    summary = <span class="tok-k">await</span> <span class="tok-f">_call_ollama</span>(SUMMARIZE_PROMPT, chunk)
+    <span class="tok-c"># … clean the answer, keep it</span>
+<span class="hl">note = <span class="tok-f">_assemble_note</span>(summaries)  <span class="tok-c"># pure code, no LLM</span></span></code></pre>
+                    <figcaption data-en="Excerpt from the public repository as of 8 November 2026, shortened where marked with an ellipsis. The whole prompt is the 24 words in lines 4–7. The fragment summaries are joined into the note by code, not by the model (line 14).">Wycinek z&nbsp;publicznego repozytorium, stan na 8&nbsp;listopada 2026, skrócony w&nbsp;miejscach z&nbsp;wielokropkiem. Cały prompt to 24&nbsp;wyrazy z&nbsp;linii 4–7. Streszczenia fragmentów składa w&nbsp;notatkę kod, a&nbsp;nie model (linia 14).</figcaption>
+                </figure>
                 <div class="showcase-cta">
                     <a href="https://github.com/karolpolikarp/Stefka-PPLuM-macOS.Silicon" target="_blank" rel="noopener" class="project-link project-link-primary">
                         <span data-en="Repository">Repozytorium</span>
@@ -376,6 +430,32 @@
             <section id="anonimizator-ai" class="case-section" aria-labelledby="h-anonimizator-ai">
                 <h2 class="case-h2" id="h-anonimizator-ai"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span>Anonimizator AI</span></h2>
                 <p data-en-html="Anonimizator AI is an optional add-on for Parawan, my local anonymiser for Polish personal data, described in a &lt;a href=&quot;/case/parawan/&quot;&gt;separate case study&lt;/a&gt;. Parawan’s rules miss most rare and foreign surnames that have no Polish ending such as -ski or -cki and no context, such as “Achtelik”, “Nguyen” or “Müller”. In the benchmark of 12 July 2026 the core alone, with its rules and dictionary, found 4 of 19 of them. The add-on brings in a model that recognises names of people and other proper names. It runs in the browser or as a local service. The text never leaves the computer. The model receives text already masked by the rules, so it can only add masks; if it fails, the rules’ result stands. I give the reasons for keeping the add-on in a separate repository there, in the decision “AI as a separate add-on”.">Anonimizator AI to opcjonalny dodatek do Parawana, mojego lokalnego anonimizatora polskich danych osobowych, opisanego w&nbsp;<a href="/case/parawan/">osobnym studium przypadku</a>. Reguły Parawana nie łapią większości rzadkich i&nbsp;obcych nazwisk bez polskiej końcówki typu -ski czy -cki i&nbsp;bez kontekstu, takich jak „Achtelik”, „Nguyen” czy „Müller”. W&nbsp;teście porównawczym z&nbsp;12&nbsp;lipca 2026 sam rdzeń z&nbsp;regułami i&nbsp;słownikiem wykrył 4 z&nbsp;19 takich nazwisk. Dodatek dokłada model, który rozpoznaje imiona, nazwiska i&nbsp;inne nazwy własne. Działa w&nbsp;przeglądarce albo jako lokalna usługa. Tekst nie opuszcza komputera. Model dostaje tekst już zamaskowany przez reguły, więc może tylko dołożyć maski; gdy zawiedzie, zostaje wynik reguł. Powody wydzielenia dodatku do osobnego repozytorium opisuję tam, w&nbsp;decyzji „AI jako osobny dodatek”.</p>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="How many of 19 rare and foreign surnames were found">Ile z&nbsp;19 rzadkich i&nbsp;obcych nazwisk wykryto</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar" style="--v: 21.1">
+                            <span class="cc-hbar-label" data-en="Parawan’s core alone (rules and dictionary)">Sam rdzeń Parawana (reguły i&nbsp;słownik)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en=" 4 of 19 (21.1%)"> 4 z&nbsp;19 (21,1%)</span>
+                        </li>
+                        <li class="cc-hbar cc-hbar--key" style="--v: 78.9">
+                            <span class="cc-hbar-label" data-en="Core + add-on model (FastPDN int8 in Node.js)">Rdzeń + model dodatku (FastPDN int8 w&nbsp;Node.js)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="15 of 19 (78.9%)">15 z&nbsp;19 (78,9%)</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 84.2">
+                            <span class="cc-hbar-label" data-en="Core + FastPDN as a local service">Rdzeń + FastPDN jako lokalna usługa</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="16 of 19 (84.2%)">16 z&nbsp;19 (84,2%)</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 89.5">
+                            <span class="cc-hbar-label" data-en="Core + spaCy as a local service">Rdzeń + spaCy jako lokalna usługa</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="17 of 19 (89.5%)">17 z&nbsp;19 (89,5%)</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en-html="Source: Parawan’s &lt;a href=&quot;https://github.com/karolpolikarp/parawan/blob/v0.45.1/docs/BENCHMARK.md&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;docs/BENCHMARK.md as of 12 July 2026&lt;/a&gt; (v0.45.1, core 0.29.1). Surnames with no Polish ending and no context, in synthetic sentences.">Źródło: <a href="https://github.com/karolpolikarp/parawan/blob/v0.45.1/docs/BENCHMARK.md" target="_blank" rel="noopener">docs/BENCHMARK.md Parawana w&nbsp;wersji z&nbsp;12&nbsp;lipca 2026</a> (v0.45.1, rdzeń 0.29.1). Nazwiska bez polskiej końcówki i&nbsp;bez kontekstu, w&nbsp;syntetycznych zdaniach.</figcaption>
+                </figure>
                 <p data-en="Status as of 7 November 2026: work in progress. Since 25 October 2026 Parawan’s core has been in the public npm package catalogue as anonimizator 0.29.13. That version matches what the add-on requires (^0.29.1). I have not checked installing the add-on against this version. The model pack (about 125 MB) has to be built separately. The add-on’s repository has not changed since 13 July 2026, and its README still describes linking the core by hand with npm link.">Stan na 7&nbsp;listopada 2026: w&nbsp;budowie. Od 25&nbsp;października 2026 rdzeń Parawana jest w&nbsp;publicznym katalogu pakietów npm jako anonimizator 0.29.13. Ta wersja jest zgodna z&nbsp;tym, czego wymaga dodatek (^0.29.1). Instalacji dodatku z&nbsp;tej wersji nie sprawdzałem. Paczkę modelu (ok.&nbsp;125&nbsp;MB) trzeba zbudować osobno. Repozytorium dodatku nie zmieniło się od 13&nbsp;lipca 2026, a&nbsp;jego README wciąż opisuje ręczne podłączenie rdzenia przez npm link.</p>
                 <div class="showcase-cta">
                     <a href="https://github.com/karolpolikarp/anonimizator-ai" target="_blank" rel="noopener" class="project-link project-link-primary">
@@ -415,6 +495,12 @@
             <section id="clicker" class="case-section" aria-labelledby="h-clicker">
                 <h2 class="case-h2" id="h-clicker"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span>Multi-Sequence Clicker</span></h2>
                 <p data-en="Multi-Sequence Clicker is a Java auto-clicker that clicks chosen points on the screen by itself in your own repetitive tasks. You mark points by hovering the cursor over them and pressing the space bar, then group them into sequences and the sequences into a pattern with a repeat count for each step. The whole pattern can run a set number of times or indefinitely. As the README says, automated clicking may break the terms of service of some games and services, so the tool should be used only where that is allowed. It is the smallest project on this page and has neither tests nor a history of code changes. The code went into the repository as a single upload in August 2025, and only a README and a licence were added in June 2026.">Multi-Sequence Clicker to autoklikacz w&nbsp;Javie, który sam klika w&nbsp;wybrane miejsca ekranu przy własnych, powtarzalnych czynnościach. Punkty zaznacza się, najeżdżając na nie kursorem i&nbsp;naciskając spację; potem łączy się je w&nbsp;sekwencje, a&nbsp;sekwencje we wzorzec z&nbsp;liczbą powtórzeń każdego kroku. Całość można powtórzyć określoną liczbę razy albo bez końca. Jak piszę w&nbsp;README, automatyzacja klikania może naruszać regulaminy niektórych gier i&nbsp;serwisów, więc narzędzia można używać tylko tam, gdzie wolno. To najmniejszy projekt na tej stronie i&nbsp;nie ma ani testów, ani historii zmian kodu. Kod trafił do repozytorium jednym wgraniem w&nbsp;sierpniu 2025, a&nbsp;w&nbsp;czerwcu 2026 doszły tylko README i&nbsp;licencja.</p>
+                <figure class="case-media case-media--frame">
+                    <div class="case-media-shot">
+                        <img src="/assets/images/tools/clicker.webp" width="960" height="540" alt="Zrzut ekranu: okno Multi-Sequence Clicker ze wzorcem sekwencji, opóźnieniami, ruchem myszy i dziennikiem" data-en-alt="Screenshot: the Multi-Sequence Clicker window with the sequence pattern, delays, mouse movement and log" loading="lazy">
+                    </div>
+                    <figcaption data-en="The Swing window of version 4.0: pattern, delays, mouse movement and log in one form.">Okno w&nbsp;Swingu, wersja 4.0: wzorzec, opóźnienia, ruch myszy i&nbsp;dziennik w&nbsp;jednym formularzu.</figcaption>
+                </figure>
                 <div class="showcase-cta">
                     <a href="https://github.com/karolpolikarp/Multi-Sequence-Clicker" target="_blank" rel="noopener" class="project-link project-link-primary">
                         <span data-en="Repository">Repozytorium</span>
@@ -481,6 +567,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=63" defer></script>
+    <script src="/script.js?v=64" defer></script>
 </body>
 </html>

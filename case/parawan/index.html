@@ -77,7 +77,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="/style.css?v=161">
+    <link rel="stylesheet" href="/style.css?v=162">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -181,6 +181,12 @@
             <section id="problem" class="case-section" aria-labelledby="h-problem">
                 <h2 class="case-h2" id="h-problem"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span data-en="Problem and context">Problem i kontekst</span></h2>
                 <p data-en="Before you paste a letter, a contract or a note into an AI chat, publish it in a public bulletin (BIP) or send it on, the personal data has to come out. That means national ID (PESEL) and tax (NIP) numbers, bank accounts, addresses and names. By hand it is tedious and easy to get wrong. An online anonymizer doesn’t help, because the text would still have to be sent to someone. On a computer with corporate restrictions you can’t install a program either.">Zanim wkleisz pismo, umowę czy notatkę do czatu AI, opublikujesz je w&nbsp;BIP albo prześlesz dalej, trzeba usunąć z&nbsp;nich dane osób. Chodzi o&nbsp;PESEL, NIP, numer konta, adres, imię i&nbsp;nazwisko. Ręcznie to żmudne i&nbsp;łatwo coś przeoczyć. Anonimizator w&nbsp;internecie nie pomoże, bo tekst i&nbsp;tak trzeba by komuś wysłać. Na komputerze z&nbsp;blokadami firmowymi nie zainstalujesz też programu.</p>
+                <figure class="case-media case-media--frame">
+                    <div class="case-media-shot">
+                        <video poster="/assets/videos/parawan.webp" data-src="/assets/videos/parawan.mp4" width="960" height="540" style="--ar: 960 / 540" muted loop playsinline preload="none" aria-label="Nagranie: strona Parawanu z przykładowym pismem i wynikiem ze znacznikami" data-en-aria="Clip: the Parawan site with a sample letter and the output with placeholders"></video>
+                    </div>
+                    <figcaption data-en="The Parawan site. A sample letter with fictional data on the left, placeholders instead of the data on the right. Recorded in October 2026, 7 seconds, no sound.">Strona Parawanu. Po lewej przykładowe pismo z&nbsp;fikcyjnymi danymi, po prawej znaczniki w&nbsp;miejscu danych. Nagranie z&nbsp;października 2026, 7&nbsp;sekund bez dźwięku.</figcaption>
+                </figure>
                 <p data-en="I started from the mechanism in JakiePrawo.pl that hides personal data in questions before they reach the language model. On 3 July 2026 I extracted it from the live service as a separate TypeScript package with a browser app. A day later I packed the app into a single HTML file. Until 20 July I worked on detection and on the benchmark, a fixed set of sentences that measures how well it works. Between 14 and 25 October 2026 I rebuilt the engine and adapted the app to work in a public office. Among other things I added a non-disclosure note with a record for the file.">Zacząłem od mechanizmu z&nbsp;JakiePrawo.pl, który zasłania dane osobowe w&nbsp;pytaniach, zanim trafią do modelu językowego. 3&nbsp;lipca 2026 wydzieliłem go z&nbsp;działającego serwisu jako osobny pakiet w&nbsp;TypeScripcie z&nbsp;aplikacją w&nbsp;przeglądarce. Dzień później zamknąłem aplikację w&nbsp;jednym pliku HTML. Do 20&nbsp;lipca rozwijałem wykrywanie i&nbsp;benchmark, czyli stały zestaw zdań do mierzenia skuteczności. Między 14 a&nbsp;25&nbsp;października 2026 przebudowałem silnik i&nbsp;dostosowałem aplikację do pracy w&nbsp;urzędzie. Dodałem między innymi adnotację o&nbsp;wyłączeniu jawności z&nbsp;protokołem do akt.</p>
                 <p data-en="Parawan has to mask everything that points to a person without breaking the text. A statute reference, the reference number of a cited judgment or a name such as “Uniwersytet Warszawski”, the University of Warsaw, must stay. In a conflict, avoiding needless masks comes before masking “just in case”. The output must always be reviewed before it is sent.">Parawan ma zamaskować wszystko, co wskazuje na osobę, i&nbsp;nie zepsuć tekstu. Numer przepisu, sygnatura cytowanego wyroku czy „Uniwersytet Warszawski” mają zostać. W&nbsp;razie konfliktu unikanie niepotrzebnych masek ma pierwszeństwo przed maskowaniem „na zapas”. Wynik zawsze trzeba przejrzeć przed wysłaniem.</p>
             </section>
@@ -196,6 +202,17 @@
                     <li data-en="The same text must always give the same result. Then every bug can be reproduced and covered by a test.">Ten sam tekst ma zawsze dawać ten sam wynik. Wtedy każdy błąd da się odtworzyć i&nbsp;zabezpieczyć testem.</li>
                     <li data-en="Offices still run Chrome and Edge 109 on Windows 7, 8.1 and Server 2012 R2. The app is built for these browsers, and the pdf.js library that reads PDFs stays on a version that still works there.">W&nbsp;urzędach wciąż działają Chrome i&nbsp;Edge 109 na Windows 7, 8.1 i&nbsp;Server 2012 R2. Aplikacja jest budowana pod te przeglądarki, a&nbsp;biblioteka pdf.js do czytania PDF-ów zostaje na wersji, która tam jeszcze działa.</li>
                 </ul>
+                <div class="case-compare">
+                    <div class="case-compare-col">
+                        <p class="case-compare-label" data-en="Two fictional sentences from the benchmark">Dwa fikcyjne zdania z&nbsp;benchmarku</p>
+                        <p class="case-compare-text" lang="pl"><s>Kowalskiemu</s> wręczono wypowiedzenie umowy. Kredyt zaciągnięto w&nbsp;Banku Śląskim w&nbsp;zeszłym roku.</p>
+                    </div>
+                    <div class="case-compare-col case-compare-col--after">
+                        <p class="case-compare-label" data-en="Engine output (core 0.29.13)">Wynik silnika (rdzeń 0.29.13)</p>
+                        <p class="case-compare-text" lang="pl"><code>[IMIĘ I&nbsp;NAZWISKO]</code> wręczono wypowiedzenie umowy. Kredyt zaciągnięto w&nbsp;<strong>Banku Śląskim</strong> w&nbsp;zeszłym roku.</p>
+                    </div>
+                </div>
+                <p data-en="The engine masks the crossed-out inflected surname and keeps the bold adjective in the bank’s name (output checked on 8 November 2026).">Silnik zasłania przekreślone, odmienione nazwisko i&nbsp;zostawia pogrubiony przymiotnik w&nbsp;nazwie banku (wynik sprawdzony 8&nbsp;listopada 2026).</p>
             </section>
 
             <section id="architektura" class="case-section" aria-labelledby="h-architektura">
@@ -231,7 +248,7 @@
 
                         <rect class="cd-box cd-box--key" x="20" y="268" width="320" height="52" rx="8"/>
                         <text class="cd-label" x="180" y="289" text-anchor="middle" data-en="Checksummed identifiers">Numery z sumą kontrolną</text>
-                        <text class="cd-note" x="180" y="307" text-anchor="middle" data-en="PESEL, NIP, REGON, IBAN, ID, card, land register">PESEL, NIP, REGON, IBAN, dowód, karta, KW</text>
+                        <text class="cd-note" x="180" y="307" text-anchor="middle" data-en="PESEL, NIP, REGON, IBAN, ID, card, land reg.">PESEL, NIP, REGON, IBAN, dowód, karta, KW</text>
                         <path class="cd-edge" d="M180 320V350" marker-end="url(#cd-arrow-parawan)"/>
 
                         <rect class="cd-box" x="20" y="354" width="320" height="52" rx="8"/>
@@ -282,6 +299,25 @@
                             <dd data-en="The PESEL checksum lets through about 10% of random 11-digit strings. Without a “PESEL” label, any string that passes it is masked unless it directly follows “art.”, “§”, “poz.”, “sygn.” or “nr”. So roughly one in ten unlabelled numbers of that length, e.g. a case number, is masked needlessly. Surnames with no Polish ending and no context, foreign ones for example, are caught only by the dictionary. In the benchmark category of 19 such sentences Parawan found 4 on 24 October 2026, i.e. 21.1%, all of them from the dictionary. That is why the app asks you to review the output, and since v0.46.25 you can mask a missed fragment by hand.">Suma kontrolna PESEL przepuszcza ok.&nbsp;10% przypadkowych ciągów 11&nbsp;cyfr. Bez etykiety „PESEL” maskowany jest każdy ciąg, który ją przechodzi, chyba że stoi tuż po „art.”, „§”, „poz.”, „sygn.” albo „nr”. Mniej więcej co dziesiąty taki numer bez etykiety, np.&nbsp;numer sprawy, zostaje więc zamaskowany niepotrzebnie. Nazwiska bez polskiej końcówki i&nbsp;bez kontekstu, np.&nbsp;obce, wykrywa tylko słownik. W&nbsp;kategorii benchmarku z&nbsp;19&nbsp;takimi zdaniami Parawan wykrył 24&nbsp;października 2026 cztery, czyli 21,1%, wszystkie ze słownika. Dlatego aplikacja prosi o&nbsp;przejrzenie wyniku, a&nbsp;od v0.46.25 przeoczony fragment można zasłonić ręcznie.</dd>
                         </dl>
                     </article>
+                </div>
+                <figure class="case-code">
+                    <div class="case-code-head">
+                        <span class="case-code-file">packages/core/src/index.ts</span>
+                        <span class="case-code-lang">TypeScript</span>
+                    </div>
+<pre tabindex="0" aria-label="Wycinek kodu: liczba tuż po odwołaniu do przepisu zostaje jawna" data-en-aria="Code excerpt: a number right after a legal reference stays visible"><code><span class="tok-k">function</span> <span class="tok-f">precededByLegalRef</span>(full: string, offset: number): boolean {
+  <span class="tok-k">const</span> before = full.<span class="tok-f">slice</span>(Math.<span class="tok-f">max</span>(<span class="tok-n">0</span>, offset - <span class="tok-n">24</span>), offset);
+<span class="hl">  <span class="tok-k">return</span> <span class="tok-s">/(art\.?|§|ust\.?|pkt|poz\.?|sygn\.?|nr\s|dz\.?\s?u|regon|lp\.?|porządkow\w+|rejestr\w*|seryjn\w+|wersj\w+)\s*$/i</span>.<span class="tok-f">test</span>(before);</span>
+}
+<span class="tok-c">// …</span>
+<span class="tok-k">function</span> <span class="tok-f">passPesel</span>(ctx: RedactCtx): void {
+  <span class="tok-c">// …</span>
+  ctx.text = ctx.text.<span class="tok-f">replace</span>(<span class="tok-s">/(?&lt;![\dA-Za-z])\d{11}(?![\d])/g</span>, (m, offset: number) =&gt; {
+<span class="hl">    <span class="tok-k">if</span> (<span class="tok-f">precededByLegalRef</span>(ctx.text, offset)) <span class="tok-k">return</span> m;</span>
+    <span class="tok-c">// …</span></code></pre>
+                    <figcaption data-en-html="Digits after “art.”, “§”, “sygn.” or “nr” stay, because the function looks at the 24 characters before the number. The engine calls it in 8 places, PESEL among them. Real code, abridged, lines 317 and 4387 of &lt;a href=&quot;https://github.com/karolpolikarp/parawan/blob/6f9a910/packages/core/src/index.ts#L317&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;index.ts&lt;/a&gt; at commit 6f9a910 (1 November 2026).">Cyfry po „art.”, „§”, „sygn.” czy „nr” zostają, bo funkcja patrzy na 24&nbsp;znaki przed liczbą. Silnik woła ją w&nbsp;8&nbsp;miejscach, m.in. przy PESEL-u. Prawdziwy kod ze skrótami, wiersze 317 i&nbsp;4387 pliku <a href="https://github.com/karolpolikarp/parawan/blob/6f9a910/packages/core/src/index.ts#L317" target="_blank" rel="noopener">index.ts</a> z&nbsp;commitu 6f9a910 (1&nbsp;listopada 2026).</figcaption>
+                </figure>
+                <div class="case-decisions">
                     <article class="case-decision">
                         <h3 data-en="AI as a separate add-on">AI jako osobny dodatek</h3>
                         <dl class="case-decision-grid">
@@ -329,17 +365,74 @@
                             <dt data-en="Alternative">Alternatywa</dt>
                             <dd data-en="Relying only on the benchmark that automatically blocks a change when results drop.">Oprzeć się tylko na benchmarku, który automatycznie blokuje zmianę, gdy wyniki spadną.</dd>
                             <dt data-en="Why">Dlaczego</dt>
-                            <dd data-en="The benchmark guards known cases, and a rebuilt engine also changes the result where the set has no examples. The comparison showed about 43,700 places with a better result and 334 with a worse one, only 10 of them in ordinary documents. The gains were 32,000 closed leaks and 11,700 fragments no longer masked needlessly. The figures for the attack texts are estimated from a hand-checked sample of 300 lines.">Benchmark pilnuje znanych przypadków, a&nbsp;przebudowany silnik zmienia wynik także tam, gdzie zbiór nie ma przykładów. Porównanie pokazało ok.&nbsp;43,7&nbsp;tys. miejsc z&nbsp;lepszym wynikiem i&nbsp;334 z&nbsp;gorszym, z&nbsp;czego tylko 10 w&nbsp;zwykłych pismach. Na poprawę złożyło się 32&nbsp;tys. domkniętych wycieków i&nbsp;11,7&nbsp;tys. fragmentów, których silnik już niepotrzebnie nie zasłania. Liczby dla tekstów pisanych pod atak są oszacowane na ręcznie sprawdzonej próbce 300 wierszy.</dd>
+                            <dd data-en="The benchmark guards known cases, and a rebuilt engine also changes the result where the set has no examples. The comparison showed about 43,700 places with a better result and 334 with a worse one, only 10 of them in ordinary documents. The figures for the attack texts are estimated from a hand-checked sample of 300 lines.">Benchmark pilnuje znanych przypadków, a&nbsp;przebudowany silnik zmienia wynik także tam, gdzie zbiór nie ma przykładów. Porównanie pokazało ok.&nbsp;43,7&nbsp;tys. miejsc z&nbsp;lepszym wynikiem i&nbsp;334 z&nbsp;gorszym, z&nbsp;czego tylko 10 w&nbsp;zwykłych pismach. Liczby dla tekstów pisanych pod atak są oszacowane na ręcznie sprawdzonej próbce 300 wierszy.</dd>
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="I released it with known regressions, places where the result is worse than before. I described them by group in the changelog. The most serious one concerns a tab-separated form where the role is the label, e.g. “Powód:⇥Jan⇥Nazwisko:⇥Nowak”, where ⇥ is a tab. There the first name stays visible. As of 8 November 2026 the fix has not been released. The project plan, as of 25 October 2026, schedules it for version 0.46.27.">Wydałem go ze znanymi regresjami, czyli miejscami, gdzie wynik jest gorszy niż wcześniej. Opisałem je grupami w&nbsp;dzienniku zmian. Najpoważniejsza dotyczy formularza z&nbsp;tabulatorami, w&nbsp;którym rola stoi jako etykieta, np.&nbsp;„Powód:⇥Jan⇥Nazwisko:⇥Nowak”, gdzie ⇥&nbsp;to tabulator. Imię zostaje w&nbsp;nim jawne. Do 8&nbsp;listopada 2026 poprawka nie trafiła do wydania. Plan projektu ze stanem na 25&nbsp;października 2026 przewiduje ją w&nbsp;wersji 0.46.27.</dd>
                         </dl>
                     </article>
                 </div>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="Old vs new engine on 23,646 texts, number of places">Porównanie silników na 23&nbsp;646 tekstach, liczba miejsc</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Leaks closed">Domknięte wycieki</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 10ch" data-en="≈32,000">≈32&nbsp;tys.</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 36.6">
+                            <span class="cc-hbar-label" data-en="Needless masks removed">Zdjęte zbędne maski</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 10ch" data-en="≈11,700">≈11,7&nbsp;tys.</span>
+                        </li>
+                        <li class="cc-hbar cc-hbar--key" style="--v: 1">
+                            <span class="cc-hbar-label" data-en="Places with a worse result">Miejsca z&nbsp;gorszym wynikiem</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 10ch">334</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="Source: CHANGELOG.md v0.46.24 (24 October 2026). Figures for the attack texts are estimated from a hand-checked sample of 300 lines.">Źródło: CHANGELOG.md v0.46.24 (24&nbsp;października 2026). Liczby dla tekstów pisanych pod atak oszacowane na ręcznie sprawdzonej próbce 300 wierszy.</figcaption>
+                </figure>
             </section>
 
             <section id="dowody" class="case-section" aria-labelledby="h-dowody">
                 <h2 class="case-h2" id="h-dowody"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span data-en="Evidence">Dowody</span></h2>
-                <p data-en="Quality is measured by a benchmark of 496 fictional sentences. They hold 683 fragments that must disappear and 774 that must stay. All 15 misses fall in the category of surnames with no Polish ending and no context, which has 19 sentences. In every other category recall, the share of data to hide that was caught, is 100%. The one fragment masked needlessly is “Tadeusz” in “Pan Tadeusz”, the title of a poem.">Jakość mierzy benchmark z&nbsp;496&nbsp;fikcyjnymi zdaniami. Zdania zawierają 683 fragmenty, które muszą zniknąć, i&nbsp;774, które muszą zostać. Wszystkie 15&nbsp;pominięć przypada na kategorię nazwisk bez polskiej końcówki i&nbsp;bez kontekstu, która liczy 19&nbsp;zdań. W&nbsp;pozostałych kategoriach wykrywalność, czyli odsetek wykrytych danych do ukrycia, wynosi 100%. Jedyny niepotrzebnie zasłonięty fragment to „Tadeusz” w&nbsp;tytule „Pan Tadeusz”.</p>
+                <p data-en="Quality is measured by a benchmark of 496 fictional sentences. They hold 683 fragments that must disappear and 774 that must stay. The chart shows recall, the share of data to hide that was caught, in each category. The one fragment masked needlessly is “Tadeusz” in “Pan Tadeusz”, the title of a poem.">Jakość mierzy benchmark z&nbsp;496&nbsp;fikcyjnymi zdaniami. Zdania zawierają 683 fragmenty, które muszą zniknąć, i&nbsp;774, które muszą zostać. Wykrywalność, czyli odsetek wykrytych danych do ukrycia, w&nbsp;każdej kategorii pokazuje wykres. Jedyny niepotrzebnie zasłonięty fragment to „Tadeusz” w&nbsp;tytule „Pan Tadeusz”.</p>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="Recall by benchmark category">Wykrywalność w&nbsp;kategoriach benchmarku</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Names and surnames, basic form (74 sentences)">Imiona i&nbsp;nazwiska w&nbsp;formie podstawowej (74&nbsp;zdania)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch">100%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Inflected (35 sentences)">W&nbsp;odmianie (35&nbsp;zdań)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch">100%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Rare surnames (28 sentences)">Rzadkie nazwiska (28&nbsp;zdań)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch">100%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Surnames from the dictionary (12 sentences)">Nazwiska ze słownika (12&nbsp;zdań)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch">100%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Numbers, addresses, e-mails, phones (164 sentences)">Numery, adresy, e-maile, telefony (164&nbsp;zdania)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch">100%</span>
+                        </li>
+                        <li class="cc-hbar cc-hbar--key" style="--v: 21.1">
+                            <span class="cc-hbar-label" data-en="Surnames with no Polish ending and no context (19 sentences)">Nazwiska bez polskiej końcówki i&nbsp;bez kontekstu (19&nbsp;zdań)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch" data-en="21.1%">21,1%</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="Source: docs/BENCHMARK.md, run on 24 October 2026 on 496 fictional sentences. All 15 misses fall in the last category. The 164 sentences that must stay untouched have no recall, so they are not shown.">Źródło: docs/BENCHMARK.md, przebieg z&nbsp;24&nbsp;października 2026 na 496&nbsp;fikcyjnych zdaniach. Wszystkie 15&nbsp;pominięć przypada na ostatnią kategorię. 164&nbsp;zdania, które mają zostać nietknięte, nie mają wykrywalności, więc ich tu nie ma.</figcaption>
+                </figure>
                 <p data-en="The benchmark runs automatically on every change to the main branch and every proposed change. It guards five categories. They are names in their basic form, inflected names, rare surnames, surnames from the dictionary, and structured data: numbers (e.g. PESEL, NIP, IBAN, KSeF), addresses, e-mails and phone numbers. The run fails if recall in any of them drops below 100%, or if overall precision falls below 98%. Precision is the share of fragments that must stay and were left intact.">Benchmark uruchamia się automatycznie przy każdej zmianie w&nbsp;głównej gałęzi i&nbsp;każdej propozycji zmiany. Pilnuje pięciu kategorii. Są to imiona i&nbsp;nazwiska w&nbsp;formie podstawowej, w&nbsp;odmianie, rzadkie nazwiska, nazwiska ze słownika oraz dane o&nbsp;stałej budowie: numery (np.&nbsp;PESEL, NIP, IBAN, KSeF), adresy, e-maile i&nbsp;telefony. Zgłasza błąd, gdy wykrywalność w&nbsp;którejkolwiek z&nbsp;nich spadnie poniżej 100% albo gdy łączna precyzja spadnie poniżej 98%. Precyzja to odsetek nietkniętych fragmentów, które mają zostać.</p>
                 <p data-en="The second check is an automated browser test written in Playwright. It opens the built file from disk, loads fictional official letters in DOCX and PDF, prints and downloads the output. It checks that no data gets through and that the browser sends not a single request, live connection channels such as WebSocket and WebRTC included.">Druga kontrola to automatyczny test w&nbsp;przeglądarce, napisany w&nbsp;narzędziu Playwright. Otwiera gotowy plik z&nbsp;dysku, wczytuje fikcyjne pisma urzędowe w&nbsp;DOCX i&nbsp;PDF, drukuje i&nbsp;pobiera wynik. Sprawdza, że żadna dana nie przechodzi, a&nbsp;przeglądarka nie wysłała ani jednego żądania, także przez kanały łączności na żywo WebSocket i&nbsp;WebRTC.</p>
                 <div class="case-evidence">
@@ -410,6 +503,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=63" defer></script>
+    <script src="/script.js?v=64" defer></script>
 </body>
 </html>

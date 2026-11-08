@@ -77,7 +77,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="/style.css?v=161">
+    <link rel="stylesheet" href="/style.css?v=162">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -161,6 +161,12 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
                 </div>
+                <figure class="case-media case-media--frame">
+                    <div class="case-media-shot">
+                        <video poster="/assets/videos/urzednik-i-ai.webp" data-src="/assets/videos/urzednik-i-ai.mp4" width="960" height="540" style="--ar: 960 / 540" muted loop playsinline preload="none" aria-label="Nagranie strony startowej katalogu i promptu z przykładowym wynikiem" data-en-aria="Clip of the catalogue’s start page and a prompt with a sample result"></video>
+                    </div>
+                    <figcaption data-en="The start page and a prompt with a sample result. Recorded on release 1.19.0, data as of 11 Oct 2026.">Strona startowa i&nbsp;prompt z&nbsp;przykładowym wynikiem. Nagranie z&nbsp;wydania 1.19.0, baza z&nbsp;11.10.2026.</figcaption>
+                </figure>
                 <nav class="case-toc" aria-label="Spis treści" data-en-aria="Contents">
                     <a href="#problem"><span data-en="Problem">Problem</span></a>
                     <a href="#ograniczenia"><span data-en="Constraints">Ograniczenia</span></a>
@@ -176,6 +182,27 @@
             <section id="problem" class="case-section" aria-labelledby="h-problem">
                 <h2 class="case-h2" id="h-problem"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span data-en="Problem and context">Problem i&nbsp;kontekst</span></h2>
                 <p data-en="In a public office a language model can speed up many routine tasks, such as a letter, the minutes of a meeting or a table of comments on a draft. For that a civil servant needs a prompt template that fits administrative work and has to know which data a given prompt works with. The data level decides which tool a prompt may be used in.">Model językowy może w&nbsp;urzędzie przyspieszyć wiele zwykłych czynności, na przykład pismo, notatkę ze spotkania albo zestawienie uwag do projektu. Urzędnik potrzebuje do tego wzorca polecenia dopasowanego do pracy administracji i&nbsp;musi wiedzieć, z&nbsp;jakimi danymi dany prompt pracuje. Poziom danych decyduje o&nbsp;tym, w&nbsp;jakim narzędziu wolno użyć promptu.</p>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="What data the 550 prompts work with">Z&nbsp;jakimi danymi pracuje 550 promptów</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar cc-hbar--key" style="--v: 31">
+                            <span class="cc-hbar-label" data-en="public">publiczne</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">103</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="internal">wewnętrzne</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">331</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 35">
+                            <span class="cc-hbar-label" data-en="sensitive">wrażliwe</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">116</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="Only 103 prompts work with public data. The other 447 work with internal or sensitive data. Data from the “Data level” filter in the live catalogue, release 1.28.0, as of 7 Nov 2026.">Na danych publicznych pracują tylko 103 prompty. Pozostałe 447 pracują na danych wewnętrznych albo wrażliwych. Dane z&nbsp;filtra „Poziom danych” w&nbsp;katalogu na żywo, wydanie 1.28.0, stan bazy na 7.11.2026.</figcaption>
+                </figure>
                 <p data-en="I wanted a catalogue you can browse the way a civil servant thinks about the job. You search it by task, domain, position, type of office or department. The result is a map of 550 ready-to-copy prompts in 10 areas and 56 topics, with 15 step-by-step work paths and 130 use cases that show the outcome. Every prompt has a “Check before use” section, because responsibility for the result stays with the person using the prompt.">Chciałem katalogu, który da się przeglądać tak, jak urzędnik myśli o&nbsp;swojej pracy. Szuka się w&nbsp;nim według zadania, dziedziny, stanowiska, rodzaju urzędu albo wydziału. Powstała mapa 550 gotowych promptów w&nbsp;10 działach i&nbsp;56 obszarach, z&nbsp;15 ścieżkami pracy krok po kroku i&nbsp;130 zastosowaniami pokazującymi wynik. Każdy prompt ma sekcję „Sprawdź przed użyciem”, bo odpowiedzialność za wynik zostaje po stronie osoby, która korzysta z&nbsp;promptu.</p>
                 <p data-en="A tool that shows how administration can use AI could not itself become an example of a data leak. That condition had no exceptions.">Narzędzie, które pokazuje zastosowania AI w&nbsp;administracji, samo nie mogło być przykładem wycieku danych. To był warunek bez wyjątków.</p>
             </section>
@@ -190,6 +217,47 @@
                     <li data-en="A prompt has to fit any office, so the content names no institutions, programmes, systems or people.">Prompt ma pasować do każdego urzędu, więc w&nbsp;treści nie ma nazw instytucji, programów, systemów ani osób.</li>
                     <li data-en="Content can be edited without programming. A new prompt is added to a text file, and an error must be explained in plain words, with the file name and line number.">Treść da się edytować bez programowania. Nowy prompt dopisuje się do pliku tekstowego, a&nbsp;błąd ma być opisany słowami, z&nbsp;nazwą pliku i&nbsp;numerem wiersza.</li>
                 </ul>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="How many of the 550 prompts fit each type of office">Ile z&nbsp;550 promptów pasuje do danego rodzaju urzędu</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar" style="--v: 60">
+                            <span class="cc-hbar-label" data-en="ministry">ministerstwo</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">318</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 64">
+                            <span class="cc-hbar-label" data-en="central office">urząd centralny</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">340</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 67">
+                            <span class="cc-hbar-label" data-en="voivodeship office">urząd wojewódzki</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">357</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 77">
+                            <span class="cc-hbar-label" data-en="subordinate unit">jednostka podległa</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">408</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 79">
+                            <span class="cc-hbar-label" data-en="regional (marshal’s) office">urząd marszałkowski</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">418</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 89">
+                            <span class="cc-hbar-label" data-en="county office">starostwo</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">473</span>
+                        </li>
+                        <li class="cc-hbar cc-hbar--key" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="municipal office">urząd gminy</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">531</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="One prompt can fit several types of office. Every type gets at least 318 prompts, a municipal office 531. Data from the “Type of office” filter in the live catalogue, release 1.28.0, as of 7 Nov 2026.">Jeden prompt może pasować do kilku rodzajów urzędu. Każdy rodzaj ma co najmniej 318 promptów, urząd gminy 531. Dane z&nbsp;filtra „Rodzaj urzędu” w&nbsp;katalogu na żywo, wydanie 1.28.0, stan bazy na 7.11.2026.</figcaption>
+                </figure>
             </section>
 
             <section id="architektura" class="case-section" aria-labelledby="h-architektura">
@@ -262,6 +330,28 @@
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="The civil servant fills in the legal basis and the deadlines, so the result needs more work. 27 corrections changed a prompt’s meaning, a value from a closed list (data level, offices) or touched a protected prompt, so they waited for my approval.">Podstawę prawną i&nbsp;terminy urzędnik uzupełnia sam, więc wynik wymaga więcej pracy. 27 poprawek zmieniało sens polecenia, wartość z&nbsp;zamkniętej listy (poziom danych, urzędy) albo dotyczyło promptu chronionego przed zmianami, więc czekały na moją zgodę.</dd>
                         </dl>
+                        <figure class="case-code">
+                            <div class="case-code-head">
+                                <span class="case-code-file" data-en="excerpt">fragment</span>
+                                <span class="case-code-lang">prompt</span>
+                            </div>
+<pre tabindex="0" aria-label="Fragment promptu ze znacznikiem braku w źródle" data-en-aria="Prompt excerpt with the missing-in-source marker"><code>Wklejam pismo z żądaniem
+przekazania informacji lub
+dokumentów […]
+Przygotuj trzy części.
+
+Część 1. Rozbiór żądania:
+[…] jaką podstawę prawną
+powołał. Podstawę przepisz
+tak, jak stoi w piśmie.
+Jeśli pismo jej nie podaje,
+wpisz
+<span class="hl"><span class="tok-n">[BRAK W ŹRÓDLE:</span></span>
+<span class="hl"><span class="tok-n">podstawa prawna żądania]</span></span>
+i nie dobieraj przepisu
+z własnej wiedzy. […]</code></pre>
+                            <figcaption data-en="Excerpt from the prompt “Odpowiedź na żądanie informacji od sądu, prokuratury lub policji”, a reply to a request for information from a court, prosecutor or police, in the live catalogue, data as of 7 Nov 2026. The highlighted lines show the marker the model inserts instead of picking a provision from its own knowledge.">Fragment promptu „Odpowiedź na żądanie informacji od sądu, prokuratury lub policji” z&nbsp;katalogu na żywo, stan bazy na 7.11.2026. Podświetlone wiersze pokazują znacznik, który model wstawia zamiast dobierać przepis z&nbsp;własnej wiedzy.</figcaption>
+                        </figure>
                     </article>
                     <article class="case-decision">
                         <h3 data-en="State in the address, not in the browser">Stan w&nbsp;adresie, nie w&nbsp;przeglądarce</h3>
@@ -297,10 +387,22 @@
                             <dt data-en="Alternative">Alternatywa</dt>
                             <dd data-en="A pass over the whole catalogue on every keystroke, with a 150&nbsp;ms delay.">Przejście po całym katalogu przy każdym wciśniętym klawiszu, z&nbsp;opóźnieniem 150&nbsp;ms.</dd>
                             <dt data-en="Why">Dlaczego</dt>
-                            <dd data-en="Each keystroke meant splitting text into words 2,630 times (with 526 prompts, measured on 31 Aug 2026), and the phrase “notatka ze spotkania” (meeting notes) took 13.6&nbsp;ms. With the index it takes 0.34&nbsp;ms. The test comparing both versions caught a bug in the new one straight away. For a query spread across several fields the result differed by 9 prompts out of 68.">Każde wciśnięcie klawisza oznaczało 2630 podziałów tekstu na słowa (przy 526 promptach, pomiar z&nbsp;31.08.2026), a&nbsp;fraza „notatka ze spotkania” kosztowała 13,6&nbsp;ms. Na indeksie trwa to 0,34&nbsp;ms. Test porównujący obie wersje od razu złapał błąd nowej. Przy zapytaniu rozłożonym na kilka pól wynik różnił się o&nbsp;9 promptów z&nbsp;68.</dd>
+                            <dd data-en="A pass over the catalogue split the text into words again on every keystroke. The comparison below shows the cost. The test comparing both versions caught a bug in the new one straight away. For a query spread across several fields the result differed by 9 prompts out of 68.">Przejście po katalogu przy każdym wciśnięciu klawisza od nowa dzieliło tekst na słowa. Ile to kosztowało, pokazuje porównanie niżej. Test porównujący obie wersje od razu złapał błąd nowej. Przy zapytaniu rozłożonym na kilka pól wynik różnił się o&nbsp;9 promptów z&nbsp;68.</dd>
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="Built at start-up, the index delayed the first display to 178&nbsp;ms instead of 144, even in views that never search. Deferred to the first query, it delayed the first keystroke to 49&nbsp;ms instead of 30. Building it at the browser’s first idle moment removed both delays. The first display then took 144&nbsp;ms and the first keystroke 18–22&nbsp;ms (measured on 3 Sep 2026). The reference has to be maintained alongside the code.">Liczony przy starcie indeks opóźniał pierwsze wyświetlenie strony do 178&nbsp;ms zamiast 144, także w&nbsp;widokach bez wyszukiwania. Odłożony do pierwszego zapytania opóźniał pierwszy wpisany znak do 49&nbsp;ms zamiast 30. Liczenie indeksu w&nbsp;pierwszej wolnej chwili przeglądarki usunęło oba opóźnienia. Pierwsze wyświetlenie trwało wtedy 144&nbsp;ms, a&nbsp;pierwszy znak 18–22&nbsp;ms (pomiar z&nbsp;3.09.2026). Wzorzec trzeba utrzymywać razem z&nbsp;kodem.</dd>
                         </dl>
+                        <div class="case-compare">
+                            <div class="case-compare-col">
+                                <p class="case-compare-label" data-en="Before">Przed</p>
+                                <p class="case-compare-value" data-en="13.6&nbsp;ms">13,6&nbsp;ms</p>
+                                <p class="case-compare-text" data-en-html="A pass over the whole catalogue, 2,630 splits of text into words on every keystroke. Phrase &lt;code&gt;notatka ze spotkania&lt;/code&gt;, 526 prompts, measured on 31 Aug 2026.">Przejście po całym katalogu, przy każdym znaku 2630 podziałów tekstu na słowa. Fraza <code>notatka ze spotkania</code>, 526 promptów, pomiar z&nbsp;31.08.2026.</p>
+                            </div>
+                            <div class="case-compare-col case-compare-col--after">
+                                <p class="case-compare-label" data-en="After">Po</p>
+                                <p class="case-compare-value" data-en="0.34&nbsp;ms">0,34&nbsp;ms</p>
+                                <p class="case-compare-text" data-en="The same phrase on the inverted index, built at the browser’s first idle moment.">Ta sama fraza na indeksie odwróconym, liczonym w&nbsp;pierwszej wolnej chwili przeglądarki.</p>
+                            </div>
+                        </div>
                     </article>
                     <article class="case-decision">
                         <h3 data-en="Publishing only after the gate passes">Publikacja tylko po przejściu bramki</h3>
@@ -333,11 +435,6 @@
                         <span class="case-stat-source" data-en="end-to-end test · 2026-11-07">test E2E · 2026-11-07</span>
                     </div>
                     <div class="case-stat">
-                        <span class="case-stat-value scramble-num" data-en="0.34&nbsp;ms">0,34&nbsp;ms</span>
-                        <span class="case-stat-label" data-en="phrase search on the index; previously 13.6&nbsp;ms per keystroke">wyszukanie frazy na indeksie; wcześniej 13,6&nbsp;ms na każdy znak</span>
-                        <span class="case-stat-source" data-en="measurement with the change · 2026-08-31">pomiar przy zmianie · 2026-08-31</span>
-                    </div>
-                    <div class="case-stat">
                         <span class="case-stat-value scramble-num" data-en="136.0&nbsp;kB">136,0&nbsp;kB</span>
                         <span class="case-stat-label" data-en="of code after gzip compression, measured on the day I removed the animation library; previously 176.7&nbsp;kB">kodu po kompresji gzip w&nbsp;dniu usunięcia biblioteki animacji; wcześniej 176,7&nbsp;kB</span>
                         <span class="case-stat-source" data-en="budget measurement with the change · 2026-09-23">pomiar budżetów przy zmianie · 2026-09-23</span>
@@ -353,6 +450,32 @@
                         <span class="case-stat-source" data-en="decision log · 2026-11-07">dziennik decyzji · 2026-11-07</span>
                     </div>
                 </div>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="What happened to the 131 findings from the review of 527 prompts">Co się stało ze 131 zgłoszeniami z&nbsp;przeglądu 527 promptów</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar cc-hbar--key" style="--v: 26">
+                            <span class="cc-hbar-label" data-en="legal claims stated as certain">twierdzenia prawne podane jako pewnik</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">23</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="other findings confirmed by the sceptic">pozostałe potwierdzone przez sceptyka</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">87</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 14">
+                            <span class="cc-hbar-label" data-en="referred to me">skierowane do mnie</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">12</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 10">
+                            <span class="cc-hbar-label" data-en="rejected">odrzucone</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">9</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="The sceptic confirmed 110 findings, 23 of them legal claims stated as certain. Data from the project’s private repository, review of 7 Nov 2026.">Sceptyk potwierdził 110 zgłoszeń, w&nbsp;tym 23 twierdzenia prawne podane jako pewnik. Dane z&nbsp;prywatnego repozytorium projektu, przegląd z&nbsp;7.11.2026.</figcaption>
+                </figure>
                 <p class="case-source-note" data-en="Figures from the project’s private repository as of 7 Nov 2026 (release 1.28.0); performance measurements are dated to the change they belong to. There is no user data, because the app collects none.">Liczby z&nbsp;prywatnego repozytorium projektu, stan na 7.11.2026 (wydanie 1.28.0); pomiary wydajności mają datę zmiany, której dotyczą. Bez danych o&nbsp;użytkownikach, bo aplikacja ich nie zbiera.</p>
             </section>
 
@@ -399,6 +522,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=63" defer></script>
+    <script src="/script.js?v=64" defer></script>
 </body>
 </html>

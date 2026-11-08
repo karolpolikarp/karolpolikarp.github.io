@@ -1391,6 +1391,138 @@ const ScrollMotion = {
 ScrollMotion.init();
 
 // ================================================
+// CASE VISUALS — see "CASE STUDIES — VISUALS" in style.css. Case pages only.
+// Charts (.case-chart): bars grow, lines draw, values fade in once when the figure scrolls into view.
+// Diagrams (.case-diagram): a gold dot runs along every .cd-edge while the figure is on screen.
+// Clips (.case-media video[data-src]): loaded and played only while on screen in a visible tab,
+// with a pause button; under prefers-reduced-motion nothing is armed and a clip shows its poster only.
+// ================================================
+const CaseVisuals = {
+    init() {
+        if (!document.querySelector('.case') || !('IntersectionObserver' in window)) return;
+        if (prefersReducedMotion) return;
+        this.charts();
+        this.diagrams();
+        this.videos();
+    },
+
+    charts() {
+        const charts = document.querySelectorAll('.case-chart');
+        if (!charts.length) return;
+        charts.forEach(chart => {
+            // stagger index in document order, unless the author set --i by hand
+            ['.cc-bar', '.cc-hbar', '.cc-value', '.cc-dot', '.cc-line'].forEach(sel => {
+                chart.querySelectorAll(sel).forEach((el, i) => {
+                    if (!el.style.getPropertyValue('--i')) el.style.setProperty('--i', String(i));
+                });
+            });
+            chart.classList.add('is-armed');
+        });
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+            });
+        }, { threshold: 0.3 });
+        charts.forEach(c => io.observe(c));
+    },
+
+    diagrams() {
+        const figs = document.querySelectorAll('.case-diagram');
+        if (!figs.length) return;
+        figs.forEach(fig => {
+            fig.querySelectorAll('.cd-edge').forEach((edge, i) => {
+                if (typeof edge.getTotalLength !== 'function') return;
+                const len = edge.getTotalLength();
+                if (!len) return;
+                const pulse = edge.cloneNode(false);
+                pulse.removeAttribute('marker-end');
+                pulse.removeAttribute('marker-start');
+                pulse.removeAttribute('id');
+                pulse.setAttribute('class', 'cd-pulse');
+                pulse.setAttribute('aria-hidden', 'true');
+                pulse.style.setProperty('--len', len.toFixed(1));
+                // about 90 user units per second, never shorter than 1.4 s
+                pulse.style.setProperty('--dur', Math.max(1.4, len / 90).toFixed(2) + 's');
+                pulse.style.setProperty('--i', String(i));
+                edge.after(pulse);
+            });
+        });
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(entry => entry.target.classList.toggle('is-visible', entry.isIntersecting));
+        }, { threshold: 0.15 });
+        figs.forEach(f => io.observe(f));
+    },
+
+    videos() {
+        const videos = Array.from(document.querySelectorAll('.case-media video[data-src]'));
+        if (!videos.length) return;
+        const state = new WeakMap();
+        const label = (paused) => {
+            const en = document.documentElement.lang === 'en';
+            if (paused) return en ? 'Play the clip' : 'Odtwórz nagranie';
+            return en ? 'Pause the clip' : 'Zatrzymaj nagranie';
+        };
+        const sync = (video) => {
+            const s = state.get(video);
+            const run = s.onScreen && !document.hidden && !s.userPaused;
+            if (run) {
+                if (!video.getAttribute('src')) {
+                    video.src = video.dataset.src;
+                }
+                const p = video.play();
+                if (p && p.catch) p.catch(() => {});
+            } else if (!video.paused) {
+                video.pause();
+            }
+        };
+        const setButton = (video) => {
+            const s = state.get(video);
+            s.button.classList.toggle('is-paused', s.userPaused);
+            s.button.setAttribute('aria-label', label(s.userPaused));
+        };
+
+        videos.forEach(video => {
+            video.muted = true;
+            video.playsInline = true;
+            let host = video.closest('.case-media-shot');
+            if (!host) {
+                host = document.createElement('div');
+                host.className = 'case-media-shot';
+                video.before(host);
+                host.appendChild(video);
+            }
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'case-media-toggle';
+            host.appendChild(button);
+            state.set(video, { onScreen: false, userPaused: false, button });
+            setButton(video);
+            button.addEventListener('click', () => {
+                const s = state.get(video);
+                s.userPaused = !s.userPaused;
+                setButton(video);
+                sync(video);
+            });
+            video.addEventListener('error', () => button.remove());
+        });
+
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                state.get(entry.target).onScreen = entry.isIntersecting;
+                sync(entry.target);
+            });
+        }, { threshold: 0.35 });
+        videos.forEach(v => io.observe(v));
+        document.addEventListener('visibilitychange', () => videos.forEach(sync));
+        document.addEventListener('languagechange', () => videos.forEach(setButton));
+    }
+};
+
+CaseVisuals.init();
+
+// ================================================
 // PARTICLES — hero and contact scenes (particles.js + particle-morph.js).
 // Fetched only after the page has loaded, so they never compete with the first paint.
 // ================================================

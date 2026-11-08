@@ -77,7 +77,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="/style.css?v=161">
+    <link rel="stylesheet" href="/style.css?v=162">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -181,6 +181,12 @@
                 <p data-en="Polish law is public, but hard to reach. ISAP assumes you know what you are looking for. The search in the Sejm API matches a fragment of the title, so the query “rybactwo” (fisheries) does not find the act whose title uses the inflected form “rybactwie”. Someone with an employment or consumer problem does not know the name of the act, let alone the article number.">Polskie prawo jest jawne, ale trudno dostępne. ISAP zakłada, że wiesz, czego szukasz. Wyszukiwarka w&nbsp;API Sejmu dopasowuje fragment tytułu, więc zapytanie „rybactwo” nie znajduje „ustawy o&nbsp;rybactwie śródlądowym”. Kto ma sprawę pracowniczą czy konsumencką, nie zna nazwy aktu, a&nbsp;tym bardziej numeru artykułu.</p>
                 <p data-en="A language model has the opposite weakness. It answers fluently, but without a source it can make up the text of a provision. An early version, from November 2025, did exactly that. When the Sejm API returned an error, it produced invented article text instead of admitting it had no data.">Model językowy ma odwrotną słabość. Odpowiada płynnie, ale bez źródła potrafi zmyślić treść przepisu. Wczesna wersja z&nbsp;listopada 2025 tak właśnie robiła. Gdy API Sejmu zwracało błąd, podawała wymyśloną treść artykułu, zamiast przyznać, że nie ma danych.</p>
                 <p data-en="I wanted a tool that understands a question asked in plain language but answers with the law itself. The answer is meant to give the name of the act, the article number, the verbatim text from ISAP and a link to the source. JakiePrawo.pl points to the legal basis, which anyone can check for themselves. It does not give legal advice.">Chciałem narzędzia, które rozumie pytanie zadane zwykłym językiem, a&nbsp;odpowiada przepisem. Odpowiedź ma podawać nazwę aktu, numer artykułu, dosłowny tekst z&nbsp;ISAP i&nbsp;link do źródła. JakiePrawo.pl wskazuje podstawę prawną, którą każdy może sprawdzić sam. Porad prawnych nie udziela.</p>
+                <figure class="case-media case-media--frame">
+                    <div class="case-media-shot">
+                        <video poster="/assets/videos/jakieprawo.webp" data-src="/assets/videos/jakieprawo.mp4" width="960" height="540" style="--ar: 960 / 540" muted loop playsinline preload="none" aria-label="Nagranie: strona główna JakiePrawo.pl, informacja o maskowaniu danych i przykładowe pytania" data-en-aria="Clip: the JakiePrawo.pl home page, the personal-data notice and sample questions"></video>
+                    </div>
+                    <figcaption data-en="The online version: home page, the personal-data notice and sample questions. 7 seconds without sound, recorded in October 2026.">Wersja online: strona główna, informacja o&nbsp;maskowaniu danych i&nbsp;przykładowe pytania. 7&nbsp;sekund bez dźwięku, nagranie z&nbsp;października 2026.</figcaption>
+                </figure>
             </section>
 
             <section id="ograniczenia" class="case-section" aria-labelledby="h-ograniczenia">
@@ -199,6 +205,22 @@
                 <h2 class="case-h2" id="h-architektura"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span data-en="Architecture">Architektura</span></h2>
                 <p data-en="A question travels from the browser to a function on the server. There I first mask personal data. The first stop is the cache, a store of ready answers. It recognises a question asked before, even in other words, and then answers without the model. A new question goes to a search that combines meaning with keywords. Then the Claude agent answers, calling tools that fetch provisions on its own, in a loop.">Pytanie trafia z&nbsp;przeglądarki do funkcji na serwerze. Tam najpierw maskuję dane osobowe. Pierwszy przystanek to cache, czyli pamięć gotowych odpowiedzi. Rozpoznaje pytanie zadane już wcześniej, także innymi słowami, i&nbsp;wtedy odpowiada bez modelu. Nowe pytanie trafia do wyszukiwania, które łączy znaczenie ze słowami kluczowymi. Potem odpowiada agent Claude, który sam w&nbsp;pętli wywołuje narzędzia do pobierania przepisów.</p>
                 <p data-en="The verbatim article text came from my ELI MCP server. Until July 2026 it ran on a Raspberry Pi, found the act in its own catalogue and fetched the article from ISAP. Since the Pi was shut down, the online version has run without it. In the evaluation of the online version on 17 July 2026, already without this server, 28 of 81 answers (34.6%) had a placeholder, a pointer like “check ISAP”, instead of the provision text. On the same 81 questions in a local configuration with a working server, a placeholder appeared in only 1 answer, for both Claude Haiku 4.5 and Bielik. In November 2026 I prepared the server to run on Fly.io in Frankfurt, but as of 8 November 2026 it is not deployed. The same server code is built into the desktop app.">Dosłowny tekst artykułu dawał mój serwer ELI MCP. Do lipca 2026 działał na Raspberry Pi, znajdował akt we własnym spisie i&nbsp;pobierał artykuł z&nbsp;ISAP. Od wyłączenia Pi wersja online działa bez niego. W&nbsp;ewaluacji wersji online z&nbsp;17&nbsp;lipca 2026, już bez tego serwera, 28 z&nbsp;81&nbsp;odpowiedzi (34,6%) miało znacznik zastępczy, czyli odesłanie w&nbsp;rodzaju „sprawdź w&nbsp;ISAP”, zamiast treści przepisu. Na tych samych 81&nbsp;pytaniach w&nbsp;konfiguracji lokalnej z&nbsp;działającym serwerem znacznik pojawił się tylko w&nbsp;1 odpowiedzi, zarówno u&nbsp;Claude Haiku 4.5, jak i&nbsp;u&nbsp;Bielika. W&nbsp;listopadzie 2026 przygotowałem serwer do uruchomienia na Fly.io we Frankfurcie, ale na 8&nbsp;listopada 2026 nie jest wdrożony. Ten sam kod serwera jest wbudowany w&nbsp;aplikację desktopową.</p>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="Answers with a placeholder instead of the provision text">Odpowiedzi ze znacznikiem zamiast treści przepisu</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar cc-hbar--key" style="--v: 34.6">
+                            <span class="cc-hbar-label" data-en="Online version, without the ELI MCP server">Wersja online, bez serwera ELI&nbsp;MCP</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="28 of 81 (34.6%)">28 z&nbsp;81 (34,6%)</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 1.2">
+                            <span class="cc-hbar-label" data-en="Local configuration, with the server">Konfiguracja lokalna, z&nbsp;serwerem</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="1 of 81">1 z&nbsp;81</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="Each bar is a share of 81 questions. The same questions, Claude Haiku 4.5 in both runs. Evaluation of 17 July 2026.">Pasek pokazuje część z&nbsp;81&nbsp;pytań. Te same pytania, Claude Haiku 4.5 w&nbsp;obu przebiegach. Ewaluacja z&nbsp;17&nbsp;lipca 2026.</figcaption>
+                </figure>
                 <p data-en="Before it is sent, the answer passes seven layers against hallucinations, meaning things the model makes up.">Przed wysłaniem odpowiedź przechodzi przez siedem warstw przeciw halucynacjom, czyli zmyśleniom modelu.</p>
                 <ul class="showcase-list">
                     <li data-en="The list of allowed articles in the instructions for the model.">Lista dozwolonych artykułów w&nbsp;poleceniu dla modelu.</li>
@@ -295,7 +317,7 @@
             <section id="decyzje" class="case-section" aria-labelledby="h-decyzje">
                 <h2 class="case-h2" id="h-decyzje"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span data-en="Decisions and their cost">Decyzje i&nbsp;ich koszt</span></h2>
                 <div class="case-decisions">
-                    <article class="case-decision">
+                    <article class="case-decision" style="min-width: 0">
                         <h3 data-en="Redacting data before it reaches the model">Maskowanie danych przed wysłaniem do modelu</h3>
                         <dl class="case-decision-grid">
                             <dt data-en="Decision">Decyzja</dt>
@@ -307,6 +329,24 @@
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="First names, surnames and addresses are caught by approximate rules, so rare surnames can slip through. An optional spaCy module, which recognises names of people and places in text, did better. But it was one more service to maintain. It ran on the Raspberry Pi and has been off since July 2026, so only the rules work now. The code still has a circuit breaker that falls back to the rules when the module fails. A test on 40 cases in June 2026 found a bug that reversed the meaning of a sentence. The name rule also masked the next lowercase word, such as “nie” (not). After the fix of 28 June 2026 all 40 cases gave the correct result, with no leaks and no over-masking, but I did not save that set in the repository, so I give no detection rate.">Imiona, nazwiska i&nbsp;adresy wykrywają reguły przybliżone, więc rzadkie nazwiska mogą przejść. Lepiej radził sobie opcjonalny moduł spaCy, który rozpoznaje w&nbsp;tekście nazwy osób i&nbsp;miejsc. Był jednak kolejną usługą do utrzymania. Działał na Raspberry Pi i&nbsp;od lipca 2026 jest wyłączony, więc dziś działają same reguły. W&nbsp;kodzie został bezpiecznik, który przy awarii modułu wraca do reguł. Test na 40&nbsp;przypadkach z&nbsp;czerwca 2026 wykazał błąd, który odwracał sens zdania. Reguła dla nazwisk maskowała też następne słowo pisane małą literą, np. „nie”. Po poprawce z&nbsp;28&nbsp;czerwca 2026 wszystkie 40&nbsp;przypadków dało poprawny wynik, bez wycieków i&nbsp;bez nadmiarowych maskowań, ale tego zestawu nie zapisałem w&nbsp;repozytorium, więc skuteczności wykrywania nie podaję.</dd>
                         </dl>
+                        <figure class="case-code">
+                            <div class="case-code-head">
+                                <span class="case-code-file" data-en="simplified excerpt">uproszczony zapis</span>
+                                <span class="case-code-lang">TypeScript</span>
+                            </div>
+<pre tabindex="0" aria-label="Wycinek kodu: reguła dla numeru PESEL z sumą kontrolną" data-en-aria="Code excerpt: the PESEL rule with its checksum"><code><span class="tok-c" data-en="// 11 digits count as a PESEL only if the check digit matches">// 11 cyfr to PESEL tylko przy zgodnej cyfrze kontrolnej</span>
+<span class="tok-k">const</span> W = [<span class="tok-n">1</span>, <span class="tok-n">3</span>, <span class="tok-n">7</span>, <span class="tok-n">9</span>, <span class="tok-n">1</span>, <span class="tok-n">3</span>, <span class="tok-n">7</span>, <span class="tok-n">9</span>, <span class="tok-n">1</span>, <span class="tok-n">3</span>];
+
+<span class="tok-k">function</span> <span class="tok-f">isPesel</span>(d: string): boolean {
+  <span class="tok-k">const</span> sum = W.<span class="tok-f">reduce</span>((acc, w, i) =&gt; acc + w * <span class="tok-f">Number</span>(d[i]), <span class="tok-n">0</span>);
+<span class="hl">  <span class="tok-k">return</span> (<span class="tok-n">10</span> - sum % <span class="tok-n">10</span>) % <span class="tok-n">10</span> === <span class="tok-f">Number</span>(d[<span class="tok-n">10</span>]);</span>
+}
+
+<span class="tok-k">function</span> <span class="tok-f">maskPesel</span>(text: string): string {
+  <span class="tok-k">return</span> text.<span class="tok-f">replace</span>(<span class="tok-s">/\b\d{11}\b/g</span>, (d) =&gt; <span class="tok-f">isPesel</span>(d) ? <span class="tok-s">'[PESEL]'</span> : d);
+}</code></pre>
+                            <figcaption data-en="One of the rules, simplified. Eleven digits with the wrong check digit, such as a case number, stay in the text (line 6).">Jedna z&nbsp;reguł w&nbsp;uproszczeniu. Jedenaście cyfr bez zgodnej cyfry kontrolnej, np. numer sprawy, zostaje w&nbsp;tekście (linia 6).</figcaption>
+                        </figure>
                     </article>
                     <article class="case-decision">
                         <h3 data-en="My own act catalogue instead of ISAP search">Własny spis aktów zamiast wyszukiwarki ISAP</h3>
@@ -333,6 +373,21 @@
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="Sometimes the answer has no verbatim quote, or its quote is marked as unverified. Replacement originally inserted the whole article. In a measurement on 28 July 2026 across 50 saved answers, those with replacement averaged 3,789 characters against 1,009 without it. The same day I limited it to the paragraph named in the legal basis. The whole article is used only when no paragraph is named, capped at 1,500 characters with a pointer to ISAP. On a sample question the answer shrank from 6,996 to 2,488 characters.">Czasem odpowiedź nie ma dosłownego cytatu albo ma cytat oznaczony jako niezweryfikowany. Podmiana wstawiała początkowo cały artykuł. W&nbsp;pomiarze z&nbsp;28&nbsp;lipca 2026 na 50&nbsp;zapisanych odpowiedziach te z&nbsp;podmianą miały średnio 3&nbsp;789&nbsp;znaków wobec 1&nbsp;009 bez niej. Tego samego dnia ograniczyłem ją do ustępu wskazanego w&nbsp;podstawie. Cały artykuł trafia do odpowiedzi tylko wtedy, gdy ustępu nie wskazano, ucięty do 1&nbsp;500&nbsp;znaków z&nbsp;odesłaniem do ISAP. Na przykładowym pytaniu odpowiedź skróciła się z&nbsp;6&nbsp;996 do 2&nbsp;488&nbsp;znaków.</dd>
                         </dl>
+                        <figure class="case-media">
+                        <div class="case-compare">
+                            <div class="case-compare-col">
+                                <p class="case-compare-label" data-en="Whole article">Cały artykuł</p>
+                                <p class="case-compare-value" data-en="6,996 characters">6&nbsp;996 znaków</p>
+                                <p class="case-compare-text" data-en="Before the change of 28 July 2026. Replacement inserted the whole article.">Przed zmianą z&nbsp;28&nbsp;lipca 2026. Podmiana wstawiała cały artykuł.</p>
+                            </div>
+                            <div class="case-compare-col case-compare-col--after">
+                                <p class="case-compare-label" data-en="Named paragraph only">Tylko wskazany ustęp</p>
+                                <p class="case-compare-value" data-en="2,488 characters">2&nbsp;488 znaków</p>
+                                <p class="case-compare-text" data-en="The same question after the change. Without a named paragraph, the article is cut at 1,500 characters.">To samo pytanie po zmianie. Bez wskazanego ustępu artykuł jest ucinany na 1&nbsp;500&nbsp;znakach.</p>
+                            </div>
+                        </div>
+                            <figcaption data-en="The same answer before and after the change, 28 July 2026.">Ta sama odpowiedź przed zmianą i&nbsp;po niej, 28&nbsp;lipca 2026.</figcaption>
+                        </figure>
                     </article>
                     <article class="case-decision">
                         <h3 data-en="Bielik in a separate app, Claude online">Bielik w&nbsp;osobnej aplikacji, Claude w&nbsp;wersji online</h3>
@@ -346,6 +401,32 @@
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="The desktop app reuses the online version’s code. Changes made for Bielik therefore land in files shared with the online version, without being measured on Haiku. In the desktop version, code rather than the model inserts the verbatim ISAP text. On the same local test configuration, in the evaluation of 17 July 2026, Bielik answered more slowly, with a median of 15.6 s against 9.8 s for Claude Haiku 4.5. In the online version, redacted questions still go to providers in the USA, and every question costs money. That is why the open version has a daily limit of 300 questions for the whole service and 50 from one IP address (as of 7 November 2026). Haiku 5.5 has not been through the full evaluation yet. In a quick check on 7 November 2026 it got 5 of 6 control questions right against 3 of 6 for Haiku 4.5. That sample is too small, though, and most answers in that check came from a cache that does not tell the models apart.">Aplikacja desktopowa korzysta z&nbsp;kodu wersji online. Zmiany robione pod Bielika trafiają więc do plików wspólnych z&nbsp;wersją online, bez pomiaru na Haiku. W&nbsp;wersji desktopowej dosłowny tekst z&nbsp;ISAP wstawia kod, nie model. Na tej samej lokalnej konfiguracji testowej, w&nbsp;ewaluacji z&nbsp;17&nbsp;lipca 2026, Bielik odpowiadał wolniej, z&nbsp;medianą 15,6&nbsp;s wobec 9,8&nbsp;s dla Claude Haiku 4.5. W&nbsp;wersji online zamaskowane pytania nadal trafiają do dostawców w&nbsp;USA, a&nbsp;każde pytanie kosztuje. Dlatego otwarta wersja ma dzienny limit 300&nbsp;pytań dla całej usługi i&nbsp;50 z&nbsp;jednego adresu IP (stan na 7&nbsp;listopada 2026). Haiku 5.5 nie przeszedł jeszcze pełnej ewaluacji. W&nbsp;szybkim sprawdzeniu z&nbsp;7&nbsp;listopada 2026 trafił w&nbsp;5 z&nbsp;6&nbsp;pytań kontrolnych wobec 3 z&nbsp;6 dla Haiku 4.5. To jednak za mała próba, a&nbsp;większość odpowiedzi pochodziła wtedy z&nbsp;cache, który nie rozróżnia modeli.</dd>
                         </dl>
+                        <figure class="case-chart">
+                            <p class="case-chart-title" data-en="Bielik-11B and Claude Haiku 4.5 on the same configuration">Bielik-11B i&nbsp;Claude Haiku 4.5 na tej samej konfiguracji</p>
+                            <ul class="cc-hbars" role="list">
+                                <li class="cc-hbar" style="--v: 88.5">
+                                    <span class="cc-hbar-label" data-en="Citation accuracy, Haiku 4.5">Trafność cytowań, Haiku&nbsp;4.5</span>
+                                    <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                                    <span class="cc-hbar-value" data-en="88.5%">88,5%</span>
+                                </li>
+                                <li class="cc-hbar" style="--v: 88.5">
+                                    <span class="cc-hbar-label" data-en="Citation accuracy, Bielik‑11B">Trafność cytowań, Bielik‑11B</span>
+                                    <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                                    <span class="cc-hbar-value" data-en="88.5%">88,5%</span>
+                                </li>
+                                <li class="cc-hbar" style="--v: 98.3">
+                                    <span class="cc-hbar-label" data-en="ISAP agreement, Haiku 4.5">Zgodność z&nbsp;ISAP, Haiku&nbsp;4.5</span>
+                                    <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                                    <span class="cc-hbar-value" data-en="98.3%">98,3%</span>
+                                </li>
+                                <li class="cc-hbar cc-hbar--key" style="--v: 61">
+                                    <span class="cc-hbar-label" data-en="ISAP agreement, Bielik‑11B">Zgodność z&nbsp;ISAP, Bielik‑11B</span>
+                                    <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                                    <span class="cc-hbar-value" data-en="61.0%">61,0%</span>
+                                </li>
+                            </ul>
+                            <figcaption data-en="Go/no-go evaluation of 17 July 2026, local test configuration, scale 0-100%. Accuracy on 52 questions with an expected article, ISAP agreement on correct answers (26 for Haiku, 25 for Bielik).">Ewaluacja go/no-go z&nbsp;17&nbsp;lipca 2026, lokalna konfiguracja testowa, skala 0-100%. Trafność na 52&nbsp;pytaniach z&nbsp;oczekiwanym artykułem, zgodność z&nbsp;ISAP na poprawnych odpowiedziach (26 u&nbsp;Haiku, 25 u&nbsp;Bielika).</figcaption>
+                        </figure>
                     </article>
                     <article class="case-decision">
                         <h3 data-en="Thresholds before measuring, and a kill switch">Progi przed pomiarem i&nbsp;wyłącznik awaryjny</h3>
@@ -359,6 +440,23 @@
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="Progress is slower. Article accuracy rose only from 22 to 23 of 29 (measured on 2 August 2026). I rejected two promising ideas. Tuning the result ranking will not fix the six remaining misses. The results come from the same 32 questions I tuned the changes on.">Postęp jest wolniejszy. Trafność artykułu wzrosła tylko z&nbsp;22 do 23 z&nbsp;29 (pomiar z&nbsp;2&nbsp;sierpnia 2026). Dwa obiecujące pomysły odrzuciłem. Pozostałych sześciu chybień nie naprawi strojenie kolejności wyników. Wyniki pochodzą z&nbsp;tych samych 32&nbsp;pytań, na których stroiłem zmiany.</dd>
                         </dl>
+                        <figure class="case-chart">
+                            <p class="case-chart-title" data-en="Reliability defects in 32 answers of the local variant">Defekty rzetelności w&nbsp;32&nbsp;odpowiedziach wariantu lokalnego</p>
+                            <svg viewBox="0 0 360 230" role="img" aria-labelledby="ch-def-t ch-def-d">
+                                <title id="ch-def-t" data-en="Reliability defects, local variant">Defekty rzetelności, wariant lokalny</title>
+                                <desc id="ch-def-d" data-en="At baseline 6 of 32 answers had a reliability defect, before the last change 1 of 32, after it 0 of 32.">Na początku defekt rzetelności miało 6 z&nbsp;32&nbsp;odpowiedzi, przed ostatnią zmianą 1 z&nbsp;32, po niej 0 z&nbsp;32.</desc>
+                                <rect class="cc-bar" x="61.7" y="20" width="60" height="180" rx="3"/>
+                                <rect class="cc-bar" x="165" y="170" width="60" height="30" rx="3"/>
+                                <text class="cc-value" x="91.7" y="13" text-anchor="middle">6/32</text>
+                                <text class="cc-value" x="195" y="163" text-anchor="middle">1/32</text>
+                                <text class="cc-value cc-value--key" x="298.3" y="193" text-anchor="middle">0/32</text>
+                                <line class="cc-axis" x1="40" y1="200" x2="350" y2="200"/>
+                                <text class="cc-label" x="91.7" y="220" text-anchor="middle" data-en="baseline">początek</text>
+                                <text class="cc-label" x="195" y="220" text-anchor="middle" data-en="before">przed</text>
+                                <text class="cc-label" x="298.3" y="220" text-anchor="middle" data-en="after">po</text>
+                            </svg>
+                            <figcaption data-en="At baseline, before the last change and after it. Local variant measurement of 2 August 2026, on the same 32 questions the changes were tuned on.">Na początku, przed ostatnią zmianą i&nbsp;po niej. Pomiar wariantu lokalnego z&nbsp;2&nbsp;sierpnia 2026, na tych samych 32&nbsp;pytaniach, na których stroiłem zmiany.</figcaption>
+                        </figure>
                     </article>
                     <article class="case-decision">
                         <h3 data-en="Local processing instead of redaction before US providers">Lokalne przetwarzanie zamiast maskowania przed dostawcami z&nbsp;USA</h3>
@@ -466,6 +564,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=63" defer></script>
+    <script src="/script.js?v=64" defer></script>
 </body>
 </html>

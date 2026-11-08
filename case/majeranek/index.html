@@ -77,7 +77,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="/style.css?v=161">
+    <link rel="stylesheet" href="/style.css?v=162">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -177,7 +177,44 @@
             <section id="problem" class="case-section" aria-labelledby="h-problem">
                 <h2 class="case-h2" id="h-problem"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span data-en="Problem and context">Problem i&nbsp;kontekst</span></h2>
                 <p data-en="Majeranek is an app in Polish and English for building rankings of films, games, books and music. The seeded catalogue also has anime, TV series, food and sport. Since version 1.1.0 of 1 November 2026 the editor opens as a tier board, that is levels from best to weakest. A numbered list is one switch away. Items are ordered by dragging or tapping. When the choice is hard, head-to-head “which is better?” duels help. A ranking can be shared or kept private.">Majeranek to aplikacja po polsku i&nbsp;angielsku do układania rankingów filmów, gier, książek i&nbsp;muzyki. W&nbsp;zasilonym katalogu są też anime, seriale, jedzenie i&nbsp;sport. Od wersji 1.1.0&nbsp;z&nbsp;1&nbsp;listopada 2026 kreator otwiera się jako tablica tierów, czyli poziomów od najlepszego do najsłabszego. Lista numerowana jest pod przełącznikiem. Pozycje układa się przeciąganiem albo stuknięciem. Gdy trudno wybrać, pomagają pojedynki jeden na jeden „który lepszy?”. Ranking można udostępnić albo zostawić prywatny.</p>
+                <figure class="case-diagram">
+                    <svg viewBox="0 0 360 244" role="img" aria-labelledby="duel-title duel-desc">
+                        <title id="duel-title" data-en="One duel, illustration">Jeden pojedynek, ilustracja</title>
+                        <desc id="duel-desc" data-en="Two items with a rating of 1500 each. The user answers “which is better?” and picks A. With K = 32 and equal ratings the expected result is one half, so A goes up to 1516 and B goes down to 1484.">Dwie pozycje z&nbsp;oceną 1500 każda. Użytkownik odpowiada na pytanie „który lepszy?” i&nbsp;wybiera A. Przy K&nbsp;=&nbsp;32 i&nbsp;równych ocenach oczekiwany wynik to połowa, więc A rośnie do 1516, a&nbsp;B spada do 1484.</desc>
+                        <defs>
+                            <marker id="cd-arrow-duel" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path class="cd-arrow" d="M0 0L10 5L0 10z"/>
+                            </marker>
+                        </defs>
+                        <rect class="cd-box" x="20" y="10" width="140" height="52" rx="8"/>
+                        <text class="cd-label" x="90" y="31" text-anchor="middle" data-en="Item A">Pozycja A</text>
+                        <text class="cd-note" x="90" y="49" text-anchor="middle">ELO 1500</text>
+                        <rect class="cd-box" x="200" y="10" width="140" height="52" rx="8"/>
+                        <text class="cd-label" x="270" y="31" text-anchor="middle" data-en="Item B">Pozycja B</text>
+                        <text class="cd-note" x="270" y="49" text-anchor="middle">ELO 1500</text>
+                        <path class="cd-edge" d="M90 62V92" marker-end="url(#cd-arrow-duel)"/>
+                        <path class="cd-edge" d="M270 62V92" marker-end="url(#cd-arrow-duel)"/>
+                        <rect class="cd-box" x="60" y="96" width="240" height="52" rx="8"/>
+                        <text class="cd-label" x="180" y="117" text-anchor="middle" data-en="“Which is better?” → A">„Który lepszy?” → A</text>
+                        <text class="cd-note" x="180" y="135" text-anchor="middle" data-en="K = 32 · expected result 0.5">K = 32 · oczekiwany wynik 0,5</text>
+                        <path class="cd-edge" d="M90 148V178" marker-end="url(#cd-arrow-duel)"/>
+                        <path class="cd-edge" d="M270 148V178" marker-end="url(#cd-arrow-duel)"/>
+                        <rect class="cd-box cd-box--key" x="20" y="182" width="140" height="52" rx="8"/>
+                        <text class="cd-label" x="90" y="203" text-anchor="middle">A: 1516</text>
+                        <text class="cd-note" x="90" y="221" text-anchor="middle" data-en="wins, +16">wygrywa, +16</text>
+                        <rect class="cd-box" x="200" y="182" width="140" height="52" rx="8"/>
+                        <text class="cd-label" x="270" y="203" text-anchor="middle">B: 1484</text>
+                        <text class="cd-note" x="270" y="221" text-anchor="middle" data-en="loses, −16">przegrywa, −16</text>
+                    </svg>
+                    <figcaption data-en="An illustration of one duel. A new item starts at 1500, and with equal ratings the winner takes 16 points from the loser. Formula from the code, as of 7 November 2026.">Ilustracja jednego pojedynku. Nowa pozycja startuje z&nbsp;oceną 1500, a&nbsp;przy równych ocenach zwycięzca zabiera przegranemu 16&nbsp;punktów. Wzór z&nbsp;kodu, stan na 7&nbsp;listopada 2026.</figcaption>
+                </figure>
                 <p data-en="The question was whether taste and recommendations can be derived from rankings alone, also across categories. For example, to recommend a film based on music taste or a book based on favourite games. In the first version the recommendations came entirely from Claude, which saw only the asking user’s own rankings. In early October 2026 more problems came to light. The recommendations page spent an AI credit on every visit, and the trending list was the same as the popular one. Reactions to recommendations were not saved anywhere, and the explanation widget showed made-up scores.">Pytanie projektu brzmiało, czy z&nbsp;samych rankingów da się wyprowadzić gust i&nbsp;rekomendacje, także między kategoriami. Na przykład polecić film na podstawie gustu muzycznego albo książkę na podstawie ulubionych gier. W&nbsp;pierwszej wersji rekomendacje w&nbsp;całości pisał Claude, który widział wyłącznie rankingi pytającego. Na początku października 2026 wyszło więcej problemów. Strona rekomendacji zużywała kredyt AI przy każdym wejściu, a&nbsp;lista trendów była tą samą listą co popularne. Reakcje na rekomendacje nigdzie się nie zapisywały, a&nbsp;widżet z&nbsp;wyjaśnieniem podawał wymyślone wyniki.</p>
+                <figure class="case-media case-media--frame">
+                    <div class="case-media-shot">
+                        <video poster="/assets/videos/majeranek.webp" data-src="/assets/videos/majeranek.mp4" width="960" height="540" style="--ar: 960 / 540" muted loop playsinline preload="none" aria-label="Nagranie: strona główna Majeranka z przykładowymi rankingami" data-en-aria="Clip: the Majeranek home page with sample rankings"></video>
+                    </div>
+                    <figcaption data-en="The home page with sample rankings, 7 seconds without sound. Recorded in October 2026, before version 1.1.0, Polish version.">Strona główna z&nbsp;przykładowymi rankingami, 7&nbsp;sekund bez dźwięku. Nagranie z&nbsp;października 2026, sprzed wersji 1.1.0, wersja polska.</figcaption>
+                </figure>
                 <p data-en="Then there is the cold start, the lack of data at the beginning. A new app does not know which titles appear together in rankings, and it has no full catalogue. Items added in the editor had no category, so they never entered the duel pool. A freshly seeded catalogue, where nothing had been ranked yet, fell back to random order. This is a personal project at version 1.1.0, not measured on users, so the evidence below is technical only.">Do tego dochodzi zimny start, czyli brak danych na początku. Nowa aplikacja nie wie, które tytuły występują razem w&nbsp;rankingach, i&nbsp;nie ma pełnego katalogu. Pozycje dodane w&nbsp;kreatorze nie miały kategorii, więc nie trafiały do puli pojedynków. Świeżo zasilony katalog, w&nbsp;którym nic jeszcze nie trafiło do rankingów, układał się losowo. To projekt osobisty w&nbsp;wersji 1.1.0, bez pomiaru na użytkownikach, dlatego dowody poniżej są wyłącznie techniczne.</p>
             </section>
 
@@ -199,6 +236,24 @@
                 <p data-en="The browser reads and writes tables with the signed-in user’s token, which proves who they are. It does this through PostgREST, an API that Supabase creates straight from the database structure.">Przeglądarka czyta i&nbsp;zapisuje tabele z&nbsp;tokenem zalogowanego użytkownika, który potwierdza, kim on jest. Robi to przez PostgREST, API, które Supabase tworzy prosto ze struktury bazy.</p>
                 <p data-en="Whatever needs a server is done by server functions that live next to the pages. They call Claude, fetch covers from outside catalogues and run scheduled jobs. Some of them run with full privileges that bypass the RLS rules. There the filters have to be written in code.">To, co wymaga serwera, robią funkcje serwerowe działające obok stron. Wywołują Claude’a, pobierają okładki z&nbsp;zewnętrznych katalogów i&nbsp;uruchamiają zadania okresowe. Część z&nbsp;nich działa z&nbsp;pełnymi uprawnieniami, które omijają reguły RLS. Tam filtry trzeba zapisać w&nbsp;kodzie.</p>
                 <p data-en="Logic that has to stay consistent lives in the database itself, in SQL functions. They count the duel vote with ELO, the rating system known from chess. They also compute the similarity matrix behind recommendations, the taste profile and, since 1 November 2026, the community consensus for templates. A GitHub Actions job recomputes them every day.">Logika, która musi być spójna, siedzi w&nbsp;samej bazie, w&nbsp;funkcjach SQL. Liczą one głos w&nbsp;pojedynku według ELO, systemu ocen znanego z&nbsp;szachów. Liczą też macierz podobieństw do rekomendacji, profil gustu, a&nbsp;od 1&nbsp;listopada 2026 także konsensus społeczności dla szablonów. Codziennie przelicza je zadanie w&nbsp;GitHub Actions.</p>
+                <figure class="case-code">
+                    <div class="case-code-head">
+                        <span class="case-code-file" data-en="simplified excerpt">uproszczony zapis</span>
+                        <span class="case-code-lang">SQL</span>
+                    </div>
+<pre tabindex="0" aria-label="Wycinek kodu: głos ELO w jednej transakcji" data-en-aria="Code excerpt: the ELO vote in one transaction"><code><span class="tok-c">-- one duel vote = one transaction: all or nothing</span>
+<span class="tok-k">perform</span> <span class="tok-f">pg_advisory_xact_lock</span>(<span class="tok-f">hashtext</span>(r::text));  <span class="tok-c">-- lock this ranking</span>
+<span class="tok-k">select</span> owner_id <span class="tok-k">from</span> rankings <span class="tok-k">where</span> id = r;
+<span class="tok-k">if</span> owner_id &lt;&gt; <span class="tok-f">auth.uid</span>() <span class="tok-k">then raise</span> <span class="tok-s">'not your ranking'</span>; <span class="tok-k">end if</span>;
+
+e := <span class="tok-n">1</span> / (<span class="tok-n">1</span> + <span class="tok-n">10</span> ^ ((elo_loser - elo_winner) / <span class="tok-n">400.0</span>));
+<span class="hl">elo_winner := <span class="tok-f">floor</span>(elo_winner + <span class="tok-n">32</span> * (<span class="tok-n">1</span> - e) + <span class="tok-n">0.5</span>);  <span class="tok-c">-- same rounding as the preview</span></span>
+elo_loser  := <span class="tok-f">floor</span>(elo_loser  - <span class="tok-n">32</span> * (<span class="tok-n">1</span> - e) + <span class="tok-n">0.5</span>);
+
+<span class="tok-k">insert into</span> comparisons <span class="tok-k">values</span> (r, winner, loser);
+<span class="tok-k">perform</span> <span class="tok-f">recompute_positions</span>(r);</code></pre>
+                    <figcaption data-en="The whole vote is one function in the database. It locks the ranking, checks the owner, computes ELO with K = 32 and saves the comparison and the new positions. As of 7 November 2026.">Cały głos to jedna funkcja w&nbsp;bazie. Blokuje ranking, sprawdza właściciela, liczy ELO z&nbsp;K&nbsp;=&nbsp;32 i&nbsp;zapisuje porównanie oraz nowe miejsca. Stan na 7&nbsp;listopada 2026.</figcaption>
+                </figure>
                 <p data-en="Claude is an add-on, and since 14 October 2026 the Haiku 5.5 model writes the text. AI recommendations and analyses run only after a click that shows their cost. Besides that the model suggests a category and searches when items are added. It also writes an optional description of the taste profile. All of it shares one limit of 5 uses in any 24 hours and 30 a month.">Claude jest dodatkiem, a&nbsp;od 14&nbsp;października 2026 tekst pisze model Haiku 5.5. Rekomendacje i&nbsp;analizy z&nbsp;modelu uruchamia dopiero kliknięcie, które pokazuje koszt. Poza tym model podpowiada kategorię i&nbsp;wyszukuje przy dodawaniu pozycji. Pisze też opcjonalny opis profilu gustu. Wszystko to ma jeden limit, 5&nbsp;użyć w&nbsp;dowolnych 24&nbsp;godzinach i&nbsp;30&nbsp;w&nbsp;miesiącu.</p>
                 <figure class="case-diagram">
                     <svg viewBox="0 0 360 416" role="img" aria-labelledby="arch-title arch-desc">
@@ -310,6 +365,18 @@
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="Recommendations appear only after a click. Without an API key the AI features return 503. The helpers used when adding items, search hints and the category suggestion, count towards the same limit without such a click (as of 7 November 2026).">Rekomendacje pojawiają się dopiero po kliknięciu. Bez klucza API funkcje AI zwracają błąd 503. Podpowiedzi przy dodawaniu pozycji, czyli wyszukiwanie i&nbsp;kategoria, liczą się do tego samego limitu bez takiego kliknięcia (stan na 7&nbsp;listopada 2026).</dd>
                         </dl>
+                        <div class="case-compare">
+                            <div class="case-compare-col">
+                                <p class="case-compare-label" data-en="Until 31 October 2026">Do 31&nbsp;października 2026</p>
+                                <p class="case-compare-value" data-en="10 a month">10 na miesiąc</p>
+                                <p class="case-compare-text" data-en="AI credits on a free account.">Kredyty AI na darmowym koncie.</p>
+                            </div>
+                            <div class="case-compare-col case-compare-col--after">
+                                <p class="case-compare-label" data-en="Since 31 October 2026">Od 31&nbsp;października 2026</p>
+                                <p class="case-compare-value" data-en="5 per 24 h">5 na 24&nbsp;h</p>
+                                <p class="case-compare-text" data-en="And 30 a calendar month, the same on every plan. Only a delivered answer counts.">I&nbsp;30&nbsp;w&nbsp;miesiącu kalendarzowym, tyle samo w&nbsp;każdym planie. Liczy się tylko dostarczona odpowiedź.</p>
+                            </div>
+                        </div>
                     </article>
                     <article class="case-decision">
                         <h3 data-en="A tier list without an account">Tier lista bez konta</h3>
@@ -338,6 +405,20 @@
                         </dl>
                     </article>
                 </div>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="What a recommendation’s score is made of">Z&nbsp;czego składa się wynik rekomendacji</p>
+                    <svg viewBox="0 0 360 100" role="img" aria-labelledby="split-t split-d">
+                        <title id="split-t" data-en="Recommendation score split">Podział wyniku rekomendacji</title>
+                        <desc id="split-d" data-en="One bar is the whole score. 65 percent comes from similar titles, 35 percent from the category.">Jeden pasek to cały wynik. 65&nbsp;procent pochodzi z&nbsp;podobnych tytułów, 35&nbsp;procent z&nbsp;kategorii.</desc>
+                        <rect class="cc-bar cc-bar--key" x="20" y="34" width="207" height="30" rx="3"/>
+                        <rect class="cc-bar" x="229" y="34" width="111" height="30" rx="3"/>
+                        <text class="cc-value cc-value--key" x="123.5" y="24" text-anchor="middle" data-en="0.65">0,65</text>
+                        <text class="cc-value" x="284.5" y="24" text-anchor="middle" data-en="0.35">0,35</text>
+                        <text class="cc-label" x="123.5" y="84" text-anchor="middle" data-en="Similar titles">Podobne tytuły</text>
+                        <text class="cc-label" x="284.5" y="84" text-anchor="middle" data-en="Category">Kategoria</text>
+                    </svg>
+                    <figcaption data-en="The score split from the taste profile decision. Constants picked by hand, with no measurement behind them. Code as of 7 November 2026.">Podział wyniku z&nbsp;decyzji o&nbsp;profilu gustu. Stałe dobrane ręcznie, bez pomiaru. Stan kodu na 7&nbsp;listopada 2026.</figcaption>
+                </figure>
             </section>
 
             <section id="dowody" class="case-section" aria-labelledby="h-dowody">
@@ -381,7 +462,21 @@
             <section id="wnioski" class="case-section" aria-labelledby="h-wnioski">
                 <h2 class="case-h2" id="h-wnioski"><span class="case-h2-num" aria-hidden="true" translate="no">§ 6</span><span data-en="What I learned">Czego się nauczyłem</span></h2>
                 <ul class="showcase-list">
-                    <li data-en="A green tick in GitHub Actions does not mean the job works. The matrix and profile refresh first finished successfully while, without its secrets, it did nothing. So I added a warning for missing configuration. After the move to the new domain it went quiet again, from 31 October to 6 November 2026. The old address answered with a 308 redirect, and the curl tool counted that as success. Since 6 November the job fails on any answer other than a correct 2xx one, and the health check fails when the app address redirects.">Zielony znaczek w&nbsp;GitHub Actions nie znaczy jeszcze, że zadanie działa. Odświeżanie macierzy i&nbsp;profili najpierw kończyło się sukcesem, choć bez sekretów nic nie robiło. Dodałem więc ostrzeżenie o&nbsp;brakującej konfiguracji. Po przejściu na nową domenę zadanie znów ucichło, od 31&nbsp;października do 6&nbsp;listopada 2026. Stary adres odpowiadał przekierowaniem 308, a&nbsp;narzędzie curl uznawało to za sukces. Od 6&nbsp;listopada zadanie kończy się błędem przy każdej odpowiedzi innej niż poprawna 2xx, a&nbsp;kontrola zdrowia, gdy adres aplikacji przekierowuje.</li>
+                    <li data-en="A green tick in GitHub Actions does not mean the job works. The matrix and profile refresh first finished successfully while, without its secrets, it did nothing. So I added a warning for missing configuration. After the move to the new domain it went quiet again, from 31 October to 6 November 2026. The old address answered with a 308 redirect, and the curl tool counted that as success.">Zielony znaczek w&nbsp;GitHub Actions nie znaczy jeszcze, że zadanie działa. Odświeżanie macierzy i&nbsp;profili najpierw kończyło się sukcesem, choć bez sekretów nic nie robiło. Dodałem więc ostrzeżenie o&nbsp;brakującej konfiguracji. Po przejściu na nową domenę zadanie znów ucichło, od 31&nbsp;października do 6&nbsp;listopada 2026. Stary adres odpowiadał przekierowaniem 308, a&nbsp;narzędzie curl uznawało to za sukces.</li>
+                </ul>
+                <div class="case-compare">
+                    <div class="case-compare-col">
+                        <p class="case-compare-label" data-en="31 October to 6 November 2026">Od 31&nbsp;października do 6&nbsp;listopada 2026</p>
+                        <p class="case-compare-value" data-en="308 = success">308 = sukces</p>
+                        <p class="case-compare-text" data-en="The old address redirected, curl ended without an error, the job showed green and recomputed nothing.">Stary adres przekierowywał, curl kończył bez błędu, zadanie świeciło na zielono i&nbsp;nic nie przeliczało.</p>
+                    </div>
+                    <div class="case-compare-col case-compare-col--after">
+                        <p class="case-compare-label" data-en="Since 6 November 2026">Od 6&nbsp;listopada 2026</p>
+                        <p class="case-compare-value" data-en="2xx only">tylko 2xx</p>
+                        <p class="case-compare-text" data-en="Any other answer fails the job, and the health check fails when the app address redirects.">Każda inna odpowiedź kończy zadanie błędem, a&nbsp;kontrola zdrowia pada, gdy adres aplikacji przekierowuje.</p>
+                    </div>
+                </div>
+                <ul class="showcase-list">
                     <li data-en="RLS fails silently. A blocked update returns 0 rows and no error. So the compare screen kept serving the same pair until the server function started checking the number of affected rows and returning a 403 error. Hiding a test account’s profile with an RLS rule did not hide its rankings either. An embed in PostgREST, which pulls related rows into the same query, returns the rankings even when the linked profile is hidden. Isolation had to be added to every content table.">RLS zawodzi po cichu. Zablokowana aktualizacja zwraca 0&nbsp;wierszy i&nbsp;żadnego błędu. Ekran porównań podawał więc w&nbsp;kółko tę samą parę, aż funkcja serwerowa zaczęła sprawdzać liczbę zmienionych wierszy i&nbsp;zwracać błąd 403. Ukrycie profilu konta testowego regułą RLS nie ukrywało też jego rankingów. Osadzenie w&nbsp;PostgREST, czyli dociągnięcie powiązanych wierszy w&nbsp;tym samym zapytaniu, zwraca rankingi także wtedy, gdy powiązany profil jest ukryty. Izolację trzeba było dopisać na każdej tabeli z&nbsp;treścią.</li>
                     <li data-en="A Prisma schema is not the database. The recommendations migration referred to a column that existed only in the old Prisma schema, and it would have aborted as a whole. A review before merging caught it. Since 11 October 2026 CI generates the types from the real migrations.">Schemat Prisma to nie baza. Migracja rekomendacji odwoływała się do kolumny istniejącej tylko w&nbsp;starym schemacie Prisma i&nbsp;przerwałaby się w&nbsp;całości. Wyłapał to przegląd przed scaleniem. Od 11&nbsp;października 2026 typy generuje CI z&nbsp;prawdziwych migracji.</li>
                     <li data-en="I add an index only after measuring. An index meant to speed up the duel pool query changed nothing. With or without it the query took about 13 ms on a test database with 200,000 items in 8 categories (11 October 2026). So I did not add it and recorded the reason in the migration.">Indeks dodaję dopiero po pomiarze. Indeks, który miał przyspieszyć zapytanie o&nbsp;pulę pojedynków, niczego nie zmieniał. Z&nbsp;nim i&nbsp;bez niego zapytanie trwało ok.&nbsp;13&nbsp;ms na testowej bazie z&nbsp;200&nbsp;000&nbsp;pozycji w&nbsp;8&nbsp;kategoriach (11&nbsp;października 2026). Dlatego go nie dodałem, a&nbsp;powód zapisałem w&nbsp;migracji.</li>
@@ -422,6 +517,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=63" defer></script>
+    <script src="/script.js?v=64" defer></script>
 </body>
 </html>

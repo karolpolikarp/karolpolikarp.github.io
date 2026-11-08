@@ -99,7 +99,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="/style.css?v=161">
+    <link rel="stylesheet" href="/style.css?v=162">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -250,7 +250,59 @@
                     <li data-en="The answer has a fixed format. First come the numbers alone, from “D0: [number]%” to “D30: [number]%”, then the reasoning. A regular expression, a search pattern for text, takes only a number with a per cent sign that stands at most 20 characters after the horizon label. Each later match overwrites the earlier one, so a phrase such as “D7 … 12%” in the reasoning would replace the forecast. A missing horizon shows up only as “N/A” in the table.">Odpowiedź ma sztywny format. Najpierw idą same liczby, od „D0: [liczba]%” do „D30: [liczba]%”, a&nbsp;potem uzasadnienie. Wyrażenie regularne, czyli wzorzec wyszukiwania w&nbsp;tekście, bierze tylko liczbę ze znakiem procentu, stojącą najwyżej 20&nbsp;znaków za etykietą horyzontu. Każde kolejne dopasowanie nadpisuje poprzednie, więc fraza w&nbsp;rodzaju „D7 … 12%” w&nbsp;uzasadnieniu zastąpiłaby prognozę. Brak horyzontu widać tylko jako „N/A” w&nbsp;tabeli.</li>
                     <li data-en="The 100-session statistics and the moving averages use only sessions before the report, so the report-day price does not enter them. The exception is the 100-day volatility, described below. The averages are clean only on the function’s first call, though; after that the indicator function overwrites them with a version that includes the report day. With many reports in turn, report-day information would return to the averages too.">Statystyki ze 100&nbsp;sesji i&nbsp;średnie kroczące liczę wyłącznie z&nbsp;sesji przed raportem, więc cena z&nbsp;dnia raportu do nich nie trafia. Wyjątkiem jest zmienność 100-dniowa, opisana niżej. Średnie są jednak czyste tylko przy pierwszym wywołaniu funkcji, potem funkcja wskaźników nadpisuje je wersją z&nbsp;dniem raportu. Przy wielu raportach po kolei informacja z&nbsp;dnia raportu wróciłaby więc też do średnich.</li>
                 </ul>
-                <p data-en="The only result stored in the repository is not about Allegro. The notebook run of 18 December 2024 covers a CD Projekt report of 29 January 2021 about a class action against the company. The model forecast −5, −10, −15, −20 and −25%, and the actual moves were −16.4, −16.2, −19.6, −27.9 and −35.2%. The direction is right at all five horizons. The mean absolute error, computed from the notebook table, is 8.1 percentage points, the largest 11.4 on the report day and the smallest 4.6 at D7. The forecast is an even ladder in steps of 5 percentage points. A single sample cannot show whether the model read the report or repeated a pattern. The CD Projekt files from this run are not in the repository, so the run cannot be reproduced from the repository alone.">Jedyny wynik zapisany w&nbsp;repozytorium nie dotyczy Allegro. Przebieg notebooka z&nbsp;18&nbsp;grudnia 2024 obejmuje raport CD Projekt z&nbsp;29&nbsp;stycznia 2021 o&nbsp;pozwie zbiorowym przeciwko spółce. Model prognozował −5, −10, −15, −20 i&nbsp;−25%, a&nbsp;rzeczywiste zmiany wyniosły −16,4, −16,2, −19,6, −27,9 i&nbsp;−35,2%. Kierunek zgadza się we wszystkich pięciu horyzontach. Średni błąd bezwzględny, policzony z&nbsp;tabeli notebooka, to 8,1&nbsp;punktu procentowego, największy 11,4 w&nbsp;dniu raportu, a&nbsp;najmniejszy 4,6 w&nbsp;D7. Prognoza to równe schodki co 5&nbsp;punktów procentowych. Z&nbsp;jednej próby nie da się rozstrzygnąć, czy model odczytał raport, czy powtórzył schemat. Plików CD Projekt z&nbsp;tego przebiegu nie ma w&nbsp;repozytorium, więc z&nbsp;samego repozytorium nie da się go odtworzyć.</p>
+                <figure class="case-code">
+                    <div class="case-code-head">
+                        <span class="case-code-file">predykcje_sgh.ipynb</span>
+                        <span class="case-code-lang">Python</span>
+                    </div>
+<pre tabindex="0" aria-label="Wycinek kodu: odczyt prognoz z odpowiedzi modelu" data-en-aria="Code excerpt: reading the forecasts from the model’s answer"><code>gpt_predictions = {}
+
+matches = re.<span class="tok-f">findall</span>(<span class="tok-s">r"(D\d+).{0,20}?([+-]?\d+(?:\.\d+)?)%"</span>, prediction)
+<span class="tok-k">for</span> period, value <span class="tok-k">in</span> matches:
+<span class="hl">    gpt_predictions[period] = <span class="tok-f">float</span>(value)</span>
+    <span class="tok-f">print</span>(<span class="tok-s">f"Znaleziono przewidywanie: {period} = {float(value):.2f}%"</span>)</code></pre>
+                    <figcaption data-en="When a horizon is found a second time, the later number overwrites the earlier one in the highlighted line. Code from the public repository, as of 8 November 2026.">Gdy ten sam horyzont pojawi się drugi raz, późniejsza liczba nadpisuje wcześniejszą w&nbsp;podświetlonej linii. Kod z&nbsp;publicznego repozytorium, stan na 8&nbsp;listopada 2026.</figcaption>
+                </figure>
+                <p data-en="The only result stored in the repository is not about Allegro. The notebook run of 18 December 2024 covers a CD Projekt report of 29 January 2021 about a class action against the company. The model forecast −5, −10, −15, −20 and −25%, and the actual moves were −16.4, −16.2, −19.6, −27.9 and −35.2%. The direction is right at all five horizons. The mean absolute error, computed from the notebook table, is 8.1 percentage points, the largest 11.4 on the report day and the smallest 4.6 at D7. A single sample cannot show whether the model read the report or repeated a pattern. The CD Projekt files from this run are not in the repository, so the run cannot be reproduced from the repository alone.">Jedyny wynik zapisany w&nbsp;repozytorium nie dotyczy Allegro. Przebieg notebooka z&nbsp;18&nbsp;grudnia 2024 obejmuje raport CD Projekt z&nbsp;29&nbsp;stycznia 2021 o&nbsp;pozwie zbiorowym przeciwko spółce. Model prognozował −5, −10, −15, −20 i&nbsp;−25%, a&nbsp;rzeczywiste zmiany wyniosły −16,4, −16,2, −19,6, −27,9 i&nbsp;−35,2%. Kierunek zgadza się we wszystkich pięciu horyzontach. Średni błąd bezwzględny, policzony z&nbsp;tabeli notebooka, to 8,1&nbsp;punktu procentowego, największy 11,4 w&nbsp;dniu raportu, a&nbsp;najmniejszy 4,6 w&nbsp;D7. Z&nbsp;jednej próby nie da się rozstrzygnąć, czy model odczytał raport, czy powtórzył schemat. Plików CD Projekt z&nbsp;tego przebiegu nie ma w&nbsp;repozytorium, więc z&nbsp;samego repozytorium nie da się go odtworzyć.</p>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="CD Projekt: forecast and actual price change">CD Projekt: prognoza i&nbsp;rzeczywista zmiana kursu</p>
+                    <ul class="cc-legend" role="list">
+                        <li class="cc-legend--key" data-en="GPT-4o-mini forecast">prognoza GPT-4o-mini</li>
+                        <li data-en="actual change">rzeczywista zmiana</li>
+                    </ul>
+                    <svg viewBox="0 0 360 215" role="img" aria-labelledby="ch-cdp-t ch-cdp-d">
+                        <title id="ch-cdp-t" data-en="CD Projekt forecast against the actual change">Prognoza dla CD Projekt wobec rzeczywistej zmiany</title>
+                        <desc id="ch-cdp-d" data-en="At D0, D3, D7, D14 and D30 the model forecast −5, −10, −15, −20 and −25 per cent. The price actually changed by −16.4, −16.2, −19.6, −27.9 and −35.2 per cent.">W horyzontach D0, D3, D7, D14 i D30 model prognozował −5, −10, −15, −20 i −25 procent. Kurs zmienił się o −16,4, −16,2, −19,6, −27,9 i −35,2 procent.</desc>
+                        <line class="cc-axis" x1="40" y1="30" x2="300" y2="30"/>
+                        <line class="cc-grid" x1="40" y1="105" x2="300" y2="105"/>
+                        <line class="cc-grid" x1="40" y1="180" x2="300" y2="180"/>
+                        <text class="cc-label" x="32" y="34" text-anchor="end">0%</text>
+                        <text class="cc-label" x="32" y="109" text-anchor="end">−20%</text>
+                        <text class="cc-label" x="32" y="184" text-anchor="end">−40%</text>
+                        <path class="cc-line" pathLength="1" d="M40 91.5L105 90.8L170 103.5L235 134.6L300 162"/>
+                        <path class="cc-line cc-line--key" pathLength="1" d="M40 48.8L105 67.5L170 86.3L235 105L300 123.8"/>
+                        <circle class="cc-dot" cx="40" cy="91.5" r="4"/>
+                        <circle class="cc-dot" cx="105" cy="90.8" r="4"/>
+                        <circle class="cc-dot" cx="170" cy="103.5" r="4"/>
+                        <circle class="cc-dot" cx="235" cy="134.6" r="4"/>
+                        <circle class="cc-dot" cx="300" cy="162" r="4"/>
+                        <circle class="cc-dot cc-dot--key" cx="40" cy="48.8" r="4"/>
+                        <circle class="cc-dot cc-dot--key" cx="105" cy="67.5" r="4"/>
+                        <circle class="cc-dot cc-dot--key" cx="170" cy="86.3" r="4"/>
+                        <circle class="cc-dot cc-dot--key" cx="235" cy="105" r="4"/>
+                        <circle class="cc-dot cc-dot--key" cx="300" cy="123.8" r="4"/>
+                        <text class="cc-value cc-value--key" x="47" y="44" text-anchor="start">−5%</text>
+                        <text class="cc-value" x="47" y="83" text-anchor="start" data-en="−16.4%">−16,4%</text>
+                        <text class="cc-value cc-value--key" x="309" y="128" text-anchor="start">−25%</text>
+                        <text class="cc-value" x="309" y="166" text-anchor="start" data-en="−35.2%">−35,2%</text>
+                        <text class="cc-label" x="40" y="204" text-anchor="middle">D0</text>
+                        <text class="cc-label" x="105" y="204" text-anchor="middle">D3</text>
+                        <text class="cc-label" x="170" y="204" text-anchor="middle">D7</text>
+                        <text class="cc-label" x="235" y="204" text-anchor="middle">D14</text>
+                        <text class="cc-label" x="300" y="204" text-anchor="middle">D30</text>
+                    </svg>
+                    <figcaption data-en="CD Projekt report of 29 January 2021, notebook run of 18 December 2024. The direction is right at every horizon, but the forecast is an even ladder in steps of 5 points. The largest gap, 11.4 points, is on the report day.">Raport CD Projekt z&nbsp;29&nbsp;stycznia 2021, przebieg notebooka z&nbsp;18&nbsp;grudnia 2024. Kierunek trafiony w&nbsp;każdym horyzoncie, ale prognoza to równe schodki co 5&nbsp;punktów. Największy rozjazd, 11,4&nbsp;punktu, jest w&nbsp;dniu raportu.</figcaption>
+                </figure>
                 <p data-en="Only 114 of the 134 reports can be evaluated cleanly, because only they have at least 100 earlier sessions, a full 30 days after the report and a date on a session day. As of 14 October 2026. The two biggest threats are in the cards below, three more follow.">Bez zastrzeżeń da się ocenić tylko 114 ze 134&nbsp;raportów, bo tylko one mają co najmniej 100&nbsp;wcześniejszych sesji, pełne 30&nbsp;dni po raporcie i&nbsp;datę w&nbsp;dniu sesji. Stan na 14&nbsp;października 2026. Dwa największe zagrożenia opisuję w&nbsp;kartach niżej, trzy kolejne poniżej.</p>
                 <ul class="showcase-list">
                     <li data-en="Calendar days instead of sessions. D3 or D7 uses the close of the last session no later than 3 or 7 calendar days after the report, so a horizon spans a varying number of sessions. 8 of the 134 reports are dated on a day without a session. Two of them, from 31 December 2021 and 20 January 2024, get D0 = 0 by construction, and six predate Allegro’s first session. For them, and for the report from the day of that first session, the code has no base price and stops with an error. For 6 reports at the end of the set D30 silently stops at the last available price.">Dni kalendarzowe zamiast sesji. D3 czy D7 liczy się z&nbsp;ceny zamknięcia ostatniej sesji nie później niż 3 czy 7&nbsp;dni kalendarzowych po raporcie, więc horyzont obejmuje różną liczbę sesji. Datę dnia bez sesji ma 8&nbsp;ze 134&nbsp;raportów. Dwa z&nbsp;nich, z&nbsp;31&nbsp;grudnia 2021 i&nbsp;20&nbsp;stycznia 2024, dostają D0&nbsp;=&nbsp;0 z&nbsp;samej konstrukcji, a&nbsp;sześć pochodzi sprzed pierwszej sesji Allegro. Dla nich i&nbsp;dla raportu z&nbsp;dnia tej pierwszej sesji kod nie ma ceny bazowej i&nbsp;przerywa działanie błędem. Przy 6&nbsp;raportach z&nbsp;końca zbioru D30 po cichu kończy się na ostatniej dostępnej cenie.</li>
@@ -330,8 +382,44 @@
                 <p data-en="The question was what makes a game sell. The data comes from the public Video Game Sales dataset on Kaggle. It holds 16,598 records from 1980–2020, and each record is a game on a given platform. There are 11,493 unique titles. The data file is not in the repository; it has to be downloaded from Kaggle. I did the analysis in June 2025 as a university project and uploaded the notebooks on 14 and 15 June 2025.">Pytanie brzmiało, co decyduje o&nbsp;sprzedaży gry. Dane pochodzą z&nbsp;publicznego zbioru Video Game Sales z&nbsp;serwisu Kaggle. To 16&nbsp;598&nbsp;rekordów z&nbsp;lat 1980–2020, a&nbsp;każdy rekord to gra na danej platformie. Unikalnych tytułów jest 11&nbsp;493. Pliku z&nbsp;danymi nie ma w&nbsp;repozytorium, trzeba go pobrać z&nbsp;Kaggle. Analizę zrobiłem w&nbsp;czerwcu 2025 jako projekt na studia, a&nbsp;notebooki wgrałem 14 i&nbsp;15&nbsp;czerwca 2025.</p>
                 <p data-en="In Python I went from a data quality audit to a model. Among other things, the audit found that in 2,041 records from 1980–2010, or 16.4%, regional sales do not add up to global sales. I kept them in the data with a flag.">W&nbsp;Pythonie przeszedłem od audytu jakości danych do modelu. Audyt wykazał m.in., że w&nbsp;2&nbsp;041&nbsp;rekordach z&nbsp;lat 1980–2010, czyli w&nbsp;16,4%, suma sprzedaży regionalnej nie zgadza się ze sprzedażą globalną. Zostawiłem je w&nbsp;danych z&nbsp;oznaczeniem.</p>
                 <p data-en="Next I grouped 191 platform–genre pairs, each with at least 5 games. First PCA, principal component analysis, reduced many features to a few axes. Then K-Means split the pairs into 5 clusters, and I checked the result against Ward’s hierarchical clustering. Finally a random forest, an ensemble of many decision trees, predicted the logarithm of sales. I scored it on 20% of the data held out before training. An earlier version, also in the repository, fitted the model to raw sales on the whole set and reported no quality measure at all.">Potem pogrupowałem 191&nbsp;par platforma–gatunek, każda z&nbsp;co najmniej 5&nbsp;grami. Najpierw PCA, czyli analiza głównych składowych, sprowadziła wiele cech do kilku osi. Potem K-Means podzielił pary na 5&nbsp;skupień, a&nbsp;wynik sprawdziłem hierarchicznym grupowaniem Warda. Na koniec las losowy, czyli zespół wielu drzew decyzyjnych, przewidywał logarytm sprzedaży. Oceniłem go na 20% danych odłożonych przed uczeniem. Wcześniejsza wersja, też w&nbsp;repozytorium, dopasowywała model do surowej sprzedaży na całym zbiorze i&nbsp;nie podawała żadnej miary jakości.</p>
-                <p data-en="The first two PCA axes explain 61.3% of the variance. The silhouette score measures, on a scale from −1 to 1, how well separated the groups are, and for five clusters it is 0.366. The agreement with Ward’s split, measured by the adjusted Rand index, is 0.448, so the two methods agree only in part. In the model the publisher carries the most weight (34.5%), then years since 1980 (24.9%) and genre (19.1%), and the platform only 8.5%.">Dwie pierwsze osie z&nbsp;PCA wyjaśniają 61,3% zmienności. Wskaźnik silhouette mierzy w&nbsp;skali od −1 do 1, jak wyraźnie oddzielone są grupy, i&nbsp;dla pięciu skupień wynosi 0,366. Zgodność z&nbsp;podziałem Warda, mierzona skorygowanym indeksem Randa, to 0,448, więc obie metody zgadzają się tylko częściowo. W&nbsp;modelu największą wagę ma wydawca (34,5%), potem lata od 1980 (24,9%) i&nbsp;gatunek (19,1%), a&nbsp;platforma tylko 8,5%.</p>
+                <p data-en="The first two PCA axes explain 61.3% of the variance. The silhouette score measures, on a scale from −1 to 1, how well separated the groups are, and for five clusters it is 0.366. The agreement with Ward’s split, measured by the adjusted Rand index, is 0.448, so the two methods agree only in part.">Dwie pierwsze osie z&nbsp;PCA wyjaśniają 61,3% zmienności. Wskaźnik silhouette mierzy w&nbsp;skali od −1 do 1, jak wyraźnie oddzielone są grupy, i&nbsp;dla pięciu skupień wynosi 0,366. Zgodność z&nbsp;podziałem Warda, mierzona skorygowanym indeksem Randa, to 0,448, więc obie metody zgadzają się tylko częściowo.</p>
                 <p data-en="The main limitation is the conclusions hard-coded into part of the block at the end of the notebook. Those sentences contradict numbers printed earlier in the same output. The notebook says “Platform choice is key (40% of success)”, while the model gives the platform 8.5% importance and 9.0% for its popularity. It also says “1% of games = 30% of sales”, while the computation shows 11.3% of games and 61.0% of sales. “Growth 1980-2010: 5176x” does come from the computation, but the formula computes a percentage, not a multiple.">Główne ograniczenie to wnioski wpisane na sztywno w&nbsp;części bloku na końcu notebooka. Te zdania przeczą liczbom wypisanym wcześniej w&nbsp;tym samym wyniku. Notebook pisze „Kluczowe znaczenie wyboru platformy (40% sukcesu)”, a&nbsp;model daje platformie 8,5% ważności i&nbsp;9,0% za jej popularność. Pisze też „1% gier = 30% sprzedaży”, a&nbsp;obliczenia mówią o&nbsp;11,3% gier i&nbsp;61,0% sprzedaży. „Wzrost 1980-2010: 5176x” pochodzi z&nbsp;obliczeń, ale wzór liczy procenty, a&nbsp;nie krotność.</p>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="Feature importance in the sales model">Ważność cech w&nbsp;modelu sprzedaży</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Publisher">Wydawca</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="34.5%">34,5%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 72.2">
+                            <span class="cc-hbar-label" data-en="Years since 1980">Lata od 1980</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="24.9%">24,9%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 55.4">
+                            <span class="cc-hbar-label" data-en="Genre">Gatunek</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="19.1%">19,1%</span>
+                        </li>
+                        <li class="cc-hbar cc-hbar--key" style="--v: 26.1">
+                            <span class="cc-hbar-label" data-en="Platform popularity">Popularność platformy</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="9.0%">9,0%</span>
+                        </li>
+                        <li class="cc-hbar cc-hbar--key" style="--v: 24.6">
+                            <span class="cc-hbar-label" data-en="Platform">Platforma</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="8.5%">8,5%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 11.9">
+                            <span class="cc-hbar-label" data-en="Sequel or not">Czy sequel</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" data-en="4.1%">4,1%</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="Random forest on the 1980–2010 data, model notebook of 15 June 2025. Both platform features together come to 17.5%, while the summary of the same notebook gives the platform “40% of success”.">Las losowy na danych z&nbsp;lat 1980–2010, notebook z&nbsp;modelem z&nbsp;15&nbsp;czerwca 2025. Obie cechy platformy razem dają 17,5%, a&nbsp;podsumowanie tego samego notebooka przypisuje platformie „40% sukcesu”.</figcaption>
+                </figure>
                 <p data-en="The model notebook has a separate K-Means run, not the one with silhouette 0.366. The cluster names in it were hard-coded to cluster numbers rather than derived from their contents. The name “Japanese – JP dominance” went to a cluster whose top platforms are the Wii and PS2. Platform, genre and publisher are coded as consecutive numbers, so the model treats them as if they had a natural order.">Notebook z&nbsp;modelem ma osobne grupowanie K-Means, inne niż to z&nbsp;silhouette 0,366. Nazwy skupień były w&nbsp;nim przypisane na sztywno do numerów, a&nbsp;nie wyprowadzone z&nbsp;zawartości. Nazwę „Japońskie - Dominacja JP” dostało skupienie, w&nbsp;którym przodują Wii i&nbsp;PS2. Platforma, gatunek i&nbsp;wydawca są zakodowane jako kolejne numery, więc model traktuje je tak, jakby miały naturalną kolejność.</p>
                 <div class="case-decisions">
                     <article class="case-decision">
@@ -378,7 +466,33 @@
                 <p data-en="This was a course project in R, built around nine set tasks, from data types and missing values to segmentation and a map. Among other things, the analysis looks at who offers listings in the city and what goes with a higher price. The data is the Inside Airbnb snapshot for Winnipeg of 7 March 2025. It covers 1,626 listings, 79 variables and 15 neighbourhoods. I ran the notebook on 14 June 2025.">To projekt na zaliczenie w&nbsp;języku R, ułożony wokół dziewięciu zadanych kroków, od typów danych i&nbsp;braków po segmentację i&nbsp;mapę. Analiza sprawdza m.in., kto wystawia oferty w&nbsp;mieście i&nbsp;co idzie w&nbsp;parze z&nbsp;wyższą ceną. Dane to migawka serwisu Inside Airbnb dla Winnipeg z&nbsp;7&nbsp;marca 2025. Obejmuje 1&nbsp;626&nbsp;ofert, 79&nbsp;zmiennych i&nbsp;15&nbsp;dzielnic. Notebook uruchomiłem 14&nbsp;czerwca 2025.</p>
                 <p data-en="I removed 173 listings with no price. I capped price and the minimum and maximum number of nights at the 1st and 99th percentiles, without dropping rows. I filled gaps in beds, bathrooms and guest ratings with MICE. It is multiple imputation, in which each variable with gaps is predicted from the others.">Usunąłem 173&nbsp;oferty bez ceny. Cenę oraz minimalną i&nbsp;maksymalną liczbę nocy przyciąłem do 1. i&nbsp;99. percentyla, bez usuwania wierszy. Braki w&nbsp;łóżkach, łazienkach i&nbsp;ocenach gości uzupełniłem metodą MICE. To wielokrotne uzupełnianie braków, w&nbsp;którym każdą zmienną z&nbsp;brakami przewiduje się z&nbsp;pozostałych.</p>
                 <p data-en="I measured links with price by Pearson and Spearman correlation. For categorical variables such as property type I used R² from regressing price on one variable, the share of the variation in price that the variable explains. For pairs of categorical variables I computed Cramér’s V, which measures the strength of their association on a scale from 0 to 1. I split hosts, not listings, into 4 groups with k-means. The result went into a report and an HTML presentation, both in the repository.">Związki z&nbsp;ceną mierzyłem korelacją Pearsona i&nbsp;Spearmana. Dla zmiennych kategorycznych, takich jak typ obiektu, użyłem R² z&nbsp;regresji ceny na jedną zmienną, czyli części zróżnicowania ceny, którą ta zmienna wyjaśnia. Dla par zmiennych kategorycznych policzyłem V Craméra, które mierzy siłę ich związku w&nbsp;skali od 0 do 1. Na 4&nbsp;grupy metodą k-means podzieliłem gospodarzy, a&nbsp;nie oferty. Wynik trafił do raportu i&nbsp;prezentacji w&nbsp;HTML; oba są w&nbsp;repozytorium.</p>
-                <p data-en="The main limitation is the host segmentation. I set four groups in advance, without checking that against silhouette or any other measure. They came out very uneven, with 712, 80, 27 and 5 hosts. Group names such as “Premium” and “Mega players” come from thresholds written into the code. The presentation drifted from the analysis in places. It gives 35 neighbourhoods, while the data has 15. The interactive map the code produces is not in the repository either.">Główne ograniczenie to segmentacja gospodarzy. Cztery grupy przyjąłem z&nbsp;góry, bez sprawdzenia wskaźnikiem silhouette ani inną miarą. Wyszły bardzo nierówne i&nbsp;liczą 712, 80, 27 i&nbsp;5&nbsp;gospodarzy. Nazwy grup, takie jak „Premium” czy „Mega-gracze”, wynikają z&nbsp;progów wpisanych w&nbsp;kod. Prezentacja miejscami rozjechała się z&nbsp;analizą. Podaje 35&nbsp;dzielnic, a&nbsp;w&nbsp;danych jest 15. Interaktywnej mapy, którą tworzy kod, też nie ma w&nbsp;repozytorium.</p>
+                <p data-en="The main limitation is the host segmentation. I set four groups in advance, without checking that against silhouette or any other measure. They came out very uneven. Group names such as “Premium” and “Mega players” come from thresholds written into the code. The presentation drifted from the analysis in places. It gives 35 neighbourhoods, while the data has 15. The interactive map the code produces is not in the repository either.">Główne ograniczenie to segmentacja gospodarzy. Cztery grupy przyjąłem z&nbsp;góry, bez sprawdzenia wskaźnikiem silhouette ani inną miarą. Wyszły bardzo nierówne. Nazwy grup, takie jak „Premium” czy „Mega-gracze”, wynikają z&nbsp;progów wpisanych w&nbsp;kod. Prezentacja miejscami rozjechała się z&nbsp;analizą. Podaje 35&nbsp;dzielnic, a&nbsp;w&nbsp;danych jest 15. Interaktywnej mapy, którą tworzy kod, też nie ma w&nbsp;repozytorium.</p>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="Hosts in the four k-means groups">Gospodarze w&nbsp;czterech grupach k-means</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Group 1">Grupa 1</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">712</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 11.2">
+                            <span class="cc-hbar-label" data-en="Group 2">Grupa 2</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">80</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 3.8">
+                            <span class="cc-hbar-label" data-en="Group 3">Grupa 3</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">27</span>
+                        </li>
+                        <li class="cc-hbar cc-hbar--key" style="--v: 0.7">
+                            <span class="cc-hbar-label" data-en="Group 4">Grupa 4</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value">5</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="Number of hosts per group, largest first, notebook run of 14 June 2025. I set four groups in advance, and the smallest has 5 hosts.">Liczba gospodarzy w&nbsp;grupie, od największej, przebieg notebooka z&nbsp;14&nbsp;czerwca 2025. Cztery grupy przyjąłem z&nbsp;góry, a&nbsp;najmniejsza ma 5&nbsp;gospodarzy.</figcaption>
+                </figure>
                 <div class="case-decisions">
                     <article class="case-decision">
                         <h3 data-en="Filling gaps with MICE instead of dropping incomplete listings">Uzupełnianie braków metodą MICE zamiast usuwania niepełnych ofert</h3>
@@ -423,7 +537,20 @@
                 <h2 class="case-h2" id="h-waszyngton"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span data-en="Airbnb in Washington">Airbnb w&nbsp;Waszyngtonie</span></h2>
                 <p data-en="Same topic as Winnipeg, analysed here in Python instead of R. The question was what shapes the price of a night in Washington. The data is the Inside Airbnb snapshot of 17 September 2024. It covers 5,454 listings and 75 columns, and 932 listings, or 17.1%, have no price. The notebook did not record when it was run. I uploaded it to the repository on 9 June 2026.">Ten sam temat co w&nbsp;Winnipeg analizowałem tu w&nbsp;Pythonie zamiast w&nbsp;R. Pytanie brzmiało, co kształtuje cenę noclegu w&nbsp;Waszyngtonie. Dane to migawka Inside Airbnb z&nbsp;17&nbsp;września 2024. Obejmuje 5&nbsp;454&nbsp;oferty i&nbsp;75&nbsp;kolumn, a&nbsp;932&nbsp;oferty, czyli 17,1%, nie mają ceny. Daty uruchomienia notebook nie zapisał. Do repozytorium wgrałem go 9&nbsp;czerwca 2026.</p>
                 <p data-en="I used pandas, SciPy and statsmodels. I removed the listings with no price, then those outside the 1st–99th percentile of price. 4,441 remained. Guest ratings were filled with the median within each room type. I measured associations according to variable type. For numeric pairs it was Pearson correlation, for categorical pairs Cramér’s V, and for price against a single categorical variable R² from regression.">Użyłem bibliotek pandas, SciPy i&nbsp;statsmodels. Usunąłem oferty bez ceny, a&nbsp;potem te spoza przedziału od 1. do 99. percentyla ceny. Zostało 4&nbsp;441. Oceny gości uzupełniłem medianą w&nbsp;obrębie typu pokoju. Związki mierzyłem zależnie od typu zmiennych. Dla par liczbowych była to korelacja Pearsona, dla par kategorycznych V Craméra, a&nbsp;dla ceny i&nbsp;jednej zmiennej kategorycznej R² z&nbsp;regresji.</p>
-                <p data-en="The main limitation is that the analysis describes associations and does not measure effects. There are no p-values, that is significance tests, and no model with several variables at once, so no effect is isolated. The notebook’s summary says “Effect on price: an additional bathroom (+45.7% to the price)”. Yet 0.457 is the correlation coefficient between bathrooms and price, not a percentage effect. Medians are called averages there, and the sentence about higher prices at weekends has no basis, because I did not analyse calendar data.">Główne ograniczenie polega na tym, że analiza opisuje związki i&nbsp;nie mierzy wpływu. Nie ma wartości p, czyli testów istotności, ani modelu z&nbsp;wieloma zmiennymi naraz, więc żaden efekt nie jest wyodrębniony. Podsumowanie w&nbsp;notebooku podaje „Wpływ na cenę: dodatkowa łazienka (+45.7% do ceny)”. Tymczasem 0,457 to współczynnik korelacji łazienek z&nbsp;ceną, a&nbsp;nie efekt procentowy. Mediany są tam nazwane średnimi, a&nbsp;zdanie o&nbsp;wyższych cenach w&nbsp;weekendy nie ma oparcia, bo danych kalendarzowych nie analizowałem.</p>
+                <p data-en="The main limitation is that the analysis describes associations and does not measure effects. There are no p-values, that is significance tests, and no model with several variables at once, so no effect is isolated. The notebook’s summary says “Effect on price: an additional bathroom (+45.7% to the price)”.">Główne ograniczenie polega na tym, że analiza opisuje związki i&nbsp;nie mierzy wpływu. Nie ma wartości p, czyli testów istotności, ani modelu z&nbsp;wieloma zmiennymi naraz, więc żaden efekt nie jest wyodrębniony. Podsumowanie w&nbsp;notebooku podaje „Wpływ na cenę: dodatkowa łazienka (+45.7% do ceny)”.</p>
+                <div class="case-compare">
+                    <div class="case-compare-col">
+                        <p class="case-compare-label" data-en="Notebook summary">Podsumowanie notebooka</p>
+                        <p class="case-compare-value" data-en="“+45.7% to the price”">„+45.7% do ceny”</p>
+                        <p class="case-compare-text" data-en="A sentence about an extra bathroom.">Zdanie o&nbsp;dodatkowej łazience.</p>
+                    </div>
+                    <div class="case-compare-col case-compare-col--after">
+                        <p class="case-compare-label" data-en="Computation">Obliczenie</p>
+                        <p class="case-compare-value" data-en="r = 0.457">r = 0,457</p>
+                        <p class="case-compare-text" data-en="The correlation between bathrooms and price, not a percentage effect. It does not say how much the price goes up.">Korelacja liczby łazienek z&nbsp;ceną, a&nbsp;nie efekt procentowy. Nie mówi, o&nbsp;ile rośnie cena.</p>
+                    </div>
+                </div>
+                <p data-en="Medians are called averages in that summary, and the sentence about higher prices at weekends has no basis, because I did not analyse calendar data.">Mediany są w&nbsp;tym podsumowaniu nazwane średnimi, a&nbsp;zdanie o&nbsp;wyższych cenach w&nbsp;weekendy nie ma oparcia, bo danych kalendarzowych nie analizowałem.</p>
                 <div class="case-decisions">
                     <article class="case-decision">
                         <h3 data-en="Percentiles instead of the IQR rule, each city handled differently">Percentyle zamiast reguły IQR, w&nbsp;każdym mieście inaczej</h3>
@@ -439,6 +566,12 @@
                         </dl>
                     </article>
                 </div>
+                <figure class="case-media case-media--frame">
+                    <div class="case-media-shot">
+                        <a href="/assets/images/washington.webp" target="_blank" rel="noopener"><img src="/assets/images/washington.webp" width="1027" height="556" alt="Histogram cen noclegów w Waszyngtonie po regule IQR, słupki podzielone na typ pokoju" data-en-alt="Histogram of Washington night prices after the IQR rule, bars split by room type" loading="lazy"></a>
+                    </div>
+                    <figcaption data-en="The one chart drawn after the IQR rule, on 4,136 listings. Blue is a whole flat (Entire home/apt), green a private room (Private room). Chart labels as in the notebook, in Polish. From the notebook uploaded on 9 June 2026. Tap the image for full size.">Jedyny wykres po regule IQR, na 4&nbsp;136&nbsp;ofertach. Niebieskie to całe mieszkania (Entire home/apt), zielone pokoje prywatne (Private room). Z&nbsp;notebooka wgranego 9&nbsp;czerwca 2026, pełny rozmiar po kliknięciu.</figcaption>
+                </figure>
                 <div class="case-evidence">
                     <div class="case-stat">
                         <span class="case-stat-value scramble-num" data-en="4,441">4&nbsp;441</span>
@@ -520,6 +653,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=63" defer></script>
+    <script src="/script.js?v=64" defer></script>
 </body>
 </html>

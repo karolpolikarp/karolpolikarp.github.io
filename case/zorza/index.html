@@ -77,7 +77,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="/style.css?v=161">
+    <link rel="stylesheet" href="/style.css?v=162">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -162,6 +162,12 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
                 </div>
+                <figure class="case-media case-media--frame">
+                    <div class="case-media-shot">
+                        <video poster="/assets/videos/zorza.webp" data-src="/assets/videos/zorza.mp4" width="960" height="540" style="--ar: 960 / 540" muted loop playsinline preload="none" aria-label="Nagranie: przewijanie strony projektu Zorza" data-en-aria="Clip: scrolling the Zorza project page"></video>
+                    </div>
+                    <figcaption data-en="The project page with a live item card, 7 seconds without sound. Recorded in October 2026.">Strona projektu z&nbsp;kartą wpisu na żywo, 7&nbsp;sekund bez dźwięku. Nagranie z&nbsp;października 2026.</figcaption>
+                </figure>
                 <nav class="case-toc" aria-label="Spis treści" data-en-aria="Contents">
                     <a href="#problem"><span data-en="Problem">Problem</span></a>
                     <a href="#ograniczenia"><span data-en="Constraints">Ograniczenia</span></a>
@@ -179,6 +185,12 @@
                 <p data-en="I built Zorza for my own use. I wanted to follow geopolitics and markets in one place. OSINT channels on Telegram often report first, but that speed comes with noise. The same message arrives from several channels, a rumour looks like confirmed news, and a move in the oil price has to be matched by hand with posts from the same minute.">Zorza powstała na własny użytek. Chciałem śledzić wydarzenia geopolityczne i&nbsp;rynki w&nbsp;jednym miejscu. Kanały OSINT na Telegramie często podają informację najwcześniej, ale ta szybkość idzie w&nbsp;parze z&nbsp;szumem. Ten sam komunikat przychodzi z&nbsp;kilku kanałów, plotka wygląda jak potwierdzona wiadomość, a&nbsp;ruch ceny ropy trzeba samemu zestawić z&nbsp;wpisami z&nbsp;tej samej minuty.</p>
                 <p data-en="A dozen open tabs, each refreshing at its own pace, cannot tell an event confirmed by independent sources from an echo inside one bubble. The same alarm gets read several times, and gut feeling decides whether it is credible.">Kilkanaście otwartych kart, każda odświeżana we własnym rytmie, nie odróżnia zdarzenia potwierdzonego przez niezależne źródła od echa jednej bańki. Ten sam alarm czyta się kilka razy, a&nbsp;o&nbsp;jego wiarygodności decyduje wyczucie.</p>
                 <p data-en="I wanted one dashboard for one analyst. Items have separate columns for geopolitics, markets, and world affairs and politics, in publication order, and each event’s weight shows on its card. Urgent events get a separate bar. A repost collapses into a counter next to the original, and the credibility score shows where it came from. A phone alert goes out only for an event that is confirmed or comes from a trusted source.">Chciałem mieć jeden pulpit dla jednego analityka. Wpisy mają osobne kolumny dla geopolityki, rynków oraz świata i&nbsp;polityki, w&nbsp;kolejności publikacji, a&nbsp;waga zdarzenia jest widoczna na karcie. Pilne zdarzenia mają osobny pasek. Przedruk zwija się w&nbsp;licznik przy oryginale, a&nbsp;ocena wiarygodności pokazuje, skąd się wzięła. Powiadomienie na telefon przychodzi tylko przy zdarzeniu potwierdzonym albo podanym przez wiarygodne źródło.</p>
+                <figure class="case-media case-media--frame">
+                    <div class="case-media-shot">
+                        <img src="/assets/images/zorza.webp" width="1600" height="900" alt="Zrzut ekranu: pulpit Zorzy z paskiem pilnych zdarzeń i kolumnami geopolityki, rynków oraz świata i polityki" data-en-alt="Screenshot: the Zorza dashboard with the urgent events bar and the geopolitics, markets, and world and politics columns" loading="lazy">
+                    </div>
+                    <figcaption data-en="Urgent events in the bar on top, the dashboard columns below. On the left a preview of news TV channels. Screenshot from August 2026.">Pilne zdarzenia w&nbsp;pasku u&nbsp;góry, pod nim kolumny pulpitu. Po lewej podgląd telewizji informacyjnych. Zrzut z&nbsp;sierpnia 2026.</figcaption>
+                </figure>
                 <p data-en="Since late September the dashboard has had a waitlist. Access is still closed, and no invitation has gone out yet (as of 8 November 2026). Since 17 October the project page collects sign-ups instead of showing a price list. Sign-in through a Google or Discord account is ready. The evidence below is technical only.">Od końca września pulpit ma listę oczekujących. Dostęp jest jeszcze zamknięty i&nbsp;żadne zaproszenie nie wyszło (stan na 8&nbsp;listopada 2026). Od 17&nbsp;października strona projektu zbiera zapisy zamiast pokazywać cennik. Logowanie jest przygotowane przez konto Google albo Discord. Dowody poniżej są wyłącznie techniczne.</p>
             </section>
 
@@ -282,8 +294,14 @@
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="The score is only as good as the source classes, and I assigned some of them by hand. “Three sources” means three of the channels I picked myself. GDELT lags by a dozen or so minutes, so the freshest news earns no GDELT points yet. The rules compute the score, but Haiku partly decides which items share a cluster. That sets how many channels and camps count. Clustering can fail. On 7 November, between 15:30 and 18:53, 54 items about a high-profile national event ended up in 46 separate clusters, because they shared no topic or country from my lists. The “confirmed by two channels” alert never went out. I deployed a fix at 18:53 that day. On the night of 7 to 8 November (19:00–10:00) the system made 105 merges, against 44 in the same window a week earlier (31 October to 1 November): 9.5 instead of 4.1 per 1,000 candidates, with the same 75 model calls. Clustering cost in that window rose from 0.12 to 0.16 USD. On that event itself no gain is visible: items after 18:53 also landed almost one per cluster (39 items in 34 clusters), and older items are not regrouped. This comparison is indicative only (measured on the Pi, 2026-11-08).">Wynik jest tak dobry jak klasy źródeł, a&nbsp;część z&nbsp;nich nadałem ręcznie. „Trzy źródła” to trzy spośród kanałów, które sam wybrałem. GDELT ma kilkanaście minut opóźnienia, więc najświeższa wiadomość nie dostaje jeszcze punktów za potwierdzenie z&nbsp;GDELT. Wynik liczą reguły, ale to Haiku częściowo rozstrzyga, które wpisy należą do jednego klastra. Od tego zależy, ile kanałów i&nbsp;obozów się liczy. Grupowanie bywa zawodne. 7&nbsp;listopada między 15:30 a&nbsp;18:53 54 wpisy o&nbsp;głośnym wydarzeniu krajowym trafiły do 46 osobnych klastrów, bo nie miały wspólnego tematu ani kraju z&nbsp;moich list. Alert „potwierdzone przez dwa kanały” nie poszedł. Poprawkę wdrożyłem tego samego dnia o&nbsp;18:53. W&nbsp;nocy z&nbsp;7 na 8&nbsp;listopada (19:00–10:00) system wykonał 105 scaleń wobec 44 w&nbsp;tym samym oknie tydzień wcześniej (31.10–01.11), czyli 9,5 zamiast 4,1 na 1000 kandydatów, przy tych samych 75 wywołaniach modelu. Koszt grupowania w&nbsp;tym oknie wzrósł z&nbsp;0,12 do 0,16&nbsp;USD. Na samym wydarzeniu poprawy nie widać. Wpisy po 18:53 też trafiały prawie każdy do osobnego klastra (39 wpisów w&nbsp;34 klastrach), a&nbsp;starszych wpisów system nie grupuje ponownie. To porównanie orientacyjne (pomiar na Pi, 2026-11-08).</dd>
                         </dl>
+                        <figure class="case-media">
+                            <div class="case-media-shot">
+                                <img src="/assets/images/zorza-karta-reguly.webp" width="692" height="288" alt="Zrzut ekranu: wiarygodność 100 na 100, 10 źródeł, najlepsza klasa B. Reguły: baza +10, 10 różnych źródeł +44, źródło klasy B +20, potwierdzenie z różnych typów źródeł +12, potwierdzenie z różnych obozów +15" data-en-alt="Screenshot: credibility 100 out of 100, 10 sources, best class B. Rules: base +10, 10 distinct sources +44, class B source +20, confirmation from different source types +12, confirmation from different camps +15" loading="lazy">
+                            </div>
+                            <figcaption data-en="The expanded item card shows the score and the points from each rule. Screenshot from August 2026.">Rozwinięta karta wpisu pokazuje wynik i&nbsp;punkty z&nbsp;każdej reguły. Zrzut z&nbsp;sierpnia 2026.</figcaption>
+                        </figure>
                     </article>
-                    <article class="case-decision">
+                    <article class="case-decision" style="min-width: 0">
                         <h3 data-en="Dedup thresholds taken from measurement">Progi deduplikacji wzięte z&nbsp;pomiaru</h3>
                         <dl class="case-decision-grid">
                             <dt data-en="Decision">Decyzja</dt>
@@ -295,6 +313,26 @@
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="For embeddings no cut is perfect. Paraphrases score 0.39–0.69 and different events on the same topic 0.46–0.60, so the ranges overlap. The 0.65 cut deliberately lets some paraphrases through to the model, because a wrong merge would give an item someone else’s country and weight. The paraphrase check runs only on the live path, so items from the batch queue skip it. In dollars the saving is small: at the Haiku 5.5 rate it comes to about 0.04 USD a day. That is my estimate from the tariff, not a figure from the cost log.">Dla embeddingów nie da się wyznaczyć idealnego progu. Parafrazy mają wynik 0,39–0,69, a&nbsp;różne zdarzenia na ten sam temat 0,46–0,60, więc te zakresy się nakładają. Próg 0,65 świadomie przepuszcza część parafraz do modelu, bo błędne sklejenie nadałoby wpisowi cudzy kraj i&nbsp;wagę. Sprawdzenie parafraz działa tylko na ścieżce na żywo, więc wpisy z&nbsp;kolejki wsadowej go omijają. W&nbsp;dolarach oszczędność jest mała, przy stawce Haiku 5.5 ok.&nbsp;0,04&nbsp;USD na dobę. To mój szacunek ze stawki, nie liczba z&nbsp;dziennika kosztu.</dd>
                         </dl>
+                        <figure class="case-code">
+                            <div class="case-code-head">
+                                <span class="case-code-file" data-en="simplified excerpt">uproszczony zapis</span>
+                                <span class="case-code-lang" data-en="pseudocode">pseudokod</span>
+                            </div>
+<pre tabindex="0" aria-label="Uproszczony zapis: trzy sprawdzenia przedruku przed płatnym modelem" data-en-aria="Simplified excerpt: three repost checks before the paid model"><code><span class="tok-c">// three cheap checks before the paid model</span>
+<span class="tok-k">function</span> <span class="tok-f">tag</span>(a) {
+  <span class="tok-k">const</span> b = <span class="tok-f">closestTagged</span>(a);
+  <span class="tok-c">// 1. share of common words</span>
+<span class="hl">  <span class="tok-k">if</span> (<span class="tok-f">jaccard</span>(a, b) &gt;= <span class="tok-n">0.70</span>) <span class="tok-k">return</span> <span class="tok-f">copy</span>(b);</span>
+  <span class="tok-c">// 2. short strings of characters</span>
+  <span class="tok-k">if</span> (<span class="tok-f">sameNgrams</span>(a, b)) <span class="tok-k">return</span> <span class="tok-f">copy</span>(b);
+  <span class="tok-c">// 3. optional: meaning, local model</span>
+<span class="hl">  <span class="tok-k">if</span> (EMB &amp;&amp; <span class="tok-f">cosine</span>(a, b) &gt;= <span class="tok-n">0.65</span>)</span>
+<span class="hl">    <span class="tok-k">return</span> <span class="tok-f">copy</span>(b);</span>
+  <span class="tok-c">// the only paid step</span>
+  <span class="tok-k">return</span> <span class="tok-f">sendToHaiku</span>(a);
+}</code></pre>
+                            <figcaption data-en="Not code from the repository. A repost takes the tags of its twin for free. Both thresholds in the highlighted lines come from measurement.">Nie kod z&nbsp;repozytorium. Przedruk bierze tagi po bliźniaku za darmo. Oba progi w&nbsp;podświetlonych liniach pochodzą z&nbsp;pomiaru.</figcaption>
+                        </figure>
                     </article>
                     <article class="case-decision">
                         <h3 data-en="A batch gate instead of draining the queue">Bramka paczek zamiast opróżniania kolejki</h3>
@@ -321,6 +359,28 @@
                             <dt data-en="Cost">Koszt</dt>
                             <dd data-en="The new model thinks by default, and thinking counts towards the limit of tokens, the units of text the model is billed in. Because of that, short tasks returned no text at all, so I turn thinking off for them. The same Polish text takes about 1.35 times more tokens, so I doubled the limits for the three tasks where the model writes in Polish. About once in 135 batches the model looped or returned results in the wrong format. When that happened, 25 items stayed without model tags and without a trace in the log. Over 8 days that came to about 175 items. I found it on 23 October and deployed the fix, after which a batch with no results goes back to the queue, around the turn of 23 and 24 October. I measured the effect on the batch path on 8 November. Over 8 days (14–21 October), 158 items in 7 batches still have no tags; some lost items were tagged later, hence 158 and not 175. In batches sent from 10:00 on 24 October, when the new code was certainly running, there are 10 such items over 15 days. The live path cannot be compared, because before the fix lost batches left no trace in the log.">Nowy model domyślnie myśli, a&nbsp;myślenie liczy się do limitu tokenów, czyli jednostek tekstu, za które się płaci. Przy krótkich zadaniach model oddawał przez to odpowiedź bez tekstu, więc tam myślenie wyłączam. Ten sam polski tekst to ok.&nbsp;1,35 raza więcej tokenów, dlatego trzem zadaniom, w&nbsp;których model pisze po polsku, podwoiłem limity. Mniej więcej raz na 135 paczek model się zapętlał albo oddawał wyniki w&nbsp;złym formacie. Wtedy 25 wpisów zostawało bez tagów z&nbsp;modelu i&nbsp;bez śladu w&nbsp;dzienniku. Przez 8&nbsp;dób uzbierało się tak ok.&nbsp;175 wpisów. Wykryłem to 23&nbsp;października, a&nbsp;poprawkę, po której paczka bez wyników wraca do kolejki, wdrożyłem na przełomie 23 i&nbsp;24&nbsp;października. Skutek zmierzyłem na ścieżce wsadowej 8&nbsp;listopada. Z&nbsp;paczek wysłanych w&nbsp;8&nbsp;dobach (14–21.10) 158 wpisów w&nbsp;7 paczkach do dziś nie ma tagów. Część zgubionych wpisów otagowano później, dlatego 158, a&nbsp;nie 175. W&nbsp;paczkach wysłanych od 24&nbsp;października, 10:00, gdy na pewno działał już nowy kod, takich wpisów jest 10 w&nbsp;15&nbsp;dobach. Ścieżki na żywo nie da się porównać, bo przed poprawką zgubione paczki nie zostawiały śladu w&nbsp;dzienniku.</dd>
                         </dl>
+                        <figure class="case-chart">
+                            <p class="case-chart-title" data-en="Daily cost of all models before and after Haiku 5.5">Dobowy koszt wszystkich modeli przed i&nbsp;po Haiku 5.5</p>
+                            <svg viewBox="0 0 360 245" role="img" aria-labelledby="cost-t cost-d">
+                                <title id="cost-t" data-en="Daily cost of all models">Dobowy koszt wszystkich modeli</title>
+                                <desc id="cost-d" data-en="12 to 14 October, Haiku 4.5: 2.12 to 2.14 dollars a day, just under the daily cap of 2.15 dollars. 15 October to 7 November, Haiku 5.5: 0.09 to 0.27 dollars a day.">Od 12 do 14 października, Haiku 4.5: od 2,12 do 2,14 dolara na dobę, tuż pod dobowym pułapem 2,15 dolara. Od 15 października do 7 listopada, Haiku 5.5: od 0,09 do 0,27 dolara na dobę.</desc>
+                                <line class="cc-grid" x1="40" y1="125" x2="350" y2="125"/>
+                                <line class="cc-grid" x1="165" y1="38.8" x2="350" y2="38.8"/>
+                                <text class="cc-label" x="32" y="129" text-anchor="end" data-en="$1">1 $</text>
+                                <text class="cc-label" x="32" y="204" text-anchor="end">0</text>
+                                <text class="cc-label" x="350" y="31" text-anchor="end" data-en="cap $2.15">pułap 2,15 $</text>
+                                <rect class="cc-bar" x="85.5" y="39.5" width="64" height="160.5" rx="3"/>
+                                <rect class="cc-bar cc-bar--key" x="240.5" y="179.8" width="64" height="13.5" rx="3"/>
+                                <text class="cc-value" x="117.5" y="32.5" text-anchor="middle" data-en="$2.12–2.14">2,12–2,14 $</text>
+                                <text class="cc-value cc-value--key" x="272.5" y="172.8" text-anchor="middle" data-en="$0.09–0.27">0,09–0,27 $</text>
+                                <line class="cc-axis" x1="40" y1="200" x2="350" y2="200"/>
+                                <text class="cc-label" x="117.5" y="220" text-anchor="middle">Haiku 4.5</text>
+                                <text class="cc-label" x="272.5" y="220" text-anchor="middle">Haiku 5.5</text>
+                                <text class="cc-label" x="117.5" y="237" text-anchor="middle" data-en="Oct 12–14">12–14.10</text>
+                                <text class="cc-label" x="272.5" y="237" text-anchor="middle" data-en="Oct 15–Nov 7">15.10–7.11</text>
+                            </svg>
+                            <figcaption data-en="Data from the cost log on the Pi, all modules together, US dollars a day. As of 8 November 2026. The gold bar spans the cheapest and the most expensive day.">Dane z&nbsp;dziennika kosztu na Pi, wszystkie moduły razem, w&nbsp;dolarach na dobę. Stan na 8&nbsp;listopada 2026. Złoty słupek obejmuje najtańszą i&nbsp;najdroższą dobę.</figcaption>
+                        </figure>
                     </article>
                     <article class="case-decision">
                         <h3 data-en="Haiku instead of Sonnet for summaries">Haiku zamiast Sonneta do streszczeń</h3>
@@ -378,6 +438,27 @@
                         <span class="case-stat-source" data-en="measured on the Pi · 2026-10-14">pomiar na Pi · 2026-10-14</span>
                     </div>
                 </div>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="What happened to 42,139 items at the tagging step">Co się stało z&nbsp;42&nbsp;139 wpisami na etapie tagowania</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar" style="--v: 77">
+                            <span class="cc-hbar-label" data-en="Sent to the paid model Claude Haiku">Do płatnego modelu Claude Haiku</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 6ch" data-en="32,425">32&nbsp;425</span>
+                        </li>
+                        <li class="cc-hbar cc-hbar--key" style="--v: 17.5">
+                            <span class="cc-hbar-label" data-en="Paraphrases, tags from a twin">Parafrazy, tagi po bliźniaku</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 6ch" data-en="7,386">7386</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 5.5">
+                            <span class="cc-hbar-label" data-en="Near-identical copies, Jaccard ≥ 0.70">Niemal identyczne kopie, Jaccard ≥&nbsp;0,70</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 6ch" data-en="2,328">2328</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="Production database, 14 days from 25 October to 7 November 2026, as of 8 November 2026. Bar length is the share of all 42,139 items. 9,714 items, 23.1%, got their tags without a paid call, most of them paraphrases.">Baza na produkcji, 14&nbsp;dób od 25.10 do 07.11.2026, stan na 8&nbsp;listopada 2026. Długość paska to udział we wszystkich 42&nbsp;139 wpisach. Tagi bez płatnego wywołania dostało 9714 wpisów, czyli 23,1%, w&nbsp;większości parafrazy.</figcaption>
+                </figure>
                 <p class="case-source-note" data-en="Repository state as of 7 November 2026: 690 commits since 20 July, version 1.12.0. The repository is private. No data about users or people on the waitlist.">Stan repozytorium na 7&nbsp;listopada 2026: 690&nbsp;commitów od 20&nbsp;lipca, wersja 1.12.0. Repozytorium jest prywatne. Bez danych o&nbsp;użytkownikach ani o&nbsp;osobach z&nbsp;listy oczekujących.</p>
             </section>
 
@@ -425,6 +506,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=63" defer></script>
+    <script src="/script.js?v=64" defer></script>
 </body>
 </html>
