@@ -6512,3 +6512,292 @@ body::before { content: none; }
 @media (prefers-reduced-motion: reduce) {
     .case-diagram .cd-pulse { display: none; }
 }
+
+
+/* ================================================
+   MATERIALS "GMACH" (2026-10-27): Verde Alpi + gold (dark), Calacatta Oro + gold (light).
+   Material is an accent only; the layout, the copy and the dark-green base stay as they were.
+   1. tokens: gold foil (CSS, 0 KB) and the stone of each theme
+   2. marble buttons with a gold-leaf edge + a light sheen on hover (hero CTA, tile live/repo buttons)
+   3. a gold-foil rule under every section heading (.s1-title)
+   4. the motto in gold leaf; the contact ground in soft Verde (dark) / Calacatta (light)
+   5. Gablota tiles: a thin gold-foil frame that brightens on hover / focus
+   6. talk dates: a plaque with a gold strip on top
+   7. the scroll progress bar in gold foil
+   No sheen and no transitions under prefers-reduced-motion. Text on stone sits on a veil (AA measured).
+   ================================================ */
+:root {
+    --foil-gold: linear-gradient(115deg, #8a6d2f 0%, #d9bd74 22%, #f6e6b0 34%, #b8913f 50%, #edd68f 66%, #9c7a33 84%, #d6b86c 100%);
+    /* on cream the bright foil washes out: the same foil, a step deeper */
+    --foil-gold-ink: linear-gradient(115deg, #6e5420 0%, #b8913f 24%, #d9bd74 36%, #8a6d2f 52%, #c9a962 68%, #7a5e26 86%, #a8873f 100%);
+    --mat-verde: url("assets/images/materials/verde.webp?v=1");
+    --mat-calacatta: url("assets/images/materials/calacatta.webp?v=1");
+    --mat-leaf: url("assets/images/materials/gold-leaf.webp?v=1");
+    --mat-rule: var(--foil-gold-ink);
+}
+[data-theme="dark"] { --mat-rule: var(--foil-gold); }
+
+/* ---------- 2. marble buttons ---------- */
+/* Verde Alpi under a dark veil (cream text), the gold foil only on the 1.5px edge (border-box layer) */
+.hero-cta .btn-primary,
+[data-theme="dark"] .hero-cta .btn-primary {
+    border: 1.5px solid transparent;
+    background:
+        linear-gradient(rgba(4, 22, 13, 0.42), rgba(4, 22, 13, 0.42)) padding-box,
+        var(--mat-verde) 30% 40% / 260% auto padding-box,
+        var(--foil-gold) border-box;
+    color: #fbf3dc;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 4px 18px rgba(0, 40, 22, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.hero-cta .btn-primary:hover,
+[data-theme="dark"] .hero-cta .btn-primary:hover {
+    background:
+        linear-gradient(rgba(4, 22, 13, 0.3), rgba(4, 22, 13, 0.3)) padding-box,
+        var(--mat-verde) 30% 40% / 260% auto padding-box,
+        var(--foil-gold) border-box;
+    box-shadow: 0 6px 22px rgba(201, 169, 98, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+/* secondary: Calacatta Oro in the light theme, a dark plaque with the same gold edge in the dark one */
+.hero-cta .btn-secondary {
+    border: 1.5px solid transparent;
+    background:
+        linear-gradient(rgba(255, 253, 248, 0.6), rgba(255, 253, 248, 0.6)) padding-box,
+        var(--mat-calacatta) 60% 30% / 300% auto padding-box,
+        var(--foil-gold-ink) border-box;
+    color: var(--color-primary);
+    box-shadow: 0 3px 12px rgba(80, 60, 20, 0.12);
+}
+[data-theme="dark"] .hero-cta .btn-secondary {
+    background:
+        linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+        var(--foil-gold) border-box;
+    color: var(--color-text);
+}
+.hero-cta .btn-secondary:hover { color: var(--color-primary); border-color: transparent; }
+[data-theme="dark"] .hero-cta .btn-secondary:hover { color: var(--color-accent); }
+
+/* live site / repo buttons on the tiles: small stone pills with a gold edge */
+.g-ext,
+.g-links .g-ext {
+    overflow: hidden;
+    border: 1.5px solid transparent;
+    background:
+        linear-gradient(rgba(255, 253, 248, 0.66), rgba(255, 253, 248, 0.66)) padding-box,
+        var(--mat-calacatta) 55% 35% / 520% auto padding-box,
+        var(--foil-gold-ink) border-box;
+    color: var(--color-primary);
+}
+.g-ext .g-ext-ico { color: var(--color-primary); }
+[data-theme="dark"] .g-ext,
+[data-theme="dark"] .g-links .g-ext {
+    background:
+        linear-gradient(rgba(4, 22, 13, 0.45), rgba(4, 22, 13, 0.45)) padding-box,
+        var(--mat-verde) 40% 50% / 520% auto padding-box,
+        var(--foil-gold) border-box;
+    color: #fbf3dc;
+}
+[data-theme="dark"] .g-ext .g-ext-ico { color: #e6cf8f; }
+.g-ext:hover,
+.g-links .g-ext:hover {
+    background:
+        linear-gradient(rgba(255, 253, 248, 0.45), rgba(255, 253, 248, 0.45)) padding-box,
+        var(--mat-calacatta) 55% 35% / 520% auto padding-box,
+        var(--foil-gold-ink) border-box;
+    color: var(--color-primary);
+}
+[data-theme="dark"] .g-ext:hover,
+[data-theme="dark"] .g-links .g-ext:hover {
+    background:
+        linear-gradient(rgba(4, 22, 13, 0.25), rgba(4, 22, 13, 0.25)) padding-box,
+        var(--mat-verde) 40% 50% / 520% auto padding-box,
+        var(--foil-gold) border-box;
+    color: #fff;
+}
+.g-ext:hover .g-ext-ico { color: var(--color-primary); }
+[data-theme="dark"] .g-ext:hover .g-ext-ico { color: #f6e6b0; }
+
+/* the sheen: one soft band of light crosses the stone on hover (replaces the old .btn::before sweep here) */
+.hero-cta .btn::before { display: none; }
+.hero-cta .btn::after,
+.g-ext::after {
+    content: '';
+    position: absolute;
+    inset: -20% -60%;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 250, 230, 0.42) 50%, transparent 60%);
+    transform: translateX(-75%);
+    opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+    .hero-cta .btn::after,
+    .g-ext::after { transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 200ms ease-out; }
+    .hero-cta .btn:hover::after,
+    .g-ext:hover::after { transform: translateX(75%); opacity: 1; }
+}
+
+/* ---------- 3. section headings: a short gold-foil rule ---------- */
+.s1-title::after {
+    content: '';
+    display: block;
+    width: 72px;
+    height: 3px;
+    margin-top: 0.42em;
+    border-radius: 2px;
+    background: var(--mat-rule);
+}
+#kontakt .s1-title::after { margin-left: auto; margin-right: auto; }
+
+/* ---------- 4. contact: the motto in gold leaf, the ground in soft stone ---------- */
+.contact-motto .motto-text {
+    background:
+        linear-gradient(rgba(255, 240, 200, 0.06), rgba(255, 240, 200, 0.06)),
+        var(--mat-leaf) 50% 50% / 120% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+.contact-motto :is(.motto-law, .motto-code) { color: transparent; -webkit-text-fill-color: transparent; }
+/* on cream the leaf is darkened under a bronze veil so the letters keep their contrast */
+[data-theme="light"] .contact-motto .motto-text {
+    background:
+        linear-gradient(100deg, rgba(64, 42, 4, 0.66) 0%, rgba(64, 42, 4, 0.42) 30%, rgba(64, 42, 4, 0.66) 52%, rgba(64, 42, 4, 0.46) 76%, rgba(64, 42, 4, 0.66) 100%),
+        var(--mat-leaf) 50% 50% / 120% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+/* the light theme gets its own stone behind the contact section: Calacatta Oro, faint, fading in from above */
+[data-theme="light"] .contact.s1-section { position: relative; overflow-x: clip; }
+[data-theme="light"] .contact.s1-section::after {
+    content: '';
+    position: absolute;
+    inset: -180px -40px 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url("assets/images/materials/calacatta-soft.webp?v=1") center / cover no-repeat;
+    opacity: 0.7;
+    /* quieter right behind the motto, so no vein crosses the letters */
+    -webkit-mask-image:
+        radial-gradient(640px 220px at 50% 58%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.55) 60%, #000 100%),
+        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 15%, rgba(0, 0, 0, 0.45) 35%, #000 55%, #000 80%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+        radial-gradient(640px 220px at 50% 58%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.55) 60%, #000 100%),
+        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 15%, rgba(0, 0, 0, 0.45) 35%, #000 55%, #000 80%, transparent 100%);
+    mask-composite: intersect;
+}
+[data-theme="light"] .contact.s1-section > .container { position: relative; z-index: 1; }
+/* contact tiles: a gold hairline edge on the stone */
+.contact-tile { border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border)); }
+
+/* ---------- 5. Gablota tiles: a thin gold-foil frame ---------- */
+.g-tile,
+.g-tools { border-color: transparent; }
+.g-tools { position: relative; }
+.g-tile::before,
+.g-tools::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: 5;
+    padding: 1.5px;
+    border-radius: inherit;
+    background: var(--mat-rule);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    opacity: 0.45;
+    pointer-events: none;
+}
+[data-theme="dark"] .g-tile::before,
+[data-theme="dark"] .g-tools::before { opacity: 0.4; }
+@media (hover: hover) and (pointer: fine) {
+    .g-tile:hover,
+    [data-theme="dark"] .g-tile:hover { border-color: transparent; }
+    .g-tile:hover::before,
+    .g-tools:hover::before { opacity: 1; }
+}
+.g-tile:focus-within,
+[data-theme="dark"] .g-tile:focus-within { border-color: transparent; }
+.g-tile:focus-within::before { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+    .g-tile::before,
+    .g-tools::before { transition: opacity 250ms var(--g-ease); }
+}
+
+/* ---------- 6. talk dates: a plaque with a gold strip on top ---------- */
+.talk-date {
+    position: relative;
+    overflow: hidden;
+    padding-top: calc(var(--space-sm) + 3px);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+}
+.talk-date::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--mat-rule);
+}
+
+/* ---------- 7. the scroll progress bar in gold foil ---------- */
+.scroll-progress { height: 3px; }
+.scroll-progress-bar,
+[data-theme="dark"] .scroll-progress-bar { background: var(--mat-rule); }
+
+/* the hero text column clipped the marble buttons' shadow into a square box (overflow: hidden);
+   clip keeps the old guard against overflow, with room left for the shadow */
+.hero-content { overflow: clip; overflow-clip-margin: 32px; }
+
+/* ---------- 8. hero marble: the page opens in the same stone it closes with ----------
+   The contact recipe (soft image, blur baked in, a mask with no hard edge), turned upside down: full
+   stone at the top under the nav, fading to nothing before Projekty. Quieter behind the text column and
+   the timeline (two soft ellipses), so the veins never cross the letters. Static: no motion of any kind;
+   the drifting dust (#heroParticles) is painted above it. The dark selector beats the old green-glow
+   rule for [data-theme="dark"] .hero::before. */
+.hero::before,
+[data-theme="dark"] .hero::before {
+    display: block;
+    content: '';
+    position: absolute;
+    inset: 0 -40px;
+    z-index: 0;
+    pointer-events: none;
+    background: url("assets/images/brand/verde-alpi-soft.webp?v=1") center 35% / cover no-repeat;
+    filter: blur(1.5px) saturate(1.05);
+    opacity: 0.55;
+    -webkit-mask-image:
+        radial-gradient(34% 46% at 28% 52%, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.66) 60%, #000 100%),
+        radial-gradient(30% 50% at 74% 54%, rgba(0, 0, 0, 0.36) 0%, rgba(0, 0, 0, 0.62) 60%, #000 100%),
+        linear-gradient(180deg, #000 0%, #000 42%, rgba(0, 0, 0, 0.84) 52%, rgba(0, 0, 0, 0.6) 62%, rgba(0, 0, 0, 0.36) 72%, rgba(0, 0, 0, 0.16) 82%, rgba(0, 0, 0, 0.05) 91%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+        radial-gradient(34% 46% at 28% 52%, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.66) 60%, #000 100%),
+        radial-gradient(30% 50% at 74% 54%, rgba(0, 0, 0, 0.36) 0%, rgba(0, 0, 0, 0.62) 60%, #000 100%),
+        linear-gradient(180deg, #000 0%, #000 42%, rgba(0, 0, 0, 0.84) 52%, rgba(0, 0, 0, 0.6) 62%, rgba(0, 0, 0, 0.36) 72%, rgba(0, 0, 0, 0.16) 82%, rgba(0, 0, 0, 0.05) 91%, transparent 100%);
+    mask-composite: intersect;
+}
+[data-theme="light"] .hero::before {
+    background-image: url("assets/images/materials/calacatta-soft.webp?v=1");
+    filter: none;
+    opacity: 0.4;
+}
+/* the dust and the content stay above the stone */
+.hero-bg-decoration { z-index: 1; }
+.hero .container { z-index: 2; }
+@media (max-width: 768px) {
+    /* one column: text over the whole width, so the stone is quieter all over and only full at the top */
+    .hero::before {
+        inset: 0;
+        background-position: 30% 20%;
+        -webkit-mask-image:
+            radial-gradient(90% 40% at 50% 45%, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.65) 60%, #000 100%),
+            linear-gradient(180deg, #000 0%, #000 25%, rgba(0, 0, 0, 0.7) 45%, rgba(0, 0, 0, 0.4) 65%, rgba(0, 0, 0, 0.15) 82%, transparent 100%);
+        mask-image:
+            radial-gradient(90% 40% at 50% 45%, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.65) 60%, #000 100%),
+            linear-gradient(180deg, #000 0%, #000 25%, rgba(0, 0, 0, 0.7) 45%, rgba(0, 0, 0, 0.4) 65%, rgba(0, 0, 0, 0.15) 82%, transparent 100%);
+    }
+}
