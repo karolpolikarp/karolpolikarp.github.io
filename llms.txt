@@ -22,7 +22,7 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 - Majeranek: rankingi filmów, gier, książek i muzyki (wersja alfa).
 - Kamerton: kreator instrukcji systemowej dla asystentów AI (https://kamerton.karolwilczynski.com).
 - Nimbuhold: gra tower defense w przeglądarce, w której z wież budujesz labirynt dla wrogów.
-- Candor: analiza wyników inwestora z wyciągów brokera, bez porad inwestycyjnych (podgląd na danych przykładowych).
+- Candor: analiza wyników inwestora z wyciągów brokera (podgląd na danych przykładowych).
 - Narzędzia: Claude Usage (Stream Deck), ISAP-scraper, Stefka, Anonimizator AI, Multi-Sequence Clicker (kod publiczny na GitHubie).
 - Analiza danych: prognozy z raportów ESPI, rynek gier wideo, Airbnb (Winnipeg, Waszyngton), segmentacja (kod publiczny na GitHubie).
 
