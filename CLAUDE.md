@@ -2,6 +2,23 @@
 
 This file provides guidance for AI assistants working on this repository.
 
+## Stan
+2026-11-26: na produkcję idzie Gmach 1 (marmur Verde Alpi / Calacatta + złoto, marmur w hero), teksty z 8.11 i nowe stanowisko (radca, Wydział Wdrożeń MC). Studia przypadku nadal wstrzymane.
+
+## Backlog
+- #3 Odrzucić niezacommitowane resztki własnej analityki (`404.html`, `robots.txt`)
+- #4 Zamknąć nieaktualny PR #108
+- #5 Usunąć nieużywany `MagneticButtons` (`deno lint`)
+- #6 Posprzątać stare gałęzie (NIE material-v1..v8 ani wersja-zielona, dopóki #9 nierozstrzygnięte)
+- #7 Publikacja studiów przypadku (decyzja autora)
+- #8 Test na telefonie <484 px, Safari, Firefox
+- #9 Gmach: wybrany i wdrożony Gmach 1 (26.11). Do posprzątania: gałęzie `claude/gmach-2..5`, `claude/material-v1..v8`, worktree `E:\wt\gmach-N`
+- #10 Gałąź `claude/wersja-zielona` (24.10, uspokojona zieleń phthalo): decyzja albo usunięcie
+- Reszta w `BACKLOG.md`
+
+## Znane problemy
+- upfor.pl odpowiada wolno (~4 s, 2026-11-25).
+
 ## Project Overview
 
 **karolwilczynski.com** is a personal portfolio website for Karol Polikarp Wilczynski, showcasing work at the intersection of AI, law, and public administration in Poland.

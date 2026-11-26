@@ -68,17 +68,19 @@ const LanguageManager = {
         ['.hero-tab[data-tab="skills"]', 'Skills'],
 
         // Employment
-        ['#panel-employment li:nth-child(1) .emp-date', '2025\u2013present'],
-        ['#panel-employment li:nth-child(1) .emp-title', 'Chief Specialist, Innovative Public Policies Division'],
+        ['#panel-employment li:nth-child(1) .emp-date', '2026–present'],
+        ['#panel-employment li:nth-child(1) .emp-title', 'Counselor, Implementation Division'],
         ['#panel-employment li:nth-child(1) .emp-company', 'Ministry of Digital Affairs'],
-        ['#panel-employment li:nth-child(2) .emp-title', 'Head of CEEB Department'],
-        ['#panel-employment li:nth-child(2) .emp-company', 'General Office of Building Supervision'],
-        ['#panel-employment li:nth-child(3) .emp-title', 'Deputy Head of Service Development Team'],
-        ['#panel-employment li:nth-child(3) .emp-company', 'Educational Research Institute'],
-        ['#panel-employment li:nth-child(4) .emp-title', 'Senior Legal Specialist'],
+        ['#panel-employment li:nth-child(2) .emp-title', 'Chief Specialist, Innovative Public Policies Division'],
+        ['#panel-employment li:nth-child(2) .emp-company', 'Ministry of Digital Affairs'],
+        ['#panel-employment li:nth-child(3) .emp-title', 'Head of CEEB Department'],
+        ['#panel-employment li:nth-child(3) .emp-company', 'General Office of Building Supervision'],
+        ['#panel-employment li:nth-child(4) .emp-title', 'Deputy Head of Service Development Team'],
         ['#panel-employment li:nth-child(4) .emp-company', 'Educational Research Institute'],
-        ['#panel-employment li:nth-child(5) .emp-title', 'Senior Specialist, Portal RP Project'],
-        ['#panel-employment li:nth-child(5) .emp-company', 'Ministry of Digital Affairs'],
+        ['#panel-employment li:nth-child(5) .emp-title', 'Senior Legal Specialist'],
+        ['#panel-employment li:nth-child(5) .emp-company', 'Educational Research Institute'],
+        ['#panel-employment li:nth-child(6) .emp-title', 'Senior Specialist, Portal RP Project'],
+        ['#panel-employment li:nth-child(6) .emp-company', 'Ministry of Digital Affairs'],
 
         // Education
         ['#panel-education li:nth-child(1) .edu-title', 'Big Data: Large-Scale Data Engineering'],

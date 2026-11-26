@@ -6,7 +6,7 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 
 ## Kim jestem
 - Prawnik (Uniwersytet Warszawski); dalsze kształcenie w AI, big data i programowaniu (SGH, PJATK).
-- Doświadczenie: Ministerstwo Cyfryzacji (główny specjalista, Wydział Innowacyjnych Polityk Publicznych), wcześniej Główny Urząd Nadzoru Budowlanego i Instytut Badań Edukacyjnych.
+- Doświadczenie: Ministerstwo Cyfryzacji (radca w Wydziale Wdrożeń; wcześniej główny specjalista w Wydziale Innowacyjnych Polityk Publicznych), wcześniej Główny Urząd Nadzoru Budowlanego i Instytut Badań Edukacyjnych.
 - Obszary: AI w administracji publicznej, narzędzia do pracy z prawem, ochrona danych osobowych w pracy z modelami językowymi, analiza danych.
 
 ## Strony
