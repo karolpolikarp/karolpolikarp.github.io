@@ -32,7 +32,7 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
   + link buttons -> case-study bar. No stack chips on tiles (they live on the case pages). Screenshots in
   `assets/images/shots/`, captured from the live sites at a window matched to the tile (16:9 large, 80:63 for
   the 5-column tiles, 1024×576 for the small ones); extra height in a row goes to the screenshot. Tile order (the
-  author's): Zorza + UpFor.pl, Urzędnik i AI + Parawan, AutoMargiela, AIgets.me, Majeranek, then the
+  author's): Zorza + UpFor.pl, Urzędnik i AI + Parawan, AutoMargiela, AIgets.me, Majeranek, Nimbuhold + Candor (6 + 6 columns, added 26.11.2026), then the
   „Narzędzia” box (8 columns: three cards, two wider below; `/case/narzedzia/#<anchor>`) + a small JakiePrawo.pl.
 - **Wystąpienia (`#wystapienia`):** dot-matrix map of Europe (static inline SVG generated offline from
   Natural Earth 1:50m, gold pins sized by event count). Wide screens: the map is the quiet, pinned

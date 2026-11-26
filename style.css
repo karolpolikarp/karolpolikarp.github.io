@@ -4373,12 +4373,13 @@ section {
 @media (min-width: 1100px) {
     .gablota-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
     /* the author's order: Zorza + UpFor, Urzędnik i AI + Parawan, then AutoMargiela, AIgets.me, Majeranek,
-       then JakiePrawo next to the tools */
+       then Nimbuhold + Candor, then JakiePrawo next to the tools */
     .g-zorza      { grid-column: span 7; }
     .g-upfor      { grid-column: span 5; }
     .g-urzednik   { grid-column: span 7; }
     .g-parawan    { grid-column: span 5; }
     .g-margiela, .g-aigets, .g-majeranek { grid-column: span 4; }
+    .g-nimbuhold, .g-candor { grid-column: span 6; }
     .g-tools      { grid-column: span 8; order: 1; }
     .g-jakieprawo { grid-column: span 4; order: 2; }
 }
