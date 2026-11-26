@@ -57,3 +57,7 @@ Source of truth for visual decisions. Tokens live in `style.css` (`:root` + `[da
 - Motion: one authored moment per element — tile screenshot scales 1.03 and caption lifts 3px on
   hover/focus (200 ms, ease-out `cubic-bezier(0.23,1,0.32,1)`); nothing under `prefers-reduced-motion`.
 - Every visible string has a `data-en` / `data-en-html` / `data-en-aria` / `data-en-alt` counterpart.
+
+
+## Zaakceptowane
+- 2026-11-26: materiały „Gmach” (wariant 1): zielony marmur Verde Alpi (ciemny motyw) i Calacatta (jasny) u góry hero, rozmyty w dół; marmurowe przyciski ze złotą krawędzią, złota kreska pod tytułami sekcji, złote ramki kafli, motto z płatków złota, marmur za Kontaktem. Blok `MATERIALS "GMACH"` na końcu `style.css`. Nie zmieniać bez prośby autora.

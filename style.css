@@ -4058,6 +4058,10 @@ section {
     color: var(--color-text-tertiary);
 }
 
+.case-diagram + * {
+    margin-top: var(--space-lg);
+}
+
 .case-diagram svg {
     display: block;
     width: 100%;
@@ -4122,6 +4126,7 @@ section {
 
 .case-decision {
     position: relative;
+    min-width: 0;
     padding: var(--space-lg);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -5867,4 +5872,932 @@ body::before { content: none; }
 @media (min-width: 769px) {
     .hero { min-height: 0; padding-bottom: var(--space-3xl); }
     .hero .container { align-items: center; }
+}
+
+/* ================================================
+   CASE STUDIES — VISUALS: screenshots and clips (.case-media), hand-drawn SVG charts (.case-chart),
+   code excerpts (.case-code), before/after (.case-compare) and the flowing architecture diagrams.
+   Motion is armed by CaseVisuals (script.js) only without prefers-reduced-motion; without JS or with
+   reduced motion every element is simply shown in its final state.
+   ================================================ */
+:root {
+    --cv-ink: var(--color-phthalo-mid);          /* main series: bars, lines */
+    --cv-key: var(--color-accent-dark);          /* the highlighted series */
+    --cv-grid: var(--color-border);
+    --code-bg: var(--color-bg-alt);
+    --code-head: var(--color-bg-accent);
+    --code-text: var(--color-text);
+    --code-k: var(--color-burgundy-light);
+    --code-s: var(--color-phthalo-mid);
+    --code-n: #8a6a1f;                           /* gold deep enough for text on cream (about 5:1) */
+    --code-f: var(--color-primary);
+    --code-c: var(--color-text-tertiary);
+    --code-hl: var(--color-accent-subtle);
+}
+[data-theme="dark"] {
+    --cv-ink: var(--color-primary-on-dark);
+    --cv-key: var(--color-accent);
+    --code-bg: #15130f;
+    --code-head: var(--color-bg-alt);
+    --code-k: #e39a8c;
+    --code-s: #7cc9a3;
+    --code-n: var(--color-accent);
+    --code-f: var(--color-text);
+    --code-hl: rgba(201, 169, 98, 0.12);
+}
+
+.case-media,
+.case-chart,
+.case-code,
+.case-compare {
+    margin: var(--space-lg) 0 0;
+    min-width: 0;
+}
+
+.case-media + *,
+.case-chart + *,
+.case-code + *,
+.case-compare + * {
+    margin-top: var(--space-lg);
+}
+
+.case-media figcaption,
+.case-chart figcaption,
+.case-code figcaption {
+    margin-top: var(--space-sm);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--color-text-tertiary);
+    text-align: center;
+}
+
+/* ---------- .case-media: screenshot or short muted clip ---------- */
+.case-media-shot {
+    position: relative;
+    min-width: 0;
+}
+
+.case-media img,
+.case-media video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-alt);
+}
+
+/* a video has no intrinsic size until its metadata loads: reserve the box (default 16:9, or --ar inline) */
+.case-media video {
+    aspect-ratio: var(--ar, 16 / 9);
+    object-fit: cover;
+}
+
+/* browser-window frame: thin top bar with three dots */
+.case-media--frame .case-media-shot {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-alt);
+    box-shadow: var(--shadow-md);
+}
+
+.case-media--frame .case-media-shot::before {
+    content: '';
+    display: block;
+    height: 26px;
+    border-bottom: 1px solid var(--color-border);
+    background:
+        radial-gradient(circle at 14px 50%, var(--color-burgundy-light) 0 4px, transparent 4.5px),
+        radial-gradient(circle at 29px 50%, var(--color-accent) 0 4px, transparent 4.5px),
+        radial-gradient(circle at 44px 50%, var(--color-phthalo-light) 0 4px, transparent 4.5px),
+        var(--color-bg-accent);
+}
+
+.case-media--frame img,
+.case-media--frame video {
+    border: 0;
+    border-radius: 0;
+}
+
+/* two shots side by side on desktop, stacked on phones */
+.case-media--pair {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-md);
+    align-items: start;
+}
+
+.case-media--pair figcaption {
+    grid-column: 1 / -1;
+    margin-top: 0;
+}
+
+/* pause / play for clips (added by CaseVisuals; WCAG 2.2.2 pause control) */
+.case-media-toggle {
+    position: absolute;
+    right: var(--space-sm);
+    bottom: var(--space-sm);
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+    color: var(--color-text);
+    cursor: pointer;
+    opacity: 0.85;
+    transition: opacity var(--transition-base), border-color var(--transition-base);
+}
+
+.case-media-toggle:hover,
+.case-media-toggle:focus-visible {
+    opacity: 1;
+    border-color: var(--color-accent);
+}
+
+.case-media-toggle::before {
+    content: '';
+    box-sizing: border-box;
+    width: 10px;
+    height: 12px;
+    border-left: 3px solid currentColor;
+    border-right: 3px solid currentColor;
+}
+
+.case-media-toggle.is-paused::before {
+    width: 0;
+    height: 0;
+    margin-left: 3px;
+    border-style: solid;
+    border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent currentColor;
+}
+
+/* ---------- .case-chart: hand-drawn SVG chart (or HTML horizontal bars) ---------- */
+.case-chart {
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.case-chart svg {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    margin: 0 auto;
+    overflow: visible;
+}
+
+.case-chart-title {
+    margin: 0 0 var(--space-md);
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text);
+    text-align: center;
+}
+
+.case-section .case-chart-title {
+    margin-bottom: var(--space-md);
+    font-size: var(--text-lg);
+    line-height: 1.3;
+    color: var(--color-text);
+}
+
+.cc-grid {
+    stroke: var(--cv-grid);
+    stroke-width: 1;
+    stroke-dasharray: 2 4;
+}
+
+.cc-axis {
+    fill: none;
+    stroke: var(--color-text-tertiary);
+    stroke-width: 1.2;
+}
+
+.cc-label {
+    fill: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 12px;
+}
+
+.cc-value {
+    fill: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.cc-value--key {
+    fill: var(--cv-key);
+}
+
+.cc-bar {
+    fill: var(--cv-ink);
+}
+
+.cc-bar--key {
+    fill: var(--cv-key);
+}
+
+.cc-line {
+    fill: none;
+    stroke: var(--cv-ink);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.cc-line--key {
+    stroke: var(--cv-key);
+}
+
+.cc-area {
+    fill: var(--cv-ink);
+    fill-opacity: 0.14;
+}
+
+.cc-area--key {
+    fill: var(--cv-key);
+    fill-opacity: 0.18;
+}
+
+.cc-dot {
+    fill: var(--color-surface);
+    stroke: var(--cv-ink);
+    stroke-width: 2;
+}
+
+.cc-dot--key {
+    fill: var(--cv-key);
+    stroke: var(--cv-key);
+}
+
+/* legend: a swatch per series */
+.cc-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xs) var(--space-lg);
+    margin: 0 0 var(--space-md);
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+}
+
+.cc-legend li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin: 0;
+}
+
+.cc-legend li::before {
+    content: '';
+    width: 14px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--cv-ink);
+}
+
+.cc-legend .cc-legend--key::before {
+    background: var(--cv-key);
+}
+
+/* horizontal bars in HTML: real text at real size, the phone-friendly chart for named categories */
+.cc-hbars {
+    display: grid;
+    gap: var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.cc-hbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "label label" "track value";
+    align-items: center;
+    gap: 4px var(--space-sm);
+    margin: 0;
+}
+
+.cc-hbar-label {
+    grid-area: label;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--color-text);
+}
+
+.cc-hbar-track {
+    grid-area: track;
+    display: block;
+    height: 12px;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--color-border) 70%, transparent);
+    overflow: hidden;
+}
+
+.cc-hbar-fill {
+    display: block;
+    width: calc(var(--v, 0) * 1%);
+    height: 100%;
+    border-radius: inherit;
+    background: var(--cv-ink);
+    transform-origin: left center;
+}
+
+.cc-hbar--key .cc-hbar-fill {
+    background: var(--cv-key);
+}
+
+.cc-hbar-value {
+    grid-area: value;
+    min-width: 6ch;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: right;
+}
+
+.cc-hbar--key .cc-hbar-value {
+    color: var(--code-n);
+}
+
+/* ---------- .case-code: a short code excerpt, highlighted by hand ---------- */
+.case-code {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--code-bg);
+}
+
+.case-code-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: 8px var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--code-head);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text);
+}
+
+.case-code-file {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.case-code-lang {
+    flex-shrink: 0;
+    padding: 2px 8px;
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-full);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    color: var(--code-n);
+}
+
+.case-code pre {
+    margin: 0;
+    padding: var(--space-md) 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--code-text);
+    tab-size: 4;
+}
+
+.case-code pre:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+}
+
+.case-code code {
+    display: block;
+    box-sizing: border-box;
+    width: max-content;
+    min-width: 100%;
+    padding: 0 var(--space-md);
+    font: inherit;
+    white-space: pre;
+    background: none;
+}
+
+.case-code .hl {
+    display: inline-block;
+    box-sizing: border-box;
+    width: calc(100% + 2 * var(--space-md));
+    margin: 0 calc(-1 * var(--space-md));
+    padding: 0 var(--space-md);
+    background: var(--code-hl);
+    box-shadow: inset 3px 0 0 var(--color-accent);
+}
+
+.tok-k { color: var(--code-k); font-weight: 600; }
+.tok-s { color: var(--code-s); }
+.tok-n { color: var(--code-n); }
+.tok-f { color: var(--code-f); font-weight: 600; }
+.tok-c { color: var(--code-c); font-style: italic; }
+
+.case-code figcaption {
+    margin: 0;
+    padding: var(--space-sm) var(--space-md);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+    text-align: left;
+}
+
+/* ---------- .case-compare: two short columns, "Przed" -> "Po" ---------- */
+.case-compare {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-sm);
+}
+
+.case-compare > :first-child { order: 0; }
+.case-compare > :last-child { order: 2; }
+
+/* the arrow is the container's own grid item between the two columns (decorative, empty alt text) */
+.case-compare::after {
+    content: '\2193';
+    content: '\2193' / '';
+    order: 1;
+    justify-self: center;
+    font-size: var(--text-xl);
+    line-height: 1;
+    color: var(--code-n);
+}
+
+.case-compare-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    min-width: 0;
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.case-compare-col--after {
+    border-color: color-mix(in srgb, var(--color-accent) 60%, var(--color-border));
+    box-shadow: inset 0 3px 0 var(--color-accent);
+}
+
+.case-compare .case-compare-label {
+    align-self: flex-start;
+    margin: 0;
+    padding: 2px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
+.case-compare-col--after .case-compare-label {
+    border-color: var(--color-accent);
+    background: var(--color-accent-subtle);
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .case-compare-col--after .case-compare-label {
+    background: rgba(201, 169, 98, 0.12);
+}
+
+.case-compare .case-compare-value {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--color-text);
+}
+
+.case-compare-col--after .case-compare-value {
+    color: var(--color-phthalo-mid);
+}
+
+[data-theme="dark"] .case-compare-col--after .case-compare-value {
+    color: var(--color-primary-on-dark);
+}
+
+.case-compare .case-compare-text {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
+.case-compare-col code {
+    padding: 1px 6px;
+    border-radius: var(--radius-sm);
+    background: var(--code-bg);
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--code-text);
+    overflow-wrap: anywhere;
+}
+
+@media (min-width: 768px) {
+    .case-chart {
+        padding: var(--space-lg);
+    }
+
+    .case-media--pair {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cc-hbar {
+        grid-template-columns: minmax(8rem, 13rem) minmax(0, 1fr) auto;
+        grid-template-areas: "label track value";
+        gap: var(--space-md);
+    }
+
+    .case-compare {
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        gap: var(--space-md);
+    }
+
+    .case-compare::after {
+        content: '\2192';
+        content: '\2192' / '';
+        align-self: center;
+    }
+}
+
+/* ---------- motion (armed by CaseVisuals: .is-armed, then .is-visible) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+    .case-chart.is-armed .cc-bar {
+        transform: scaleY(0);
+        transform-box: fill-box;
+        transform-origin: bottom;
+    }
+
+    .case-chart.is-armed .cc-hbar-fill {
+        transform: scaleX(0);
+    }
+
+    .case-chart.is-armed .cc-line {
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+    }
+
+    .case-chart.is-armed :is(.cc-value, .cc-dot, .cc-area, .cc-hbar-value) {
+        opacity: 0;
+    }
+
+    .case-chart.is-visible .cc-bar,
+    .case-chart.is-visible .cc-hbar-fill {
+        transform: none;
+        transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--i, 0) * 90ms);
+    }
+
+    .case-chart.is-visible .cc-line {
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 1400ms cubic-bezier(0.45, 0, 0.2, 1) calc(var(--i, 0) * 250ms);
+    }
+
+    .case-chart.is-visible :is(.cc-value, .cc-dot, .cc-area, .cc-hbar-value) {
+        opacity: 1;
+        transition: opacity 400ms ease calc(450ms + var(--i, 0) * 90ms);
+    }
+
+    /* architecture diagrams: a gold dot runs along every arrow while the figure is on screen
+       (.cd-pulse paths are cloned from .cd-edge by CaseVisuals; --len and --dur are set per path) */
+    .case-diagram .cd-pulse {
+        fill: none;
+        stroke: var(--color-accent);
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-dasharray: 0.1px calc(var(--len, 100) * 1px + 20px);
+        stroke-dashoffset: 4px;
+        opacity: 0;
+        transition: opacity 400ms ease;
+        animation: cd-pulse var(--dur, 2s) linear calc(var(--i, 0) * 280ms) infinite;
+        animation-play-state: paused;
+        pointer-events: none;
+    }
+
+    .case-diagram.is-visible .cd-pulse {
+        opacity: 0.95;
+        animation-play-state: running;
+    }
+}
+
+@keyframes cd-pulse {
+    from { stroke-dashoffset: 4px; }
+    to { stroke-dashoffset: calc(var(--len, 100) * -1px - 4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .case-diagram .cd-pulse { display: none; }
+}
+
+
+/* ================================================
+   MATERIALS "GMACH" (2026-10-27): Verde Alpi + gold (dark), Calacatta Oro + gold (light).
+   Material is an accent only; the layout, the copy and the dark-green base stay as they were.
+   1. tokens: gold foil (CSS, 0 KB) and the stone of each theme
+   2. marble buttons with a gold-leaf edge + a light sheen on hover (hero CTA, tile live/repo buttons)
+   3. a gold-foil rule under every section heading (.s1-title)
+   4. the motto in gold leaf; the contact ground in soft Verde (dark) / Calacatta (light)
+   5. Gablota tiles: a thin gold-foil frame that brightens on hover / focus
+   6. talk dates: a plaque with a gold strip on top
+   7. the scroll progress bar in gold foil
+   No sheen and no transitions under prefers-reduced-motion. Text on stone sits on a veil (AA measured).
+   ================================================ */
+:root {
+    --foil-gold: linear-gradient(115deg, #8a6d2f 0%, #d9bd74 22%, #f6e6b0 34%, #b8913f 50%, #edd68f 66%, #9c7a33 84%, #d6b86c 100%);
+    /* on cream the bright foil washes out: the same foil, a step deeper */
+    --foil-gold-ink: linear-gradient(115deg, #6e5420 0%, #b8913f 24%, #d9bd74 36%, #8a6d2f 52%, #c9a962 68%, #7a5e26 86%, #a8873f 100%);
+    --mat-verde: url("assets/images/materials/verde.webp?v=1");
+    --mat-calacatta: url("assets/images/materials/calacatta.webp?v=1");
+    --mat-leaf: url("assets/images/materials/gold-leaf.webp?v=1");
+    --mat-rule: var(--foil-gold-ink);
+}
+[data-theme="dark"] { --mat-rule: var(--foil-gold); }
+
+/* ---------- 2. marble buttons ---------- */
+/* Verde Alpi under a dark veil (cream text), the gold foil only on the 1.5px edge (border-box layer) */
+.hero-cta .btn-primary,
+[data-theme="dark"] .hero-cta .btn-primary {
+    border: 1.5px solid transparent;
+    background:
+        linear-gradient(rgba(4, 22, 13, 0.42), rgba(4, 22, 13, 0.42)) padding-box,
+        var(--mat-verde) 30% 40% / 260% auto padding-box,
+        var(--foil-gold) border-box;
+    color: #fbf3dc;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 4px 18px rgba(0, 40, 22, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.hero-cta .btn-primary:hover,
+[data-theme="dark"] .hero-cta .btn-primary:hover {
+    background:
+        linear-gradient(rgba(4, 22, 13, 0.3), rgba(4, 22, 13, 0.3)) padding-box,
+        var(--mat-verde) 30% 40% / 260% auto padding-box,
+        var(--foil-gold) border-box;
+    box-shadow: 0 6px 22px rgba(201, 169, 98, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+/* secondary: Calacatta Oro in the light theme, a dark plaque with the same gold edge in the dark one */
+.hero-cta .btn-secondary {
+    border: 1.5px solid transparent;
+    background:
+        linear-gradient(rgba(255, 253, 248, 0.6), rgba(255, 253, 248, 0.6)) padding-box,
+        var(--mat-calacatta) 60% 30% / 300% auto padding-box,
+        var(--foil-gold-ink) border-box;
+    color: var(--color-primary);
+    box-shadow: 0 3px 12px rgba(80, 60, 20, 0.12);
+}
+[data-theme="dark"] .hero-cta .btn-secondary {
+    background:
+        linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+        var(--foil-gold) border-box;
+    color: var(--color-text);
+}
+.hero-cta .btn-secondary:hover { color: var(--color-primary); border-color: transparent; }
+[data-theme="dark"] .hero-cta .btn-secondary:hover { color: var(--color-accent); }
+
+/* live site / repo buttons on the tiles: small stone pills with a gold edge */
+.g-ext,
+.g-links .g-ext {
+    overflow: hidden;
+    border: 1.5px solid transparent;
+    background:
+        linear-gradient(rgba(255, 253, 248, 0.66), rgba(255, 253, 248, 0.66)) padding-box,
+        var(--mat-calacatta) 55% 35% / 520% auto padding-box,
+        var(--foil-gold-ink) border-box;
+    color: var(--color-primary);
+}
+.g-ext .g-ext-ico { color: var(--color-primary); }
+[data-theme="dark"] .g-ext,
+[data-theme="dark"] .g-links .g-ext {
+    background:
+        linear-gradient(rgba(4, 22, 13, 0.45), rgba(4, 22, 13, 0.45)) padding-box,
+        var(--mat-verde) 40% 50% / 520% auto padding-box,
+        var(--foil-gold) border-box;
+    color: #fbf3dc;
+}
+[data-theme="dark"] .g-ext .g-ext-ico { color: #e6cf8f; }
+.g-ext:hover,
+.g-links .g-ext:hover {
+    background:
+        linear-gradient(rgba(255, 253, 248, 0.45), rgba(255, 253, 248, 0.45)) padding-box,
+        var(--mat-calacatta) 55% 35% / 520% auto padding-box,
+        var(--foil-gold-ink) border-box;
+    color: var(--color-primary);
+}
+[data-theme="dark"] .g-ext:hover,
+[data-theme="dark"] .g-links .g-ext:hover {
+    background:
+        linear-gradient(rgba(4, 22, 13, 0.25), rgba(4, 22, 13, 0.25)) padding-box,
+        var(--mat-verde) 40% 50% / 520% auto padding-box,
+        var(--foil-gold) border-box;
+    color: #fff;
+}
+.g-ext:hover .g-ext-ico { color: var(--color-primary); }
+[data-theme="dark"] .g-ext:hover .g-ext-ico { color: #f6e6b0; }
+
+/* the sheen: one soft band of light crosses the stone on hover (replaces the old .btn::before sweep here) */
+.hero-cta .btn::before { display: none; }
+.hero-cta .btn::after,
+.g-ext::after {
+    content: '';
+    position: absolute;
+    inset: -20% -60%;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 250, 230, 0.42) 50%, transparent 60%);
+    transform: translateX(-75%);
+    opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+    .hero-cta .btn::after,
+    .g-ext::after { transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 200ms ease-out; }
+    .hero-cta .btn:hover::after,
+    .g-ext:hover::after { transform: translateX(75%); opacity: 1; }
+}
+
+/* ---------- 3. section headings: a short gold-foil rule ---------- */
+.s1-title::after {
+    content: '';
+    display: block;
+    width: 72px;
+    height: 3px;
+    margin-top: 0.42em;
+    border-radius: 2px;
+    background: var(--mat-rule);
+}
+#kontakt .s1-title::after { margin-left: auto; margin-right: auto; }
+
+/* ---------- 4. contact: the motto in gold leaf, the ground in soft stone ---------- */
+.contact-motto .motto-text {
+    background:
+        linear-gradient(rgba(255, 240, 200, 0.06), rgba(255, 240, 200, 0.06)),
+        var(--mat-leaf) 50% 50% / 120% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+.contact-motto :is(.motto-law, .motto-code) { color: transparent; -webkit-text-fill-color: transparent; }
+/* on cream the leaf is darkened under a bronze veil so the letters keep their contrast */
+[data-theme="light"] .contact-motto .motto-text {
+    background:
+        linear-gradient(100deg, rgba(64, 42, 4, 0.66) 0%, rgba(64, 42, 4, 0.42) 30%, rgba(64, 42, 4, 0.66) 52%, rgba(64, 42, 4, 0.46) 76%, rgba(64, 42, 4, 0.66) 100%),
+        var(--mat-leaf) 50% 50% / 120% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+/* the light theme gets its own stone behind the contact section: Calacatta Oro, faint, fading in from above */
+[data-theme="light"] .contact.s1-section { position: relative; overflow-x: clip; }
+[data-theme="light"] .contact.s1-section::after {
+    content: '';
+    position: absolute;
+    inset: -180px -40px 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url("assets/images/materials/calacatta-soft.webp?v=1") center / cover no-repeat;
+    opacity: 0.7;
+    /* quieter right behind the motto, so no vein crosses the letters */
+    -webkit-mask-image:
+        radial-gradient(640px 220px at 50% 58%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.55) 60%, #000 100%),
+        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 15%, rgba(0, 0, 0, 0.45) 35%, #000 55%, #000 80%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+        radial-gradient(640px 220px at 50% 58%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.55) 60%, #000 100%),
+        linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 15%, rgba(0, 0, 0, 0.45) 35%, #000 55%, #000 80%, transparent 100%);
+    mask-composite: intersect;
+}
+[data-theme="light"] .contact.s1-section > .container { position: relative; z-index: 1; }
+/* contact tiles: a gold hairline edge on the stone */
+.contact-tile { border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border)); }
+
+/* ---------- 5. Gablota tiles: a thin gold-foil frame ---------- */
+.g-tile,
+.g-tools { border-color: transparent; }
+.g-tools { position: relative; }
+.g-tile::before,
+.g-tools::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: 5;
+    padding: 1.5px;
+    border-radius: inherit;
+    background: var(--mat-rule);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    opacity: 0.45;
+    pointer-events: none;
+}
+[data-theme="dark"] .g-tile::before,
+[data-theme="dark"] .g-tools::before { opacity: 0.4; }
+@media (hover: hover) and (pointer: fine) {
+    .g-tile:hover,
+    [data-theme="dark"] .g-tile:hover { border-color: transparent; }
+    .g-tile:hover::before,
+    .g-tools:hover::before { opacity: 1; }
+}
+.g-tile:focus-within,
+[data-theme="dark"] .g-tile:focus-within { border-color: transparent; }
+.g-tile:focus-within::before { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+    .g-tile::before,
+    .g-tools::before { transition: opacity 250ms var(--g-ease); }
+}
+
+/* ---------- 6. talk dates: a plaque with a gold strip on top ---------- */
+.talk-date {
+    position: relative;
+    overflow: hidden;
+    padding-top: calc(var(--space-sm) + 3px);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+}
+.talk-date::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--mat-rule);
+}
+
+/* ---------- 7. the scroll progress bar in gold foil ---------- */
+.scroll-progress { height: 3px; }
+.scroll-progress-bar,
+[data-theme="dark"] .scroll-progress-bar { background: var(--mat-rule); }
+
+/* the hero text column clipped the marble buttons' shadow into a square box (overflow: hidden);
+   clip keeps the old guard against overflow, with room left for the shadow */
+.hero-content { overflow: clip; overflow-clip-margin: 32px; }
+
+/* ---------- 8. hero marble: the page opens in the same stone it closes with ----------
+   The contact recipe (soft image, blur baked in, a mask with no hard edge), turned upside down: full
+   stone at the top under the nav, fading to nothing before Projekty. Quieter behind the text column and
+   the timeline (two soft ellipses), so the veins never cross the letters. Static: no motion of any kind;
+   the drifting dust (#heroParticles) is painted above it. The dark selector beats the old green-glow
+   rule for [data-theme="dark"] .hero::before. */
+.hero::before,
+[data-theme="dark"] .hero::before {
+    display: block;
+    content: '';
+    position: absolute;
+    inset: 0 -40px;
+    z-index: 0;
+    pointer-events: none;
+    background: url("assets/images/brand/verde-alpi-soft.webp?v=1") center 35% / cover no-repeat;
+    filter: blur(1.5px) saturate(1.05);
+    opacity: 0.55;
+    -webkit-mask-image:
+        radial-gradient(34% 46% at 28% 52%, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.66) 60%, #000 100%),
+        radial-gradient(30% 50% at 74% 54%, rgba(0, 0, 0, 0.36) 0%, rgba(0, 0, 0, 0.62) 60%, #000 100%),
+        linear-gradient(180deg, #000 0%, #000 42%, rgba(0, 0, 0, 0.84) 52%, rgba(0, 0, 0, 0.6) 62%, rgba(0, 0, 0, 0.36) 72%, rgba(0, 0, 0, 0.16) 82%, rgba(0, 0, 0, 0.05) 91%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+        radial-gradient(34% 46% at 28% 52%, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.66) 60%, #000 100%),
+        radial-gradient(30% 50% at 74% 54%, rgba(0, 0, 0, 0.36) 0%, rgba(0, 0, 0, 0.62) 60%, #000 100%),
+        linear-gradient(180deg, #000 0%, #000 42%, rgba(0, 0, 0, 0.84) 52%, rgba(0, 0, 0, 0.6) 62%, rgba(0, 0, 0, 0.36) 72%, rgba(0, 0, 0, 0.16) 82%, rgba(0, 0, 0, 0.05) 91%, transparent 100%);
+    mask-composite: intersect;
+}
+[data-theme="light"] .hero::before {
+    background-image: url("assets/images/materials/calacatta-soft.webp?v=1");
+    filter: none;
+    opacity: 0.4;
+}
+/* the dust and the content stay above the stone */
+.hero-bg-decoration { z-index: 1; }
+.hero .container { z-index: 2; }
+@media (max-width: 768px) {
+    /* one column: text over the whole width, so the stone is quieter all over and only full at the top */
+    .hero::before {
+        inset: 0;
+        background-position: 30% 20%;
+        -webkit-mask-image:
+            radial-gradient(90% 40% at 50% 45%, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.65) 60%, #000 100%),
+            linear-gradient(180deg, #000 0%, #000 25%, rgba(0, 0, 0, 0.7) 45%, rgba(0, 0, 0, 0.4) 65%, rgba(0, 0, 0, 0.15) 82%, transparent 100%);
+        mask-image:
+            radial-gradient(90% 40% at 50% 45%, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.65) 60%, #000 100%),
+            linear-gradient(180deg, #000 0%, #000 25%, rgba(0, 0, 0, 0.7) 45%, rgba(0, 0, 0, 0.4) 65%, rgba(0, 0, 0, 0.15) 82%, transparent 100%);
+    }
 }

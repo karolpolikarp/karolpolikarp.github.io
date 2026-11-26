@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
     <title data-en="Parawan: case study | Karol Polikarp Wilczyński">Parawan: studium przypadku | Karol Polikarp Wilczyński</title>
-    <meta name="description" content="Parawan: jeden plik HTML, który lokalnie maskuje polskie dane osobowe. Reguły i sumy kontrolne zamiast AI; w benchmarku recall 94,8%, precyzja 99,7%." data-en-content="Parawan: a single HTML file that masks Polish personal data locally. Rules and checksums instead of AI; benchmark recall 94.8%, precision 99.7%.">
+    <meta name="description" content="Parawan to jeden plik HTML, który na komputerze użytkownika zasłania polskie dane osobowe. Działa na regułach i sumach kontrolnych numerów, bez AI. W teście z 24 października 2026 wykrył 97,8% danych do ukrycia i zostawił 99,9% fragmentów, które miały zostać." data-en-content="Parawan is a single HTML file that hides Polish personal data on the user’s own computer. It works with rules and number checksums, without AI. In the 24 October 2026 test it caught 97.8% of the data to hide and left 99.9% of the fragments that had to stay.">
     <meta name="author" content="Karol Polikarp Wilczyński">
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://karolwilczynski.com/case/parawan/">
@@ -15,7 +15,7 @@
     <meta property="og:site_name" content="Karol Polikarp Wilczyński">
     <meta property="og:url" content="https://karolwilczynski.com/case/parawan/">
     <meta property="og:title" content="Parawan: studium przypadku | Karol Polikarp Wilczyński">
-    <meta property="og:description" content="Parawan: jeden plik HTML, który lokalnie maskuje polskie dane osobowe. Reguły i sumy kontrolne zamiast AI; w benchmarku recall 94,8%, precyzja 99,7%.">
+    <meta property="og:description" content="Parawan to jeden plik HTML, który na komputerze użytkownika zasłania polskie dane osobowe. Działa na regułach i sumach kontrolnych numerów, bez AI. W teście z 24 października 2026 wykrył 97,8% danych do ukrycia i zostawił 99,9% fragmentów, które miały zostać.">
     <meta property="og:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://karolwilczynski.com/case/parawan/">
     <meta name="twitter:title" content="Parawan: studium przypadku | Karol Polikarp Wilczyński">
-    <meta name="twitter:description" content="Parawan: jeden plik HTML, który lokalnie maskuje polskie dane osobowe. Reguły i sumy kontrolne zamiast AI; w benchmarku recall 94,8%, precyzja 99,7%.">
+    <meta name="twitter:description" content="Parawan to jeden plik HTML, który na komputerze użytkownika zasłania polskie dane osobowe. Działa na regułach i sumach kontrolnych numerów, bez AI. W teście z 24 października 2026 wykrył 97,8% danych do ukrycia i zostawił 99,9% fragmentów, które miały zostać.">
     <meta name="twitter:image" content="https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2">
     <meta name="twitter:image:alt" content="Karol Polikarp Wilczyński: AI, prawo i administracja publiczna">
 
@@ -48,11 +48,11 @@
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "Parawan: studium przypadku",
-        "description": "Parawan: jeden plik HTML, który lokalnie maskuje polskie dane osobowe. Reguły i sumy kontrolne zamiast AI; w benchmarku recall 94,8%, precyzja 99,7%.",
+        "description": "Parawan to jeden plik HTML, który na komputerze użytkownika zasłania polskie dane osobowe. Działa na regułach i sumach kontrolnych numerów, bez AI. W teście z 24 października 2026 wykrył 97,8% danych do ukrycia i zostawił 99,9% fragmentów, które miały zostać.",
         "url": "https://karolwilczynski.com/case/parawan/",
         "inLanguage": "pl-PL",
         "datePublished": "2026-10-03",
-        "dateModified": "2026-10-11",
+        "dateModified": "2026-11-08",
         "image": "https://karolwilczynski.com/assets/images/brand/og-card.jpg?v=2",
         "author": {
             "@type": "Person",
@@ -77,7 +77,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="/style.css?v=160">
+    <link rel="stylesheet" href="/style.css?v=170">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -144,16 +144,17 @@
                     <span class="tag">TypeScript</span>
                     <span class="tag">Vite</span>
                     <span class="tag">Vitest</span>
+                    <span class="tag">Playwright</span>
                     <span class="tag">GitHub Actions</span>
                 </div>
                 <h1 class="case-title">Parawan</h1>
                 <p class="case-subtitle" data-en="Local anonymizer for Polish personal data">Lokalny anonimizator polskich danych osobowych</p>
-                <p class="case-lead" data-en="Personal data slips easily into an AI chat along with pasted text, and on a computer with corporate restrictions you can’t install a tool to remove it. I built Parawan: a single HTML file that masks Polish personal data locally — on a synthetic 319-sentence benchmark (20 July 2026) it catches 94.8% of the data to hide and leaves 99.7% of the fragments that must stay intact.">Dane osobowe łatwo trafiają do czatu AI razem z&nbsp;wklejanym tekstem, a&nbsp;na komputerze z&nbsp;blokadami firmowymi nie zainstalujesz narzędzia do ich usuwania. Zbudowałem Parawan: jeden plik HTML, który maskuje polskie dane osobowe lokalnie — w&nbsp;syntetycznym benchmarku z&nbsp;319&nbsp;zdaniami (20&nbsp;lipca 2026) wykrywa 94,8% danych do ukrycia i&nbsp;zostawia nietknięte 99,7% fragmentów, które mają zostać.</p>
+                <p class="case-lead" data-en="Parawan is a single HTML file that hides Polish personal data in a letter before it goes into an AI chat or a public bulletin (BIP). It needs no installation, and the text never leaves the computer. Instead of an AI model it uses rules, a dictionary and checksums. In the 24 October 2026 test on 496 fictional sentences it caught 97.8% of the data to hide and left 99.9% of the fragments that had to stay.">Parawan to jeden plik HTML, który zasłania polskie dane osobowe w&nbsp;piśmie, zanim trafi do czatu AI albo do BIP. Działa bez instalacji, a&nbsp;tekst nie opuszcza komputera. Zamiast modelu AI używa reguł, słownika i&nbsp;sum kontrolnych. W&nbsp;teście z&nbsp;24&nbsp;października 2026 na 496&nbsp;fikcyjnych zdaniach wykrył 97,8% danych do ukrycia i&nbsp;zostawił 99,9% fragmentów, które miały zostać.</p>
                 <dl class="case-facts">
-                    <div><dt data-en="Role">Rola</dt><dd data-en="Author: design, decisions, code and tests (with an AI assistant)">Autor: projekt, decyzje, kod i&nbsp;testy (z&nbsp;asystentem AI)</dd></div>
-                    <div><dt data-en="Period">Okres</dt><dd data-en="3–20 July 2026">3–20&nbsp;lipca 2026</dd></div>
-                    <div><dt data-en="Status">Status</dt><dd data-en="Released, version 0.46.22">Wydany, wersja 0.46.22</dd></div>
-                    <div><dt data-en="Code">Kod</dt><dd data-en="Public (Apache 2.0)">Publiczny (Apache 2.0)</dd></div>
+                    <div><dt data-en="Role">Rola</dt><dd data-en="I designed and wrote the code and tests with help from an AI assistant">Zaprojektowałem i&nbsp;napisałem kod oraz testy z&nbsp;pomocą asystenta AI</dd></div>
+                    <div><dt data-en="Period">Okres</dt><dd data-en="Since July 2026, still in development">Od lipca 2026, nadal rozwijany</dd></div>
+                    <div><dt data-en="Status">Status</dt><dd data-en="Released, version 0.46.26 of 25 October 2026. The engine is on npm">Wydany, wersja 0.46.26 z&nbsp;25&nbsp;października 2026. Silnik jest w&nbsp;npm</dd></div>
+                    <div><dt data-en="Code">Kod</dt><dd data-en="Public, Apache 2.0 licence">Publiczny, licencja Apache 2.0</dd></div>
                 </dl>
                 <div class="showcase-cta">
                     <a href="https://parawan.karolwilczynski.com/" target="_blank" rel="noopener" class="project-link project-link-primary">
@@ -179,31 +180,51 @@
         <div class="container case-container">
             <section id="problem" class="case-section" aria-labelledby="h-problem">
                 <h2 class="case-h2" id="h-problem"><span class="case-h2-num" aria-hidden="true" translate="no">§ 1</span><span data-en="Problem and context">Problem i kontekst</span></h2>
-                <p data-en="Before you paste a letter, a contract or a note into an AI chat, or send it on, the personal data has to come out: national ID (PESEL) and tax (NIP) numbers, bank accounts, addresses, names. By hand it is tedious and easy to get wrong. A cloud anonymizer doesn’t help, because the text would still have to be sent to someone, and on a computer with corporate restrictions you can’t install a program.">Zanim wkleisz pismo, umowę czy notatkę do czatu AI albo prześlesz je dalej, trzeba usunąć z&nbsp;nich dane osób: PESEL, NIP, numer konta, adres, imię i&nbsp;nazwisko. Ręcznie to żmudne i&nbsp;łatwo coś przeoczyć. Anonimizator w&nbsp;chmurze nie pomoże, bo tekst i&nbsp;tak trzeba by komuś wysłać, a&nbsp;na komputerze z&nbsp;blokadami firmowymi nie zainstalujesz programu.</p>
-                <p data-en="I already had a starting point: in JakiePrawo.pl a redaction engine masks personal data in questions before they reach the language model, so the model gets only what it needs. On 3 July 2026 I extracted it from the production code as a TypeScript package with a CLI and a web app. A day later I packed the app into a single HTML file, and until 20 July I worked on detection and the benchmark.">Punkt wyjścia już miałem: w&nbsp;JakiePrawo.pl silnik redakcji maskuje dane osobowe w&nbsp;pytaniach, zanim trafią do modelu językowego, żeby model dostawał tylko to, co niezbędne. Wydzieliłem go z&nbsp;kodu produkcyjnego 3&nbsp;lipca 2026 jako pakiet TypeScript z&nbsp;CLI i&nbsp;aplikacją webową. Dzień później zamknąłem aplikację w&nbsp;jednym pliku HTML, a&nbsp;do 20&nbsp;lipca rozwijałem wykrywanie i&nbsp;benchmark.</p>
-                <p data-en="The goal: mask everything that points to a person without breaking the text — a statute reference, a case number or a name like “Uniwersytet Warszawski” (University of Warsaw) must stay. In a conflict, precision beats masking “just in case”, and the output must always be reviewed before it is sent.">Cel: zamaskować wszystko, co wskazuje na osobę, nie psując tekstu — numer przepisu, sygnatura akt czy „Uniwersytet Warszawski” mają zostać. W&nbsp;razie konfliktu precyzja ma pierwszeństwo przed maskowaniem „na zapas”, a&nbsp;wynik zawsze trzeba przejrzeć przed wysłaniem.</p>
+                <p data-en="Before you paste a letter, a contract or a note into an AI chat, publish it in a public bulletin (BIP) or send it on, the personal data has to come out. That means national ID (PESEL) and tax (NIP) numbers, bank accounts, addresses and names. By hand it is tedious and easy to get wrong. An online anonymizer doesn’t help, because the text would still have to be sent to someone. On a computer with corporate restrictions you can’t install a program either.">Zanim wkleisz pismo, umowę czy notatkę do czatu AI, opublikujesz je w&nbsp;BIP albo prześlesz dalej, trzeba usunąć z&nbsp;nich dane osób. Chodzi o&nbsp;PESEL, NIP, numer konta, adres, imię i&nbsp;nazwisko. Ręcznie to żmudne i&nbsp;łatwo coś przeoczyć. Anonimizator w&nbsp;internecie nie pomoże, bo tekst i&nbsp;tak trzeba by komuś wysłać. Na komputerze z&nbsp;blokadami firmowymi nie zainstalujesz też programu.</p>
+                <figure class="case-media case-media--frame">
+                    <div class="case-media-shot">
+                        <video poster="/assets/videos/parawan.webp" data-src="/assets/videos/parawan.mp4" width="960" height="540" style="--ar: 960 / 540" muted loop playsinline preload="none" aria-label="Nagranie: strona Parawanu z przykładowym pismem i wynikiem ze znacznikami" data-en-aria="Clip: the Parawan site with a sample letter and the output with placeholders"></video>
+                    </div>
+                    <figcaption data-en="The Parawan site. A sample letter with fictional data on the left, placeholders instead of the data on the right. Recorded in October 2026, 7 seconds, no sound.">Strona Parawanu. Po lewej przykładowe pismo z&nbsp;fikcyjnymi danymi, po prawej znaczniki w&nbsp;miejscu danych. Nagranie z&nbsp;października 2026, 7&nbsp;sekund bez dźwięku.</figcaption>
+                </figure>
+                <p data-en="I started from the mechanism in JakiePrawo.pl that hides personal data in questions before they reach the language model. On 3 July 2026 I extracted it from the live service as a separate TypeScript package with a browser app. A day later I packed the app into a single HTML file. Until 20 July I worked on detection and on the benchmark, a fixed set of sentences that measures how well it works. Between 14 and 25 October 2026 I rebuilt the engine and adapted the app to work in a public office. For example, I added a non-disclosure note together with a record for the case file.">Zacząłem od mechanizmu z&nbsp;JakiePrawo.pl, który zasłania dane osobowe w&nbsp;pytaniach, zanim trafią do modelu językowego. 3&nbsp;lipca 2026 wydzieliłem go z&nbsp;działającego serwisu jako osobny pakiet w&nbsp;TypeScripcie z&nbsp;aplikacją w&nbsp;przeglądarce. Dzień później zamknąłem aplikację w&nbsp;jednym pliku HTML. Do 20&nbsp;lipca rozwijałem wykrywanie i&nbsp;benchmark, czyli stały zestaw zdań do mierzenia skuteczności. Między 14 a&nbsp;25&nbsp;października 2026 przebudowałem silnik i&nbsp;dostosowałem aplikację do pracy w&nbsp;urzędzie. Dodałem np.&nbsp;adnotację o&nbsp;wyłączeniu jawności razem z&nbsp;protokołem do akt.</p>
+                <p data-en="Parawan has to mask everything that points to a person without breaking the text. A statute reference or the case number of a cited judgment must stay. When the two goals clash in a fragment, Parawan leaves it visible instead of masking it just in case. The output must always be reviewed before it is sent.">Parawan ma zamaskować wszystko, co wskazuje na osobę, i&nbsp;nie zepsuć tekstu. Numer przepisu czy sygnatura cytowanego wyroku mają zostać. Gdy w&nbsp;jakimś fragmencie te cele się kłócą, Parawan zostawia go jawnym, zamiast zasłaniać na zapas. Wynik zawsze trzeba przejrzeć przed wysłaniem.</p>
             </section>
 
             <section id="ograniczenia" class="case-section" aria-labelledby="h-ograniczenia">
                 <h2 class="case-h2" id="h-ograniczenia"><span class="case-h2-num" aria-hidden="true" translate="no">§ 2</span><span data-en="Constraints">Ograniczenia</span></h2>
-                <p data-en="The shape of the project was set by constraints, not by a choice of technology:">O&nbsp;kształcie projektu przesądziły ograniczenia, nie wybór technologii:</p>
                 <ul class="showcase-list">
-                    <li data-en="The text never leaves the computer: no server, account, analytics or network requests — and anyone can check that by switching the internet off.">Tekst nie opuszcza komputera: żadnego serwera, konta, analityki ani zapytań sieciowych — i&nbsp;każdy może to sprawdzić, wyłączając internet.</li>
-                    <li data-en="Zero installation: the tool has to work where you can’t run an .exe, a .bat script or a local server.">Zero instalacji: narzędzie ma działać tam, gdzie nie uruchomisz pliku .exe, skryptu .bat ani lokalnego serwera.</li>
-                    <li data-en="A file opened from disk (file://): Chromium then blocks JavaScript modules and separate assets, so everything must live in one HTML file.">Plik otwierany z&nbsp;dysku (file://): Chromium blokuje wtedy moduły JavaScript i&nbsp;osobne zasoby, więc wszystko musi być w&nbsp;jednym pliku HTML.</li>
-                    <li data-en="Polish: surnames inflect (“Kowalskiemu”, “Wiśniewskiego”), and the same word can be a surname, an adjective or part of an institution’s name.">Polszczyzna: nazwiska się odmieniają („Kowalskiemu”, „Wiśniewskiego”), a&nbsp;to samo słowo bywa nazwiskiem, przymiotnikiem albo częścią nazwy instytucji.</li>
-                    <li data-en="Predictability: the same text must always give the same result, so every bug can be reproduced and covered by a test.">Przewidywalność: ten sam tekst ma dawać zawsze ten sam wynik, żeby każdy błąd dało się odtworzyć i&nbsp;zabezpieczyć testem.</li>
+                    <li data-en="The text never leaves the computer. There is no server, account, usage statistics or network request. Anyone can check that by switching the internet off.">Tekst nie opuszcza komputera. Nie ma serwera, konta, statystyk użycia ani zapytań sieciowych. Każdy może to sprawdzić, wyłączając internet.</li>
+                    <li data-en="The tool needs no installation and has to work where you can’t run an .exe, a .bat script or a local server.">Narzędzie nie wymaga instalacji i&nbsp;ma działać tam, gdzie nie uruchomisz pliku .exe, skryptu .bat ani lokalnego serwera.</li>
+                    <li data-en="The file is opened straight from disk. Chrome and Edge then block JavaScript modules and separate assets, so everything must live in one HTML file.">Plik otwiera się prosto z&nbsp;dysku. Chrome i&nbsp;Edge blokują wtedy moduły JavaScriptu i&nbsp;osobne zasoby, więc wszystko musi być w&nbsp;jednym pliku HTML.</li>
+                    <li data-en="Polish surnames inflect, e.g. “Kowalskiemu” or “Wiśniewskiego”, and the same word can be a surname, an adjective or part of an institution’s name.">Nazwiska w&nbsp;polszczyźnie się odmieniają, np.&nbsp;„Kowalskiemu” czy „Wiśniewskiego”, a&nbsp;to samo słowo bywa nazwiskiem, przymiotnikiem albo częścią nazwy instytucji.</li>
+                    <li data-en="The same text must always give the same result.">Ten sam tekst ma zawsze dawać ten sam wynik.</li>
+                    <li data-en="Offices still run Chrome and Edge 109 on Windows 7, 8.1 and Server 2012 R2. The app is built for these browsers, and the pdf.js library that reads PDFs stays on a version that still works there.">W&nbsp;urzędach wciąż działają Chrome i&nbsp;Edge 109 na Windows 7, 8.1 i&nbsp;Server 2012 R2. Aplikacja jest budowana pod te przeglądarki, a&nbsp;biblioteka pdf.js do czytania PDF-ów zostaje na wersji, która tam jeszcze działa.</li>
                 </ul>
+                <div class="case-compare">
+                    <div class="case-compare-col">
+                        <p class="case-compare-label" data-en="Two fictional sentences from the benchmark">Dwa fikcyjne zdania z&nbsp;benchmarku</p>
+                        <p class="case-compare-text" lang="pl"><s>Kowalskiemu</s> wręczono wypowiedzenie umowy. Kredyt zaciągnięto w&nbsp;Banku Śląskim w&nbsp;zeszłym roku.</p>
+                    </div>
+                    <div class="case-compare-col case-compare-col--after">
+                        <p class="case-compare-label" data-en="Engine output (core 0.29.13)">Wynik silnika (rdzeń 0.29.13)</p>
+                        <p class="case-compare-text" lang="pl"><code>[IMIĘ I&nbsp;NAZWISKO]</code> wręczono wypowiedzenie umowy. Kredyt zaciągnięto w&nbsp;<strong>Banku Śląskim</strong> w&nbsp;zeszłym roku.</p>
+                    </div>
+                </div>
+                <p data-en="The crossed-out inflected surname is masked, and the bold adjective “Śląskim” in the bank’s name stays. I checked the output on 8 November 2026.">Przekreślone nazwisko w&nbsp;odmianie zniknęło, a&nbsp;pogrubiony przymiotnik „Śląskim” w&nbsp;nazwie banku został. Wynik sprawdziłem 8&nbsp;listopada 2026.</p>
             </section>
 
             <section id="architektura" class="case-section" aria-labelledby="h-architektura">
                 <h2 class="case-h2" id="h-architektura"><span class="case-h2-num" aria-hidden="true" translate="no">§ 3</span><span data-en="Architecture">Architektura</span></h2>
-                <p data-en="The engine is a redactPII() function in TypeScript with no runtime dependencies, packaged as an npm library with a CLI. Text goes through 38 passes in a fixed order: URLs, emails and form fields first, then identifiers from the longest digit strings down (IBAN, PESEL, NIP), then addresses, and people last. Labels such as [PESEL] contain no digits and no “@”, so a later pass can’t match them again. The report gives only the type and number of matches, never the original values.">Silnik to funkcja redactPII() w&nbsp;TypeScripcie, bez zależności w&nbsp;czasie działania, przygotowana jako pakiet npm z&nbsp;CLI. Tekst przechodzi przez 38&nbsp;przebiegów w&nbsp;stałej kolejności: najpierw URL-e, e-maile i&nbsp;pola formularzy, potem identyfikatory od najdłuższych ciągów cyfr (IBAN, PESEL, NIP), dalej adresy, na końcu osoby. Etykiety typu [PESEL] nie zawierają cyfr ani „@”, więc kolejny przebieg ich nie naruszy. Raport podaje tylko typ i&nbsp;liczbę trafień, nigdy oryginalnych wartości.</p>
-                <p data-en="The app (Vite, no framework) imports the same core and builds into a single Parawan.html. The fflate library unpacks .docx files locally, and pdf.js reads PDFs on the main thread, which removes the need for a separate worker file; only the text layer is read, so scans are out of reach (no OCR). Every version tag starts a GitHub Actions build of the file that goes into the release.">Aplikacja (Vite, bez frameworka) importuje ten sam rdzeń i&nbsp;buduje się do jednego pliku Parawan.html. Pliki .docx rozpakowuje lokalnie fflate, a&nbsp;PDF czyta pdf.js na głównym wątku, dzięki czemu nie potrzeba osobnego pliku workera; czytana jest tylko warstwa tekstowa, więc skanów aplikacja nie odczyta (brak OCR). Każdy tag wersji uruchamia w&nbsp;GitHub Actions budowanie pliku, który trafia do wydania.</p>
+                <p data-en="The program reads the text many times, each time looking for a different kind of data. First it handles web addresses, emails, form fields and tables. Then it looks for numbers that can be verified by calculation, and last for addresses and people. Each find is replaced with a placeholder such as [PESEL]. Text outside the placeholders stays exactly as in the original, tabs and capitalisation included. The report gives only the type and number of matches, never the original values.">Program czyta tekst wiele razy i&nbsp;za każdym razem szuka innego rodzaju danych. Najpierw rozpoznaje adresy stron, e-maile, pola formularzy i&nbsp;tabele. Potem szuka numerów, które da się sprawdzić rachunkiem, a&nbsp;na końcu adresów i&nbsp;osób. Każde trafienie zastępuje znacznikiem, np.&nbsp;[PESEL]. Tekst poza znacznikami zostaje taki jak w&nbsp;oryginale, z&nbsp;tabulatorami i&nbsp;wielkością liter. Raport podaje tylko typ i&nbsp;liczbę trafień, nigdy oryginalnych wartości.</p>
+                <p data-en="The engine is one TypeScript function, redactPII(), with no outside libraries. It recognises 25 data types in 50 passes in a fixed order. Invoice numbers from KSeF, Poland’s national e-invoicing system, land register numbers and case numbers come before the numbers checked by calculation, such as IBAN, PESEL and NIP. Since 25 October 2026 the engine has been on npm, the public package registry, as “anonimizator” and “parawan”.">Silnik to jedna funkcja w&nbsp;TypeScripcie, redactPII(), bez zewnętrznych bibliotek. Rozpoznaje 25&nbsp;typów danych w&nbsp;50&nbsp;przebiegach o&nbsp;stałej kolejności. Numery faktur z&nbsp;KSeF, krajowego systemu e-faktur, numery ksiąg wieczystych i&nbsp;znaki spraw idą przed numerami sprawdzanymi rachunkiem, takimi jak IBAN, PESEL i&nbsp;NIP. Od 25&nbsp;października 2026 silnik jest w&nbsp;npm, publicznym katalogu pakietów, jako „anonimizator” i&nbsp;„parawan”.</p>
+                <p data-en="The app is the same core in a single Parawan.html file. It also reads .docx and PDF files. From PDFs it reads only the stored text, so scans can’t be read. The output can be corrected by hand, printed without the source field, or saved as .txt or a new .docx with no author or change history from the original.">Aplikacja to ten sam rdzeń w&nbsp;jednym pliku Parawan.html. Czyta też pliki .docx i&nbsp;PDF. Z&nbsp;PDF-ów czyta tylko zapisany tekst, więc skanów nie odczyta. Wynik można poprawić ręcznie, wydrukować bez pola źródła albo zapisać jako .txt lub nowy .docx bez autora i&nbsp;historii zmian oryginału.</p>
+                <p data-en="A security rule built into the file, the Content-Security-Policy header, blocks network connections and lets only the script with a known SHA-256 fingerprint run. Each version is built automatically by GitHub Actions. The release contains the file and its SHA-256 checksum, which shows whether anyone changed the file. It also includes a record of which code it was built from and a note for the data protection officer and IT.">Wbudowana w&nbsp;plik reguła bezpieczeństwa w&nbsp;nagłówku Content-Security-Policy blokuje połączenia sieciowe i&nbsp;pozwala uruchomić tylko skrypt o&nbsp;znanym odcisku SHA-256. Każdą wersję buduje automatycznie GitHub Actions. Wydanie zawiera plik i&nbsp;jego sumę SHA-256. Po niej widać, czy ktoś zmienił plik. Dołączone są też poświadczenie, z&nbsp;jakiego kodu powstał, oraz opis dla inspektora ochrony danych i&nbsp;działu IT.</p>
+                <p data-en="The file is assembled by Vite. The fflate library unpacks .docx files and pdf.js reads PDFs.">Plik składa narzędzie Vite. Pliki .docx rozpakowuje biblioteka fflate, a&nbsp;PDF-y czyta pdf.js.</p>
                 <figure class="case-diagram">
                     <svg viewBox="0 0 360 588" role="img" aria-labelledby="arch-title arch-desc">
                         <title id="arch-title" data-en="Data flow in Parawan">Przepływ danych w Parawanie</title>
-                        <desc id="arch-desc" data-en="Parawan.html, opened from disk, passes text through structure protection, then checksummed identifiers, then addresses and people; a separate, optional AI add-on can only add masks.">Parawan.html otwarty z dysku przepuszcza tekst przez ochronę struktury, potem numery z sumą kontrolną, na końcu adresy i osoby; osobny, opcjonalny dodatek AI może tylko dołożyć maski.</desc>
+                        <desc id="arch-desc" data-en="Parawan.html, opened from disk, passes text through structure protection, then checksummed identifiers, then addresses and people, and gives text with placeholders that can be corrected by hand. A separate, optional AI add-on can only add masks.">Parawan.html otwarty z dysku przepuszcza tekst przez ochronę struktury, potem numery z sumą kontrolną, na końcu adresy i osoby, i daje tekst ze znacznikami do ręcznej korekty. Osobny, opcjonalny dodatek AI może tylko dołożyć maski.</desc>
                         <defs>
                             <marker id="cd-arrow-parawan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                                 <path class="cd-arrow" d="M0 0L10 5L0 10z"/>
@@ -211,7 +232,7 @@
                         </defs>
                         <rect class="cd-box cd-box--key" x="20" y="10" width="320" height="52" rx="8"/>
                         <text class="cd-label" x="180" y="31" text-anchor="middle" data-en="Parawan.html opened from disk">Parawan.html otwarty z dysku</text>
-                        <text class="cd-note" x="180" y="49" text-anchor="middle" data-en="file:// · code, fonts, dictionaries inside">file:// · kod, fonty i słowniki w środku</text>
+                        <text class="cd-note" x="180" y="49" text-anchor="middle" data-en="code, fonts, dictionaries, network block">kod, fonty, słowniki, blokada sieci</text>
                         <path class="cd-edge" d="M180 62V92" marker-end="url(#cd-arrow-parawan)"/>
 
                         <rect class="cd-box cd-box--ext" x="20" y="96" width="320" height="52" rx="8"/>
@@ -221,12 +242,12 @@
 
                         <rect class="cd-box" x="20" y="182" width="320" height="52" rx="8"/>
                         <text class="cd-label" x="180" y="203" text-anchor="middle" data-en="URLs and structure first">Najpierw URL-e i struktura</text>
-                        <text class="cd-note" x="180" y="221" text-anchor="middle" data-en="email, tokens, form fields, XML/JSON">e-mail, tokeny, pola formularzy, XML/JSON</text>
+                        <text class="cd-note" x="180" y="221" text-anchor="middle" data-en="email, tokens, form fields, tables, XML/JSON">e-mail, tokeny, pola, tabele, XML/JSON</text>
                         <path class="cd-edge" d="M180 234V264" marker-end="url(#cd-arrow-parawan)"/>
 
                         <rect class="cd-box cd-box--key" x="20" y="268" width="320" height="52" rx="8"/>
                         <text class="cd-label" x="180" y="289" text-anchor="middle" data-en="Checksummed identifiers">Numery z sumą kontrolną</text>
-                        <text class="cd-note" x="180" y="307" text-anchor="middle" data-en="PESEL, NIP, REGON, IBAN, ID, card number">PESEL, NIP, REGON, IBAN, dowód, nr karty</text>
+                        <text class="cd-note" x="180" y="307" text-anchor="middle" data-en="PESEL, NIP, REGON, IBAN, ID, card, land reg.">PESEL, NIP, REGON, IBAN, dowód, karta, KW</text>
                         <path class="cd-edge" d="M180 320V350" marker-end="url(#cd-arrow-parawan)"/>
 
                         <rect class="cd-box" x="20" y="354" width="320" height="52" rx="8"/>
@@ -241,119 +262,210 @@
                         <path class="cd-edge" d="M262.5 492V522" stroke-dasharray="4 3" marker-end="url(#cd-arrow-parawan)"/>
 
                         <rect class="cd-box" x="20" y="526" width="320" height="52" rx="8"/>
-                        <text class="cd-label" x="180" y="547" text-anchor="middle" data-en="Text with labels">Tekst z etykietami</text>
-                        <text class="cd-note" x="180" y="565" text-anchor="middle" data-en="[PESEL], [ADRES]… · report: type and count">[PESEL], [ADRES]… · raport: typ i liczba</text>
+                        <text class="cd-label" x="180" y="547" text-anchor="middle" data-en="Text with placeholders">Tekst ze znacznikami</text>
+                        <text class="cd-note" x="180" y="565" text-anchor="middle" data-en="manual correction · .txt, .docx, print">ręczna korekta · .txt, .docx, wydruk</text>
                     </svg>
-                    <figcaption data-en="Gold frame: key decisions — one file with no installation, and checksums instead of guessing. Dashed: the input and the optional AI add-on outside the file.">Złota ramka: kluczowe decyzje — jeden plik bez instalacji i&nbsp;sumy kontrolne zamiast zgadywania. Przerywana: dane wejściowe i&nbsp;opcjonalny dodatek AI spoza pliku.</figcaption>
+                    <figcaption data-en="Gold frames mark the single file with no installation and the checksum test for numbers. The dashed frame marks the input and the optional AI add-on outside the file.">Złote ramki oznaczają jeden plik bez instalacji i&nbsp;sprawdzanie numerów sumą kontrolną. Przerywana ramka oznacza dane wejściowe i&nbsp;opcjonalny dodatek AI spoza pliku.</figcaption>
                 </figure>
             </section>
 
             <section id="decyzje" class="case-section" aria-labelledby="h-decyzje">
-                <h2 class="case-h2" id="h-decyzje"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span data-en="Key decisions">Kluczowe decyzje</span></h2>
+                <h2 class="case-h2" id="h-decyzje"><span class="case-h2-num" aria-hidden="true" translate="no">§ 4</span><span data-en="Decisions and their cost">Decyzje i&nbsp;ich koszt</span></h2>
                 <div class="case-decisions">
                     <article class="case-decision">
-                        <h3 data-en="A document, not a program">Dokument, nie program</h3>
+                        <h3 data-en="One HTML file">Jeden plik HTML</h3>
                         <dl class="case-decision-grid">
                             <dt data-en="Decision">Decyzja</dt>
                             <dd data-en="One self-contained HTML file, opened with a double click from disk.">Jeden samowystarczalny plik HTML, otwierany podwójnym kliknięciem z&nbsp;dysku.</dd>
                             <dt data-en="Alternative">Alternatywa</dt>
-                            <dd data-en="A web service, or a program to install (.exe, a local server).">Serwis internetowy albo program do zainstalowania (.exe, lokalny serwer).</dd>
+                            <dd data-en="A web service, or a program to install, such as an .exe or a local server.">Serwis internetowy albo program do zainstalowania, np.&nbsp;plik .exe lub lokalny serwer.</dd>
                             <dt data-en="Why">Dlaczego</dt>
-                            <dd data-en="An HTML document opens even on a computer with corporate restrictions, and anyone can check for themselves that it sends nothing. Chromium blocks separate assets under file://, so the build inlines everything, fonts included.">Dokument HTML otworzy się także na komputerze z&nbsp;blokadami firmowymi, a&nbsp;to, że nic nie wysyła, każdy sprawdzi sam. Chromium przy file:// blokuje osobne zasoby, więc przy budowaniu wszystko, także fonty, trafia do środka pliku.</dd>
+                            <dd data-en="An HTML document opens even on a computer with corporate restrictions. Anyone can also check for themselves that it sends nothing. Everything, fonts included, is inside the file. The download buttons point to a copy on Parawan’s own site, because office web filters sometimes block github.com.">Dokument HTML otworzy się także na komputerze z&nbsp;blokadami firmowymi. Każdy może też sam sprawdzić, że nic nie wysyła. Wszystko, także fonty, jest w&nbsp;środku pliku. Przyciski pobierania prowadzą do kopii na stronie Parawanu, bo urzędowe filtry stron czasem blokują github.com.</dd>
                             <dt data-en="Cost">Koszt</dt>
-                            <dd data-en="No automatic updates — you compare the version number in the header yourself.">Brak automatycznych aktualizacji — numer wersji w&nbsp;nagłówku trzeba porównywać samemu.</dd>
+                            <dd data-en="The file doesn’t update itself. It shows its version and date, and once it is older than six months it shows a yellow warning. Its age is read from the computer’s clock, with no network. The file has grown to 2.3 MB (v0.46.26, 25 October 2026).">Plik nie aktualizuje się sam. Pokazuje wersję i&nbsp;datę, a&nbsp;gdy jest starszy niż pół roku, wyświetla żółte ostrzeżenie. Wiek liczy według zegara komputera, bez sieci. Plik urósł do 2,3&nbsp;MB (v0.46.26, 25&nbsp;października 2026).</dd>
                         </dl>
                     </article>
                     <article class="case-decision">
-                        <h3 data-en="Rules and checksums instead of a model">Reguły i&nbsp;sumy kontrolne zamiast modelu</h3>
+                        <h3 data-en="Rules and checksums">Reguły i&nbsp;sumy kontrolne</h3>
                         <dl class="case-decision-grid">
                             <dt data-en="Decision">Decyzja</dt>
-                            <dd data-en="Purely deterministic detection: patterns, dictionaries, context anchors and checksums (PESEL, NIP, REGON, IBAN, ID card, payment cards).">Wykrywanie wyłącznie deterministyczne: wzorce, słowniki, kotwice kontekstowe i&nbsp;sumy kontrolne (PESEL, NIP, REGON, IBAN, dowód, karty płatnicze).</dd>
+                            <dd data-en="Detection by fixed rules only. It uses patterns, dictionaries, telltale words nearby, and the checksums that validate PESEL, NIP, REGON, IBAN, ID card and payment card numbers.">Wykrywanie wyłącznie stałymi regułami. Korzysta ze wzorców, słowników, słów-sygnałów w&nbsp;otoczeniu i&nbsp;sum kontrolnych, którymi sprawdza się poprawność numerów PESEL, NIP, REGON, IBAN, dowodu i&nbsp;kart płatniczych.</dd>
                             <dt data-en="Alternative">Alternatywa</dt>
-                            <dd data-en="A named-entity recognition (NER) model or an LLM as the main mechanism.">Model rozpoznawania nazw własnych (NER) albo LLM jako główny mechanizm.</dd>
+                            <dd data-en="An AI model that recognises proper names (NER), or a large language model, as the main mechanism.">Model AI do rozpoznawania nazw własnych (NER) albo duży model językowy jako główny mechanizm.</dd>
                             <dt data-en="Why">Dlaczego</dt>
-                            <dd data-en="The same text always gives the same result, so a regression test locks in every fix. The PESEL checksum is a filter, not a guarantee: it rejects about 90% of random 11-digit strings. Without a “PESEL” label, any string that passes it is masked unless it directly follows a reference such as “art.”, “§”, “poz.”, “sygn.” or “nr”, so roughly one in ten unlabelled numbers of that length, e.g. a case number, is still masked needlessly.">Ten sam tekst daje zawsze ten sam wynik, więc każdą poprawkę zabezpiecza test regresji. Suma kontrolna PESEL to sito, nie gwarancja: odrzuca ok.&nbsp;90% przypadkowych ciągów 11&nbsp;cyfr. Bez etykiety „PESEL” maskowany jest każdy ciąg, który ją przechodzi, chyba że stoi tuż po odwołaniu typu „art.”, „§”, „poz.”, „sygn.” albo „nr”, więc mniej więcej co dziesiąty taki numer bez etykiety, np.&nbsp;numer sprawy, i&nbsp;tak zostaje zamaskowany niepotrzebnie.</dd>
+                            <dd data-en="The same text always gives the same result, so every fix is locked in by a test that catches the bug if it comes back. Rules don’t need a model of about 125 MB. On 24 October 2026 the core ran the whole 496-sentence benchmark in 0.3 s.">Ten sam tekst daje zawsze ten sam wynik, więc każdą poprawkę zabezpiecza test, który wyłapie powrót błędu. Reguły nie potrzebują modelu ok.&nbsp;125&nbsp;MB. 24&nbsp;października 2026 rdzeń przetworzył cały benchmark z&nbsp;496&nbsp;zdaniami w&nbsp;0,3&nbsp;s.</dd>
                             <dt data-en="Cost">Koszt</dt>
-                            <dd data-en="Surnames with no Polish ending and no context (foreign ones, for example) are caught only by the dictionary, and the rest slip through: in the benchmark category built from such surnames (19 sentences) recall is 21.1% (4 of 19, all four in the dictionary). That is why the app asks you to review the output.">Nazwiska bez polskiej końcówki i&nbsp;bez kontekstu (np.&nbsp;obce) wykrywa tylko słownik, a&nbsp;pozostałe przechodzą niezamaskowane: w&nbsp;kategorii benchmarku zbudowanej z&nbsp;takich nazwisk (19&nbsp;zdań) recall to 21,1% (4 z&nbsp;19, wszystkie cztery ze słownika). Dlatego aplikacja prosi o&nbsp;przejrzenie wyniku.</dd>
+                            <dd data-en="The PESEL checksum lets through about 10% of random 11-digit strings. Without a “PESEL” label, any string that passes it is masked unless it directly follows “art.”, “§”, “poz.”, “sygn.” or “nr”. So roughly one in ten unlabelled numbers of that length, e.g. a case number, is masked needlessly. Surnames with no Polish ending and no context, foreign ones for example, are caught only by the dictionary. The 24 October 2026 benchmark has 19 such sentences. Parawan caught the surname in 4 of them, each time through the dictionary. That is why the app asks you to review the output, and since v0.46.25 you can mask a missed fragment by hand.">Suma kontrolna PESEL przepuszcza ok.&nbsp;10% przypadkowych ciągów 11&nbsp;cyfr. Bez etykiety „PESEL” maskowany jest każdy ciąg, który ją przechodzi, chyba że stoi tuż po „art.”, „§”, „poz.”, „sygn.” albo „nr”. Mniej więcej co dziesiąty taki numer bez etykiety, np.&nbsp;numer sprawy, zostaje więc zamaskowany niepotrzebnie. Nazwiska bez polskiej końcówki i&nbsp;bez kontekstu, np.&nbsp;obce, wykrywa tylko słownik. W&nbsp;benchmarku z&nbsp;24&nbsp;października 2026 jest 19&nbsp;takich zdań. Parawan wykrył nazwisko w&nbsp;4 z&nbsp;nich, za każdym razem dzięki słownikowi. Dlatego aplikacja prosi o&nbsp;przejrzenie wyniku, a&nbsp;od v0.46.25 przeoczony fragment można zasłonić ręcznie.</dd>
                         </dl>
                     </article>
+                </div>
+                <figure class="case-code">
+                    <div class="case-code-head">
+                        <span class="case-code-file">packages/core/src/index.ts</span>
+                        <span class="case-code-lang">TypeScript</span>
+                    </div>
+<pre tabindex="0" aria-label="Wycinek kodu: liczba tuż po odwołaniu do przepisu zostaje jawna" data-en-aria="Code excerpt: a number right after a legal reference stays visible"><code><span class="tok-k">function</span> <span class="tok-f">precededByLegalRef</span>(full: string, offset: number): boolean {
+  <span class="tok-k">const</span> before = full.<span class="tok-f">slice</span>(Math.<span class="tok-f">max</span>(<span class="tok-n">0</span>, offset - <span class="tok-n">24</span>), offset);
+<span class="hl">  <span class="tok-k">return</span> <span class="tok-s">/(art\.?|§|ust\.?|pkt|poz\.?|sygn\.?|nr\s|dz\.?\s?u|regon|lp\.?|porządkow\w+|rejestr\w*|seryjn\w+|wersj\w+)\s*$/i</span>.<span class="tok-f">test</span>(before);</span>
+}
+<span class="tok-c">// …</span>
+<span class="tok-k">function</span> <span class="tok-f">passPesel</span>(ctx: RedactCtx): void {
+  <span class="tok-c">// …</span>
+  ctx.text = ctx.text.<span class="tok-f">replace</span>(<span class="tok-s">/(?&lt;![\dA-Za-z])\d{11}(?![\d])/g</span>, (m, offset: number) =&gt; {
+<span class="hl">    <span class="tok-k">if</span> (<span class="tok-f">precededByLegalRef</span>(ctx.text, offset)) <span class="tok-k">return</span> m;</span>
+    <span class="tok-c">// …</span></code></pre>
+                    <figcaption data-en-html="Digits after “art.”, “§”, “sygn.” or “nr” stay, because the function looks at the 24 characters before the number. The engine calls it in 8 places, PESEL among them. Real code, abridged, lines 317 and 4387 of &lt;a href=&quot;https://github.com/karolpolikarp/parawan/blob/6f9a910/packages/core/src/index.ts#L317&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;index.ts&lt;/a&gt; at commit 6f9a910 (1 November 2026).">Cyfry po „art.”, „§”, „sygn.” czy „nr” zostają, bo funkcja patrzy na 24&nbsp;znaki przed liczbą. Silnik woła ją w&nbsp;8&nbsp;miejscach, m.in. przy PESEL-u. Prawdziwy kod ze skrótami, wiersze 317 i&nbsp;4387 pliku <a href="https://github.com/karolpolikarp/parawan/blob/6f9a910/packages/core/src/index.ts#L317" target="_blank" rel="noopener">index.ts</a> z&nbsp;commitu 6f9a910 (1&nbsp;listopada 2026).</figcaption>
+                </figure>
+                <div class="case-decisions">
                     <article class="case-decision">
                         <h3 data-en="AI as a separate add-on">AI jako osobny dodatek</h3>
                         <dl class="case-decision-grid">
                             <dt data-en="Decision">Decyzja</dt>
-                            <dd data-en="The AI layer (NER: an ONNX model in the browser or a local spaCy/HerBERT service) moved to a separate anonimizator-ai repository. It gets text after the structural redaction and can only add masks, never remove them.">Warstwa AI (NER: model ONNX w&nbsp;przeglądarce albo lokalna usługa spaCy/HerBERT) trafiła do osobnego repozytorium anonimizator-ai. Dostaje tekst po redakcji strukturalnej i&nbsp;może tylko dołożyć maski, nigdy ich zdjąć.</dd>
+                            <dd data-en="The AI layer moved to a separate anonimizator-ai repository. It is a model that recognises proper names. It runs as an ONNX model in the browser or as a local service built on spaCy and the Polish HerBERT model. It gets text with numbers and form fields already masked. It can add masks but cannot remove them.">Warstwa AI trafiła do osobnego repozytorium anonimizator-ai. To model rozpoznający nazwy własne. Działa jako model ONNX w&nbsp;przeglądarce albo jako lokalna usługa oparta na spaCy i&nbsp;polskim modelu HerBERT. Dostaje tekst z&nbsp;zamaskowanymi już numerami i&nbsp;polami formularzy. Może dołożyć maski, ale nie może ich zdjąć.</dd>
                             <dt data-en="Alternative">Alternatywa</dt>
-                            <dd data-en="Two editions in one release, “plain HTML” and “full / AI” — the setup until 13 July 2026.">Dwie edycje w&nbsp;jednym wydaniu, „czysty HTML” i&nbsp;„pełna / AI” — tak było do 13&nbsp;lipca 2026.</dd>
+                            <dd data-en="Two editions in one release, “plain HTML” and “full / AI”. That was the setup until 13 July 2026.">Dwie edycje w&nbsp;jednym wydaniu, „czysty HTML” i&nbsp;„pełna / AI”. Tak było do 13&nbsp;lipca 2026.</dd>
                             <dt data-en="Why">Dlaczego</dt>
-                            <dd data-en="The “full / AI” edition (a zip with the app and an HTTP launcher; the model had to be downloaded separately) was confusing. AI needs a local server (browsers block AI models for file:// pages) and a model of about 125 MB, which breaks the “one file, zero installation” rule. Gain on the 12 July 2026 benchmark (260 sentences): on 19 sentences with surnames that have no Polish ending and no context, recall rose from 21.1% (4 of 19) to 78.9–89.5% (15–17 of 19: ONNX model 15, FastPDN service 16, spaCy service 17), with the precision (proxy) unchanged at 99.6%.">Edycja „pełna / AI” (zip z&nbsp;aplikacją i&nbsp;launcherem HTTP; model trzeba było pobrać osobno) była myląca. AI potrzebuje lokalnego serwera (przeglądarki blokują modele AI dla plików file://) i&nbsp;modelu ok.&nbsp;125&nbsp;MB, co łamie zasadę „jeden plik, zero instalacji”. Zysk w&nbsp;benchmarku z&nbsp;12&nbsp;lipca 2026 (260&nbsp;zdań): w&nbsp;19&nbsp;zdaniach z&nbsp;nazwiskami bez polskiej końcówki i&nbsp;bez kontekstu recall wzrósł z&nbsp;21,1% (4 z&nbsp;19) do 78,9–89,5% (15–17 z&nbsp;19: model ONNX 15, usługa FastPDN 16, usługa spaCy 17), przy precyzji (proxy) 99,6% bez zmian.</dd>
+                            <dd data-en="The “full / AI” edition was confusing. It was a zip with the app and a program that started a local server, and the model had to be downloaded separately. AI needs a model of about 125 MB and a local server, because a browser won’t run a model from a file opened from disk. The model and the server can’t fit in one file with no installation. The 12 July 2026 benchmark of 260 sentences has 19 sentences with surnames that have no Polish ending and no context. With the AI layer, the share of data caught in them rose from 21.1%, i.e. 4 of 19, to 78.9–89.5%, i.e. 15–17 of 19. The share of fragments left intact did not change and was 99.6%. I haven’t repeated this on the current 496-sentence set, because in the 24 October 2026 run the AI layers were unavailable.">Edycja „pełna / AI” była myląca. Był to zip z&nbsp;aplikacją i&nbsp;programem uruchamiającym lokalny serwer, a&nbsp;model trzeba było pobrać osobno. Do AI potrzebny jest model ok.&nbsp;125&nbsp;MB i&nbsp;lokalny serwer, bo przeglądarka nie uruchomi modelu w&nbsp;pliku otwartym z&nbsp;dysku. Modelu i&nbsp;serwera nie da się zmieścić w&nbsp;jednym pliku bez instalacji. W&nbsp;benchmarku z&nbsp;12&nbsp;lipca 2026 na 260&nbsp;zdaniach jest 19&nbsp;zdań z&nbsp;nazwiskami bez polskiej końcówki i&nbsp;bez kontekstu. Z&nbsp;warstwą AI wykrywalność wzrosła w&nbsp;nich z&nbsp;21,1%, czyli 4 z&nbsp;19, do 78,9–89,5%, czyli 15–17 z&nbsp;19. Odsetek nietkniętych fragmentów się nie zmienił i&nbsp;wyniósł 99,6%. Nie powtórzyłem tego pomiaru na obecnym zbiorze 496&nbsp;zdań, bo w&nbsp;przebiegu z&nbsp;24&nbsp;października 2026 warstwy AI były niedostępne.</dd>
                             <dt data-en="Cost">Koszt</dt>
-                            <dd data-en="The add-on doesn’t work out of the box yet: the core isn’t published on npm and the model pack has to be supplied separately. Another cost is a second repository to maintain.">Dodatek nie działa jeszcze „z&nbsp;pudełka”: rdzeń nie jest opublikowany w&nbsp;npm, a&nbsp;paczkę modelu trzeba dostarczyć osobno. Kosztem jest też drugie repozytorium do utrzymania.</dd>
+                            <dd data-en="The add-on is not ready to use. The core has been on npm since 25 October 2026, but the model pack still has to be supplied separately, and the add-on repository hasn’t changed since 13 July 2026. Another cost is a second repository to maintain.">Dodatek nie jest gotowy do użycia. Rdzeń jest w&nbsp;npm od 25&nbsp;października 2026, ale paczkę modelu nadal trzeba dostarczyć osobno, a&nbsp;w&nbsp;repozytorium dodatku nic się nie zmieniło od 13&nbsp;lipca 2026. Kosztem jest też drugie repozytorium do utrzymania.</dd>
                         </dl>
                     </article>
                     <article class="case-decision">
                         <h3 data-en="Surnames by their endings">Nazwiska po końcówce</h3>
                         <dl class="case-decision-grid">
                             <dt data-en="Decision">Decyzja</dt>
-                            <dd data-en="Surnames with a typically Polish ending (-ski, -cki, -dzki, -icz, -wicz, -czyk) are recognized by morphology, inflected forms included, with no dictionary and no model.">Nazwiska z&nbsp;typowo polską końcówką (-ski, -cki, -dzki, -icz, -wicz, -czyk) są rozpoznawane po morfologii, także w&nbsp;odmianie, bez słownika i&nbsp;modelu.</dd>
+                            <dd data-en="Surnames with a typically Polish ending (-ski, -cki, -dzki, -icz, -wicz, -czyk) are recognised by the shape of the word, inflected forms included, with no dictionary and no model.">Nazwiska z&nbsp;typowo polską końcówką (-ski, -cki, -dzki, -icz, -wicz, -czyk) są rozpoznawane po budowie słowa, także w&nbsp;odmianie, bez słownika i&nbsp;modelu.</dd>
                             <dt data-en="Alternative">Alternatywa</dt>
-                            <dd data-en="Adding rare suffixed surnames to the dictionary, or an NER model.">Rozbudowa słownika o&nbsp;rzadkie nazwiska z&nbsp;sufiksem albo model NER.</dd>
+                            <dd data-en="Adding rare surnames with such endings to the dictionary, or an NER model.">Rozbudowa słownika o&nbsp;rzadkie nazwiska z&nbsp;taką końcówką albo model NER.</dd>
                             <dt data-en="Why">Dlaczego</dt>
-                            <dd data-en="The suffix lets the engine recognize rare and inflected surnames without a model, in one HTML file — until then only the optional NER caught them. The most common surnames without a suffix are covered by the dictionary (extended in v0.43.0 with about 900 surnames from PESEL registry statistics). After the change (v0.28.0, 6 July 2026) recall in the category of rare surnames with a Polish ending (24 sentences in the 159-sentence benchmark of the time) rose from 51% to 100%, with the precision (proxy) at 99.4%.">Po sufiksie da się rozpoznać rzadkie i&nbsp;odmienione nazwiska bez modelu, w&nbsp;jednym pliku HTML — dotąd łapał je tylko opcjonalny NER. Najczęstsze nazwiska bez sufiksu pokrywa słownik (w&nbsp;v0.43.0 rozszerzony o&nbsp;ok.&nbsp;900&nbsp;nazwisk ze statystyk rejestru PESEL). Po zmianie (v0.28.0, 6&nbsp;lipca 2026) recall w&nbsp;kategorii rzadkich nazwisk z&nbsp;polską końcówką (24&nbsp;zdania ówczesnego benchmarku 159&nbsp;zdań) wzrósł z&nbsp;51% do 100%, przy precyzji (proxy) 99,4%.</dd>
+                            <dd data-en="The ending lets the engine recognise rare and inflected surnames without a model, in one HTML file. Until then only the optional AI model caught them. The most common surnames without such an ending are covered by the dictionary. In v0.43.0 I added about 900 surnames from PESEL registry statistics to it. After the change in v0.28.0 of 6 July 2026, recall for rare surnames with a Polish ending rose from 51% to 100%. Fragments left intact stood at 99.4%. That category had 24 of the 159 sentences in the benchmark of the time.">Po końcówce da się rozpoznać rzadkie i&nbsp;odmienione nazwiska bez modelu, w&nbsp;jednym pliku HTML. Wcześniej łapał je tylko opcjonalny model AI. Najczęstsze nazwiska bez takiej końcówki pokrywa słownik. W&nbsp;v0.43.0 dodałem do niego ok.&nbsp;900&nbsp;nazwisk ze statystyk rejestru PESEL. Po zmianie w&nbsp;v0.28.0 z&nbsp;6&nbsp;lipca 2026 wykrywalność rzadkich nazwisk z&nbsp;polską końcówką wzrosła z&nbsp;51% do 100%. Nietkniętych fragmentów było wtedy 99,4%. Ta kategoria liczyła 24 z&nbsp;159&nbsp;zdań ówczesnego benchmarku.</dd>
                             <dt data-en="Cost">Koszt</dt>
-                            <dd data-en="Adjectives look like surnames: it takes stoplists, protection for institution names (“Bank Śląski”) and fixes — a county field like “Powiat: Pruszkowski” was mistaken for a person (fixed in version 0.45.1, 13 July 2026).">Przymiotniki wyglądają jak nazwiska: potrzebne są stoplisty, ochrona nazw instytucji („Bank Śląski”) i&nbsp;poprawki — pole „Powiat: Pruszkowski” było mylone z&nbsp;osobą (naprawione w&nbsp;wersji 0.45.1, 13&nbsp;lipca 2026).</dd>
+                            <dd data-en="Adjectives look like surnames, so it takes exception lists, protection for institution names such as “Bank Śląski”, and further fixes. A county field like “Powiat: Pruszkowski” was mistaken for a person. I fixed that in version 0.45.1 (13 July 2026). Since v0.46.24 a surname that is also an adjective stays visible even after a person label, e.g. “Wnioskodawca: Kampinoski”, because masking it took names of offices and places out of the text.">Przymiotniki wyglądają jak nazwiska, więc potrzebne są listy wyjątków, ochrona nazw instytucji, np.&nbsp;„Bank Śląski”, i&nbsp;kolejne poprawki. Pole „Powiat: Pruszkowski” było mylone z&nbsp;osobą. Naprawiłem to w&nbsp;wersji 0.45.1 (13&nbsp;lipca 2026). Od v0.46.24 nazwisko, które jest też przymiotnikiem, zostaje jawne nawet po etykiecie osoby, np.&nbsp;„Wnioskodawca: Kampinoski”, bo jego maskowanie zabierało z&nbsp;tekstu nazwy urzędów i&nbsp;miejscowości.</dd>
                         </dl>
                     </article>
                     <article class="case-decision">
-                        <h3 data-en="A document-wide anchor for KSeF numbers">Kotwica dokumentowa dla numerów KSeF</h3>
+                        <h3 data-en="KSeF numbers recognised across the whole document">Numery KSeF rozpoznawane w&nbsp;całym dokumencie</h3>
                         <dl class="case-decision-grid">
                             <dt data-en="Decision">Decyzja</dt>
-                            <dd data-en="An invoice number from KSeF, Poland’s national e-invoicing system, is masked in full when “KSeF” (or “Krajowy System e-Faktur”) appears anywhere in the document, the first segment is a valid NIP (the “M” + 9 digits variant has no checksum), the date is in range (year 20xx, month 01–12, day 01–31), and the technical part has at least one letter A–F.">Numer faktury KSeF jest maskowany w&nbsp;całości, gdy „KSeF” (lub „Krajowy System e-Faktur”) występuje gdziekolwiek w&nbsp;dokumencie, pierwszy człon jest poprawnym NIP-em (wariant „M” + 9&nbsp;cyfr nie ma sumy kontrolnej), data mieści się w&nbsp;zakresie (rok 20xx, miesiąc 01–12, dzień 01–31), a&nbsp;część techniczna ma co najmniej jedną literę A–F.</dd>
+                            <dd data-en="An invoice number from KSeF is masked in full when the word “KSeF” or “Krajowy System e-Faktur” appears in the document. The number itself must start with a valid NIP or M plus 9 digits. It must also carry a valid 20xx date and at least one letter from A to F.">Numer faktury z&nbsp;KSeF jest maskowany w&nbsp;całości, gdy w&nbsp;dokumencie pada słowo „KSeF” albo „Krajowy System e-Faktur”. Sam numer musi zaczynać się poprawnym NIP-em lub literą M z&nbsp;9&nbsp;cyframi. Musi też mieć poprawną datę z&nbsp;lat 20xx i&nbsp;co najmniej jedną literę od A do F.</dd>
                             <dt data-en="Alternative">Alternatywa</dt>
-                            <dd data-en="A label right before the number, the NIP checksum alone, or validating the number’s own CRC.">Etykieta tuż przed numerem, sama suma NIP albo walidacja własnej sumy CRC numeru.</dd>
+                            <dd data-en="A label right before the number, the NIP checksum alone, or the checksum built into the KSeF number itself.">Etykieta tuż przed numerem, sama suma kontrolna NIP albo suma kontrolna zapisana w&nbsp;samym numerze KSeF.</dd>
                             <dt data-en="Why">Dlaczego</dt>
-                            <dd data-en="Previously, only the NIP at the start was masked and the rest stayed visible. The label can sit in a column header or after the number. The NIP checksum alone is passed by 8.97% of random 10-digit strings, and order numbers have no letters. The CRC was dropped because KSeF 1.0 numbers fail it.">Wcześniej znikał tylko NIP z&nbsp;początku numeru, a&nbsp;reszta zostawała jawna. Etykieta bywa w&nbsp;nagłówku kolumny albo po numerze. Samą sumę NIP przechodzi 8,97%&nbsp;losowych ciągów 10&nbsp;cyfr, a&nbsp;numery zamówień nie mają liter. CRC odpadło, bo numery z&nbsp;KSeF 1.0 go nie przechodzą.</dd>
+                            <dd data-en="Previously, only the NIP at the start was masked and the rest stayed visible. The label can sit in a column header or after the number. The NIP checksum alone is passed by 8.97% of random 10-digit strings, and order numbers have no letters. I dropped the built-in checksum because KSeF 1.0 numbers fail it. The 24 October 2026 benchmark has 4 sentences with a KSeF number and 6 traps. In the traps a similar string, such as a device model number, or the bare word “KSeF” must stay. All 4 numbers were masked in full, and in all 6 traps the part meant to stay was kept.">Wcześniej znikał tylko NIP z&nbsp;początku numeru, a&nbsp;reszta zostawała jawna. Etykieta bywa w&nbsp;nagłówku kolumny albo po numerze. Samą sumę kontrolną NIP przechodzi 8,97%&nbsp;losowych ciągów 10&nbsp;cyfr, a&nbsp;numery zamówień nie mają liter. Sumę zapisaną w&nbsp;numerze odrzuciłem, bo numery z&nbsp;KSeF 1.0 jej nie przechodzą. Benchmark z&nbsp;24&nbsp;października 2026 ma 4&nbsp;zdania z&nbsp;numerem KSeF i&nbsp;6&nbsp;pułapek. W&nbsp;pułapkach podobny ciąg, np.&nbsp;numer modelu urządzenia, albo samo słowo „KSeF” ma zostać. Wszystkie 4&nbsp;numery zniknęły w&nbsp;całości, a&nbsp;we wszystkich 6&nbsp;pułapkach zostało to, co miało zostać.</dd>
                             <dt data-en="Cost">Koszt</dt>
-                            <dd data-en="In a document without the word “KSeF”, the number still loses only its NIP prefix — a case left out on purpose. Getting it right took three rounds of adversarial review.">W&nbsp;dokumencie bez słowa „KSeF” numer nadal traci tylko prefiks z&nbsp;NIP-em — przypadek świadomie pominięty. Dopracowanie zajęło trzy rundy przeglądu adwersarialnego.</dd>
+                            <dd data-en="In a document without the word “KSeF” the rule deliberately does not apply, so the number still loses only its NIP prefix. Getting the rule right took three review rounds looking for text that would fool it. The KSeF cases entered the benchmark together with the fix, so there is no measurement of how many numbers were partly visible before.">W&nbsp;dokumencie bez słowa „KSeF” reguła celowo nie działa, więc numer nadal traci tylko początek z&nbsp;NIP-em. Dopracowanie reguły wymagało trzech rund przeglądu, w&nbsp;których szukano tekstu, który ją oszuka. Przypadki KSeF trafiły do benchmarku razem z&nbsp;poprawką, więc nie ma pomiaru, ile numerów było wcześniej częściowo jawnych.</dd>
+                        </dl>
+                    </article>
+                    <article class="case-decision">
+                        <h3 data-en="The new engine checked against the old one before release">Nowy silnik sprawdzony na starym przed wydaniem</h3>
+                        <dl class="case-decision-grid">
+                            <dt data-en="Decision">Decyzja</dt>
+                            <dd data-en="Version 0.46.24 (24 October 2026) changed detection a lot. Before releasing it I compared the output of the new and the old engine line by line on 23,646 texts. These were 5,911 ordinary documents from my test sets and 17,735 texts written to trip the engine up.">Wersja 0.46.24 (24&nbsp;października 2026) mocno zmieniła wykrywanie. Przed wydaniem porównałem wynik nowego i&nbsp;starego silnika wiersz po wierszu na 23&nbsp;646 tekstach. Było to 5&nbsp;911 zwykłych pism z&nbsp;moich zbiorów testowych i&nbsp;17&nbsp;735 tekstów napisanych tak, żeby zmylić silnik.</dd>
+                            <dt data-en="Alternative">Alternatywa</dt>
+                            <dd data-en="Relying only on the benchmark that automatically blocks a change when results drop.">Oprzeć się tylko na benchmarku, który automatycznie blokuje zmianę, gdy wyniki spadną.</dd>
+                            <dt data-en="Why">Dlaczego</dt>
+                            <dd data-en="The benchmark guards known cases, and a rebuilt engine also changes the result where the set has no examples. The comparison showed about 43,700 places with a better result and 334 with a worse one, only 10 of them in ordinary documents.">Benchmark pilnuje znanych przypadków, a&nbsp;przebudowany silnik zmienia wynik także tam, gdzie zbiór nie ma przykładów. Porównanie pokazało ok.&nbsp;43,7&nbsp;tys. miejsc z&nbsp;lepszym wynikiem i&nbsp;334 z&nbsp;gorszym, z&nbsp;czego tylko 10 w&nbsp;zwykłych pismach.</dd>
+                            <dt data-en="Cost">Koszt</dt>
+                            <dd data-en="I released it with known regressions, places where the result is worse than before. I described them by group in the changelog. The most serious one concerns a tab-separated form where the role is the label, e.g. “Powód:⇥Jan⇥Nazwisko:⇥Nowak”, where ⇥ is a tab. There the first name stays visible. As of 8 November 2026 I haven’t released the fix yet. The project plan of 25 October 2026 schedules it for version 0.46.27.">Wydałem go ze znanymi regresjami, czyli miejscami, gdzie wynik jest gorszy niż wcześniej. Opisałem je grupami w&nbsp;dzienniku zmian. Najpoważniejsza dotyczy formularza z&nbsp;tabulatorami, w&nbsp;którym rola stoi jako etykieta, np.&nbsp;„Powód:⇥Jan⇥Nazwisko:⇥Nowak”, gdzie ⇥&nbsp;to tabulator. Imię zostaje w&nbsp;nim jawne. Stan na 8&nbsp;listopada 2026: poprawki jeszcze nie wydałem. Plan projektu z&nbsp;25&nbsp;października 2026 przewiduje ją w&nbsp;wersji 0.46.27.</dd>
                         </dl>
                     </article>
                 </div>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="Old vs new engine on 23,646 texts, number of places">Porównanie silników na 23&nbsp;646 tekstach, liczba miejsc</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Leaks closed">Domknięte wycieki</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 10ch" data-en="≈32,000">≈32&nbsp;tys.</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 36.6">
+                            <span class="cc-hbar-label" data-en="Needless masks removed">Zdjęte zbędne maski</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 10ch" data-en="≈11,700">≈11,7&nbsp;tys.</span>
+                        </li>
+                        <li class="cc-hbar cc-hbar--key" style="--v: 1">
+                            <span class="cc-hbar-label" data-en="Places with a worse result">Miejsca z&nbsp;gorszym wynikiem</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 10ch">334</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="Source: CHANGELOG.md v0.46.24 (24 October 2026). Figures for the texts written to trip the engine up are estimated from a hand-checked sample of 300 lines.">Źródło: CHANGELOG.md v0.46.24 (24&nbsp;października 2026). Liczby dla tekstów pisanych, żeby zmylić silnik, są oszacowane na ręcznie sprawdzonej próbce 300 wierszy.</figcaption>
+                </figure>
             </section>
 
             <section id="dowody" class="case-section" aria-labelledby="h-dowody">
                 <h2 class="case-h2" id="h-dowody"><span class="case-h2-num" aria-hidden="true" translate="no">§ 5</span><span data-en="Evidence">Dowody</span></h2>
-                <p data-en="Quality is measured by a deterministic benchmark: 319 synthetic sentences with fragments that must disappear (291) or must stay (351). All 15 misses fall in the category of surnames with no Polish ending and no context (19 sentences); in every other category recall is 100%. In CI (on every push to main and every pull request) the benchmark acts as a gate and fails the run if recall in any of the five guarded categories drops below 100% or the overall precision (proxy) falls below 98%.">Jakość mierzy deterministyczny benchmark: 319&nbsp;syntetycznych zdań z&nbsp;fragmentami, które muszą zniknąć (291) albo zostać (351). Wszystkie 15&nbsp;pominięć przypada na kategorię nazwisk bez polskiej końcówki i&nbsp;bez kontekstu (19&nbsp;zdań); w&nbsp;pozostałych kategoriach recall wynosi 100%. W&nbsp;CI (przy każdej zmianie w&nbsp;gałęzi main i&nbsp;każdym pull requeście) benchmark działa jako bramka i&nbsp;zgłasza błąd, gdy recall w&nbsp;którejkolwiek z&nbsp;pięciu pilnowanych kategorii spadnie poniżej 100% albo łączna precyzja (proxy) poniżej 98%.</p>
+                <p data-en="Quality is measured by a benchmark of 496 fictional sentences. They hold 683 fragments that must disappear and 774 that must stay. The chart shows recall in each category, the share of data to hide that Parawan caught. The one fragment masked needlessly is “Tadeusz” in “Pan Tadeusz”, the title of a poem.">Jakość mierzy benchmark z&nbsp;496&nbsp;fikcyjnymi zdaniami. Zdania zawierają 683 fragmenty, które muszą zniknąć, i&nbsp;774, które muszą zostać. Wykres pokazuje wykrywalność w&nbsp;każdej kategorii, czyli jaką część danych do ukrycia Parawan wykrył. Jedyny niepotrzebnie zasłonięty fragment to „Tadeusz” w&nbsp;tytule „Pan Tadeusz”.</p>
+                <figure class="case-chart">
+                    <p class="case-chart-title" data-en="Recall by benchmark category">Wykrywalność w&nbsp;kategoriach benchmarku</p>
+                    <ul class="cc-hbars" role="list">
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Names and surnames, basic form (74 sentences)">Imiona i&nbsp;nazwiska w&nbsp;formie podstawowej (74&nbsp;zdania)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch">100%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Inflected (35 sentences)">W&nbsp;odmianie (35&nbsp;zdań)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch">100%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Rare surnames (28 sentences)">Rzadkie nazwiska (28&nbsp;zdań)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch">100%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Surnames from the dictionary (12 sentences)">Nazwiska ze słownika (12&nbsp;zdań)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch">100%</span>
+                        </li>
+                        <li class="cc-hbar" style="--v: 100">
+                            <span class="cc-hbar-label" data-en="Numbers, addresses, e-mails, phones (164 sentences)">Numery, adresy, e-maile, telefony (164&nbsp;zdania)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch">100%</span>
+                        </li>
+                        <li class="cc-hbar cc-hbar--key" style="--v: 21.1">
+                            <span class="cc-hbar-label" data-en="Surnames with no Polish ending and no context (19 sentences)">Nazwiska bez polskiej końcówki i&nbsp;bez kontekstu (19&nbsp;zdań)</span>
+                            <span class="cc-hbar-track" aria-hidden="true"><span class="cc-hbar-fill"></span></span>
+                            <span class="cc-hbar-value" style="min-width: 5ch" data-en="21.1%">21,1%</span>
+                        </li>
+                    </ul>
+                    <figcaption data-en="Source: docs/BENCHMARK.md, run on 24 October 2026 on 496 fictional sentences. All 15 misses fall in the last category. The 164 sentences that must stay untouched have no recall, so they are not shown.">Źródło: docs/BENCHMARK.md, przebieg z&nbsp;24&nbsp;października 2026 na 496&nbsp;fikcyjnych zdaniach. Wszystkie 15&nbsp;pominięć przypada na ostatnią kategorię. 164&nbsp;zdania, które mają zostać nietknięte, nie mają wykrywalności, więc ich tu nie ma.</figcaption>
+                </figure>
+                <p data-en="The benchmark runs automatically on every change to the main branch and every proposed change. It guards the first five categories in the chart. The run fails if recall in any of them drops below 100%, or if overall precision falls below 98%. Precision is the share of fragments that must stay and were left intact.">Benchmark uruchamia się automatycznie przy każdej zmianie w&nbsp;głównej gałęzi i&nbsp;każdej propozycji zmiany. Pilnuje pięciu pierwszych kategorii z&nbsp;wykresu. Zgłasza błąd, gdy wykrywalność w&nbsp;którejkolwiek z&nbsp;nich spadnie poniżej 100% albo gdy łączna precyzja spadnie poniżej 98%. Precyzja to odsetek nietkniętych fragmentów, które mają zostać.</p>
+                <p data-en="The second check is an automated browser test written in Playwright. It opens the built file from disk, loads fictional official letters in DOCX and PDF, prints and downloads the output. It checks that no personal data is left in the output and that the browser sent nothing, including over WebSocket and WebRTC live connections.">Druga kontrola to automatyczny test w&nbsp;przeglądarce, napisany w&nbsp;narzędziu Playwright. Otwiera gotowy plik z&nbsp;dysku, wczytuje fikcyjne pisma urzędowe w&nbsp;DOCX i&nbsp;PDF, drukuje i&nbsp;pobiera wynik. Sprawdza, czy w&nbsp;wyniku nie zostały dane osób i&nbsp;czy przeglądarka niczego nie wysłała, także przez WebSocket i&nbsp;WebRTC, czyli połączenia na żywo.</p>
                 <div class="case-evidence">
                     <div class="case-stat">
-                        <span class="case-stat-value scramble-num" data-en="94.8%">94,8%</span>
-                        <span class="case-stat-label" data-en="recall: data to hide that was caught (276 of 291)">recall: wykryte dane do ukrycia (276 z&nbsp;291)</span>
-                        <span class="case-stat-source" data-en="docs/BENCHMARK.md · 2026-07-20">docs/BENCHMARK.md · 2026-07-20</span>
+                        <span class="case-stat-value scramble-num" data-en="97.8%">97,8%</span>
+                        <span class="case-stat-label" data-en="recall: data to hide that was caught (668 of 683)">wykrywalność: wykryte dane do ukrycia (668 z&nbsp;683)</span>
+                        <span class="case-stat-source" data-en="docs/BENCHMARK.md · 2026-10-24">docs/BENCHMARK.md · 2026-10-24</span>
                     </div>
                     <div class="case-stat">
-                        <span class="case-stat-value scramble-num" data-en="99.7%">99,7%</span>
-                        <span class="case-stat-label" data-en="precision (proxy): fragments kept intact (350 of 351)">precyzja (proxy): zachowane fragmenty (350 z&nbsp;351)</span>
-                        <span class="case-stat-source" data-en="docs/BENCHMARK.md · 2026-07-20">docs/BENCHMARK.md · 2026-07-20</span>
+                        <span class="case-stat-value scramble-num" data-en="99.9%">99,9%</span>
+                        <span class="case-stat-label" data-en="precision: fragments kept intact (773 of 774)">precyzja: zachowane fragmenty (773 z&nbsp;774)</span>
+                        <span class="case-stat-source" data-en="docs/BENCHMARK.md · 2026-10-24">docs/BENCHMARK.md · 2026-10-24</span>
                     </div>
                     <div class="case-stat">
-                        <span class="case-stat-value scramble-num" data-en="334">334</span>
-                        <span class="case-stat-label" data-en="core tests (26 in the first commit)">testy rdzenia (26 w&nbsp;pierwszym commicie)</span>
-                        <span class="case-stat-source" data-en="CHANGELOG.md v0.46.22 · 2026-07-20; commit 5ca5f32 · 2026-07-03">CHANGELOG.md v0.46.22 · 2026-07-20; commit 5ca5f32 · 2026-07-03</span>
+                        <span class="case-stat-value scramble-num" data-en="687">687</span>
+                        <span class="case-stat-label" data-en="core tests at v0.46.25, up from 26 in the first commit, plus 326 app tests">testów rdzenia w&nbsp;v0.46.25, a&nbsp;w&nbsp;pierwszym commicie 26. Do tego 326&nbsp;testów aplikacji</span>
+                        <span class="case-stat-source" data-en="CHANGELOG.md v0.46.25 · 2026-10-24; commit 5ca5f32 · 2026-07-03">CHANGELOG.md v0.46.25 · 2026-10-24; commit 5ca5f32 · 2026-07-03</span>
                     </div>
                     <div class="case-stat">
-                        <span class="case-stat-value scramble-num" data-en="74">74</span>
-                        <span class="case-stat-label" data-en="tagged versions in 18 days">wersje oznaczone tagiem w&nbsp;ciągu 18&nbsp;dni</span>
-                        <span class="case-stat-source" data-en="git history · 2026-07-03 → 2026-07-20">historia repozytorium git · 2026-07-03 → 2026-07-20</span>
+                        <span class="case-stat-value scramble-num" data-en="23,646">23&nbsp;646</span>
+                        <span class="case-stat-label" data-en="texts on which the new engine was compared with the old one before release">tekstów, na których przed wydaniem porównałem nowy silnik ze starym</span>
+                        <span class="case-stat-source" data-en="CHANGELOG.md v0.46.24 · 2026-10-24">CHANGELOG.md v0.46.24 · 2026-10-24</span>
                     </div>
                 </div>
-                <p class="case-source-note" data-en="Figures from the karolpolikarp/parawan repository as of 20 July 2026 (release 0.46.22, core package 0.29.12); the AI result is from docs/BENCHMARK.md (commit abb54d9, run on 12 July 2026) and the add-on’s README. The test set is synthetic and also serves as the regression gate, so it doesn’t replace an evaluation on real documents. The app collects no user data.">Liczby z&nbsp;repozytorium karolpolikarp/parawan, stan na 20&nbsp;lipca 2026 (wydanie 0.46.22, pakiet rdzenia 0.29.12); wynik AI z&nbsp;docs/BENCHMARK.md (commit abb54d9, uruchomienie z&nbsp;12&nbsp;lipca 2026) i&nbsp;README dodatku. Zbiór testowy jest syntetyczny i&nbsp;służy też jako bramka regresji, więc nie zastępuje oceny na prawdziwych dokumentach. Aplikacja nie zbiera danych o&nbsp;użytkownikach.</p>
+                <p class="case-source-note" data-en="Figures from the karolpolikarp/parawan repository as of 8 November 2026. The file size is that of Parawan.html in the GitHub release v0.46.26. The KSeF cases come from scripts/benchmark/dataset.mjs at commit df630b0. The benchmark was run on 24 October 2026 on the engine from v0.46.24, which has not changed since. The AI result comes from the add-on’s README and from docs/BENCHMARK.md at commit abb54d9, run on 12 July 2026. The test set consists of fictional sentences, so it doesn’t replace an evaluation on real documents.">Liczby z&nbsp;repozytorium karolpolikarp/parawan, stan na 8&nbsp;listopada 2026. Rozmiar pliku podaję za Parawan.html z&nbsp;wydania v0.46.26 na GitHubie. Przypadki KSeF pochodzą z&nbsp;pliku scripts/benchmark/dataset.mjs w&nbsp;commicie df630b0. Benchmark uruchomiono 24&nbsp;października 2026 na silniku z&nbsp;v0.46.24, który od tego czasu się nie zmienił. Wynik AI pochodzi z&nbsp;README dodatku i&nbsp;z&nbsp;docs/BENCHMARK.md w&nbsp;commicie abb54d9, z&nbsp;przebiegu 12&nbsp;lipca 2026. Zbiór testowy składa się z&nbsp;fikcyjnych zdań, więc nie zastępuje oceny na prawdziwych pismach.</p>
             </section>
 
             <section id="wnioski" class="case-section" aria-labelledby="h-wnioski">
                 <h2 class="case-h2" id="h-wnioski"><span class="case-h2-num" aria-hidden="true" translate="no">§ 6</span><span data-en="What I learned">Czego się nauczyłem</span></h2>
                 <ul class="showcase-list">
-                    <li data-en="An environment constraint is a requirement, not an obstacle: the “single HTML file” form came from what can run on a locked-down computer, and it shaped the rest of the architecture.">Ograniczenie środowiska to wymaganie, nie przeszkoda: forma „jeden plik HTML” wynikła z&nbsp;tego, co da się uruchomić na zablokowanym komputerze, i&nbsp;ułożyła resztę architektury.</li>
-                    <li data-en="A benchmark with “must disappear” and “must stay” lists measures leaks and over-masking at once, and as a CI gate it stops regressions in the five guarded categories.">Benchmark z&nbsp;listami „musi zniknąć” i&nbsp;„musi zostać” mierzy naraz wyciek i&nbsp;nadmaskowanie, a&nbsp;jako bramka w&nbsp;CI zatrzymuje regresje w&nbsp;pięciu pilnowanych kategoriach.</li>
-                    <li data-en="It pays to measure your own weak spot: a category where the rules lose by design shows how much AI really adds — and what keeping it out of the main file costs.">Warto mierzyć własną słabość: kategoria, w&nbsp;której reguły z&nbsp;założenia przegrywają, pokazuje, ile naprawdę daje AI — i&nbsp;ile kosztuje trzymanie warstwy AI poza głównym plikiem.</li>
-                    <li data-en="It’s better to design privacy in than to promise it: a report without original values and zero network traffic, both of which anyone can verify, are more convincing than a promise.">Prywatność lepiej zaprojektować, niż obiecać: raport bez oryginalnych wartości i&nbsp;brak ruchu sieciowego — oba do sprawdzenia przez każdego — przekonują bardziej niż deklaracja.</li>
+                    <li data-en="I treated the limits of a civil servant’s locked-down computer as requirements. They gave one HTML file, and the rest of the design followed from it.">Ograniczenia zablokowanego komputera urzędnika potraktowałem jak wymagania. Z&nbsp;nich wyszedł jeden plik HTML, a&nbsp;z&nbsp;niego reszta architektury.</li>
+                    <li data-en="A benchmark with “must disappear” and “must stay” lists measures leaks and needless masking at once, but it guards only the cases it contains. When I rebuilt the engine, only the comparison with the old version showed the 334 places where the result got worse.">Benchmark z&nbsp;listami „musi zniknąć” i&nbsp;„musi zostać” mierzy naraz wycieki i&nbsp;niepotrzebne maskowanie, ale pilnuje tylko przypadków, które w&nbsp;nim są. Przy przebudowie silnika gorsze wyniki w&nbsp;334 miejscach pokazało dopiero porównanie ze starą wersją.</li>
+                    <li data-en="A separate category for surnames the rules can’t handle showed what AI adds. The result rose from 4 to 15–17 of 19 sentences, but it needs a 125 MB model and a local server. I didn’t break the one-file rule, so AI lives in a separate repository.">Osobna kategoria na nazwiska, z&nbsp;którymi reguły sobie nie radzą, pokazała, ile daje AI. Wynik wzrósł z&nbsp;4 do 15–17 z&nbsp;19&nbsp;zdań, ale wymaga modelu 125&nbsp;MB i&nbsp;lokalnego serwera. Zasady jednego pliku nie złamałem, więc AI jest w&nbsp;osobnym repozytorium.</li>
+                    <li data-en="Anyone can check that the report holds no original values and that the app sends nothing. I don’t have to ask anyone to take my word for it.">Każdy może sam sprawdzić, że raport nie zawiera oryginalnych wartości, a&nbsp;aplikacja niczego nie wysyła. Nie muszę nikogo prosić, żeby uwierzył mi na słowo.</li>
                 </ul>
             </section>
 
@@ -390,6 +502,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=63" defer></script>
+    <script src="/script.js?v=65" defer></script>
 </body>
 </html>

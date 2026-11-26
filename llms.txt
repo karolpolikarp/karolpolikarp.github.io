@@ -6,7 +6,7 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 
 ## Kim jestem
 - Prawnik (Uniwersytet Warszawski); dalsze kształcenie w AI, big data i programowaniu (SGH, PJATK).
-- Doświadczenie: Ministerstwo Cyfryzacji (główny specjalista, Wydział Innowacyjnych Polityk Publicznych), wcześniej Główny Urząd Nadzoru Budowlanego i Instytut Badań Edukacyjnych.
+- Doświadczenie: Ministerstwo Cyfryzacji (radca w Wydziale Wdrożeń; wcześniej główny specjalista w Wydziale Innowacyjnych Polityk Publicznych), wcześniej Główny Urząd Nadzoru Budowlanego i Instytut Badań Edukacyjnych.
 - Obszary: AI w administracji publicznej, narzędzia do pracy z prawem, ochrona danych osobowych w pracy z modelami językowymi, analiza danych.
 
 ## Strony
@@ -20,7 +20,7 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 - UpFor.pl: kalendarz dostępności dla grup graczy (zamknięta beta).
 - AutoMargiela: śledzenie cen perfum w trzech sklepach; analityka cen na żywo: https://replica.karolwilczynski.com/analytics
 - Majeranek: rankingi filmów, gier, książek i muzyki (wersja alfa).
-- Kamerton: kreator instrukcji systemowej dla asystentów AI (https://whoisi.vercel.app).
+- Kamerton: kreator instrukcji systemowej dla asystentów AI (https://kamerton.karolwilczynski.com).
 - Narzędzia: Claude Usage (Stream Deck), ISAP-scraper, Stefka, Anonimizator AI, Multi-Sequence Clicker (kod publiczny na GitHubie).
 - Analiza danych: prognozy z raportów ESPI, rynek gier wideo, Airbnb (Winnipeg, Waszyngton), segmentacja (kod publiczny na GitHubie).
 
@@ -34,7 +34,7 @@ Strona osobista (portfolio) w języku polskim z przełącznikiem PL/EN realizowa
 - Parawan: https://parawan.karolwilczynski.com/ (kod: https://github.com/karolpolikarp/parawan)
 - Urzędnik i AI: https://promptyurzednika.karolwilczynski.com/
 - UpFor.pl (kalendarz dostępności dla grup graczy): https://upfor.pl
-- Majeranek (rankingi ulubionych rzeczy): https://majeranek.vercel.app
+- Majeranek (rankingi ulubionych rzeczy): https://majeranek.karolwilczynski.com
 - AutoMargiela (śledzenie cen perfum): https://replica.karolwilczynski.com
 - Narzędzia i analizy danych: https://github.com/karolpolikarp
 
